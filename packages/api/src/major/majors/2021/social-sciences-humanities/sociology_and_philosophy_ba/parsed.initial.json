@@ -1,0 +1,294 @@
+{
+  "name": "Sociology and Philosophy, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Sociology Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "PHIL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "POLS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Philosophy of Science Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1105,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3050,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3343,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4535,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4903,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5005,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 15
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy 4000/5000 Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4535,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4903,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5005,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 11
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4550,
+              "subject": "PHIL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

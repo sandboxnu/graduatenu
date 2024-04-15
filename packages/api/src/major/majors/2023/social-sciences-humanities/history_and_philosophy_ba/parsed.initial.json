@@ -1,0 +1,239 @@
+{
+  "name": "History and Philosophy, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "History Colloquium",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "History Seminar and Historical Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2302,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Pre-1800 History Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1185,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1187,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1218,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1252,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1272,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1285,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1389,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2375,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2390,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3334,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "History Capstone Seminar or Senior Project",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "PHIL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "POLS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Critical Philosophy Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1104,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1271,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2155,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2492,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2619,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3822,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2308,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

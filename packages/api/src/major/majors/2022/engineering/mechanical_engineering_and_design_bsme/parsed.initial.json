@@ -1,0 +1,486 @@
+{
+  "name": "Mechanical Engineering and Design, BSME",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 141,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Engineering",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2340,
+              "description": "Introduction to Material Science",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2341,
+              "description": "Lab for ME 2340",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ME"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2355,
+              "description": "Mechanics of Materials",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2356,
+              "description": "Lab for ME 2355",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2380,
+              "description": "Thermodynamics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2381,
+              "description": "Recitation for ME 2380",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 3455,
+              "description": "Dynamics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 3456,
+              "description": "Lab for ME 3455",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3475,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3480,
+              "subject": "ME"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 4505,
+              "description": "Measurement and Analysis with Thermal Science Application",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 4506,
+              "description": "Lab for ME 4505",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Capstone Design Project",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "MEIE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "MEIE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Technical Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4508,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4570,
+          "subject": "ME"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Fundamentals",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Fundamentals Elective",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1124,
+              "description": "Form and Structure",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1125,
+              "description": "Form and Structure Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 2220,
+              "description": "Movement and Time",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 2221,
+              "description": "Movement and Time Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 2223,
+              "description": "Experience and Interaction",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 2224,
+              "description": "Experience and Interaction Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Requirements",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1001,
+              "description": "Design Perspectives: An Introduction to Design in the World",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1002,
+              "description": "Seminar for Design Perspectives",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2250,
+              "description": "Typography 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2251,
+              "description": "Type Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Experience Design Option",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3462,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3463,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Graphic Design Option",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2252,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3350,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Information Design Option",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3451,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4552,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Interaction Design Option",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2400,
+              "description": "Interaction Design 1: Responsive",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2401,
+              "description": "Interaction Design Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1155,
+              "description": "Physics for Engineering 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1156,
+              "description": "Lab for PHYS 1155",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1157,
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

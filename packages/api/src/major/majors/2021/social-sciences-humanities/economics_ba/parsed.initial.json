@@ -1,0 +1,209 @@
+{
+  "name": "Economics, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Economics Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1116,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4692,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics Electives for BA",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 1200,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 1200,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 3000,
+          "idRangeEnd": 4689,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 4900,
+          "idRangeEnd": 4999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 5200,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Calculus",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1231,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1245,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1340,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "CS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "DS",
+              "classId": 2000,
+              "description": "Programming with Data",
+              "type": "COURSE"
+            },
+            {
+              "subject": "DS",
+              "classId": 2001,
+              "description": "Data Science Programming Practicum",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2510,
+          "subject": "MISM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics Major GPA/Credit Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

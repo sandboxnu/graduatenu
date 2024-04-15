@@ -1,0 +1,270 @@
+{
+  "name": "Human Services and Sociology, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Human Services Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2300,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3570,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3900,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4994,
+          "subject": "HUSV"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Research Methods",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2970,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Capstone 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "HUSV"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Sociology Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1245,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1246,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1255,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1295,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate-Level Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2302,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2305,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2358,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3241,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3441,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3270,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3468,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced-Level Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4505,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4580,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4518,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4520,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4580,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Seminar 2",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Human Services/Sociology Integrative Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "HUSV"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

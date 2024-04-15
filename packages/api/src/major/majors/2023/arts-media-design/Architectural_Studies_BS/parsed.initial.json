@@ -1,0 +1,249 @@
+{
+  "name": "Architectural Studies, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Architecture at Northeastern",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "General Architecture and Studio",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2130,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2140,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3170,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Technology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2260,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "History",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1310,
+          "subject": "ARCH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 2340,
+              "description": "Modern Architecture",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 2341,
+              "description": "Recitation for ARCH 2340",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Architecture History Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ARCH",
+          "idRangeStart": 2300,
+          "idRangeEnd": 2399,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4960,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Real Estate",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3330,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4501,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2206,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2209,
+          "subject": "MKTG"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Sustainability",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2334,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4566,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "SBSY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5200,
+          "subject": "SBSY"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "History, Theory, and Culture",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2215,
+          "subject": "ARTH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Optional Preparation for Two-Year Master of Architecture",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2240,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5230,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1241,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1141,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

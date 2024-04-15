@@ -1,0 +1,318 @@
+{
+  "name": "Sociology and Environmental Studies, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Sociology Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Statistics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4997,
+          "subject": "ENVS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4900,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Elective A",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "SOCL",
+          "idRangeStart": 1000,
+          "idRangeEnd": 2999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Elective B",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "SOCL",
+          "idRangeStart": 3000,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1200,
+              "description": "Dynamic Earth",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1201,
+              "description": "Lab for ENVR 1200",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1400,
+              "description": "Foundations in Environmental and Sustainability Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1401,
+              "description": "Lab for ENVR 1400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2401,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1246,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Skills Course",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3110,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5280,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3520,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3201,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3202,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3701,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4504,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5563,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4202,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5268,
+          "subject": "PPUA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 18
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4522,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "name": "Studio Art, BFA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 136,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Art History Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTH",
+              "classId": 1001,
+              "description": "Visual Intelligence",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTH",
+              "classId": 1002,
+              "description": "Seminar in Visual Intelligence",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "ARTH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design History Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1310,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2501,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2211,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2212,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5902,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1240,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1260,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1281,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2302,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2336,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3392,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3426,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3920,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 30
+    },
+    {
+      "type": "SECTION",
+      "title": "Studio Art",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "SMFA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3510,
+          "subject": "ARTS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3520,
+          "subject": "ARTS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3530,
+          "subject": "ARTS"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Thesis Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "SMFA"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

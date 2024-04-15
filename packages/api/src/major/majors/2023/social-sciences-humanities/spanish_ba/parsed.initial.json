@@ -1,0 +1,193 @@
+{
+  "name": "Spanish, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Spanish Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3502,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Language and Linguistics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Culture, Literature & History",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1240,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1504,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1505,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2001,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3715,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3720,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3805,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4655,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4944,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "LACS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Spanish Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2900,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3602,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3603,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3900,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Study Abroad/Experiential Learning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "LANG"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

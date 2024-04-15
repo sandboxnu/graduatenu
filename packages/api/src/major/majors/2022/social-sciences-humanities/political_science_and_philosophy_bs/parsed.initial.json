@@ -1,0 +1,733 @@
+{
+  "name": "Political Science and Philosophy, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Core Courses in Political Science",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1155,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2399,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Political Thought",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2328,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2332,
+              "subject": "POLS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Political Science Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "POLS",
+              "idRangeStart": 2000,
+              "idRangeEnd": 5999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "PHIL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "POLS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy Restricted Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3343,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3822,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4535,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4903,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5005,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 17
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5001,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5002,
+              "subject": "PHIL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Concentration in American Political Institutions",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2350,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3300,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3307,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3310,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3160,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3160,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3302,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Campaigns and Elections Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2345,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2350,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2355,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3310,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3320,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3304,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Theoretical Requirement",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2370,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3418,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3430,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3487,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Regional Requirements",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3435,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3465,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3470,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Experiential/Practicum Requirement",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 4915,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4918,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4937,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Core Course",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3418,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2359,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2368,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2370,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2375,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3309,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3324,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Experiential/Practicum Requirement",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 4910,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4915,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4938,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Core Courses",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3405,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3406,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3408,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3435,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3470,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Law and Legal Studies",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2330,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3300,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "POLS"
+              },
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 3323,
+                    "subject": "POLS"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 3323,
+                    "subject": "AFAM"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 3324,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3406,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3409,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4500,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4505,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Core Requirement",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3307,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2340,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2345,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2350,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2357,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2390,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2395,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3425,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Security Studies",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 3408,
+                    "subject": "POLS"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 5408,
+                    "subject": "POLS"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 3420,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3423,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3425,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3430,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3470,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3487,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

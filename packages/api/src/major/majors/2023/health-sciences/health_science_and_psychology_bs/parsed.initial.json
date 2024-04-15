@@ -1,0 +1,463 @@
+{
+  "name": "Health Science and Psychology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 133,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Public Health Core",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4120,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses for Health Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1113,
+              "description": "General Biology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1114,
+              "description": "Lab for BIOL 1113",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3458,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Statistics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Personal/Social Bases of Behavior (Area A)",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3402,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Biological/Cognitive Bases of Behavior (Area B)",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3452,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3464,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Lab",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4604,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4612,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4614,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4616,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4622,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4624,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4626,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4628,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4656,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4658,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4662,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4664,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4666,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4668,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4674,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4676,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "INSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "First-Year Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Preparation",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Math",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1241,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Discipline",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Ethical Reasoning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3510,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4514,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2012,
+              "subject": "CAEP"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

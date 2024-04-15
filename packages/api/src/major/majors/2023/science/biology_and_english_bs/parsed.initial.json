@@ -1,0 +1,973 @@
+{
+  "name": "Biology and English, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning Introduction",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Biology",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1107,
+              "description": "Foundations of Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1108,
+              "description": "Lab for BIOL 1107",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2299,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2309,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3611,
+              "description": "Biochemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3612,
+              "description": "Lab for BIOL 3611",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced Biology",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 2327,
+          "idRangeEnd": 3999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 4705,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Organismal and Evolutionary Biology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2327,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3413,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "EEMB"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2700,
+              "description": "Marine Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2701,
+              "description": "Lab for EEMB 2700",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Statistics",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2313,
+              "description": "Organic Chemistry 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2314,
+              "description": "Lab for CHEM 2313",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Physics",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1145,
+              "description": "Physics for Life Sciences 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1146,
+              "description": "Lab for PHYS 1145",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1161,
+              "description": "Physics 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1162,
+              "description": "Lab for PHYS 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1147,
+              "description": "Physics for Life Sciences 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1148,
+              "description": "Lab for PHYS 1147",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1155,
+              "description": "Physics for Engineering 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1156,
+              "description": "Lab for PHYS 1155",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1157,
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1165,
+              "description": "Physics 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1166,
+              "description": "Lab for PHYS 1165",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "ENGL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1410,
+              "subject": "ENGL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1701,
+              "subject": "ENGL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Diversity",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2296,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2450,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2455,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2470,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2760,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3678,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3685,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Literary Periods",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1600,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2296,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3120,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3618,
+              "subject": "ENGL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3678,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3678,
+                  "subject": "JWSS"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3140,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3190,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3619,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3720,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2440,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2600,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3161,
+              "subject": "ENGL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3685,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3685,
+                  "subject": "JWSS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3730,
+              "subject": "ENGL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Theories and Methods",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1140,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1410,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3325,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3381,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3452,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3454,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3456,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3458,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Comparative Course",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1450,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1502,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2420,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2430,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2455,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2470,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2510,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2520,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2600,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2620,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2690,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "ENGL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2710,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2730,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2740,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2760,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2770,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2850,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3375,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3376,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3377,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3378,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3380,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3384,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative English Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2620,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2650,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2770,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative General Biological Sciences Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3464,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Biology Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4900,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4971,
+          "subject": "BIOL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "English Capstone",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4710,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4720,
+              "subject": "ENGL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

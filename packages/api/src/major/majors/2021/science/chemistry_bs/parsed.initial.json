@@ -1,0 +1,419 @@
+{
+  "name": "Chemistry, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 135,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "CHEM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning Introduction",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "General Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2161,
+              "description": "Concepts in Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2162,
+              "description": "Lab for CHEM 2161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2163,
+              "description": "Recitation for CHEM 2161",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Organic Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2315,
+              "description": "Organic Chemistry 1 for Chemistry Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2316,
+              "description": "Lab for CHEM 2315",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2317,
+              "description": "Organic Chemistry 2 for Chemistry Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2318,
+              "description": "Lab for CHEM 2317",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Analytical Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2321,
+              "description": "Analytical Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2322,
+              "description": "Lab for CHEM 2321",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2323,
+              "description": "Recitation for CHEM 2321",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Physical Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 3401,
+              "description": "Chemical Thermodynamics and Kinetics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3402,
+              "description": "Lab for CHEM 3401",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 3403,
+              "description": "Quantum Chemistry and Spectroscopy",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3404,
+              "description": "Lab for CHEM 3403",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Biochemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 4621,
+              "description": "Introduction to Chemical Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 4622,
+              "description": "Lab for CHEM 4621",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced-Level Chemistry",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 5,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 3501,
+                  "description": "Inorganic Chemistry",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 3502,
+                  "description": "Lab for CHEM 3501",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 3505,
+                  "description": "Introduction to Bioinorganic Chemistry",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 3506,
+                  "description": "Lab for CHEM 3505",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 9,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 3331,
+                  "description": "Bioanalytical Chemistry",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 3332,
+                  "description": "Lab for CHEM 3331",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 4456,
+                  "description": "Organic Chemistry 3: Organic Chemistry of Drug Design and Development",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 4457,
+                  "description": "Lab for CHEM 4456",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4620,
+              "subject": "CHEM"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 4628,
+                  "description": "Introduction to Spectroscopy of Organic Compounds",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 4629,
+                  "description": "Identification of Organic Compounds",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Research/Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4750,
+          "subject": "CHEM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Physics",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1155,
+              "description": "Physics for Engineering 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1156,
+              "description": "Lab for PHYS 1155",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1157,
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

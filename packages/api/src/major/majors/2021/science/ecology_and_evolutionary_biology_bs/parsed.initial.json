@@ -1,0 +1,574 @@
+{
+  "name": "Ecology and Evolutionary Biology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 137,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Ecology and Evolutionary Biology",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 1101,
+              "description": "Foundations in Ecology and Evolutionary Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 1102,
+              "description": "Lab for EEMB 1101",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Ecology and Evolutionary Genomics",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 1105,
+              "description": "Foundations in Ecological and Evolutionary Genomics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 1106,
+              "description": "Lab for EEMB 1105",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Genetics",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Evolution",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Ecology",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Conservation",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Data Skills",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Biostatistics",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Communication",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4997,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4900,
+              "subject": "ENVR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Math",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Organic or Environmental Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Physics 1",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1145,
+              "description": "Physics for Life Sciences 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1146,
+              "description": "Lab for PHYS 1145",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1161,
+              "description": "Physics 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1162,
+              "description": "Lab for PHYS 1161",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Ecology and Evolutionary Biology Topical Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2290,
+          "subject": "EEMB"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2700,
+              "description": "Marine Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2701,
+              "description": "Lab for EEMB 2700",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3001,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3465,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3475,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4010,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3455,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4001,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3125,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4505,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5210,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5242,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3611,
+              "description": "Biochemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3612,
+              "description": "Lab for BIOL 3611",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2313,
+              "description": "Organic Chemistry 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2314,
+              "description": "Lab for CHEM 2313",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3555,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5130,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5522,
+          "subject": "EEMB"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5500,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5563,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1147,
+              "description": "Physics for Life Sciences 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1148,
+              "description": "Lab for PHYS 1147",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 29
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

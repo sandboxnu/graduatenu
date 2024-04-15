@@ -1,0 +1,96 @@
+{
+  "name": "Human Services, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 130,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Human Services Overview",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2300,
+          "subject": "HUSV"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2970,
+              "subject": "HUSV"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "INSH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3570,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3900,
+          "subject": "HUSV"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Human Services and Diverse Populations",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2800,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2960,
+          "subject": "HUSV"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Seminar and Internship",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4994,
+          "subject": "HUSV"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

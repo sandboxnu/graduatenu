@@ -1,0 +1,314 @@
+{
+  "name": "American Sign Language and Linguistics, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Language Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "AMSL"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Social and Cultural World",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "DEAF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "DEAF"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Interpreting",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "INTP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3510,
+          "subject": "INTP"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistics Foundations",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistic Structure",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3422,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "LING"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology of Language",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3464,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistics Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3420,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3422,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3424,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3434,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3442,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3452,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3454,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3456,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3458,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4654,
+          "subject": "LING"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4891,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4970,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4971,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "PSYC"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4993,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4658,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 16
+    },
+    {
+      "type": "SECTION",
+      "title": "Seminar Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4654,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4891,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4658,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "DEAF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4940,
+          "subject": "INTP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3412,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 3
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

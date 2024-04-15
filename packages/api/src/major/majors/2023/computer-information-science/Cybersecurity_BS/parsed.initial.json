@@ -1,0 +1,648 @@
+{
+  "name": "Cybersecurity, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 134,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Computer Science Overview",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "CS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Fundamental Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2500,
+              "description": "Fundamentals of Computer Science 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2501,
+              "description": "Lab for CS 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2510,
+              "description": "Fundamentals of Computer Science 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2511,
+              "description": "Lab for CS 2510",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "CS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 3500,
+              "description": "Object-Oriented Design",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 3501,
+              "description": "Lab for CS 3500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "CS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4730,
+              "subject": "CS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Presentation Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1112,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1511,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1125,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2345,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Cybersecurity Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2550,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3740,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4740,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4770,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4930,
+          "subject": "CY"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Cybersecurity and Social Issues Elective List",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2551,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4040,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "LPSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "LPSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3303,
+          "subject": "LPSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2390,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3307,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3324,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3406,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3420,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3423,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electrical Engineering Required Course",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2322,
+              "description": "Fundamentals of Digital Design and Computer Organization",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2323,
+              "description": "Lab for EECE 2322",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "College Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Law Requirement",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4170,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5240,
+              "subject": "CY"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Cybersecurity Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2551,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4040,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "CS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4500,
+                  "subject": "CS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4530,
+                  "subject": "CS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "CS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4710,
+                  "subject": "CS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 6710,
+                  "subject": "CS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4730,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4760,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5200,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5210,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5770,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4300,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3324,
+              "subject": "EECE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 4534,
+                  "description": "Microprocessor-Based Design",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 4535,
+                  "description": "Lab for EECE 4534",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4300,
+              "subject": "IS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "LPSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "LPSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3303,
+              "subject": "LPSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3527,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "MISM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2390,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3324,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3423,
+              "subject": "POLS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Cyber Operations Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 4710,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5210,
+            "subject": "CY"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5240,
+            "subject": "CY"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 4500,
+                    "subject": "CS"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 4530,
+                    "subject": "CS"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 5200,
+                "subject": "CY"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3324,
+                "subject": "EECE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4534,
+                "subject": "EECE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

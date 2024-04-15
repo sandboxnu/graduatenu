@@ -1,0 +1,125 @@
+{
+  "name": "Sociology, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Sociology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Cultural Anthropology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Methods Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5030,
+          "subject": "DA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4400,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5301,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3487,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Experiential Learning Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3487,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4971,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

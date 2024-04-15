@@ -1,0 +1,222 @@
+{
+  "name": "Landscape Architecture, BLA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 142,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Calculus",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1241,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Environmental Geology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "History/Theory Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 1310,
+              "description": "Buildings and Cities, A Global History",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 1311,
+              "description": "Recitation for ARCH 1310",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "LARC"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Technology/Science Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2230,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2430,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2240,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5210,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5420,
+          "subject": "LARC"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Design",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2130,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2140,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2440,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3170,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5120,
+          "subject": "LARC"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EEAM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Cooperative Education",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3945,
+          "subject": "COOP"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

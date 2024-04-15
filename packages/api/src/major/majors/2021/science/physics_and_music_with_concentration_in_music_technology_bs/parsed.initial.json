@@ -1,0 +1,329 @@
+{
+  "name": "Physics and Music with Concentration in Music Technology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "totalCreditsRequired": 131,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introductory Physics",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1161,
+              "description": "Physics 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1162,
+              "description": "Lab for PHYS 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1165,
+              "description": "Physics 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1166,
+              "description": "Lab for PHYS 1165",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate Physics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "PHYS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 2371,
+              "description": "Electronics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 2372,
+              "description": "Lab for PHYS 2371",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Physics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3602,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4115,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4305,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5318,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Theory and Composition",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1202,
+          "subject": "MUSC"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3541,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2111,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3300,
+              "subject": "MUSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Music in Context",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2317,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3352,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3560,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3401,
+              "subject": "MUSI"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Technology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2431,
+          "subject": "MUST"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Technology Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3540,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4610,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "MUST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Technology Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4611,
+          "subject": "MUST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
