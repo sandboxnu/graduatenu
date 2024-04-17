@@ -307,6 +307,12 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       isSearchable
                       useFuzzySearch
                     />
+                    <Flex align="center">
+                      <Text size="xs" mr="xs">
+                        Can&apos;t find your major?
+                      </Text>
+                      <HelperToolTip label="We are working to support all majors, but in the meantime, you can submit feedback requesting your major and select 'No Major' so that you can still use our planner!" />
+                    </Flex>
                     {majorHasConcentrations && (
                       <PlanSelect
                         label="Concentrations"
