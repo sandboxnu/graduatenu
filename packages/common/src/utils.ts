@@ -19,7 +19,7 @@ export const majorNameComparator = (a: string, b: string) => {
     .replace(/[^A-Z0-9]/gi, "")
     .trim()
     .toLowerCase();
-  return trimmedB.localeCompare(trimmedA);
+  return trimmedA.localeCompare(trimmedB);
 };
 
 /**
