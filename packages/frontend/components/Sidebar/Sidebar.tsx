@@ -190,7 +190,13 @@ const Sidebar: React.FC<SidebarProps> = memo(
       concentrationValidationStatus = SidebarValidationStatus.Error;
     }
 
-    const creditsTaken = totalCreditsInSchedule(selectedPlan.schedule);
+    const transferCredits = transferCourses.reduce(
+      (sum, course) => course.numCreditsMin + sum,
+      0
+    );
+
+    const creditsTaken =
+      totalCreditsInSchedule(selectedPlan.schedule) + transferCredits;
 
     return (
       <SidebarContainer
@@ -247,12 +253,19 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
 interface NoMajorSidebarProps {
   selectedPlan: PlanModel<string>;
+  transferCourses: ScheduleCourse2<unknown>[];
 }
 
 export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
   selectedPlan,
+  transferCourses,
 }) => {
-  const creditsTaken = totalCreditsInSchedule(selectedPlan.schedule);
+  const transferCredits = transferCourses.reduce(
+    (sum, course) => course.numCreditsMin + sum,
+    0
+  );
+  const creditsTaken =
+    totalCreditsInSchedule(selectedPlan.schedule) + transferCredits;
   return (
     <SidebarContainer
       title="No Major"
