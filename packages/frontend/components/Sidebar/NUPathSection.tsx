@@ -1,4 +1,4 @@
-import { NUPathEnum, ScheduleCourse2, StatusEnum } from "@graduate/common";
+import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
 import { COOP_BLOCK, SidebarValidationStatus } from "./Sidebar";
 import { useState } from "react";
 import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
