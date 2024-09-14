@@ -4,6 +4,7 @@ import {
   MajorValidationResult,
   PlanModel,
   ScheduleCourse2,
+  StatusEnum,
 } from "@graduate/common";
 import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";

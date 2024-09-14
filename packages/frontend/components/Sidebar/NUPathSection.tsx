@@ -1,5 +1,5 @@
-import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
-import { SidebarValidationStatus } from "./Sidebar";
+import { NUPathEnum, ScheduleCourse2, StatusEnum } from "@graduate/common";
+import { COOP_BLOCK, SidebarValidationStatus } from "./Sidebar";
 import { useState } from "react";
 import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
 import { HelperToolTip } from "../Help";
@@ -49,6 +49,14 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
   const nupathMap: Record<string, number> = {};
 
   for (const course of coursesTaken) {
+    // Check if the course is a COOP, if it is, check off the Integration Experience
+    if (
+      course.name === COOP_BLOCK.name &&
+      course.classId === COOP_BLOCK.classId
+    ) {
+      nupathMap[NUPathEnum.EX] = 1;
+    }
+
     if (!course.nupaths) {
       continue;
     }
