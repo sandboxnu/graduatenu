@@ -49,14 +49,6 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
   const nupathMap: Record<string, number> = {};
 
   for (const course of coursesTaken) {
-    // Check if the course is a COOP, if it is, check off the Integration Experience
-    if (
-      course.name === COOP_BLOCK.name &&
-      course.classId === COOP_BLOCK.classId
-    ) {
-      nupathMap[NUPathEnum.EX] = 1;
-    }
-
     if (!course.nupaths) {
       continue;
     }
