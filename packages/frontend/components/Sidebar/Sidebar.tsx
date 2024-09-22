@@ -30,6 +30,7 @@ import { useFetchCourses, useMajor } from "../../hooks";
 import { HelperToolTip } from "../Help";
 import NUPathSection from "./NUPathSection";
 import DropdownWarning from "./DropdownWarning";
+import { NUPathEnum } from "@graduate/common";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -44,6 +45,7 @@ export const COOP_BLOCK: ScheduleCourse2<string> = {
   numCreditsMax: 8,
   numCreditsMin: 0,
   id: `${SIDEBAR_DND_ID_PREFIX}-co-op-block"`,
+  nupaths: [NUPathEnum.EX],
 };
 
 const createCourseMap = (
