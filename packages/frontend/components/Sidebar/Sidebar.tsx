@@ -190,13 +190,10 @@ const Sidebar: React.FC<SidebarProps> = memo(
       concentrationValidationStatus = SidebarValidationStatus.Error;
     }
 
-    const transferCredits = transferCourses.reduce(
-      (sum, course) => course.numCreditsMin + sum,
-      0
+    const creditsTaken = totalCreditsInSchedule(
+      selectedPlan.schedule,
+      transferCourses
     );
-
-    const creditsTaken =
-      totalCreditsInSchedule(selectedPlan.schedule) + transferCredits;
 
     return (
       <SidebarContainer
@@ -260,12 +257,10 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
   selectedPlan,
   transferCourses,
 }) => {
-  const transferCredits = transferCourses.reduce(
-    (sum, course) => course.numCreditsMin + sum,
-    0
+  const creditsTaken = totalCreditsInSchedule(
+    selectedPlan.schedule,
+    transferCourses
   );
-  const creditsTaken =
-    totalCreditsInSchedule(selectedPlan.schedule) + transferCredits;
   return (
     <SidebarContainer
       title="No Major"
