@@ -7,6 +7,7 @@ import {
   INEUReqError,
   IRequiredCourse,
   ScheduleCourse2,
+  SeasonEnum,
 } from "@graduate/common";
 import { forwardRef, PropsWithChildren, useEffect, useState } from "react";
 import {
@@ -370,6 +371,17 @@ const ScheduleCourseDraggedContents: React.FC<
             {`${courseToString(scheduleCourse)} `}
           </span>
           <span>{scheduleCourse.name}</span>
+          <br></br>
+          {scheduleCourse != null && (
+            <a //hehe year and season hardcoded :D how to get course context?
+              href={getSearchLink(2022, SeasonEnum.FL, scheduleCourse)}
+              style={{ textDecorationLine: "underline" }}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Find on NUSearch!
+            </a>
+          )}
         </p>
       </div>
     </div>
@@ -383,3 +395,33 @@ const ScheduleCourseDraggedContents: React.FC<
 const ScheduleCourseSpacer: React.FC = () => {
   return <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>;
 };
+
+function getSearchLink(
+  catalogYear: number,
+  szn: SeasonEnum,
+  course: ScheduleCourse2<unknown>
+): string {
+  let sznInt = -1;
+  switch (szn) {
+    case SeasonEnum.FL:
+      sznInt = 1;
+      break;
+    case SeasonEnum.SP:
+      sznInt = 3;
+      break;
+    case SeasonEnum.S1:
+      sznInt = 4;
+      break;
+    case SeasonEnum.SM:
+      sznInt = 5;
+      break;
+    case SeasonEnum.S2:
+      sznInt = 6;
+      break;
+    default:
+      sznInt = 1;
+  }
+  return `https://searchneu.com/NEU/${catalogYear}${sznInt}${0}/search/${
+    course.subject
+  }${course.classId}`;
+}
