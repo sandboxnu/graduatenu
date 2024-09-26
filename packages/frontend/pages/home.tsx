@@ -249,7 +249,13 @@ const HomePage: NextPage = () => {
           transferCourses={student.coursesTransfered || []}
         />
       );
-    } else renderedSidebar = <NoMajorSidebar selectedPlan={selectedPlan} />;
+    } else
+      renderedSidebar = (
+        <NoMajorSidebar
+          selectedPlan={selectedPlan}
+          transferCourses={student.coursesTransfered || []}
+        />
+      );
   }
 
   return (
