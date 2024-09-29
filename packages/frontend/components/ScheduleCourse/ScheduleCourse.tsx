@@ -371,17 +371,6 @@ const ScheduleCourseDraggedContents: React.FC<
             {`${courseToString(scheduleCourse)} `}
           </span>
           <span>{scheduleCourse.name}</span>
-          <br></br>
-          {scheduleCourse != null && (
-            <a //hehe year and season hardcoded :D how to get course context?
-              href={getSearchLink(2022, SeasonEnum.FL, scheduleCourse)}
-              style={{ textDecorationLine: "underline" }}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Find on NUSearch!
-            </a>
-          )}
         </p>
       </div>
     </div>
