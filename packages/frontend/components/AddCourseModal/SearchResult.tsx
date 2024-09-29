@@ -5,7 +5,6 @@ import { getCourseDisplayString } from "../../utils/";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { NUPathLabel } from "./NUPathLabel";
 import Image from "next/image";
-import SearchIcon from "/more-info.svg";
 import { getSearchLink } from "../ScheduleCourse";
 
 interface SearchResultProps {
