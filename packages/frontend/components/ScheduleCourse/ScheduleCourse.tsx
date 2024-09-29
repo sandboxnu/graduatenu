@@ -396,7 +396,7 @@ const ScheduleCourseSpacer: React.FC = () => {
   return <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>;
 };
 
-function getSearchLink(
+export function getSearchLink(
   catalogYear: number,
   szn: SeasonEnum,
   course: ScheduleCourse2<unknown>

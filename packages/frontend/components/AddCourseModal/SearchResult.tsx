@@ -1,9 +1,12 @@
 import { AddIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
-import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
+import { NUPathEnum, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils/";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { NUPathLabel } from "./NUPathLabel";
+import Image from "next/image";
+import SearchIcon from "/more-info.svg";
+import { getSearchLink } from "../ScheduleCourse";
 
 interface SearchResultProps {
   course: ScheduleCourse2<null>;
@@ -48,6 +51,19 @@ export const SearchResult: React.FC<SearchResultProps> = ({
             {course.name}
           </Text>
         </Box>
+        <Box ml="auto" mr="sm"></Box>
+        <a
+          href={getSearchLink(2022, SeasonEnum.FL, course)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Image
+            src="/more-info.svg"
+            width={14}
+            height={14}
+            alt="See on SearchNU!"
+          />
+        </a>
         <NUPathLabel
           nuPaths={course.nupaths ? course.nupaths : []}
           filteredPaths={filteredPaths}
