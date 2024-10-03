@@ -1,7 +1,7 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Flex, Grid, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
-import { ScheduleCourse2, StudentModel } from "@graduate/common";
+import { ScheduleCourse2, SeasonEnum, StudentModel } from "@graduate/common";
 import { useRouter } from "next/router";
 import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../../hooks";
 import {
@@ -19,11 +19,13 @@ import { IsGuestContext } from "../../pages/_app";
 interface TransferCoursesToggleProps {
   isExpanded: boolean;
   toggleExpanded: () => void;
+  year: number;
 }
 
 export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
   isExpanded,
   toggleExpanded,
+  year,
 }) => {
   const { student, isLoading, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
@@ -86,11 +88,13 @@ export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
         isExpanded={isExpanded}
         toggleExpanded={toggleExpanded}
         totalTransferCredits={totalTransferCredits}
+        year={year}
       />
       {isExpanded && (
         <TransferCoursesBody
           transferCourses={transferCourses}
           updateTransferCourses={updateTransferCourses}
+          year={year}
         />
       )}
     </Flex>
@@ -102,11 +106,13 @@ interface TransferCoursesBodyProps {
   updateTransferCourses: (
     updateTransferCourses: ScheduleCourse2<null>[]
   ) => void;
+  year: number;
 }
 
 const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
   transferCourses,
   updateTransferCourses,
+  year,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -145,6 +151,9 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
       ))}
       <AddCourseButton onOpen={onOpen} />
       <AddCourseModal
+        //is season really necessary? i have placeholder here
+        season={SeasonEnum.FL}
+        catalogYear={year}
         isOpen={isOpen}
         addTo="Transfer Courses"
         closeModalDisplay={onClose}
