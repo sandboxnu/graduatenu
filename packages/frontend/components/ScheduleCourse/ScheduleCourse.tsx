@@ -411,6 +411,6 @@ export function getSearchLink(
       sznInt = 1;
   }
   return `https://searchneu.com/NEU/${catalogYear}${sznInt}${0}/search/${
-    course.subject
-  }${course.classId}`;
+    course.name
+  }`;
 }
