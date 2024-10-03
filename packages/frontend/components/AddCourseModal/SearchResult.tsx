@@ -9,6 +9,8 @@ import { getSearchLink } from "../ScheduleCourse";
 
 interface SearchResultProps {
   course: ScheduleCourse2<null>;
+  year: number | undefined;
+  season: SeasonEnum;
   addSelectedCourse: (course: ScheduleCourse2<null>) => Promise<void>;
   isResultAlreadySelected: boolean;
   isResultAlreadyAdded: boolean;
@@ -19,6 +21,8 @@ interface SearchResultProps {
 
 export const SearchResult: React.FC<SearchResultProps> = ({
   course,
+  year,
+  season,
   addSelectedCourse,
   isResultAlreadySelected,
   isResultAlreadyAdded,
@@ -52,7 +56,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
         </Box>
         <Box ml="auto" mr="sm"></Box>
         <a
-          href={getSearchLink(2022, SeasonEnum.FL, course)}
+          href={getSearchLink(year ?? 2022, season, course)}
           target="_blank"
           rel="noreferrer"
         >
