@@ -59,7 +59,19 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           target="_blank"
           rel="noreferrer"
         >
-          <QuestionOutlineIcon pb={1} />
+          <IconButton
+            aria-label="Add class"
+            icon={<QuestionOutlineIcon />}
+            color="primary.blue.light.main"
+            border={0}
+            colorScheme="primary.blue.light.main"
+            isRound
+            size="sm"
+            pr={1}
+            isLoading={isSelectingAnotherCourse}
+            isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
+            alignSelf="center"
+          />
         </a>
         <NUPathLabel
           nuPaths={course.nupaths ? course.nupaths : []}
