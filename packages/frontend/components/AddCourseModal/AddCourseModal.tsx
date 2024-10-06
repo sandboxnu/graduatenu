@@ -13,7 +13,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { NUPathEnum, ScheduleCourse2 } from "@graduate/common";
+import { NUPathEnum, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import { useState } from "react";
 import { useSearchCourses } from "../../hooks";
 import {
@@ -33,6 +33,7 @@ import { SecondaryButton } from "../Button";
 interface AddCourseModalProps {
   isOpen: boolean;
   catalogYear?: number;
+  season: SeasonEnum;
   addTo: string;
   /** Function to close the modal UX, returned from the useDisclosure chakra hook */
   closeModalDisplay: () => void;
@@ -50,6 +51,7 @@ interface AddCourseModalProps {
 export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   isOpen,
   catalogYear,
+  season,
   addTo,
   closeModalDisplay,
   isCourseAlreadyAdded,
@@ -227,6 +229,8 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                       (course) => (
                         <SearchResult
                           key={getCourseDisplayString(course)}
+                          year={catalogYear}
+                          season={season}
                           course={course}
                           addSelectedCourse={addSelectedCourse}
                           isResultAlreadyAdded={isCourseAlreadyAdded(course)}

@@ -313,6 +313,7 @@ const HomePage: NextPage = () => {
                 />
                 <Divider borderColor="neutral.200" borderWidth={1} />
                 <TransferCourses
+                  year={selectedPlan.catalogYear}
                   isExpanded={isTransferCoursesExpanded}
                   toggleExpanded={() =>
                     setIsTransferCoursesExpanded(!isTransferCoursesExpanded)

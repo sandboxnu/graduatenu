@@ -7,6 +7,7 @@ import {
   INEUReqError,
   IRequiredCourse,
   ScheduleCourse2,
+  SeasonEnum,
 } from "@graduate/common";
 import { forwardRef, PropsWithChildren, useEffect, useState } from "react";
 import {
@@ -383,3 +384,33 @@ const ScheduleCourseDraggedContents: React.FC<
 const ScheduleCourseSpacer: React.FC = () => {
   return <div style={{ width: "32px", height: "32px", flexShrink: 0 }}></div>;
 };
+
+export function getSearchLink(
+  catalogYear: number,
+  szn: SeasonEnum,
+  course: ScheduleCourse2<unknown>
+): string {
+  let sznInt = -1;
+  switch (szn) {
+    case SeasonEnum.FL:
+      sznInt = 1;
+      break;
+    case SeasonEnum.SP:
+      sznInt = 3;
+      break;
+    case SeasonEnum.S1:
+      sznInt = 4;
+      break;
+    case SeasonEnum.SM:
+      sznInt = 5;
+      break;
+    case SeasonEnum.S2:
+      sznInt = 6;
+      break;
+    default:
+      sznInt = 1;
+  }
+  return `https://searchneu.com/NEU/${catalogYear}${sznInt}${0}/search/${
+    course.name
+  }`;
+}
