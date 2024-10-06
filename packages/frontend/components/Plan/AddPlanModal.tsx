@@ -335,6 +335,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       <Flex alignItems="center">
                         <Checkbox
                           mr="md"
+                          borderColor="primary.blue.dark.main"
                           {...register("agreeToBetaMajor", {
                             required: "You must agree to continue",
                           })}
