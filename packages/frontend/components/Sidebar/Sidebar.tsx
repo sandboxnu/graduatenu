@@ -36,6 +36,7 @@ export enum SidebarValidationStatus {
   Loading = "Loading",
   Error = "Error",
   Complete = "Complete",
+  InProgress = "InProgress",
 }
 
 export const COOP_BLOCK: ScheduleCourse2<string> = {
@@ -106,6 +107,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
       };
+
       workerRef.current?.postMessage(validationInfo);
     };
 
@@ -188,8 +190,17 @@ const Sidebar: React.FC<SidebarProps> = memo(
     let concentrationValidationStatus = SidebarValidationStatus.Complete;
     if (validationStatus === undefined) {
       concentrationValidationStatus = SidebarValidationStatus.Loading;
-    } else if (concentrationValidationError) {
+    } else if (
+      concentrationValidationError &&
+      concentrationValidationError.type === "AND" &&
+      concentrationValidationError.error.type === "AND_UNSAT_CHILD" &&
+      concentrationValidationError.error.childErrors[0].type === "SECTION" &&
+      concentrationValidationError.error.childErrors[0]
+        .maxPossibleChildCount === 0
+    ) {
       concentrationValidationStatus = SidebarValidationStatus.Error;
+    } else {
+      concentrationValidationStatus = SidebarValidationStatus.InProgress;
     }
 
     const creditsTaken = totalCreditsInSchedule(
@@ -218,10 +229,21 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 getSectionError(index, validationStatus);
 
               let sectionValidationStatus = SidebarValidationStatus.Complete;
+
               if (validationStatus === undefined) {
                 sectionValidationStatus = SidebarValidationStatus.Loading;
-              } else if (sectionValidationError) {
+              } else if (
+                sectionValidationError &&
+                sectionValidationError.type === "SECTION" &&
+                sectionValidationError.maxPossibleChildCount === 0
+              ) {
                 sectionValidationStatus = SidebarValidationStatus.Error;
+              } else if (
+                sectionValidationError &&
+                sectionValidationError.type === "SECTION" &&
+                sectionValidationError.maxPossibleChildCount > 0
+              ) {
+                sectionValidationStatus = SidebarValidationStatus.InProgress;
               }
 
               return (
