@@ -87,6 +87,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
       ))}
       <AddCourseButton onOpen={onOpen} />
       <AddCourseModal
+        season={scheduleTerm.season}
         isOpen={isOpen}
         catalogYear={catalogYear}
         addTo={getSeasonDisplayWord(scheduleTerm.season)}
