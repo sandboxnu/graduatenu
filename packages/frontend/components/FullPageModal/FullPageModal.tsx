@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
-  Center,
-  Flex,
-  Grid,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
-  VStack,
-  useDisclosure,
 } from "@chakra-ui/react";
 
 interface WhatsNewPopUpProps {
