@@ -1,4 +1,15 @@
-import { Badge, Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  Flex,
+  Heading,
+  Link,
+  Stack,
+  Text,
+  Textarea,
+  VStack,
+} from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
@@ -319,13 +330,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   children,
 }) => {
   return (
-    <Box
-      pt="xl"
-      backgroundColor="neutral.50"
-      borderRight="1px"
-      borderRightColor="neutral.200"
-      minH="100%"
-    >
+    <Box pt="xl" borderRight="1px" borderRightColor="neutral.200" minH="100%">
       <Box px="md" pb="md">
         <Box pb="sm">
           {renderBetaMajorBlock && (
@@ -383,6 +388,25 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
         )}
       </Box>
       {children}
+
+      <Box backgroundColor="white" pt="6" pb="3" px="3">
+        <VStack align="left" px="4">
+          <Flex mb="3">
+            <Image src="/sandbox_logo.svg" alt="sandbox logo" mr="2" />
+            <Text
+              color="primary.blue.dark.main"
+              fontSize="sm"
+              fontWeight="bold"
+            >
+              Sandbox Area
+            </Text>
+          </Flex>
+          <Text color="primary.blue.dark.main" fontSize="sm" fontWeight="bold">
+            Notes
+          </Text>
+          <Textarea placeholder="notes here!" resize="vertical" />
+        </VStack>
+      </Box>
     </Box>
   );
 };
