@@ -50,6 +50,8 @@ import {
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
+import { WhatsNewPopUp } from "../components/FullPageModal/FullPageModal";
+import Cookies from "universal-cookie";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -66,6 +68,43 @@ const courseDndCollisisonAlgorithm: CollisionDetection = (args) => {
 const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
+  // How we keep track if the modal is open or closed
+  const [isOpen, setIsOpen] = useState(false);
+  const cookies = new Cookies();
+  // useEffect(() => {
+  //   setIsOpen(true); // Show the modal when the component renders
+  // }, []);
+
+  // when the modal closes
+  // useEffect(() => {
+  //   const cookies = new Cookies();
+  //   const existingToken = cookies.get('FeedbackModal JWT');
+  //   if (existingToken) {
+  //     setIsOpen(false); // Don't show the modal
+  //   } else {
+  //     setIsOpen(true);
+  //     const newtoken = 'alreadyShowedModal';
+  //     cookies.set('FeedbackModal JWT', newtoken, { path: '/' });
+  //      // Show the modal
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    const existingToken = cookies.get("FeedbackModal JWT");
+
+    if (!existingToken) {
+      setIsOpen(true); // Open modal only if token doesn't exist
+    }
+  }, []);
+
+  const handleClose = () => {
+    setIsOpen(false); // Close the modal when user dismisses it
+    const cookies = new Cookies();
+    const newToken = "alreadyShowedModal";
+    cookies.set("FeedbackModal JWT", newToken, { path: "/" }); // Set the token when user closes the modal
+  };
+
+  // const onClose = () => setIsOpen(false);
 
   /*
    * Keep track of the plan being displayed, initially undef and later either the plan id or null.
@@ -325,6 +364,13 @@ const HomePage: NextPage = () => {
           />
         ) : null}
       </DragOverlay>
+
+      <WhatsNewPopUp
+        isOpen={isOpen}
+        onClose={handleClose}
+        // handleCancel
+        //() => setIsOpen(false)
+      />
     </DndContext>
   );
 };
