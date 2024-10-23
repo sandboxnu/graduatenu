@@ -66,6 +66,7 @@ type CourseError = {
   type: typeof MajorValidationErrorType.Course;
   requiredCourse: string;
 };
+
 export const CourseError = (c: IRequiredCourse): CourseError => ({
   type: MajorValidationErrorType.Course,
   requiredCourse: courseToString(c),

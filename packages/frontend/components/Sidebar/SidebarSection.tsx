@@ -5,6 +5,7 @@ import {
   SmallCloseIcon,
   WarningTwoIcon,
 } from "@chakra-ui/icons";
+
 import { Box, Flex, Spinner, Stack, Text } from "@chakra-ui/react";
 import { ScheduleCourse2, Section } from "@graduate/common";
 import { useState } from "react";
@@ -85,11 +86,15 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
                 ? green
                 : validationStatus === SidebarValidationStatus.Error
                 ? grey
+                : validationStatus === SidebarValidationStatus.InProgress
+                ? "orange"
                 : "transparent"
             }
             borderColor={
               validationStatus === SidebarValidationStatus.Complete
                 ? green
+                : validationStatus === SidebarValidationStatus.InProgress
+                ? "orange"
                 : grey
             }
             color={
@@ -101,16 +106,17 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
             width="18px"
             height="18px"
             display="flex"
-            transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
-            transitionDelay="0.1s"
             alignItems="center"
             justifyContent="center"
+            transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
+            transitionDelay="0.1s"
             borderRadius="2xl"
             mt="4xs"
             p="xs"
+            position="relative"
           >
             {/*
-              The following three icons appear and disappear based on opacity to allow for transitions (if they're conditionally rendered, then transitions can't occur).
+              The following four icons appear and disappear based on opacity to allow for transitions (if they're conditionally rendered, then transitions can't occur).
             */}
             <CheckIcon
               position="absolute"
@@ -140,6 +146,16 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
               transition="opacity 0.25s ease"
               transitionDelay="0.1s"
             />
+            <Text
+              opacity={
+                validationStatus === SidebarValidationStatus.InProgress ? 1 : 0
+              }
+              fontSize="s"
+              boxSize="34px"
+              color="white"
+            >
+              ...
+            </Text>
           </Box>
           <Text color="primary.blue.dark.main" mt="0" fontSize="sm">
             {section.title}

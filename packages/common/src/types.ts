@@ -181,7 +181,6 @@ export type Requirement2 =
   | ICourseRange2
   | IRequiredCourse
   | Section;
-
 /**
  * Represents a requirement where X number of credits need to be completed from
  * a list of courses.
