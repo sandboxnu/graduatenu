@@ -5903,16 +5903,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chakra-ui-ionicons@npm:^0.3.3":
-  version: 0.3.3
-  resolution: "chakra-ui-ionicons@npm:0.3.3"
-  peerDependencies:
-    "@chakra-ui/react": ^1.0.0
-    react: ">=16"
-  checksum: 23c06650c2f9ffb8283ef1b51dd52e1ed249dd90ac14bbc6ecadae4ee77bd489976d403912f99e39f24d6bc7b76ba831b1c01cb6176eeae760a7d6a818ea3618
-  languageName: node
-  linkType: hard
-
 "chalk@npm:3.0.0, chalk@npm:^3.0.0":
   version: 3.0.0
   resolution: "chalk@npm:3.0.0"
@@ -8179,7 +8169,6 @@ __metadata:
     "@types/nodemailer": ^6.4.7
     "@typescript-eslint/eslint-plugin": ^5.15.0
     "@typescript-eslint/parser": ^5.15.0
-    chakra-ui-ionicons: ^0.3.3
     concurrently: ^7.0.0
     cross-env: ^7.0.3
     eslint: ^8.11.0
