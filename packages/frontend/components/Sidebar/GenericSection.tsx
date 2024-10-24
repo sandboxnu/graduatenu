@@ -5,12 +5,24 @@ import {
 } from "@chakra-ui/icons";
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { useState } from "react";
+import SectionRequirement from "./SectionRequirement";
+import { IAndCourse2, ScheduleCourse2 } from "@graduate/common";
 
-interface ClassOptionProps {
-  type: "NUpath" | "Elective Placeholder";
+// Define the props interface for GenericSection
+interface GenericSectionProps {
+  courseData: { [id: string]: ScheduleCourse2<null> };
+  dndIdPrefix: string;
 }
 
-const ClassOption: React.FC<ClassOptionProps> = ({ type }) => {
+// The sample IAndCourse2 requirement object
+const andCourseRequirement: IAndCourse2 = {
+  type: "AND",
+  courses: [],
+};
+
+const ClassOption: React.FC<{ type: "NUpath" | "Elective Placeholder" }> = ({
+  type,
+}) => {
   return (
     <Text fontSize="sm" color="primary.blue.dark.main" mt="0">
       {type === "NUpath" ? "NUpath" : "Elective Placeholder"}
@@ -18,7 +30,10 @@ const ClassOption: React.FC<ClassOptionProps> = ({ type }) => {
   );
 };
 
-const GenericSection: React.FC = () => {
+const GenericSection: React.FC<GenericSectionProps> = ({
+  courseData,
+  dndIdPrefix,
+}) => {
   const [opened, setOpened] = useState(false);
 
   return (
@@ -92,7 +107,11 @@ const GenericSection: React.FC = () => {
       >
         {opened && (
           <Stack spacing={3}>
-            <ClassOption type="NUpath" />
+            <SectionRequirement
+              requirement={andCourseRequirement}
+              courseData={courseData} // Passing courseData prop here
+              dndIdPrefix={dndIdPrefix} // dndIdPrefix prop passed here
+            />
             <ClassOption type="Elective Placeholder" />
           </Stack>
         )}

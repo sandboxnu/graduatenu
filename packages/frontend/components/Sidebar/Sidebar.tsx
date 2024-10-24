@@ -217,7 +217,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       >
         {courseData && (
           <>
-            <GenericSection />
+            <GenericSection courseData={courseData} dndIdPrefix="temp" />
             <NUPathSection
               coursesTaken={coursesTaken}
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-nupath`}
