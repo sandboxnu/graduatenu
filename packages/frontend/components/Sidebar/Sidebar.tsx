@@ -329,6 +329,11 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   renderDropdownWarning = true,
   children,
 }) => {
+  const [notes, setNotes] = useState<string>("");
+  const handleNewNotes = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNotes(e.target.value);
+    console.log("New notes: ", e.target.value);
+  };
   return (
     <Box pt="xl" borderRight="1px" borderRightColor="neutral.200" minH="100%">
       <Box px="md" pb="md">
@@ -404,7 +409,12 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
           <Text color="primary.blue.dark.main" fontSize="sm" fontWeight="bold">
             Notes
           </Text>
-          <Textarea placeholder="notes here!" resize="vertical" />
+          <Textarea
+            placeholder="notes here!"
+            resize="vertical"
+            value={notes}
+            onChange={handleNewNotes}
+          />
         </VStack>
       </Box>
     </Box>
