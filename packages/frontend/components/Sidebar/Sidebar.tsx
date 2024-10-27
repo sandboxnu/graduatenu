@@ -338,7 +338,7 @@ interface SidebarContainerProps {
   renderCoopBlock?: boolean;
   renderBetaMajorBlock?: boolean;
   renderDropdownWarning?: boolean;
-  planId: string | number;
+  planId?: string | number;
 }
 
 export const NoPlanSidebar: React.FC = () => {
@@ -358,18 +358,23 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
 }) => {
   const [notes, setNotes] = useState<string>("");
   const handleNewNotes = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (!planId) return;
     setNotes(e.target.value);
+    // Retrieve existing notes from localStorage
+    const storedNotes = localStorage.getItem("notes");
+    const notesObject = storedNotes ? JSON.parse(storedNotes) : {};
+    notesObject[planId] = notes;
     // have a notes object plan_id (number | string) -> note (string)
-    localStorage.setItem(planId.toString(), e.target.value);
+    localStorage.setItem("notes", JSON.stringify(notesObject));
     console.log("New notes: ", e.target.value);
   };
 
   useEffect(() => {
     if (!planId) return;
-
-    const storedNotes = localStorage.getItem(planId.toString());
+    const storedNotes = localStorage.getItem("notes");
+    const notesObject = storedNotes ? JSON.parse(storedNotes) : {};
     if (storedNotes) {
-      setNotes(storedNotes);
+      setNotes(notesObject[planId]);
     }
   }, [planId]);
 
@@ -434,30 +439,36 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
 
       {children}
 
-      <Box backgroundColor="white" pt="6" pb="6" px="3">
-        <VStack align="left" px="4">
-          <Flex mb="3">
-            <Image src="/sandbox_logo.svg" alt="sandbox logo" mr="2" />
+      {planId && (
+        <Box backgroundColor="white" pt="6" pb="6" px="3">
+          <VStack align="left" px="4">
+            <Flex mb="3">
+              <Image src="/sandbox_logo.svg" alt="sandbox logo" mr="2" />
+              <Text
+                color="primary.blue.dark.main"
+                fontSize="sm"
+                fontWeight="bold"
+              >
+                Sandbox Area {planId}
+              </Text>
+            </Flex>
             <Text
               color="primary.blue.dark.main"
               fontSize="sm"
               fontWeight="bold"
             >
-              Sandbox Area {planId}
+              Notes
             </Text>
-          </Flex>
-          <Text color="primary.blue.dark.main" fontSize="sm" fontWeight="bold">
-            Notes
-          </Text>
-          <AutoResizeTextarea
-            placeholder="notes here!"
-            resize="vertical"
-            height="initial"
-            value={notes}
-            onChange={handleNewNotes}
-          />
-        </VStack>
-      </Box>
+            <AutoResizeTextarea
+              placeholder="notes here!"
+              resize="vertical"
+              height="initial"
+              value={notes}
+              onChange={handleNewNotes}
+            />
+          </VStack>
+        </Box>
+      )}
     </Box>
   );
 };
