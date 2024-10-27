@@ -15,7 +15,6 @@ import {
   MajorValidationResult,
   PlanModel,
   ScheduleCourse2,
-  UpdatePlanDto,
 } from "@graduate/common";
 import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
@@ -25,7 +24,6 @@ import {
   getSectionError,
   getAllCoursesInMajor,
   BETA_MAJOR_TOOLTIP_MSG,
-  toast,
 } from "../../utils";
 import {
   handleApiClientError,
@@ -39,12 +37,11 @@ import {
   WorkerMessageType,
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
-import { useFetchCourses, useMajor, usePlan } from "../../hooks";
+import { useFetchCourses, useMajor } from "../../hooks";
 import { HelperToolTip } from "../Help";
 import NUPathSection from "./NUPathSection";
 import DropdownWarning from "./DropdownWarning";
 import { NUPathEnum } from "@graduate/common";
-import { API } from "@graduate/api-client";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -219,7 +216,6 @@ const Sidebar: React.FC<SidebarProps> = memo(
         creditsToTake={major.totalCreditsRequired}
         renderCoopBlock
         renderBetaMajorBlock={major.metadata?.verified !== true}
-        planId={selectedPlan.id}
       >
         {courseData && (
           <>
@@ -317,7 +313,6 @@ interface SidebarContainerProps {
   renderCoopBlock?: boolean;
   renderBetaMajorBlock?: boolean;
   renderDropdownWarning?: boolean;
-  planId?: string | number;
 }
 
 export const NoPlanSidebar: React.FC = () => {
@@ -332,45 +327,12 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   renderCoopBlock,
   renderBetaMajorBlock,
   renderDropdownWarning = true,
-  planId,
   children,
 }) => {
   const [notes, setNotes] = useState<string>("");
-  const router = useRouter();
-  //fetch existing notes
-  useEffect(() => {
-    const fetchNotes = async () => {
-      try {
-        if (planId) {
-          const response = await API.plans.get(planId);
-          setNotes(response.note ?? "");
-        } else {
-          toast.error(`Plan ID: ${planId} not found`);
-        }
-      } catch (error) {
-        handleApiClientError(error as Error, router);
-        return;
-      }
-    };
-    fetchNotes();
-  }, []);
-  const handleNewNotes = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleNewNotes = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNotes(e.target.value);
-
-    const newPlan: UpdatePlanDto = {
-      note: notes,
-    };
-
-    try {
-      if (planId) {
-        await API.plans.update(planId, newPlan);
-      } else {
-        toast.error(`Plan ID: ${planId} not found`);
-      }
-    } catch (error) {
-      handleApiClientError(error as Error, router);
-      return;
-    }
+    console.log("New notes: ", e.target.value);
   };
   return (
     <Box pt="xl" borderRight="1px" borderRightColor="neutral.200" minH="100%">

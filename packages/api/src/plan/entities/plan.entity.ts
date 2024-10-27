@@ -39,7 +39,4 @@ export class Plan {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  @Column({ nullable: true })
-  note: string;
 }
