@@ -8,6 +8,7 @@ import {
   Text,
   Textarea,
   VStack,
+  TextareaProps,
 } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import {
@@ -42,6 +43,9 @@ import { HelperToolTip } from "../Help";
 import NUPathSection from "./NUPathSection";
 import DropdownWarning from "./DropdownWarning";
 import { NUPathEnum } from "@graduate/common";
+import { forwardRef } from "react";
+
+import ResizeTextarea from "react-textarea-autosize";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -305,6 +309,25 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
   );
 };
 
+// Still a bit buggy
+const AutoResizeTextarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  (props, ref) => {
+    return (
+      <Textarea
+        minH="unset"
+        w="100%"
+        ref={ref}
+        minRows={4}
+        as={ResizeTextarea}
+        maxRows={10}
+        {...props}
+      />
+    );
+  }
+);
+
+AutoResizeTextarea.displayName = "AutoResizeTextarea";
+
 interface SidebarContainerProps {
   title: string;
   subtitle?: string;
@@ -394,7 +417,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
       </Box>
       {children}
 
-      <Box backgroundColor="white" pt="6" pb="3" px="3">
+      <Box backgroundColor="white" pt="6" pb="6" px="3">
         <VStack align="left" px="4">
           <Flex mb="3">
             <Image src="/sandbox_logo.svg" alt="sandbox logo" mr="2" />
@@ -409,9 +432,11 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
           <Text color="primary.blue.dark.main" fontSize="sm" fontWeight="bold">
             Notes
           </Text>
-          <Textarea
+          {/* <Textarea placeholder="notes here!" resize="vertical" height="initial" /> */}
+          <AutoResizeTextarea
             placeholder="notes here!"
             resize="vertical"
+            height="initial"
             value={notes}
             onChange={handleNewNotes}
           />
