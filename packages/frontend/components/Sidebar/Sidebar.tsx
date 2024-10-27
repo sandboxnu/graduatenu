@@ -366,7 +366,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
     notesObject[planId] = notes;
     // have a notes object plan_id (number | string) -> note (string)
     localStorage.setItem("notes", JSON.stringify(notesObject));
-    console.log("New notes: ", e.target.value);
+    //console.log("New notes: ", e.target.value);
   };
 
   useEffect(() => {
@@ -449,7 +449,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
                 fontSize="sm"
                 fontWeight="bold"
               >
-                Sandbox Area {planId}
+                Sandbox Area
               </Text>
             </Flex>
             <Text
