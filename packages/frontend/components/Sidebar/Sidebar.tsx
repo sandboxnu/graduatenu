@@ -220,6 +220,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
         creditsToTake={major.totalCreditsRequired}
         renderCoopBlock
         renderBetaMajorBlock={major.metadata?.verified !== true}
+        planId={selectedPlan.id}
       >
         {courseData && (
           <>
@@ -284,6 +285,7 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
       creditsTaken={creditsTaken}
       renderCoopBlock
       renderDropdownWarning={false}
+      planId={selectedPlan.id}
     >
       <Stack px="md">
         <Text>
@@ -336,6 +338,7 @@ interface SidebarContainerProps {
   renderCoopBlock?: boolean;
   renderBetaMajorBlock?: boolean;
   renderDropdownWarning?: boolean;
+  planId: string | number;
 }
 
 export const NoPlanSidebar: React.FC = () => {
@@ -350,13 +353,26 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   renderCoopBlock,
   renderBetaMajorBlock,
   renderDropdownWarning = true,
+  planId,
   children,
 }) => {
   const [notes, setNotes] = useState<string>("");
   const handleNewNotes = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNotes(e.target.value);
+    // have a notes object plan_id (number | string) -> note (string)
+    localStorage.setItem(planId.toString(), e.target.value);
     console.log("New notes: ", e.target.value);
   };
+
+  useEffect(() => {
+    if (!planId) return;
+
+    const storedNotes = localStorage.getItem(planId.toString());
+    if (storedNotes) {
+      setNotes(storedNotes);
+    }
+  }, [planId]);
+
   return (
     <Box pt="xl" borderRight="1px" borderRightColor="neutral.200" minH="100%">
       <Box px="md" pb="md">
@@ -415,6 +431,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
           />
         )}
       </Box>
+
       {children}
 
       <Box backgroundColor="white" pt="6" pb="6" px="3">
@@ -426,13 +443,12 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
               fontSize="sm"
               fontWeight="bold"
             >
-              Sandbox Area
+              Sandbox Area {planId}
             </Text>
           </Flex>
           <Text color="primary.blue.dark.main" fontSize="sm" fontWeight="bold">
             Notes
           </Text>
-          {/* <Textarea placeholder="notes here!" resize="vertical" height="initial" /> */}
           <AutoResizeTextarea
             placeholder="notes here!"
             resize="vertical"
