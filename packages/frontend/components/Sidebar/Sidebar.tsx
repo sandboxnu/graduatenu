@@ -32,6 +32,7 @@ import NUPathSection from "./NUPathSection";
 import DropdownWarning from "./DropdownWarning";
 import { NUPathEnum } from "@graduate/common";
 import GenericSection from "./GenericSection";
+import { GENERIC_ELECTIVE_ID_PREFIX } from "../../utils";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -217,7 +218,10 @@ const Sidebar: React.FC<SidebarProps> = memo(
       >
         {courseData && (
           <>
-            <GenericSection courseData={courseData} dndIdPrefix="temp" />
+            <GenericSection
+              courseData={courseData}
+              dndIdPrefix={`${GENERIC_ELECTIVE_ID_PREFIX}-generic-elective`}
+            />
             <NUPathSection
               coursesTaken={coursesTaken}
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-nupath`}

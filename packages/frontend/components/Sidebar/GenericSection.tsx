@@ -23,38 +23,23 @@ export const GENERIC_ELECTIVE: ScheduleCourse2<string> = {
   name: "Elective",
   classId: "Generic Class",
   subject: "",
-  numCreditsMax: 8,
+  numCreditsMax: 0,
   numCreditsMin: 0,
-  id: `${GENERIC_ELECTIVE_ID_PREFIX}-generic-elective"`,
-  nupaths: [],
+  id: `${GENERIC_ELECTIVE_ID_PREFIX}-generic-elective`,
 };
 
 export const GENERIC_NUPATH: ScheduleCourse2<string> = {
   name: "NUPath",
   classId: "Generic Class",
   subject: "",
-  numCreditsMax: 8,
+  numCreditsMax: 0,
   numCreditsMin: 0,
-  id: `${GENERIC_NUPATH_ID_PREFIX}-generic-nupath"`,
-  nupaths: [],
-};
-
-const ClassOption: React.FC<{ type: "NUpath" | "Elective Placeholder" }> = ({
-  type,
-}) => {
-  return (
-    <Text fontSize="sm" color="primary.blue.dark.main" mt="0">
-      {type === "NUpath" ? "NUpath" : "Elective Placeholder"}
-    </Text>
-  );
+  id: `${GENERIC_NUPATH_ID_PREFIX}-generic-nupath`,
 };
 
 const courses = [GENERIC_ELECTIVE, GENERIC_NUPATH];
 
-const GenericSection: React.FC<GenericSectionProps> = ({
-  courseData,
-  dndIdPrefix,
-}) => {
+const GenericSection: React.FC<GenericSectionProps> = ({ courseData }) => {
   const [opened, setOpened] = useState(false);
 
   console.log(Object.keys(courseData)[0], "asdasd");
