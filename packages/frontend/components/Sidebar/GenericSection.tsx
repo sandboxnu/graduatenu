@@ -7,6 +7,7 @@ import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
 import { IAndCourse2, ScheduleCourse2 } from "@graduate/common";
+import { DraggableScheduleCourse } from "../ScheduleCourse";
 
 // Define the props interface for GenericSection
 interface GenericSectionProps {
@@ -35,6 +36,8 @@ const GenericSection: React.FC<GenericSectionProps> = ({
   dndIdPrefix,
 }) => {
   const [opened, setOpened] = useState(false);
+
+  console.log(Object.keys(courseData)[0], "asdasd");
 
   return (
     <Box
@@ -107,11 +110,21 @@ const GenericSection: React.FC<GenericSectionProps> = ({
       >
         {opened && (
           <Stack spacing={3}>
-            <SectionRequirement
-              requirement={andCourseRequirement}
-              courseData={courseData} // Passing courseData prop here
-              dndIdPrefix={dndIdPrefix} // dndIdPrefix prop passed here
-            />
+            <Box pl="xs" pt="xs">
+              {Object.keys(courseData).length > 0 && (
+                <DraggableScheduleCourse
+                  key={Object.keys(courseData)[0]}
+                  scheduleCourse={{
+                    ...courseData[Object.keys(courseData)[0]],
+                    id: dndIdPrefix + "-" + Object.keys(courseData)[0],
+                  }}
+                  isInSidebar
+                  // TODO: isChecked is for when the requirement is added to the plan and validated. When true, this will render a checkmark.
+                  isChecked={false}
+                  isDisabled={false}
+                />
+              )}
+            </Box>
             <ClassOption type="Elective Placeholder" />
           </Stack>
         )}

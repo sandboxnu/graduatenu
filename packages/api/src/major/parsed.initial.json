@@ -1,0 +1,25 @@
+{
+  "name": "Any Major",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "4/14/2024"
+  },
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "General Placeholders",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "PLACEHOLDER"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "PLACEHOLDER"
+        }
+      ]
+    }
+  ]
+}
