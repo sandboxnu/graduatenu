@@ -2,6 +2,8 @@ import { GetStudentResponse } from "@graduate/common";
 
 export const DELETE_COURSE_AREA_DND_ID = "delete-course-area";
 export const SIDEBAR_DND_ID_PREFIX = "sidebar";
+export const GENERIC_ELECTIVE_ID_PREFIX = "generic-elective";
+export const GENERIC_NUPATH_ID_PREFIX = "generic-nupath";
 export const WEAK_PASSWORD_MSG =
   "A password should be at least 8 characters with digits and letters";
 export const SEARCH_NEU_FETCH_COURSE_ERROR_MSG =

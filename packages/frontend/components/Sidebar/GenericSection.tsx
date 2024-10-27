@@ -8,6 +8,10 @@ import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
 import { IAndCourse2, ScheduleCourse2 } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
+import {
+  GENERIC_ELECTIVE_ID_PREFIX,
+  GENERIC_NUPATH_ID_PREFIX,
+} from "../../utils";
 
 // Define the props interface for GenericSection
 interface GenericSectionProps {
@@ -15,10 +19,24 @@ interface GenericSectionProps {
   dndIdPrefix: string;
 }
 
-// The sample IAndCourse2 requirement object
-const andCourseRequirement: IAndCourse2 = {
-  type: "AND",
-  courses: [],
+export const GENERIC_ELECTIVE: ScheduleCourse2<string> = {
+  name: "Elective",
+  classId: "Generic Class",
+  subject: "",
+  numCreditsMax: 8,
+  numCreditsMin: 0,
+  id: `${GENERIC_ELECTIVE_ID_PREFIX}-generic-elective"`,
+  nupaths: [],
+};
+
+export const GENERIC_NUPATH: ScheduleCourse2<string> = {
+  name: "NUPath",
+  classId: "Generic Class",
+  subject: "",
+  numCreditsMax: 8,
+  numCreditsMin: 0,
+  id: `${GENERIC_NUPATH_ID_PREFIX}-generic-nupath"`,
+  nupaths: [],
 };
 
 const ClassOption: React.FC<{ type: "NUpath" | "Elective Placeholder" }> = ({
@@ -30,6 +48,8 @@ const ClassOption: React.FC<{ type: "NUpath" | "Elective Placeholder" }> = ({
     </Text>
   );
 };
+
+const courses = [GENERIC_ELECTIVE, GENERIC_NUPATH];
 
 const GenericSection: React.FC<GenericSectionProps> = ({
   courseData,
@@ -112,20 +132,17 @@ const GenericSection: React.FC<GenericSectionProps> = ({
           <Stack spacing={3}>
             <Box pl="xs" pt="xs">
               {Object.keys(courseData).length > 0 && (
-                <DraggableScheduleCourse
-                  key={Object.keys(courseData)[0]}
-                  scheduleCourse={{
-                    ...courseData[Object.keys(courseData)[0]],
-                    id: dndIdPrefix + "-" + Object.keys(courseData)[0],
-                  }}
-                  isInSidebar
-                  // TODO: isChecked is for when the requirement is added to the plan and validated. When true, this will render a checkmark.
-                  isChecked={false}
-                  isDisabled={false}
-                />
+                <div>
+                  {courses.map((course, index) => (
+                    <DraggableScheduleCourse
+                      key={index}
+                      scheduleCourse={course}
+                      isDisabled={false}
+                    />
+                  ))}
+                </div>
               )}
             </Box>
-            <ClassOption type="Elective Placeholder" />
           </Stack>
         )}
       </Box>

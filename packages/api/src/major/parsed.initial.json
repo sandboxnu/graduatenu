@@ -10,14 +10,16 @@
       "title": "General Placeholders",
       "requirements": [
         {
-          "type": "COURSE",
+          "subject": "PLACEHOLDER",
           "classId": 1000,
-          "subject": "PLACEHOLDER"
+          "description": "Elective",
+          "type": "COURSE"
         },
         {
           "type": "COURSE",
           "classId": 1000,
-          "subject": "PLACEHOLDER"
+          "subject": "PLACEHOLDER",
+          "description": "NU Path"
         }
       ]
     }
