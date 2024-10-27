@@ -67,6 +67,10 @@ export class UpdatePlanDto {
   @Min(1898)
   @Max(3000)
   catalogYear?: number;
+
+  @IsOptional()
+  @IsString()
+  note?: string;
 }
 
 export class SignUpStudentDto {
