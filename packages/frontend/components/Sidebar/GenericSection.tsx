@@ -1,17 +1,9 @@
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  SmallCloseIcon,
-} from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import SectionRequirement from "./SectionRequirement";
-import { IAndCourse2, ScheduleCourse2 } from "@graduate/common";
+import { ScheduleCourse2 } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
-import {
-  GENERIC_ELECTIVE_ID_PREFIX,
-  GENERIC_NUPATH_ID_PREFIX,
-} from "../../utils";
+import { SIDEBAR_DND_ID_PREFIX } from "../../utils";
 
 // Define the props interface for GenericSection
 interface GenericSectionProps {
@@ -25,7 +17,7 @@ export const GENERIC_ELECTIVE: ScheduleCourse2<string> = {
   subject: "",
   numCreditsMax: 0,
   numCreditsMin: 0,
-  id: `${GENERIC_ELECTIVE_ID_PREFIX}-generic-elective`,
+  id: `${SIDEBAR_DND_ID_PREFIX}-generic-elective`,
 };
 
 export const GENERIC_NUPATH: ScheduleCourse2<string> = {
@@ -34,15 +26,13 @@ export const GENERIC_NUPATH: ScheduleCourse2<string> = {
   subject: "",
   numCreditsMax: 0,
   numCreditsMin: 0,
-  id: `${GENERIC_NUPATH_ID_PREFIX}-generic-nupath`,
+  id: `${SIDEBAR_DND_ID_PREFIX}-generic-nupath`,
 };
 
 const courses = [GENERIC_ELECTIVE, GENERIC_NUPATH];
 
 const GenericSection: React.FC<GenericSectionProps> = ({ courseData }) => {
   const [opened, setOpened] = useState(false);
-
-  console.log(Object.keys(courseData)[0], "asdasd");
 
   return (
     <Box
@@ -90,9 +80,8 @@ const GenericSection: React.FC<GenericSectionProps> = ({ courseData }) => {
             mt="4xs"
             p="xs"
             position="relative"
-          >
-            <SmallCloseIcon position="absolute" opacity={0} />
-          </Box>
+            opacity="0"
+          ></Box>
           <Text color="primary.blue.dark.main" mt="0" fontSize="sm">
             General Placeholders
           </Text>
