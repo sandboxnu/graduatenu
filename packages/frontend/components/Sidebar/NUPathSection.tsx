@@ -62,6 +62,11 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
 
   if (loading) {
     validationStatus = SidebarValidationStatus.Loading;
+  } else if (
+    Object.keys(nupathMap).length > 0 &&
+    Object.keys(nupathMap).length < 13
+  ) {
+    validationStatus = SidebarValidationStatus.InProgress;
   } else if (Object.keys(nupathMap).length === 13 && wiCount >= 2) {
     // Sidebar is complete if all 13 nupaths have been fulfilled (including 2 writing intensives)
     validationStatus = SidebarValidationStatus.Complete;
@@ -105,11 +110,15 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
                 ? green
                 : validationStatus === SidebarValidationStatus.Error
                 ? grey
+                : validationStatus === SidebarValidationStatus.InProgress
+                ? "orange"
                 : "transparent"
             }
             borderColor={
               validationStatus === SidebarValidationStatus.Complete
                 ? green
+                : validationStatus === SidebarValidationStatus.InProgress
+                ? "orange"
                 : grey
             }
             color={
@@ -130,7 +139,7 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
             p="xs"
           >
             {/*
-              The following three icons appear and disappear based on opacity to allow for transitions (if they're conditionally rendered, then transitions can't occur).
+              The following four icons appear and disappear based on opacity to allow for transitions (if they're conditionally rendered, then transitions can't occur).
             */}
             <CheckIcon
               position="absolute"
@@ -160,6 +169,16 @@ const NUPathSection: React.FC<NUPathSectionProps> = ({
               transition="opacity 0.25s ease"
               transitionDelay="0.1s"
             />
+            <Text
+              opacity={
+                validationStatus === SidebarValidationStatus.InProgress ? 1 : 0
+              }
+              fontSize="s"
+              boxSize="34px"
+              color="white"
+            >
+              ...
+            </Text>
           </Box>
           <Text color="primary.blue.dark.main" mt="0" fontSize="sm">
             NUpath Requirements
