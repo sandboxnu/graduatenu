@@ -50,8 +50,9 @@ import {
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
-import { WhatsNewPopUp } from "../components/FullPageModal/FullPageModal";
+import { WhatsNewModal } from "../components/WhatsNewModal/WhatsNewModal";
 import Cookies from "universal-cookie";
+import { Fall2024ReleaseModalContent } from "../components/WhatsNewModal/Fall2024ReleaseModalContent";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -347,7 +348,11 @@ const HomePage: NextPage = () => {
         ) : null}
       </DragOverlay>
 
-      <WhatsNewPopUp isOpen={isOpen} onClose={handleClose} />
+      <WhatsNewModal
+        isOpen={isOpen}
+        onClose={handleClose}
+        children={<Fall2024ReleaseModalContent onClose={handleClose} />}
+      />
     </DndContext>
   );
 };
