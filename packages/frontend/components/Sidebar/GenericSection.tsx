@@ -1,5 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { Box, Flex, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Stack, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
@@ -9,6 +9,7 @@ import { SIDEBAR_DND_ID_PREFIX } from "../../utils";
 interface GenericSectionProps {
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
+  loading?: boolean;
 }
 
 export const GENERIC_ELECTIVE: ScheduleCourse2<string> = {
@@ -18,6 +19,7 @@ export const GENERIC_ELECTIVE: ScheduleCourse2<string> = {
   numCreditsMax: 0,
   numCreditsMin: 0,
   id: `${SIDEBAR_DND_ID_PREFIX}-generic-elective`,
+  generic: true,
 };
 
 export const GENERIC_NUPATH: ScheduleCourse2<string> = {
@@ -27,11 +29,15 @@ export const GENERIC_NUPATH: ScheduleCourse2<string> = {
   numCreditsMax: 0,
   numCreditsMin: 0,
   id: `${SIDEBAR_DND_ID_PREFIX}-generic-nupath`,
+  generic: true,
 };
 
 const courses = [GENERIC_ELECTIVE, GENERIC_NUPATH];
 
-const GenericSection: React.FC<GenericSectionProps> = ({ courseData }) => {
+const GenericSection: React.FC<GenericSectionProps> = ({
+  courseData,
+  loading,
+}) => {
   const [opened, setOpened] = useState(false);
 
   return (
@@ -102,7 +108,13 @@ const GenericSection: React.FC<GenericSectionProps> = ({ courseData }) => {
         padding="10px 20px 15px 10px"
         cursor="default"
       >
-        {opened && (
+        {loading && (
+          <Flex alignItems="center">
+            <Spinner size="sm"></Spinner>
+            <Text marginLeft="xs">Loading...</Text>
+          </Flex>
+        )}
+        {opened && !loading && (
           <Stack spacing={3}>
             <Box pl="xs" pt="xs">
               {Object.keys(courseData).length > 0 && (

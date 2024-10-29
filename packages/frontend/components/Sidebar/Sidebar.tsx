@@ -220,6 +220,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
             <GenericSection
               courseData={courseData}
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-generic`}
+              loading={isCoursesLoading}
             />
             <NUPathSection
               coursesTaken={coursesTaken}
