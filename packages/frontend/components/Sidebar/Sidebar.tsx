@@ -1,30 +1,16 @@
-import {
-  Badge,
-  Box,
-  Flex,
-  Heading,
-  Link,
-  Stack,
-  Text,
-  Textarea,
-  VStack,
-  TextareaProps,
-} from "@chakra-ui/react";
-import { Image } from "@chakra-ui/react";
+import { Link, Stack, Text } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
   PlanModel,
   ScheduleCourse2,
 } from "@graduate/common";
-import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
-import { DraggableScheduleCourse } from "../ScheduleCourse";
+import { memo, useEffect, useRef, useState } from "react";
 import SidebarSection from "./SidebarSection";
 import {
   getAllCoursesFromPlan,
   getSectionError,
   getAllCoursesInMajor,
-  BETA_MAJOR_TOOLTIP_MSG,
 } from "../../utils";
 import {
   handleApiClientError,
@@ -39,13 +25,9 @@ import {
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
 import { useFetchCourses, useMajor } from "../../hooks";
-import { HelperToolTip } from "../Help";
 import NUPathSection from "./NUPathSection";
-import DropdownWarning from "./DropdownWarning";
 import { NUPathEnum } from "@graduate/common";
-import { forwardRef } from "react";
-
-import ResizeTextarea from "react-textarea-autosize";
+import SidebarContainer from "./SidebarContainer";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -311,166 +293,8 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
   );
 };
 
-// Still a bit buggy
-const AutoResizeTextarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  (props, ref) => {
-    return (
-      <Textarea
-        minH="unset"
-        w="100%"
-        ref={ref}
-        minRows={4}
-        as={ResizeTextarea}
-        maxRows={10}
-        {...props}
-      />
-    );
-  }
-);
-
-AutoResizeTextarea.displayName = "AutoResizeTextarea";
-
-interface SidebarContainerProps {
-  title: string;
-  subtitle?: string;
-  creditsTaken?: number;
-  creditsToTake?: number;
-  renderCoopBlock?: boolean;
-  renderBetaMajorBlock?: boolean;
-  renderDropdownWarning?: boolean;
-  planId?: string | number;
-}
-
 export const NoPlanSidebar: React.FC = () => {
   return <SidebarContainer title="No Plan Selected" />;
-};
-
-const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
-  title,
-  subtitle,
-  creditsTaken,
-  creditsToTake,
-  renderCoopBlock,
-  renderBetaMajorBlock,
-  renderDropdownWarning = true,
-  planId,
-  children,
-}) => {
-  const [notes, setNotes] = useState<string>("");
-  const handleNewNotes = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    if (!planId) return;
-    setNotes(e.target.value);
-    // Retrieve existing notes from localStorage
-    const storedNotes = localStorage.getItem("notes");
-    const notesObject = storedNotes ? JSON.parse(storedNotes) : {};
-    notesObject[planId] = notes;
-    // have a notes object plan_id (number | string) -> note (string)
-    localStorage.setItem("notes", JSON.stringify(notesObject));
-    //console.log("New notes: ", e.target.value);
-  };
-
-  useEffect(() => {
-    if (!planId) return;
-    const storedNotes = localStorage.getItem("notes");
-    const notesObject = storedNotes ? JSON.parse(storedNotes) : {};
-    if (storedNotes) {
-      setNotes(notesObject[planId]);
-    }
-  }, [planId]);
-
-  return (
-    <Box pt="xl" borderRight="1px" borderRightColor="neutral.200" minH="100%">
-      <Box px="md" pb="md">
-        <Box pb="sm">
-          {renderBetaMajorBlock && (
-            <Flex alignItems="center" pb="sm">
-              <Badge
-                borderColor="red"
-                borderWidth="1px"
-                variant="outline"
-                colorScheme="red"
-                fontWeight="bold"
-                fontSize="sm"
-                borderRadius="md"
-                mr="sm"
-              >
-                BETA MAJOR
-              </Badge>
-              <HelperToolTip label={BETA_MAJOR_TOOLTIP_MSG} />
-            </Flex>
-          )}
-          <Flex alignItems="center" columnGap="2xs">
-            <Heading
-              as="h1"
-              fontSize="2xl"
-              color="primary.blue.dark.main"
-              fontWeight="bold"
-            >
-              {title}
-            </Heading>
-          </Flex>
-          {subtitle && (
-            <Text fontSize="sm" color="primary.blue.dark.main">
-              {subtitle}
-            </Text>
-          )}
-        </Box>
-        {renderDropdownWarning && <DropdownWarning />}
-        {creditsTaken !== undefined && (
-          <Flex mb="sm" alignItems="baseline" columnGap="xs">
-            <Text
-              fontSize="2xl"
-              color="primary.blue.dark.main"
-              fontWeight="bold"
-            >
-              {creditsTaken}
-              {creditsToTake !== undefined && `/${creditsToTake}`}
-            </Text>
-            <Text color="primary.blue.dark.main">Credits Completed</Text>
-          </Flex>
-        )}
-        {renderCoopBlock && (
-          <DraggableScheduleCourse
-            scheduleCourse={COOP_BLOCK}
-            isDisabled={false}
-          />
-        )}
-      </Box>
-
-      {children}
-
-      {planId && (
-        <Box backgroundColor="white" pt="6" pb="6" px="3">
-          <VStack align="left" px="4">
-            <Flex mb="3">
-              <Image src="/sandbox_logo.svg" alt="sandbox logo" mr="2" />
-              <Text
-                color="primary.blue.dark.main"
-                fontSize="sm"
-                fontWeight="bold"
-              >
-                Sandbox Area
-              </Text>
-            </Flex>
-            <Text
-              color="primary.blue.dark.main"
-              fontSize="sm"
-              fontWeight="bold"
-            >
-              Notes
-            </Text>
-            <AutoResizeTextarea
-              placeholder="notes here!"
-              resize="vertical"
-              height="initial"
-              value={notes}
-              onChange={handleNewNotes}
-            />
-          </VStack>
-        </Box>
-      )}
-    </Box>
-  );
 };
 
 // We need to manually set the display name like this because
