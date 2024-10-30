@@ -54,25 +54,29 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           </Text>
         </Box>
         <Box ml="auto" mr="sm"></Box>
-        <a
-          href={getSearchLink(year ?? 2022, season, course)}
-          target="_blank"
-          rel="noreferrer"
+        <GraduateToolTip
+          label={`Search for ${getCourseDisplayString(course)} on SearchNEU`}
         >
-          <IconButton
-            aria-label="Add class"
-            icon={<QuestionOutlineIcon />}
-            color="primary.blue.light.main"
-            border={0}
-            colorScheme="primary.blue.light.main"
-            isRound
-            size="sm"
-            pr={1}
-            isLoading={isSelectingAnotherCourse}
-            isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
-            alignSelf="center"
-          />
-        </a>
+          <a
+            href={getSearchLink(year ?? 2022, season, course)}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <IconButton
+              aria-label="Search course information"
+              icon={<QuestionOutlineIcon />}
+              color="primary.blue.light.main"
+              border={0}
+              colorScheme="primary.blue.light.main"
+              isRound
+              size="md"
+              pr={1}
+              isLoading={isSelectingAnotherCourse}
+              isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
+              alignSelf="center"
+            />
+          </a>
+        </GraduateToolTip>
         <NUPathLabel
           nuPaths={course.nupaths ? course.nupaths : []}
           filteredPaths={filteredPaths}
