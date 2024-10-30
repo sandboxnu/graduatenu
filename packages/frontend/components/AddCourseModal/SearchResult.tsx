@@ -1,4 +1,4 @@
-import { AddIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
+import { AddIcon, InfoOutlineIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils/";
@@ -64,13 +64,12 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           >
             <IconButton
               aria-label="Search course information"
-              icon={<QuestionOutlineIcon />}
+              icon={<InfoOutlineIcon />}
               color="primary.blue.light.main"
               border={0}
               colorScheme="primary.blue.light.main"
               isRound
               size="md"
-              pr={1}
               isLoading={isSelectingAnotherCourse}
               isDisabled={isResultAlreadyAdded || isResultAlreadySelected}
               alignSelf="center"
