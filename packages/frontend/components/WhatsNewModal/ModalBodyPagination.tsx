@@ -54,18 +54,18 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <Box display="flex" alignItems="center" justifyContent="center">
       <IconButton
-        colorScheme="primary.blue.dark.400"
+        colorScheme="primary.blue.light.main"
         variant="ghost"
         icon={<ChevronLeftIcon />}
         onClick={goToPreviousPage}
         isDisabled={currentPageIndex === 0}
         aria-label="Previous page"
       />
-      <Text textColor="primary.blue.dark.400">
+      <Text textColor="primary.blue.light.main">
         {currentPageIndex + 1} / {totalPages}
       </Text>
       <IconButton
-        colorScheme="primary.blue.dark.400"
+        colorScheme="primary.blue.light.main"
         variant="ghost"
         icon={<ChevronRightIcon />}
         onClick={goToNextPage}

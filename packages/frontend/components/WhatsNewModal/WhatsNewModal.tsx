@@ -13,7 +13,7 @@ export const WhatsNewModal: React.FC<WhatsNewModalProps> = ({
   children,
 }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} size="3xl" isCentered>
       <ModalOverlay />
       {children}
     </Modal>
