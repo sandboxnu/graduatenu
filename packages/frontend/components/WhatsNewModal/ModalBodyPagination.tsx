@@ -21,10 +21,6 @@ export const ModalBodyPagination: React.FC<ModalBodyPaginationProps> = ({
     setCurrentPageIndex((prev) => Math.max(prev - 1, 0));
   }
 
-  function setCurrentPage(index: number) {
-    setCurrentPageIndex(index);
-  }
-
   return (
     <ModalBody justifyContent="center" alignContent="center">
       {pages[currentPageIndex]}

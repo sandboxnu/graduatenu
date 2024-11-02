@@ -34,7 +34,6 @@ export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
         <Text>Latest Release v26.09.24</Text>
       </ModalHeader>
       <ModalBodyPagination pages={featurePages} />
-
       <ModalFooter alignContent="center" justifyContent="center">
         <Button
           variant="solid"

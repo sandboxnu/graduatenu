@@ -70,25 +70,6 @@ const HomePage: NextPage = () => {
   const { error, student, mutateStudent } = useStudentWithPlans();
   const router = useRouter();
 
-  // How we keep track if the modal is open or closed
-  const [isOpen, setIsOpen] = useState(false);
-  const cookies = new Cookies();
-
-  useEffect(() => {
-    const existingToken = cookies.get("WhatsNewModal JWT");
-
-    if (!existingToken) {
-      setIsOpen(true); // Open modal only if token doesn't exist
-    }
-  }, []);
-
-  const handleClose = () => {
-    setIsOpen(false); // Close the modal when user dismisses it
-    const cookies = new Cookies();
-    const newToken = "alreadyShowedModal";
-    cookies.set("WhatsNewModal JWT", newToken, { path: "/" }); // Set the token when user closes the modal
-  };
-
   /*
    * Keep track of the plan being displayed, initially undef and later either the plan id or null.
    * undef is used to indicate the initial state where the primary plan should be used, null is to define
@@ -347,12 +328,6 @@ const HomePage: NextPage = () => {
           />
         ) : null}
       </DragOverlay>
-
-      <WhatsNewModal
-        isOpen={isOpen}
-        onClose={handleClose}
-        children={<Fall2024ReleaseModalContent onClose={handleClose} />}
-      />
     </DndContext>
   );
 };
