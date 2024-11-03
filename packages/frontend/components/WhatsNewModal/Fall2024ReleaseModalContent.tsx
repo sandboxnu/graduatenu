@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   HStack,
   Image,
@@ -7,6 +8,7 @@ import {
   ModalHeader,
   Stack,
   Text,
+  chakra,
 } from "@chakra-ui/react";
 import { ModalBodyPagination } from "./ModalBodyPagination";
 import InProgressIndicatorImage from "../../public/in-progress-indicator.png";
@@ -60,10 +62,10 @@ const InProgressIndicatorFeaturePage: React.FC = () => {
             Want to know which major requirements are still in progress?
           </Text>
           <Text>
-            Look for the new
-            <span>
-              <InfoOutlineIcon />
-            </span>
+            Look for the new{""}
+            <chakra.span px="1">
+              <InProgressIcon />
+            </chakra.span>{" "}
             icon to know which requirements are currently in-progress.
           </Text>
         </Stack>
@@ -84,9 +86,9 @@ const SearchNEUIntegrationFeaturePage: React.FC = () => {
           </Text>
           <Text>
             Click on the new{" "}
-            <span>
+            <chakra.span px="1">
               <InfoOutlineIcon />
-            </span>{" "}
+            </chakra.span>{" "}
             button to read more about a class on SearchNEU.
           </Text>
         </Stack>
@@ -143,5 +145,31 @@ const NewFeatureText: React.FC<NewFeatureTextProps> = ({
       </Text>
       {descriptionSection}
     </Stack>
+  );
+};
+
+const InProgressIcon: React.FC = () => {
+  return (
+    <Box
+      bg="orange"
+      borderColor="orange"
+      color="white"
+      borderWidth="1px"
+      width="18px"
+      height="18px"
+      display="inline-flex"
+      alignItems="center"
+      justifyContent="center"
+      transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
+      transitionDelay="0.1s"
+      borderRadius="2xl"
+      p="xs"
+      position="relative"
+      verticalAlign="middle"
+    >
+      <Text fontSize="s" boxSize="34px" color="white">
+        ...
+      </Text>
+    </Box>
   );
 };
