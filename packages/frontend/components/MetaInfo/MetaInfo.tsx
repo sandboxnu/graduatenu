@@ -1,3 +1,4 @@
+import { UpDownIcon } from "@chakra-ui/icons";
 import { Box, Flex, Icon, Link, Text, Tooltip } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { Maybe } from "@graduate/common";
@@ -71,13 +72,7 @@ export const MetaInfoWidget: React.FC = () => {
         transition="background 0.15s ease"
         userSelect="none"
       >
-        <Icon
-          xmlns="http://www.w3.org/2000/svg"
-          fill="black"
-          viewBox="0 0 24 24"
-        >
-          <path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z"></path>
-        </Icon>
+        <UpDownIcon transform="rotate(90deg)" />
         {process.env.NODE_ENV === "development" && <Text>Dev</Text>}
       </Flex>
       {
