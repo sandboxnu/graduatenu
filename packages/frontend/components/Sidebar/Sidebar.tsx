@@ -13,6 +13,7 @@ import {
   getSectionError,
   getAllCoursesInMajor,
   BETA_MAJOR_TOOLTIP_MSG,
+  GEN_PLACEHOLDER_MSG,
 } from "../../utils";
 import {
   handleApiClientError,

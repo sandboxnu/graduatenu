@@ -3,7 +3,8 @@ import { Box, Flex, Spinner, Stack, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { ScheduleCourse2 } from "@graduate/common";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
-import { SIDEBAR_DND_ID_PREFIX } from "../../utils";
+import { SIDEBAR_DND_ID_PREFIX, GEN_PLACEHOLDER_MSG } from "../../utils";
+import { HelperToolTip } from "../Help";
 
 // Define the props interface for GenericSection
 interface GenericSectionProps {
@@ -14,7 +15,7 @@ interface GenericSectionProps {
 
 export const GENERIC_ELECTIVE: ScheduleCourse2<string> = {
   name: "Elective",
-  classId: "Generic Class",
+  classId: "Generic Class ",
   subject: "",
   numCreditsMax: 0,
   numCreditsMin: 0,
@@ -88,9 +89,12 @@ const GenericSection: React.FC<GenericSectionProps> = ({
             position="relative"
             opacity="0"
           ></Box>
-          <Text color="primary.blue.dark.main" mt="0" fontSize="sm">
-            General Placeholders
-          </Text>
+          <Flex direction="row" height="100%" alignItems="center" gap="1">
+            <Text color="primary.blue.dark.main" mt="0" fontSize="sm">
+              General Placeholders
+            </Text>
+            <HelperToolTip label={GEN_PLACEHOLDER_MSG} />
+          </Flex>
         </Flex>
         <Flex ml="xs" alignItems="center">
           {opened ? (
