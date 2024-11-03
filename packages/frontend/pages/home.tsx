@@ -252,7 +252,13 @@ const HomePage: NextPage = () => {
           transferCourses={student.coursesTransfered || []}
         />
       );
-    } else renderedSidebar = <NoMajorSidebar selectedPlan={selectedPlan} />;
+    } else
+      renderedSidebar = (
+        <NoMajorSidebar
+          selectedPlan={selectedPlan}
+          transferCourses={student.coursesTransfered || []}
+        />
+      );
   }
 
   return (
@@ -310,6 +316,7 @@ const HomePage: NextPage = () => {
                 />
                 <Divider borderColor="neutral.200" borderWidth={1} />
                 <TransferCourses
+                  year={selectedPlan.catalogYear}
                   isExpanded={isTransferCoursesExpanded}
                   toggleExpanded={() =>
                     setIsTransferCoursesExpanded(!isTransferCoursesExpanded)
