@@ -21,7 +21,6 @@ export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
   onClose,
 }) => {
   const featurePages: React.ReactNode[] = [
-    <WhatsNewModalFeaturePage />,
     <InProgressIndicatorFeaturePage />,
     <SearchNEUIntegrationFeaturePage />,
   ];
@@ -51,27 +50,23 @@ export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
   );
 };
 
-const WhatsNewModalFeaturePage: React.FC = () => {
-  return (
-    <NewFeaturePage
-      title="What's New Modal"
-      descriptionSection={
-        <Text>Stay up to date with the latest changes on GraduateNU!</Text>
-      }
-      image="https://placehold.co/600x400"
-    />
-  );
-};
-
 const InProgressIndicatorFeaturePage: React.FC = () => {
   return (
     <NewFeaturePage
       title="In-progress Indicator"
       descriptionSection={
-        <Text>
-          Have your degree audit move with you and see what requirement sections
-          are currently in progress!
-        </Text>
+        <Stack>
+          <Text>
+            Want to know which major requirements are still in progress?
+          </Text>
+          <Text>
+            Look for the new
+            <span>
+              <InfoOutlineIcon />
+            </span>
+            icon to know which requirements are currently in-progress.
+          </Text>
+        </Stack>
       }
       image={InProgressIndicatorImage.src}
     />
@@ -85,14 +80,14 @@ const SearchNEUIntegrationFeaturePage: React.FC = () => {
       descriptionSection={
         <Stack>
           <Text>
-            Want to know more about a class before adding it to the plan?{" "}
+            Want to know more about a class before adding it to the plan?
           </Text>
           <Text>
             Click on the new{" "}
             <span>
               <InfoOutlineIcon />
             </span>{" "}
-            button to read more about a class on SearchNEU
+            button to read more about a class on SearchNEU.
           </Text>
         </Stack>
       }
