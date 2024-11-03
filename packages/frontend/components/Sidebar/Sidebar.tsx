@@ -1,18 +1,16 @@
-import { Badge, Box, Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import { Link, Stack, Text } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
   PlanModel,
   ScheduleCourse2,
 } from "@graduate/common";
-import { memo, PropsWithChildren, useEffect, useRef, useState } from "react";
-import { DraggableScheduleCourse } from "../ScheduleCourse";
+import { memo, useEffect, useRef, useState } from "react";
 import SidebarSection from "./SidebarSection";
 import {
   getAllCoursesFromPlan,
   getSectionError,
   getAllCoursesInMajor,
-  BETA_MAJOR_TOOLTIP_MSG,
 } from "../../utils";
 import {
   handleApiClientError,
@@ -27,10 +25,9 @@ import {
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
 import { useFetchCourses, useMajor } from "../../hooks";
-import { HelperToolTip } from "../Help";
 import NUPathSection from "./NUPathSection";
-import DropdownWarning from "./DropdownWarning";
 import { NUPathEnum } from "@graduate/common";
+import SidebarContainer from "./SidebarContainer";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -216,6 +213,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
         creditsToTake={major.totalCreditsRequired}
         renderCoopBlock
         renderBetaMajorBlock={major.metadata?.verified !== true}
+        planId={selectedPlan.id}
       >
         {courseData && (
           <>
@@ -291,8 +289,9 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
       creditsTaken={creditsTaken}
       renderCoopBlock
       renderDropdownWarning={false}
+      planId={selectedPlan.id}
     >
-      <Stack px="md">
+      <Stack px="md" mb="3">
         <Text>
           A major has not been selected for this plan. Please select one if you
           would like to see major requirements. If we do not support your major,
@@ -316,97 +315,8 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
   );
 };
 
-interface SidebarContainerProps {
-  title: string;
-  subtitle?: string;
-  creditsTaken?: number;
-  creditsToTake?: number;
-  renderCoopBlock?: boolean;
-  renderBetaMajorBlock?: boolean;
-  renderDropdownWarning?: boolean;
-}
-
 export const NoPlanSidebar: React.FC = () => {
   return <SidebarContainer title="No Plan Selected" />;
-};
-
-const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
-  title,
-  subtitle,
-  creditsTaken,
-  creditsToTake,
-  renderCoopBlock,
-  renderBetaMajorBlock,
-  renderDropdownWarning = true,
-  children,
-}) => {
-  return (
-    <Box
-      pt="xl"
-      backgroundColor="neutral.50"
-      borderRight="1px"
-      borderRightColor="neutral.200"
-      minH="100%"
-    >
-      <Box px="md" pb="md">
-        <Box pb="sm">
-          {renderBetaMajorBlock && (
-            <Flex alignItems="center" pb="sm">
-              <Badge
-                borderColor="red"
-                borderWidth="1px"
-                variant="outline"
-                colorScheme="red"
-                fontWeight="bold"
-                fontSize="sm"
-                borderRadius="md"
-                mr="sm"
-              >
-                BETA MAJOR
-              </Badge>
-              <HelperToolTip label={BETA_MAJOR_TOOLTIP_MSG} />
-            </Flex>
-          )}
-          <Flex alignItems="center" columnGap="2xs">
-            <Heading
-              as="h1"
-              fontSize="2xl"
-              color="primary.blue.dark.main"
-              fontWeight="bold"
-            >
-              {title}
-            </Heading>
-          </Flex>
-          {subtitle && (
-            <Text fontSize="sm" color="primary.blue.dark.main">
-              {subtitle}
-            </Text>
-          )}
-        </Box>
-        {renderDropdownWarning && <DropdownWarning />}
-        {creditsTaken !== undefined && (
-          <Flex mb="sm" alignItems="baseline" columnGap="xs">
-            <Text
-              fontSize="2xl"
-              color="primary.blue.dark.main"
-              fontWeight="bold"
-            >
-              {creditsTaken}
-              {creditsToTake !== undefined && `/${creditsToTake}`}
-            </Text>
-            <Text color="primary.blue.dark.main">Credits Completed</Text>
-          </Flex>
-        )}
-        {renderCoopBlock && (
-          <DraggableScheduleCourse
-            scheduleCourse={COOP_BLOCK}
-            isDisabled={false}
-          />
-        )}
-      </Box>
-      {children}
-    </Box>
-  );
 };
 
 // We need to manually set the display name like this because
