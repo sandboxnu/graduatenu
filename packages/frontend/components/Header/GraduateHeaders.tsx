@@ -15,6 +15,8 @@ import {
   Text,
   Box,
   useMediaQuery,
+  Stack,
+  HStack,
 } from "@chakra-ui/react";
 import { MetaInfoWidget } from "../MetaInfo/MetaInfo";
 import { HamburgerIcon, RepeatClockIcon } from "@chakra-ui/icons";
@@ -50,30 +52,46 @@ interface GraduateHeaderProps {
 }
 
 const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
+  return (
+    <WhatsNewModalContextProvider>
+      <GraduateHeaderContent rightContent={rightContent} />
+    </WhatsNewModalContextProvider>
+  );
+};
+
+const GraduateHeaderContent: React.FC<GraduateHeaderProps> = ({
+  rightContent,
+}) => {
   const { openModal } = useWhatsNewModal();
 
   return (
-    <WhatsNewModalContextProvider>
-      <HeaderContainer>
-        <Logo />
-        <Flex columnGap="md" alignItems="center">
-          <MetaInfoWidget />
-          <Box onClick={openModal}>
-            <LatestReleaseNotesIcon mx="2px" />
-            Latest Release Notes
-          </Box>
-          <ChakraLink href="https://forms.gle/uXDfLFWvgCiYcqgf9" isExternal>
-            <FeedbackIcon mx="2px" />
-            Feedback
-          </ChakraLink>
-          <ChakraLink href="https://forms.gle/bXgRXyYTXN8wgYy78" isExternal>
-            <BugIcon mx="2px" />
-            Bug/Feature
-          </ChakraLink>
-          {rightContent}
+    <HeaderContainer>
+      <Logo />
+      <Flex columnGap="md" alignItems="center">
+        <MetaInfoWidget />
+        <Flex
+          onClick={() => {
+            openModal();
+          }}
+          cursor="pointer"
+          _hover={{ textDecoration: "underline" }}
+          wrap="wrap"
+          alignItems="center"
+        >
+          <LatestReleaseNotesIcon mx="4px" />
+          <Text>Latest Release Notes</Text>
         </Flex>
-      </HeaderContainer>
-    </WhatsNewModalContextProvider>
+        <ChakraLink href="https://forms.gle/uXDfLFWvgCiYcqgf9" isExternal>
+          <FeedbackIcon mx="2px" />
+          Feedback
+        </ChakraLink>
+        <ChakraLink href="https://forms.gle/bXgRXyYTXN8wgYy78" isExternal>
+          <BugIcon mx="2px" />
+          Bug/Feature
+        </ChakraLink>
+        {rightContent}
+      </Flex>
+    </HeaderContainer>
   );
 };
 

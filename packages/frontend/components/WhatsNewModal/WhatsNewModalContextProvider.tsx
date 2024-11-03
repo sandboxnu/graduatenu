@@ -19,7 +19,10 @@ export const WhatsNewModalContextProvider = ({
   children: ReactNode;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const openModal = () => setIsOpen(true);
+  const openModal = () => {
+    console.log("openModal");
+    setIsOpen(true);
+  };
   const cookies = new Cookies();
 
   useEffect(() => {

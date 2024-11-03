@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   HStack,
   Image,
@@ -10,6 +9,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { ModalBodyPagination } from "./ModalBodyPagination";
+import InProgressIndicatorImage from "../../public/in-progress-indicator.png";
+import SearchNEUIntegrationImage from "../../public/searchneu-integration.png";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 
 interface ModalContentProps {
   onClose: () => void;
@@ -71,7 +73,7 @@ const InProgressIndicatorFeaturePage: React.FC = () => {
           are currently in progress!
         </Text>
       }
-      image="https://placehold.co/600x400"
+      image={InProgressIndicatorImage.src}
     />
   );
 };
@@ -86,12 +88,15 @@ const SearchNEUIntegrationFeaturePage: React.FC = () => {
             Want to know more about a class before adding it to the plan?{" "}
           </Text>
           <Text>
-            Click on the new <span>i</span> button to read more about a class on
-            SearchNEU
+            Click on the new{" "}
+            <span>
+              <InfoOutlineIcon />
+            </span>{" "}
+            button to read more about a class on SearchNEU
           </Text>
         </Stack>
       }
-      image="https://placehold.co/600x400"
+      image={SearchNEUIntegrationImage.src}
     />
   );
 };
@@ -111,7 +116,14 @@ const NewFeaturePage: React.FC<NewFeaturePageProps> = ({
     <HStack pt="8" alignItems="start" gap="8">
       <NewFeatureText title={title} descriptionSection={descriptionSection} />
       <Stack flex="3">
-        <Image src={image} borderRadius="2xl" />
+        <Image
+          src={image}
+          alt={title + " image"}
+          fit={"contain"}
+          maxWidth={400}
+          maxHeight={300}
+          borderRadius="2xl"
+        />
       </Stack>
     </HStack>
   );
