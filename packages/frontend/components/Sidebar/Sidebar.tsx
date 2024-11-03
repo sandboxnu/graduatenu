@@ -269,7 +269,7 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
       renderDropdownWarning={false}
       planId={selectedPlan.id}
     >
-      <Stack px="md">
+      <Stack px="md" mb="3">
         <Text>
           A major has not been selected for this plan. Please select one if you
           would like to see major requirements. If we do not support your major,
