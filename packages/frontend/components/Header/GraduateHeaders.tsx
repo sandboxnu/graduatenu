@@ -17,7 +17,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { MetaInfoWidget } from "../MetaInfo/MetaInfo";
-import { HamburgerIcon, RepeatClockIcon, ChatIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, RepeatClockIcon } from "@chakra-ui/icons";
 import {
   useWhatsNewModal,
   WhatsNewModalContextProvider,
