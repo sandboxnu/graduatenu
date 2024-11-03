@@ -15,9 +15,6 @@ import {
   Text,
   Box,
   useMediaQuery,
-  Stack,
-  HStack,
-  ButtonGroup,
 } from "@chakra-ui/react";
 import { MetaInfoWidget } from "../MetaInfo/MetaInfo";
 import { HamburgerIcon, RepeatClockIcon, ChatIcon } from "@chakra-ui/icons";

@@ -50,9 +50,6 @@ import {
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
-import { WhatsNewModal } from "../components/WhatsNewModal/WhatsNewModal";
-import Cookies from "universal-cookie";
-import { Fall2024ReleaseModalContent } from "../components/WhatsNewModal/Fall2024ReleaseModalContent";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.

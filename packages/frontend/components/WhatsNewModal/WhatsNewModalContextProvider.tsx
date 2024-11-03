@@ -4,13 +4,16 @@ import {
   useState,
   ReactNode,
   useEffect,
+  useMemo,
 } from "react";
 import { WhatsNewModal } from "./WhatsNewModal";
 import { Fall2024ReleaseModalContent } from "./Fall2024ReleaseModalContent";
 import Cookies from "universal-cookie";
 
 const WhatsNewModalContext = createContext<{ openModal: () => void }>({
-  openModal: () => {},
+  openModal: () => {
+    console.warn("openModal is called without a context provider.");
+  },
 });
 
 export const WhatsNewModalContextProvider = ({
@@ -20,10 +23,9 @@ export const WhatsNewModalContextProvider = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => {
-    console.log("openModal");
     setIsOpen(true);
   };
-  const cookies = new Cookies();
+  const cookies = useMemo(() => new Cookies(), []);
 
   useEffect(() => {
     const existingToken = cookies.get("WhatsNewModal JWT");

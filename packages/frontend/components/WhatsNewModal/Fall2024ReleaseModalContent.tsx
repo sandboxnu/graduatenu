@@ -23,8 +23,8 @@ export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
   onClose,
 }) => {
   const featurePages: React.ReactNode[] = [
-    <InProgressIndicatorFeaturePage />,
-    <SearchNEUIntegrationFeaturePage />,
+    <InProgressIndicatorFeaturePage key="in-progress-indicator" />,
+    <SearchNEUIntegrationFeaturePage key="searchneu-integration" />,
   ];
 
   return (

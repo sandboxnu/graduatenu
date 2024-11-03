@@ -1,5 +1,5 @@
 import { UpDownIcon } from "@chakra-ui/icons";
-import { Box, Flex, Icon, Link, Text, Tooltip } from "@chakra-ui/react";
+import { Box, Flex, Link, Text, Tooltip } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import { Maybe } from "@graduate/common";
 import { useState } from "react";
