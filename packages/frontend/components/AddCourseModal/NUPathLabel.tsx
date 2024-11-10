@@ -48,7 +48,7 @@ export const NUPathLabel: React.FC<NuPathLabelProps> = ({
   }
 
   return (
-    <Flex justifyContent="end" gap="2xs" flex="1" ml="xs">
+    <Flex justifyContent="end" gap="2xs" ml="xs">
       {nuPaths.map((nuPath) => (
         <Flex
           key={nuPaths.indexOf(nuPath)}
