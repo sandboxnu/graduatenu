@@ -94,7 +94,8 @@ export const updatePlanOnDragEnd = (
           draggedCourseDetails.subject,
           newTerm
         ) &&
-        !isSameTerm
+        !isSameTerm &&
+        !draggedCourseDetails.generic
       ) {
         toast.error(
           `Oops, ${getCourseDisplayString(
