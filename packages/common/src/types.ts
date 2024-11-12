@@ -147,6 +147,34 @@ export interface Major2 {
 }
 
 /**
+ * A Minor, containing all the requirements.
+ *
+ * @param name                 The name of the minor.
+ * @param requirementSections  A list of the sections of requirements.
+ * @param totalCreditsRequired Total credits required to graduate with this minor.
+ * @param yearVersion          The catalog version year of this minor.
+ * @param metadata             Metadata for the minor.
+ */
+
+export interface Minor {
+  name: string;
+  requirementSections: Section[];
+  totalCreditsRequired: number;
+  yearVersion: number;
+  metadata?: MinorMetaData;
+}
+/**
+ * Metadata for a minor.
+ *
+ * @param verified   Whether the major has been manually verified.
+ * @param lastEdited The last time the major was edited MM/DD/YYYY.
+ */
+export interface MinorMetaData {
+  verified: boolean;
+  lastEdited: string;
+}
+
+/**
  * Metadata for a major.
  *
  * @param verified   Whether the major has been manually verified.
@@ -475,6 +503,8 @@ export type SupportedMajorsForYear = Record<string, SupportedConcentrations>;
 
 // { year => supported majors }
 export type SupportedMajors = Record<string, SupportedMajorsForYear>;
+
+export type SupportedMinors = Record<string, Record<string, Minor>>;
 
 /**
  * Types for a some result from an algorithim. Currently used for the result of
