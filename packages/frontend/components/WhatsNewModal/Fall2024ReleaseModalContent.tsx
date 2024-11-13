@@ -105,7 +105,7 @@ export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
       pages.push(<NewFeaturePage {...featurePageData} />);
     }
     setFeaturePages(pages);
-  }, [featurePagesData]);
+  }, []);
 
   return (
     <ModalContent>
