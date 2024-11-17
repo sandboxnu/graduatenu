@@ -1,0 +1,1431 @@
+{
+  "name": "Environmental Studies and International Affairs, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introductory Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1200,
+              "description": "Dynamic Earth",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1201,
+              "description": "Lab for ENVR 1200",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1400,
+              "description": "Foundations in Environmental and Sustainability Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1401,
+              "description": "Lab for ENVR 1400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2401,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1246,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Scientific Foundations of Environmental Systems",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Human Foundations of Environmental Systems",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2414,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4522,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Skills Course",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3110,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5280,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "COMM"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3701,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5210,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5350,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5563,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5750,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5800,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "LPSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4202,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5268,
+          "subject": "PPUA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 22
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "International Experiential Learning",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "International Affairs Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2480,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3350,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3430,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3520,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4100,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5010,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "INTL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Global Dynamics Requirement",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Environment",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1110,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2515,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "INTL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 5268,
+                  "subject": "INTL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 5268,
+                  "subject": "PPUA"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5267,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1246,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 7
+        },
+        {
+          "type": "SECTION",
+          "title": "Law, Diplomacy, and Global Governance",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1100,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "COMM"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2480,
+                  "subject": "INTL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2480,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3520,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5010,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1155,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3405,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4910,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 11
+        },
+        {
+          "type": "SECTION",
+          "title": "Human Rights and Social Justice",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4526,
+              "subject": "AFCS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3100,
+                  "subject": "ANTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3100,
+                  "subject": "POLS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2373,
+              "subject": "HIST"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2480,
+                  "subject": "INTL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2480,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5010,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5001,
+              "subject": "PHIL"
+            }
+          ],
+          "minRequirementCount": 8
+        },
+        {
+          "type": "SECTION",
+          "title": "Conflict and Security",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3030,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3060,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5203,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1206,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1389,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1390,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2217,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3330,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3334,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3335,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3430,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "INTL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3300,
+                  "subject": "JRNL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3300,
+                  "subject": "INTL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5001,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2282,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3418,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3423,
+              "subject": "POLS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3430,
+                  "subject": "POLS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3430,
+                  "subject": "INTL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4918,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 20
+        },
+        {
+          "type": "SECTION",
+          "title": "Globalization",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2600,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2305,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2315,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3290,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3635,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1215,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2211,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2311,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3310,
+              "subject": "INTB"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2480,
+                  "subject": "INTL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2480,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3520,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3405,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 16
+        },
+        {
+          "type": "SECTION",
+          "title": "Population, Migration, and Diaspora",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "AFCS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1270,
+                  "subject": "AFCS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1270,
+                  "subject": "PHTH"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1218,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1219,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4100,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1271,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2359,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 13
+        },
+        {
+          "type": "SECTION",
+          "title": "Development",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2305,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3291,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3405,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5650,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2515,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2011,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2206,
+              "subject": "INNO"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1203,
+                  "subject": "INTB"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1209,
+                  "subject": "INTB"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3520,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5230,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 14
+        },
+        {
+          "type": "SECTION",
+          "title": "Communication and Media",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3205,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3310,
+              "subject": "INTB"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3300,
+                  "subject": "JRNL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3300,
+                  "subject": "INTL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5360,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3600,
+              "subject": "LANG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "MSCR"
+            }
+          ],
+          "minRequirementCount": 7
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Regional Analysis Requirement",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Africa",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2410,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2900,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4939,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "AFRS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4350,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3308,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2464,
+              "subject": "INTL"
+            }
+          ],
+          "minRequirementCount": 8
+        },
+        {
+          "type": "SECTION",
+          "title": "Asia",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4515,
+              "subject": "ANTH"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1150,
+                  "subject": "ASNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1150,
+                  "subject": "HIST"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1246,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1252,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1253,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1275,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1290,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3485,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 14
+        },
+        {
+          "type": "SECTION",
+          "title": "Europe",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4210,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1501,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1503,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1504,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1170,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1272,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1286,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2375,
+              "subject": "HIST"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3455,
+                  "subject": "INTL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3455,
+                  "subject": "POLS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3435,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 11
+        },
+        {
+          "type": "SECTION",
+          "title": "Latin America",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1240,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1505,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3240,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3715,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3720,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4655,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1187,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2025,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "LACS"
+            }
+          ],
+          "minRequirementCount": 11
+        },
+        {
+          "type": "SECTION",
+          "title": "Middle East",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1502,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1292,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1185,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2100,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2200,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1280,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1285,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 10
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1711,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3290,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3423,
+              "subject": "ECON"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4997,
+              "subject": "ENVS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4120,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2401,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4000,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2211,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2311,
+              "subject": "HIST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,799 @@
+{
+  "name": "English and Theatre, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "ENGL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1410,
+              "subject": "ENGL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1701,
+              "subject": "ENGL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Diversity",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2296,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2450,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2455,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2470,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2760,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3678,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3685,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Literary Periods",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Pre-1850",
+          "requirements": [
+            {
+              "type": "XOM",
+              "numCreditsMin": 4,
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1500,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1502,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1600,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2296,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2330,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3101,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3120,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3160,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3619,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "OR",
+                  "courses": [
+                    {
+                      "type": "COURSE",
+                      "classId": 3678,
+                      "subject": "ENGL"
+                    },
+                    {
+                      "type": "COURSE",
+                      "classId": 3678,
+                      "subject": "JWSS"
+                    }
+                  ]
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4010,
+                  "subject": "ENGL"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Post-1850",
+          "requirements": [
+            {
+              "type": "XOM",
+              "numCreditsMin": 4,
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2301,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2420,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2430,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2440,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2450,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2451,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2455,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2470,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2600,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3161,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "OR",
+                  "courses": [
+                    {
+                      "type": "COURSE",
+                      "classId": 3685,
+                      "subject": "ENGL"
+                    },
+                    {
+                      "type": "COURSE",
+                      "classId": 3685,
+                      "subject": "JWSS"
+                    }
+                  ]
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3730,
+                  "subject": "ENGL"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Theories and Methods",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1140,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1410,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1450,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2510,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2520,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2620,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2690,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3070,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3325,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3381,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3487,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4100,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3452,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3454,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3456,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3458,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Major Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3710,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2710,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2730,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2740,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2760,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2770,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2850,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3375,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3376,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3377,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3378,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3380,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3384,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "English Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "INAM"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ENGL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1131,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3325,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Making Theatre",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Texts, Community, & Social Context",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "INAM",
+              "classId": 1300,
+              "description": "The Politics of Narrative in Theatre",
+              "type": "COURSE"
+            },
+            {
+              "subject": "INAM",
+              "classId": 1301,
+              "description": "The Politics of Narrative in Theatre Seminar",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1215,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2983,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2200,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2335,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2342,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2345,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2346,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2385,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2600,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2983,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2993,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3550,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3650,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3670,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3973,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4345,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5300,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5450,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5700,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "English Capstone Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4710,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1600,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

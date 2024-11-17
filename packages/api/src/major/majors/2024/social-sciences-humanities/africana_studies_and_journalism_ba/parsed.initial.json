@@ -1,0 +1,386 @@
+{
+  "name": "Africana Studies and Journalism, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 129,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1225,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Humanities",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2296,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2318,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2355,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2410,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2619,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3664,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "AFCS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Social Sciences",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2270,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2600,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3120,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3210,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4526,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5001,
+              "subject": "AFCS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Visual Storytelling Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3370,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5309,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5311,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5314,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5316,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5320,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Law and Ethics",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3550,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4650,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EEAM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3308,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3314,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "AFCS"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1949,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5250,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "AFCS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,278 @@
+{
+  "name": "Linguistics and Speech-Language Pathology and Audiology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 132,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Linguistics Foundations",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3412,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistic Structure",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3420,
+          "subject": "LING"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3422,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "LING"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Linguistics Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "DEAF"
+        },
+        {
+          "type": "RANGE",
+          "subject": "LING",
+          "idRangeStart": 3000,
+          "idRangeEnd": 4999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Speech-Language Pathology and Audiology Requirements",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Speech-Language Pathology and Audiology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1103,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1203,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1205,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4651,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5107,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6219,
+          "subject": "SLPA"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Biology and Physics Requirements",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2217,
+              "description": "Integrated Anatomy and Physiology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2218,
+              "description": "Lab for BIOL 2217",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2219,
+              "description": "Integrated Anatomy and Physiology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2220,
+              "description": "Lab for BIOL 2219",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1145,
+              "description": "Physics for Life Sciences 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1146,
+              "description": "Lab for PHYS 1145",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Statistics Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3420,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2100,
+              "subject": "HLTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1165,
+              "subject": "PHIL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2300,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 3
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

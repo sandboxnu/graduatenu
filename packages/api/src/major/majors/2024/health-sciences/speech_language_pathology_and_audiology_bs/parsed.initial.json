@@ -1,0 +1,204 @@
+{
+  "name": "Speech-Language Pathology and Audiology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 132,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Speech-Language Pathology and Audiology Major Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1103,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1203,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1205,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4651,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5107,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6219,
+          "subject": "SLPA"
+        }
+      ],
+      "minRequirementCount": 12
+    },
+    {
+      "type": "SECTION",
+      "title": "Biology Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2217,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2218,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2219,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2220,
+          "subject": "BIOL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Physics Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1146,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Other Supporting Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "EDUC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "HLTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1215,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2300,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3404,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 11
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

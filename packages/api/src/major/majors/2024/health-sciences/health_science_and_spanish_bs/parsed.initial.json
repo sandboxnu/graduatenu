@@ -1,0 +1,443 @@
+{
+  "name": "Health Science and Spanish, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 133,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Public Health Core",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4120,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4202,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Life Sciences",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1111,
+                  "description": "General Biology 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1112,
+                  "description": "Lab for BIOL 1111",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1113,
+                  "description": "General Biology 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1114,
+                  "description": "Lab for BIOL 1113",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 1161,
+                  "description": "General Chemistry for Science Majors",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 1162,
+                  "description": "Lab for CHEM 1161",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 1163,
+                  "description": "Recitation for CHEM 1161",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "PSYC"
+            }
+          ],
+          "minRequirementCount": 5
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Spanish Language and Culture Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Culture, Literature, and History",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1504,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1505,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3240,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3715,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3720,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3805,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4655,
+              "subject": "CLTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Spanish Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2900,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3403,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3502,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3601,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3602,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3603,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4944,
+              "subject": "SPNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3402,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College (Based on Home College)",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "INSH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing in the First Year",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Ethical Reasoning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Preparation (Based on Home College)",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Discipline",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3308,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3309,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3315,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone (Based on Home College)",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4720,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4730,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

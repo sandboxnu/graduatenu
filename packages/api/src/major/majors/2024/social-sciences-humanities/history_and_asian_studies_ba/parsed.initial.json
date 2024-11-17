@@ -1,0 +1,345 @@
+{
+  "name": "History and Asian Studies, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "History Colloquium",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Level",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "History Seminar and Historical Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2302,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Pre-1800 History Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1185,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1218,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1252,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced History",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "ASNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1215,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Asia in Global Context",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3290,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3487,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Language Courses",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Chinese",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "CHNS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2101,
+                  "subject": "CHNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2301,
+                  "subject": "CHNS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2102,
+                  "subject": "CHNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2302,
+                  "subject": "CHNS"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 4
+        },
+        {
+          "type": "SECTION",
+          "title": "Japanese",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "JPNS"
+            }
+          ],
+          "minRequirementCount": 4
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Asian Studies Electives",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Society and Politics Focus Area",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4350,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4515,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2245,
+              "subject": "ASNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4220,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1130,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 7
+        },
+        {
+          "type": "SECTION",
+          "title": "Language, Literature, and Culture Focus Area",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1130,
+              "subject": "PHIL"
+            }
+          ],
+          "minRequirementCount": 3
+        },
+        {
+          "type": "SECTION",
+          "title": "Religious Studies Focus Area",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1275,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1290,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "PHIL"
+            }
+          ],
+          "minRequirementCount": 3
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4900,
+          "subject": "ASNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2245,
+              "subject": "ASNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

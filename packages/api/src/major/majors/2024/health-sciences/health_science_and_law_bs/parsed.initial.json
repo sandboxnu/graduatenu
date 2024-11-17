@@ -1,0 +1,418 @@
+{
+  "name": "Health Science and Law, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 131,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Health Science Core",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4120,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4202,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Science Requirements",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1113,
+              "description": "General Biology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1114,
+              "description": "Lab for BIOL 1113",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1241,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "NUPath Ethical Reasoning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Law Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3120,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3130,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3140,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3235,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4335,
+          "subject": "LAW"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3160,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3170,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3181,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3182,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3210,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3211,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3212,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3232,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3236,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3238,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3239,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3320,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3321,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3801,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4369,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4501,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4525,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4640,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4664,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4983,
+          "subject": "LAW"
+        }
+      ],
+      "minRequirementCount": 23
+    },
+    {
+      "type": "SECTION",
+      "title": "First-Year Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Discipline",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3311,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3315,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Intro to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development for Coop",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4720,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

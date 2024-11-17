@@ -1,0 +1,315 @@
+{
+  "name": "Mathematics and Physics, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Calculus",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate and Advanced Math",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3175,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Reflections",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "MATH",
+              "idRangeStart": 3101,
+              "idRangeEnd": 4899,
+              "exceptions": []
+            },
+            {
+              "type": "COURSE",
+              "classId": 4115,
+              "subject": "PHYS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Physics 1",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1161,
+              "description": "Physics 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1162,
+              "description": "Lab for PHYS 1161",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Physics 2",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1155,
+              "description": "Physics for Engineering 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1156,
+              "description": "Lab for PHYS 1155",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1157,
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1165,
+              "description": "Physics 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1166,
+              "description": "Lab for PHYS 1165",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate Physics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "PHYS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 2371,
+              "description": "Electronics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 2372,
+              "description": "Lab for PHYS 2371",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Physics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3602,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4305,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "PHYS",
+              "idRangeStart": 3000,
+              "idRangeEnd": 7999,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4020,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4025,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5131,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4545,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4525,
+              "subject": "MATH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

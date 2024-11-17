@@ -1,0 +1,126 @@
+{
+  "name": "Journalism, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 129,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Journalism Major Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4650,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3610,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Journalism",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3550,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4650,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5314,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

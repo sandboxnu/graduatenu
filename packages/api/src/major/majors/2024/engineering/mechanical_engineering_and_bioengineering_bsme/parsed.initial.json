@@ -1,0 +1,498 @@
+{
+  "name": "Mechanical Engineering and Bioengineering, BSME",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 140,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Mechanical Engineering",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2340,
+              "description": "Introduction to Material Science",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2341,
+              "description": "Lab for ME 2340",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ME"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2355,
+              "description": "Mechanics of Materials",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2356,
+              "description": "Lab for ME 2355",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2380,
+              "description": "Thermodynamics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2381,
+              "description": "Recitation for ME 2380",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 3455,
+              "description": "Dynamics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 3456,
+              "description": "Lab for ME 3455",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3475,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3480,
+              "subject": "ME"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4570,
+          "subject": "ME"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Capstone Design Project",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "MEIE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "MEIE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Bioengineering Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "BIOE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOE",
+              "classId": 2365,
+              "description": "Bioengineering Measurement, Experimentation, and Statistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOE",
+              "classId": 2366,
+              "description": "Lab for BIOE 2365",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3210,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3380,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5640,
+          "subject": "BIOE"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Bioengineering Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5115,
+          "subject": "BIOE"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5235,
+              "subject": "BIOE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5648,
+              "subject": "BIOE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5250,
+          "subject": "BIOE"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5410,
+              "subject": "BIOE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5411,
+              "subject": "BIOE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5420,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5430,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5440,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5630,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5650,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5800,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5810,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5820,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5850,
+          "subject": "BIOE"
+        }
+      ],
+      "minRequirementCount": 13
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1155,
+              "description": "Physics for Engineering 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1156,
+              "description": "Lab for PHYS 1155",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1157,
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ENCP"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "MEIE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "MEIE"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

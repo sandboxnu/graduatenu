@@ -1,0 +1,339 @@
+{
+  "name": "Economics and Philosophy, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "PHIL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1231,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1245,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1340,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Economics Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1116,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3520,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 1200,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 2990,
+          "idRangeEnd": 3559,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 3561,
+          "idRangeEnd": 4689,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 4900,
+          "idRangeEnd": 4999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 5200,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Philosophy Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Critical Philosophy Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1104,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1271,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2155,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2492,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2619,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3822,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4550,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5001,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5002,
+              "subject": "PHIL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3435,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2001,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5001,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5002,
+              "subject": "PHIL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Major GPA/Credit Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

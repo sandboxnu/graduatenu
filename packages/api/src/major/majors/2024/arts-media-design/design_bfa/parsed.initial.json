@@ -1,0 +1,489 @@
+{
+  "name": "Design, BFA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/17/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design Fundamentals Required",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design Fundamentals Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 6,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1210,
+              "subject": "ARTF"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1230,
+                  "description": "Making with Form and Materials",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1231,
+                  "description": "Making with Form and Materials Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1240,
+                  "description": "Making with Video, Sound, and Animation",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1241,
+                  "description": "Making with Video, Sound, and Animation Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1250,
+                  "description": "Designing Interactive Experiences",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1251,
+                  "description": "Designing Interactive Experiences Tools",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design History",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTH",
+              "classId": 1001,
+              "description": "Visual Intelligence",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTH",
+              "classId": 1002,
+              "description": "Seminar in Visual Intelligence",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "ARTH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Course",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1001,
+              "description": "Design Perspectives: An Introduction to Design in the World",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1002,
+              "description": "Seminar for Design Perspectives",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1270,
+              "description": "Design: Process + Practices",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1271,
+              "description": "Studio for Design: Process + Practices",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1290,
+              "description": "Typographic Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1291,
+              "description": "Studio for Typographic Systems",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2262,
+              "description": "Prototyping with Code",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2263,
+              "description": "Lab for ARTG 2262",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Degree Project",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Media Arts Elective",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2360,
+              "description": "Introduction to Photography",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2361,
+              "description": "Photo Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2370,
+              "description": "Animation Basics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2371,
+              "description": "Animation Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2380,
+              "description": "Video Basics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2381,
+              "description": "Video Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives Option",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5000,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3462,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3464,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5000,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3100,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5640,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2252,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3452,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5000,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3350,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4554,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Information Design",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2242,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3444,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5000,
+            "subject": "ARTG"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ARTG",
+                    "classId": 5150,
+                    "description": "Information Visualization Principles and Practices",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ARTG",
+                    "classId": 5151,
+                    "description": "Information Design Critique Seminar",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 5320,
+                "subject": "ARTG"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 4
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2400,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3400,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5000,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3250,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5640,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}
