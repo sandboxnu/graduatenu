@@ -22,7 +22,7 @@ export const getAllCoursesInMajor = (
   const majorRequirements = major.requirementSections.reduce(
     (courses: IRequiredCourse[], section: Section) => {
       const requiredCourses: IRequiredCourse[] = [];
-      getRequiredCourses(section.requirements, requiredCourses);
+      getRequiredCourses(section.requirements ?? [], requiredCourses);
       return courses.concat(requiredCourses);
     },
     []
@@ -54,9 +54,9 @@ const getRequiredCourses = (
     } else if (requirement.type === "COURSE") {
       requiredCourses.push(requirement);
     } else if (requirement.type === "SECTION") {
-      getRequiredCourses(requirement.requirements, requiredCourses);
+      getRequiredCourses(requirement.requirements ?? [], requiredCourses);
     } else {
-      getRequiredCourses(requirement.courses, requiredCourses);
+      getRequiredCourses(requirement.courses ?? [], requiredCourses);
     }
   }
 };

@@ -285,50 +285,48 @@
           "type": "XOM",
           "numCreditsMin": 12,
           "courses": [
-            [
-              {
-                "type": "RANGE",
-                "subject": "ARTD",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "ARTE",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "ARTF",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "ARTG",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "ARTH",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "GAME",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              }
-            ],
+            {
+              "type": "RANGE",
+              "subject": "ARTD",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTE",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTF",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTG",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTH",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "GAME",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
             {
               "type": "RANGE",
               "subject": "CS",
