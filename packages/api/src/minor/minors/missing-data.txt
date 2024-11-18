@@ -1,2 +1,0 @@
-:D
-this should be json files of data for the minors
