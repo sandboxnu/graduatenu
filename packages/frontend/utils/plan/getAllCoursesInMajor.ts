@@ -55,8 +55,18 @@ const getRequiredCourses = (
       requiredCourses.push(requirement);
     } else if (requirement.type === "SECTION") {
       getRequiredCourses(requirement.requirements ?? [], requiredCourses);
+    } else if (Array.isArray(requirement)) {
+      getRequiredCourses(extractRequirements(requirement), requiredCourses);
     } else {
       getRequiredCourses(requirement.courses ?? [], requiredCourses);
     }
   }
+};
+
+const extractRequirements = (requirements: Requirement2[]): Requirement2[] => {
+  const extracted: Requirement2[] = [];
+  for (const value of requirements) {
+    extracted.push(value);
+  }
+  return extracted;
 };
