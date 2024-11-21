@@ -1,0 +1,109 @@
+{
+  "name": "Cell and Molecular Biology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3405,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3411,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3421,
+              "description": "Microbiology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3422,
+              "description": "Lab for BIOL 3421",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3605,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3611,
+              "description": "Biochemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3612,
+              "description": "Lab for BIOL 3611",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 4705,
+          "idRangeEnd": 4709,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 5301,
+          "idRangeEnd": 5306,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 5499,
+          "idRangeEnd": 5583,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 5587,
+          "idRangeEnd": 5597,
+          "exceptions": []
+        },
+        {
+          "type": "COURSE",
+          "classId": 3001,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 11
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

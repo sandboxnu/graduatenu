@@ -1,0 +1,147 @@
+{
+  "name": "African American Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AFAM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Humanities",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1104,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1135,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2296,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2339,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2360,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2362,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2690,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3120,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3404,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3664,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2455,
+          "subject": "AFAM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Social Sciences",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1225,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2399,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2549,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2618,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3270,
+          "subject": "AFAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "AFAM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

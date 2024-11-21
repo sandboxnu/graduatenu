@@ -1,0 +1,313 @@
+{
+  "name": "Art, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1121,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1124,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2220,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2223,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2341,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3449,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2360,
+                  "description": "Introduction to Photography",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2361,
+                  "description": "Photo Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1110,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ARTH"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTH",
+                  "classId": 1200,
+                  "description": "Visual Intelligence",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTH",
+                  "classId": 1201,
+                  "description": "Recitation for ARTH 1200",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2210,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2211,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2212,
+              "subject": "ARTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2341,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3449,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2360,
+                  "description": "Introduction to Photography",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2361,
+                  "description": "Photo Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1110,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ARTH"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTH",
+                  "classId": 1200,
+                  "description": "Visual Intelligence",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTH",
+                  "classId": 1201,
+                  "description": "Recitation for ARTH 1200",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2210,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2211,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2212,
+              "subject": "ARTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

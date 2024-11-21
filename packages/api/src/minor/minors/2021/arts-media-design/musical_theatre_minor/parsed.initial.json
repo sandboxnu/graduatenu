@@ -1,0 +1,286 @@
+{
+  "name": "Musical Theatre, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "THTR"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1119,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1201,
+              "subject": "MUSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Making Musical Theatre",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1901,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1142,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2107,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3570,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Making Musical Theatre",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1901,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1142,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2107,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3570,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Making Musical Theatre",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1901,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1119,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1142,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2107,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3570,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

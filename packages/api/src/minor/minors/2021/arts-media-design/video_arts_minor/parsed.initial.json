@@ -1,0 +1,130 @@
+{
+  "name": "Video Arts, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2220,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3480,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3485,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2212,
+              "subject": "ARTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3480,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3485,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2212,
+              "subject": "ARTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

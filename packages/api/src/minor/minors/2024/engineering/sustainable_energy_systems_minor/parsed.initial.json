@@ -1,0 +1,198 @@
+{
+  "name": "Sustainable Energy Systems, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Core Energy Science, Technology Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2320,
+                  "subject": "CHME"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2380,
+                  "subject": "ME"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5670,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5000,
+              "subject": "ENSY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3300,
+              "subject": "GE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Environmental/Economics/Policy Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5275,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3423,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3425,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5645,
+          "subject": "ME"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2308,
+              "subject": "CHME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "CHME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5630,
+              "subject": "CHME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5699,
+              "subject": "CHME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4566,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5275,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5670,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5680,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5682,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5688,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5000,
+              "subject": "ENSY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3300,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4512,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5645,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5685,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "SBSY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5200,
+              "subject": "SBSY"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

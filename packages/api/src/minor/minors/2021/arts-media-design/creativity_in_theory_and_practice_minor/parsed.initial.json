@@ -1,0 +1,239 @@
+{
+  "name": "Creativity in Theory and Practice, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1450,
+          "subject": "INAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "INAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "INAM"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Creativity in Making Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2345,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3352,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2360,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "ARTS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1450,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2550,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2655,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3655,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3370,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5311,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2430,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2440,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1230,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2208,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2209,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1301,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1125,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2346,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5314,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2342,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2345,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 39
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

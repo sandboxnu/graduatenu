@@ -1,0 +1,259 @@
+{
+  "name": "Global Perspectives in Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1012,
+          "subject": "GBST"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "GE",
+              "classId": 1110,
+              "description": "Engineering Design",
+              "type": "COURSE"
+            },
+            {
+              "subject": "GE",
+              "classId": 1111,
+              "description": "Engineering Problem Solving and Computation",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "GE",
+              "classId": 1501,
+              "description": "Cornerstone of Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "GE",
+              "classId": 1502,
+              "description": "Cornerstone of Engineering 2",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AFRS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "ASNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1505,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3418,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1711,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3290,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3404,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2206,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1209,
+          "subject": "INTB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3520,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1106,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2155,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2351,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3405,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "SCHM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3301,
+          "subject": "SCHM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3305,
+          "subject": "SCHM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 37
+    },
+    {
+      "type": "SECTION",
+      "title": "Global Experience",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "name": "Science and Technology Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2485,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2220,
+              "subject": "HIST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Requirement",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Complete one 1000–2000-level course from the following:",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1104,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1225,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2233,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1145,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3050,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2390,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1280,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2505,
+              "subject": "WMNS"
+            }
+          ],
+          "minRequirementCount": 9
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Electives",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Complete two of the following:",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3418,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3340,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5264,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4528,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 5
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

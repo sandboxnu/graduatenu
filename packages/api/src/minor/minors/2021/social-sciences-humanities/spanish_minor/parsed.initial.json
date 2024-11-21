@@ -1,0 +1,231 @@
+{
+  "name": "Spanish, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Culture Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "SPNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2401,
+              "subject": "SPNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2302,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2402,
+              "subject": "SPNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "INTL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1240,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1504,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1505,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2715,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3715,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3720,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3725,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3805,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4655,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4944,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1187,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "LACS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2900,
+          "subject": "SPNS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3301,
+              "subject": "SPNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "SPNS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3501,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3900,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4800,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 21
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
