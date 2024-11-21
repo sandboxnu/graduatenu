@@ -1,0 +1,213 @@
+{
+  "name": "Ecology and Evolutionary Biology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 1101,
+              "description": "Foundations in Ecology and Evolutionary Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 1102,
+              "description": "Lab for EEMB 1101",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 1105,
+              "description": "Foundations in Ecological and Evolutionary Genomics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 1106,
+              "description": "Lab for EEMB 1105",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Evolution of Organisms",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2327,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "EEMB"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2700,
+              "description": "Marine Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2701,
+              "description": "Lab for EEMB 2700",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3465,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Ecology and Conservation Biology",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3475,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4001,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Analytical Skills",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3465,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5130,
+          "subject": "EEMB"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1500,
+              "description": "Introduction to Environmental, Social, and Biological Data",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1501,
+              "description": "Lab for ENVR 1500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

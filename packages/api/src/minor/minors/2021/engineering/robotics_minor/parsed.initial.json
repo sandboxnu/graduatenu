@@ -1,0 +1,128 @@
+{
+  "name": "Robotics, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "ME"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2210,
+                  "description": "Electrical Engineering",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2211,
+                  "description": "Lab for EECE 2210",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2160,
+              "subject": "EECE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4100,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4610,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4630,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5550,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5552,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5554,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5639,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5644,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5580,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4522,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5245,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5250,
+              "subject": "ME"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

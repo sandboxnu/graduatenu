@@ -1,0 +1,378 @@
+{
+  "name": "Global Asian Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Core Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "ASNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "HIST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Nonlanguage Courses",
+          "requirements": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4220,
+                  "subject": "ANTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4220,
+                  "subject": "ASNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4350,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4410,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4515,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2245,
+              "subject": "ASNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "ASNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1800,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4944,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3290,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2470,
+              "subject": "ENGL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1246,
+                  "subject": "HIST"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1246,
+                  "subject": "ASNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1252,
+              "subject": "HIST"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1500,
+                  "subject": "HIST"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1500,
+                  "subject": "CLTR"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2011,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2308,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2360,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3330,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1130,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1275,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1290,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "PHIL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2290,
+                  "subject": "POLS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2290,
+                  "subject": "ASNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2378,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3482,
+              "subject": "POLS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3485,
+                  "subject": "POLS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3485,
+                  "subject": "ASNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 33
+        },
+        {
+          "type": "SECTION",
+          "title": "Language Courses",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2302,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3301,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4800,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "KORE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "KORE"
+            }
+          ],
+          "minRequirementCount": 21
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

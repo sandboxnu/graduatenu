@@ -1,0 +1,164 @@
+{
+  "name": "Video Arts, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2380,
+              "description": "Video Basics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2381,
+              "description": "Video Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3480,
+          "subject": "ARTD"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1240,
+              "description": "Making with Video, Sound, and Animation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1241,
+              "description": "Making with Video, Sound, and Animation Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3485,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2212,
+          "subject": "ARTH"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2380,
+              "description": "Video Basics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2381,
+              "description": "Video Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3480,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3485,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2212,
+          "subject": "ARTH"
+        }
+      ],
+      "minRequirementCount": 5
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

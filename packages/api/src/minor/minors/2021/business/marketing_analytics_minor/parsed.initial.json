@@ -1,0 +1,52 @@
+{
+  "name": "Marketing Analytics, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2209,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2201,
+              "subject": "MKTG"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2602,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3402,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3501,
+          "subject": "MKTG"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

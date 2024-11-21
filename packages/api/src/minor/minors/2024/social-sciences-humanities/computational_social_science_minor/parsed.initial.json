@@ -1,0 +1,224 @@
+{
+  "name": "Computational Social Science, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2280,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "INSH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "SOCL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "INSH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "CS"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2000,
+                  "description": "Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2001,
+                  "description": "Data Science Programming Practicum",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Applications of Computational Approaches in the Social Sciences",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2105,
+          "subject": "COMM"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4200,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4300,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "DS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "INSH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "MISM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2510,
+              "subject": "MISM"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3310,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5262,
+          "subject": "PPUA"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective in Social Inquiry, Computation, and Logic",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3418,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4681,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "IS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3081,
+              "subject": "MATH"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1115,
+                  "subject": "PHIL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1215,
+                  "subject": "MATH"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4515,
+              "subject": "PHIL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

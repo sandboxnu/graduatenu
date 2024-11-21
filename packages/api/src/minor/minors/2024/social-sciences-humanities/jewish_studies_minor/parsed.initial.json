@@ -1,0 +1,323 @@
+{
+  "name": "Jewish Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "JWSS"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1285,
+                  "subject": "JWSS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1285,
+                  "subject": "PHIL"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1294,
+                  "subject": "JWSS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1294,
+                  "subject": "HIST"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Jewish Studies Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2610,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2610,
+              "subject": "JWSS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "HBRW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "HBRW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "HBRW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "HBRW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2100,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1990,
+          "subject": "JWSS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1285,
+              "subject": "JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1285,
+              "subject": "PHIL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1294,
+              "subject": "JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1294,
+              "subject": "HIST"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2259,
+              "subject": "JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2259,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2259,
+              "subject": "WMNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2282,
+              "subject": "JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2282,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2282,
+              "subject": "HIST"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2285,
+              "subject": "JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2285,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2285,
+              "subject": "HIST"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2430,
+          "subject": "JWSS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2431,
+              "subject": "JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2431,
+              "subject": "HIST"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2990,
+          "subject": "JWSS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3678,
+              "subject": "JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3678,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3678,
+              "subject": "WMNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "JWSS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "ENGL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3990,
+          "subject": "JWSS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "JWSS"
+        }
+      ],
+      "minRequirementCount": 19
+    },
+    {
+      "type": "SECTION",
+      "title": "Affiliated Courses 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1272,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1271,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3470,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 7
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

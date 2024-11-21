@@ -1,0 +1,135 @@
+{
+  "name": "Middle East and Mediterranean Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3470,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3250,
+              "subject": "INTL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3250,
+              "subject": "INTL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1290,
+              "subject": "HIST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "ARAB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1502,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1185,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1290,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2200,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3250,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1280,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1285,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3470,
+              "subject": "POLS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

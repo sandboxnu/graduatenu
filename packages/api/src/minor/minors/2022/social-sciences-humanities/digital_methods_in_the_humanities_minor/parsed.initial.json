@@ -1,0 +1,130 @@
+{
+  "name": "Digital Methods in the Humanities, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Digital and Computational Methods",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2105,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1450,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "ENGL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "INSH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "CS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3610,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2001,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Culture, Society, and Value in the Digital Age",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3418,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1255,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5240,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2850,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3420,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4528,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2505,
+          "subject": "WMNS"
+        }
+      ],
+      "minRequirementCount": 10
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

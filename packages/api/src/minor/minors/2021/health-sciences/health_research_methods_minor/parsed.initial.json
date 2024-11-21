@@ -1,0 +1,179 @@
+{
+  "name": "Health Research Methods, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3250,
+          "subject": "PHTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4202,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "PHMD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5450,
+              "subject": "HLTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2949,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2280,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "MGSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5120,
+          "subject": "NRSG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 14
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3001,
+          "subject": "HLTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4992,
+              "subject": "HLTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "HLTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4800,
+          "subject": "IS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5223,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5320,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5330,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5340,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5350,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 11
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

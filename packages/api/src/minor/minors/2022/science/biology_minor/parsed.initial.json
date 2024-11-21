@@ -1,0 +1,251 @@
+{
+  "name": "Biology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Biology Courses",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Foundations of Biology",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1107,
+                  "description": "Foundations of Biology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1108,
+                  "description": "Lab for BIOL 1107",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2299,
+              "subject": "BIOL"
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "General Biology",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1111,
+                  "description": "General Biology 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1112,
+                  "description": "Lab for BIOL 1111",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1113,
+                  "description": "General Biology 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1114,
+                  "description": "Lab for BIOL 1113",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "General Biology (for Engineers)",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1115,
+                  "description": "General Biology 1 for Engineers",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1116,
+                  "description": "Lab for BIOL 1115",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1113,
+                  "description": "General Biology 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1114,
+                  "description": "Lab for BIOL 1113",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 2301,
+                  "description": "Genetics and Molecular Biology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 2302,
+                  "description": "Lab for BIOL 2301",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 3
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Organismal and Evolutionary Biology Course List",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2327,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3403,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3413,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5585,
+          "subject": "BIOL"
+        },
+        {
+          "type": "RANGE",
+          "subject": "EEMB",
+          "idRangeStart": 2290,
+          "idRangeEnd": 3450,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "EEMB",
+          "idRangeStart": 3460,
+          "idRangeEnd": 5130,
+          "exceptions": []
+        },
+        {
+          "type": "COURSE",
+          "classId": 5242,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced Biology Electives",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2221,
+              "description": "Foundations of Microbiology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2222,
+              "description": "Lab for BIOL 2221",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 2329,
+          "idRangeEnd": 3990,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 4705,
+          "idRangeEnd": 4709,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 5301,
+          "idRangeEnd": 5597,
+          "exceptions": []
+        },
+        {
+          "type": "COURSE",
+          "classId": 3001,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 5
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
