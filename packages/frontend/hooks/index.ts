@@ -4,6 +4,7 @@ export * from "./useRedirectIfLoggedIn";
 export * from "./useRedirectIfUnauthorized";
 export * from "./useStudentWithPlans";
 export * from "./useSupportedMajors";
+export * from "./useSupportedMinors";
 export * from "./useMajor";
 export * from "./useMinor";
 export * from "./useSearchCourses";
