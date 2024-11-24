@@ -24,7 +24,7 @@ import {
   WorkerMessageType,
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
-import { useFetchCourses, useMajor } from "../../hooks";
+import { useFetchCourses, useMajor, useMinor } from "../../hooks";
 import NUPathSection from "./NUPathSection";
 import { NUPathEnum } from "@graduate/common";
 import GenericSection from "./GenericSection";
@@ -82,6 +82,8 @@ const Sidebar: React.FC<SidebarProps> = memo(
     const concentration = major?.concentrations?.concentrationOptions.find(
       (concentration) => concentration.title === selectedPlan.concentration
     );
+    const minorResponse = useMinor(2022, "Mathematics");
+    console.log(minorResponse.minor);
 
     const workerRef = useRef<Worker>();
 
