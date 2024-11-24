@@ -21,12 +21,14 @@ interface SidebarRequirementProps {
   requirement: Requirement2;
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
+  coursesTaken: ScheduleCourse2<unknown>[];
 }
 
 const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   requirement,
   courseData,
   dndIdPrefix,
+  coursesTaken,
 }) => {
   const renderRequirement = () => {
     switch (requirement.type) {
@@ -47,6 +49,24 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
     }
   };
 
+  const isCourseInPlan = (requirement: Requirement2): boolean => {
+    let isTrue = false;
+    console.log(requirement, " AsdASDASJKDas");
+    if (coursesTaken) {
+      coursesTaken.forEach((course) => {
+        if (
+          requirement.type === "COURSE" &&
+          course.classId === requirement.classId.toString()
+        ) {
+          console.log("This is true");
+          isTrue = true;
+        }
+      });
+    }
+    console.log(isTrue, " is the");
+    return isTrue;
+  };
+
   const renderXOM = (requirement: IXofManyCourse) => {
     return (
       <div>
@@ -57,6 +77,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
           <SectionRequirement
             requirement={course}
             courseData={courseData}
+            coursesTaken={coursesTaken}
             dndIdPrefix={dndIdPrefix + "-" + index}
             key={index}
           />
@@ -75,6 +96,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
           <SectionRequirement
             requirement={course}
             courseData={courseData}
+            coursesTaken={coursesTaken}
             dndIdPrefix={dndIdPrefix + "-" + index}
             key={index}
           />
@@ -93,6 +115,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
           <SectionRequirement
             requirement={course}
             courseData={courseData}
+            coursesTaken={coursesTaken}
             dndIdPrefix={dndIdPrefix + "-" + index}
             key={index}
           />
@@ -130,7 +153,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
           }}
           isInSidebar
           // TODO: isChecked is for when the requirement is added to the plan and validated. When true, this will render a checkmark.
-          isChecked={false}
+          isChecked={isCourseInPlan(requirement)}
           isDisabled={false}
         />
       );
@@ -145,6 +168,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
         validationStatus={SidebarValidationStatus.Complete}
         section={requirement}
         courseData={courseData}
+        coursesTaken={coursesTaken}
         dndIdPrefix={dndIdPrefix + "-sec"}
       />
     );

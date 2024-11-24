@@ -258,6 +258,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                   courseData={courseData}
                   dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
                   loading={isCoursesLoading}
+                  coursesTaken={coursesTaken}
                 />
               );
             })}
@@ -267,6 +268,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 section={concentration}
                 courseData={courseData}
                 dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
+                coursesTaken={[]}
               />
             )}
           </>
