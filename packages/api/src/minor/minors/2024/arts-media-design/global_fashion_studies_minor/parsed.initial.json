@@ -1,0 +1,156 @@
+{
+  "name": "Global Fashion Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1236,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1237,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1230,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1233,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1235,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1240,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2242,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2385,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3350,
+              "subject": "THTR"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2360,
+                  "description": "Introduction to Photography",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2361,
+                  "description": "Photo Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTG",
+                  "classId": 1270,
+                  "description": "Design: Process + Practices",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTG",
+                  "classId": 1271,
+                  "description": "Studio for Design: Process + Practices",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTG",
+                  "classId": 2262,
+                  "description": "Prototyping with Code",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTG",
+                  "classId": 2263,
+                  "description": "Lab for ARTG 2262",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3445,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3451,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5310,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1425,
+              "subject": "PREL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

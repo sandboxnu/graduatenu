@@ -1,0 +1,110 @@
+{
+  "name": "Political Communication, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introductory Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1210,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1331,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1412,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "POLS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced Courses",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Communication Studies",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3320,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3409,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4602,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3550,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Political Science",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3310,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "name": "Portuguese, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Culture Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "PORT"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "PORT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "PORT"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1240,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1505,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3715,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4944,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "PORT"
+        }
+      ],
+      "minRequirementCount": 6
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

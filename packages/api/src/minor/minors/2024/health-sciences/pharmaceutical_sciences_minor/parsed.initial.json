@@ -1,0 +1,137 @@
+{
+  "name": "Pharmaceutical Sciences, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3411,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3801,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3802,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2217,
+              "description": "Integrated Anatomy and Physiology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2218,
+              "description": "Lab for BIOL 2217",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2219,
+              "description": "Integrated Anatomy and Physiology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2220,
+              "description": "Lab for BIOL 2219",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5676,
+          "subject": "CHEM"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHSC",
+              "classId": 2301,
+              "description": "Human Physiology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHSC",
+              "classId": 2302,
+              "description": "Human Anatomy Lab",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHSC",
+              "classId": 2303,
+              "description": "Human Physiology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHSC",
+              "classId": 2304,
+              "description": "Human Physiology Lab",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3412,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3430,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5400,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "name": "Urban Landscape Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Urban Landscape Core 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "LARC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Urban Landscape Core 2",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2230,
+              "subject": "LARC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "LARC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2430,
+              "subject": "LARC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1310,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3352,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4850,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2334,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2230,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2240,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2430,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2440,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5210,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1246,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

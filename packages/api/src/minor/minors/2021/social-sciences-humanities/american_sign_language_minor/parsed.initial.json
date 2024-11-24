@@ -1,0 +1,91 @@
+{
+  "name": "American Sign Language, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "DEAF"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "AMSL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "DEAF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "DEAF"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

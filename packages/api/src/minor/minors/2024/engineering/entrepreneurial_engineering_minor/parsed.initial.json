@@ -1,0 +1,234 @@
+{
+  "name": "Entrepreneurial Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "For Undergraduates in the College of Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5020,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5030,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "For Undergraduates outside the College of Engineering",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1110,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "ME"
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5010,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5020,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5030,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "GE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Venture Creation",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3305,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3306,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3330,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4501,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5000,
+              "subject": "ENTR"
+            }
+          ],
+          "minRequirementCount": 7
+        },
+        {
+          "type": "SECTION",
+          "title": "Design",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1220,
+                  "description": "Elements of Visual Composition",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1221,
+                  "description": "Elements of Visual Composition Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1230,
+                  "description": "Making with Form and Materials",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1231,
+                  "description": "Making with Form and Materials Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTG",
+                  "classId": 1270,
+                  "description": "Design: Process + Practices",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTG",
+                  "classId": 1271,
+                  "description": "Studio for Design: Process + Practices",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3462,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3464,
+              "subject": "ARTG"
+            }
+          ],
+          "minRequirementCount": 5
+        },
+        {
+          "type": "SECTION",
+          "title": "Manufacturing",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4512,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4525,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4530,
+              "subject": "IE"
+            }
+          ],
+          "minRequirementCount": 4
+        }
+      ],
+      "minRequirementCount": 3
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
