@@ -1,0 +1,395 @@
+{
+  "name": "Journalism and Communication Studies, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 81,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundation Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Visual Storytelling Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3370,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5309,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5311,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5314,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5316,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Law and Ethics",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3550,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4650,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Common Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "COMM"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1112,
+                  "subject": "COMM"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2301,
+                  "subject": "COMM"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Distributed Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1225,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1231,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1255,
+          "subject": "COMM"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1131,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2304,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2551,
+              "subject": "COMM"
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3230,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3304,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3320,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3330,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3415,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3500,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3501,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3530,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3532,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4535,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4605,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4631,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Communication Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EEAM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirement (First-Year Writing and Advanced Writing in the Disciplines)",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3314,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3409,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2550,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4755,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5314,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5316,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

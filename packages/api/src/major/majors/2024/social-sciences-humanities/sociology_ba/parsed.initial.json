@@ -1,0 +1,144 @@
+{
+  "name": "Sociology, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Sociology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "INSH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2321,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "INSH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Cultural Anthropology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional required methodological training",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2105,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5301,
+          "subject": "HINF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2323,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3487,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

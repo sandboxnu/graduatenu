@@ -1,0 +1,513 @@
+{
+  "name": "Applied Psychology, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Core Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2012,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2106,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4525,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2100,
+          "subject": "HLTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5410,
+              "subject": "HLTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2210,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "HLTH"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to Psychology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Biology Options",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1143,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1141,
+              "subject": "BIOL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1147,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1113,
+              "description": "General Biology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1114,
+              "description": "Lab for BIOL 1113",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Option 1: Co-op",
+          "requirements": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3945,
+                  "subject": "COOP"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3946,
+                  "subject": "COOP"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3947,
+                  "subject": "COOP"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3948,
+                  "subject": "COOP"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "HSCI"
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "Option 2: Course Approved for NUpath Integrating Knowledge and Skills Through Experience",
+          "requirements": [],
+          "minRequirementCount": 0
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Major Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Mindfulness and Practice",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2280,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2290,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "HLTH"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Behavior Analysis",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5330,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mental Health",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2105,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Early Intervention",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5150,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5151,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Social Behaviors",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3310,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3899,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4505,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Counseling",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2991,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3480,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3485,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "School Psychology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2107,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2460,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2899,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4511,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Public Health",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Health Science—Interdisciplinary",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Requirement",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4740,
+              "subject": "HSCI"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4720,
+              "subject": "HSCI"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4730,
+              "subject": "HSCI"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Optional Advanced Applied Psychology Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5877,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Applied Behavior Analysis",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 6326,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6327,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6328,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6329,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Child, Adolescent, and Family Psychology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5878,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5879,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Prevention Science",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5876,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Educational-School Psychology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 6203,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6206,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6218,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6247,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,488 @@
+{
+  "name": "Computing and Law, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 133,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "CS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2500,
+              "description": "Fundamentals of Computer Science 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2501,
+              "description": "Lab for CS 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2510,
+              "description": "Fundamentals of Computer Science 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2511,
+              "description": "Lab for CS 2510",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Major Courses",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Technology",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "CS"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 3500,
+                  "description": "Object-Oriented Design",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 3501,
+                  "description": "Lab for CS 3500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2550,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "DS"
+            }
+          ],
+          "minRequirementCount": 5
+        },
+        {
+          "type": "SECTION",
+          "title": "Law",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3130,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3140,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3235,
+              "subject": "LAW"
+            }
+          ],
+          "minRequirementCount": 5
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4100,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4150,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4300,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4410,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4820,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4930,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4400,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4420,
+          "subject": "DS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Law Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3160,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3170,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3181,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3182,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3210,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3211,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3212,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3232,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3236,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3238,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3239,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3320,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3321,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3801,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4335,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4369,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4501,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4525,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4640,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4664,
+          "subject": "LAW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4983,
+          "subject": "LAW"
+        }
+      ],
+      "minRequirementCount": 24
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computing and Social Issues",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2220,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "INSH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "IS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "PHIL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4528,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Coursework",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4170,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3120,
+          "subject": "LAW"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "College Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3945,
+          "subject": "COOP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3948,
+          "subject": "COOP"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

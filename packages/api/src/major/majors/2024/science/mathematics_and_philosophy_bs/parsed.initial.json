@@ -1,0 +1,216 @@
+{
+  "name": "Mathematics and Philosophy, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1365,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "MATH",
+          "idRangeStart": 3001,
+          "idRangeEnd": 4999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHIL"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2001,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3050,
+              "subject": "PHIL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy Advanced Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4535,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Open Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4020,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4025,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5131,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4535,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4901,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 9
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
