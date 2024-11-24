@@ -5,6 +5,7 @@ export * from "./useRedirectIfUnauthorized";
 export * from "./useStudentWithPlans";
 export * from "./useSupportedMajors";
 export * from "./useMajor";
+export * from "./useMinor";
 export * from "./useSearchCourses";
 export * from "./useFetchCourses";
 export * from "./useWindowSize";
