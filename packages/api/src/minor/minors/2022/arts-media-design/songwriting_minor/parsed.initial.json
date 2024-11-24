@@ -1,0 +1,117 @@
+{
+  "name": "Songwriting, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Music Theory",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Complete one of the following:",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1119,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1201,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1204,
+              "subject": "MUSI"
+            }
+          ],
+          "minRequirementCount": 3
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Songwriting",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Songwriting Electives",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Complete two of the following:",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "MUSC",
+                  "classId": 1002,
+                  "description": "Music in Everyday Life",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "MUSC",
+                  "classId": 1003,
+                  "description": "Lab for MUSC 1002",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2211,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "MUSI"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2232,
+              "subject": "MUSI"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2235,
+              "subject": "MUSI"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2331,
+              "subject": "MUSI"
+            }
+          ],
+          "minRequirementCount": 7
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

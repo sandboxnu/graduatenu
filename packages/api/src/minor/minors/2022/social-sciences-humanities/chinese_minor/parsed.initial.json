@@ -1,0 +1,131 @@
+{
+  "name": "Chinese, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Culture Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "CHNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2302,
+              "subject": "CHNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3422,
+          "subject": "ASNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "CHNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "CHNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "CHNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4800,
+          "subject": "CHNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "CHNS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "HIST"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1506,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4944,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2308,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 10
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

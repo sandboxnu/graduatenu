@@ -1,0 +1,124 @@
+{
+  "name": "Brand Management, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2209,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2201,
+              "subject": "MKTG"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3720,
+          "subject": "MKTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3530,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "MKTG"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3401,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3402,
+              "subject": "MKTG"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4502,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4504,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4506,
+          "subject": "MKTG"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3330,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3335,
+              "subject": "ENTR"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4720,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3320,
+          "subject": "SCHM"
+        }
+      ],
+      "minRequirementCount": 10
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

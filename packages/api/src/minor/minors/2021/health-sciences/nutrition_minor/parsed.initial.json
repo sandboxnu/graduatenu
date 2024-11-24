@@ -1,0 +1,119 @@
+{
+  "name": "Nutrition, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1105,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3611,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "PHSC"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2012,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3480,
+          "subject": "CAEP"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3404,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "EXSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1106,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4340,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4502,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5270,
+          "subject": "PPUA"
+        }
+      ],
+      "minRequirementCount": 10
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

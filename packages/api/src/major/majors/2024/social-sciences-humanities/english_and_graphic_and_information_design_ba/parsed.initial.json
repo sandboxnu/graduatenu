@@ -1,0 +1,715 @@
+{
+  "name": "English and Graphic and Information Design, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "English Course-Level Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1410,
+              "subject": "ENGL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Diversity",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2296,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2450,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2455,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2760,
+          "subject": "ENGL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "JWSS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Pre-1850 Literature",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1600,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2296,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Post-1850 Literature",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2440,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "ENGL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3685,
+              "subject": "JWSS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3730,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2420,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2430,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2450,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2455,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Theories and Methods",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1140,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1410,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3325,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3381,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3452,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3454,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3456,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1450,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3458,
+          "subject": "LING"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2510,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2520,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2690,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2620,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3487,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Major Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3710,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2710,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2740,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2760,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2770,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2780,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2850,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3375,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3376,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3377,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3378,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3380,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3384,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4710,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "English Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design at Northeastern",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ENGL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Fundamentals Required",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Fundamentals Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 6,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1210,
+              "subject": "ARTF"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1230,
+                  "description": "Making with Form and Materials",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1231,
+                  "description": "Making with Form and Materials Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1240,
+                  "description": "Making with Video, Sound, and Animation",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1241,
+                  "description": "Making with Video, Sound, and Animation Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1250,
+                  "description": "Designing Interactive Experiences",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1251,
+                  "description": "Designing Interactive Experiences Tools",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design History",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Design",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1270,
+              "description": "Design: Process + Practices",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1271,
+              "description": "Studio for Design: Process + Practices",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1290,
+              "description": "Typographic Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1291,
+              "description": "Studio for Typographic Systems",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2242,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2252,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3350,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Degree Project",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2360,
+                  "description": "Introduction to Photography",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2361,
+                  "description": "Photo Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2380,
+                  "description": "Video Basics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2381,
+                  "description": "Video Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTG",
+                  "classId": 2262,
+                  "description": "Prototyping with Code",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTG",
+                  "classId": 2263,
+                  "description": "Lab for ARTG 2262",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTG",
+                  "classId": 2400,
+                  "description": "Interaction Design Principles",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTG",
+                  "classId": 2401,
+                  "description": "Interaction Design Principles Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3444,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4554,
+              "subject": "ARTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2780,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

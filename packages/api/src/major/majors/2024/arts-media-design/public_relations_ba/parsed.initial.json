@@ -1,0 +1,243 @@
+{
+  "name": "Public Relations, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5311,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5480,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3625,
+          "subject": "PREL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1425,
+          "subject": "PREL"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory/Intermediate Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1225,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1231,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1255,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2510,
+          "subject": "COMM"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Electives",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3320,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 6320,
+              "subject": "COMM"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3409,
+          "subject": "COMM"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3500,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 6500,
+              "subject": "COMM"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4102,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 6102,
+              "subject": "COMM"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4631,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3610,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4650,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5400,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5420,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3627,
+          "subject": "PREL"
+        }
+      ],
+      "minRequirementCount": 10
+    },
+    {
+      "type": "SECTION",
+      "title": "Subject Expertise",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4608,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

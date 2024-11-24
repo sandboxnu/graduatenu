@@ -7,6 +7,7 @@ import { getCourseCount, prepareYearForDnd } from "./preparePlanForDnd";
 export const addEmptyDndYearToPlan = (
   plan: PlanModel<string>
 ): PlanModel<string> => {
+  // Max 5 years
   const updatedPlan = produce(plan, (draftPlan) => {
     const schedule = draftPlan.schedule;
     const newYearNum = schedule.years.length + 1;

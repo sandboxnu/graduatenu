@@ -1,0 +1,96 @@
+{
+  "name": "Ethnomusicology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "MUSC",
+              "classId": 1002,
+              "description": "Music in Everyday Life",
+              "type": "COURSE"
+            },
+            {
+              "subject": "MUSC",
+              "classId": 1003,
+              "description": "Lab for MUSC 1002",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Ethnomusicology Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1137,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3354,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2130,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2313,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3353,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3351,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5900,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 9
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

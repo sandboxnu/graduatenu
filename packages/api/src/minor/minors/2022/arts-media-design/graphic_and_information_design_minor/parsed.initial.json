@@ -1,0 +1,160 @@
+{
+  "name": "Graphic and Information Design, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2250,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2220,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2215,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2252,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3350,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3451,
+              "subject": "ARTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2250,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2252,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3250,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3350,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4554,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4555,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2215,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "name": "Social Innovation and Entrepreneurship, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2206,
+          "subject": "INNO"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2414,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3520,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4506,
+          "subject": "INNO"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2305,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3217,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3570,
+              "subject": "HUSV"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

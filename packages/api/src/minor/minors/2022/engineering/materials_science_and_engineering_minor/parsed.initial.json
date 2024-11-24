@@ -1,0 +1,258 @@
+{
+  "name": "Materials Science and Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "ME"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Bioengineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5820,
+          "subject": "BIOE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemical Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5105,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5160,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5631,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5632,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5683,
+          "subject": "CHME"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Civil and Environmental Engineering",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 2260,
+              "description": "Materials for the Built Environment",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 2261,
+              "description": "Lab for CIVE 2260",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5275,
+          "subject": "CIVE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electrical and Computer Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3392,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5606,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Materials Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5380,
+          "subject": "MATL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6250,
+          "subject": "MATL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6270,
+          "subject": "MATL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6285,
+          "subject": "MATL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Mechanical and Industrial Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4630,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4640,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5600,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5620,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5640,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5645,
+          "subject": "ME"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Engineering Interdisciplinary",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5670,
+          "subject": "ENGR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemistry and Chemical Biology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3501,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5651,
+          "subject": "CHEM"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Design",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4792,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4703,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4765,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4767,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4768,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4792,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "MEIE"
+        }
+      ],
+      "minRequirementCount": 7
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

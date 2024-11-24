@@ -1,0 +1,101 @@
+{
+  "name": "American Sign Language, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Culture Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "DEAF"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "AMSL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "DEAF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2700,
+          "subject": "DEAF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1511,
+          "subject": "AMSL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1550,
+          "subject": "DEAF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "AMSL"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

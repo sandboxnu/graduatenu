@@ -69,11 +69,13 @@ export const Plan: React.FC<PlanProps> = ({
 
   const removeCourseFromTermInCurrPlan = (
     course: ScheduleCourse2<unknown>,
+    courseIndex: number,
     termYear: number,
     termSeason: SeasonEnum
   ) => {
     const updatedPlan = removeCourseFromTerm(
       course,
+      courseIndex,
       termYear,
       termSeason,
       plan

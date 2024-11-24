@@ -8,6 +8,8 @@ export const SEARCH_NEU_FETCH_COURSE_ERROR_MSG =
   "Sorry, we can't load details for this course right now 😞. We rely on SearchNEU for our course details, and there may be an ongoing issue on their end. We recommend refreshing the page and trying again soon.";
 export const BETA_MAJOR_TOOLTIP_MSG =
   "Requirements for beta majors have not been validated and therefore may be inconsistent with your degree audit.";
+export const GEN_PLACEHOLDER_MSG =
+  "General Placeholderse are generic courses that you can place in your plan if you do not know yet what to take but want the requirements to be fulfilled";
 
 export const defaultGuestStudent: GetStudentResponse = {
   uuid: undefined,

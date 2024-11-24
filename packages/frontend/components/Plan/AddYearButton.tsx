@@ -17,7 +17,11 @@ export const AddYearButton: React.FC<AddYearButton> = ({
     mutateStudentWithUpdatedPlan(updatedPlan);
   };
   return (
-    <BlueButton onClick={addYear} leftIcon={<AddIcon />}>
+    <BlueButton
+      onClick={addYear}
+      leftIcon={<AddIcon />}
+      isDisabled={plan.schedule.years.length >= 5}
+    >
       Add Year
     </BlueButton>
   );

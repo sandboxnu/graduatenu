@@ -1,0 +1,99 @@
+{
+  "name": "Health Psychology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2012,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "CAEP"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2105,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2106,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2107,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3899,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4525,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5150,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5151,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2800,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3520,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3404,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 12
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

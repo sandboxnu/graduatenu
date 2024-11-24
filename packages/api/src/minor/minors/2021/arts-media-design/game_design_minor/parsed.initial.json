@@ -1,0 +1,60 @@
+{
+  "name": "Game Design, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "GAME"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "GAME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2260,
+              "subject": "ARTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

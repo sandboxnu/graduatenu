@@ -1,0 +1,65 @@
+{
+  "name": "Scientific Commercialization, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "INSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "INSC"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4505,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4610,
+              "subject": "FINA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5000,
+              "subject": "INSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

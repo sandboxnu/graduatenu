@@ -371,6 +371,7 @@ export interface ScheduleCourse2<T> {
   numCreditsMin: number;
   numCreditsMax: number;
   id: T;
+  generic?: boolean;
 }
 
 // LEGACY SCHEDULE. USED BY V1 OF THE APP.

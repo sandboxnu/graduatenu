@@ -1,0 +1,116 @@
+{
+  "name": "Performing Arts Administration, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1230,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1231,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2650,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3451,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3425,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2234,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2235,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3338,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2335,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6000,
+          "subject": "AACE"
+        }
+      ],
+      "minRequirementCount": 12
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "name": "Environmental Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introductory Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "ENVR"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1246,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1180,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2401,
+              "subject": "HUSV"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Scientific Foundations of Environmental Systems",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Human Dimensions of Environmental Systems",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2414,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4522,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Skills Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

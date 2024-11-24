@@ -1,0 +1,146 @@
+{
+  "name": "Interaction Design, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2223,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2260,
+          "subject": "ARTG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2500,
+              "description": "Fundamentals of Computer Science 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2501,
+              "description": "Lab for CS 2500",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2252,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3462,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2260,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3462,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "ARTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "name": "Food Systems Sustainability, Health, and Equity, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Upper-Level Courses",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "ECON"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 3300,
+                  "description": "Geographic Information Systems",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 3301,
+                  "description": "Lab for ENVR 3300",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4506,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5263,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5270,
+              "subject": "PPUA"
+            }
+          ],
+          "minRequirementCount": 6
+        },
+        {
+          "type": "SECTION",
+          "title": "Additional Courses",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1106,
+              "subject": "HSCI"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2206,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "INSH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1185,
+              "subject": "PHIL"
+            }
+          ],
+          "minRequirementCount": 5
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
