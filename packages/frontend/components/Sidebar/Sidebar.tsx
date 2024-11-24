@@ -257,6 +257,10 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 />
               );
             })}
+            {selectedPlan.minor &&
+              {
+                //render nor
+              }}
             {concentration && (
               <SidebarSection
                 validationStatus={concentrationValidationStatus}

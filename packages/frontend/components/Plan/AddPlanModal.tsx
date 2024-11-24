@@ -29,6 +29,7 @@ import { useForm } from "react-hook-form";
 import { mutate } from "swr";
 import {
   useSupportedMajors,
+  //useSupportedMinors,
   USE_STUDENT_WITH_PLANS_SWR_KEY,
   useStudentWithPlans,
 } from "../../hooks";
@@ -46,6 +47,7 @@ import { HelperToolTip } from "../Help";
 import { IsGuestContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
+//import { extractSupportedMinorOptions } from "../../utils/plan/supportedMinors";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -60,6 +62,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
+  //const { supportedMinorsData, error: supportedMinorsError } =
+  //useSupportedMinors();
   const {
     register,
     handleSubmit,
@@ -83,6 +87,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
   }
+  //if (supportedMinorsError) {
+  //handleApiClientError(supportedMinorsError, router);
+  //}
 
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();
@@ -309,7 +316,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     />
                     <Flex align="center">
                       <Text size="xs" mr="xs">
-                        Can&apos;t find your major?
+                        Can&apos;t find your major / minor?
                       </Text>
                       <HelperToolTip label="We are working to support all majors, but in the meantime, you can submit feedback requesting your major and select 'No Major' so that you can still use our planner!" />
                     </Flex>
