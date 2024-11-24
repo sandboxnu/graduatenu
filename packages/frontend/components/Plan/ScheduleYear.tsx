@@ -32,6 +32,7 @@ interface ScheduleYearProps extends ToggleYearProps {
   /** Function to remove a course from a given term in the plan being displayed. */
   removeCourseFromTermInCurrPlan: (
     course: ScheduleCourse2<unknown>,
+    courseIndex: number,
     termYear: number,
     termSeason: SeasonEnum
   ) => void;
