@@ -10,6 +10,7 @@ import { findTerm } from "./findTerm";
  */
 export const removeCourseFromTerm = (
   courseToRemove: ScheduleCourse2<unknown>,
+  courseToRemoveIndex: number,
   termYear: number,
   termSeason: SeasonEnum,
   plan: PlanModel<string>
@@ -19,7 +20,10 @@ export const removeCourseFromTerm = (
 
     // remove the course
     term.classes = term.classes.filter(
-      (course) => !isEqualCourses(course, courseToRemove)
+      (course, index) =>
+        index != courseToRemoveIndex ||
+        (index == courseToRemoveIndex &&
+          !isEqualCourses(course, courseToRemove))
     );
   });
 

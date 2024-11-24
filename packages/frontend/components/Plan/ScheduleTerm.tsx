@@ -32,6 +32,7 @@ interface ScheduleTermProps {
   /** Function to remove a course from a given term in the plan being displayed. */
   removeCourseFromTermInCurrPlan: (
     course: ScheduleCourse2<unknown>,
+    courseIndex: number,
     termYear: number,
     termSeason: SeasonEnum
   ) => void;
@@ -72,13 +73,18 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
         season={scheduleTerm.season}
         credits={totalCreditsInTerm(scheduleTerm)}
       />
-      {scheduleTerm.classes.map((scheduleCourse) => (
+      {scheduleTerm.classes.map((scheduleCourse, courseIndex) => (
         <DraggableScheduleCourse
           coReqErr={termCoReqErr?.[courseToString(scheduleCourse)]}
           preReqErr={termPreReqErr?.[courseToString(scheduleCourse)]}
           scheduleCourse={scheduleCourse}
           removeCourse={(course: ScheduleCourse2<unknown>) =>
-            removeCourseFromTermInCurrPlan(course, yearNum, scheduleTerm.season)
+            removeCourseFromTermInCurrPlan(
+              course,
+              courseIndex,
+              yearNum,
+              scheduleTerm.season
+            )
           }
           isEditable
           key={scheduleCourse.id}
