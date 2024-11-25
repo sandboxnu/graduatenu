@@ -51,7 +51,6 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
 
   const isCourseInPlan = (requirement: Requirement2): boolean => {
     let isTrue = false;
-    console.log(requirement, " AsdASDASJKDas");
     if (coursesTaken) {
       coursesTaken.forEach((course) => {
         if (
