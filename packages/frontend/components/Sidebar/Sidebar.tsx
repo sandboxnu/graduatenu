@@ -11,6 +11,7 @@ import {
   getAllCoursesFromPlan,
   getSectionError,
   getAllCoursesInMajor,
+  getAllCoursesInMinor,
 } from "../../utils";
 import {
   handleApiClientError,
@@ -82,6 +83,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       (concentration) => concentration.title === selectedPlan.concentration
     );
     const minorResponse = useMinor(2022, "Mathematics");
+    console.log("minor response");
     console.log(minorResponse.minor);
 
     const workerRef = useRef<Worker>();
@@ -159,13 +161,25 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const majorCourses = getAllCoursesInMajor(major, concentration);
 
+    console.log({ minorResponse });
+    const minorCourses = getAllCoursesInMinor(minorResponse.minor);
+    console.log({ majorCourses });
+    console.log({ minorCourses });
+
+    // console.log({minorCourses});
+    // TODO: add get all courses in minor
+
     const {
       courses,
       isLoading: isCoursesLoading,
       error: courseErrors,
-    } = useFetchCourses(majorCourses, selectedPlan.catalogYear);
+    } = useFetchCourses(
+      majorCourses.concat(minorCourses),
+      selectedPlan.catalogYear
+    );
 
     const courseData = createCourseMap(courses, courseErrors);
+    console.log({ courseData });
 
     if (isMajorLoading) {
       return <SidebarContainer title="Loading..." />;
@@ -257,10 +271,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 />
               );
             })}
-            {selectedPlan.minor &&
-              {
-                //render nor
-              }}
+
             {concentration && (
               <SidebarSection
                 validationStatus={concentrationValidationStatus}
@@ -268,6 +279,18 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 courseData={courseData}
                 dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
               />
+            )}
+
+            {minorCourses && concentration && (
+              <>
+                <Text>We have a minor</Text>
+                <SidebarSection
+                  section={minorResponse.minor?.requirementSections[2]}
+                  courseData={courseData}
+                  dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
+                  validationStatus={SidebarValidationStatus.InProgress}
+                ></SidebarSection>
+              </>
             )}
           </>
         )}
