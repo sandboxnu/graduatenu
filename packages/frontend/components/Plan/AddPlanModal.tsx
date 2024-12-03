@@ -151,13 +151,14 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const onCloseAddPlanModal = () => {
     reset();
     setIsNoMajorSelected(false);
+    setIsNoMinorSelected(false);
     onCloseDisplay();
   };
 
   const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
-  const minorName = watch("minor");
+  //const minorName = watch("minor");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
 
@@ -324,20 +325,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       isSearchable
                       useFuzzySearch
                     />
-                    <PlanSelect
-                      label="Minor"
-                      placeholder="Select a Minor"
-                      name="minor"
-                      control={control}
-                      options={extractSupportedMinorOptions(
-                        catalogYear,
-                        supportedMinorsData
-                      )}
-                      //rules={{ required: "Minor is required." }}
-                      isDisabled={!catalogYear}
-                      isSearchable
-                      useFuzzySearch
-                    />
                     <Flex align="center">
                       <Text size="xs" mr="xs">
                         Can&apos;t find your major / minor?
@@ -362,6 +349,20 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         useFuzzySearch
                       />
                     )}
+                    <PlanSelect
+                      label="Minor"
+                      placeholder="Select a Minor"
+                      name="minor"
+                      control={control}
+                      options={extractSupportedMinorOptions(
+                        catalogYear,
+                        supportedMinorsData
+                      )}
+                      //rules={{ required: "Minor is required." }}
+                      isDisabled={!catalogYear}
+                      isSearchable
+                      useFuzzySearch
+                    />
                     {majorName && !isValidatedMajor && (
                       <Flex alignItems="center">
                         <Checkbox
