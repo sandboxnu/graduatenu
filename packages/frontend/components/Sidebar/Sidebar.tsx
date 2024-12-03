@@ -82,9 +82,13 @@ const Sidebar: React.FC<SidebarProps> = memo(
     const concentration = major?.concentrations?.concentrationOptions.find(
       (concentration) => concentration.title === selectedPlan.concentration
     );
-    const minorResponse = useMinor(2022, "Data Science, Minor");
-    console.log("minor response");
-    console.log(minorResponse.minor);
+
+    const minorResponse = useMinor(
+      selectedPlan.catalogYear,
+      selectedPlan.minor
+    );
+    //console.log("minor response");
+    //console.log(minorResponse.minor);
 
     const workerRef = useRef<Worker>();
 
@@ -281,7 +285,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
               />
             )}
 
-            {minorCourses && (
+            {minorResponse.minor && (
               <>
                 <Text>We have a minor </Text>
                 {minorResponse.minor?.requirementSections.map(

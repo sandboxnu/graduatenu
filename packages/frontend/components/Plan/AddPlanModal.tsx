@@ -32,11 +32,13 @@ import {
   //useSupportedMinors,
   USE_STUDENT_WITH_PLANS_SWR_KEY,
   useStudentWithPlans,
+  useSupportedMinors,
 } from "../../hooks";
 import {
   cleanDndIdsFromStudent,
   createEmptySchedule,
   extractSupportedMajorOptions,
+  extractSupportedMinorOptions,
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
@@ -62,6 +64,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
+  const { supportedMinorsData, error: supportedMinorsError } =
+    useSupportedMinors();
   //const { supportedMinorsData, error: supportedMinorsError } =
   //useSupportedMinors();
   const {
@@ -77,6 +81,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     shouldFocusError: true,
   });
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
+  const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
@@ -86,6 +91,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
+  }
+  if (supportedMinorsError) {
+    handleApiClientError(supportedMinorsError, router);
   }
   //if (supportedMinorsError) {
   //handleApiClientError(supportedMinorsError, router);
@@ -97,6 +105,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       name: payload.name,
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
+      minor: isNoMinorSelected ? undefined : payload.minor,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
       schedule,
     };
@@ -148,6 +157,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
+  const minorName = watch("minor");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
 
@@ -310,6 +320,20 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         setValue("concentration", "");
                       }}
                       rules={{ required: "Major is required." }}
+                      isDisabled={!catalogYear}
+                      isSearchable
+                      useFuzzySearch
+                    />
+                    <PlanSelect
+                      label="Minor"
+                      placeholder="Select a Minor"
+                      name="minor"
+                      control={control}
+                      options={extractSupportedMinorOptions(
+                        catalogYear,
+                        supportedMinorsData
+                      )}
+                      //rules={{ required: "Minor is required." }}
                       isDisabled={!catalogYear}
                       isSearchable
                       useFuzzySearch
