@@ -1,0 +1,90 @@
+{
+  "name": "Music Technology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2431,
+          "subject": "MUST"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Technology Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2111,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3540,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3601,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3602,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3603,
+              "subject": "MUST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

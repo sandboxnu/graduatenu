@@ -1,0 +1,149 @@
+{
+  "name": "Latinx, Latin American, and Caribbean Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1505,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "LACS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1261,
+          "subject": "LACS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1240,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1504,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1505,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2001,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3240,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3715,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4655,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2451,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1206,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1261,
+          "subject": "LACS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2365,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3241,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3270,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3407,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4526,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 21
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

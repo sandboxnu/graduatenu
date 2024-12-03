@@ -1,0 +1,96 @@
+{
+  "name": "Arabic, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Culture Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "ARAB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "ARAB"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "ARAB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1151,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4944,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1185,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3465,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4915,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 9
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

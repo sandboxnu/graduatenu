@@ -1,0 +1,120 @@
+{
+  "name": "Business Administration, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Accounting",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1209,
+          "subject": "ACCT"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Organizational Behavior",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3209,
+          "subject": "ORGB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Finance",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2209,
+          "subject": "FINA"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Marketing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2209,
+          "subject": "MKTG"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Business Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2206,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2215,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2414,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1209,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1209,
+          "subject": "INTB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2501,
+          "subject": "INTB"
+        }
+      ],
+      "minRequirementCount": 10
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,283 @@
+{
+  "name": "Global Health, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Foundation Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1270,
+              "subject": "AFRS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1270,
+              "subject": "PHTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Core Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3424,
+          "subject": "AFRS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4120,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5230,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Area 1: Community and Public Health",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4939,
+          "subject": "AFRS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2010,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1261,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "PHTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4604,
+              "subject": "NRSG"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4202,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5202,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Area 2: Biology of Health and Disease",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1141,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1143,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2327,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Area 3: Society and Cultural Health / Area Studies",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2900,
+          "subject": "AFRS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4350,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1230,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2233,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "LACS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Area 4: Globalization and Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1291,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3404,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3413,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3416,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5292,
+          "subject": "ECON"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1510,
+              "subject": "HLTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2100,
+              "subject": "HLTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4945,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2302,
+          "subject": "LPSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 11
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

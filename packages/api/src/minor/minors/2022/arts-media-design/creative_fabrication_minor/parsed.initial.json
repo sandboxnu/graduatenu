@@ -1,0 +1,156 @@
+{
+  "name": "Creative Fabrication, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1124,
+              "description": "Form and Structure",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1125,
+              "description": "Form and Structure Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Art + Design",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3250,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            }
+          ],
+          "minRequirementCount": 4
+        },
+        {
+          "type": "SECTION",
+          "title": "Theatre",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1131,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1270,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2385,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "THTR"
+            }
+          ],
+          "minRequirementCount": 4
+        },
+        {
+          "type": "SECTION",
+          "title": "Architecture",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARCH",
+                  "classId": 1110,
+                  "description": "Fundamental Architectural Representation",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARCH",
+                  "classId": 1120,
+                  "description": "Fundamental Architectural Design",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2240,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "ARCH"
+            }
+          ],
+          "minRequirementCount": 3
+        },
+        {
+          "type": "SECTION",
+          "title": "Engineering",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1501,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1502,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5030,
+              "subject": "GE"
+            }
+          ],
+          "minRequirementCount": 3
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

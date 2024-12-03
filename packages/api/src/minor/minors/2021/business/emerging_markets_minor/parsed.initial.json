@@ -1,0 +1,106 @@
+{
+  "name": "Emerging Markets, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Emerging Markets",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2501,
+          "subject": "INTB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Field Study",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "AFRS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2305,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "ASNS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1500,
+                  "subject": "CLTR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1500,
+                  "subject": "HIST"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1505,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2302,
+              "subject": "LPSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3405,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3310,
+              "subject": "INTB"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

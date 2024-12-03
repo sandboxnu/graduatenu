@@ -1,0 +1,96 @@
+{
+  "name": "Sustainable Business Practices, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Sustainability in Business",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "FINA"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Field Study",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2334,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3423,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3425,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1180,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1132,
+              "subject": "PHYS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1246,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "name": "Economics, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ECON",
+              "classId": 1115,
+              "description": "Principles of Macroeconomics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ECON",
+              "classId": 2315,
+              "description": "Macroeconomic Theory",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ECON",
+              "classId": 1116,
+              "description": "Principles of Microeconomics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ECON",
+              "classId": 2316,
+              "description": "Microeconomic Theory",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 1200,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 1200,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 3000,
+          "idRangeEnd": 4689,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 4900,
+          "idRangeEnd": 4999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 5200,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 5
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

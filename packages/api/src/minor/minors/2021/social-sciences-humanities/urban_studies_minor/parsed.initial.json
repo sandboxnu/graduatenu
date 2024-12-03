@@ -1,0 +1,125 @@
+{
+  "name": "Urban Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2357,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2358,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2360,
+              "subject": "AFAM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2399,
+              "subject": "AFAM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2305,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4850,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1240,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3422,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2345,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2357,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3309,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2358,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4522,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,265 @@
+{
+  "name": "Civil Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2022,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2221,
+          "subject": "CIVE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 2260,
+              "description": "Materials for the Built Environment",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 2261,
+              "description": "Lab for CIVE 2260",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2324,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2334,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2335,
+          "subject": "CIVE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 2340,
+              "description": "Geotechnical Engineering",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 2341,
+              "description": "Lab for CIVE 2340",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3425,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3430,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3464,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4534,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4542,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4554,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4566,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4575,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4777,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4780,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5271,
+          "subject": "CIVE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 5221,
+              "description": "Construction Project Control and Organization",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 5231,
+              "description": "Alternative Project Delivery Systems in Construction",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5260,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5261,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5275,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5280,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5281,
+          "subject": "CIVE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 5300,
+              "description": "Environmental Sampling and Analysis",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 5301,
+              "description": "Lab for CIVE 5300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5363,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5373,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5376,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5520,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5522,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5536,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5699,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "SBSY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5200,
+          "subject": "SBSY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5250,
+          "subject": "SBSY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5300,
+          "subject": "SBSY"
+        }
+      ],
+      "minRequirementCount": 39
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

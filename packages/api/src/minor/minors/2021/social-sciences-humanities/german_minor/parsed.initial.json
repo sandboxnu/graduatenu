@@ -1,0 +1,112 @@
+{
+  "name": "German, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Culture Course Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Language Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "GRMN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "GRMN"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "GRMN"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4800,
+              "subject": "GRMN"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4944,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1390,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2280,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2282,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3412,
+              "subject": "LING"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3343,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3435,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3464,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

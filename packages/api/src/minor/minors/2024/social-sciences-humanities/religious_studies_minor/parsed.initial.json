@@ -1,0 +1,134 @@
+{
+  "name": "Religious Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1104,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1133,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1260,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1271,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1275,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1285,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1666,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1667,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2230,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2390,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2410,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2619,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4903,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 20
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

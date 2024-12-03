@@ -1,0 +1,122 @@
+{
+  "name": "Music Technology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2431,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "MUSC",
+              "classId": 1002,
+              "description": "Music in Everyday Life",
+              "type": "COURSE"
+            },
+            {
+              "subject": "MUSC",
+              "classId": 1003,
+              "description": "Lab for MUSC 1002",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Technology Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2111,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3300,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3601,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3602,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3603,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3973,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4610,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5973,
+              "subject": "MUST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
