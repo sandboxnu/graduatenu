@@ -83,7 +83,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
     const concentration = major?.concentrations?.concentrationOptions.find(
       (concentration) => concentration.title === selectedPlan.concentration
     );
-    const minorResponse = useMinor(2022, "Mathematics");
+    const minorResponse = useMinor(2022, "Data Science, Minor");
     console.log("minor response");
     console.log(minorResponse.minor);
 
@@ -289,15 +289,22 @@ const Sidebar: React.FC<SidebarProps> = memo(
               />
             )}
 
-            {minorCourses && concentration && (
+            {minorCourses && (
               <>
-                <Text>We have a minor</Text>
-                <SidebarSection
-                  section={minorResponse.minor?.requirementSections[2]}
-                  courseData={courseData}
-                  dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
-                  validationStatus={SidebarValidationStatus.InProgress}
-                ></SidebarSection>
+                <Text>We have a minor </Text>
+                {minorResponse.minor?.requirementSections.map(
+                  (section, index) => {
+                    return (
+                      <SidebarSection
+                        key={index}
+                        section={section}
+                        courseData={courseData}
+                        dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
+                        validationStatus={SidebarValidationStatus.InProgress}
+                      ></SidebarSection>
+                    );
+                  }
+                )}
               </>
             )}
           </>
