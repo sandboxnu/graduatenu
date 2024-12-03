@@ -20,7 +20,7 @@ export class PlanModel<T> {
   catalogYear: number;
   createdAt: Date;
   updatedAt: Date;
-  minor?: string | undefined;
+  minor?: string;
 }
 
 export class GetPlanResponse extends PlanModel<null> {}
