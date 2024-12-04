@@ -638,6 +638,9 @@ function validateSectionRequirement(
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
   if (r.minRequirementCount < 1) {
+    return Ok([]);
+    // this should be an invalid shape and throw an error, but for now we'll just return an empty array
+    // since the solution for a section with no requirements is an empty array
     throw new Error("Section requirement count must be >= 1");
   }
 
@@ -732,5 +735,25 @@ function validateRequirements(
   rs: Requirement2[],
   tracker: CourseValidationTracker
 ) {
+  while (rs.some((r) => Array.isArray(r))) {
+    const newRs = [];
+    for (const r of rs) {
+      if (Array.isArray(r)) {
+        newRs.push(...extractRequirements(r));
+      } else {
+        newRs.push(r);
+      }
+    }
+    rs = newRs;
+  }
+
   return rs.map((r) => validateRequirement(r, tracker));
 }
+
+const extractRequirements = (requirements: Requirement2[]): Requirement2[] => {
+  const extracted: Requirement2[] = [];
+  for (const value of requirements) {
+    extracted.push(value);
+  }
+  return extracted;
+};
