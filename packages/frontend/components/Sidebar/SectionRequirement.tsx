@@ -55,9 +55,9 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
       coursesTaken.forEach((course) => {
         if (
           requirement.type === "COURSE" &&
-          course.classId === requirement.classId.toString()
+          course.classId === requirement.classId.toString() &&
+          course.subject === requirement.subject
         ) {
-          console.log("This is true");
           isTrue = true;
         }
       });
