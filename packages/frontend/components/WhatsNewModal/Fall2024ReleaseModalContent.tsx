@@ -13,6 +13,8 @@ import {
 import { ModalBodyPagination } from "./ModalBodyPagination";
 import InProgressIndicatorImage from "../../public/in-progress-indicator.png";
 import SearchNEUIntegrationImage from "../../public/searchneu-integration.png";
+import GeneralPlaceholdersImage from "../../public/general-placeholders.png";
+import BetaMajorsImage from "../../public/2024-beta-majors.png";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import React, { useEffect } from "react";
 
@@ -74,6 +76,20 @@ const featurePagesData: FeaturePageData[] = [
     image: InProgressIndicatorImage.src,
   },
   {
+    key: "courses-added-to-plan-check",
+    title: "Courses Added To Plan Check",
+    descriptionSection: (
+      <Stack>
+        <Text>See which courses have been added to your plan at a glance.</Text>
+        <Text>
+          Now, courses that have been added to your plan will be marked with a
+          checkmark in the sidebar!
+        </Text>
+      </Stack>
+    ),
+    image: SearchNEUIntegrationImage.src,
+  },
+  {
     key: "searchneu-integration",
     title: "SearchNEU Integration",
     descriptionSection: (
@@ -91,6 +107,37 @@ const featurePagesData: FeaturePageData[] = [
       </Stack>
     ),
     image: SearchNEUIntegrationImage.src,
+  },
+  {
+    key: "general-placeholders",
+    title: "General Placeholder Courses",
+    descriptionSection: (
+      <Stack>
+        <Text>Not fully sure what courses you want to take yet?</Text>
+        <Text>
+          Add generic elective and NUPath tiles to your schedule to get a sense
+          of what your plan would look like.
+        </Text>
+      </Stack>
+    ),
+    image: GeneralPlaceholdersImage.src,
+  },
+  {
+    key: "2024-beta-majors",
+    title: "Support for 2024-2025 Academic Catalog [BETA]",
+    descriptionSection: (
+      <Stack>
+        <Text>
+          We have added support for the undergraduate catalog of the 2024-2025
+          academic year.
+        </Text>
+        <Text>
+          You can now create plans that align with the new requirements for the
+          2024-2025 academic year.
+        </Text>
+      </Stack>
+    ),
+    image: BetaMajorsImage.src,
   },
 ];
 
@@ -114,7 +161,7 @@ export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
         borderBottom="1px"
         borderColor="neutral.200"
       >
-        <Text>Latest Release v26.09.24</Text>
+        <Text>Latest Release: Fall 2024</Text>
       </ModalHeader>
       {featurePages.length > 0 && <ModalBodyPagination pages={featurePages} />}
       <ModalFooter alignContent="center" justifyContent="center">
