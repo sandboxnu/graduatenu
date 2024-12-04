@@ -22,6 +22,10 @@ interface TransferCoursesToggleProps {
   year: number;
 }
 
+/**
+ * This component is responsible for displaying the student's transfer courses,
+ * but the UI text displays it as "Overriden Courses" for purpose clarity.
+ */
 export const TransferCourses: React.FC<TransferCoursesToggleProps> = ({
   isExpanded,
   toggleExpanded,
@@ -155,7 +159,7 @@ const TransferCoursesBody: React.FC<TransferCoursesBodyProps> = ({
         season={SeasonEnum.FL}
         catalogYear={year}
         isOpen={isOpen}
-        addTo="Transfer Courses"
+        addTo="Overriden Courses"
         closeModalDisplay={onClose}
         addSelectedClasses={addTransferCourses}
         isCourseAlreadyAdded={isTransferCoursesAlreadyAdded}
@@ -210,7 +214,7 @@ const TransferCoursesHeader: React.FC<TransferCoursesHeaderProps> = ({
       <Flex flexDirection="column">
         <Flex alignItems="center" columnGap="2xs">
           <Text color="primary.blue.dark.main" fontWeight="bold">
-            Your Transfer Courses
+            Your Overriden Courses
           </Text>
           <HelperToolTip label={transferCoursesHelperText} />
         </Flex>
