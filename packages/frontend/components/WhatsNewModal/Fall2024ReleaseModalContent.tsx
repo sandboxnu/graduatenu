@@ -15,6 +15,7 @@ import InProgressIndicatorImage from "../../public/in-progress-indicator.png";
 import SearchNEUIntegrationImage from "../../public/searchneu-integration.png";
 import GeneralPlaceholdersImage from "../../public/general-placeholders.png";
 import BetaMajorsImage from "../../public/2024-beta-majors.png";
+import CoursesAddedToPlanImage from "../../public/courses-added-to-plan-check.png";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import React, { useEffect } from "react";
 
@@ -87,7 +88,7 @@ const featurePagesData: FeaturePageData[] = [
         </Text>
       </Stack>
     ),
-    image: SearchNEUIntegrationImage.src,
+    image: CoursesAddedToPlanImage.src,
   },
   {
     key: "searchneu-integration",
