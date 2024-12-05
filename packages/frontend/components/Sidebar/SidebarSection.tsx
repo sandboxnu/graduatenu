@@ -18,6 +18,7 @@ interface SidebarSectionProps {
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
   validationStatus: SidebarValidationStatus;
+  coursesTaken: ScheduleCourse2<unknown>[];
   loading?: boolean;
 }
 
@@ -27,6 +28,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   dndIdPrefix,
   validationStatus,
   loading,
+  coursesTaken,
 }) => {
   const [opened, setOpened] = useState(false);
 
@@ -201,6 +203,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
                 courseData={courseData}
                 dndIdPrefix={dndIdPrefix + "-" + index}
                 key={index}
+                coursesTaken={coursesTaken}
               />
             ))}
           </>
