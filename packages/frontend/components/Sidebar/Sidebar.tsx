@@ -28,6 +28,7 @@ import {
 import { useFetchCourses, useMajor, useMinor } from "../../hooks";
 import NUPathSection from "./NUPathSection";
 import { NUPathEnum } from "@graduate/common";
+import GenericSection from "./GenericSection";
 import SidebarContainer from "./SidebarContainer";
 
 export enum SidebarValidationStatus {
@@ -237,6 +238,11 @@ const Sidebar: React.FC<SidebarProps> = memo(
       >
         {courseData && (
           <>
+            <GenericSection
+              courseData={courseData}
+              dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-generic`}
+              loading={isCoursesLoading}
+            />
             <NUPathSection
               coursesTaken={coursesTaken}
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-nupath`}

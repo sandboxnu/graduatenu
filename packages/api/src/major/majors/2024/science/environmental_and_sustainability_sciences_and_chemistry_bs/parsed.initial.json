@@ -1,0 +1,645 @@
+{
+  "name": "Environmental and Sustainability Sciences and Chemistry, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 140,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "CHEM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning Introduction",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Core Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1200,
+                  "description": "Dynamic Earth",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1201,
+                  "description": "Lab for ENVR 1200",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2200,
+              "subject": "ENVR"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1400,
+              "description": "Foundations in Environmental and Sustainability Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1401,
+              "description": "Lab for ENVR 1400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1500,
+                  "description": "Introduction to Environmental, Social, and Biological Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1501,
+                  "description": "Lab for ENVR 1500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 3300,
+                  "description": "Geographic Information Systems",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 3301,
+                  "description": "Lab for ENVR 3300",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4001,
+              "subject": "EEMB"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2310,
+                  "description": "Earth Materials",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2311,
+                  "description": "Lab for ENVR 2310",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3125,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3600,
+              "subject": "ENVR"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 4500,
+                  "description": "Applied Hydrogeology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 4501,
+                  "description": "Lab for ENVR 4500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4505,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5190,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5210,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5220,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5350,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5450,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5670,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5750,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5800,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5260,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2485,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "General Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2161,
+              "description": "Concepts in Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2162,
+              "description": "Lab for CHEM 2161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2163,
+              "description": "Recitation for CHEM 2161",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate-Level Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2313,
+              "description": "Organic Chemistry 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2314,
+              "description": "Lab for CHEM 2313",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2321,
+              "description": "Analytical Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2322,
+              "description": "Lab for CHEM 2321",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2323,
+              "description": "Recitation for CHEM 2321",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced-Level Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 3401,
+              "description": "Chemical Thermodynamics and Kinetics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3402,
+              "description": "Lab for CHEM 3401",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 5,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 3331,
+                  "description": "Bioanalytical Chemistry",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 3332,
+                  "description": "Lab for CHEM 3331",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 3403,
+                  "description": "Quantum Chemistry and Spectroscopy",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 3404,
+                  "description": "Lab for CHEM 3403",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Math Requirements",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1241,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1251,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1341,
+                  "subject": "MATH"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1242,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1252,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1342,
+                  "subject": "MATH"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "AND",
+                  "courses": [
+                    {
+                      "subject": "ENVR",
+                      "classId": 2500,
+                      "description": "Biostatistics",
+                      "type": "COURSE"
+                    },
+                    {
+                      "subject": "ENVR",
+                      "classId": 2501,
+                      "description": "Lab for ENVR 2500",
+                      "type": "COURSE"
+                    }
+                  ]
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2350,
+                  "subject": "ECON"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2400,
+                  "subject": "POLS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2321,
+                  "subject": "SOCL"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Physics Requirement",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3410,
+              "subject": "CHEM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4750,
+              "subject": "CHEM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4050,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4504,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5190,
+              "subject": "ENVR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

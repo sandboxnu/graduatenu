@@ -1,0 +1,401 @@
+{
+  "name": "Environmental Studies and History, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introductory Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1200,
+              "description": "Dynamic Earth",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1201,
+              "description": "Lab for ENVR 1200",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1400,
+              "description": "Foundations in Environmental and Sustainability Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1401,
+              "description": "Lab for ENVR 1400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2401,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1180,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1246,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Scientific Foundations of Environmental Systems",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Human Foundations of Environmental Systems",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2414,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4522,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Skills Course",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5110,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3110,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5280,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5350,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5563,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5750,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5800,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "LPSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4202,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5268,
+          "subject": "PPUA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 18
+    },
+    {
+      "type": "SECTION",
+      "title": "History Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1170,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1215,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "History Seminar",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "HIST",
+              "classId": 2301,
+              "description": "The History Seminar",
+              "type": "COURSE"
+            },
+            {
+              "subject": "HIST",
+              "classId": 2302,
+              "description": "Historical Writing",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "History/Geographic-Area Requirements",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "ASNS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1185,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "History-Area Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2401,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4504,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5210,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4900,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4970,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4997,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

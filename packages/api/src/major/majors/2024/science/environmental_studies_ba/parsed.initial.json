@@ -1,0 +1,860 @@
+{
+  "name": "Environmental Studies, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Core Courses",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Introductory Courses",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ENVR"
+            },
+            {
+              "type": "XOM",
+              "numCreditsMin": 4,
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1101,
+                  "subject": "ANTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2401,
+                  "subject": "ENVR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1180,
+                  "subject": "PHIL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1246,
+                  "subject": "SOCL"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "Scientific Foundations of Environmental Systems",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1110,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "ENVR"
+            }
+          ],
+          "minRequirementCount": 3
+        },
+        {
+          "type": "SECTION",
+          "title": "Human Dimensions of Environmental Systems",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2515,
+              "subject": "ENVR"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3540,
+                  "subject": "ENVR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2414,
+                  "subject": "PHTH"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4522,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 3
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Skills",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Research Methods",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4050,
+          "subject": "ENVR"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4970,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4971,
+              "subject": "ENVR"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4997,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "EEMB",
+                "classId": 2302,
+                "description": "Ecology",
+                "type": "COURSE"
+              },
+              {
+                "subject": "EEMB",
+                "classId": 2303,
+                "description": "Lab for EEMB 2302",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 3466,
+            "subject": "EEMB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1270,
+            "subject": "PHTH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4202,
+            "subject": "PHTH"
+          }
+        ],
+        "minRequirementCount": 4
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3500,
+                "subject": "COMM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3460,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4505,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5450,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5750,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5100,
+                "subject": "INTL"
+              },
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 4120,
+                    "subject": "PHTH"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 5120,
+                    "subject": "PHTH"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 5214,
+                "subject": "PHTH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2395,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2485,
+                "subject": "SOCL"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3500,
+            "subject": "COMM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1180,
+            "subject": "PHIL"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2395,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2485,
+            "subject": "SOCL"
+          }
+        ],
+        "minRequirementCount": 4
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3110,
+                "subject": "BUSN"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3532,
+                "subject": "COMM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4000,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3151,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4504,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5350,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5450,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5800,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3570,
+                "subject": "HUSV"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5100,
+                "subject": "INTL"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2001,
+                "subject": "PHIL"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5268,
+                "subject": "PPUA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5270,
+                "subject": "PPUA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5390,
+                "subject": "PPUA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 1101,
+            "subject": "LPSC"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "LPSC"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2395,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5268,
+                "subject": "PPUA"
+              }
+            ]
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5210,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5220,
+                "subject": "ENVR"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 4
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3460,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3475,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4000,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3151,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4505,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5210,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5220,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5450,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5700,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3303,
+                "subject": "LPSC"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2395,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3307,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5268,
+                "subject": "PPUA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 5110,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3500,
+            "subject": "COMM"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3650,
+                "subject": "JRNL"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3700,
+                "subject": "JRNL"
+              }
+            ]
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 6330,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5280,
+                "subject": "CIVE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5563,
+                "subject": "ENVR"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 4
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3451,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5130,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5280,
+                "subject": "CIVE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2555,
+                "subject": "COMM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3532,
+                "subject": "COMM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3201,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3202,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5450,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5563,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5750,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2755,
+                "subject": "GAME"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3650,
+                "subject": "JRNL"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3700,
+                "subject": "JRNL"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Required Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 1101,
+            "subject": "BUSN"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2720,
+            "subject": "FINA"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5210,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5220,
+                "subject": "ENVR"
+              }
+            ]
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3110,
+                "subject": "BUSN"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2206,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3520,
+                "subject": "INNO"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 4
+      },
+      {
+        "type": "SECTION",
+        "title": "Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3110,
+                "subject": "BUSN"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5275,
+                "subject": "CIVE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3423,
+                "subject": "ECON"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3201,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3202,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3701,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5210,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5220,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5350,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5800,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3570,
+                "subject": "HUSV"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5645,
+                "subject": "ME"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3530,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2301,
+                "subject": "MKTG"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

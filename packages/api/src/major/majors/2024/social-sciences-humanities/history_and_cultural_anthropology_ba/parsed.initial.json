@@ -1,0 +1,264 @@
+{
+  "name": "History and Cultural Anthropology, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/21/2024"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2024,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "History Colloquium",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "History Seminar and Historical Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2302,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Pre-1800 History Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1100,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1185,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1187,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1218,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1252,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1272,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1389,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2375,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2390,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3334,
+              "subject": "HIST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "History Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Level Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced History Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced History Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3421,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Area Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4350,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4515,
+              "subject": "ANTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Anthropology Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ANTH",
+          "idRangeStart": 2001,
+          "idRangeEnd": 4599,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4350,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2360,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 3
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
