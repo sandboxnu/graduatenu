@@ -11,6 +11,7 @@ import { MajorModule } from "./major/major.module";
 import { EmailModule } from "./email/email.module";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { MetaModule } from "./meta/meta.module";
+import { MinorModule } from "./minor/minor.module";
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { MetaModule } from "./meta/meta.module";
     AuthModule,
     PlanModule,
     MajorModule,
+    MinorModule,
     EmailModule,
     MetaModule,
   ],

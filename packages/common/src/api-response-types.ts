@@ -5,6 +5,7 @@ import {
   ScheduleCourse2,
   MetaInfo,
   Maybe,
+  SupportedMinors,
 } from "./types";
 
 /** Types our API responds with. */
@@ -53,6 +54,9 @@ export class UpdateStudentResponse extends StudentModel<null> {}
 export class GetSupportedMajorsResponse {
   // { year => { majorName => {concentrations, minRequiredConcentrations} }}
   supportedMajors: SupportedMajors;
+}
+export class GetSupportedMinorsResponse {
+  supportedMinors: SupportedMinors;
 }
 
 export class GetMetaInfoResponse implements MetaInfo {
