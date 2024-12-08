@@ -26,20 +26,6 @@ export class MinorService {
   }
 
   getSupportedMinors(): SupportedMinors {
-    //const supportedMinors: SupportedMinors = MINORS;
-    //MINOR_YEARS.forEach((year) => {
-    //const supportedMinorNames = Object.keys(MINORS[year]);
-
-    //const supportedMinorForYear: SupportedMinorsForYear = {};
-    //supportedMinorNames.forEach((name) => {
-    ////no concentration for minors???
-    ////supportedMinorForYear[minorName] = this.getConcentrationsInfoForMinor(
-    ////minorName,
-    ////parseInt(year)
-    ////);
-    //});
-    //supportedMinors[year] = supportedMinorForYear;
-    //});
     return MINORS;
   }
 
