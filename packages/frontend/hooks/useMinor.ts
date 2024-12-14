@@ -20,6 +20,8 @@ type MinorReturn = MinorResponse & {
  * @param minorName   The name of the major, ex: "Computer Science, BSCS".
  */
 export function useMinor(catalogYear: number, minorName: string): MinorReturn {
+  console.log("useMinor called with: ", catalogYear, minorName);
+  // debugger;
   const key = `api/minor/${catalogYear}/${minorName}`;
 
   const { data, ...rest } = useSWR(
