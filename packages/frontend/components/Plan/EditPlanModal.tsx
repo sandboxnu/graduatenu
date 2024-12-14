@@ -167,6 +167,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
+      minor: payload.minor,
     };
 
     if (isGuest) {
