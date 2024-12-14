@@ -501,11 +501,11 @@ export type SupportedConcentrations = {
 
 // { majorName => { concentration, minRequiredConcentrations, verified} }
 export type SupportedMajorsForYear = Record<string, SupportedConcentrations>;
+export type SupportedMinorsForYear = Record<string, Minor>;
 
 // { year => supported majors }
 export type SupportedMajors = Record<string, SupportedMajorsForYear>;
-
-export type SupportedMinors = Record<string, Record<string, Minor>>;
+export type SupportedMinors = Record<string, SupportedMinorsForYear>;
 
 /**
  * Types for a some result from an algorithim. Currently used for the result of
