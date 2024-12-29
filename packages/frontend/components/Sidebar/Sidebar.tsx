@@ -88,8 +88,6 @@ const Sidebar: React.FC<SidebarProps> = memo(
       selectedPlan.catalogYear,
       selectedPlan.minor
     );
-    //console.log("minor response");
-    //console.log(minorResponse.minor);
 
     const workerRef = useRef<Worker>();
 
@@ -165,14 +163,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
     useEffect(() => revalidateMajor(), [selectedPlan, major]);
 
     const majorCourses = getAllCoursesInMajor(major, concentration);
-
-    console.log({ minorResponse });
     const minorCourses = getAllCoursesInMinor(minorResponse.minor);
-    console.log({ majorCourses });
-    console.log({ minorCourses });
-
-    // console.log({minorCourses});
-    // TODO: add get all courses in minor
 
     const {
       courses,
@@ -184,7 +175,6 @@ const Sidebar: React.FC<SidebarProps> = memo(
     );
 
     const courseData = createCourseMap(courses, courseErrors);
-    console.log({ courseData });
 
     if (isMajorLoading) {
       return <SidebarContainer title="Loading..." />;
@@ -295,7 +285,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
             {minorResponse.minor && (
               <>
-                <Text>We have a minor </Text>
+                <Text>Requirements for {minorResponse.minor.name}</Text>
                 {minorResponse.minor?.requirementSections.map(
                   (section, index) => {
                     return (

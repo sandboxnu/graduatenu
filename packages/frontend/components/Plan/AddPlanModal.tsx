@@ -49,7 +49,6 @@ import { HelperToolTip } from "../Help";
 import { IsGuestContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
-//import { extractSupportedMinorOptions } from "../../utils/plan/supportedMinors";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -66,8 +65,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     useSupportedMajors();
   const { supportedMinorsData, error: supportedMinorsError } =
     useSupportedMinors();
-  //const { supportedMinorsData, error: supportedMinorsError } =
-  //useSupportedMinors();
   const {
     register,
     handleSubmit,

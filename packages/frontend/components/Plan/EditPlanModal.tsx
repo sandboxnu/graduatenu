@@ -343,8 +343,6 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         catalogYear,
                         supportedMinorsData
                       )}
-                      //TODO:::: HOW TO HAVE DFAULT VALUEEEEEEEEEEE :DDDDD
-                      //rules={{ required: "Minor is required." }}
                       isDisabled={!catalogYear}
                       isSearchable
                       useFuzzySearch

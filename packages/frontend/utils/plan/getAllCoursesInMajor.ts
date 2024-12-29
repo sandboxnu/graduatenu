@@ -16,12 +16,6 @@ export const getAllCoursesInMinor = (
   const minorRequirements = minor.requirementSections.reduce(
     (courses: IRequiredCourse[], section: Section) => {
       const requiredCourses: IRequiredCourse[] = [];
-      // console.log("section requirements for minor");
-      // console.log(section.requirements);
-      // if (section.requirements) {
-      //   getRequiredCourses(section.requirements, requiredCourses);
-      // }
-
       getRequiredCourses(section?.requirements ?? [], requiredCourses);
       return courses.concat(requiredCourses);
     },
