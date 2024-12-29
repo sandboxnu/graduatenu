@@ -243,8 +243,6 @@ const HomePage: NextPage = () => {
   let renderedSidebar = <NoPlanSidebar />;
   if (selectedPlan) {
     if (selectedPlan.major) {
-      console.log("PRINTING SELECTED PLAN");
-      console.log(selectedPlan);
       renderedSidebar = (
         <Sidebar
           selectedPlan={selectedPlan}
