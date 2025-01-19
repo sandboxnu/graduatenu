@@ -1,4 +1,5 @@
 import { Link, Stack, Text } from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels, TabPanel, Box } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
@@ -238,69 +239,85 @@ const Sidebar: React.FC<SidebarProps> = memo(
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-nupath`}
               loading={isCoursesLoading}
             />
-            {major.requirementSections.map((section, index) => {
-              const sectionValidationError: MajorValidationError | undefined =
-                getSectionError(index, validationStatus);
+            <Tabs>
+              <TabList>
+                <Tab>Major</Tab>
+                <Tab>Minor(s)</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  {major.requirementSections.map((section, index) => {
+                    const sectionValidationError:
+                      | MajorValidationError
+                      | undefined = getSectionError(index, validationStatus);
 
-              let sectionValidationStatus = SidebarValidationStatus.Complete;
+                    let sectionValidationStatus =
+                      SidebarValidationStatus.Complete;
 
-              if (validationStatus === undefined) {
-                sectionValidationStatus = SidebarValidationStatus.Loading;
-              } else if (
-                sectionValidationError &&
-                sectionValidationError.type === "SECTION" &&
-                sectionValidationError.maxPossibleChildCount === 0
-              ) {
-                sectionValidationStatus = SidebarValidationStatus.Error;
-              } else if (
-                sectionValidationError &&
-                sectionValidationError.type === "SECTION" &&
-                sectionValidationError.maxPossibleChildCount > 0
-              ) {
-                sectionValidationStatus = SidebarValidationStatus.InProgress;
-              }
+                    if (validationStatus === undefined) {
+                      sectionValidationStatus = SidebarValidationStatus.Loading;
+                    } else if (
+                      sectionValidationError &&
+                      sectionValidationError.type === "SECTION" &&
+                      sectionValidationError.maxPossibleChildCount === 0
+                    ) {
+                      sectionValidationStatus = SidebarValidationStatus.Error;
+                    } else if (
+                      sectionValidationError &&
+                      sectionValidationError.type === "SECTION" &&
+                      sectionValidationError.maxPossibleChildCount > 0
+                    ) {
+                      sectionValidationStatus =
+                        SidebarValidationStatus.InProgress;
+                    }
 
-              return (
-                <SidebarSection
-                  key={section.title}
-                  section={section}
-                  validationStatus={sectionValidationStatus}
-                  courseData={courseData}
-                  dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
-                  loading={isCoursesLoading}
-                  coursesTaken={coursesTaken}
-                />
-              );
-            })}
-
-            {concentration && (
-              <SidebarSection
-                validationStatus={concentrationValidationStatus}
-                section={concentration}
-                courseData={courseData}
-                dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
-                coursesTaken={[]}
-              />
-            )}
-
-            {minorResponse.minor && (
-              <>
-                <Text>Requirements for {minorResponse.minor.name}</Text>
-                {minorResponse.minor?.requirementSections.map(
-                  (section, index) => {
                     return (
                       <SidebarSection
-                        key={index}
+                        key={section.title}
                         section={section}
+                        validationStatus={sectionValidationStatus}
                         courseData={courseData}
-                        dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
-                        validationStatus={SidebarValidationStatus.InProgress}
-                      ></SidebarSection>
+                        dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
+                        loading={isCoursesLoading}
+                        coursesTaken={coursesTaken}
+                      />
                     );
-                  }
-                )}
-              </>
-            )}
+                  })}
+
+                  {concentration && (
+                    <SidebarSection
+                      validationStatus={concentrationValidationStatus}
+                      section={concentration}
+                      courseData={courseData}
+                      dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
+                      coursesTaken={[]}
+                    />
+                  )}
+                </TabPanel>
+                <TabPanel>
+                  {minorResponse.minor && (
+                    <>
+                      <Text>Minor Requirments</Text>
+                      {minorResponse.minor?.requirementSections.map(
+                        (section, index) => {
+                          return (
+                            <SidebarSection
+                              key={index}
+                              section={section}
+                              courseData={courseData}
+                              dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
+                              validationStatus={
+                                SidebarValidationStatus.InProgress
+                              }
+                            ></SidebarSection>
+                          );
+                        }
+                      )}
+                    </>
+                  )}
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </>
         )}
       </SidebarContainer>
