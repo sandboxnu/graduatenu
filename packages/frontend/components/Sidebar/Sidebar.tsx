@@ -1,5 +1,5 @@
 import { Link, Stack, Text } from "@chakra-ui/react";
-import { Tabs, TabList, Tab, TabPanels, TabPanel, Box } from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
