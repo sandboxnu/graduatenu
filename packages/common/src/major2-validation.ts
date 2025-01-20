@@ -463,20 +463,9 @@ function validateRangeRequirement(
     // Adds the current course to all previous valid solutions if there are
     // enough courses.
     for (const solutionSoFar of solutionsSoFar) {
-      // Debugging statement
-      console.log(
-        "Checking solution:",
-        solutionSoFar,
-        "with course:",
-        courseSol
-      );
-
       // TODO: if i take a course twice, can both count in the same range?
       // for now assume yes. but ask khoury, then remove this note
       if (tracker.hasEnoughCoursesForBoth(solutionSoFar, courseSol)) {
-        // Debugging statement
-        console.log("Valid combination found:", solutionSoFar, courseSol);
-
         solutionsSoFarWithCourse.push({
           sol: [...solutionSoFar.sol, cs],
           minCredits: solutionSoFar.minCredits + course.numCreditsMin,
@@ -498,10 +487,6 @@ function validateRangeRequirement(
       });
     }
   }
-
-  // Debugging statement
-  console.log("Final solutions:", solutionsSoFar);
-
   return Ok(solutionsSoFar);
 }
 
