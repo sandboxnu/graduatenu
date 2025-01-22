@@ -437,7 +437,7 @@ function validateCourseRequirement(
   return Err(CourseError(r));
 }
 
-const max_combo = 1000;
+const max_combo = 5;
 function validateRangeRequirement(
   r: ICourseRange2,
   tracker: CourseValidationTracker
@@ -451,6 +451,7 @@ function validateRangeRequirement(
   const solutionsSoFar: Array<Solution> = [];
 
   // produce all combinations of the courses
+  // This is inefficient, added a hard limit (max_combo = 5) to prevent infinite loops / too many combinations
   for (const course of courses) {
     const solutionsSoFarWithCourse: Array<Solution> = [];
     const cs = courseToString(course);
@@ -480,6 +481,8 @@ function validateRangeRequirement(
     // Update the solutions so far
     solutionsSoFar.push(...solutionsSoFarWithCourse);
 
+    // If we have too many combinations, return an error
+    // Error should make validation icon gray
     if (solutionsSoFar.length > max_combo) {
       return Err({
         type: MajorValidationErrorType.Course,
