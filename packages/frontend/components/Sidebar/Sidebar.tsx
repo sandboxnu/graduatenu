@@ -239,10 +239,12 @@ const Sidebar: React.FC<SidebarProps> = memo(
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-nupath`}
               loading={isCoursesLoading}
             />
-            <Tabs>
+            <Tabs isFitted variant="enclosed-colored" colorScheme="blue">
               <TabList>
-                <Tab>Major</Tab>
-                <Tab>Minor(s)</Tab>
+                <Tab _selected={{ color: "white", bg: "blue.800" }}>Major</Tab>
+                <Tab _selected={{ color: "white", bg: "blue.800" }}>
+                  Minor(s)
+                </Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>
@@ -309,6 +311,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                               validationStatus={
                                 SidebarValidationStatus.InProgress
                               }
+                              coursesTaken={coursesTaken}
                             ></SidebarSection>
                           );
                         }
