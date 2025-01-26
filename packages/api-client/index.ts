@@ -134,8 +134,11 @@ class APIClient {
  *
  * SemEncoding => 10 for fall, 30 for spring, 40 for summer 1, 50 for summer
  * full, 60 for summer 2
+ *
+ * Remember to update the catalog year every year to ensure we are searching all
+ * possible terms.
  */
-const ALL_COURSE_TERM_IDS = ["2022", "2023"]
+const ALL_COURSE_TERM_IDS = ["2022", "2023", "2024", "2025"]
   .map((year) => [
     `${year}10`,
     `${year}30`,
