@@ -437,7 +437,7 @@ function validateCourseRequirement(
   return Err(CourseError(r));
 }
 
-const max_combo = 5;
+const max_combo = 10;
 function validateRangeRequirement(
   r: ICourseRange2,
   tracker: CourseValidationTracker
@@ -483,6 +483,7 @@ function validateRangeRequirement(
 
     // If we have too many combinations, return an error
     // Error should make validation icon gray
+    // Not sure why this fixes the infinite loop, but it does
     if (solutionsSoFar.length > max_combo) {
       return Err({
         type: MajorValidationErrorType.Course,
