@@ -16,6 +16,7 @@ import {
   INEUReqCourseError,
   INEUReqError,
   ScheduleCourse2,
+  ScheduleTerm2,
 } from "@graduate/common";
 import { HelperToolTip } from "../Help";
 import {
@@ -25,22 +26,35 @@ import {
 import { useFetchCourse } from "../../hooks";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { SetStateAction } from "react";
+import { ErrorModalError } from "./";
 
 interface ReqErrorModalProps {
   setHovered: (isHovered: SetStateAction<boolean>) => void;
   course: ScheduleCourse2<unknown>;
+  term?: ScheduleTerm2<string>;
   preReqErr?: INEUReqError;
   coReqErr?: INEUReqError;
 }
 
 export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   course,
+  term,
   setHovered,
   coReqErr = undefined,
   preReqErr = undefined,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const err =
+    course.name === "Co-op Education" &&
+    term !== undefined &&
+    (term.id === "1-FL" || term.id === "4-SP");
+  let msg = "This is an error.";
+  if (err && term.id === "1-FL") {
+    msg = "You may only register a co-op in your second year and beyond.";
+  } else if (err && term.id === "4-Sp") {
+    msg = "You cannot register a co-op in your last semester.";
+  }
   return (
     <Flex
       justifySelf="stretch"
@@ -107,7 +121,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                 <ParseCourse course={coReqErr} parent={true} />
               </Flex>
             )}
-            {preReqErr && (
+            {(preReqErr || err) && (
               <Flex direction="column">
                 <Flex
                   alignItems="center"
@@ -126,6 +140,12 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                 </Flex>
                 <ParseCourse course={preReqErr} parent={true} />
               </Flex>
+            )}
+            {err && (
+              <ErrorModalError
+                title="Cannot add co-op!"
+                message={msg}
+              ></ErrorModalError>
             )}
           </ModalBody>
         </ModalContent>

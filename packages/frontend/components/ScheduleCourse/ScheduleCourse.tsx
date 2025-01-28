@@ -7,6 +7,7 @@ import {
   INEUReqError,
   IRequiredCourse,
   ScheduleCourse2,
+  ScheduleTerm2,
   SeasonEnum,
 } from "@graduate/common";
 import { forwardRef, PropsWithChildren, useEffect, useState } from "react";
@@ -23,6 +24,7 @@ import { GraduateToolTip } from "../GraduateTooltip";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
+  scheduleTerm?: ScheduleTerm2<string>;
   coReqErr?: INEUReqError;
   preReqErr?: INEUReqError;
   isInSidebar?: boolean;
@@ -40,6 +42,7 @@ export const DraggableScheduleCourse: React.FC<
   DraggableScheduleCourseProps
 > = ({
   scheduleCourse,
+  scheduleTerm,
   removeCourse,
   preReqErr = undefined,
   coReqErr = undefined,
@@ -68,6 +71,7 @@ export const DraggableScheduleCourse: React.FC<
       preReqErr={preReqErr}
       ref={setNodeRef}
       scheduleCourse={scheduleCourse}
+      scheduleTerm={scheduleTerm}
       removeCourse={removeCourse}
       isInSidebar={isInSidebar}
       isChecked={isChecked}
@@ -186,6 +190,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
       coReqErr = undefined,
       preReqErr = undefined,
       scheduleCourse,
+      scheduleTerm,
       removeCourse,
       isInSidebar = false,
       isChecked = false,
@@ -202,7 +207,13 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
   ) => {
     const [hovered, setHovered] = useState(false);
     const isValidRemove = isRemove && !isFromSidebar;
-    const isCourseError = coReqErr !== undefined || preReqErr !== undefined;
+    const isCourseError =
+      coReqErr !== undefined ||
+      preReqErr !== undefined ||
+      // hard coded co-op error for now
+      (scheduleCourse.name === "Co-op Education" &&
+        scheduleTerm !== undefined &&
+        (scheduleTerm.id === "1-FL" || scheduleTerm.id === "4-SP"));
 
     /*
     This component uses some plain HTML elements instead of Chakra
@@ -253,6 +264,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
             <ReqErrorModal
               setHovered={setHovered}
               course={scheduleCourse}
+              term={scheduleTerm}
               coReqErr={coReqErr}
               preReqErr={preReqErr}
             />
