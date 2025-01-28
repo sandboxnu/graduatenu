@@ -239,10 +239,28 @@ const Sidebar: React.FC<SidebarProps> = memo(
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-nupath`}
               loading={isCoursesLoading}
             />
-            <Tabs isFitted variant="enclosed-colored" colorScheme="blue">
-              <TabList>
-                <Tab _selected={{ color: "white", bg: "blue.800" }}>Major</Tab>
-                <Tab _selected={{ color: "white", bg: "blue.800" }}>
+            <Tabs
+              size="md"
+              variant="enclosed-colored"
+              colorScheme="blue"
+              mt={3}
+            >
+              <TabList display="flex" gap={2}>
+                <Tab
+                  _selected={{ color: "white", bg: "blue.800" }}
+                  flex="0.4"
+                  ml={4}
+                  p={1}
+                  borderTopRadius="lg"
+                >
+                  Major
+                </Tab>
+                <Tab
+                  _selected={{ color: "white", bg: "blue.800" }}
+                  flex="0.4"
+                  p={1}
+                  borderTopRadius="lg"
+                >
                   Minor(s)
                 </Tab>
               </TabList>
