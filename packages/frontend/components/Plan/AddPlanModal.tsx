@@ -145,7 +145,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     onCloseDisplay();
   };
 
-  const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
