@@ -467,11 +467,8 @@ function validateRangeRequirement(
       // TODO: if i take a course twice, can both count in the same range?
       // for now assume yes. but ask khoury, then remove this note
       if (tracker.hasEnoughCoursesForBoth(solutionSoFar, courseSol)) {
-        solutionsSoFarWithCourse.push({
-          sol: [...solutionSoFar.sol, cs],
-          minCredits: solutionSoFar.minCredits + course.numCreditsMin,
-          maxCredits: solutionSoFar.maxCredits + course.numCreditsMax,
-        });
+        const currentSol: Solution = combineSolutions(solutionSoFar, courseSol);
+        solutionsSoFarWithCourse.push(currentSol);
       }
     }
 
