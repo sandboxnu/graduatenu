@@ -287,6 +287,7 @@ export function validateMajor2(
 ): MajorValidationResult {
   const tracker = new Major2ValidationTracker(taken);
   let concentrationReq: Requirement2[] = [];
+  console.log(concentrations); // this is "undecided"
   if (major.concentrations) {
     concentrationReq = getConcentrationsRequirement(
       concentrations,
@@ -336,6 +337,9 @@ export function getConcentrationsRequirement(
   const selectedConcentrations =
     convertToConcentrationsArray(inputConcentrations);
   if (concentrationsRequirement.concentrationOptions.length === 0) {
+    return [];
+  }
+  if (inputConcentrations === "Undecided") {
     return [];
   }
   const concentrationRequirements = [];

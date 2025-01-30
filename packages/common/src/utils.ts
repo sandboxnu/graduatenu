@@ -33,6 +33,17 @@ export const majorOptionObjectComparator = (
   return majorNameComparator(a.value.toString(), b.value.toString());
 };
 
+export const convertToOptionObjectsIncludingUndecided = (
+  options: (string | number)[]
+): OptionObject[] => {
+  const optionObjects = convertToOptionObjects(options);
+  optionObjects.unshift({
+    label: "Undecided",
+    value: "Undecided",
+  });
+  return optionObjects;
+};
+
 /**
  * Converts a list of strings or numbers into a list of option objects for the
  * Select component.

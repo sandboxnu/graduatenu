@@ -120,9 +120,9 @@ export class MajorService {
       return false;
     }
 
-    const isValidConcentrationName = concentrations.some(
-      (c) => c === concentrationName
-    );
+    const isValidConcentrationName =
+      concentrations.includes(concentrationName) ||
+      concentrationName.toLowerCase() === "undecided";
 
     if (!isValidConcentrationName) {
       this.logger.debug(
@@ -134,10 +134,9 @@ export class MajorService {
         },
         MajorService.formatMajorServiceCtx("isValidConcentrationForMajor")
       );
-
       return false;
     }
-
+    console.log("ASDASDSA");
     return true;
   }
 

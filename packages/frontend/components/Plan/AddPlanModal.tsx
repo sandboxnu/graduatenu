@@ -22,6 +22,7 @@ import {
   CreatePlanDtoWithoutSchedule,
   PlanModel,
   convertToOptionObjects,
+  convertToOptionObjectsIncludingUndecided,
 } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
@@ -93,6 +94,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       concentration: isNoMajorSelected ? undefined : payload.concentration,
       schedule,
     };
+
+    console.log(newPlan, " THIS IS NEW PLAN");
 
     // create the new plan
     let createdPlanId: number;
@@ -318,7 +321,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         label="Concentrations"
                         name="concentration"
                         placeholder="Select a Concentration"
-                        options={convertToOptionObjects(
+                        options={convertToOptionObjectsIncludingUndecided(
                           majorConcentrations.concentrations
                         )}
                         control={control}
