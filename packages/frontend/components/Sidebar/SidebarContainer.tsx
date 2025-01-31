@@ -4,6 +4,7 @@ import { BETA_MAJOR_TOOLTIP_MSG } from "../../utils";
 import { HelperToolTip } from "../Help";
 import { DraggableScheduleCourse } from "../ScheduleCourse";
 import DropdownWarning from "./DropdownWarning";
+import ConcentrationDropdownWarning from "./ConcentrationDropdownWarning";
 import { COOP_BLOCK } from "./Sidebar";
 import { SandboxArea } from "./SandboxArea";
 
@@ -61,11 +62,22 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
             </Heading>
           </Flex>
           {subtitle && (
-            <Text fontSize="sm" color="primary.blue.dark.main">
+            <Text
+              fontSize="sm"
+              color={
+                subtitle === "Concentration Undecided"
+                  ? "red.500"
+                  : "primary.blue.dark.main"
+              }
+              fontStyle={
+                subtitle === "Concentration Undecided" ? "italic" : "normal"
+              }
+            >
               {subtitle}
             </Text>
           )}
         </Box>
+        <ConcentrationDropdownWarning />
         {renderDropdownWarning && <DropdownWarning />}
         {creditsTaken !== undefined && (
           <Flex mb="sm" alignItems="baseline" columnGap="xs">
