@@ -209,7 +209,11 @@ const Sidebar: React.FC<SidebarProps> = memo(
     return (
       <SidebarContainer
         title={major.name}
-        subtitle={selectedPlan.concentration}
+        subtitle={
+          selectedPlan.concentration === "Undecided"
+            ? "Concentration Undecided"
+            : selectedPlan.concentration
+        }
         creditsTaken={creditsTaken}
         creditsToTake={major.totalCreditsRequired}
         renderCoopBlock
