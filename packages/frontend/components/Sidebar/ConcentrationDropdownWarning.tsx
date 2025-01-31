@@ -14,15 +14,15 @@ const ConcentrationDropdownWarning = () => {
     <Accordion pb="sm" allowToggle>
       <AccordionItem
         borderRadius="lg"
-        backgroundColor="red"
-        border="1px #5F6CF6 solid"
+        backgroundColor="red.100"
+        border="1px #e63433 solid"
       >
         <AccordionButton>
-          <InfoIcon mr="xs" color="blue" />
+          <InfoIcon mr="xs" color="red.400" />
           <Text fontWeight="semibold" textAlign="left" fontSize="md" flex="1">
             Missing Concentration!
           </Text>
-          <AccordionIcon color="black" />
+          <AccordionIcon color="red.400" />
         </AccordionButton>
         <AccordionPanel>
           <Text fontSize="sm">
