@@ -13,7 +13,9 @@ import {
 import { forwardRef, PropsWithChildren, useEffect, useState } from "react";
 import {
   DELETE_COURSE_AREA_DND_ID,
+  FALL_1,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
+  SPRING_4,
   isCourseFromSidebar,
 } from "../../utils";
 import { ReqErrorModal } from "../Plan/ReqErrorModal";
@@ -213,7 +215,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
       // hard coded co-op error for now
       (scheduleCourse.name === "Co-op Education" &&
         scheduleTerm !== undefined &&
-        (scheduleTerm.id === "1-FL" || scheduleTerm.id === "4-SP"));
+        (scheduleTerm.id === FALL_1 || scheduleTerm.id === SPRING_4));
 
     /*
     This component uses some plain HTML elements instead of Chakra

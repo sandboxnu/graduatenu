@@ -20,7 +20,9 @@ import {
 } from "@graduate/common";
 import { HelperToolTip } from "../Help";
 import {
+  FALL_1,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
+  SPRING_4,
   getCourseDisplayString,
 } from "../../utils";
 import { useFetchCourse } from "../../hooks";
@@ -45,14 +47,14 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const err =
+  const coopErr =
     course.name === "Co-op Education" &&
     term !== undefined &&
-    (term.id === "1-FL" || term.id === "4-SP");
+    (term.id === FALL_1 || term.id === SPRING_4);
   let msg = "This is an error.";
-  if (err && term.id === "1-FL") {
+  if (coopErr && term.id === FALL_1) {
     msg = "You may only register a co-op in your second year and beyond.";
-  } else if (err && term.id === "4-Sp") {
+  } else if (coopErr && term.id === SPRING_4) {
     msg = "You cannot register a co-op in your last semester.";
   }
   return (
@@ -121,7 +123,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                 <ParseCourse course={coReqErr} parent={true} />
               </Flex>
             )}
-            {(preReqErr || err) && (
+            {(preReqErr || coopErr) && (
               <Flex direction="column">
                 <Flex
                   alignItems="center"
@@ -141,7 +143,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                 <ParseCourse course={preReqErr} parent={true} />
               </Flex>
             )}
-            {err && (
+            {coopErr && (
               <ErrorModalError
                 title="Cannot add co-op!"
                 message={msg}
