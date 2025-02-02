@@ -212,7 +212,6 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
     const isCourseError =
       coReqErr !== undefined ||
       preReqErr !== undefined ||
-      // hard coded co-op error for now
       (scheduleCourse.name === "Co-op Education" &&
         scheduleTerm !== undefined &&
         (scheduleTerm.id === FALL_1 || scheduleTerm.id === SPRING_4));
