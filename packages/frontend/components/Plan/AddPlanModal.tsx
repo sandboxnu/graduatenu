@@ -22,7 +22,6 @@ import {
   CreatePlanDtoWithoutSchedule,
   PlanModel,
   convertToOptionObjects,
-  convertToOptionObjectsIncludingUndecided,
 } from "@graduate/common";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
@@ -319,8 +318,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         label="Concentrations"
                         name="concentration"
                         placeholder="Select a Concentration"
-                        options={convertToOptionObjectsIncludingUndecided(
-                          majorConcentrations.concentrations
+                        options={convertToOptionObjects(
+                          majorConcentrations.concentrations,
+                          true
                         )}
                         control={control}
                         rules={{

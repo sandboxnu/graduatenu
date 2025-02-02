@@ -77,7 +77,9 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
             </Text>
           )}
         </Box>
-        <ConcentrationDropdownWarning />
+        {subtitle === "Concentration Undecided" && (
+          <ConcentrationDropdownWarning />
+        )}
         {renderDropdownWarning && <DropdownWarning />}
         {creditsTaken !== undefined && (
           <Flex mb="sm" alignItems="baseline" columnGap="xs">
