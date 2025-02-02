@@ -245,7 +245,12 @@ const Sidebar: React.FC<SidebarProps> = memo(
               colorScheme="blue"
               mt={3}
             >
-              <TabList display="flex" gap={2}>
+              <TabList
+                display="flex"
+                gap={2}
+                borderBottom="2px solid"
+                borderColor="neutral.200"
+              >
                 <Tab
                   _selected={{ color: "white", bg: "blue.800" }}
                   flex="0.4"
@@ -265,7 +270,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 </Tab>
               </TabList>
               <TabPanels>
-                <TabPanel>
+                <TabPanel width="100%" p={0} m={0}>
                   {major.requirementSections.map((section, index) => {
                     const sectionValidationError:
                       | MajorValidationError
@@ -320,15 +325,41 @@ const Sidebar: React.FC<SidebarProps> = memo(
                       <Text>Minor Requirments</Text>
                       {minorResponse.minor?.requirementSections.map(
                         (section, index) => {
+                          const sectionValidationError:
+                            | MajorValidationError
+                            | undefined = getSectionError(
+                            index,
+                            validationStatus
+                          );
+
+                          let sectionValidationStatus =
+                            SidebarValidationStatus.Complete;
+
+                          if (validationStatus === undefined) {
+                            sectionValidationStatus =
+                              SidebarValidationStatus.Loading;
+                          } else if (
+                            sectionValidationError &&
+                            sectionValidationError.type === "SECTION" &&
+                            sectionValidationError.maxPossibleChildCount === 0
+                          ) {
+                            sectionValidationStatus =
+                              SidebarValidationStatus.Error;
+                          } else if (
+                            sectionValidationError &&
+                            sectionValidationError.type === "SECTION" &&
+                            sectionValidationError.maxPossibleChildCount > 0
+                          ) {
+                            sectionValidationStatus =
+                              SidebarValidationStatus.InProgress;
+                          }
                           return (
                             <SidebarSection
                               key={index}
                               section={section}
                               courseData={courseData}
                               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
-                              validationStatus={
-                                SidebarValidationStatus.InProgress
-                              }
+                              validationStatus={sectionValidationStatus}
                               coursesTaken={coursesTaken}
                             ></SidebarSection>
                           );
