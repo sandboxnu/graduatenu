@@ -95,8 +95,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       schedule,
     };
 
-    console.log(newPlan, " THIS IS NEW PLAN");
-
     // create the new plan
     let createdPlanId: number;
     if (isGuest) {
