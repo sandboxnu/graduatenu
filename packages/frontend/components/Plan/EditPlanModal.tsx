@@ -20,7 +20,6 @@ import {
   PlanModel,
   UpdatePlanDto,
   convertToOptionObjects,
-  convertToOptionObjectsIncludingUndecided,
 } from "@graduate/common";
 import { useRouter } from "next/router";
 import { useCallback, useContext, useEffect, useState } from "react";
@@ -311,8 +310,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         label="Concentrations"
                         name="concentration"
                         placeholder="Select a Concentration"
-                        options={convertToOptionObjectsIncludingUndecided(
-                          majorConcentrations.concentrations
+                        options={convertToOptionObjects(
+                          majorConcentrations.concentrations,
+                          true
                         )}
                         control={control}
                         rules={{

@@ -122,7 +122,7 @@ export class MajorService {
 
     const isValidConcentrationName =
       concentrations.includes(concentrationName) ||
-      concentrationName.toLowerCase() === "undecided";
+      concentrationName === "Undecided";
 
     if (!isValidConcentrationName) {
       this.logger.debug(
