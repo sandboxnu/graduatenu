@@ -136,7 +136,6 @@ export class MajorService {
       );
       return false;
     }
-    console.log("ASDASDSA");
     return true;
   }
 
