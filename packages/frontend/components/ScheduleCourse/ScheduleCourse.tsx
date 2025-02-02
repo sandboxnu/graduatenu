@@ -12,6 +12,7 @@ import {
 } from "@graduate/common";
 import { forwardRef, PropsWithChildren, useEffect, useState } from "react";
 import {
+  COOP_TITLE,
   DELETE_COURSE_AREA_DND_ID,
   FALL_1,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
@@ -212,7 +213,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
     const isCourseError =
       coReqErr !== undefined ||
       preReqErr !== undefined ||
-      (scheduleCourse.name === "Co-op Education" &&
+      (scheduleCourse.name === COOP_TITLE &&
         scheduleTerm !== undefined &&
         (scheduleTerm.id === FALL_1 || scheduleTerm.id === SPRING_4));
 

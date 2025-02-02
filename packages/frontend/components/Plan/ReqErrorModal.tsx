@@ -20,6 +20,7 @@ import {
 } from "@graduate/common";
 import { HelperToolTip } from "../Help";
 import {
+  COOP_TITLE,
   FALL_1,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
   SPRING_4,
@@ -48,7 +49,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const coopErr =
-    course.name === "Co-op Education" &&
+    course.name === COOP_TITLE &&
     term !== undefined &&
     (term.id === FALL_1 || term.id === SPRING_4);
   let msg = "This is an error.";
