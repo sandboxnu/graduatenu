@@ -22,8 +22,11 @@ import { HelperToolTip } from "../Help";
 import {
   COOP_TITLE,
   FALL_1,
+  FALL_1_COOP_ERROR_MSG,
+  GENERIC_ERROR_MSG,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
   SPRING_4,
+  SPRING_4_COOP_ERROR_MSG,
   getCourseDisplayString,
 } from "../../utils";
 import { useFetchCourse } from "../../hooks";
@@ -52,11 +55,11 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
     course.name === COOP_TITLE &&
     term !== undefined &&
     (term.id === FALL_1 || term.id === SPRING_4);
-  let msg = "This is an error.";
+  let msg = GENERIC_ERROR_MSG;
   if (coopErr && term.id === FALL_1) {
-    msg = "You may only register a co-op in your second year and beyond.";
+    msg = FALL_1_COOP_ERROR_MSG;
   } else if (coopErr && term.id === SPRING_4) {
-    msg = "You cannot register a co-op in your last semester.";
+    msg = SPRING_4_COOP_ERROR_MSG;
   }
   return (
     <Flex

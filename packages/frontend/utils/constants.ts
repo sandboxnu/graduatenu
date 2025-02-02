@@ -13,6 +13,11 @@ export const GEN_PLACEHOLDER_MSG =
 export const FALL_1 = "1-FL";
 export const SPRING_4 = "4-SP";
 export const COOP_TITLE = "Co-op Education";
+export const FALL_1_COOP_ERROR_MSG =
+  "You may only register a co-op in your second year and beyond.";
+export const SPRING_4_COOP_ERROR_MSG =
+  "You cannot register a co-op in your last semester.";
+export const GENERIC_ERROR_MSG = "This is an error.";
 
 export const defaultGuestStudent: GetStudentResponse = {
   uuid: undefined,
