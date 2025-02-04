@@ -10,6 +10,7 @@ export const BETA_MAJOR_TOOLTIP_MSG =
   "Requirements for beta majors have not been validated and therefore may be inconsistent with your degree audit.";
 export const GEN_PLACEHOLDER_MSG =
   "General Placeholderse are generic courses that you can place in your plan if you do not know yet what to take but want the requirements to be fulfilled";
+export const UNDECIDED_CONCENTRATION = "Concentration Undecided";
 
 export const defaultGuestStudent: GetStudentResponse = {
   uuid: undefined,
