@@ -18,6 +18,7 @@ export const SPRING_4_COOP_ERROR_MSG =
   "You cannot register a co-op in your last semester.";
 export const GENERIC_ERROR_MSG = "This is an error.";
 export const UNDECIDED_CONCENTRATION = "Concentration Undecided";
+export const UNDECIDED = "Undecided";
 
 export const defaultGuestStudent: GetStudentResponse = {
   uuid: undefined,

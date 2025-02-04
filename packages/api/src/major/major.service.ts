@@ -4,6 +4,7 @@ import {
   SupportedMajors,
   SupportedConcentrations,
 } from "@graduate/common";
+import { UNDECIDED } from "@graduate/common/dist/constants";
 import { Injectable, Logger } from "@nestjs/common";
 import { formatServiceCtx } from "../utils";
 import { MAJOR_YEARS, MAJORS } from "./major-collator";
@@ -122,7 +123,7 @@ export class MajorService {
 
     const isValidConcentrationName =
       concentrations.includes(concentrationName) ||
-      concentrationName === "Undecided";
+      concentrationName === UNDECIDED;
 
     if (!isValidConcentrationName) {
       this.logger.debug(
