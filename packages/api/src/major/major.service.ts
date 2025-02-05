@@ -3,6 +3,7 @@ import {
   SupportedMajorsForYear,
   SupportedMajors,
   SupportedConcentrations,
+  UNDECIDED,
 } from "@graduate/common";
 import { Injectable, Logger } from "@nestjs/common";
 import { formatServiceCtx } from "../utils";
