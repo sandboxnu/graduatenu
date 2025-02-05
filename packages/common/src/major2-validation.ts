@@ -354,8 +354,6 @@ export function getNecessaryCourses(
   for (const req of requirements) {
     crawlRequirement(req, tracker, requiredCourses);
   }
-  console.log("KOBE");
-  console.log(requiredCourses);
   return requiredCourses;
 }
 
@@ -507,7 +505,6 @@ function validateRangeRequirement(
 ): Result<Array<Solution>, MajorValidationError> {
   // get the eligible courses (Filter out exceptions)
   const exceptions = new Set(r.exceptions.map(courseToString));
-  console.log("necessaryCourses", tracker.getNecessaryCourses());
   tracker.getNecessaryCourses().forEach((course) => exceptions.add(course));
 
   const courses = tracker
@@ -540,7 +537,6 @@ function validateRangeRequirement(
     solutionsSoFarWithCourse.push(courseSol);
     solutionsSoFar.push(...solutionsSoFarWithCourse);
   }
-  console.log("Solutions so far", solutionsSoFar);
   return Ok(solutionsSoFar);
 }
 
