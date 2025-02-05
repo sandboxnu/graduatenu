@@ -8,3 +8,4 @@ export const forgotPasswordTokenExpiredError = "Token expired";
 export const unableToSendEmail = "Unable to send email";
 export const emailAlreadyConfirmed = "Email already confirmed";
 export const UNDECIDED = "Undecided";
+export const UNDECIDED_CONCENTRATION = "Concentration Undecided";

@@ -7,7 +7,7 @@ import DropdownWarning from "./DropdownWarning";
 import ConcentrationDropdownWarning from "./ConcentrationDropdownWarning";
 import { COOP_BLOCK } from "./Sidebar";
 import { SandboxArea } from "./SandboxArea";
-import { UNDECIDED_CONCENTRATION } from "../../utils";
+import { UNDECIDED_CONCENTRATION } from "@graduate/common";
 
 interface SidebarContainerProps {
   title: string;

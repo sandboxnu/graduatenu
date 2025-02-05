@@ -4,7 +4,6 @@ import {
   SupportedMajors,
   SupportedConcentrations,
 } from "@graduate/common";
-import { UNDECIDED } from "@graduate/common/dist/constants";
 import { Injectable, Logger } from "@nestjs/common";
 import { formatServiceCtx } from "../utils";
 import { MAJOR_YEARS, MAJORS } from "./major-collator";
