@@ -62,9 +62,17 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           </Text>
           {course.coreqs &&
             (opened ? (
-              <ChevronUpIcon boxSize="25px" color="primary.red.main" />
+              <ChevronUpIcon
+                boxSize="25px"
+                color="black"
+                onClick={() => setOpened(!opened)}
+              />
             ) : (
-              <ChevronDownIcon boxSize="25px" color="primary.red.main" />
+              <ChevronDownIcon
+                boxSize="25px"
+                color="black"
+                onClick={() => setOpened(!opened)}
+              />
             ))}
         </Box>
         {course.coreqs && (
