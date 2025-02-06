@@ -10,7 +10,13 @@ import {
   ScheduleTerm2,
   SeasonEnum,
 } from "@graduate/common";
-import { forwardRef, PropsWithChildren, useEffect, useState } from "react";
+import {
+  forwardRef,
+  PropsWithChildren,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
 import {
   COOP_TITLE,
   DELETE_COURSE_AREA_DND_ID,
@@ -24,6 +30,7 @@ import { COOP_BLOCK } from "../Sidebar";
 import { CourseDragIcon } from "./CourseDragIcon";
 import { CourseTrashButton } from "./CourseTrashButton";
 import { GraduateToolTip } from "../GraduateTooltip";
+import { TotalYearsContext } from "../Plan/Plan";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
@@ -210,12 +217,17 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
   ) => {
     const [hovered, setHovered] = useState(false);
     const isValidRemove = isRemove && !isFromSidebar;
+    const totalYears = useContext(TotalYearsContext);
+    const isFinalYear =
+      scheduleTerm && parseInt(scheduleTerm.id[0]) === totalYears;
+
     const isCourseError =
       coReqErr !== undefined ||
       preReqErr !== undefined ||
       (scheduleCourse.name === COOP_TITLE &&
         scheduleTerm !== undefined &&
-        (scheduleTerm.id === FALL_1 || scheduleTerm.id === SPRING_4));
+        (scheduleTerm.id === FALL_1 ||
+          (isFinalYear && scheduleTerm.season === SeasonEnum.SP)));
 
     /*
     This component uses some plain HTML elements instead of Chakra

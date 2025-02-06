@@ -17,6 +17,7 @@ import {
   INEUReqError,
   ScheduleCourse2,
   ScheduleTerm2,
+  SeasonEnum,
 } from "@graduate/common";
 import { HelperToolTip } from "../Help";
 import {
@@ -31,8 +32,8 @@ import {
 } from "../../utils";
 import { useFetchCourse } from "../../hooks";
 import { GraduateToolTip } from "../GraduateTooltip";
-import { SetStateAction } from "react";
-import { ErrorModalError } from "./";
+import { SetStateAction, useContext } from "react";
+import { ErrorModalError, TotalYearsContext } from "./";
 
 interface ReqErrorModalProps {
   setHovered: (isHovered: SetStateAction<boolean>) => void;
@@ -51,14 +52,16 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const totalYears = useContext(TotalYearsContext);
+  const isFinalYear = term && parseInt(term.id[0]) === totalYears;
   const coopErr =
     course.name === COOP_TITLE &&
     term !== undefined &&
-    (term.id === FALL_1 || term.id === SPRING_4);
+    (term.id === FALL_1 || (isFinalYear && term.season == SeasonEnum.SP));
   let msg = GENERIC_ERROR_MSG;
   if (coopErr && term.id === FALL_1) {
     msg = FALL_1_COOP_ERROR_MSG;
-  } else if (coopErr && term.id === SPRING_4) {
+  } else if (coopErr) {
     msg = SPRING_4_COOP_ERROR_MSG;
   }
   return (
