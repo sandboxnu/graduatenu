@@ -83,7 +83,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
               borderRadius="lg"
               backgroundColor="transparent"
             >
-              <Text fontSize="sm">"hi"</Text>
+              <Text fontSize="sm">boo</Text>
             </Box>
           </Collapse>
         )}
