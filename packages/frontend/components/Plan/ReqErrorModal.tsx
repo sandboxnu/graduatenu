@@ -26,7 +26,6 @@ import {
   FALL_1_COOP_ERROR_MSG,
   GENERIC_ERROR_MSG,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
-  SPRING_4,
   SPRING_4_COOP_ERROR_MSG,
   getCourseDisplayString,
 } from "../../utils";

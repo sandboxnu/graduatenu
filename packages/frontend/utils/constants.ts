@@ -11,7 +11,6 @@ export const BETA_MAJOR_TOOLTIP_MSG =
 export const GEN_PLACEHOLDER_MSG =
   "General Placeholderse are generic courses that you can place in your plan if you do not know yet what to take but want the requirements to be fulfilled";
 export const FALL_1 = "1-FL";
-export const SPRING_4 = "4-SP";
 export const COOP_TITLE = "Co-op Education";
 export const FALL_1_COOP_ERROR_MSG =
   "You may only register a co-op in your second year and beyond.";

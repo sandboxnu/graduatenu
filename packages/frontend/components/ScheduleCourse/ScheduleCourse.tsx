@@ -22,7 +22,6 @@ import {
   DELETE_COURSE_AREA_DND_ID,
   FALL_1,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
-  SPRING_4,
   isCourseFromSidebar,
 } from "../../utils";
 import { ReqErrorModal } from "../Plan/ReqErrorModal";
