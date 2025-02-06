@@ -1,10 +1,16 @@
-import { AddIcon, InfoOutlineIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
+import {
+  AddIcon,
+  InfoOutlineIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+} from "@chakra-ui/icons";
+import { Box, Flex, IconButton, Text, Collapse } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils/";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { NUPathLabel } from "./NUPathLabel";
 import { getSearchLink } from "../ScheduleCourse";
+import { useState } from "react";
 
 interface SearchResultProps {
   course: ScheduleCourse2<null>;
@@ -34,6 +40,8 @@ export const SearchResult: React.FC<SearchResultProps> = ({
     : isResultAlreadySelected
     ? "This course is already selected."
     : undefined;
+  /* This useState is only used for course-coreq hybrid search results */
+  const [opened, setOpened] = useState(false);
 
   return (
     <Flex
@@ -52,7 +60,25 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           <Text as="span" fontSize="sm">
             {course.name}
           </Text>
+          {course.coreqs &&
+            (opened ? (
+              <ChevronUpIcon boxSize="25px" color="primary.red.main" />
+            ) : (
+              <ChevronDownIcon boxSize="25px" color="primary.red.main" />
+            ))}
         </Box>
+        {course.coreqs && (
+          <Collapse in={opened} animateOpacity>
+            <Box
+              px="sm"
+              py="xs"
+              borderRadius="lg"
+              backgroundColor="transparent"
+            >
+              <Text fontSize="sm">"hi"</Text>
+            </Box>
+          </Collapse>
+        )}
         <Box ml="auto" mr="sm"></Box>
         <GraduateToolTip
           label={`Search for ${getCourseDisplayString(course)} on SearchNEU`}
