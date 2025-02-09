@@ -7,11 +7,20 @@ import {
   INEUReqError,
   IRequiredCourse,
   ScheduleCourse2,
+  ScheduleTerm2,
   SeasonEnum,
 } from "@graduate/common";
-import { forwardRef, PropsWithChildren, useEffect, useState } from "react";
 import {
+  forwardRef,
+  PropsWithChildren,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
+import {
+  COOP_TITLE,
   DELETE_COURSE_AREA_DND_ID,
+  FALL_1,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
   isCourseFromSidebar,
 } from "../../utils";
@@ -20,9 +29,11 @@ import { COOP_BLOCK } from "../Sidebar";
 import { CourseDragIcon } from "./CourseDragIcon";
 import { CourseTrashButton } from "./CourseTrashButton";
 import { GraduateToolTip } from "../GraduateTooltip";
+import { TotalYearsContext } from "../Plan/Plan";
 
 interface DraggableScheduleCourseProps {
   scheduleCourse: ScheduleCourse2<string>;
+  scheduleTerm?: ScheduleTerm2<string>;
   coReqErr?: INEUReqError;
   preReqErr?: INEUReqError;
   isInSidebar?: boolean;
@@ -40,6 +51,7 @@ export const DraggableScheduleCourse: React.FC<
   DraggableScheduleCourseProps
 > = ({
   scheduleCourse,
+  scheduleTerm,
   removeCourse,
   preReqErr = undefined,
   coReqErr = undefined,
@@ -68,6 +80,7 @@ export const DraggableScheduleCourse: React.FC<
       preReqErr={preReqErr}
       ref={setNodeRef}
       scheduleCourse={scheduleCourse}
+      scheduleTerm={scheduleTerm}
       removeCourse={removeCourse}
       isInSidebar={isInSidebar}
       isChecked={isChecked}
@@ -186,6 +199,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
       coReqErr = undefined,
       preReqErr = undefined,
       scheduleCourse,
+      scheduleTerm,
       removeCourse,
       isInSidebar = false,
       isChecked = false,
@@ -202,7 +216,17 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
   ) => {
     const [hovered, setHovered] = useState(false);
     const isValidRemove = isRemove && !isFromSidebar;
-    const isCourseError = coReqErr !== undefined || preReqErr !== undefined;
+    const totalYears = useContext(TotalYearsContext);
+    const isFinalYear =
+      scheduleTerm && parseInt(scheduleTerm.id[0]) === totalYears;
+
+    const isCourseError =
+      coReqErr !== undefined ||
+      preReqErr !== undefined ||
+      (scheduleCourse.name === COOP_TITLE &&
+        scheduleTerm !== undefined &&
+        (scheduleTerm.id === FALL_1 ||
+          (isFinalYear && scheduleTerm.season === SeasonEnum.SP)));
 
     /*
     This component uses some plain HTML elements instead of Chakra
@@ -253,6 +277,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
             <ReqErrorModal
               setHovered={setHovered}
               course={scheduleCourse}
+              term={scheduleTerm}
               coReqErr={coReqErr}
               preReqErr={preReqErr}
             />
