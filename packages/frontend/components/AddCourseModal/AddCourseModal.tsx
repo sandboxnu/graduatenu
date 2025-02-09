@@ -269,10 +269,13 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                             )}
                             isSelectingAnotherCourse={isLoadingSelectCourse}
                             selectedNUPaths={selectedNUPaths}
+                            coreq={courseCoreqsMap.has(
+                              getCourseDisplayString(course)
+                            )}
                           />
-                          {courseCoreqsMap.get(course.id) !== undefined && (
-                            <Text>hi</Text>
-                          )}
+                          {courseCoreqsMap.has(
+                            getCourseDisplayString(course)
+                          ) && <Text>hi</Text>}
                         </>
                       )
                     )}
