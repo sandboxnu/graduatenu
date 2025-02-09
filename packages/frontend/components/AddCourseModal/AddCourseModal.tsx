@@ -79,7 +79,15 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     setIsLoadingSelectCourse(true);
 
     // grab any coreqs of the course that haven't already been selected/added to the term
-    const coreqs = courseCoreqsMap.get(course.id) || [];
+    const coreqs = isAutoSelectCoreqs
+      ? (await getRequiredCourseCoreqs(course, catalogYear)).filter((coreq) => {
+          const isAlreadySelected = selectedCourses.find((selectedCourse) =>
+            isEqualCourses(selectedCourse, coreq)
+          );
+          const isAlreadyAdded = isCourseAlreadyAdded(coreq);
+          return !(isAlreadyAdded || isAlreadySelected);
+        })
+      : [];
 
     const updatedSelectedCourses = [...selectedCourses, course, ...coreqs];
 
