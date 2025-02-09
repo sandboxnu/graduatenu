@@ -22,6 +22,7 @@ interface SearchResultProps {
   /** Another course is currently in the process of being selected. */
   isSelectingAnotherCourse?: boolean;
   selectedNUPaths: NUPathEnum[];
+  coreq?: boolean;
 }
 
 export const SearchResult: React.FC<SearchResultProps> = ({
@@ -33,6 +34,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
   isResultAlreadyAdded,
   isSelectingAnotherCourse,
   selectedNUPaths: filteredPaths,
+  coreq,
 }) => {
   const isAddButtonDisabled = isResultAlreadyAdded || isResultAlreadySelected;
   const addButtonTooltip = isResultAlreadyAdded
@@ -61,7 +63,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
             <Text as="span" fontSize="sm">
               {course.name}
             </Text>
-            {course.coreqs &&
+            {coreq &&
               (opened ? (
                 <ChevronUpIcon
                   boxSize="25px"
