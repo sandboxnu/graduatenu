@@ -125,13 +125,13 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           />
         </GraduateToolTip>
       </Flex>
-      {course.coreqs && (
+      {/* {course.coreqs && (
         <Collapse in={opened} animateOpacity>
           <Box px="sm" py="xs" borderRadius="lg" backgroundColor="transparent">
             <Text fontSize="sm">boo</Text>
           </Box>
         </Collapse>
-      )}
+      )} */}
     </Box>
   );
 };

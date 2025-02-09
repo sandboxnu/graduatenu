@@ -14,7 +14,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2, SeasonEnum } from "@graduate/common";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchCourses } from "../../hooks";
 import {
   getCourseDisplayString,
@@ -79,15 +79,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     setIsLoadingSelectCourse(true);
 
     // grab any coreqs of the course that haven't already been selected/added to the term
-    const coreqs = isAutoSelectCoreqs
-      ? (await getRequiredCourseCoreqs(course, catalogYear)).filter((coreq) => {
-          const isAlreadySelected = selectedCourses.find((selectedCourse) =>
-            isEqualCourses(selectedCourse, coreq)
-          );
-          const isAlreadyAdded = isCourseAlreadyAdded(coreq);
-          return !(isAlreadyAdded || isAlreadySelected);
-        })
-      : [];
+    const coreqs = courseCoreqsMap.get(course.id) || [];
 
     const updatedSelectedCourses = [...selectedCourses, course, ...coreqs];
 
@@ -123,6 +115,43 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     setSelectedNUPaths([]);
     closeModalDisplay();
   };
+
+  const [courseCoreqsMap, setCourseCoreqsMap] = useState(
+    new Map<any, ScheduleCourse2<null>[]>()
+  );
+  useEffect(() => {
+    if (!courses || courses.length === 0 || isCourseSearchLoading) {
+      console.log("Courses are not ready yet...");
+      return;
+    }
+    const fetchCoreqsForAllCourses = async () => {
+      if (!courses || courses.length === 0) return;
+      if (courses) {
+        const newCourseCoreqsMap = new Map<any, ScheduleCourse2<null>[]>();
+
+        for (const course of courses) {
+          const coreqs = (
+            await getRequiredCourseCoreqs(course, catalogYear)
+          ).filter((coreq) => !isCourseAlreadyAdded(coreq));
+
+          if (coreqs.length === 1) {
+            newCourseCoreqsMap.set(getCourseDisplayString(course), coreqs);
+            console.log(
+              `Fetching coreqs for course ${getCourseDisplayString(course)}`
+            );
+            console.log(`Coreqs fetched:`, coreqs);
+          }
+        }
+        setCourseCoreqsMap(newCourseCoreqsMap);
+      }
+    };
+
+    fetchCoreqsForAllCourses();
+  }, [courses, catalogYear]);
+
+  useEffect(() => {
+    console.log("Updated courseCoreqsMap:", courseCoreqsMap);
+  }, [courseCoreqsMap]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
@@ -227,19 +256,24 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   {courses &&
                     sortCoursesByNUPath(courses, selectedNUPaths).map(
                       (course) => (
-                        <SearchResult
-                          key={getCourseDisplayString(course)}
-                          year={catalogYear}
-                          season={season}
-                          course={course}
-                          addSelectedCourse={addSelectedCourse}
-                          isResultAlreadyAdded={isCourseAlreadyAdded(course)}
-                          isResultAlreadySelected={isCourseAlreadySelected(
-                            course
+                        <>
+                          <SearchResult
+                            key={getCourseDisplayString(course)}
+                            year={catalogYear}
+                            season={season}
+                            course={course}
+                            addSelectedCourse={addSelectedCourse}
+                            isResultAlreadyAdded={isCourseAlreadyAdded(course)}
+                            isResultAlreadySelected={isCourseAlreadySelected(
+                              course
+                            )}
+                            isSelectingAnotherCourse={isLoadingSelectCourse}
+                            selectedNUPaths={selectedNUPaths}
+                          />
+                          {courseCoreqsMap.get(course.id) !== undefined && (
+                            <Text>hi</Text>
                           )}
-                          isSelectingAnotherCourse={isLoadingSelectCourse}
-                          selectedNUPaths={selectedNUPaths}
-                        />
+                        </>
                       )
                     )}
                 </Flex>
