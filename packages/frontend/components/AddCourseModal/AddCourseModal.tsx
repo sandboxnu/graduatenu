@@ -140,7 +140,9 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
         for (const course of courses) {
           const coreqs = (
             await getRequiredCourseCoreqs(course, catalogYear)
-          ).filter((coreq) => !isCourseAlreadyAdded(coreq));
+          ).filter(
+            (coreq) => !isCourseAlreadyAdded(coreq) && course.numCreditsMax >= 4
+          );
 
           if (coreqs.length === 1) {
             newCourseCoreqsMap.set(getCourseDisplayString(course), coreqs);
@@ -283,7 +285,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                           />
                           {courseCoreqsMap.has(
                             getCourseDisplayString(course)
-                          ) && <Text>hi</Text>}
+                          ) && <Text color="red">hi</Text>}
                         </>
                       )
                     )}
