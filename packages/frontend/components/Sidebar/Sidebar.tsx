@@ -87,7 +87,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const minorResponse = useMinor(
       selectedPlan.catalogYear,
-      selectedPlan.minor
+      selectedPlan.minor ?? ""
     );
 
     const workerRef = useRef<Worker>();
@@ -108,6 +108,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
         major: major,
+        minor: minorResponse.minor,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
@@ -260,14 +261,16 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 >
                   Major
                 </Tab>
-                <Tab
-                  _selected={{ color: "white", bg: "blue.800" }}
-                  flex="0.4"
-                  p={1}
-                  borderTopRadius="lg"
-                >
-                  Minor(s)
-                </Tab>
+                {minorResponse.minor && (
+                  <Tab
+                    _selected={{ color: "white", bg: "blue.800" }}
+                    flex="0.4"
+                    p={1}
+                    borderTopRadius="lg"
+                  >
+                    Minor(s)
+                  </Tab>
+                )}
               </TabList>
               <TabPanels>
                 <TabPanel width="100%" p={0} m={0}>
@@ -319,11 +322,11 @@ const Sidebar: React.FC<SidebarProps> = memo(
                     />
                   )}
                 </TabPanel>
-                <TabPanel>
+                <TabPanel width="100%" p={0} m={0}>
                   {minorResponse.minor && (
                     <>
                       <Text>Minor Requirments</Text>
-                      {minorResponse.minor?.requirementSections.map(
+                      {minorResponse.minor.requirementSections.map(
                         (section, index) => {
                           const sectionValidationError:
                             | MajorValidationError
