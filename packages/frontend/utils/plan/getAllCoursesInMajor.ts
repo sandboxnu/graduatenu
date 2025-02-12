@@ -1,9 +1,46 @@
 import {
   IRequiredCourse,
   Major2,
+  Minor,
   Requirement2,
   Section,
 } from "@graduate/common";
+
+export const getAllCoursesInMinor = (
+  minor: Minor | undefined
+): { subject: string; classId: string }[] => {
+  if (!minor) {
+    return [];
+  }
+
+  const minorRequirements = minor.requirementSections.reduce(
+    (courses: IRequiredCourse[], section: Section) => {
+      const requiredCourses: IRequiredCourse[] = [];
+      console.log("section requirements for minor");
+      console.log(section.requirements);
+      // if (section.requirements) {
+      //   getRequiredCourses(section.requirements, requiredCourses);
+      // }
+
+      getRequiredCourses(section?.requirements ?? [], requiredCourses);
+      return courses.concat(requiredCourses);
+    },
+    []
+  );
+
+  const coursesQueryData: { subject: string; classId: string }[] = [];
+  for (const requirement of minorRequirements) {
+    const subject = requirement.subject;
+    const classId = requirement.classId.toString();
+    coursesQueryData.push({ subject, classId });
+  }
+
+  if (coursesQueryData) {
+    return coursesQueryData;
+  } else {
+    return [];
+  }
+};
 
 export const getAllCoursesInMajor = (
   major: Major2 | undefined,
