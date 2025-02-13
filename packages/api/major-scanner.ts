@@ -1,7 +1,8 @@
 /**
  * This script is used to scan the major JSON files used by the API for specific
  * information. The information that is scanned is logged to a file
- * 'major-scanner-output.json' in the API directory.
+ * 'major-scanner-output.json' in the API directory. Run from the root of this
+ * API directory: `npx ts-node major-scanner.ts`
  */
 import * as fs from "fs";
 import { Major2, Requirement2 } from "@graduate/common";
@@ -155,7 +156,9 @@ async function scanMajorForInformation(
     for (const year of majorYears) {
       for (const major of Object.values(majors[year])) {
         if (majorPredicate.predicate(major)) {
-          scanningInformation[majorPredicate.name].push(major.name);
+          scanningInformation[majorPredicate.name].push(
+            `${major.yearVersion} - ${major.name}`
+          );
         }
       }
     }
