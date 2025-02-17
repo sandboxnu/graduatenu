@@ -15,7 +15,7 @@ import {
   Err,
   Ok,
 } from "./types";
-import { UNDECIDED } from "./constants";
+import { UNDECIDED_STRING } from "./constants";
 import { assertUnreachable, courseToString } from "./course-utils";
 
 /**
@@ -340,7 +340,7 @@ export function getConcentrationsRequirement(
     return [];
   }
   // Allow undecided concentrations
-  if (inputConcentrations === UNDECIDED) {
+  if (inputConcentrations === UNDECIDED_STRING) {
     return [];
   }
   const concentrationRequirements = [];
