@@ -12,7 +12,7 @@ import {
   getSectionError,
   getAllCoursesInMajor,
   UNDECIDED_CONCENTRATION,
-  UNDECIDED,
+  UNDECIDED_STRING,
 } from "../../utils";
 import {
   handleApiClientError,
@@ -212,7 +212,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       <SidebarContainer
         title={major.name}
         subtitle={
-          selectedPlan.concentration === UNDECIDED
+          selectedPlan.concentration === UNDECIDED_STRING
             ? UNDECIDED_CONCENTRATION
             : selectedPlan.concentration
         }
