@@ -204,6 +204,7 @@ export class Major2ValidationTracker implements CourseValidationTracker {
   // maps courseString => [course instance, # of times taken]
   private currentCourses: Map<string, [ScheduleCourse2<unknown>, number]>;
 
+  //list of degree-required courses that we should not consider in the range validator
   private necessaryCourses: Set<string> = new Set();
 
   constructor(courses: ScheduleCourse2<unknown>[]) {
@@ -364,14 +365,15 @@ function crawlRequirement(
   requiredCourses: Set<string>
 ): void {
   switch (req.type) {
-    // base cases
+    // base cases, a course is added to the list of necessary courses
     case "COURSE":
       requiredCourses.add(courseToString(req));
       break;
-    // inductive cases
+    // inductive case, we crawl through the children of an AND requirement
     case "AND":
       req.courses.forEach((r) => crawlRequirement(r, tracker, requiredCourses));
       break;
+    // inductive case, we crawl through the children of a whole section
     case "SECTION":
       req.requirements.forEach((r) =>
         crawlRequirement(r, tracker, requiredCourses)
