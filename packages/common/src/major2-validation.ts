@@ -404,9 +404,9 @@ export function getMinorRequirement(
   // put all the minor requirments into minor requirments and assigning type as section
   const minorRequirements: Section[] = inputMinor.requirementSections;
 
-  const selectedMinors = convertToMinorsArray(inputMinor);
+  //const selectedMinors = convertToMinorsArray(inputMinor);
 
-  const matchedRequirements = [];
+  //const matchedRequirements = [];
   // for (const minor of selectedMinors) {
   //   console.log(selectedMinors);
   //   const found = minorRequirements.find((m) => {
@@ -423,15 +423,15 @@ export function getMinorRequirement(
   return [{ type: "AND", courses: minorRequirements }];
 }
 
-function convertToMinorsArray(minors: undefined | Minor | Minor[]): Minor[] {
-  if (minors === undefined) {
-    return [];
-  }
-  if (!Array.isArray(minors)) {
-    return [minors];
-  }
-  return minors;
-}
+// function convertToMinorsArray(minors: undefined | Minor | Minor[]): Minor[] {
+//   if (minors === undefined) {
+//     return [];
+//   }
+//   if (!Array.isArray(minors)) {
+//     return [minors];
+//   }
+//   return minors;
+// }
 
 // the solutions returned may have duplicate courses, indicating the # of times a course is taken
 export const validateRequirement = (
