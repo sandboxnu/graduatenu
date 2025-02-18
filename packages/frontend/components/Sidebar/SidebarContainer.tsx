@@ -7,6 +7,7 @@ import DropdownWarning from "./DropdownWarning";
 import ConcentrationDropdownWarning from "./ConcentrationDropdownWarning";
 import { COOP_BLOCK } from "./Sidebar";
 import { SandboxArea } from "./SandboxArea";
+import { UNDECIDED_CONCENTRATION } from "../../utils";
 
 interface SidebarContainerProps {
   title: string;
@@ -65,12 +66,12 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
             <Text
               fontSize="sm"
               color={
-                subtitle === "Concentration Undecided"
+                subtitle === UNDECIDED_CONCENTRATION
                   ? "red.500"
                   : "primary.blue.dark.main"
               }
               fontStyle={
-                subtitle === "Concentration Undecided" ? "italic" : "normal"
+                subtitle === UNDECIDED_CONCENTRATION ? "italic" : "normal"
               }
             >
               {subtitle}
