@@ -1,7 +1,8 @@
-import { WarningIcon, WarningTwoIcon } from "@chakra-ui/icons";
+import { AddIcon, WarningIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
+  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -179,25 +180,23 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
 
   switch (course.type) {
     case "course":
-      return <ReqCourseError courseError={course} isParent={parent} />;
+      return (
+        <Flex align="center" justify="space-between" width="100%">
+          <ReqCourseError courseError={course} isParent={parent} />
+          <IconButton
+            aria-label="Add class"
+            icon={<AddIcon />}
+            color="primary.blue.light.main"
+            borderColor="primary.blue.light.main"
+            colorScheme="primary.blue.light.main"
+            isRound
+            size="xs"
+            ml="2"
+          />
+        </Flex>
+      );
 
     case "and":
-      return (
-        <>
-          {course.missing.map((c, index) => (
-            <Flex direction="column" key={index}>
-              <BorderContainer>
-                <ParseCourse course={c} parent={false} />
-              </BorderContainer>
-              {index < course.missing.length - 1 && (
-                <Text fontSize="md" textAlign="center">
-                  AND
-                </Text>
-              )}
-            </Flex>
-          ))}
-        </>
-      );
     case "or":
       return (
         <>
@@ -208,13 +207,14 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
               </BorderContainer>
               {index < course.missing.length - 1 && (
                 <Text fontSize="md" textAlign="center">
-                  OR
+                  {course.type.toUpperCase()}
                 </Text>
               )}
             </Flex>
           ))}
         </>
       );
+
     default:
       assertUnreachable(course);
   }
