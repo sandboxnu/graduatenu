@@ -62,11 +62,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     useSupportedMajors();
 
   // Generate default plan title using formatted date and time
-  const generateDefaultPlanTitle = (catalogYear?: number, major?: string) => {
+  const generateDefaultPlanTitle = () => {
     const now = new Date();
-    return `${catalogYear ? `${catalogYear} - ` : ""}${
-      major ? `${major} - ` : ""
-    }${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+    return `Plan ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
   };
 
   const {
@@ -96,9 +94,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();
     const newPlan: CreatePlanDto = {
-      name:
-        payload.name ||
-        generateDefaultPlanTitle(payload.catalogYear, payload.major),
+      name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
@@ -236,7 +232,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   label="Title"
                   id="name"
                   type="text"
-                  placeholder={generateDefaultPlanTitle(catalogYear, majorName)}
+                  placeholder={generateDefaultPlanTitle()}
                   error={errors.name}
                   {...register("name", {
                     pattern: noLeadOrTrailWhitespacePattern,
