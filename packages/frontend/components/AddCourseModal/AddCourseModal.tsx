@@ -125,7 +125,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   };
 
   const [courseCoreqsMap, setCourseCoreqsMap] = useState(
-    new Map<any, ScheduleCourse2<null>[]>()
+    new Map<any, ScheduleCourse2<null>>()
   );
   useEffect(() => {
     if (!courses || courses.length === 0 || isCourseSearchLoading) {
@@ -135,17 +135,17 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     const fetchCoreqsForAllCourses = async () => {
       if (!courses || courses.length === 0) return;
       if (courses) {
-        const newCourseCoreqsMap = new Map<any, ScheduleCourse2<null>[]>();
+        const newCourseCoreqsMap = new Map<any, ScheduleCourse2<null>>();
 
         for (const course of courses) {
           const coreqs = (
             await getRequiredCourseCoreqs(course, catalogYear)
           ).filter(
-            (coreq) => !isCourseAlreadyAdded(coreq) && course.numCreditsMax >= 4
+            (coreq) => !isCourseAlreadyAdded(coreq) && course.numCreditsMax >= 3 // this is hardcoded and for some reason its 3?
           );
 
           if (coreqs.length === 1) {
-            newCourseCoreqsMap.set(getCourseDisplayString(course), coreqs);
+            newCourseCoreqsMap.set(getCourseDisplayString(course), coreqs[0]);
             console.log(
               `Fetching coreqs for course ${getCourseDisplayString(course)}`
             );
@@ -285,7 +285,28 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                           />
                           {courseCoreqsMap.has(
                             getCourseDisplayString(course)
-                          ) && <Text color="red">hi</Text>}
+                          ) && (
+                            <SearchResult
+                              key={getCourseDisplayString(course) + "coreq"}
+                              year={catalogYear}
+                              season={season}
+                              course={
+                                courseCoreqsMap.get(
+                                  getCourseDisplayString(course)
+                                )!
+                              }
+                              addSelectedCourse={addSelectedCourse}
+                              isResultAlreadyAdded={isCourseAlreadyAdded(
+                                course
+                              )}
+                              isResultAlreadySelected={isCourseAlreadySelected(
+                                course
+                              )}
+                              isSelectingAnotherCourse={isLoadingSelectCourse}
+                              selectedNUPaths={selectedNUPaths}
+                              coreq={false}
+                            />
+                          )}
                         </>
                       )
                     )}
