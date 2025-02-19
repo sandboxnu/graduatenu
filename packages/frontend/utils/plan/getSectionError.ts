@@ -17,6 +17,7 @@ export const getSectionError = (
   index: number,
   validationStatus: MajorValidationResult | undefined
 ): MajorValidationError | undefined => {
+  console.log(validationStatus);
   // Find the error for this sidebar component
   if (validationStatus && validationStatus.type == ResultType.Err) {
     // Both these cases should be unreachable, but help to narrow types

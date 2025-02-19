@@ -79,16 +79,17 @@ const Sidebar: React.FC<SidebarProps> = memo(
     const {
       major,
       isLoading: isMajorLoading,
-      error,
+      error: majorError,
     } = useMajor(selectedPlan.catalogYear, selectedPlan.major);
     const concentration = major?.concentrations?.concentrationOptions.find(
       (concentration) => concentration.title === selectedPlan.concentration
     );
 
-    const minorResponse = useMinor(
-      selectedPlan.catalogYear,
-      selectedPlan.minor ?? ""
-    );
+    const {
+      minor,
+      isLoading: isMinorLoading,
+      error: minorError,
+    } = useMinor(selectedPlan.catalogYear, selectedPlan.minor ?? "");
 
     const workerRef = useRef<Worker>();
 
@@ -108,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
         major: major,
-        minor: minorResponse.minor,
+        minor: minor,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
@@ -165,7 +166,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
     useEffect(() => revalidateMajor(), [selectedPlan, major]);
 
     const majorCourses = getAllCoursesInMajor(major, concentration);
-    const minorCourses = getAllCoursesInMinor(minorResponse.minor);
+    const minorCourses = getAllCoursesInMinor(minor);
 
     const {
       courses,
@@ -183,19 +184,26 @@ const Sidebar: React.FC<SidebarProps> = memo(
     }
 
     if (!major) {
-      if (error) {
-        if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (majorError) {
+        if (
+          axios.isAxiosError(majorError) &&
+          majorError.response?.status === 404
+        ) {
           return <SidebarContainer title="Major not found" />;
         }
 
-        handleApiClientError(error, router);
+        handleApiClientError(majorError, router);
       }
 
       return <SidebarContainer title="" />;
     }
 
     const concentrationValidationError: MajorValidationError | undefined =
-      getSectionError(major.requirementSections.length, validationStatus);
+      getSectionError(
+        major.requirementSections.length +
+          (minor?.requirementSections.length ?? 0),
+        validationStatus
+      );
 
     let concentrationValidationStatus = SidebarValidationStatus.Complete;
     if (validationStatus === undefined) {
@@ -261,7 +269,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 >
                   Major
                 </Tab>
-                {minorResponse.minor && (
+                {minor && (
                   <Tab
                     _selected={{ color: "white", bg: "blue.800" }}
                     flex="0.4"
@@ -323,51 +331,49 @@ const Sidebar: React.FC<SidebarProps> = memo(
                   )}
                 </TabPanel>
                 <TabPanel width="100%" p={0} m={0}>
-                  {minorResponse.minor && (
+                  {minor && (
                     <>
                       <Text>Minor Requirments</Text>
-                      {minorResponse.minor.requirementSections.map(
-                        (section, index) => {
-                          const sectionValidationError:
-                            | MajorValidationError
-                            | undefined = getSectionError(
-                            index,
-                            validationStatus
-                          );
+                      {minor.requirementSections.map((section, index) => {
+                        const sectionValidationError:
+                          | MajorValidationError
+                          | undefined = getSectionError(
+                          major.requirementSections.length + index,
+                          validationStatus
+                        );
 
-                          let sectionValidationStatus =
-                            SidebarValidationStatus.Complete;
+                        let sectionValidationStatus =
+                          SidebarValidationStatus.Complete;
 
-                          if (validationStatus === undefined) {
-                            sectionValidationStatus =
-                              SidebarValidationStatus.Loading;
-                          } else if (
-                            sectionValidationError &&
-                            sectionValidationError.type === "SECTION" &&
-                            sectionValidationError.maxPossibleChildCount === 0
-                          ) {
-                            sectionValidationStatus =
-                              SidebarValidationStatus.Error;
-                          } else if (
-                            sectionValidationError &&
-                            sectionValidationError.type === "SECTION" &&
-                            sectionValidationError.maxPossibleChildCount > 0
-                          ) {
-                            sectionValidationStatus =
-                              SidebarValidationStatus.InProgress;
-                          }
-                          return (
-                            <SidebarSection
-                              key={index}
-                              section={section}
-                              courseData={courseData}
-                              dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
-                              validationStatus={sectionValidationStatus}
-                              coursesTaken={coursesTaken}
-                            ></SidebarSection>
-                          );
+                        if (validationStatus === undefined) {
+                          sectionValidationStatus =
+                            SidebarValidationStatus.Loading;
+                        } else if (
+                          sectionValidationError &&
+                          sectionValidationError.type === "SECTION" &&
+                          sectionValidationError.maxPossibleChildCount === 0
+                        ) {
+                          sectionValidationStatus =
+                            SidebarValidationStatus.Error;
+                        } else if (
+                          sectionValidationError &&
+                          sectionValidationError.type === "SECTION" &&
+                          sectionValidationError.maxPossibleChildCount > 0
+                        ) {
+                          sectionValidationStatus =
+                            SidebarValidationStatus.InProgress;
                         }
-                      )}
+                        return (
+                          <SidebarSection
+                            key={index}
+                            section={section}
+                            courseData={courseData}
+                            dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
+                            validationStatus={sectionValidationStatus}
+                            coursesTaken={coursesTaken}
+                          ></SidebarSection>
+                        );
+                      })}
                     </>
                   )}
                 </TabPanel>
