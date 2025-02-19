@@ -146,6 +146,13 @@ export interface Major2 {
   metadata?: MajorMetadata;
 }
 
+export interface Template {
+  name: string;
+  major: Major2;
+  requirementSections: Section[];
+  yearVersion: number;
+}
+
 /**
  * A Minor, containing all the requirements.
  *

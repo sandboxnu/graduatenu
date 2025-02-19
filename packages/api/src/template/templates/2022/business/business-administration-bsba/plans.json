@@ -1,0 +1,63 @@
+{
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "BUSN 1101",
+        "BUSN 1102",
+        "ENGW 1111 and ECON  1116 and MATH  1231 , , or (FQ)",
+        "MGSC 2301",
+        "ACCT 1201",
+        "INTB 1203"
+      ],
+      "Spring": [
+        "ECON 1115",
+        "ENGW 1111 and ECON  1116 and MATH  1231 , , or (FQ)",
+        "MGSC 2301",
+        "ACCT 1201",
+        "INTB 1203"
+      ],
+      "Summer 1": ["ENGW 1111 and ECON  1116 and MATH  1231 , , or"]
+    },
+    "Year 2": {
+      "Summer 2": ["ORGB 3201"],
+      "Fall": ["BUSN 1103"],
+      "Spring": ["BUSN 1103"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3304", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Fall": ["ENGW 3304"],
+      "Spring": ["STRT 4501"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "BUSN 1101",
+        "BUSN 1102",
+        "ENGW 1111 and ECON  1116 and MATH  1231 , , or (FQ)",
+        "MGSC 2301",
+        "ACCT 1201",
+        "INTB 1203"
+      ],
+      "Spring": [
+        "ECON 1115",
+        "ENGW 1111 and ECON  1116 and MATH  1231 , , or (FQ)",
+        "MGSC 2301",
+        "ACCT 1201",
+        "INTB 1203"
+      ],
+      "Summer 1": ["ENGW 1111 and ECON  1116 and MATH  1231 , , or"]
+    },
+    "Year 2": {
+      "Spring": ["BUSN 1103"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3304", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Spring": ["STRT 4501"]
+    }
+  }
+}
