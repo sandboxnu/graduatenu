@@ -503,7 +503,8 @@ function validateCourseRequirement(
 
 function validateRangeRequirement(
   r: ICourseRange2,
-  tracker: CourseValidationTracker
+  tracker: CourseValidationTracker,
+  parentXOMCredits?: number
 ): Result<Array<Solution>, MajorValidationError> {
   // get the eligible courses (Filter out exceptions)
   const exceptions = new Set(r.exceptions.map(courseToString));
@@ -515,7 +516,20 @@ function validateRangeRequirement(
 
   const solutionsSoFar: Array<Solution> = [];
 
-  // produce all combinations of the courses
+  // Calculate min and max combinations needed if we have parent XOM credits
+  const maxCourseCredits =
+    Math.max(...courses.map((c) => c.numCreditsMax)) || 4;
+  const minCourseCredits =
+    Math.min(...courses.map((c) => c.numCreditsMin)) || 4;
+
+  const minCombinations = parentXOMCredits
+    ? Math.ceil(parentXOMCredits / maxCourseCredits)
+    : 1;
+  const maxCombinations = parentXOMCredits
+    ? Math.ceil(parentXOMCredits / minCourseCredits)
+    : courses.length;
+
+  // produce all combinations of the courses between min and max combinations
   for (const course of courses) {
     const solutionsSoFarWithCourse: Array<Solution> = [];
     const cs = courseToString(course);
@@ -525,18 +539,22 @@ function validateRangeRequirement(
       maxCredits: course.numCreditsMax,
     };
 
-    // Adds the current course to all previous valid solutions if there are
-    // enough courses.
+    // Only add combinations if within our bounds
     for (const solutionSoFar of solutionsSoFar) {
-      // TODO: if i take a course twice, can both count in the same range?
-      // for now assume yes. but ask khoury, then remove this note
+      if (solutionSoFar.sol.length >= maxCombinations) continue;
+
       if (tracker.hasEnoughCoursesForBoth(solutionSoFar, courseSol)) {
         const currentSol: Solution = combineSolutions(solutionSoFar, courseSol);
-        solutionsSoFarWithCourse.push(currentSol);
+        if (currentSol.sol.length >= minCombinations) {
+          solutionsSoFarWithCourse.push(currentSol);
+        }
       }
     }
-    // include solutions where the only course is ourself
-    solutionsSoFarWithCourse.push(courseSol);
+
+    // Add single course solution only if it meets minimum
+    if (courseSol.sol.length >= minCombinations) {
+      solutionsSoFarWithCourse.push(courseSol);
+    }
     solutionsSoFar.push(...solutionsSoFarWithCourse);
   }
   return Ok(solutionsSoFar);
@@ -637,8 +655,13 @@ function validateXomRequirement(
   r: IXofManyCourse,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
-  const splitResults = validateAndSplit(r.courses, tracker);
-  const [allChildRequirementSolutions, childErrors] = splitResults;
+  const results = r.courses.map((course) =>
+    course.type === "RANGE"
+      ? validateRangeRequirement(course, tracker, r.numCreditsMin)
+      : validateRequirement(course, tracker)
+  );
+  const [allChildRequirementSolutions, childErrors] =
+    splitChildResults(results);
   // error if there are no solutions, and at least 1 credit is required
   if (allChildRequirementSolutions.length === 0 && r.numCreditsMin > 0) {
     return Err(XOMError(r, childErrors, 0));
