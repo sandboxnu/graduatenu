@@ -16,31 +16,53 @@ import {
   INEUReqCourseError,
   INEUReqError,
   ScheduleCourse2,
+  ScheduleTerm2,
+  SeasonEnum,
 } from "@graduate/common";
 import { HelperToolTip } from "../Help";
 import {
+  COOP_TITLE,
+  FALL_1,
+  FALL_1_COOP_ERROR_MSG,
+  GENERIC_ERROR_MSG,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
+  SPRING_4_COOP_ERROR_MSG,
   getCourseDisplayString,
 } from "../../utils";
 import { useFetchCourse } from "../../hooks";
 import { GraduateToolTip } from "../GraduateTooltip";
-import { SetStateAction } from "react";
+import { SetStateAction, useContext } from "react";
+import { ErrorModalError, TotalYearsContext } from "./";
 
 interface ReqErrorModalProps {
   setHovered: (isHovered: SetStateAction<boolean>) => void;
   course: ScheduleCourse2<unknown>;
+  term?: ScheduleTerm2<string>;
   preReqErr?: INEUReqError;
   coReqErr?: INEUReqError;
 }
 
 export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   course,
+  term,
   setHovered,
   coReqErr = undefined,
   preReqErr = undefined,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const totalYears = useContext(TotalYearsContext);
+  const isFinalYear = term && parseInt(term.id[0]) === totalYears;
+  const coopErr =
+    course.name === COOP_TITLE &&
+    term !== undefined &&
+    (term.id === FALL_1 || (isFinalYear && term.season == SeasonEnum.SP));
+  let msg = GENERIC_ERROR_MSG;
+  if (coopErr && term.id === FALL_1) {
+    msg = FALL_1_COOP_ERROR_MSG;
+  } else if (coopErr) {
+    msg = SPRING_4_COOP_ERROR_MSG;
+  }
   return (
     <Flex
       justifySelf="stretch"
@@ -107,7 +129,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                 <ParseCourse course={coReqErr} parent={true} />
               </Flex>
             )}
-            {preReqErr && (
+            {(preReqErr || coopErr) && (
               <Flex direction="column">
                 <Flex
                   alignItems="center"
@@ -126,6 +148,12 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                 </Flex>
                 <ParseCourse course={preReqErr} parent={true} />
               </Flex>
+            )}
+            {coopErr && (
+              <ErrorModalError
+                title="Cannot add co-op!"
+                message={msg}
+              ></ErrorModalError>
             )}
           </ModalBody>
         </ModalContent>
