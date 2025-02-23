@@ -193,12 +193,19 @@ interface CourseValidationTracker {
 
   // do we have enough courses to take all classes in both solutions?
   hasEnoughCoursesForBoth(s1: Solution, s2: Solution): boolean;
+
+  setNecessaryCourses(courses: Set<string>): void;
+
+  getNecessaryCourses(): Set<string>;
 }
 
 // exported for testing
 export class Major2ValidationTracker implements CourseValidationTracker {
   // maps courseString => [course instance, # of times taken]
   private currentCourses: Map<string, [ScheduleCourse2<unknown>, number]>;
+
+  //list of degree-required courses that we should not consider in the range validator
+  private necessaryCourses: Set<string> = new Set();
 
   constructor(courses: ScheduleCourse2<unknown>[]) {
     this.currentCourses = new Map();
@@ -260,6 +267,14 @@ export class Major2ValidationTracker implements CourseValidationTracker {
     return true;
   }
 
+  setNecessaryCourses(courses: Set<string>) {
+    this.necessaryCourses = courses;
+  }
+
+  getNecessaryCourses() {
+    return this.necessaryCourses;
+  }
+
   // Maps the # of each course required in the given solution
   private static createTakenMap(s: Solution): Map<string, number> {
     const map = new Map();
@@ -295,6 +310,10 @@ export function validateMajor2(
   }
 
   const majorReqs = [...major.requirementSections, ...concentrationReq];
+
+  const requiredCourses: Set<string> = new Set();
+  tracker.setNecessaryCourses(getNecessaryCourses(majorReqs, requiredCourses));
+
   // create a big AND requirement of all the sections and selected concentrations
   const requirementsResult = validateRequirement(
     {
@@ -321,6 +340,51 @@ export function validateMajor2(
     majorRequirementsError,
     totalCreditsRequirementError,
   });
+}
+
+/**
+ * Crawls through the requirements, producing a list of necessary courses. This
+ * is used to filter out courses that cannot be used for the range.
+ */
+export function getNecessaryCourses(
+  requirements: Requirement2[],
+  requiredCourses: Set<string>
+): Set<string> {
+  const tracker = new Major2ValidationTracker([]);
+
+  for (const req of requirements) {
+    crawlRequirement(req, tracker, requiredCourses);
+  }
+  return requiredCourses;
+}
+
+/** Crawls through the requirements, producing a list of necessary courses. */
+function crawlRequirement(
+  req: Requirement2,
+  tracker: CourseValidationTracker,
+  requiredCourses: Set<string>
+): void {
+  switch (req.type) {
+    // base cases, a course is added to the list of necessary courses
+    case "COURSE":
+      requiredCourses.add(courseToString(req));
+      break;
+    // inductive case, we crawl through the children of an AND requirement
+    case "AND":
+      req.courses.forEach((r) => crawlRequirement(r, tracker, requiredCourses));
+      break;
+    // inductive case, we crawl through the children of a whole section
+    case "SECTION":
+      req.requirements.forEach((r) =>
+        crawlRequirement(r, tracker, requiredCourses)
+      );
+    case "XOM":
+    case "OR":
+    case "RANGE":
+      break;
+    default:
+      return assertUnreachable(req);
+  }
 }
 
 /**
@@ -443,6 +507,8 @@ function validateRangeRequirement(
 ): Result<Array<Solution>, MajorValidationError> {
   // get the eligible courses (Filter out exceptions)
   const exceptions = new Set(r.exceptions.map(courseToString));
+  tracker.getNecessaryCourses().forEach((course) => exceptions.add(course));
+
   const courses = tracker
     .getAll(r.subject, r.idRangeStart, r.idRangeEnd)
     .filter((c) => !exceptions.has(courseToString(c)));
