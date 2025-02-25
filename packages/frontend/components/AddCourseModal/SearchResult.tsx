@@ -23,6 +23,8 @@ interface SearchResultProps {
   isSelectingAnotherCourse?: boolean;
   selectedNUPaths: NUPathEnum[];
   coreq?: boolean;
+  opened?: boolean;
+  toggleCoreq?: () => void;
 }
 
 export const SearchResult: React.FC<SearchResultProps> = ({
@@ -35,6 +37,8 @@ export const SearchResult: React.FC<SearchResultProps> = ({
   isSelectingAnotherCourse,
   selectedNUPaths: filteredPaths,
   coreq,
+  opened,
+  toggleCoreq,
 }) => {
   const isAddButtonDisabled = isResultAlreadyAdded || isResultAlreadySelected;
   const addButtonTooltip = isResultAlreadyAdded
@@ -43,7 +47,7 @@ export const SearchResult: React.FC<SearchResultProps> = ({
     ? "This course is already selected."
     : undefined;
   /* This useState is only used for course-coreq hybrid search results */
-  const [opened, setOpened] = useState(false);
+  //const [opened, setOpened] = useState(false);
 
   return (
     <Box>
@@ -68,13 +72,13 @@ export const SearchResult: React.FC<SearchResultProps> = ({
                 <ChevronUpIcon
                   boxSize="25px"
                   color="black"
-                  onClick={() => setOpened(!opened)}
+                  onClick={toggleCoreq}
                 />
               ) : (
                 <ChevronDownIcon
                   boxSize="25px"
                   color="black"
-                  onClick={() => setOpened(!opened)}
+                  onClick={toggleCoreq}
                 />
               ))}
           </Box>
