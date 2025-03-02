@@ -56,8 +56,8 @@ export const SearchResult: React.FC<SearchResultProps> = ({
         alignItems="end"
         padding="2xs"
         paddingY="xs"
-        borderBottom="1px"
-        borderColor="neutral.100"
+        //borderBottom="1px"
+        //borderColor="neutral.100"
       >
         <Flex width="100%" mr="md" alignItems="center" minH="25px">
           <Box lineHeight="1.2">
