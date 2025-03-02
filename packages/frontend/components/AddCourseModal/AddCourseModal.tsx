@@ -2,6 +2,7 @@ import { AddIcon, InfoIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
+  Box,
   Grid,
   Modal,
   ModalBody,
@@ -276,9 +277,10 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   )}
                   {/* Show courses */}
                   {courses &&
-                    sortCoursesByNUPath(courses, selectedNUPaths).map(
-                      (course) => (
-                        <>
+                    sortCoursesByNUPath(courses, selectedNUPaths)
+                      .filter((course) => course.numCreditsMax >= 3)
+                      .map((course) => (
+                        <Box borderBottom="1px" borderColor="#C1CAD9">
                           <SearchResult
                             key={getCourseDisplayString(course)}
                             year={catalogYear}
@@ -314,6 +316,14 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                                 }
                                 animateOpacity
                               >
+                                <div
+                                  style={{
+                                    width: "98%",
+                                    height: "1px",
+                                    backgroundColor: "#F4F6F9",
+                                    margin: "0 auto",
+                                  }}
+                                ></div>
                                 <SearchResult
                                   key={getCourseDisplayString(course) + "coreq"}
                                   year={catalogYear}
@@ -325,10 +335,14 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                                   }
                                   addSelectedCourse={addSelectedCourse}
                                   isResultAlreadyAdded={isCourseAlreadyAdded(
-                                    course
+                                    courseCoreqsMap.get(
+                                      getCourseDisplayString(course)
+                                    )!
                                   )}
                                   isResultAlreadySelected={isCourseAlreadySelected(
-                                    course
+                                    courseCoreqsMap.get(
+                                      getCourseDisplayString(course)
+                                    )!
                                   )}
                                   isSelectingAnotherCourse={
                                     isLoadingSelectCourse
@@ -345,9 +359,8 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                               </Collapse>
                             </div>
                           )}
-                        </>
-                      )
-                    )}
+                        </Box>
+                      ))}
                 </Flex>
               </Flex>
 
