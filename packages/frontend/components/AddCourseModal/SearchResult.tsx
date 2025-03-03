@@ -10,6 +10,7 @@ import { getCourseDisplayString } from "../../utils/";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { NUPathLabel } from "./NUPathLabel";
 import { getSearchLink } from "../ScheduleCourse";
+import { UpTriangle, DownTriangle } from "./DropdownTriangle";
 import { useState } from "react";
 
 interface SearchResultProps {
@@ -56,31 +57,23 @@ export const SearchResult: React.FC<SearchResultProps> = ({
         alignItems="end"
         padding="2xs"
         paddingY="xs"
-        //borderBottom="1px"
-        //borderColor="neutral.100"
       >
         <Flex width="100%" mr="md" alignItems="center" minH="25px">
           <Box lineHeight="1.2">
-            <Text as="span" fontSize="sm" fontWeight="bold" marginRight="sm">
-              {getCourseDisplayString(course)}
-            </Text>
-            <Text as="span" fontSize="sm">
-              {course.name}
-            </Text>
-            {coreq &&
-              (opened ? (
-                <ChevronUpIcon
-                  boxSize="25px"
-                  color="black"
-                  onClick={toggleCoreq}
-                />
-              ) : (
-                <ChevronDownIcon
-                  boxSize="25px"
-                  color="black"
-                  onClick={toggleCoreq}
-                />
-              ))}
+            <Flex alignItems="center">
+              <Text as="span" fontSize="sm" fontWeight="bold" marginRight="sm">
+                {getCourseDisplayString(course)}
+              </Text>
+              <Text as="span" fontSize="sm">
+                {course.name}
+              </Text>
+              {coreq &&
+                (opened ? (
+                  <UpTriangle boxSize="12px" onClick={toggleCoreq} />
+                ) : (
+                  <DownTriangle boxSize="12px" onClick={toggleCoreq} />
+                ))}
+            </Flex>
           </Box>
           <Box ml="auto" mr="sm"></Box>
           <GraduateToolTip
