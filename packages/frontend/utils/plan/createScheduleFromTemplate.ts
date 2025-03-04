@@ -93,8 +93,9 @@ export function createScheduleFromTemplate(
 
           // Process each course
           courses.forEach((courseStr) => {
-            // Parse course string format: "SUBJECT CLASSID"
-            const courseParts = courseStr.match(/([A-Z]+)\s+(\d+[A-Z]*)/);
+            // Parse course string format, which may now include description
+            // Example: "CS 3500: Object-Oriented Design"
+            const courseParts = courseStr.match(/([A-Z]+)\s+(\d+[A-Z]*)(.*)/);
             if (!courseParts) {
               console.warn("Couldn't parse course:", courseStr);
               return;
@@ -102,12 +103,13 @@ export function createScheduleFromTemplate(
 
             const subject = courseParts[1];
             const classId = courseParts[2];
+            // The full name will be the entire courseStr since it now includes the description
 
-            console.log(`Adding course: ${subject} ${classId}`);
+            console.log(`Adding course: ${courseStr}`);
 
             // Create a course object
             const course: ScheduleCourse2<null> = {
-              name: courseStr, // Use full course string as name for now
+              name: courseStr, // Use the full course string with description
               subject,
               classId,
               numCreditsMin: 4, // Default credits
