@@ -500,6 +500,35 @@ function validateCourseRequirement(
   }
   return Err(CourseError(r));
 }
+function findMinMaxCombinations(
+  courses: ScheduleCourse2<unknown>[],
+  requiredCredits: number
+): { minCombinations: number; maxCombinations: number } {
+  // Sort courses by credits in descending order
+  const sortedCourses = [...courses].sort(
+    (a, b) => b.numCreditsMin - a.numCreditsMin
+  );
+
+  // Find minimum combinations (using highest credit courses)
+  let creditSum = 0;
+  let minCombinations = 0;
+  for (const course of sortedCourses) {
+    creditSum += course.numCreditsMin;
+    minCombinations++;
+    if (creditSum >= requiredCredits) break;
+  }
+
+  // Find maximum combinations (using lowest credit courses)
+  creditSum = 0;
+  let maxCombinations = 0;
+  for (let i = sortedCourses.length - 1; i >= 0; i--) {
+    creditSum += sortedCourses[i].numCreditsMin;
+    maxCombinations++;
+    if (creditSum >= requiredCredits) break;
+  }
+
+  return { minCombinations, maxCombinations };
+}
 
 function validateRangeRequirement(
   r: ICourseRange2,
@@ -516,18 +545,10 @@ function validateRangeRequirement(
 
   const solutionsSoFar: Array<Solution> = [];
 
-  // Calculate min and max combinations needed if we have parent XOM credits
-  const maxCourseCredits =
-    Math.max(...courses.map((c) => c.numCreditsMax)) || 4;
-  const minCourseCredits =
-    Math.min(...courses.map((c) => c.numCreditsMin)) || 4;
-
-  const minCombinations = parentXOMCredits
-    ? Math.ceil(parentXOMCredits / maxCourseCredits)
-    : 1;
-  const maxCombinations = parentXOMCredits
-    ? Math.ceil(parentXOMCredits / minCourseCredits)
-    : courses.length;
+  const { minCombinations, maxCombinations } = findMinMaxCombinations(
+    courses,
+    parentXOMCredits || 0
+  );
 
   // produce all combinations of the courses between min and max combinations
   for (const course of courses) {
