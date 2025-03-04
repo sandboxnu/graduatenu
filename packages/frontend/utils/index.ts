@@ -8,3 +8,4 @@ export * from "./error/handleApiClientError";
 export * from "./constants";
 export * from "./student";
 export * from "./validation";
+export * from "./plan/createScheduleFromTemplate";

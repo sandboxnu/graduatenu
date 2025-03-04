@@ -1,18 +1,12 @@
 {
   "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800 and CS 1802",
-        "CS 2500 and CS 2501",
-        "ENGW 1111",
-        "ECON 1115"
-      ],
-      "Spring": ["CS 2510 and CS 2511", "CS 3200", "ECON 1116"],
-      "Summer 1": ["MATH 1341 and 1231 or", "ACCT 1201"]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "ECON 1115"],
+      "Spring": ["CS 2510", "CS 3200", "ECON 1116"],
+      "Summer 1": ["MATH 1341", "ACCT 1201"]
     },
     "Year 2": {
-      "Fall": ["ACCT 2301", "CS 3500 and CS 3501", "MGSC 2301"],
+      "Fall": ["ACCT 2301", "CS 3500", "MGSC 2301"],
       "Summer 1": ["MKTG 2201"],
       "Spring": ["CS 3000", "CS 1210"]
     },

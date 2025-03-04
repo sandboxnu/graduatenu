@@ -3,10 +3,11 @@ import {
   SupportedMajorsForYear,
   SupportedMajors,
   SupportedConcentrations,
+  Template,
 } from "@graduate/common";
 import { Injectable, Logger } from "@nestjs/common";
 import { formatServiceCtx } from "../utils";
-import { MAJOR_YEARS, MAJORS } from "./major-collator";
+import { MAJOR_YEARS, MAJORS, TEMPLATES } from "./major-collator";
 
 @Injectable()
 export class MajorService {
@@ -161,6 +162,62 @@ export class MajorService {
       return false;
     }
     return true;
+  }
+
+  /**
+   * Retrieves the template for a specific major and catalog year
+   *
+   * @param   majorName   Name of the major
+   * @param   catalogYear Catalog year
+   * @returns             The template if found, null otherwise
+   */
+  getTemplateForMajor(majorName: string, catalogYear: number): Template | null {
+    const major = this.findByMajorAndYear(majorName, catalogYear);
+    if (!major) {
+      this.logger.debug(
+        { message: "Major not found for template", majorName, catalogYear },
+        MajorService.formatMajorServiceCtx("getTemplateForMajor")
+      );
+      return null;
+    }
+
+    if (!major.baseTemplate) {
+      this.logger.debug(
+        { message: "No template found for major", majorName, catalogYear },
+        MajorService.formatMajorServiceCtx("getTemplateForMajor")
+      );
+      return null;
+    }
+
+    return major.baseTemplate;
+  }
+
+  /**
+   * Retrieves all templates for a specific catalog year
+   *
+   * @param   catalogYear Catalog year
+   * @returns             Record of major names to templates
+   */
+  getTemplatesForYear(catalogYear: number): Record<string, Template> | null {
+    const year = String(catalogYear);
+    if (!TEMPLATES[year]) {
+      this.logger.debug(
+        { message: "No templates found for year", catalogYear },
+        MajorService.formatMajorServiceCtx("getTemplatesForYear")
+      );
+      return null;
+    }
+
+    return TEMPLATES[year];
+  }
+
+  /**
+   * Retrieve all templates across all years
+   *
+   * @returns Record of years to major templates
+   */
+  getAllTemplates(): Record<string, Record<string, Template>> {
+    return TEMPLATES;
   }
 
   private static formatMajorServiceCtx(methodName: string) {

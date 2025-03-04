@@ -144,13 +144,14 @@ export interface Major2 {
   yearVersion: number;
   concentrations?: Concentrations2;
   metadata?: MajorMetadata;
+  baseTemplate?: Template;
 }
 
 export interface Template {
   name: string;
-  major: Major2;
   requirementSections: Section[];
   yearVersion: number;
+  templateData?: any; // Add this field to store the complete template data
 }
 
 /**
