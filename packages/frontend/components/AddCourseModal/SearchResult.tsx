@@ -1,5 +1,5 @@
 import { AddIcon, InfoOutlineIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Text, Collapse } from "@chakra-ui/react";
+import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils/";
 import { GraduateToolTip } from "../GraduateTooltip";
