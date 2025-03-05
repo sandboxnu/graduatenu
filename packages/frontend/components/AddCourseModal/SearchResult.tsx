@@ -1,9 +1,4 @@
-import {
-  AddIcon,
-  InfoOutlineIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@chakra-ui/icons";
+import { AddIcon, InfoOutlineIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Text, Collapse } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2, SeasonEnum } from "@graduate/common";
 import { getCourseDisplayString } from "../../utils/";
@@ -11,7 +6,6 @@ import { GraduateToolTip } from "../GraduateTooltip";
 import { NUPathLabel } from "./NUPathLabel";
 import { getSearchLink } from "../ScheduleCourse";
 import { UpTriangle, DownTriangle } from "./DropdownTriangle";
-import { useState } from "react";
 
 interface SearchResultProps {
   course: ScheduleCourse2<null>;
@@ -47,8 +41,6 @@ export const SearchResult: React.FC<SearchResultProps> = ({
     : isResultAlreadySelected
     ? "This course is already selected."
     : undefined;
-  /* This useState is only used for course-coreq hybrid search results */
-  //const [opened, setOpened] = useState(false);
 
   return (
     <Box>
@@ -124,14 +116,6 @@ export const SearchResult: React.FC<SearchResultProps> = ({
           />
         </GraduateToolTip>
       </Flex>
-      {/* {course.coreqs && (
-      {/* (
-        <Collapse in={opened} animateOpacity>
-          <Box px="sm" py="xs" borderRadius="lg" backgroundColor="transparent">
-            <Text fontSize="sm">boo</Text>
-          </Box>
-        </Collapse>
-      )} */}
     </Box>
   );
 };
