@@ -288,9 +288,12 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                     sortCoursesByNUPath(courses, selectedNUPaths)
                       .filter((course) => course.numCreditsMax >= 3)
                       .map((course) => (
-                        <Box borderBottom="1px" borderColor="#C1CAD9">
+                        <Box
+                          key={getCourseDisplayString(course)}
+                          borderBottom="1px"
+                          borderColor="#C1CAD9"
+                        >
                           <SearchResult
-                            key={getCourseDisplayString(course)}
                             year={catalogYear}
                             season={season}
                             course={course}
