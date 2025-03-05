@@ -30,6 +30,7 @@ import { NUPathCheckBox } from "./NUPathCheckBox";
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";
+import { SelectedCourseCombination } from "./SelectedCourseCombination";
 import { SecondaryButton } from "../Button";
 
 interface AddCourseModalProps {
@@ -105,6 +106,17 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     setSelectedCourses(updatedSelectedCourses);
   };
 
+  const removeSelectedCourses = (coursesToRemove: ScheduleCourse2<null>[]) => {
+    const updatedSelectedCourses = selectedCourses.filter(
+      (selectedCourse) =>
+        !coursesToRemove.some((course) =>
+          isEqualCourses(selectedCourse, course)
+        )
+    );
+
+    setSelectedCourses(updatedSelectedCourses);
+  };
+
   const isCourseAlreadySelected = (course: ScheduleCourse2<null>) => {
     return selectedCourses.some((selectedCourse) =>
       isEqualCourses(selectedCourse, course)
@@ -160,10 +172,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
     fetchCoreqsForAllCourses();
   }, [courses, catalogYear]);
-
-  useEffect(() => {
-    console.log("Updated courseCoreqsMap:", courseCoreqsMap);
-  }, [courseCoreqsMap]);
 
   const [expandedCourses, setExpandedCourses] = useState<
     Record<string, boolean>
@@ -375,14 +383,56 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   overflow="scroll"
                   alignItems="stretch"
                 >
-                  {selectedCourses.map((selectedCourse) => (
-                    <SelectedCourse
-                      key={getCourseDisplayString(selectedCourse)}
-                      selectedCourse={selectedCourse}
-                      removeSelectedCourse={removeSelectedCourse}
-                      selectedNUPaths={selectedNUPaths}
-                    />
-                  ))}
+                  {(() => {
+                    const processed = new Set();
+                    return selectedCourses
+                      .slice()
+                      .sort((a, b) => b.numCreditsMax - a.numCreditsMax)
+                      .map((selectedCourse) => {
+                        const courseKey =
+                          getCourseDisplayString(selectedCourse);
+
+                        // Skip if already processed as part of a coreq pair
+                        if (processed.has(courseKey)) return null;
+
+                        const coreq = courseCoreqsMap.get(courseKey);
+                        const coreqInSelected =
+                          coreq != null
+                            ? selectedCourses.find(
+                                (c) =>
+                                  getCourseDisplayString(c) ===
+                                  getCourseDisplayString(coreq)
+                              )
+                            : null;
+
+                        if (coreq && coreqInSelected) {
+                          const coreqKey =
+                            getCourseDisplayString(coreqInSelected);
+                          processed.add(courseKey);
+                          processed.add(coreqKey);
+
+                          return (
+                            <SelectedCourseCombination
+                              key={courseKey}
+                              selectedCourse={selectedCourse}
+                              selectedCourseCoreq={coreq}
+                              removeSelectedCourses={removeSelectedCourses}
+                              selectedNUPaths={selectedNUPaths}
+                            />
+                          );
+                        } else {
+                          processed.add(courseKey);
+                          return (
+                            <SelectedCourse
+                              key={courseKey}
+                              selectedCourse={selectedCourse}
+                              removeSelectedCourse={removeSelectedCourse}
+                              selectedNUPaths={selectedNUPaths}
+                            />
+                          );
+                        }
+                      });
+                  })()}
                 </VStack>
               </Flex>
               <ModalFooter justifyContent="end" gap="md">
