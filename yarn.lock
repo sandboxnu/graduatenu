@@ -4846,6 +4846,36 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vercel/analytics@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "@vercel/analytics@npm:1.5.0"
+  peerDependencies:
+    "@remix-run/react": ^2
+    "@sveltejs/kit": ^1 || ^2
+    next: ">= 13"
+    react: ^18 || ^19 || ^19.0.0-rc
+    svelte: ">= 4"
+    vue: ^3
+    vue-router: ^4
+  peerDependenciesMeta:
+    "@remix-run/react":
+      optional: true
+    "@sveltejs/kit":
+      optional: true
+    next:
+      optional: true
+    react:
+      optional: true
+    svelte:
+      optional: true
+    vue:
+      optional: true
+    vue-router:
+      optional: true
+  checksum: 60991e558ce459ef0fdd3f3b4ccb657453507083ff879570c43cfe613e5a37f6fdae5146926f3cdeba48db9943a4cfd203be6c5d55de44294cf892526b603877
+  languageName: node
+  linkType: hard
+
 "@webassemblyjs/ast@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/ast@npm:1.11.1"
@@ -8167,6 +8197,7 @@ __metadata:
     "@types/nodemailer": ^6.4.7
     "@typescript-eslint/eslint-plugin": ^5.15.0
     "@typescript-eslint/parser": ^5.15.0
+    "@vercel/analytics": ^1.5.0
     concurrently: ^7.0.0
     cross-env: ^7.0.3
     eslint: ^8.11.0

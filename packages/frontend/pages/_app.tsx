@@ -10,6 +10,7 @@ import { ErrorBoundary, GraduateDisabledAppHeader } from "../components";
 import { useWindowSize } from "../hooks";
 import { theme } from "../utils";
 import { ClientSideError } from "../components/Error/ClientSideError";
+import { Analytics } from "@vercel/analytics/react";
 
 interface IsGuestContextType {
   isGuest: boolean;
@@ -48,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </ChakraProvider>
         <ToastContainer position="bottom-right" />
       </ErrorBoundary>
+      <Analytics />
     </>
   );
 }
