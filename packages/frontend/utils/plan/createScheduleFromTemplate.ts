@@ -109,19 +109,34 @@ export function createScheduleFromTemplate(
             // Look up the course in the API data
             const courseDetails = courseLookup?.[courseKey];
 
+            // Debug logging to help identify course lookup issues
+            console.log(
+              `Course ${courseKey}: Found in lookup: ${!!courseDetails}`,
+              courseDetails
+                ? `credits: ${courseDetails.numCreditsMin}-${courseDetails.numCreditsMax}`
+                : "not found"
+            );
+
             // Create a course object
             const course: ScheduleCourse2<null> = {
               // Use the name from the API if available, otherwise use the template string
               name: courseDetails?.name || courseStr,
               subject,
               classId,
-              numCreditsMin: courseDetails?.numCreditsMin || 4, // Use API data or default
-              numCreditsMax: courseDetails?.numCreditsMax || 4, // Use API data or default
+              // If we have course details, use its credit values exactly as provided
+              // This ensures 0-credit courses remain 0-credit
+              numCreditsMin: courseDetails ? courseDetails.numCreditsMin : 4,
+              numCreditsMax: courseDetails ? courseDetails.numCreditsMax : 4,
               prereqs: courseDetails?.prereqs,
               coreqs: courseDetails?.coreqs,
               nupaths: courseDetails?.nupaths,
               id: null,
             };
+
+            // Log the final course object for validation
+            console.log(
+              `Added course: ${course.subject} ${course.classId}, credits: ${course.numCreditsMin}-${course.numCreditsMax}`
+            );
 
             // Add course to the term
             termObj.classes.push(course);

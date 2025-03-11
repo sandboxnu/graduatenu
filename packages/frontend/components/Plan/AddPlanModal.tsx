@@ -226,6 +226,12 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     // Valid plan for no major selected
     isNoMajorSelected;
 
+  // Determine if we should disable the Create button
+  const isButtonDisabled =
+    !isValidForm ||
+    // Disable button when template is selected but courses are still loading
+    (usingTemplate && isLoadingCourses);
+
   const noMajorHelperLabel = (
     <Stack>
       <Text>
@@ -469,8 +475,10 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 </Button>
                 <Button
                   variant="solid"
-                  isLoading={isSubmitting}
-                  isDisabled={!isValidForm}
+                  isLoading={
+                    isSubmitting || (usingTemplate && isLoadingCourses)
+                  }
+                  isDisabled={isButtonDisabled}
                   size="md"
                   borderRadius="lg"
                   type="submit"
