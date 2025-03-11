@@ -151,7 +151,13 @@ export interface Template {
   name: string;
   requirementSections: Section[];
   yearVersion: number;
-  templateData?: any; // Add this field to store the complete template data
+  templateData?: {
+    [templateName: string]: {
+      [yearKey: string]: {
+        [termKey: string]: string[];
+      };
+    };
+  };
 }
 
 /**

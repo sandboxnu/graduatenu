@@ -56,6 +56,7 @@ import { HelperToolTip } from "../Help";
 import { IsGuestContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
+import { useTemplateCourses } from "../../hooks/useTemplateCourses";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -108,6 +109,16 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     usingTemplate ? catalogYear : null
   );
 
+  // Fetch actual course data for the template
+  const { courseLookup, isLoading: isLoadingCourses } = useTemplateCourses(
+    usingTemplate ? template : null,
+    usingTemplate
+      ? typeof catalogYear === "number"
+        ? catalogYear
+        : null
+      : null
+  );
+
   // Reset useTemplate when major or catalog year changes
   useEffect(() => {
     setValue("useTemplate", false);
@@ -131,7 +142,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     if (payload.useTemplate && template) {
       try {
         // Use the template to create a schedule with pre-populated courses
-        schedule = createScheduleFromTemplate(template);
+        schedule = createScheduleFromTemplate(template, courseLookup);
       } catch (error) {
         console.error("Error creating schedule from template:", error);
         schedule = createEmptySchedule();
@@ -237,6 +248,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         Selecting this option will pre-populate your plan with the recommended
         courses.
       </Text>
+      {usingTemplate && isLoadingCourses && (
+        <Text color="blue.500">Loading course details...</Text>
+      )}
     </Stack>
   );
 

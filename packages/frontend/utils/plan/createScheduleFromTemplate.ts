@@ -9,11 +9,13 @@ import { createEmptySchedule } from "./createEmptySchedule";
 /**
  * Creates a schedule from a template
  *
- * @param   template The template to create a schedule from
- * @returns          A new schedule populated with courses from the template
+ * @param   template     The template to create a schedule from
+ * @param   courseLookup Optional lookup object with course details from the API
+ * @returns              A new schedule populated with courses from the template
  */
 export function createScheduleFromTemplate(
-  template: Template
+  template: Template,
+  courseLookup?: Record<string, ScheduleCourse2<null>>
 ): Schedule2<null> {
   // Start with an empty schedule
   const schedule = createEmptySchedule();
@@ -93,8 +95,7 @@ export function createScheduleFromTemplate(
 
           // Process each course
           courses.forEach((courseStr) => {
-            // Parse course string format, which may now include description
-            // Example: "CS 3500: Object-Oriented Design"
+            // Parse course string format
             const courseParts = courseStr.match(/([A-Z]+)\s+(\d+[A-Z]*)(.*)/);
             if (!courseParts) {
               console.warn("Couldn't parse course:", courseStr);
@@ -103,17 +104,22 @@ export function createScheduleFromTemplate(
 
             const subject = courseParts[1];
             const classId = courseParts[2];
-            // The full name will be the entire courseStr since it now includes the description
+            const courseKey = `${subject} ${classId}`;
 
-            console.log(`Adding course: ${courseStr}`);
+            // Look up the course in the API data
+            const courseDetails = courseLookup?.[courseKey];
 
             // Create a course object
             const course: ScheduleCourse2<null> = {
-              name: courseStr, // Use the full course string with description
+              // Use the name from the API if available, otherwise use the template string
+              name: courseDetails?.name || courseStr,
               subject,
               classId,
-              numCreditsMin: 4, // Default credits
-              numCreditsMax: 4, // Default credits
+              numCreditsMin: courseDetails?.numCreditsMin || 4, // Use API data or default
+              numCreditsMax: courseDetails?.numCreditsMax || 4, // Use API data or default
+              prereqs: courseDetails?.prereqs,
+              coreqs: courseDetails?.coreqs,
+              nupaths: courseDetails?.nupaths,
               id: null,
             };
 
