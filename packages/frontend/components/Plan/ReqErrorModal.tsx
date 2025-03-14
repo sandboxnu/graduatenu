@@ -386,15 +386,15 @@ const ReqCourseError: React.FC<{
     courseError.classId
   );
 
-  /** Render only the course id when loading or if we can't fetch the course name. */
-  let content = (
-    <Text fontSize="md">{getCourseDisplayString(courseError)}: Loading...</Text>
-  );
+  // Instead of JSX, use simple strings or components that won't cause nesting
+  let displayContent;
 
   if (error) {
-    content = (
+    displayContent = (
       <Flex alignItems="center" columnGap="2xs">
-        <Text fontSize="md">{getCourseDisplayString(courseError)}</Text>
+        <Text as="span" fontSize="md">
+          {getCourseDisplayString(courseError)}
+        </Text>
         <GraduateToolTip
           label={SEARCH_NEU_FETCH_COURSE_ERROR_MSG}
           placement="top"
@@ -403,24 +403,26 @@ const ReqCourseError: React.FC<{
         </GraduateToolTip>
       </Flex>
     );
-  }
-
-  if (course) {
-    content = (
-      <Text fontSize="md">
-        {getCourseDisplayString(course)}: {course.name}
-      </Text>
-    );
+  } else if (course) {
+    displayContent = `${getCourseDisplayString(course)}: ${course.name}`;
+  } else {
+    displayContent = `${getCourseDisplayString(courseError)}: Loading...`;
   }
 
   return (
     <>
       {isParent ? (
         <BorderContainer>
-          <Text fontSize="md">{content}</Text>
+          {typeof displayContent === "string" ? (
+            <Text fontSize="md">{displayContent}</Text>
+          ) : (
+            displayContent
+          )}
         </BorderContainer>
+      ) : typeof displayContent === "string" ? (
+        <Text fontSize="md">{displayContent}</Text>
       ) : (
-        <Text fontSize="md">{content}</Text>
+        displayContent
       )}
     </>
   );
