@@ -116,8 +116,8 @@ export const MetaInfo: React.FC = () => {
       <MetaInfoSection
         environment={process.env.NODE_ENV ?? false}
         buildTime={process.env.NEXT_PUBLIC_BUILD_TIMESTAMP ?? false}
-        commitHash={process.env.NEXT_PUBLIC_COMMIT_HASH ?? false}
-        commitMessage={process.env.NEXT_PUBLIC_COMMIT_MESSAGE ?? false}
+        commitHash={process.env.VERCEL_GIT_COMMIT_REF ?? false}
+        commitMessage={process.env.VERCEL_GIT_COMMIT_MESSAGE ?? false}
       />
 
       <Text fontWeight="bold" marginTop="xs">
