@@ -9,7 +9,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Stack,
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -274,18 +273,7 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
   switch (course.type) {
     case "course":
       return (
-        <Flex
-          align="center"
-          justify="space-between"
-          width="100%"
-          border="1px solid"
-          borderColor="gray.200"
-          borderRadius="lg"
-          padding="16px"
-          bg="white"
-          _hover={{ borderColor: "gray.300" }}
-          transition="all 0.2s"
-        >
+        <Flex align="center" justify={"space-between"}>
           <ReqCourseError courseError={course} isParent={parent} />
           <IconButton
             aria-label="Add class"
@@ -307,51 +295,48 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
 
     case "and":
       return (
-        <Stack spacing={4} align="stretch" width="100%">
+        <>
           {course.missing.map((c, index) => (
-            <Box key={index} width="100%">
-              <ParseCourse
-                course={c}
-                parent={false}
-                term={term}
-                originalCourse={originalCourse}
-              />
-            </Box>
-          ))}
-        </Stack>
-      );
-
-    case "or":
-      return (
-        <Box
-          border="1px solid"
-          borderColor="gray.200"
-          borderRadius="lg"
-          padding="24px"
-          width="100%"
-          bg="white"
-        >
-          <Flex align="center" mb={6}>
-            <Text fontSize="lg" fontWeight="semibold" color="gray.700">
-              Choose ONE of the following
-            </Text>
-            <Box ml={2} transform="rotate(180deg)" color="gray.400">
-              ▼
-            </Box>
-          </Flex>
-          <Stack spacing={4}>
-            {course.missing.map((c, index) => (
-              <Box key={index}>
+            <Flex direction="column" key={index}>
+              <BorderContainer>
                 <ParseCourse
                   course={c}
                   parent={false}
                   term={term}
                   originalCourse={originalCourse}
                 />
-              </Box>
-            ))}
-          </Stack>
-        </Box>
+              </BorderContainer>
+              {index < course.missing.length - 1 && (
+                <Text fontSize="md" textAlign="center">
+                  AND
+                </Text>
+              )}
+            </Flex>
+          ))}
+        </>
+      );
+
+    case "or":
+      return (
+        <>
+          {course.missing.map((c, index) => (
+            <Flex direction="column" key={index}>
+              <BorderContainer>
+                <ParseCourse
+                  course={c}
+                  parent={false}
+                  term={term}
+                  originalCourse={originalCourse}
+                />
+              </BorderContainer>
+              {index < course.missing.length - 1 && (
+                <Text fontSize="md" textAlign="center">
+                  OR
+                </Text>
+              )}
+            </Flex>
+          ))}
+        </>
       );
 
     default:
