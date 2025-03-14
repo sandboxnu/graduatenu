@@ -95,11 +95,15 @@ export interface INEUReqCourseError {
 export interface INEUReqAndError {
   type: "and";
   missing: INEUReqError[];
+  subject?: string;
+  classId?: string;
 }
 
 export interface INEUReqOrError {
   type: "or";
   missing: INEUReqError[];
+  subject?: string;
+  classId?: string;
 }
 
 export interface TermError {
