@@ -29,12 +29,23 @@ import {
   GENERIC_ERROR_MSG,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
   SPRING_4_COOP_ERROR_MSG,
+  addClassesToTerm,
+  cleanDndIdsFromPlan,
   getCourseDisplayString,
+  handleApiClientError,
+  updatePlanForStudent,
 } from "../../utils";
-import { useFetchCourse } from "../../hooks";
+import {
+  fetchStudentAndPrepareForDnd,
+  useFetchCourse,
+  useStudentWithPlans,
+} from "../../hooks";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { SetStateAction, useContext } from "react";
-import { ErrorModalError, TotalYearsContext } from "./";
+import { ErrorModalError, TotalYearsContext, PlanContext } from "./";
+import { API } from "@graduate/api-client";
+import { useRouter } from "next/router";
+import { IsGuestContext } from "../../pages/_app";
 
 interface ReqErrorModalProps {
   setHovered: (isHovered: SetStateAction<boolean>) => void;
@@ -128,7 +139,12 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                     )}.`}
                   />
                 </Flex>
-                <ParseCourse course={coReqErr} parent={true} />
+                <ParseCourse
+                  course={coReqErr}
+                  parent={true}
+                  term={term}
+                  originalCourse={course}
+                />
               </Flex>
             )}
             {(preReqErr || coopErr) && (
@@ -148,7 +164,12 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                     )}.`}
                   />
                 </Flex>
-                <ParseCourse course={preReqErr} parent={true} />
+                <ParseCourse
+                  course={preReqErr}
+                  parent={true}
+                  term={term}
+                  originalCourse={course}
+                />
               </Flex>
             )}
             {coopErr && (
@@ -167,10 +188,88 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
 interface ParseCourseProps {
   course?: INEUReqError;
   parent: boolean;
+  term?: ScheduleTerm2<string>;
+  originalCourse?: ScheduleCourse2<unknown>;
 }
 
-const ParseCourse: React.FC<ParseCourseProps> = ({ course, parent }) => {
-  if (!course) return <></>;
+const ParseCourse: React.FC<ParseCourseProps> = ({
+  course,
+  parent,
+  term,
+  originalCourse,
+}) => {
+  // Use the context directly
+  const plan = useContext(PlanContext);
+
+  // Get student and mutateStudent
+  const { student, mutateStudent } = useStudentWithPlans();
+
+  const { course: fetchedCourse } = useFetchCourse(
+    course?.subject || "",
+    course?.classId || ""
+  );
+
+  const router = useRouter();
+  const { isGuest } = useContext(IsGuestContext);
+
+  if (!course || !plan) {
+    return <></>;
+  }
+
+  const addCourseToPlan = async (
+    course: INEUReqError,
+    term: ScheduleTerm2<string>,
+    originalCourse: ScheduleCourse2<unknown>
+  ) => {
+    if (fetchedCourse && student && originalCourse) {
+      // Create updated plan
+      const updatedPlan = addClassesToTerm(
+        [fetchedCourse],
+        parseInt(term.id[0]),
+        term.season,
+        plan
+      );
+
+      // Create updated student for optimistic update
+      const updatedStudent = updatePlanForStudent(student, updatedPlan);
+
+      // Use mutateStudent for optimistic updates
+      mutateStudent(
+        async () => {
+          // Clean plan data before saving
+          const cleanedPlan = cleanDndIdsFromPlan(updatedPlan);
+
+          if (isGuest) {
+            const cleanedPlanWithUpdatedTimeStamp = {
+              ...cleanedPlan,
+              updatedAt: new Date(),
+            };
+            window.localStorage.setItem(
+              "student",
+              JSON.stringify({
+                ...student,
+                plans: student.plans.map((p) =>
+                  p.id === cleanedPlanWithUpdatedTimeStamp.id
+                    ? cleanedPlanWithUpdatedTimeStamp
+                    : p
+                ),
+              })
+            );
+          } else {
+            await API.plans.update(updatedPlan.id, cleanedPlan);
+          }
+          return fetchStudentAndPrepareForDnd(isGuest);
+        },
+        {
+          optimisticData: updatedStudent,
+          rollbackOnError: true,
+          revalidate: false,
+        }
+      ).catch((error) => {
+        handleApiClientError(error, router);
+      });
+    }
+  };
 
   switch (course.type) {
     case "course":
@@ -197,6 +296,11 @@ const ParseCourse: React.FC<ParseCourseProps> = ({ course, parent }) => {
             isRound
             size="xs"
             ml="2"
+            onClick={() =>
+              term &&
+              originalCourse &&
+              addCourseToPlan(course, term, originalCourse)
+            }
           />
         </Flex>
       );
@@ -206,7 +310,12 @@ const ParseCourse: React.FC<ParseCourseProps> = ({ course, parent }) => {
         <Stack spacing={4} align="stretch" width="100%">
           {course.missing.map((c, index) => (
             <Box key={index} width="100%">
-              <ParseCourse course={c} parent={false} />
+              <ParseCourse
+                course={c}
+                parent={false}
+                term={term}
+                originalCourse={originalCourse}
+              />
             </Box>
           ))}
         </Stack>
@@ -233,7 +342,12 @@ const ParseCourse: React.FC<ParseCourseProps> = ({ course, parent }) => {
           <Stack spacing={4}>
             {course.missing.map((c, index) => (
               <Box key={index}>
-                <ParseCourse course={c} parent={false} />
+                <ParseCourse
+                  course={c}
+                  parent={false}
+                  term={term}
+                  originalCourse={originalCourse}
+                />
               </Box>
             ))}
           </Stack>
