@@ -149,7 +149,9 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     const fetchCoreqsForAllCourses = async () => {
       if (!courses || courses.length === 0) return;
       if (courses) {
-        const newCourseCoreqsMap = new Map<any, ScheduleCourse2<null>>();
+        const newCourseCoreqsMap = new Map<any, ScheduleCourse2<null>>(
+          courseCoreqsMap
+        );
 
         for (const course of courses) {
           const coreqs = (
