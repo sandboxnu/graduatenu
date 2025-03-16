@@ -93,6 +93,13 @@ export const MetaInfo: React.FC = () => {
   );
 };
 
+const truncateMessage = (message: string) => {
+  if (message.length > 50) {
+    return message.slice(0, 50) + "...";
+  }
+  return message;
+};
+
 /** Display the given optional commit hash and message. */
 const CommitText: React.FC<{
   commitHash: Maybe<string>;
@@ -107,7 +114,9 @@ const CommitText: React.FC<{
         <Tooltip label={commitHash}>
           <Link href={commitLink} color="blue.500" target="_blank">
             {`${
-              commitMessage !== false ? commitMessage : "<missing message>"
+              commitMessage !== false
+                ? truncateMessage(commitMessage)
+                : "<missing message>"
             } (${shortHash})`}
           </Link>
         </Tooltip>
