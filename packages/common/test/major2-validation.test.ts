@@ -20,7 +20,7 @@ import {
   IOrCourse2,
   IRequiredCourse,
   IXofManyCourse,
-  type Major2,
+  Major2,
   Requirement2,
   ScheduleCourse2,
   Section,

@@ -60,13 +60,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
-
-  // Generate default plan title using formatted date and time
-  const generateDefaultPlanTitle = () => {
-    const now = new Date();
-    return `Plan ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-  };
-
   const {
     register,
     handleSubmit,
@@ -94,7 +87,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();
     const newPlan: CreatePlanDto = {
-      name: payload.name || generateDefaultPlanTitle(),
+      name: payload.name,
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
@@ -145,6 +138,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     onCloseDisplay();
   };
 
+  const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   const concentration = watch("concentration");
@@ -167,12 +161,13 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
 
   const isValidForm =
-    (catalogYear &&
+    (title &&
+      catalogYear &&
       majorName &&
       (!isConcentrationRequired || concentration) &&
       (!isValidatedMajor ? agreeToBetaMajor : true)) ||
     // Valid plan for no major selected
-    isNoMajorSelected;
+    (title && isNoMajorSelected);
 
   const noMajorHelperLabel = (
     <Stack>
@@ -232,9 +227,10 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   label="Title"
                   id="name"
                   type="text"
-                  placeholder={generateDefaultPlanTitle()}
+                  placeholder="My Plan"
                   error={errors.name}
                   {...register("name", {
+                    required: "Title is required",
                     pattern: noLeadOrTrailWhitespacePattern,
                   })}
                 />

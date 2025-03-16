@@ -78,7 +78,6 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
           coReqErr={termCoReqErr?.[courseToString(scheduleCourse)]}
           preReqErr={termPreReqErr?.[courseToString(scheduleCourse)]}
           scheduleCourse={scheduleCourse}
-          scheduleTerm={scheduleTerm}
           removeCourse={(course: ScheduleCourse2<unknown>) =>
             removeCourseFromTermInCurrPlan(
               course,
