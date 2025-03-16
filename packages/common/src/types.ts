@@ -532,7 +532,6 @@ export type Maybe<T> = T | false;
 export interface MetaInfo {
   commit: Maybe<string>;
   commitMessage: Maybe<string>;
-  build_timestamp: Maybe<number>;
   environment: Maybe<string>;
 }
 

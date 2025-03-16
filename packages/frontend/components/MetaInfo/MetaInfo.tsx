@@ -5,51 +5,6 @@ import { Maybe } from "@graduate/common";
 import { useState } from "react";
 import useSWR from "swr";
 
-// adapted from https://stackoverflow.com/questions/3177836/how-to-format-time-since-xxx-e-g-4-minutes-ago-similar-to-stack-exchange-site
-/**
- * @param   current  The current time as a JS timestamp (milliseconds)
- * @param   previous The previous time as a JS timestamp (milliseconds)
- * @returns          Textual relative time difference
- */
-function timeDifference(current: number, previous: number): string {
-  const msPerMinute = 60 * 1000;
-  const msPerHour = msPerMinute * 60;
-  const msPerDay = msPerHour * 24;
-  const msPerMonth = msPerDay * 30;
-  const msPerYear = msPerDay * 365;
-
-  const elapsed = current - previous;
-
-  if (elapsed < msPerMinute) {
-    return Math.round(elapsed / 1000) + " second(s) ago";
-  } else if (elapsed < msPerHour) {
-    return Math.round(elapsed / msPerMinute) + " minute(s) ago";
-  } else if (elapsed < msPerDay) {
-    return Math.round(elapsed / msPerHour) + " hour(s) ago";
-  } else if (elapsed < msPerMonth) {
-    return "~" + Math.round(elapsed / msPerDay) + " day(s) ago";
-  } else if (elapsed < msPerYear) {
-    return "~" + Math.round(elapsed / msPerMonth) + " month(s) ago";
-  } else {
-    return "~" + Math.round(elapsed / msPerYear) + " year(s) ago";
-  }
-}
-
-/**
- * @param   timestamp A JS timestamp (milliseconds)
- * @returns           Formats the given timestamp as a string time
- */
-function formatBuildTime(timestamp: number): string {
-  return new Date(timestamp).toLocaleDateString("en-US", {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-  });
-}
-
 /** A clickable dev widget for the header at the top of all pages. */
 export const MetaInfoWidget: React.FC = () => {
   const [showDevInfo, setShowDevInfo] = useState(false);
@@ -112,11 +67,10 @@ export const MetaInfo: React.FC = () => {
       <Text fontWeight="bold" marginBottom="xs">
         Docker Build Info
       </Text>
-      <Text fontWeight="bold">Frontend</Text>
+      <Text fontWeight="bold">Vercel Frontend</Text>
       <MetaInfoSection
         environment={process.env.NODE_ENV ?? false}
-        buildTime={process.env.NEXT_PUBLIC_BUILD_TIMESTAMP ?? false}
-        commitHash={process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF ?? false}
+        commitHash={process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? false}
         commitMessage={
           process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_MESSAGE ?? false
         }
@@ -129,7 +83,6 @@ export const MetaInfo: React.FC = () => {
       {data !== undefined ? (
         <MetaInfoSection
           environment={data.environment}
-          buildTime={data.build_timestamp}
           commitHash={data.commit}
           commitMessage={data.commitMessage}
         />
@@ -165,36 +118,18 @@ const CommitText: React.FC<{
   }
 };
 
-/** Displays the given optional build time timestamp. */
-const BuildTime: React.FC<{ buildTime: Maybe<string | number> }> = ({
-  buildTime,
-}) => {
-  if (buildTime !== false) {
-    const numericTime = Number(buildTime) * 1000;
-    return (
-      <Tooltip label={formatBuildTime(numericTime)}>
-        <Text>Image Built: {timeDifference(Date.now(), numericTime)}</Text>
-      </Tooltip>
-    );
-  } else {
-    return <Text>Built: {"<missing build time>"}</Text>;
-  }
-};
-
 /** A Docker meta info section. */
 export const MetaInfoSection: React.FC<{
   environment: Maybe<string>;
   commitHash: Maybe<string>;
-  buildTime: Maybe<string> | Maybe<number>;
   commitMessage: Maybe<string>;
-}> = ({ environment, commitHash, buildTime, commitMessage }) => {
+}> = ({ environment, commitHash, commitMessage }) => {
   return (
     <>
       <Text>
         Environment: {environment !== false ? environment : "<unknown env>"}
       </Text>
       <CommitText commitHash={commitHash} commitMessage={commitMessage} />
-      <BuildTime buildTime={buildTime} />
     </>
   );
 };
