@@ -4,7 +4,8 @@ const MAJORS: Record<string, Record<string, Major2>> = {};
 const MAJOR_YEARS = new Set<string>();
 const TEMPLATES: Record<string, Record<string, Template>> = {};
 
-const rootDir = "./src/major/majors";
+const reqRootDir = "./src/major/majors";
+const templateRootDir = "./src/major/templates";
 
 interface YearData {
   year: string;
@@ -46,7 +47,7 @@ async function collateMajors() {
   console.log("Starting major collation...");
 
   const years = (
-    await fs.readdir(path.resolve(rootDir), {
+    await fs.readdir(path.resolve(reqRootDir), {
       withFileTypes: true,
     })
   )
@@ -60,7 +61,7 @@ async function collateMajors() {
   const colleges = (
     await Promise.all(
       years.map(async ({ year }) => {
-        const colleges = await fs.readdir(path.join(rootDir, year), {
+        const colleges = await fs.readdir(path.join(reqRootDir, year), {
           withFileTypes: true,
         });
         return colleges
@@ -78,7 +79,7 @@ async function collateMajors() {
   const majors = (
     await Promise.all(
       colleges.map(async ({ year, college }) => {
-        const majors = await fs.readdir(path.join(rootDir, year, college), {
+        const majors = await fs.readdir(path.join(reqRootDir, year, college), {
           withFileTypes: true,
         });
         return majors
@@ -104,10 +105,11 @@ async function collateMajors() {
   console.log("Loading majors and processing templates...");
   await Promise.all(
     majors.map(async ({ year, college, major }) => {
-      const basePath = path.join(rootDir, year, college, major);
+      const basePath = path.join(reqRootDir, year, college, major);
+      const templateBasePath = path.join(templateRootDir, year, college, major);
       const commitFile = path.join(basePath, "parsed.commit.json");
       const initialFile = path.join(basePath, "parsed.initial.json");
-      const templateFile = path.join(basePath, "template.json");
+      const templateFile = path.join(templateBasePath, "template.json");
 
       try {
         // Step 1: Load major data
