@@ -304,9 +304,13 @@ export function validateMajor2(
     // console.log(minorRequirements)
   }
 
+  let majorRequirements: Requirement2[] = [];
+  majorRequirements = wrapMajor(major);
+
   //const majorReqs = [...major.requirementSections, ...(minor?.requirementSections ?? []), ...concentrationReq];
   const majorReqs = [
-    ...major.requirementSections,
+    // ...major.requirementSections,
+    ...majorRequirements,
     ...minorRequirements,
     ...concentrationReq,
   ];
@@ -391,6 +395,11 @@ function convertToConcentrationsArray(
     return [concentrations];
   }
   return concentrations;
+}
+
+export function wrapMajor(inputMajor: Major2): Requirement2[] {
+  const majorRequirements: Section[] = inputMajor.requirementSections;
+  return [{ type: "AND", courses: majorRequirements }];
 }
 
 export function getMinorRequirement(

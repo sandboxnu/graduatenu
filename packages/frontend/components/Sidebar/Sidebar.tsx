@@ -199,11 +199,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
     }
 
     const concentrationValidationError: MajorValidationError | undefined =
-      getSectionError(
-        major.requirementSections.length +
-          (minor?.requirementSections.length ?? 0),
-        validationStatus
-      );
+      getSectionError(2, 0, validationStatus);
 
     let concentrationValidationStatus = SidebarValidationStatus.Complete;
     if (validationStatus === undefined) {
@@ -285,8 +281,12 @@ const Sidebar: React.FC<SidebarProps> = memo(
                   {major.requirementSections.map((section, index) => {
                     const sectionValidationError:
                       | MajorValidationError
-                      | undefined = getSectionError(index, validationStatus);
-
+                      | undefined = getSectionError(
+                      0, // AND index for the current major requirement
+                      index, // Section index, aligning with the array structure
+                      validationStatus
+                    );
+                    //console.log(index);
                     let sectionValidationStatus =
                       SidebarValidationStatus.Complete;
 
@@ -338,7 +338,8 @@ const Sidebar: React.FC<SidebarProps> = memo(
                         const sectionValidationError:
                           | MajorValidationError
                           | undefined = getSectionError(
-                          major.requirementSections.length + index,
+                          1, // Offset by major length
+                          index, // Section index for minor
                           validationStatus
                         );
 
