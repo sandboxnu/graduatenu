@@ -287,9 +287,8 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   )}
                   {/* Show courses */}
                   {courses &&
-                    sortCoursesByNUPath(courses, selectedNUPaths)
-                      .filter((course) => course.numCreditsMax >= 3)
-                      .map((course) => (
+                    sortCoursesByNUPath(courses, selectedNUPaths).map(
+                      (course) => (
                         <Box
                           key={getCourseDisplayString(course)}
                           borderBottom="1px"
@@ -373,7 +372,8 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                             </div>
                           )}
                         </Box>
-                      ))}
+                      )
+                    )}
                 </Flex>
               </Flex>
 
