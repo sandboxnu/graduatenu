@@ -1,6 +1,7 @@
 import { AddIcon, WarningIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Divider,
   Flex,
   IconButton,
   Modal,
@@ -16,6 +17,7 @@ import {
   assertUnreachable,
   INEUReqCourseError,
   INEUReqError,
+  ReqErrorType,
   ScheduleCourse2,
   ScheduleTerm2,
   SeasonEnum,
@@ -98,7 +100,12 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
         justifySelf="center"
         transition="background 0.15s ease"
       />
-      <Modal isOpen={isOpen} onClose={onClose} scrollBehavior="inside">
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        scrollBehavior="inside"
+        size="3xl"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader
@@ -122,21 +129,15 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
           </ModalHeader>
           <ModalBody mb="sm">
             {coReqErr && (
-              <Flex direction="column" mb="sm">
-                <Flex
-                  alignItems="center"
-                  mb="xs"
-                  columnGap="2xs"
-                  justifyContent="left"
-                >
-                  <Text fontWeight="semibold" textAlign="center">
+              <Flex direction="column" mb="sm" gap={4}>
+                <Flex direction="column">
+                  <Text fontWeight="bold" fontSize={"lg"}>
                     Co-requisite Errors
                   </Text>
-                  <HelperToolTip
-                    label={`You will need to statisfy the following requirement(s) along with ${getCourseDisplayString(
-                      course
-                    )}.`}
-                  />
+                  <Text fontStyle={"italic"}>
+                    {`You will need to statisfy the following requirement(s) along with 
+                    ${getCourseDisplayString(course)}.`}
+                  </Text>
                 </Flex>
                 <ParseCourse
                   course={coReqErr}
@@ -147,21 +148,15 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
               </Flex>
             )}
             {(preReqErr || coopErr) && (
-              <Flex direction="column">
-                <Flex
-                  alignItems="center"
-                  mb="xs"
-                  columnGap="2xs"
-                  justifyContent="left"
-                >
-                  <Text fontWeight="semibold" textAlign="center">
+              <Flex direction="column" gap={4}>
+                <Flex direction="column">
+                  <Text fontWeight="bold" fontSize={"lg"}>
                     Pre-requisite Errors
                   </Text>
-                  <HelperToolTip
-                    label={`You will need to statisfy the following requirement(s) before taking ${getCourseDisplayString(
-                      course
-                    )}.`}
-                  />
+                  <Text fontStyle={"italic"}>
+                    {`You will need to statisfy the following requirement(s) before taking 
+                      ${getCourseDisplayString(course)}.`}
+                  </Text>
                 </Flex>
                 <ParseCourse
                   course={preReqErr}
@@ -189,13 +184,32 @@ interface ParseCourseProps {
   parent: boolean;
   term?: ScheduleTerm2<string>;
   originalCourse?: ScheduleCourse2<unknown>;
+  nestedIn?: ReqErrorType;
+  neighborCount?: number; // the amount of courses at the same level as this course (including this course)
 }
 
+/**
+ * Recursively parses co and pre-requisite errors and renders them in a modal.
+ * Following the design specs provided here:
+ * https://www.figma.com/design/yUflVFVxjMynm7gGymLpQY/%F0%9F%8F%97-Current-Work?node-id=6269-37326&t=sLw3yqhmIftbNc8j-4
+ * here are the rules for rendering the errors:
+ *
+ * - If a COURSE is standalone or at the top-level, render it with a border
+ *   container. Otherwise, render it without a border container.
+ * - If multiple courses are nested in an OR statement, render it with the "Choose
+ *   ONE of the following" text and no border between courses.
+ * - If multiple courses are nested in an OR statement and the OR statement is
+ *   top-level, render each course with a border container.
+ * - If multiple courses are nested in an AND statement, render each section with
+ *   a border container
+ */
 const ParseCourse: React.FC<ParseCourseProps> = ({
   course,
   parent,
   term,
   originalCourse,
+  nestedIn,
+  neighborCount,
 }) => {
   // Use the context directly
   const plan = useContext(PlanContext);
@@ -271,9 +285,9 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
   };
 
   switch (course.type) {
-    case "course":
-      return (
-        <Flex align="center" justify={"space-between"}>
+    case ReqErrorType.COURSE: {
+      let content = (
+        <Flex align="center" justify={"space-between"} paddingLeft={2}>
           <ReqCourseError courseError={course} isParent={parent} />
           <IconButton
             aria-label="Add class"
@@ -292,53 +306,98 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
           />
         </Flex>
       );
-
-    case "and":
+      // renders border if not nested in any requirement error
+      if ((neighborCount && neighborCount == 1) || nestedIn == undefined) {
+        return <BorderContainer>{content}</BorderContainer>;
+      } else {
+        return content;
+      }
+    }
+    case ReqErrorType.AND:
       return (
         <>
           {course.missing.map((c, index) => (
             <Flex direction="column" key={index}>
-              <BorderContainer>
+              <ParseCourse
+                course={c}
+                parent={false}
+                term={term}
+                originalCourse={originalCourse}
+                nestedIn={ReqErrorType.AND}
+                neighborCount={course.missing.reduce(
+                  (acc, curr) =>
+                    acc + (curr.type == ReqErrorType.COURSE ? 1 : 0),
+                  0
+                )}
+              />
+            </Flex>
+          ))}
+        </>
+      );
+    case ReqErrorType.OR: {
+      // renders requirement errors with OR text if it is a top-level OR statement
+      if (!nestedIn) {
+        return (
+          <>
+            {course.missing.map((c, index) => (
+              <Flex direction="column" key={index}>
                 <ParseCourse
                   course={c}
                   parent={false}
                   term={term}
                   originalCourse={originalCourse}
+                  nestedIn={ReqErrorType.OR}
+                  neighborCount={1} // set to 1 since all top-level OR statement should render courses with border
                 />
-              </BorderContainer>
-              {index < course.missing.length - 1 && (
-                <Text fontSize="md" textAlign="center">
-                  AND
+                {index < course.missing.length - 1 && (
+                  <Text fontSize="md" textAlign="center" fontWeight="semibold">
+                    OR
+                  </Text>
+                )}
+              </Flex>
+            ))}
+          </>
+        );
+      } else {
+        return (
+          <>
+            <BorderContainer>
+              <Flex
+                direction="column"
+                align="left"
+                justify={"space-between"}
+                paddingLeft={2}
+              >
+                <Text fontSize="md" textAlign="left" fontWeight="semibold">
+                  Choose ONE of the following:
                 </Text>
-              )}
-            </Flex>
-          ))}
-        </>
-      );
+                <Divider />
+              </Flex>
 
-    case "or":
-      return (
-        <>
-          {course.missing.map((c, index) => (
-            <Flex direction="column" key={index}>
-              <BorderContainer>
-                <ParseCourse
-                  course={c}
-                  parent={false}
-                  term={term}
-                  originalCourse={originalCourse}
-                />
-              </BorderContainer>
-              {index < course.missing.length - 1 && (
-                <Text fontSize="md" textAlign="center">
-                  OR
-                </Text>
-              )}
-            </Flex>
-          ))}
-        </>
-      );
-
+              {course.missing.map((c, index) => (
+                <Flex direction="column" key={index}>
+                  <Flex
+                    direction="column"
+                    paddingTop={2}
+                    paddingBottom={2}
+                    paddingLeft={8}
+                  >
+                    <ParseCourse
+                      course={c}
+                      parent={false}
+                      term={term}
+                      originalCourse={originalCourse}
+                      nestedIn={ReqErrorType.OR}
+                    />
+                  </Flex>
+                  {index < course.missing.length - 1 && <Divider />}
+                </Flex>
+              ))}
+            </BorderContainer>
+          </>
+        );
+      }
+    }
     default:
       assertUnreachable(course);
   }
@@ -389,7 +448,16 @@ const ReqCourseError: React.FC<{
       </Flex>
     );
   } else if (course) {
-    displayContent = `${getCourseDisplayString(course)}: ${course.name}`;
+    displayContent = (
+      <Flex alignItems="center" columnGap="2xs">
+        <Text as="span" fontSize="md" fontWeight="semibold">
+          {getCourseDisplayString(course) + ":"}
+        </Text>
+        <Text as="span" fontSize="md">
+          {course.name}
+        </Text>
+      </Flex>
+    );
   } else {
     displayContent = `${getCourseDisplayString(courseError)}: Loading...`;
   }
