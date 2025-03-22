@@ -1,6 +1,7 @@
 import { AddIcon, WarningIcon, WarningTwoIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Button,
   Divider,
   Flex,
   IconButton,
@@ -8,6 +9,7 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
+  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Text,
@@ -30,28 +32,25 @@ import {
   GENERIC_ERROR_MSG,
   SEARCH_NEU_FETCH_COURSE_ERROR_MSG,
   SPRING_4_COOP_ERROR_MSG,
-  addClassesToTerm,
-  cleanDndIdsFromPlan,
   getCourseDisplayString,
-  handleApiClientError,
-  updatePlanForStudent,
 } from "../../utils";
-import {
-  fetchStudentAndPrepareForDnd,
-  useFetchCourse,
-  useStudentWithPlans,
-} from "../../hooks";
+import { useFetchCourse, useStudentWithPlans } from "../../hooks";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { SetStateAction, useContext } from "react";
 import { ErrorModalError, TotalYearsContext, PlanContext } from "./";
-import { API } from "@graduate/api-client";
-import { useRouter } from "next/router";
 import { IsGuestContext } from "../../pages/_app";
+import { GreenCheckIcon } from "../Icon/GreenCheckIcon";
+import { useSelectedCourses } from "../../hooks/useSelectedCourses";
+import {
+  ClassesToAddBundle,
+  useMutateStudentWithPlan,
+} from "../../hooks/useMutateStudentWithPlan";
+import { shiftYearAndSeason } from "../../utils/plan/shiftYearAndSeason";
 
 interface ReqErrorModalProps {
-  setHovered: (isHovered: SetStateAction<boolean>) => void;
   course: ScheduleCourse2<unknown>;
   term?: ScheduleTerm2<string>;
+  setHovered: (isHovered: SetStateAction<boolean>) => void;
   preReqErr?: INEUReqError;
   coReqErr?: INEUReqError;
 }
@@ -77,6 +76,77 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
   } else if (coopErr) {
     msg = SPRING_4_COOP_ERROR_MSG;
   }
+
+  // selected co-requisite courses
+  const {
+    selectedCourses: selectedCoreqCourses,
+    addSelectedCourse: addSelectedCoreqCourse,
+    isCourseAlreadySelected: isCoreqCourseAlreadySelected,
+    clearSelectedCourses: clearSelectedCoreqCourses,
+  } = useSelectedCourses();
+
+  // selected pre-requisite courses
+  const {
+    selectedCourses: selectedPrereqCourses,
+    addSelectedCourse: addSelectedPrereqCourse,
+    isCourseAlreadySelected: isPrereqCourseAlreadySelected,
+    clearSelectedCourses: clearSelectedPrereqCourses,
+  } = useSelectedCourses();
+
+  const isCourseAlreadySelected = (course: ScheduleCourse2<null>) => {
+    return (
+      isCoreqCourseAlreadySelected(course) ||
+      isPrereqCourseAlreadySelected(course)
+    );
+  };
+
+  const plan = useContext(PlanContext);
+  const { isGuest } = useContext(IsGuestContext);
+  const { student, mutateStudent } = useStudentWithPlans();
+
+  const { addAllClassesToTermsInCurrentPlan } = useMutateStudentWithPlan(
+    isGuest,
+    student,
+    mutateStudent,
+    plan
+  );
+
+  const addClassesOnClick = () => {
+    if (
+      selectedCoreqCourses.length + selectedPrereqCourses.length === 0 ||
+      !term
+    ) {
+      return;
+    }
+    const prevSemesterShift = shiftYearAndSeason(
+      parseInt(term.id[0]),
+      term.season,
+      -1
+    );
+    const classesForCurrentSemester: ClassesToAddBundle = {
+      classes: selectedCoreqCourses,
+      termYear: parseInt(term.id[0]),
+      termSeason: term.season,
+    };
+    const classesForPrevSemester: ClassesToAddBundle = {
+      classes: selectedPrereqCourses,
+      termYear: prevSemesterShift.year,
+      termSeason: prevSemesterShift.season,
+    };
+
+    addAllClassesToTermsInCurrentPlan([
+      classesForCurrentSemester,
+      classesForPrevSemester,
+    ]);
+    onCloseModal();
+  };
+
+  const onCloseModal = () => {
+    clearSelectedCoreqCourses();
+    clearSelectedPrereqCourses();
+    onClose();
+  };
+
   return (
     <Flex
       justifySelf="stretch"
@@ -102,7 +172,7 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
       />
       <Modal
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={onCloseModal}
         scrollBehavior="inside"
         size="3xl"
       >
@@ -144,6 +214,8 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                   parent={true}
                   term={term}
                   originalCourse={course}
+                  addSelectedCourse={addSelectedCoreqCourse}
+                  isCourseAlreadySelected={isCourseAlreadySelected}
                 />
               </Flex>
             )}
@@ -163,6 +235,8 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
                   parent={true}
                   term={term}
                   originalCourse={course}
+                  addSelectedCourse={addSelectedPrereqCourse}
+                  isCourseAlreadySelected={isCourseAlreadySelected}
                 />
               </Flex>
             )}
@@ -173,6 +247,25 @@ export const ReqErrorModal: React.FC<ReqErrorModalProps> = ({
               ></ErrorModalError>
             )}
           </ModalBody>
+          {selectedCoreqCourses.length + selectedPrereqCourses.length > 0 && (
+            <ModalFooter justifyContent="end" gap="md">
+              <Button
+                leftIcon={<AddIcon />}
+                variant="solid"
+                borderRadius="lg"
+                backgroundColor="primary.blue.light.main"
+                borderColor="primary.blue.light.main"
+                colorScheme="primary.blue.light.main"
+                onClick={addClassesOnClick}
+                isDisabled={
+                  selectedCoreqCourses.length + selectedPrereqCourses.length ===
+                  0
+                }
+              >
+                Add Courses
+              </Button>
+            </ModalFooter>
+          )}
         </ModalContent>
       </Modal>
     </Flex>
@@ -186,6 +279,8 @@ interface ParseCourseProps {
   originalCourse?: ScheduleCourse2<unknown>;
   nestedIn?: ReqErrorType;
   neighborCount?: number; // the amount of courses at the same level as this course (including this course)
+  addSelectedCourse: (course: ScheduleCourse2<null>) => void;
+  isCourseAlreadySelected: (course: ScheduleCourse2<null>) => boolean;
 }
 
 /**
@@ -210,100 +305,43 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
   originalCourse,
   nestedIn,
   neighborCount,
+  addSelectedCourse,
+  isCourseAlreadySelected,
 }) => {
   // Use the context directly
   const plan = useContext(PlanContext);
-
-  // Get student and mutateStudent
-  const { student, mutateStudent } = useStudentWithPlans();
-
-  const { course: fetchedCourse } = useFetchCourse(
-    course?.subject || "",
-    course?.classId || ""
-  );
-
-  const router = useRouter();
-  const { isGuest } = useContext(IsGuestContext);
 
   if (!course || !plan) {
     return <></>;
   }
 
-  const addCourseToPlan = async (
-    course: INEUReqError,
-    term: ScheduleTerm2<string>,
-    originalCourse: ScheduleCourse2<unknown>
-  ) => {
-    if (fetchedCourse && student && originalCourse) {
-      // Create updated plan
-      const updatedPlan = addClassesToTerm(
-        [fetchedCourse],
-        parseInt(term.id[0]),
-        term.season,
-        plan
-      );
-
-      // Create updated student for optimistic update
-      const updatedStudent = updatePlanForStudent(student, updatedPlan);
-
-      // Use mutateStudent for optimistic updates
-      mutateStudent(
-        async () => {
-          // Clean plan data before saving
-          const cleanedPlan = cleanDndIdsFromPlan(updatedPlan);
-
-          if (isGuest) {
-            const cleanedPlanWithUpdatedTimeStamp = {
-              ...cleanedPlan,
-              updatedAt: new Date(),
-            };
-            window.localStorage.setItem(
-              "student",
-              JSON.stringify({
-                ...student,
-                plans: student.plans.map((p) =>
-                  p.id === cleanedPlanWithUpdatedTimeStamp.id
-                    ? cleanedPlanWithUpdatedTimeStamp
-                    : p
-                ),
-              })
-            );
-          } else {
-            await API.plans.update(updatedPlan.id, cleanedPlan);
-          }
-          return fetchStudentAndPrepareForDnd(isGuest);
-        },
-        {
-          optimisticData: updatedStudent,
-          rollbackOnError: true,
-          revalidate: false,
-        }
-      ).catch((error) => {
-        handleApiClientError(error, router);
-      });
-    }
-  };
-
   switch (course.type) {
     case ReqErrorType.COURSE: {
+      const { course: fetchedCourse } = useFetchCourse(
+        course?.subject || "",
+        course?.classId || ""
+      );
+
+      const isCourseSelected =
+        fetchedCourse && isCourseAlreadySelected(fetchedCourse);
       let content = (
         <Flex align="center" justify={"space-between"} paddingLeft={2}>
           <ReqCourseError courseError={course} isParent={parent} />
-          <IconButton
-            aria-label="Add class"
-            icon={<AddIcon />}
-            color="primary.blue.light.main"
-            borderColor="primary.blue.light.main"
-            colorScheme="primary.blue.light.main"
-            isRound
-            size="xs"
-            ml="2"
-            onClick={() =>
-              term &&
-              originalCourse &&
-              addCourseToPlan(course, term, originalCourse)
-            }
-          />
+          {isCourseSelected ? (
+            <GreenCheckIcon />
+          ) : (
+            <IconButton
+              aria-label="Add class"
+              icon={<AddIcon />}
+              color="primary.blue.light.main"
+              borderColor="primary.blue.light.main"
+              colorScheme="primary.blue.light.main"
+              isRound
+              size="xs"
+              ml="2"
+              onClick={() => fetchedCourse && addSelectedCourse(fetchedCourse)}
+            />
+          )}
         </Flex>
       );
       // renders border if not nested in any requirement error
@@ -329,6 +367,8 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
                     acc + (curr.type == ReqErrorType.COURSE ? 1 : 0),
                   0
                 )}
+                addSelectedCourse={addSelectedCourse}
+                isCourseAlreadySelected={isCourseAlreadySelected}
               />
             </Flex>
           ))}
@@ -348,6 +388,8 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
                   originalCourse={originalCourse}
                   nestedIn={ReqErrorType.OR}
                   neighborCount={1} // set to 1 since all top-level OR statement should render courses with border
+                  addSelectedCourse={addSelectedCourse}
+                  isCourseAlreadySelected={isCourseAlreadySelected}
                 />
                 {index < course.missing.length - 1 && (
                   <Text fontSize="md" textAlign="center" fontWeight="semibold">
@@ -388,6 +430,8 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
                       term={term}
                       originalCourse={originalCourse}
                       nestedIn={ReqErrorType.OR}
+                      addSelectedCourse={addSelectedCourse}
+                      isCourseAlreadySelected={isCourseAlreadySelected}
                     />
                   </Flex>
                   {index < course.missing.length - 1 && <Divider />}
