@@ -12,10 +12,7 @@ import {
 } from "../utils";
 import { API } from "@graduate/api-client";
 import router from "next/router";
-import {
-  fetchStudentAndPrepareForDnd,
-  useStudentWithPlans,
-} from "./useStudentWithPlans";
+import { fetchStudentAndPrepareForDnd } from "./useStudentWithPlans";
 import { KeyedMutator } from "swr";
 
 /** Specifies the classes that need to be added to a specific term year and season. */

@@ -311,20 +311,20 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
   // Use the context directly
   const plan = useContext(PlanContext);
 
+  const { course: fetchedCourse, isLoading: courseIsLoading } = useFetchCourse(
+    course?.subject || "",
+    course?.classId || ""
+  );
+
   if (!course || !plan) {
     return <></>;
   }
 
   switch (course.type) {
     case ReqErrorType.COURSE: {
-      const { course: fetchedCourse } = useFetchCourse(
-        course?.subject || "",
-        course?.classId || ""
-      );
-
       const isCourseSelected =
         fetchedCourse && isCourseAlreadySelected(fetchedCourse);
-      let content = (
+      const content = (
         <Flex align="center" justify={"space-between"} paddingLeft={2}>
           <ReqCourseError courseError={course} isParent={parent} />
           {isCourseSelected ? (
@@ -340,12 +340,17 @@ const ParseCourse: React.FC<ParseCourseProps> = ({
               size="xs"
               ml="2"
               onClick={() => fetchedCourse && addSelectedCourse(fetchedCourse)}
+              isDisabled={courseIsLoading}
             />
           )}
         </Flex>
       );
       // renders border if not nested in any requirement error
-      if ((neighborCount && neighborCount == 1) || nestedIn == undefined) {
+      if (
+        (neighborCount && neighborCount == 1) ||
+        nestedIn == undefined ||
+        nestedIn == ReqErrorType.AND
+      ) {
         return <BorderContainer>{content}</BorderContainer>;
       } else {
         return content;
