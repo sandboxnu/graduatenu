@@ -1,0 +1,17 @@
+{
+  "Sample Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "LING 1150", "MATH 1215"],
+      "Spring": ["ENGL 1400", "LING 2350", "LING 3412"]
+    },
+    "Year 2": {
+      "Fall": ["ENGL 1410", "LING 3454"],
+      "Spring": ["EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["LING 3412", "ENGL 3710"],
+      "Summer 1": ["ENGW 3315"]
+    },
+    "Year 4": {}
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "Four Years/Two Co-ops in Spring/Summer 1—Bouvé Student Sample": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "PSYC 1101", "COMM 1000", "ENGW 1111"],
+      "Spring": ["ENGW 1111", "PSYC 1101"],
+      "Summer 1": ["PHTH 2350", "PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2210", "COMM 1101", "COMM 1112"],
+      "Summer 2": ["PHTH 2300", "ENGW 3306"],
+      "Spring": ["EEAM 2000", "PHTH 2210", "PHTH 2350"],
+      "Summer 1": ["PHTH 2300", "ENGW 3314"]
+    },
+    "Year 3": {
+      "Fall": ["PHTH 2515"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540", "HSCI 4700"],
+      "Spring": ["PHTH 4202"],
+      "Summer 1": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4202", "HSCI 4720"],
+      "Spring": ["COMM 4102"]
+    }
+  },
+  "Four Years/Two Co-ops in Summer 2/Fall—CAMD Student Sample": {
+    "Year 1": {
+      "Fall": ["COMM 1000", "PHTH 1260", "ENGW 1111"],
+      "Spring": ["PSYC 1101"],
+      "Summer 1": ["PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["COMM 1101", "COMM 1112"],
+      "Spring": ["EEAM 2000", "PHTH 2210", "PHTH 2350"],
+      "Summer 1": ["PHTH 2300", "ENGW 3314"]
+    },
+    "Year 3": {
+      "Spring": ["PHTH 4202"],
+      "Summer 1": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Spring": ["COMM 4102"]
+    }
+  }
+}

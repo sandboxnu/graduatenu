@@ -1,0 +1,19 @@
+{
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["HIST 1000", "HIST 1200", "HIST 1201", "JPNS 1101"],
+      "Spring": ["ASNS 1150", "HIST 1100", "HIST 1246", "JPNS 1102"]
+    },
+    "Year 2": {
+      "Fall": ["HIST 1215", "HIST 2301", "HIST 2302", "HIST 2308", "JPNS 2101"],
+      "Spring": ["HIST 1252", "HIST 2351", "HIST 2360", "JPNS 2102"]
+    },
+    "Year 3": {
+      "Fall": ["CLTR 1700", "HIST 3350", "PHIL 2395"]
+    },
+    "Year 4": {
+      "Fall": ["HIST 4701"],
+      "Spring": ["ANTH 4350", "POLS 3487"]
+    }
+  }
+}

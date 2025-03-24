@@ -1,0 +1,34 @@
+{
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["ANTH 1101", "ENGW 1111", "LING 1150", "MATH 1215"],
+      "Spring": ["ANTH 2305", "LING 2350", "LING 3412"]
+    },
+    "Year 2": {
+      "Spring": ["LING 3442"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315", "LING 3456"],
+      "Fall": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Spring": ["ANTH 4600"]
+    }
+  },
+  "Four Years, No Co-op": {
+    "Year 1": {
+      "Fall": ["ANTH 1101", "ENGW 1111", "LING 1150", "MATH 1215"],
+      "Spring": ["ANTH 2305", "LING 2350", "LING 3412"]
+    },
+    "Year 2": {
+      "Spring": ["LING 3442"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3315"],
+      "Spring": ["LING 3456"]
+    },
+    "Year 4": {
+      "Spring": ["ANTH 4600"]
+    }
+  }
+}

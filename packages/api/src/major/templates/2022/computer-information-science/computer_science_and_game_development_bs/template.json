@@ -1,0 +1,20 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "GAME 1110"],
+      "Spring": ["CS 2510", "GAME 2500"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3520", "CS 3000", "GAME 2950", "GAME 3400"],
+      "Spring": ["CS 1210", "CS 3540", "CS 3650", "GAME 3700"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4850", "CS 4300", "ENGW 3302", "PSYC 1101"]
+    },
+    "Year 4": {
+      "Fall": ["CS 3700", "CS 4500", "GAME 3800"],
+      "Spring": ["GAME 4700"]
+    }
+  }
+}

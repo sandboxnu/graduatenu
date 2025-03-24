@@ -1,0 +1,74 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years, One Co-op in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163"
+      ],
+      "Spring": [
+        "ENGW 1111",
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167"
+      ],
+      "Summer 1": ["MATH 2341"]
+    },
+    "Year 2": {
+      "Fall": ["EECE 2140", "EECE 2150", "MATH 2321", "PHYS 2303"],
+      "Spring": ["EECE 2160", "PHYS 4305"]
+    },
+    "Year 3": {
+      "Fall": ["ENCP 2000", "ENGW 3302", "PHYS 3602"],
+      "Summer 2": ["EECE 4791", "PHYS 3600"]
+    },
+    "Year 4": {
+      "Fall": ["EECE 3468", "EECE 4792", "ENCP 3000", "PHYS 4115"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163"
+      ],
+      "Spring": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167"
+      ]
+    },
+    "Year 2": {
+      "Fall": ["EECE 2140", "MATH 2321", "MATH 2341", "PHYS 2303"],
+      "Spring": ["EECE 2150", "EECE 2160", "ENCP 2000", "PHYS 3602"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3302", "PHYS 4115"],
+      "Summer 1": ["PHYS 3600"]
+    },
+    "Year 4": {
+      "Spring": ["EECE 3468", "ENCP 3000", "PHYS 4305"],
+      "Summer 1": ["EECE 4791"]
+    },
+    "Year 5": {
+      "Spring": ["EECE 4792"]
+    }
+  }
+}

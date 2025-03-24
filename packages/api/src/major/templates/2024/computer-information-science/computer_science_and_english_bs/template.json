@@ -1,0 +1,39 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGL 1400", "ENGW 1111"],
+      "Spring": ["CS 2510", "ENGL 1160"],
+      "Summer 1": ["CS 3500"],
+      "Summer 2": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3200", "ENGL 1700"]
+    },
+    "Year 3": {
+      "Fall": ["ENGL 3340", "IS 2000", "ENGL 3710"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["ENGL 4710"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGL 1400", "ENGW 1111"],
+      "Spring": ["CS 2510", "ENGL 1160"],
+      "Summer 1": ["CS 3500"],
+      "Summer 2": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3200", "ENGL 1700"],
+      "Spring": ["CS 1210", "ENGL 3340", "IS 2000", "ENGL 3710"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["ENGL 4710"]
+    }
+  }
+}

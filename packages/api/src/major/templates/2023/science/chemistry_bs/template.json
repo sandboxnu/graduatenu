@@ -1,0 +1,122 @@
+{
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1000",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163",
+        "ENGW 1111",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CHEM 2315",
+        "CHEM 2316",
+        "CHEM 2324",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": ["PHYS 1155", "PHYS 1156", "PHYS 1157"]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHEM 2161",
+        "CHEM 2162",
+        "CHEM 2163",
+        "CHEM 2317",
+        "CHEM 2318",
+        "CHEM 2325",
+        "PHYS 1155",
+        "PHYS 1156",
+        "PHYS 1157"
+      ],
+      "Spring": [
+        "CHEM 2321",
+        "CHEM 2322",
+        "CHEM 2323",
+        "EESC 2000",
+        "CHEM 3401",
+        "CHEM 3402"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CHEM 3401",
+        "CHEM 3402",
+        "CHEM 3501",
+        "CHEM 3502",
+        "CHEM 3503",
+        "ENGW 3307",
+        "CHEM 3403",
+        "CHEM 3404"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CHEM 3403",
+        "CHEM 3404",
+        "CHEM 4750",
+        "CHEM 5621",
+        "CHEM 5622"
+      ]
+    },
+    "Year 5": {
+      "Spring": ["CHEM 4750", "CHEM 5621", "CHEM 5622"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1000",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163",
+        "ENGW 1111",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CHEM 2315",
+        "CHEM 2316",
+        "CHEM 2324",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": ["PHYS 1155", "PHYS 1156", "PHYS 1157"]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHEM 2161",
+        "CHEM 2162",
+        "CHEM 2163",
+        "CHEM 2317",
+        "CHEM 2318",
+        "CHEM 2325"
+      ],
+      "Spring": [
+        "CHEM 2321",
+        "CHEM 2322",
+        "CHEM 2323",
+        "CHEM 3401",
+        "CHEM 3402",
+        "EESC 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CHEM 3403",
+        "CHEM 3404",
+        "CHEM 3501",
+        "CHEM 3502",
+        "CHEM 3503",
+        "ENGW 3307"
+      ]
+    },
+    "Year 4": {
+      "Spring": ["CHEM 4750", "CHEM 5621", "CHEM 5622"]
+    }
+  }
+}

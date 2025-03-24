@@ -1,0 +1,21 @@
+{
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["BUSN 1102", "ECON 1115", "ENGW 1111", "INTB 1205", "MATH 1231"],
+      "Spring": ["ACCT 1201", "ECON 1116", "MGSC 2301"],
+      "Summer 1": ["FINA 2201"],
+      "Summer 2": ["MKTG 2201"]
+    },
+    "Year 2": {
+      "Fall": ["BUSN 1103", "ECON 2315", "INTB 2205", "INTB 2206", "ACCT 2301"]
+    },
+    "Year 3": {
+      "Fall": ["ECON 2316", "ECON 2560", "ORGB 3201", "FINA 4320"],
+      "Summer 2": ["ENGW 3304"]
+    },
+    "Year 4": {
+      "Fall": ["ECON 3290"],
+      "Spring": ["INTB 4202"]
+    }
+  }
+}

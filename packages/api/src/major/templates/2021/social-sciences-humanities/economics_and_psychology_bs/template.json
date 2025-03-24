@@ -1,0 +1,19 @@
+{
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["PSYC 1101", "ENGW 1111", "MATH 1231", "ECON 1115", "ECON 1000"],
+      "Spring": ["PSYC 2320", "ECON 1116", "CS 1100"]
+    },
+    "Year 2": {
+      "Fall": ["PSYC 3402", "ECON 2315"],
+      "Spring": ["PSYC 3466", "ECON 2316", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["PSYC 3450", "ECON 2560"],
+      "Summer 1": ["ECON 4692"]
+    },
+    "Year 4": {
+      "Spring": ["ECON 4681"]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["MATH 1231", "PHIL 1000", "PHIL 1160", "POLS 1160"],
+      "Spring": ["ECON 1116", "ENGW 1111", "PHIL 1115", "PHIL 2303"]
+    },
+    "Year 2": {
+      "Fall": ["ECON 1115", "PHIL 3435", "POLS 1150"],
+      "Spring": ["ECON 2315"]
+    },
+    "Year 3": {
+      "Spring": ["PHIL 3000"]
+    },
+    "Year 4": {}
+  }
+}

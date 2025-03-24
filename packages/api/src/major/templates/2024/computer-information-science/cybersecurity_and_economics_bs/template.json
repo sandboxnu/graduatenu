@@ -1,0 +1,34 @@
+{
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ECON 1115", "ENGW 1111"],
+      "Spring": ["CS 2510", "CY 2550", "ECON 1116", "MATH 1231"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "CS 3650", "ECON 2315", "ECON 2350"],
+      "Spring": ["CS 1210", "CS 3000", "CS 4700", "ECON 2316"]
+    },
+    "Year 3": {
+      "Spring": ["CY 3740", "ECON 2560", "ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CY 4170", "CY 4740"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ECON 1115", "ENGW 1111"],
+      "Spring": ["CS 2510", "CY 2550", "ECON 1116", "MATH 1231"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "CS 3650", "ECON 2315", "ECON 2350"],
+      "Spring": ["CS 1210", "CS 3000", "CS 4700", "ECON 2316"]
+    },
+    "Year 3": {
+      "Spring": ["CY 3740", "ECON 2560", "ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CY 4170", "CY 4740"]
+    }
+  }
+}

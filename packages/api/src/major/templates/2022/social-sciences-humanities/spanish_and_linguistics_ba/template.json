@@ -1,0 +1,22 @@
+{
+  "Sample Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CLTR 1000", "CLTR 1120", "LING 1150", "SPNS 2102"],
+      "Spring": ["LING 2350", "SPNS 3101"]
+    },
+    "Year 2": {
+      "Fall": ["SPNS 3102", "LING 3412"],
+      "Spring": ["SPNS 3601", "EESH 2000"],
+      "Summer 2": ["COOP 3948"]
+    },
+    "Year 3": {
+      "Fall": ["COOP 3948"],
+      "Spring": ["SPNS 3601"],
+      "Summer 2": ["COOP 3948"]
+    },
+    "Year 4": {
+      "Fall": ["COOP 3948"],
+      "Spring": ["LING 4891", "LING 4654"]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": ["CRIM 1100", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["CRIM 1110", "CRIM 1120", "CS 2510", "CY 2550"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CRIM 3600", "CS 3650", "MATH 1341"],
+      "Spring": ["CRIM 3700", "CS 1210", "CS 3000", "CS 3700"]
+    },
+    "Year 3": {
+      "Spring": ["CRIM 3000", "CY 3740"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CRIM 4000", "CY 4170", "CY 4740"]
+    }
+  }
+}

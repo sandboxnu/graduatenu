@@ -1,0 +1,19 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["CS 2510", "CY 2550", "MATH 1341"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "DS 3000", "LAW 3101", "LAW 3102"]
+    },
+    "Year 3": {
+      "Fall": ["CS 3200", "CY 4170", "LAW 3130", "LAW 3140"]
+    },
+    "Year 4": {
+      "Fall": ["ENGW 3302", "LAW 3235"],
+      "Spring": ["LAW 3120"]
+    }
+  }
+}

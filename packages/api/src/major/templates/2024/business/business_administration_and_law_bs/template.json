@@ -1,0 +1,20 @@
+{
+  "Sample Plan of Study: Fours Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "BUSN 1102", "ECON 1115", "INTB 1203", "MATH 1231"],
+      "Spring": ["ACCT 2301", "ENGW 1111", "INNO 2301", "MGSC 2301"],
+      "Summer 1": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["BUSN 1103", "LAW 3101", "LAW 3102"],
+      "Summer 2": ["ORGB 3201"]
+    },
+    "Year 3": {
+      "Fall": ["LAW 3120"]
+    },
+    "Year 4": {
+      "Spring": ["STRT 4501", "LAW 3140"],
+      "Fall": ["LAW 3130"]
+    }
+  }
+}

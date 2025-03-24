@@ -1,0 +1,59 @@
+{
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "DS 2000", "ENGW 1111", "PSYC 1101"],
+      "Spring": ["DS 2500", "PSYC 2320"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3200", "DS 3000", "MATH 1341", "CS 1210"],
+      "Spring": ["CS 1210", "DS 3500", "DS 4200"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4300", "DS 4400"],
+      "Summer 1": ["ENGW 3302"],
+      "Fall": ["DS 3500", "DS 4200"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420"],
+      "Fall": ["DS 4300", "DS 4400"]
+    }
+  },
+  "Four Years, Two Co-ops Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "DS 2000", "ENGW 1111", "PSYC 1101"],
+      "Spring": ["DS 2500", "PSYC 2320"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3200", "DS 3000", "MATH 1341", "CS 1210"],
+      "Spring": ["CS 1210", "DS 3500", "DS 4200"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4300", "DS 4400"],
+      "Summer 1": ["ENGW 3302"],
+      "Fall": ["DS 3500", "DS 4200"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420"],
+      "Fall": ["DS 4300", "DS 4400"]
+    }
+  },
+  "Four Years, Two Co-ops Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "DS 2000", "ENGW 1111", "PSYC 1101"],
+      "Spring": ["DS 2500", "PSYC 2320"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3200", "DS 3000", "MATH 1341"]
+    },
+    "Year 3": {
+      "Fall": ["DS 3500", "DS 4200"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["DS 4300", "DS 4400"],
+      "Spring": ["DS 4420"]
+    }
+  }
+}

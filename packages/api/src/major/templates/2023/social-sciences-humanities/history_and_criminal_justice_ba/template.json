@@ -1,0 +1,15 @@
+{
+  "Sample Plan of Study: Four Years with One Co-op": {
+    "Year 1": {
+      "Fall": ["CRIM 1100", "ENGW 1111", "HIST 1200", "HIST 1201"],
+      "Spring": ["CRIM 1110", "CRIM 1120", "HIST 1100"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Fall": ["CRIM 3700", "EESH 2000"]
+    },
+    "Year 4": {
+      "Fall": ["CRIM 3000"]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Four Years, No Co-op": {
+    "Year 1": {
+      "Fall": ["AMSL 1101", "DEAF 1500", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["AMSL 1102", "LING 1150", "MATH 1215"]
+    },
+    "Year 2": {
+      "Fall": ["AMSL 2101", "DEAF 2500", "PSYC 3464", "INTP 3500"],
+      "Spring": ["AMSL 2102", "PSYC 2320", "PSYC 3466"]
+    },
+    "Year 3": {
+      "Fall": ["AMSL 3101", "ENGW 3315", "INTP 3510"],
+      "Spring": ["DEAF 2700", "AMSL 3102"]
+    },
+    "Year 4": {
+      "Fall": ["INTP 3970"],
+      "Spring": ["INTP 4940"]
+    }
+  }
+}

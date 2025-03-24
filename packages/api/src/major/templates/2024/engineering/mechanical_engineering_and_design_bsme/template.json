@@ -1,0 +1,142 @@
+{
+  "Sample Plan of Study: Four Years, One Co-op in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CHEM 1151", "ENGW 1111", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["ARTG 1001", "GE 1502", "MATH 1342", "PHYS 1151"]
+    },
+    "Year 2": {
+      "Fall": [
+        "ARTF 1220",
+        "MATH 2321",
+        "ME 2350",
+        "PHYS 1155",
+        "ARTG 1270",
+        "ENCP 2000"
+      ],
+      "Spring": [
+        "ARTG 1270",
+        "ENCP 2000",
+        "MATH 2341",
+        "ME 2355",
+        "ME 2380",
+        "ME 2340",
+        "ARTF 1220"
+      ],
+      "Summer 1": ["ME 3475"],
+      "Summer 2": ["ARTF 1220", "ME 3475"]
+    },
+    "Year 3": {
+      "Fall": [
+        "ARTG 1290",
+        "ENGW 3302",
+        "ME 2340",
+        "ME 3455",
+        "ME 4505",
+        "MATH 2341",
+        "ME 2355",
+        "ME 2380"
+      ],
+      "Spring": ["ME 3455", "ME 4505", "ENGW 3302", "ME 2355"],
+      "Summer 1": ["MEIE 4701", "ARTG 1290", "ME 3475"],
+      "Summer 2": ["ENGW 3302", "MEIE 4701", "ARTF 1220", "ME 3475"]
+    },
+    "Year 4": {
+      "Spring": ["ARTG 2262", "ENCP 3000", "MEIE 4702", "ME 3455", "ME 4505"],
+      "Fall": ["ENCP 3000", "MEIE 4702", "ME 2340", "ME 3455", "ME 4505"],
+      "Summer 1": ["MEIE 4701"],
+      "Summer 2": ["ARTG 1290", "MEIE 4701"]
+    },
+    "Year 5": {
+      "Spring": ["ARTG 2262", "MEIE 4702", "ENGW 3302"],
+      "Fall": ["MEIE 4702"]
+    }
+  },
+  "Sample Plan of Study: Four Years, One Co-op in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CHEM 1151", "ENGW 1111", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["ARTG 1001", "GE 1502", "MATH 1342", "PHYS 1151"]
+    },
+    "Year 2": {
+      "Fall": ["ARTG 1270", "ENCP 2000", "MATH 2321", "ME 2350", "PHYS 1155"],
+      "Spring": [
+        "MATH 2341",
+        "ME 2340",
+        "ME 2355",
+        "ME 2380",
+        "ARTF 1220",
+        "ENCP 2000"
+      ],
+      "Summer 2": ["ARTF 1220", "ME 3475"]
+    },
+    "Year 3": {
+      "Fall": [
+        "ARTG 1290",
+        "ME 3455",
+        "ME 4505",
+        "MATH 2341",
+        "ME 2355",
+        "ME 2380"
+      ],
+      "Summer 2": ["ENGW 3302", "MEIE 4701", "ARTF 1220", "ME 3475"],
+      "Spring": ["ENGW 3302", "ME 2355"],
+      "Summer 1": ["ARTG 1290", "ME 3475"]
+    },
+    "Year 4": {
+      "Fall": ["ENCP 3000", "MEIE 4702", "ME 2340", "ME 3455", "ME 4505"],
+      "Spring": ["ARTG 2262", "ENCP 3000", "ME 3455", "ME 4505"],
+      "Summer 1": ["MEIE 4701"],
+      "Summer 2": ["ARTG 1290", "MEIE 4701"]
+    },
+    "Year 5": {
+      "Spring": ["ARTG 2262", "MEIE 4702", "ENGW 3302"],
+      "Fall": ["MEIE 4702"]
+    }
+  },
+  "Sample Plan of Study: Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CHEM 1151", "ENGW 1111", "GE 1501", "GE 1000", "MATH 1341"],
+      "Spring": ["ARTG 1001", "GE 1502", "MATH 1342", "PHYS 1151"]
+    },
+    "Year 2": {
+      "Fall": ["ARTG 1270", "MATH 2321", "ME 2350", "PHYS 1155", "ENCP 2000"],
+      "Spring": ["ARTF 1220", "ENCP 2000", "MATH 2341", "ME 2340", "ME 2380"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3302", "ME 2355"],
+      "Summer 1": ["ARTG 1290", "ME 3475"],
+      "Fall": ["MATH 2341", "ME 2355", "ME 2380"],
+      "Summer 2": ["ARTF 1220", "ME 3475"]
+    },
+    "Year 4": {
+      "Spring": ["ENCP 3000", "ME 3455", "ME 4505"],
+      "Summer 1": ["MEIE 4701"],
+      "Fall": ["ENCP 3000", "ME 2340", "ME 3455", "ME 4505"],
+      "Summer 2": ["ARTG 1290", "MEIE 4701"]
+    },
+    "Year 5": {
+      "Spring": ["ARTG 2262", "MEIE 4702", "ENGW 3302"],
+      "Fall": ["MEIE 4702"]
+    }
+  },
+  "Sample Plan of Study: Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CHEM 1151", "ENGW 1111", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["ARTG 1001", "GE 1502", "MATH 1342", "PHYS 1151"]
+    },
+    "Year 2": {
+      "Fall": ["ARTG 1270", "ENCP 2000", "MATH 2321", "ME 2350", "PHYS 1155"]
+    },
+    "Year 3": {
+      "Fall": ["MATH 2341", "ME 2355", "ME 2380"],
+      "Summer 2": ["ARTF 1220", "ME 3475"]
+    },
+    "Year 4": {
+      "Fall": ["ENCP 3000", "ME 2340", "ME 3455", "ME 4505"],
+      "Summer 2": ["ARTG 1290", "MEIE 4701"]
+    },
+    "Year 5": {
+      "Fall": ["MEIE 4702"],
+      "Spring": ["ARTG 2262", "ENGW 3302"]
+    }
+  }
+}

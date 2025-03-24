@@ -1,0 +1,19 @@
+{
+  "Sample, Four Years": {
+    "Year 1": {
+      "Fall": ["AMSL 1101", "DEAF 1500", "LING 1150"],
+      "Spring": ["AMSL 1102", "LING 2350", "LING 3412"]
+    },
+    "Year 2": {
+      "Fall": ["AMSL 2101", "DEAF 2500", "PSYC 1101"],
+      "Spring": ["AMSL 2102", "DEAF 2700", "PSYC 2320"]
+    },
+    "Year 3": {
+      "Fall": ["AMSL 3101", "INTP 3500", "INTP 3510"],
+      "Spring": ["PSYC 3464"]
+    },
+    "Year 4": {
+      "Fall": ["INTP 4940"]
+    }
+  }
+}

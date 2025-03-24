@@ -1,0 +1,52 @@
+{
+  "Sample Four Years, Two Co-ops (Option 1 of Science Requirement)": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "PSYC 1101", "BIOL 1143", "BIOL 1111"],
+      "Spring": [
+        "ENGW 1111",
+        "PHTH 2515",
+        "BIOL 1147",
+        "PHTH 2350",
+        "BIOL 1113"
+      ],
+      "Summer 1": ["PHTH 2350"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2210", "PHTH 2300", "PHTH 2515"],
+      "Summer 2": ["ENGW 3306"],
+      "Spring": ["HSCI 2000", "PHTH 2210"]
+    },
+    "Year 3": {
+      "Fall": ["PHTH 4202", "PHTH 4540"],
+      "Spring": ["ENGW 3306", "PHTH 4202"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4120"],
+      "Spring": ["PHTH 4540"]
+    },
+    "Year 5": {
+      "Fall": ["HSCI 4700", "PHTH 4120"],
+      "Spring": ["HSCI 4720"]
+    }
+  },
+  "Sample Five Years, Two Co-ops (Option 2 of Science Requirement)": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "PSYC 1101", "BIOL 1111"],
+      "Spring": ["PHTH 2350", "ENGW 1111", "BIOL 1113"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 2300", "PHTH 2515"],
+      "Spring": ["HSCI 2000", "PHTH 2210"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3306", "PHTH 4202"]
+    },
+    "Year 4": {
+      "Spring": ["PHTH 4540"]
+    },
+    "Year 5": {
+      "Fall": ["HSCI 4700", "PHTH 4120"],
+      "Spring": ["HSCI 4720"]
+    }
+  }
+}

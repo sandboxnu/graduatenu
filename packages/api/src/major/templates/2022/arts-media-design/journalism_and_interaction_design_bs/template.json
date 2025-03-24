@@ -1,0 +1,52 @@
+{
+  "Sample Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["JRNL 1000", "JRNL 1150", "ARTF 1122", "ENGW 1111"],
+      "Spring": ["JRNL 1101", "ARTF 2223", "ARTG 1250", "ARTG 2260"],
+      "Summer 1": ["ARTG 2250"]
+    },
+    "Year 2": {
+      "Fall": [
+        "JRNL 2201",
+        "JRNL 5311",
+        "EEAM 2000",
+        "ARTG 2400",
+        "ARTG 3350",
+        "ARTG 2250",
+        "ARTG 2260"
+      ]
+    },
+    "Year 3": {
+      "Fall": ["JRNL 2301", "ARTG 3700", "ARTG 2400", "ARTG 3350"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["JRNL 3610", "ARTG 3451", "ARTG 4550", "ARTG 3700"],
+      "Spring": ["JRNL 3550"]
+    },
+    "Year 5": {
+      "Fall": ["JRNL 5311", "JRNL 3550", "ARTG 3451", "ARTG 4550"],
+      "Spring": ["JRNL 3550"]
+    }
+  },
+  "Sample Five Years, Three Co-ops": {
+    "Year 1": {
+      "Fall": ["JRNL 1000", "JRNL 1150", "ENGW 1111", "ARTF 1122"],
+      "Spring": ["JRNL 1101", "ARTG 1250"]
+    },
+    "Year 2": {
+      "Fall": ["JRNL 2201", "EEAM 2000", "ARTG 2250", "ARTG 2260"]
+    },
+    "Year 3": {
+      "Fall": ["JRNL 2301", "ARTG 2400", "ARTG 3350"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["JRNL 3610", "ARTG 3700"]
+    },
+    "Year 5": {
+      "Fall": ["JRNL 5311", "JRNL 3550", "ARTG 3451", "ARTG 4550"],
+      "Spring": ["JRNL 3550"]
+    }
+  }
+}

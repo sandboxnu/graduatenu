@@ -1,0 +1,56 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "BIOL 1147",
+        "ENGW 1111",
+        "BIOL 1141",
+        "PSYC 1101"
+      ],
+      "Spring": [
+        "PHTH 2350",
+        "BIOL 1141",
+        "PSYC 1101",
+        "BIOL 1147",
+        "ENGW 1111"
+      ],
+      "Summer 1": ["PHTH 2300", "PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2210", "LAW 3101", "LAW 3102", "PHTH 2300"],
+      "Summer 2": ["PHTH 2515"],
+      "Spring": ["HSCI 2000", "PHTH 2210", "LAW 3102", "LAW 3101"]
+    },
+    "Year 3": {
+      "Fall": ["LAW 3120", "LAW 3130", "LAW 4335"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540"],
+      "Spring": ["PHTH 4202", "LAW 4335", "LAW 3120", "LAW 3130"],
+      "Summer 1": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4202", "LAW 3140", "LAW 3235", "LAW 3800"],
+      "Spring": ["LAW 3800", "LAW 3140", "LAW 3235"]
+    }
+  },
+  "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "BIOL 1141", "PSYC 1101"],
+      "Spring": ["PHTH 2350", "BIOL 1147", "ENGW 1111"],
+      "Summer 1": ["PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 2300"],
+      "Spring": ["HSCI 2000", "PHTH 2210", "LAW 3102", "LAW 3101"]
+    },
+    "Year 3": {
+      "Spring": ["PHTH 4202", "LAW 4335", "LAW 3120", "LAW 3130"],
+      "Summer 1": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Spring": ["LAW 3140", "LAW 3235", "LAW 3800"],
+      "Fall": ["LAW 3800"]
+    }
+  }
+}

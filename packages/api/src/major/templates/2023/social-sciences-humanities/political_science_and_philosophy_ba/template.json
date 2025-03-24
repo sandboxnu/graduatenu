@@ -1,0 +1,16 @@
+{
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "PHIL 1115", "POLS 1000", "POLS 1155"],
+      "Spring": ["MATH 1215", "POLS 1150", "POLS 1160"],
+      "Summer 1": ["PHIL 2325"]
+    },
+    "Year 2": {
+      "Fall": ["PHIL 2330", "POLS 2399"]
+    },
+    "Year 3": {
+      "Fall": ["PHIL 2303", "PHIL 5001", "POLS 2400"]
+    },
+    "Year 4": {}
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "HIST 1200",
+        "HIST 1201",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ENCP 2000",
+        "MATH 2321",
+        "ME 2340",
+        "ME 2341",
+        "ME 2350",
+        "PHYS 1155",
+        "PHYS 1156",
+        "PHYS 1157",
+        "HIST 2301",
+        "HIST 2302"
+      ],
+      "Spring": [
+        "HIST 2301",
+        "HIST 2302",
+        "MATH 2341",
+        "ME 2355",
+        "ME 2380",
+        "ME 2381",
+        "ME 2356"
+      ],
+      "Summer 2": ["ME 3475"]
+    },
+    "Year 3": {
+      "Fall": [
+        "HIST 2220",
+        "ME 3455",
+        "ME 3456",
+        "ME 4505",
+        "ME 4506",
+        "MATH 2341",
+        "ME 2340",
+        "ME 2341",
+        "ME 2355",
+        "ME 2356"
+      ],
+      "Summer 2": ["MEIE 4701", "ME 2380", "ME 2381"]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENCP 3000",
+        "ENGW 3302",
+        "MEIE 4702",
+        "HIST 2220",
+        "ME 3455",
+        "ME 3456",
+        "ME 4505",
+        "ME 4506"
+      ],
+      "Summer 2": ["ME 3475", "MEIE 4701"]
+    },
+    "Year 5": {
+      "Fall": ["ENGW 3302", "MEIE 4702"]
+    }
+  },
+  "Four Years, One Co-op in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "HIST 1200",
+        "HIST 1201",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ENCP 2000",
+        "MATH 2321",
+        "ME 2340",
+        "ME 2341",
+        "ME 2350",
+        "PHYS 1155",
+        "PHYS 1156",
+        "PHYS 1157",
+        "HIST 2301",
+        "HIST 2302"
+      ],
+      "Spring": [
+        "HIST 2301",
+        "HIST 2302",
+        "MATH 2341",
+        "ME 2355",
+        "ME 2380",
+        "ME 2381",
+        "ME 2356"
+      ],
+      "Summer 2": ["ME 3475"]
+    },
+    "Year 3": {
+      "Fall": [
+        "HIST 2220",
+        "ME 3455",
+        "ME 3456",
+        "ME 4505",
+        "ME 4506",
+        "MATH 2341",
+        "ME 2340",
+        "ME 2341",
+        "ME 2355",
+        "ME 2356"
+      ],
+      "Summer 2": ["MEIE 4701", "ME 2380", "ME 2381"]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENCP 3000",
+        "ENGW 3302",
+        "MEIE 4702",
+        "HIST 2220",
+        "ME 3455",
+        "ME 3456",
+        "ME 4505",
+        "ME 4506"
+      ],
+      "Summer 2": ["ME 3475", "MEIE 4701"]
+    },
+    "Year 5": {
+      "Fall": ["ENGW 3302", "MEIE 4702"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "HIST 1200",
+        "HIST 1201",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ENCP 2000",
+        "MATH 2321",
+        "ME 2350",
+        "PHYS 1155",
+        "PHYS 1156",
+        "PHYS 1157",
+        "HIST 2301",
+        "HIST 2302"
+      ]
+    },
+    "Year 3": {
+      "Fall": ["MATH 2341", "ME 2340", "ME 2341", "ME 2355", "ME 2356"],
+      "Summer 2": ["ME 2380", "ME 2381"]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENCP 3000",
+        "HIST 2220",
+        "ME 3455",
+        "ME 3456",
+        "ME 4505",
+        "ME 4506"
+      ],
+      "Summer 2": ["ME 3475", "MEIE 4701"]
+    },
+    "Year 5": {
+      "Fall": ["ENGW 3302", "MEIE 4702"]
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Summer2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "MATH 1241",
+        "BIOL 1111",
+        "ENGW 1111",
+        "PSYC 1101",
+        "BIOL 1112"
+      ],
+      "Spring": [
+        "PSYC 1101",
+        "BIOL 1113",
+        "CHEM 1161",
+        "BIOL 1114",
+        "MATH 1241",
+        "CHEM 1162",
+        "CHEM 1163"
+      ]
+    },
+    "Year 2": {
+      "Spring": ["HSCI 2000", "PHTH 2210"],
+      "Fall": ["PHIL 1165", "HSCI 2000", "PHTH 2210"],
+      "Summer 2": ["PHIL 1165"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3306"],
+      "Fall": ["ENGW 3306"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "PSYC 1101",
+        "BIOL 1111",
+        "BIOL 1112",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "BIOL 1114",
+        "MATH 1241",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163"
+      ]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2210"],
+      "Summer 2": ["PHIL 1165"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306"]
+    },
+    "Year 4": {}
+  }
+}

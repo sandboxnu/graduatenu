@@ -1,0 +1,21 @@
+{
+  "Sample 5-Year Plan of Study , 2 Co-op": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1220", "MATH 1365", "MATH 1341", "ENGW 1111"],
+      "Spring": ["MATH 1342", "ARTH 2210", "ARTG 1270"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "ARTG 1290", "ARTH 2215"],
+      "Spring": ["MATH 2341", "ARTG 2252"]
+    },
+    "Year 3": {
+      "Fall": ["MATH 2331", "ARTG 3350", "EEAM 2000"]
+    },
+    "Year 4": {
+      "Fall": ["MATH 3081", "ARTG 2242"]
+    },
+    "Year 5": {
+      "Fall": ["ARTG 4550"]
+    }
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/ Summer 1": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CHEM 1151", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["INTB 1203", "GE 1502", "MATH 1342", "PHYS 1151"],
+      "Summer 1": ["ENGW 1111", "MATH 2321"],
+      "Summer 2": ["MATH 2341", "ECON 1115"]
+    },
+    "Year 2": {
+      "Summer 2": ["ENGW 3302", "ORGB 3201"],
+      "Fall": [
+        "ENCP 2000",
+        "IE 2310",
+        "IE 3412",
+        "IE 4512",
+        "ECON 1115",
+        "ENGW 1111",
+        "MATH 2321"
+      ],
+      "Summer 1": ["ENGW 3302", "ORGB 3201"],
+      "Spring": [
+        "ENCP 2000",
+        "IE 4510",
+        "IE 4515",
+        "IE 4516",
+        "IE 3412",
+        "IE 4512",
+        "MATH 2341"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "IE 4510",
+        "IE 4515",
+        "IE 4516",
+        "IE 3412",
+        "IE 4512",
+        "MATH 2341"
+      ],
+      "Summer 2": ["STRT 4501", "ENGW 3302", "ORGB 3201"],
+      "Spring": [
+        "IE 4520",
+        "IE 4522",
+        "IE 4525",
+        "ENCP 3000",
+        "IE 4510",
+        "IE 4515",
+        "IE 4516"
+      ],
+      "Summer 1": ["MEIE 4701", "STRT 4501", "ENGW 3302", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENCP 3000",
+        "IE 4520",
+        "IE 4522",
+        "IE 4525",
+        "MEIE 4701",
+        "IE 4510",
+        "IE 4515",
+        "IE 4516"
+      ],
+      "Spring": [
+        "IE 4530",
+        "MEIE 4702",
+        "ENCP 3000",
+        "IE 4520",
+        "IE 4522",
+        "IE 4525"
+      ],
+      "Summer 2": ["STRT 4501"],
+      "Summer 1": ["MEIE 4701", "STRT 4501"]
+    },
+    "Year 5": {
+      "Fall": ["IE 4520", "IE 4522", "IE 4525", "MEIE 4701"],
+      "Spring": ["IE 4530", "MEIE 4702"]
+    }
+  },
+  "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CHEM 1151", "GE 1501", "GE 1000", "MATH 1341"],
+      "Spring": ["GE 1502", "INTB 1203", "MATH 1342", "PHYS 1151"],
+      "Summer 1": ["ENGW 1111", "MATH 2321"],
+      "Summer 2": ["ECON 1115", "MATH 2341"]
+    },
+    "Year 2": {
+      "Summer 1": ["ENGW 3302", "ORGB 3201"],
+      "Fall": [
+        "IE 2310",
+        "IE 3412",
+        "IE 4512",
+        "ECON 1115",
+        "ENCP 2000",
+        "ENGW 1111",
+        "MATH 2321"
+      ],
+      "Spring": [
+        "ENCP 2000",
+        "IE 4510",
+        "IE 4515",
+        "IE 4516",
+        "IE 3412",
+        "IE 4512",
+        "MATH 2341"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "IE 4520",
+        "IE 4522",
+        "IE 4525",
+        "ENCP 3000",
+        "IE 4510",
+        "IE 4515",
+        "IE 4516"
+      ],
+      "Summer 1": ["MEIE 4701", "STRT 4501", "ENGW 3302", "ORGB 3201"],
+      "Summer 2": ["ENGW 3302", "ORGB 3201"],
+      "Fall": ["IE 3412", "IE 4512", "MATH 2341"]
+    },
+    "Year 4": {
+      "Spring": [
+        "ENCP 3000",
+        "IE 4530",
+        "MEIE 4702",
+        "IE 4520",
+        "IE 4522",
+        "IE 4525"
+      ],
+      "Fall": ["ENCP 3000", "IE 4510", "IE 4515", "IE 4516"],
+      "Summer 2": ["STRT 4501"],
+      "Summer 1": ["MEIE 4701", "STRT 4501"]
+    },
+    "Year 5": {
+      "Fall": ["IE 4520", "IE 4522", "IE 4525", "MEIE 4701"],
+      "Spring": ["IE 4530", "MEIE 4702"]
+    }
+  },
+  "Sample Plan of Study: Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CHEM 1151", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["GE 1502", "INTB 1203", "MATH 1342", "PHYS 1151"]
+    },
+    "Year 2": {
+      "Fall": ["ECON 1115", "ENCP 2000", "ENGW 1111", "IE 2310", "MATH 2321"],
+      "Spring": ["ENCP 2000", "IE 3412", "IE 4512", "MATH 2341"]
+    },
+    "Year 3": {
+      "Summer 2": ["ENGW 3302", "ORGB 3201"],
+      "Fall": ["IE 3412", "IE 4512", "MATH 2341"],
+      "Summer 1": ["ENGW 3302", "ORGB 3201"],
+      "Spring": ["ENCP 3000", "IE 4510", "IE 4515", "IE 4516"]
+    },
+    "Year 4": {
+      "Fall": ["ENCP 3000", "IE 4510", "IE 4515", "IE 4516"],
+      "Summer 2": ["STRT 4501"],
+      "Spring": ["IE 4520", "IE 4522", "IE 4525"],
+      "Summer 1": ["MEIE 4701", "STRT 4501"]
+    },
+    "Year 5": {
+      "Fall": ["IE 4520", "IE 4522", "IE 4525", "MEIE 4701"],
+      "Spring": ["IE 4530", "MEIE 4702"]
+    }
+  },
+  "Sample Plan of Study: Five Years, Three Co-ops in Summer 2/ Fall": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CHEM 1151", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["GE 1502", "INTB 1203", "MATH 1342", "PHYS 1151"]
+    },
+    "Year 2": {
+      "Fall": ["ECON 1115", "ENGW 1111", "IE 2310", "MATH 2321"],
+      "Spring": ["ENCP 2000", "IE 3412", "IE 4512", "MATH 2341"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3302", "ORGB 3201"],
+      "Spring": ["ENCP 3000", "IE 4510", "IE 4515", "IE 4516"]
+    },
+    "Year 4": {
+      "Spring": ["IE 4520", "IE 4522", "IE 4525"],
+      "Summer 1": ["MEIE 4701", "STRT 4501"]
+    },
+    "Year 5": {
+      "Spring": ["IE 4530", "MEIE 4702"]
+    }
+  }
+}

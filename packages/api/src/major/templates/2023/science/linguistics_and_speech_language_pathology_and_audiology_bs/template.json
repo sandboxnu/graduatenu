@@ -1,0 +1,19 @@
+{
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["BIOL 2217", "ENGW 1111", "LING 1150", "PSYC 1101", "SLPA 1000"],
+      "Spring": ["BIOL 2219", "LING 2350", "SLPA 1101", "SLPA 1205"]
+    },
+    "Year 2": {
+      "Fall": ["LING 3420", "PHYS 1145", "SLPA 1103", "SLPA 1203", "SLPA 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306", "LING 3422", "PHTH 2300"],
+      "Spring": ["HLTH 2100", "LING 3422", "PHTH 2210", "SLPA 1102"]
+    },
+    "Year 4": {
+      "Fall": ["LING 3412", "SLPA 4500", "SLPA 5107"],
+      "Spring": ["LING 3424", "SLPA 4651", "SLPA 6219"]
+    }
+  }
+}

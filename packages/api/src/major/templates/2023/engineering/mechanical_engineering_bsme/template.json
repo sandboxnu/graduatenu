@@ -1,0 +1,187 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "PHYS 1151", "PHYS 1152", "PHYS 1153", "MATH 1342"],
+      "Summer 1": ["MATH 2321", "ME 2350"]
+    },
+    "Year 2": {
+      "Fall": [
+        "ENGW 3302",
+        "MATH 2341",
+        "ME 2355",
+        "ME 2356",
+        "PHYS 1155",
+        "PHYS 1156",
+        "PHYS 1157"
+      ],
+      "Spring": [
+        "ENCP 2000",
+        "ME 2340",
+        "ME 2341",
+        "ME 2380",
+        "ME 2381",
+        "ME 3455",
+        "ME 3456"
+      ],
+      "Summer 1": ["ME 3475"]
+    },
+    "Year 3": {
+      "Spring": [
+        "EECE 2210",
+        "EECE 2211",
+        "ENCP 3000",
+        "ME 4505",
+        "ME 4506",
+        "ME 4555",
+        "ME 4570"
+      ],
+      "Summer 1": ["ME 4550", "MEIE 4701"]
+    },
+    "Year 4": {
+      "Spring": ["ME 4508", "MEIE 4702"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "PHYS 1151", "PHYS 1152", "PHYS 1153", "MATH 1342"],
+      "Summer 1": ["ME 2350", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": [
+        "ENCP 2000",
+        "MATH 2341",
+        "ME 2355",
+        "ME 2356",
+        "ME 2380",
+        "ME 2381",
+        "PHYS 1155",
+        "PHYS 1156",
+        "PHYS 1157"
+      ],
+      "Summer 2": ["ME 3475"]
+    },
+    "Year 3": {
+      "Fall": [
+        "ENGW 3302",
+        "ME 3455",
+        "ME 3456",
+        "ME 4505",
+        "ME 4506",
+        "ME 4570"
+      ],
+      "Summer 2": ["ME 4550", "MEIE 4701"]
+    },
+    "Year 4": {
+      "Fall": ["EECE 2210", "EECE 2211", "ENCP 3000", "ME 4555", "MEIE 4702"],
+      "Spring": ["ME 2340", "ME 2341", "ME 4508"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "ME 2350", "PHYS 1155", "PHYS 1156", "PHYS 1157"],
+      "Spring": [
+        "ENCP 2000",
+        "MATH 2341",
+        "ME 2355",
+        "ME 2356",
+        "ME 2380",
+        "ME 2381"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3302",
+        "ME 2340",
+        "ME 2341",
+        "ME 3455",
+        "ME 3456",
+        "ME 4508"
+      ],
+      "Summer 1": ["ME 3475"]
+    },
+    "Year 4": {
+      "Spring": ["ENCP 3000", "ME 4505", "ME 4506", "ME 4555", "ME 4570"],
+      "Summer 1": ["ME 4550", "MEIE 4701"]
+    },
+    "Year 5": {
+      "Spring": ["EECE 2210", "EECE 2211", "MEIE 4702"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"]
+    },
+    "Year 2": {
+      "Fall": [
+        "ENCP 2000",
+        "MATH 2321",
+        "ME 2350",
+        "PHYS 1155",
+        "PHYS 1156",
+        "PHYS 1157"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "MATH 2341",
+        "ME 2340",
+        "ME 2341",
+        "ME 2355",
+        "ME 2356",
+        "ME 2380",
+        "ME 2381"
+      ],
+      "Summer 2": ["ENGW 3302", "ME 3475"]
+    },
+    "Year 4": {
+      "Fall": [
+        "ME 3455",
+        "ME 3456",
+        "ME 4505",
+        "ME 4506",
+        "ME 4508",
+        "ME 4570"
+      ],
+      "Summer 2": ["ME 4550", "MEIE 4701"]
+    },
+    "Year 5": {
+      "Fall": ["EECE 2210", "EECE 2211", "ENCP 3000", "ME 4555", "MEIE 4702"]
+    }
+  }
+}

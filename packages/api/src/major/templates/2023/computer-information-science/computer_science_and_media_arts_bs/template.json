@@ -1,0 +1,41 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["ARTF 1124", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["ARTD 2100", "ARTF 1122", "CS 2510", "CS 3200"],
+      "Summer 1": ["ARTF 2223", "CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["ARTF 2220", "CS 1210", "CS 3000", "IS 4300"],
+      "Summer 2": ["MATH 2331"]
+    },
+    "Year 3": {
+      "Fall": ["CS 4300"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["ARTD 3000", "CS 4500"],
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Sample Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["ARTF 1124", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["ARTD 2100", "ARTF 1122", "CS 2510", "CS 3200"],
+      "Summer 1": ["ARTF 2223", "CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTF 2220", "CS 3500"],
+      "Spring": ["CS 1210", "IS 4300"],
+      "Summer 1": ["MATH 2331"]
+    },
+    "Year 3": {
+      "Spring": ["ARTD 3000", "CS 4300"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["ARTD 4530", "CS 4530"]
+    }
+  }
+}

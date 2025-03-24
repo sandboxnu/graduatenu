@@ -1,0 +1,35 @@
+{
+  "Sample Plan of Study: Four Years, 0 Co-ops (Option 1 of Science Requirement)": {
+    "Year 1": {
+      "Fall": ["BIOL 1143", "CAEP 2012", "PSYC 1101", "HSCI 1000"],
+      "Spring": ["BIOL 1147", "CAEP 2106", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["CAEP 1290", "CAEP 2101", "HLTH 2100", "HSCI 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306"],
+      "Spring": ["CAEP 4525", "HLTH 5450"]
+    },
+    "Year 4": {
+      "Fall": ["HLTH 5410"],
+      "Spring": ["HSCI 4740", "CAEP 4525", "HLTH 5450"]
+    }
+  },
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1 (Option 1 of Science Requirement)": {
+    "Year 1": {
+      "Fall": ["BIOL 1143", "CAEP 2012", "PSYC 1101", "HSCI 1000"],
+      "Spring": ["BIOL 1147", "CAEP 2106", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "CAEP 1290", "CAEP 2101", "HLTH 2100"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306"]
+    },
+    "Year 4": {
+      "Fall": ["HLTH 5410"],
+      "Spring": ["CAEP 4525", "HSCI 4740", "HLTH 5450"]
+    }
+  }
+}

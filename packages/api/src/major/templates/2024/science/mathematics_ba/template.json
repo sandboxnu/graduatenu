@@ -1,0 +1,57 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years": {
+    "Year 1": {
+      "Fall": ["MATH 1341", "MATH 1365", "PHYS 1161", "PHYS 1162", "MATH 1000"],
+      "Spring": ["MATH 1342", "PHYS 1165", "PHYS 1166", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "MATH 2331"],
+      "Spring": ["MATH 2201", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315", "MATH 3175", "MATH 3000"]
+    },
+    "Year 4": {
+      "Spring": ["MATH 3150"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["PHYS 1161", "PHYS 1162", "MATH 1365", "MATH 1341", "MATH 1000"],
+      "Spring": ["MATH 1342", "PHYS 1165", "PHYS 1166", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "MATH 2331", "EESC 2000"]
+    },
+    "Year 3": {
+      "Fall": ["MATH 2201", "MATH 3000"]
+    },
+    "Year 4": {
+      "Fall": ["ENGW 3315", "MATH 3560"]
+    },
+    "Year 5": {
+      "Fall": ["MATH 3150"],
+      "Spring": ["MATH 3175", "MATH 4025"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["MATH 1341", "MATH 1365", "PHYS 1161", "PHYS 1162", "MATH 1000"],
+      "Spring": ["MATH 1342", "PHYS 1165", "PHYS 1166", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "MATH 2331"],
+      "Spring": ["MATH 2201", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["MATH 3560", "ENGW 3315", "MATH 3000"]
+    },
+    "Year 4": {
+      "Spring": ["MATH 3150"]
+    },
+    "Year 5": {
+      "Spring": ["MATH 3175", "MATH 4025"]
+    }
+  }
+}

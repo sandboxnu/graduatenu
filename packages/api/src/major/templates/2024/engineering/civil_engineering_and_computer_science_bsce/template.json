@@ -1,0 +1,306 @@
+{
+  "Four Years, One Co-op in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": [
+        "CS 1800",
+        "CS 1802",
+        "CIVE 2221",
+        "CIVE 2222",
+        "CS 2500",
+        "CS 2501"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CIVE 2334",
+        "CIVE 2260",
+        "CIVE 2261",
+        "MATH 2321",
+        "CS 2500",
+        "CS 2501",
+        "CIVE 2221",
+        "CIVE 2222",
+        "CS 2510",
+        "CS 2511",
+        "ENCP 2000"
+      ],
+      "Spring": [
+        "CIVE 2320",
+        "CIVE 2321",
+        "CIVE 2331",
+        "CIVE 3464",
+        "CS 2510",
+        "CS 2511",
+        "ENCP 2000",
+        "CIVE 2260",
+        "CIVE 2261"
+      ],
+      "Summer 1": ["MATH 2341", "CIVE 2324"],
+      "Summer 2": ["CIVE 2340", "CIVE 2341", "MATH 2341"]
+    },
+    "Year 3": {
+      "Spring": [
+        "CIVE 2340",
+        "CIVE 2341",
+        "CS 3000",
+        "CS 3001",
+        "CS 3200",
+        "GE 3300"
+      ],
+      "Fall": [
+        "CIVE 2324",
+        "CS 3000",
+        "CS 3001",
+        "CS 3200",
+        "ENCP 2000",
+        "CIVE 2320",
+        "CIVE 2321",
+        "CIVE 2331",
+        "CIVE 3464",
+        "CS 2510",
+        "CS 2511"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CS 3500",
+        "ENCP 3000",
+        "ENGW 3302",
+        "CIVE 2324",
+        "CS 3000",
+        "CS 3001",
+        "CS 3200"
+      ],
+      "Spring": [
+        "CS 4500",
+        "GE 3300",
+        "CS 3500",
+        "CS 3501",
+        "ENCP 3000",
+        "ENGW 3302"
+      ]
+    },
+    "Year 5": {
+      "Spring": ["CS 4500", "GE 3300"],
+      "Fall": ["CS 3500", "ENCP 3000", "ENGW 3302"]
+    }
+  },
+  "Four Years, One Co-op in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": [
+        "CS 1800",
+        "CS 1802",
+        "CS 2500",
+        "CS 2501",
+        "CIVE 2221",
+        "CIVE 2222"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CIVE 2221",
+        "CIVE 2222",
+        "CIVE 2334",
+        "CS 2510",
+        "CS 2511",
+        "MATH 2321",
+        "CIVE 2260",
+        "CIVE 2261",
+        "CS 2500",
+        "CS 2501",
+        "ENCP 2000"
+      ],
+      "Spring": [
+        "CIVE 2260",
+        "CIVE 2261",
+        "CIVE 2320",
+        "CIVE 2321",
+        "CIVE 2331",
+        "CIVE 3464",
+        "ENCP 2000",
+        "CS 2510",
+        "CS 2511"
+      ],
+      "Summer 2": ["CIVE 2340", "CIVE 2341", "MATH 2341"],
+      "Summer 1": ["MATH 2341", "CIVE 2324"]
+    },
+    "Year 3": {
+      "Fall": [
+        "CIVE 2324",
+        "CS 3000",
+        "CS 3001",
+        "CS 3200",
+        "ENCP 2000",
+        "CIVE 2320",
+        "CIVE 2321",
+        "CIVE 2331",
+        "CIVE 3464",
+        "CS 2510",
+        "CS 2511"
+      ],
+      "Spring": [
+        "GE 3300",
+        "CIVE 2340",
+        "CIVE 2341",
+        "CS 3000",
+        "CS 3001",
+        "CS 3200"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CS 3500",
+        "ENCP 3000",
+        "ENGW 3302",
+        "CIVE 2324",
+        "CS 3000",
+        "CS 3001",
+        "CS 3200"
+      ],
+      "Spring": [
+        "CS 4500",
+        "GE 3300",
+        "CS 3500",
+        "CS 3501",
+        "ENCP 3000",
+        "ENGW 3302"
+      ]
+    },
+    "Year 5": {
+      "Spring": ["CS 4500", "GE 3300"],
+      "Fall": ["CS 3500", "ENCP 3000", "ENGW 3302"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Spring": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": [
+        "CS 1800",
+        "CS 1802",
+        "CIVE 2221",
+        "CIVE 2222",
+        "CS 2500",
+        "CS 2501"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CIVE 2260",
+        "CIVE 2261",
+        "CIVE 2334",
+        "MATH 2321",
+        "CS 2500",
+        "CS 2501",
+        "CIVE 2221",
+        "CIVE 2222",
+        "ENCP 2000"
+      ],
+      "Spring": [
+        "ENCP 2000",
+        "CIVE 2320",
+        "CIVE 2321",
+        "CIVE 2331",
+        "CIVE 3464",
+        "CS 2510",
+        "CS 2511"
+      ],
+      "Summer 1": ["MATH 2341", "CIVE 2324"],
+      "Summer 2": ["CIVE 2340", "CIVE 2341", "MATH 2341"]
+    },
+    "Year 3": {
+      "Spring": [
+        "GE 3300",
+        "CIVE 2340",
+        "CIVE 2341",
+        "CS 3000",
+        "CS 3001",
+        "CS 3200"
+      ],
+      "Fall": [
+        "CIVE 2320",
+        "CIVE 2321",
+        "CIVE 2331",
+        "CIVE 3464",
+        "CS 2510",
+        "CS 2511"
+      ]
+    },
+    "Year 4": {
+      "Spring": ["CS 3500", "CS 3501", "ENCP 3000", "ENGW 3302"],
+      "Fall": ["CIVE 2324", "CS 3000", "CS 3001", "CS 3200"]
+    },
+    "Year 5": {
+      "Spring": ["CS 4500", "GE 3300"],
+      "Fall": ["CS 3500", "ENCP 3000", "ENGW 3302"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CS 1800", "CS 1802", "CS 2500", "CS 2501"]
+    },
+    "Year 2": {
+      "Fall": [
+        "CIVE 2221",
+        "CIVE 2222",
+        "CIVE 2260",
+        "CIVE 2261",
+        "CIVE 2334",
+        "ENCP 2000",
+        "MATH 2321"
+      ],
+      "Summer 2": ["CIVE 2340", "CIVE 2341", "MATH 2341"]
+    },
+    "Year 3": {
+      "Fall": [
+        "CIVE 2320",
+        "CIVE 2321",
+        "CIVE 2331",
+        "CIVE 3464",
+        "CS 2510",
+        "CS 2511"
+      ]
+    },
+    "Year 4": {
+      "Fall": ["CIVE 2324", "CS 3000", "CS 3001", "CS 3200"]
+    },
+    "Year 5": {
+      "Fall": ["CS 3500", "ENCP 3000", "ENGW 3302"],
+      "Spring": ["CS 4500", "GE 3300"]
+    }
+  }
+}

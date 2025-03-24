@@ -1,0 +1,39 @@
+{
+  "Sample Plan of Study: Four Years, One Co-op in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["SLPA 1101", "SLPA 1205", "CS 2510", "BIOL 2217"],
+      "Summer 1": ["PHIL 1145"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 1341", "CS 3500", "SLPA 1103", "SLPA 1203", "CS 1210"],
+      "Spring": ["CS 3000", "PHTH 2210", "IS 4300", "PHYS 1145"]
+    },
+    "Year 3": {
+      "Fall": ["CS 3000", "PHTH 2210", "IS 4300", "PHYS 1145"],
+      "Spring": ["ENGW 3302", "SLPA 1200", "SLPA 1102", "CS 3200"]
+    },
+    "Year 4": {
+      "Fall": ["SLPA 4500", "SLPA 5107", "CS 4120"],
+      "Spring": ["CS 4530", "SLPA 4651", "SLPA 6219"]
+    }
+  },
+  "Sample Plan of Study: Four Years, One Co-op in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["SLPA 1101", "SLPA 1205", "CS 2510", "BIOL 2217"],
+      "Summer 1": ["PHIL 1145"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 1341", "CS 3500", "SLPA 1103", "SLPA 1203", "CS 1210"],
+      "Spring": ["CS 3000", "PHTH 2210", "IS 4300", "PHYS 1145"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3302", "SLPA 1200", "SLPA 1102", "CS 3200"]
+    },
+    "Year 4": {
+      "Fall": ["SLPA 4500", "SLPA 5107", "CS 4120"],
+      "Spring": ["CS 4530", "SLPA 4651", "SLPA 6219"]
+    }
+  }
+}

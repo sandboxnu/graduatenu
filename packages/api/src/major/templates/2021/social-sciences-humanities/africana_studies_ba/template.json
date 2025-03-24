@@ -1,0 +1,35 @@
+{
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CLTR 1000", "AFAM 1101", "AFAM 1104", "MATH 1215", "ENGW 1111"],
+      "Spring": ["AFAM 1113", "AFAM 1225", "AFAM 2296", "AFAM 1135"]
+    },
+    "Year 2": {
+      "Spring": ["EESH 2000"],
+      "Fall": ["EESH 2000"]
+    },
+    "Year 3": {
+      "Spring": ["AFAM 3663", "ENGW 3315"]
+    },
+    "Year 4": {
+      "Fall": ["AFAM 4700", "ENGW 3315"]
+    },
+    "Year 5": {
+      "Spring": ["AFAM 4700"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CLTR 1000", "AFAM 1101", "MATH 1215", "AFAM 1104", "ENGW 1111"],
+      "Spring": ["AFAM 1113", "AFAM 1135", "AFAM 1225"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["AFAM 4700", "ENGW 3315"]
+    },
+    "Year 5": {}
+  }
+}

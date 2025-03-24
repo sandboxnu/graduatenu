@@ -1,0 +1,75 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years, One Co-op in Summer 2/Fall": {},
+  "LAST NAME BEGINS WITH A–L": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "ARCH 1110", "ARCH 1120", "ARCH 1310", "PHYS 1141"],
+      "Spring": ["ARCH 2130", "ARCH 2240", "EEAM 2000", "ENGW 1111"],
+      "Summer 1": ["MATH 1241"]
+    },
+    "Year 2": {
+      "Fall": ["ARCH 2140", "ARCH 3450", "MATH 1241"],
+      "Spring": ["ARCH 2340", "ARCH 3170", "ARCH 3210"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["ARCH 5115", "ARCH 5330", "ARCH 5430", "ENGW 3314"],
+      "Spring": ["ARCH 3370", "ARCH 5140", "ARCH 5230", "ARCH 5310"]
+    }
+  },
+  "Four Years, One Co-op in Spring/Summer 1": {},
+  "LAST NAME BEGINS WITH M–Z": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "ARCH 1110", "ARCH 1120", "ARCH 1310", "PHYS 1141"],
+      "Spring": ["ARCH 2130", "ARCH 2240", "EEAM 2000", "ENGW 1111"],
+      "Summer 1": ["MATH 1241"]
+    },
+    "Year 2": {
+      "Fall": ["ARCH 2140", "ARCH 3450"],
+      "Spring": ["ARCH 2340", "ARCH 3170", "ARCH 3210"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["ARCH 5115", "ARCH 6330", "ARCH 6430", "ENGW 3314"],
+      "Spring": ["ARCH 3370", "ARCH 5140", "ARCH 5230", "ARCH 5310"]
+    }
+  },
+  "Five Years, Two Co-ops in Summer 2/Fall": {},
+  "Last Name Begins with A–L": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "ARCH 1110", "ARCH 1120", "ARCH 1310"],
+      "Spring": ["ARCH 2130", "ARCH 2240", "EEAM 2000", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["ARCH 2140", "ARCH 3450", "PHYS 1141"],
+      "Spring": ["ARCH 2340", "ARCH 3170", "ARCH 3210"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["ARCH 5330", "ARCH 5430", "ENGW 3314"],
+      "Spring": ["ARCH 5115", "ARCH 5310", "MATH 1241"]
+    },
+    "Year 5": {
+      "Spring": ["ARCH 3370", "ARCH 5140", "ARCH 5230"]
+    }
+  },
+  "Five Years, Two Co-ops in Spring/Summer 1": {},
+  "Division  B—Last Name Begins with M–Z": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "ARCH 1110", "ARCH 1120", "ARCH 1310"],
+      "Spring": ["ARCH 2130", "ARCH 2240", "EEAM 2000", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["ARCH 2140", "ARCH 3450", "PHYS 1141"],
+      "Spring": ["ARCH 2340", "ARCH 3170", "ARCH 3210"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["ARCH 5115", "ARCH 5430"]
+    },
+    "Year 5": {
+      "Fall": ["ARCH 5330", "ENGW 3314", "MATH 1241"],
+      "Spring": ["ARCH 3370", "ARCH 5140", "ARCH 5230", "ARCH 5310"]
+    }
+  }
+}

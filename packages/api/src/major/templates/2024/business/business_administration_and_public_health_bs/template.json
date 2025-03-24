@@ -1,0 +1,48 @@
+{
+  "DMSB Student Sample: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ACCT 1201",
+        "BUSN 1102",
+        "MATH 1231",
+        "PSYC 1101",
+        "ENGW 1110",
+        "HSCI 1000"
+      ],
+      "Spring": ["ENGW 1111", "INTB 1203", "PHTH 1260", "PSYC 1101"],
+      "Summer 1": ["ECON 1116"]
+    },
+    "Year 2": {
+      "Fall": ["ACCT 2301", "MGSC 2301", "FINA 2201", "HSCI 2000", "PHTH 2210"],
+      "Spring": ["BUSN 1103", "FINA 2201"]
+    },
+    "Year 3": {
+      "Spring": ["MGMT 3340", "PHTH 4202", "ENGW 3306"],
+      "Summer 1": ["PHTH 4540", "PHTH 4120"],
+      "Fall": ["ENGW 3304", "PHTH 4511"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Spring": ["STRT 4501"],
+      "Fall": ["PHTH 4202"]
+    }
+  },
+  "Bouvé Student Sample: Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "ENGW 1110", "HSCI 1000", "MATH 1231"],
+      "Spring": ["INTB 1203", "PHTH 1260", "PSYC 1101"],
+      "Summer 1": ["ECON 1116"]
+    },
+    "Year 2": {
+      "Fall": ["ACCT 2301", "FINA 2201", "HSCI 2000", "PHTH 2210"]
+    },
+    "Year 3": {
+      "Fall": ["PHTH 4511"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540"],
+      "Spring": ["ENGW 3306"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4202"]
+    }
+  }
+}

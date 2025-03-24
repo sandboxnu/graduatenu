@@ -1,0 +1,69 @@
+{
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1000",
+        "BIOL 1107",
+        "BIOL 1108",
+        "CHEM 1161",
+        "CHEM 1162",
+        "MATH 1341",
+        "POLS 1150",
+        "CHEM 1163"
+      ],
+      "Spring": [
+        "BIOL 2299",
+        "CHEM 2311",
+        "CHEM 2312",
+        "ENGW 1111",
+        "POLS 1155",
+        "POLS 1156"
+      ],
+      "Summer 1": ["BIOL 2301", "BIOL 2302"]
+    },
+    "Year 2": {
+      "Fall": ["BIOL 2309", "CHEM 2313", "CHEM 2314", "EESC 2000", "POLS 1160"],
+      "Spring": ["BIOL 3611", "BIOL 3612", "PHYS 1145", "PHYS 1146"]
+    },
+    "Year 3": {
+      "Fall": ["BIOL 3611", "BIOL 3612", "PHYS 1145", "PHYS 1146"],
+      "Spring": ["PHYS 1147", "PHYS 1148"]
+    },
+    "Year 4": {
+      "Fall": ["PHYS 1147", "PHYS 1148"],
+      "Spring": ["ENVR 2500", "ENVR 2501"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1000",
+        "BIOL 1107",
+        "BIOL 1108",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163",
+        "MATH 1341",
+        "POLS 1150"
+      ],
+      "Spring": [
+        "BIOL 2299",
+        "CHEM 2311",
+        "CHEM 2312",
+        "ENGW 1111",
+        "POLS 1155"
+      ],
+      "Summer 1": ["BIOL 2301", "BIOL 2302"]
+    },
+    "Year 2": {
+      "Fall": ["BIOL 2309", "CHEM 2313", "CHEM 2314", "EESC 2000", "POLS 1160"],
+      "Spring": ["BIOL 3611", "BIOL 3612", "PHYS 1145", "PHYS 1146"]
+    },
+    "Year 3": {
+      "Spring": ["PHYS 1147", "PHYS 1148"]
+    },
+    "Year 4": {
+      "Spring": ["ENVR 2500", "ENVR 2501"]
+    }
+  }
+}

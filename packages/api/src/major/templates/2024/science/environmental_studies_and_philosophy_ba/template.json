@@ -1,0 +1,13 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["ENVR 1101", "PHIL 1115", "PHIL 1180"],
+      "Spring": ["ENVR 2515", "ENVR 3150", "PHIL 2325"]
+    },
+    "Year 2": {
+      "Fall": ["ENVR 3300", "PHIL 1105", "PHIL 2330"]
+    },
+    "Year 3": {},
+    "Year 4": {}
+  }
+}

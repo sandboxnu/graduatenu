@@ -1,0 +1,42 @@
+{
+  "Four Years/Two Co-ops in Spring/Summer 1— Bouvé Student Sample": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "HSCI 1000", "PHTH 1260", "PSYC 1101", "SOCL 1000"],
+      "Spring": ["PSYC 1101", "SOCL 1101", "ENGW 1111"],
+      "Summer 1": ["PHTH 2350", "PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2300", "PHTH 2210", "SOCL 3300", "PHTH 2350"],
+      "Summer 2": ["PHTH 2515"],
+      "Spring": ["ANTH 2305", "EESH 2000", "PHTH 2300", "SOCL 2320"]
+    },
+    "Year 3": {
+      "Fall": ["ANTH 2305", "ENGW 3306", "SOCL 3441"],
+      "Summer 2": ["HSCI 4700", "PHTH 4540", "PHTH 4120"],
+      "Spring": ["ENGW 3308", "SOCL 3441"],
+      "Summer 1": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["HSCI 4720", "PHTH 4202"],
+      "Spring": ["SOCL 2321", "SOCL 4600"]
+    }
+  },
+  "Four Years/Two Co-ops in Summer 2/Fall—CSSH Student Sample": {
+    "Year 1": {
+      "Fall": ["PHTH 1260", "PSYC 1101", "SOCL 1000"],
+      "Spring": ["ENGW 1111", "SOCL 1101"],
+      "Summer 1": ["PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 2350", "SOCL 3300"],
+      "Spring": ["ANTH 2305", "EESH 2000", "PHTH 2300", "SOCL 2320"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3308", "SOCL 3441"],
+      "Summer 1": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Spring": ["SOCL 2321", "SOCL 4600"]
+    }
+  }
+}

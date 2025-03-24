@@ -1,0 +1,41 @@
+{
+  "Sample Plan of Study: Four Years, One Co-op": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 2217",
+        "BIOL 2218",
+        "ENGW 1111",
+        "MATH 1215",
+        "PSYC 1101",
+        "SLPA 1000"
+      ],
+      "Spring": [
+        "BIOL 2219",
+        "BIOL 2220",
+        "PHIL 1165",
+        "SLPA 1101",
+        "SLPA 1205"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHYS 1145",
+        "PHYS 1146",
+        "PSYC 3404",
+        "SLPA 1103",
+        "SLPA 1203",
+        "SLPA 2000"
+      ],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306", "PHTH 2210", "PHTH 2300", "PSYC 3466"],
+      "Spring": ["HLTH 5450", "SLPA 1102", "SLPA 1200", "EDUC 1111"]
+    },
+    "Year 4": {
+      "Fall": ["SLPA 4500", "SLPA 5107"],
+      "Spring": ["SLPA 4651", "SLPA 6219"]
+    }
+  }
+}

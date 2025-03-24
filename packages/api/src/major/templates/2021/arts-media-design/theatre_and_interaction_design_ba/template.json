@@ -1,0 +1,18 @@
+{
+  "Sample Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["THTR 1000", "THTR 1120", "ENGW 1111", "ARTF 1122", "ARTG 1250"],
+      "Spring": ["THTR 1101", "THTR 1131", "ARTF 2223", "ARTG 2250"]
+    },
+    "Year 2": {
+      "Fall": ["EEAM 2000", "THTR 2000", "THTR 1270", "ARTG 2260", "THTR 2325"]
+    },
+    "Year 3": {
+      "Fall": ["ARTG 2400", "ARTG 3350"]
+    },
+    "Year 4": {
+      "Spring": ["THTR 4702", "ARTG 3451"],
+      "Fall": ["ARTG 3700", "ARTG 4550", "THTR 4100"]
+    }
+  }
+}

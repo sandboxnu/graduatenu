@@ -1,0 +1,19 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["ECON 1000", "ECON 1115", "ENGW 1111", "MATH 1231", "PSYC 1101"],
+      "Spring": ["CS 1100", "ECON 1116", "PSYC 2320"]
+    },
+    "Year 2": {
+      "Fall": ["ECON 2315", "PSYC 3402"],
+      "Spring": ["ECON 2316", "EESC 2000", "PSYC 3466"]
+    },
+    "Year 3": {
+      "Spring": ["ECON 2560", "PSYC 3450"],
+      "Summer 1": ["ECON 4692"]
+    },
+    "Year 4": {
+      "Spring": ["ECON 4681"]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "ANTH 1101", "SOCL 1101", "JRNL 1150", "ENGW 1111"],
+      "Spring": ["ANTH 2305", "SOCL 2321", "JRNL 1101"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "JRNL 2201"]
+    },
+    "Year 3": {
+      "Fall": ["SOCL 3300", "JRNL 3550"]
+    },
+    "Year 4": {
+      "Spring": ["SOCL 4600"]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops  in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["ENGL 1000", "ENGL 1400", "ENGL 1450", "ARTF 1220", "ARTG 1001"],
+      "Spring": ["ENGL 1160", "ARTG 1270"],
+      "Summer 1": ["ARTG 1290"]
+    },
+    "Year 2": {
+      "Fall": ["ENGL 1700", "ARTG 1290"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["ARTG 4550"]
+    },
+    "Year 5": {
+      "Fall": ["ENGL 4710"],
+      "Spring": ["ARTG 4550"]
+    }
+  },
+  "Sample Plan of Study: Five Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["ENGL 1000", "ENGL 1400", "ENGL 1450", "ARTF 1220", "ARTG 1001"],
+      "Spring": ["ENGL 1160", "ARTG 1270"]
+    },
+    "Year 2": {
+      "Fall": ["ENGL 1700", "ARTG 1290"]
+    },
+    "Year 3": {},
+    "Year 4": {},
+    "Year 5": {
+      "Fall": ["ENGL 4710"],
+      "Spring": ["ARTG 4550"]
+    }
+  }
+}
