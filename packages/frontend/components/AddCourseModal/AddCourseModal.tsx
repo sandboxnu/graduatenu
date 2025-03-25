@@ -109,10 +109,21 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     }
     //or add course w/ no coreq
     else {
-      updatedSelectedCourseCoreqsMap.set(getCourseDisplayString(course), null);
+      const emptySchedCourse: ScheduleCourse2<null> = {
+        name: "",
+        classId: "",
+        subject: "",
+        numCreditsMin: 0,
+        numCreditsMax: 0,
+        nupaths: [],
+        id: null,
+      };
+      updatedSelectedCourseCoreqsMap.set(
+        getCourseDisplayString(course),
+        emptySchedCourse
+      );
     }
     setSelectedCourseCoreqsMap(updatedSelectedCourseCoreqsMap);
-    console.log("NEW MAP (with additions): ", updatedSelectedCourseCoreqsMap);
   };
 
   const removeSelectedCourse = (course: ScheduleCourse2<null>) => {
@@ -126,14 +137,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     const updatedSelectedCourseCoreqsMap = new Map(selectedCourseCoreqsMap);
     updatedSelectedCourseCoreqsMap.delete(getCourseDisplayString(course));
     setSelectedCourseCoreqsMap(updatedSelectedCourseCoreqsMap);
-    console.log(
-      "REMOVED FROM NEW MAP 1: ",
-      updatedSelectedCourseCoreqsMap.get(getCourseDisplayString(course))
-    );
-    console.log(
-      "NEW MAP (with single removal): ",
-      updatedSelectedCourseCoreqsMap
-    );
   };
 
   const removeSelectedCourses = (coursesToRemove: ScheduleCourse2<null>[]) => {
@@ -154,11 +157,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
       getCourseDisplayString(coursesToRemove[0])
     );
     setSelectedCourseCoreqsMap(updatedSelectedCourseCoreqsMap);
-    console.log("REMOVED FROM NEW MAP 2: ", removed);
-    console.log(
-      "NEW MAP (with multiple removals): ",
-      updatedSelectedCourseCoreqsMap
-    );
   };
 
   const isCourseAlreadySelected = (course: ScheduleCourse2<null>) => {
