@@ -107,22 +107,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
         coreqs[0]
       );
     }
-    //or add course w/ no coreq
-    else {
-      const emptySchedCourse: ScheduleCourse2<null> = {
-        name: "",
-        classId: "",
-        subject: "",
-        numCreditsMin: 0,
-        numCreditsMax: 0,
-        nupaths: [],
-        id: null,
-      };
-      updatedSelectedCourseCoreqsMap.set(
-        getCourseDisplayString(course),
-        emptySchedCourse
-      );
-    }
     setSelectedCourseCoreqsMap(updatedSelectedCourseCoreqsMap);
   };
 
@@ -150,9 +134,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
     //update selectedCourseCoreqsMap to remove a class and its coreqs
     const updatedSelectedCourseCoreqsMap = new Map(selectedCourseCoreqsMap);
-    const removed = updatedSelectedCourseCoreqsMap.get(
-      getCourseDisplayString(coursesToRemove[0])
-    );
     updatedSelectedCourseCoreqsMap.delete(
       getCourseDisplayString(coursesToRemove[0])
     );
