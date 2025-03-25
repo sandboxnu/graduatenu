@@ -125,8 +125,8 @@ export function createScheduleFromTemplate(
               classId,
               // If we have course details, use its credit values exactly as provided
               // This ensures 0-credit courses remain 0-credit
-              numCreditsMin: courseDetails ? courseDetails.numCreditsMin : 4,
-              numCreditsMax: courseDetails ? courseDetails.numCreditsMax : 4,
+              numCreditsMin: courseDetails ? courseDetails.numCreditsMin : 1,
+              numCreditsMax: courseDetails ? courseDetails.numCreditsMax : 1,
               prereqs: courseDetails?.prereqs,
               coreqs: courseDetails?.coreqs,
               nupaths: courseDetails?.nupaths,
