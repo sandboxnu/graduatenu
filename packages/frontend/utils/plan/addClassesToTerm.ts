@@ -18,7 +18,7 @@ export const addClassesToTerm = (
   const updatedPlan = produce(plan, (draftPlan) => {
     const schedule = draftPlan.schedule;
 
-    const term = findTerm(termSeason, plan, termYear);
+    const term = findTerm(termSeason, draftPlan, termYear);
 
     // populate courses with dnd id
     const terms = flattenScheduleToTerms(schedule);
