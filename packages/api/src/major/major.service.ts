@@ -4,6 +4,7 @@ import {
   SupportedMajors,
   SupportedConcentrations,
   Template,
+  UNDECIDED_STRING,
 } from "@graduate/common";
 import { Injectable, Logger } from "@nestjs/common";
 import { formatServiceCtx } from "../utils";
@@ -121,9 +122,9 @@ export class MajorService {
       return false;
     }
 
-    const isValidConcentrationName = concentrations.some(
-      (c) => c === concentrationName
-    );
+    const isValidConcentrationName =
+      concentrations.includes(concentrationName) ||
+      concentrationName === UNDECIDED_STRING;
 
     if (!isValidConcentrationName) {
       this.logger.debug(
@@ -135,10 +136,8 @@ export class MajorService {
         },
         MajorService.formatMajorServiceCtx("isValidConcentrationForMajor")
       );
-
       return false;
     }
-
     return true;
   }
 
