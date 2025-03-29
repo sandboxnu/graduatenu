@@ -69,7 +69,11 @@ export function createScheduleFromTemplate(
         console.log(`Processing ${termKey} with ${courses.length} courses`);
 
         // Map the term key to the schedule term
-        let termObj;
+        let termObj: {
+          status: StatusEnum;
+          classes: ScheduleCourse2<null>[];
+        };
+
         switch (termKey.toLowerCase()) {
           case "fall":
             termObj = yearObj.fall;
