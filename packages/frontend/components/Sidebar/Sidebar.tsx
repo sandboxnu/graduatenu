@@ -202,18 +202,20 @@ const Sidebar: React.FC<SidebarProps> = memo(
       getSectionError(2, 0, validationStatus);
 
     let concentrationValidationStatus = SidebarValidationStatus.Complete;
+
     if (validationStatus === undefined) {
       concentrationValidationStatus = SidebarValidationStatus.Loading;
     } else if (
       concentrationValidationError &&
-      concentrationValidationError.type === "AND" &&
-      concentrationValidationError.error.type === "AND_UNSAT_CHILD" &&
-      concentrationValidationError.error.childErrors[0].type === "SECTION" &&
-      concentrationValidationError.error.childErrors[0]
-        .maxPossibleChildCount === 0
+      concentrationValidationError.type === "SECTION" &&
+      concentrationValidationError.maxPossibleChildCount === 0
     ) {
       concentrationValidationStatus = SidebarValidationStatus.Error;
-    } else {
+    } else if (
+      concentrationValidationError &&
+      concentrationValidationError.type === "SECTION" &&
+      concentrationValidationError.maxPossibleChildCount > 0
+    ) {
       concentrationValidationStatus = SidebarValidationStatus.InProgress;
     }
 

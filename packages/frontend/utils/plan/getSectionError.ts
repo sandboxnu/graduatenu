@@ -10,8 +10,6 @@ export const getSectionError = (
   sectionIndex: number, // The specific section index within the AND
   validationStatus: MajorValidationResult | undefined
 ): MajorValidationError | undefined => {
-  //console.log(validationStatus);
-
   if (!validationStatus || validationStatus.type !== ResultType.Err) {
     return undefined;
   }
@@ -24,53 +22,45 @@ export const getSectionError = (
     throw new Error("Top-level requirement error should be AND.");
   }
 
-  // AND handeling
+  // AND handling
   const andReq = majorError.error;
 
   // Checking if the and requirement is unsatisfied
   if (andReq.type === MajorValidationErrorType.And.UnsatChild) {
     // The way it is set up: err -> majorRequirmentErorrs -> error -> childError -> error -> unsatchilderrors -> childerrors
     // Checks if childerrors is an array (since childerrors would have all the classes) and the andIndex is within the range of those classes
-    if (
-      Array.isArray(andReq.childErrors) &&
-      andIndex < andReq.childErrors.length
-    ) {
-      //console.log(andReq.childErrors); // getting all the classes (minor + major + concentration)
-      const specificAndError = andReq.childErrors[andIndex];
-      console.log(andReq.childErrors[2]);
-      // Ensure `specificAndError` has `childErrors` before accessing
-      // This isn't right what is happening here...
-      // We want to go into the childerrors
-      console.log(specificAndError);
-      // console.log(Array.isArray(specificAndError.error.unsatChildErrors?.childErrors));
+
+    const specificAndError = andReq.childErrors.find(
+      (childErrors: { childIndex: number }) => {
+        return childErrors.childIndex === andIndex;
+      }
+    );
+
+    if (!specificAndError) {
+      return undefined;
+    }
+
+    // Ensure `specificAndError` has `childErrors` before accessing
+    // This isn't right what is happening here...
+    // We want to go into the childerrors
+    if (specificAndError.type === MajorValidationErrorType.And.Type) {
       if (
-        "error" in specificAndError &&
-        Array.isArray(specificAndError.error.unsatChildErrors?.childErrors)
+        specificAndError.error.type ===
+        MajorValidationErrorType.And.UnsatChildAndNoSolution
       ) {
-        // console.log(sectionIndex);
-        // console.log(specificAndError.error.unsatChildErrors?.childErrors.find(
-        //   (childErrors: { childIndex: number }) => {
-        //     console.log("childIndex:", childErrors.childIndex);
-        //     // console.log("sectionIndex:", sectionIndex);
-        //     return childErrors.childIndex === sectionIndex;
-        //   }
-        // ));
-        return specificAndError.error.unsatChildErrors?.childErrors.find(
+        return specificAndError.error.unsatChildErrors.childErrors.find(
           (childErrors: { childIndex: number }) =>
             childErrors.childIndex === sectionIndex
         );
       } else if (
-        "error" in specificAndError &&
-        Array.isArray(specificAndError.error.childErrors)
+        specificAndError.error.type === MajorValidationErrorType.And.UnsatChild
       ) {
-        console.log(sectionIndex);
         return specificAndError.error.childErrors.find(
           (childErrors: { childIndex: number }) =>
             childErrors.childIndex === sectionIndex
         );
       }
     }
-
     return undefined;
   }
 
@@ -114,69 +104,67 @@ export const getSectionError = (
   return undefined;
 };
 
-// /**
-//  * Gets the error object for a given section if it exists from the
-//  * MajorValidationResult object.
-//  *
-//  * @param   index            The index of the section
-//  * @param   validationStatus The result of major validation
-//  * @returns                  The error for that section or undefined.
-//  */
-// export const getSectionError = (
-//   index: number,
-//   validationStatus: MajorValidationResult | undefined
-// ): MajorValidationError | undefined => {
-//   console.log(validationStatus);
-
-//   // Find the error for this sidebar component
-//   if (validationStatus && validationStatus.type == ResultType.Err) {
-//     // Both these cases should be unreachable, but help to narrow types
-//     if (!validationStatus.err.majorRequirementsError)
-//       throw new Error("Top level requirement should have an error.");
-//     if (
-//       validationStatus.err.majorRequirementsError.type !==
-//       MajorValidationErrorType.And.Type
-//     )
-//       throw new Error("Top level requirement error should be AND.");
-
-//     const andReq = validationStatus.err.majorRequirementsError?.error;
-
-//     if (andReq.type == MajorValidationErrorType.And.UnsatChild) {
-//       //console.log(MajorValidationErrorType.And.UnsatChild);
-//       return andReq.childErrors.find((error) => {
-//         return error.childIndex === index;
-//       });
-//     } else if (
-//       andReq.type == MajorValidationErrorType.And.NoSolution &&
-//       andReq.discoveredAtChild == index
-//     ) {
-//       // Create a section error so we don't display a check on the section that
-//       // caused the "no solution" error.
-//       return {
-//         type: "SECTION",
-//         sectionTitle: "No Solution Section",
-//         childErrors: [],
-//         minRequiredChildCount: 0,
-//         maxPossibleChildCount: 0,
-//       };
-//     } else if (
-//       andReq.type == MajorValidationErrorType.And.UnsatChildAndNoSolution
-//     ) {
-//       if (andReq.noSolution.discoveredAtChild === index) {
-//         return {
-//           type: "SECTION",
-//           sectionTitle: "No Solution Section",
-//           childErrors: [],
-//           minRequiredChildCount: 0,
-//           maxPossibleChildCount: 0,
-//         };
-//       } else {
-//         return andReq.unsatChildErrors.childErrors.find((error) => {
-//           return error.childIndex === index;
-//         });
-//       }
-//     }
-
-//     return undefined;
-//   }
-// };
+/**
+ * Gets the error object for a given section if it exists from the
+ * MajorValidationResult object.
+ *
+ * @param   index            The index of the section
+ * @param   validationStatus The result of major validation
+ * @returns                  The error for that section or undefined.
+ */
+/**
+ * Export const getSectionError = ( index: number, validationStatus:
+ * MajorValidationResult | undefined ): MajorValidationError | undefined => {
+ * console.log(validationStatus);
+ *
+ * // Find the error for this sidebar component if (validationStatus &&
+ * validationStatus.type == ResultType.Err) { // Both these cases should be
+ * unreachable, but help to narrow types if
+ * (!validationStatus.err.majorRequirementsError) throw new Error("Top level
+ * requirement should have an error."); if (
+ * validationStatus.err.majorRequirementsError.type !==
+ * MajorValidationErrorType.And.Type ) throw new Error("Top level requirement
+ * error should be AND.");
+ *
+ *     const andReq = validationStatus.err.majorRequirementsError?.error;
+ *
+ *     if (andReq.type == MajorValidationErrorType.And.UnsatChild) {
+ *       //console.log(MajorValidationErrorType.And.UnsatChild);
+ *       return andReq.childErrors.find((error) => {
+ *         return error.childIndex === index;
+ *       });
+ *     } else if (
+ *       andReq.type == MajorValidationErrorType.And.NoSolution &&
+ *       andReq.discoveredAtChild == index
+ *     ) {
+ *       // Create a section error so we don't display a check on the section that
+ *       // caused the "no solution" error.
+ *       return {
+ *         type: "SECTION",
+ *         sectionTitle: "No Solution Section",
+ *         childErrors: [],
+ *         minRequiredChildCount: 0,
+ *         maxPossibleChildCount: 0,
+ *       };
+ *     } else if (
+ *       andReq.type == MajorValidationErrorType.And.UnsatChildAndNoSolution
+ *     ) {
+ *       if (andReq.noSolution.discoveredAtChild === index) {
+ *         return {
+ *           type: "SECTION",
+ *           sectionTitle: "No Solution Section",
+ *           childErrors: [],
+ *           minRequiredChildCount: 0,
+ *           maxPossibleChildCount: 0,
+ *         };
+ *       } else {
+ *         return andReq.unsatChildErrors.childErrors.find((error) => {
+ *           return error.childIndex === index;
+ *         });
+ *       }
+ *     }
+ *
+ *     return undefined;
+ *
+ * } };
+ */
