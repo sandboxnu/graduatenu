@@ -29,7 +29,6 @@ import { useForm } from "react-hook-form";
 import { mutate } from "swr";
 import {
   useSupportedMajors,
-  //useSupportedMinors,
   USE_STUDENT_WITH_PLANS_SWR_KEY,
   useStudentWithPlans,
   useSupportedMinors,
@@ -92,9 +91,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   if (supportedMinorsError) {
     handleApiClientError(supportedMinorsError, router);
   }
-  //if (supportedMinorsError) {
-  //handleApiClientError(supportedMinorsError, router);
-  //}
 
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();

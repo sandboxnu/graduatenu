@@ -301,7 +301,6 @@ export function validateMajor2(
   if (minor) {
     // Get the minor requirements and assign them
     minorRequirements = getMinorRequirement(minor);
-    // console.log(minorRequirements)
   }
 
   let majorRequirements: Requirement2[] = [];
@@ -336,7 +335,6 @@ export function validateMajor2(
   }
   const totalCreditsRequirementError =
     creditsResult.type === ResultType.Ok ? undefined : creditsResult.err;
-  console.log("error");
   return Err({
     majorRequirementsError,
     totalCreditsRequirementError,

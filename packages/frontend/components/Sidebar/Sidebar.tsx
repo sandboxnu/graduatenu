@@ -328,6 +328,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                       section={concentration}
                       courseData={courseData}
                       dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
+                      loading={isCoursesLoading}
                       coursesTaken={[]}
                     />
                   )}
@@ -373,6 +374,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                             courseData={courseData}
                             dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
                             validationStatus={sectionValidationStatus}
+                            loading={isCoursesLoading}
                             coursesTaken={coursesTaken}
                           ></SidebarSection>
                         );
