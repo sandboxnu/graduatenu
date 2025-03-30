@@ -170,7 +170,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     new Map<any, ScheduleCourse2<null>>()
   );
   useEffect(() => {
-    if (!courses || courses.length === 0 || isCourseSearchLoading) {
+    if (!courses || courses.length === 0) {
       console.log("Courses are not ready yet...");
       return;
     }
@@ -199,7 +199,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     };
 
     fetchCoreqsForAllCourses();
-  }, [courses, catalogYear]);
+  }, [courses, catalogYear, isCourseAlreadyAdded]);
 
   const [expandedCourses, setExpandedCourses] = useState<
     Record<string, boolean>
