@@ -16,6 +16,7 @@ export class PlanModel<T> {
   student: StudentModel<null>;
   schedule: Schedule2<T>;
   major: string;
+  majors: string[];
   concentration: string | undefined;
   catalogYear: number;
   createdAt: Date;

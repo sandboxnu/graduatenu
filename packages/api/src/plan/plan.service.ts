@@ -24,8 +24,9 @@ export class PlanService {
   ) {}
 
   create(createPlanDto: CreatePlanDto, student: Student): Promise<Plan> {
+    console.log("createPlanDto", createPlanDto);
     const {
-      major: majorName,
+      majors: [majorName],
       catalogYear,
       concentration: concentrationName,
     } = createPlanDto;

@@ -23,7 +23,7 @@ export class CreatePlanDtoWithoutSchedule {
 
   @IsString()
   @IsOptional()
-  major?: string;
+  majors?: string[];
 
   @IsString()
   @IsOptional()

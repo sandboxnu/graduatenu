@@ -14,6 +14,9 @@ export class Plan {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ type: "json", nullable: true })
+  majors: string[];
+
   @Column()
   name: string;
 
