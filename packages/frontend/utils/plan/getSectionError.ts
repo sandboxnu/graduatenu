@@ -37,7 +37,7 @@ export const getSectionError = (
     );
 
     if (!specificAndError) {
-      return undefined;
+      return;
     }
 
     // Ensure `specificAndError` has `childErrors` before accessing
@@ -61,7 +61,6 @@ export const getSectionError = (
         );
       }
     }
-    return undefined;
   }
 
   // **Handle "AND_NO_SOLUTION" separately**

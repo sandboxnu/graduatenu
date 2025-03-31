@@ -1,4 +1,4 @@
-import { Link, Stack, Text } from "@chakra-ui/react";
+import { Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import {
   MajorValidationError,
@@ -179,7 +179,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const courseData = createCourseMap(courses, courseErrors);
 
-    if (isMajorLoading) {
+    if (isMajorLoading || isMinorLoading) {
       return <SidebarContainer title="Loading..." />;
     }
 
@@ -198,8 +198,40 @@ const Sidebar: React.FC<SidebarProps> = memo(
       return <SidebarContainer title="" />;
     }
 
+    if (selectedPlan.minor && !minor) {
+      if (minorError) {
+        handleApiClientError(minorError, router);
+      }
+    }
+
+    const getSidebarValidationStatus = (
+      validationError: MajorValidationError | undefined
+    ): SidebarValidationStatus => {
+      console.log(validationError);
+      if (validationStatus === undefined) {
+        return SidebarValidationStatus.Loading;
+      } else if (
+        validationError &&
+        validationError.type === "SECTION" &&
+        validationError.maxPossibleChildCount === 0
+      ) {
+        return SidebarValidationStatus.Error;
+      } else if (
+        validationError &&
+        validationError.type === "SECTION" &&
+        validationError.maxPossibleChildCount > 0
+      ) {
+        return SidebarValidationStatus.InProgress;
+      }
+      return SidebarValidationStatus.Complete;
+    };
+
     const concentrationValidationError: MajorValidationError | undefined =
-      getSectionError(2, 0, validationStatus);
+      getSectionError(
+        (major ? 1 : 0) + (minor ? 1 : 0), // offset by major and minor length
+        0, // the concentration AND index is always 0
+        validationStatus
+      );
 
     let concentrationValidationStatus = SidebarValidationStatus.Complete;
 
@@ -250,7 +282,8 @@ const Sidebar: React.FC<SidebarProps> = memo(
               size="md"
               variant="enclosed-colored"
               colorScheme="blue"
-              mt={3}
+              pt={3}
+              backgroundColor="neutral.50"
             >
               <TabList
                 display="flex"
@@ -264,8 +297,9 @@ const Sidebar: React.FC<SidebarProps> = memo(
                   ml={4}
                   p={1}
                   borderTopRadius="lg"
+                  fontWeight="bold"
                 >
-                  Major
+                  MAJOR
                 </Tab>
                 {minor && (
                   <Tab
@@ -273,8 +307,9 @@ const Sidebar: React.FC<SidebarProps> = memo(
                     flex="0.4"
                     p={1}
                     borderTopRadius="lg"
+                    fontWeight="bold"
                   >
-                    Minor(s)
+                    MINOR
                   </Tab>
                 )}
               </TabList>
@@ -288,27 +323,10 @@ const Sidebar: React.FC<SidebarProps> = memo(
                       index, // Section index, aligning with the array structure
                       validationStatus
                     );
-                    //console.log(index);
-                    let sectionValidationStatus =
-                      SidebarValidationStatus.Complete;
 
-                    if (validationStatus === undefined) {
-                      sectionValidationStatus = SidebarValidationStatus.Loading;
-                    } else if (
-                      sectionValidationError &&
-                      sectionValidationError.type === "SECTION" &&
-                      sectionValidationError.maxPossibleChildCount === 0
-                    ) {
-                      sectionValidationStatus = SidebarValidationStatus.Error;
-                    } else if (
-                      sectionValidationError &&
-                      sectionValidationError.type === "SECTION" &&
-                      sectionValidationError.maxPossibleChildCount > 0
-                    ) {
-                      sectionValidationStatus =
-                        SidebarValidationStatus.InProgress;
-                    }
-
+                    const sectionValidationStatus = getSidebarValidationStatus(
+                      sectionValidationError
+                    );
                     return (
                       <SidebarSection
                         key={section.title}
@@ -329,14 +347,23 @@ const Sidebar: React.FC<SidebarProps> = memo(
                       courseData={courseData}
                       dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
                       loading={isCoursesLoading}
-                      coursesTaken={[]}
+                      coursesTaken={coursesTaken}
                     />
                   )}
                 </TabPanel>
                 <TabPanel width="100%" p={0} m={0}>
                   {minor && (
                     <>
-                      <Text>Minor Requirments</Text>
+                      <Flex>
+                        <Heading
+                          color="primary.blue.dark.main"
+                          fontSize="md"
+                          py={4}
+                          px={4}
+                        >
+                          Minor Requirements
+                        </Heading>
+                      </Flex>
                       {minor.requirementSections.map((section, index) => {
                         const sectionValidationError:
                           | MajorValidationError
@@ -346,27 +373,8 @@ const Sidebar: React.FC<SidebarProps> = memo(
                           validationStatus
                         );
 
-                        let sectionValidationStatus =
-                          SidebarValidationStatus.Complete;
-
-                        if (validationStatus === undefined) {
-                          sectionValidationStatus =
-                            SidebarValidationStatus.Loading;
-                        } else if (
-                          sectionValidationError &&
-                          sectionValidationError.type === "SECTION" &&
-                          sectionValidationError.maxPossibleChildCount === 0
-                        ) {
-                          sectionValidationStatus =
-                            SidebarValidationStatus.Error;
-                        } else if (
-                          sectionValidationError &&
-                          sectionValidationError.type === "SECTION" &&
-                          sectionValidationError.maxPossibleChildCount > 0
-                        ) {
-                          sectionValidationStatus =
-                            SidebarValidationStatus.InProgress;
-                        }
+                        const sectionValidationStatus =
+                          getSidebarValidationStatus(sectionValidationError);
                         return (
                           <SidebarSection
                             key={index}
