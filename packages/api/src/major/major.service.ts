@@ -164,34 +164,6 @@ export class MajorService {
   }
 
   /**
-   * Retrieves the template for a specific major and catalog year
-   *
-   * @param   majorName   Name of the major
-   * @param   catalogYear Catalog year
-   * @returns             The template if found, null otherwise
-   */
-  getTemplateForMajor(majorName: string, catalogYear: number): Template | null {
-    const major = this.findByMajorAndYear(majorName, catalogYear);
-    if (!major) {
-      this.logger.debug(
-        { message: "Major not found for template", majorName, catalogYear },
-        MajorService.formatMajorServiceCtx("getTemplateForMajor")
-      );
-      return null;
-    }
-
-    if (!major.baseTemplate) {
-      this.logger.debug(
-        { message: "No template found for major", majorName, catalogYear },
-        MajorService.formatMajorServiceCtx("getTemplateForMajor")
-      );
-      return null;
-    }
-
-    return major.baseTemplate;
-  }
-
-  /**
    * Retrieves all templates for a specific catalog year
    *
    * @param   catalogYear Catalog year
