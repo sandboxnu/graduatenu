@@ -1,0 +1,114 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "DS 2000",
+        "ENGW 1111",
+        "PHIL 1115"
+      ],
+      "Spring": [
+        "CS 3200",
+        "DS 2500",
+        "PHIL 1145",
+        "PHIL 2325"
+      ],
+      "Summer 1": [
+        "MATH 1341"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "DS 3000",
+        "DS 3500",
+        "PHIL 4515",
+        "CS 1210",
+        "ECON 2350"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 4200",
+        "PHIL 5005"
+      ],
+      "Summer 1": [
+        "ECON 2350"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4300",
+        "DS 4400",
+        "PHIL 3050"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ],
+      "Fall": [
+        "DS 4200",
+        "PHIL 5005"
+      ],
+      "Summer 2": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "DS 4420"
+      ],
+      "Fall": [
+        "DS 4300",
+        "DS 4400",
+        "PHIL 3050"
+      ]
+    }
+  },
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "DS 2000",
+        "ENGW 1111",
+        "PHIL 1115"
+      ],
+      "Spring": [
+        "CS 3200",
+        "DS 2500",
+        "PHIL 1145",
+        "PHIL 2325"
+      ],
+      "Summer 1": [
+        "MATH 1341"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 1210",
+        "DS 3000",
+        "DS 3500",
+        "PHIL 4515",
+        "ECON 2350"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "DS 4200",
+        "PHIL 5005"
+      ],
+      "Summer 2": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "DS 4300",
+        "DS 4400",
+        "PHIL 3050"
+      ],
+      "Spring": [
+        "DS 4420"
+      ]
+    }
+  }
+}

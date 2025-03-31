@@ -1,0 +1,162 @@
+{
+  "Four Years, One Co-op in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CHME 2308",
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOL 1115",
+        "CHEM 2311",
+        "CHEM 2312",
+        "CHME 2320",
+        "MATH 2321"
+      ],
+      "Spring": [
+        "CHEM 2313",
+        "CHEM 2314",
+        "CHEM 2321",
+        "CHEM 2322",
+        "CHEM 2323",
+        "ENCP 2000",
+        "CHME 2310",
+        "MATH 2341"
+      ],
+      "Summer 1": [
+        "BIOL 2301",
+        "BIOL 2302"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CHME 3312",
+        "CHME 3315",
+        "CHME 3316",
+        "CHME 3322",
+        "ENGW 3302"
+      ],
+      "Spring": [
+        "CHME 4315",
+        "CHME 4316",
+        "CHME 4510",
+        "CHME 4701",
+        "CHME 3312",
+        "CHME 3315",
+        "CHME 3316",
+        "CHME 3322",
+        "ENGW 3302"
+      ],
+      "Summer 1": [
+        "BIOL 3611",
+        "BIOL 3612"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "BIOL 4707",
+        "CHME 4512",
+        "CHME 4703",
+        "CHME 4705",
+        "ENCP 3000",
+        "CHME 4315",
+        "CHME 4316",
+        "CHME 4510",
+        "CHME 4701"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "CHME 4512",
+        "CHME 4703",
+        "CHME 4705"
+      ]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CHME 2308",
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOL 1115",
+        "CHEM 2311",
+        "CHEM 2312",
+        "CHME 2320",
+        "MATH 2321"
+      ],
+      "Spring": [
+        "CHEM 2313",
+        "CHEM 2314",
+        "CHEM 2321",
+        "CHEM 2322",
+        "CHEM 2323",
+        "ENCP 2000",
+        "CHME 2310",
+        "MATH 2341"
+      ],
+      "Summer 1": [
+        "BIOL 2301",
+        "BIOL 2302"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CHME 3312",
+        "CHME 3315",
+        "CHME 3316",
+        "CHME 3322",
+        "ENGW 3302"
+      ],
+      "Summer 1": [
+        "BIOL 3611",
+        "BIOL 3612"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "BIOL 4707",
+        "CHME 4315",
+        "CHME 4316",
+        "CHME 4510",
+        "CHME 4701",
+        "ENCP 3000"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "CHME 4512",
+        "CHME 4703",
+        "CHME 4705"
+      ]
+    }
+  }
+}

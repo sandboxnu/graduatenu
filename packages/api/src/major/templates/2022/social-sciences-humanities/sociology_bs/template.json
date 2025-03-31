@@ -1,0 +1,69 @@
+{
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "SOCL 1000",
+        "SOCL 1101",
+        "ENGW 1111",
+        "MATH 1215",
+        "ANTH 1101"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "SOCL 2320",
+        "SOCL 3300",
+        "EESH 2000"
+      ],
+      "Spring": [
+        "SOCL 2321",
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3315"
+      ],
+      "Fall": [
+        "ENGW 3315",
+        "SOCL 2321"
+      ]
+    },
+    "Year 4": {},
+    "Year 5": {
+      "Spring": [
+        "SOCL 4600"
+      ]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "SOCL 1000",
+        "SOCL 1101",
+        "ENGW 1111",
+        "MATH 1215",
+        "ANTH 1101"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "SOCL 2320",
+        "SOCL 3300",
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "ENGW 3315",
+        "SOCL 2321"
+      ]
+    },
+    "Year 4": {},
+    "Year 5": {
+      "Spring": [
+        "SOCL 4600"
+      ]
+    }
+  }
+}

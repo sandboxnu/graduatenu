@@ -1,0 +1,24 @@
+{
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "PHYS 1161", "MATH 1341"],
+      "Spring": ["CS 2510", "MATH 1342", "PHYS 1165", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "PHYS 2303", "DS 3000", "MATH 2321"],
+      "Spring": ["MATH 2341", "PHYS 3601", "DS 4200", "CS 1210"],
+      "Summer 1": ["CS 3200", "MATH 3081"]
+    },
+    "Year 3": {
+      "Spring": ["PHYS 3602", "PHYS 4305", "DS 4300"],
+      "Summer 1": ["PHYS 3600", "PHYS 3603"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4400", "PHYS 4115", "ENGW 3307"]
+    },
+    "Year 5": {
+      "Spring": ["PHYS 5318"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {}
+}

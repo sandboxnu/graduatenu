@@ -1,0 +1,26 @@
+{
+  "Four Years, Two Co-ops in Summer 2/ Fall": {
+    "Year 1": {
+      "Fall": [
+        "ANTH 1101",
+        "PHIL 1115",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "ANTH 2305",
+        "PHIL 2325"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHIL 2330"
+      ],
+      "Spring": [
+        "ANTH 3410",
+        "ANTH 3421"
+      ]
+    },
+    "Year 3": {},
+    "Year 4": {}
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "Sample Plan of Study - Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ACCT 1201",
+        "BUSN 1102",
+        "MATH 1231",
+        "PHIL 1160",
+        "POLS 1150"
+      ],
+      "Spring": [
+        "ACCT 2301",
+        "ECON 1116",
+        "ENGW 1111",
+        "MGSC 2301",
+        "ECON 2350"
+      ],
+      "Summer 1": [
+        "MISM 2301",
+        "MKTG 2201"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BUSN 1103",
+        "ECON 2316",
+        "FINA 2201",
+        "INNO 2301",
+        "PHIL 1170"
+      ],
+      "Summer 2": [
+        "ORGB 3201"
+      ],
+      "Spring": [
+        "POLS 1160",
+        "PHIL 2303",
+        "BUSN 1103"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "PHIL 2303",
+        "POLS 1160"
+      ],
+      "Summer 2": [
+        "ENGW 3315"
+      ],
+      "Spring": [
+        "ORGB 3201",
+        "POLS 3405"
+      ],
+      "Summer 1": [
+        "ENGW 3315"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "PHIL 3435",
+        "POLS 3405"
+      ]
+    },
+    "Core Term 1": {
+      "Spring": [
+        "PHIL 3435"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "BUSN 1102",
+        "ACCT 1201",
+        "PHIL 1160",
+        "POLS 1150",
+        "MATH 1231"
+      ],
+      "Spring": [
+        "ENGW 1111",
+        "ECON 2350",
+        "ECON 1116",
+        "ACCT 2301"
+      ],
+      "Summer 1": [
+        "MKTG 2201",
+        "MISM 2301"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "FINA 2201",
+        "INNO 2301",
+        "ECON 2316",
+        "PHIL 1170"
+      ],
+      "Spring": [
+        "POLS 1160",
+        "PHIL 2303",
+        "BUSN 1103"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ORGB 3201",
+        "POLS 3405"
+      ],
+      "Summer 1": [
+        "ENGW 3315"
+      ]
+    },
+    "Core Term 1": {
+      "Spring": [
+        "PHIL 3435"
+      ]
+    }
+  }
+}

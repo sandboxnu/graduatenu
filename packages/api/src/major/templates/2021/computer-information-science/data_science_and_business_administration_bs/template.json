@@ -1,0 +1,110 @@
+{
+  "Sample Patterns:": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ACCT 1201",
+        "ENGW 1111",
+        "ECON 1115"
+      ],
+      "Spring": ["CS 2510", "CS 3200", "MATH 1341", "ECON 1115", "ACCT 1201"],
+      "Summer 1": ["CS 3500", "ACCT 2301"]
+    },
+    "Year 2": {
+      "Fall": [
+        "MGSC 2301",
+        "DS 3000",
+        "INTB 1203",
+        "CS 3500",
+        "MATH 1341",
+        "ACCT 2301"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 4200",
+        "DS 4300",
+        "FINA 2201",
+        "INTB 1203",
+        "DS 3000"
+      ],
+      "Summer 1": ["MKTG 2201"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4400", "SCHM 2301", "DS 4200", "DS 4300", "MISM 2301"],
+      "Summer 1": ["FINA 2201", "ORGB 3201", "MKTG 2201"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420", "BUSN 5001"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["DS 4420", "SCHM 2301", "BUSN 5001"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ACCT 1201",
+        "ENGW 1111",
+        "ECON 1115"
+      ],
+      "Spring": ["CS 2510", "CS 3200", "MATH 1341", "ECON 1115", "ACCT 1201"],
+      "Summer 1": ["CS 3500", "ACCT 2301"]
+    },
+    "Year 2": {
+      "Fall": [
+        "MGSC 2301",
+        "DS 3000",
+        "INTB 1203",
+        "CS 3500",
+        "MATH 1341",
+        "ACCT 2301"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 4200",
+        "DS 4300",
+        "FINA 2201",
+        "INTB 1203",
+        "DS 3000"
+      ],
+      "Summer 1": ["MKTG 2201"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4400", "SCHM 2301", "DS 4200", "DS 4300", "MISM 2301"],
+      "Summer 1": ["FINA 2201", "ORGB 3201", "MKTG 2201"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420", "BUSN 5001"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["DS 4420", "SCHM 2301", "BUSN 5001"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1800", "CS 2500", "CS 1200", "ECON 1115", "ENGW 1111"],
+      "Spring": ["CS 2510", "CS 3200", "ACCT 1201"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "MATH 1341", "MGSC 2301", "ACCT 2301"],
+      "Spring": ["FINA 2201", "INTB 1203", "DS 3000", "CS 1210"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4200", "DS 4300", "MISM 2301"],
+      "Summer 1": ["ORGB 3201", "MKTG 2201"]
+    },
+    "Year 4": {
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["DS 4420", "SCHM 2301", "BUSN 5001"]
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "MUSC 1000",
+        "MUSC 1001",
+        "MUSC 1119",
+        "MUST 1220",
+        "MUSC 1002",
+        "MUSC 1201"
+      ],
+      "Spring": [
+        "MUSC 1201",
+        "MUSC 2350",
+        "MUSC 1202"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "EEAM 2000",
+        "MUSC 1202",
+        "MUST 2431",
+        "MUSC 2350",
+        "MUST 2102"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "MUST 2102"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENGW 3314"
+      ],
+      "Spring": [
+        "MUST 4611"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "MUSC 1000",
+        "MUSC 1001",
+        "MUSC 1119",
+        "MUST 1220",
+        "MUSC 1002",
+        "MUSC 1201"
+      ],
+      "Spring": [
+        "MUSC 1201",
+        "MUSC 2350",
+        "MUSC 1202"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "EEAM 2000",
+        "MUSC 1202",
+        "MUST 2431",
+        "MUSC 2350",
+        "MUST 2102"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "MUST 2102"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENGW 3314"
+      ],
+      "Spring": [
+        "MUST 4611"
+      ]
+    }
+  },
+  "Four Years, No Co-op": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "MUSC 1000",
+        "MUSC 1002",
+        "MUSC 1201",
+        "MUST 1220"
+      ],
+      "Spring": [
+        "MUSC 1202",
+        "MUSC 2350"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "MUSC 2350",
+        "MUST 2102",
+        "MUST 2431"
+      ]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": [
+        "MUST 4611"
+      ]
+    }
+  }
+}

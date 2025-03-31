@@ -1,0 +1,19 @@
+{
+  "Sample Four Years, Two Co-ops Plan of Study": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "SMFA 3000", "ENGW 1111"],
+      "Spring": ["SMFA 3000", "ARTH 2210", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["SMFA 3000", "ARTH 2211", "EEAM 2010"]
+    },
+    "Year 3": {
+      "Fall": ["SMFA 3000"],
+      "Spring": ["ENGW 3314"]
+    },
+    "Year 4": {
+      "Fall": ["SMFA 3000", "SMFA 4000"],
+      "Spring": ["SMFA 3000", "SMFA 4000"]
+    }
+  }
+}

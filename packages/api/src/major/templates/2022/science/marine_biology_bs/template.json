@@ -1,0 +1,108 @@
+{
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "EEMB 1101",
+        "ENVR 1000",
+        "ENVR 1500",
+        "MATH 1251"
+      ],
+      "Spring": [
+        "CHEM 1161",
+        "EEMB 1105",
+        "PHYS 1161",
+        "EEMB 2400"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOL 2301",
+        "CHEM 2311",
+        "EESC 2000",
+        "ENGW 3307",
+        "ENVR 2500"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "EEMB 2302",
+        "EEMB 2400",
+        "EEMB 2700",
+        "EEMB 3460"
+      ],
+      "Summer 2": [
+        "EEMB 5525",
+        "EEMB 5546"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "EEMB 3460",
+        "ENVR 3600",
+        "EEMB 5504",
+        "EEMB 5506",
+        "EEMB 5508",
+        "EEMB 5518",
+        "EEMB 5520",
+        "EEMB 5538",
+        "EEMB 5540"
+      ],
+      "Spring": [
+        "BIOL 4701",
+        "ENVR 3125",
+        "ENVR 4000"
+      ]
+    }
+  },
+  "Marine Biology—Three Seas Program, Four Years, One Co-op in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "EEMB 1101",
+        "ENVR 1000",
+        "ENVR 1500",
+        "MATH 1251"
+      ],
+      "Spring": [
+        "CHEM 1161",
+        "EEMB 1105",
+        "EEMB 2400",
+        "PHYS 1161"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOL 2301",
+        "CHEM 2311",
+        "EESC 2000",
+        "ENGW 3307",
+        "ENVR 2500"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "EEMB 2302",
+        "EEMB 2700",
+        "EEMB 3460"
+      ],
+      "Summer 2": [
+        "EEMB 5525",
+        "EEMB 5546"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "EEMB 5504",
+        "EEMB 5506",
+        "EEMB 5508",
+        "EEMB 5518",
+        "EEMB 5520",
+        "EEMB 5538",
+        "EEMB 5540"
+      ],
+      "Spring": [
+        "BIOL 4701",
+        "ENVR 4000"
+      ]
+    }
+  }
+}

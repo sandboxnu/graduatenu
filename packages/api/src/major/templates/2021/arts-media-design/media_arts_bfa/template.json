@@ -1,0 +1,21 @@
+{
+  "No Concentration": {},
+  "Sample Four Years, Two Co-ops in Spring/Summer 1/Sample—ZA Plan of Study Only": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1124", "ARTH 1110", "ENGW 1111"],
+      "Spring": ["ARTF 1122", "ARTF 2220", "ARTH 1111"]
+    },
+    "Year 2": {
+      "Fall": ["ARTF 2223", "ARTH 2210", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ARTG 2250"]
+    },
+    "Year 4": {
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Animation": {},
+  "Photography": {},
+  "Video Arts": {}
+}

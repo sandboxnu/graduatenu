@@ -1,0 +1,63 @@
+{
+  "Sample Patterns:": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "HIST 1200",
+        "HIST 1201"
+      ],
+      "Spring": ["CS 2510", "IS 2000", "CS 3200"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "HIST 2301", "HIST 2302", "CS 1210", "CS 3500"],
+      "Spring": ["CS 1210"]
+    },
+    "Year 3": {},
+    "Year 4": {},
+    "Year 5": {}
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "HIST 1200",
+        "HIST 1201"
+      ],
+      "Spring": ["CS 2510", "IS 2000", "CS 3200"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "HIST 2301", "HIST 2302", "CS 1210", "CS 3500"],
+      "Spring": ["CS 1210"]
+    },
+    "Year 3": {},
+    "Year 4": {},
+    "Year 5": {}
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "HIST 1200",
+        "HIST 1201"
+      ],
+      "Spring": ["CS 2510", "CS 3200", "IS 2000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "CS 3500", "HIST 2301", "HIST 2302"]
+    },
+    "Year 3": {},
+    "Year 4": {},
+    "Year 5": {}
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "Four Years/ Two Co-ops in Spring/Summer 1—CSSH Student Sample": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1111",
+        "ENGL 1000",
+        "MATH 1241",
+        "PHTH 1260",
+        "PSYC 1101",
+        "ENGW 1111",
+        "HSCI 1000"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "CHEM 1161",
+        "ENGW 1111",
+        "INSH 1300",
+        "PSYC 1101"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "EESH 2000",
+        "PHTH 2210"
+      ],
+      "Summer 2": [
+        "ENGW 3315"
+      ],
+      "Spring": [
+        "HSCI 2000",
+        "PHTH 2210"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "INSH 2300",
+        "PHTH 4202",
+        "ENGW 3306"
+      ],
+      "Summer 2": [
+        "HSCI 4700",
+        "PHTH 4120",
+        "PHTH 4540"
+      ],
+      "Spring": [
+        "INSH 2300",
+        "PHTH 4202"
+      ],
+      "Summer 1": [
+        "PHTH 4120",
+        "PHTH 4540"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "HSCI 4720",
+        "HSCI 4700"
+      ],
+      "Spring": [
+        "HSCI 4720"
+      ]
+    }
+  },
+  "Four Years/ Two Co-ops in Summer 2/Fall—Bouvé Student Sample": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1111",
+        "ENGW 1111",
+        "HSCI 1000",
+        "MATH 1241",
+        "PHTH 1260"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "CHEM 1161",
+        "INSH 1300",
+        "PSYC 1101"
+      ]
+    },
+    "Year 2": {
+      "Spring": [
+        "HSCI 2000",
+        "PHTH 2210"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "INSH 2300",
+        "PHTH 4202"
+      ],
+      "Summer 1": [
+        "PHTH 4120",
+        "PHTH 4540"
+      ],
+      "Fall": [
+        "ENGW 3306"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "HSCI 4720"
+      ],
+      "Fall": [
+        "HSCI 4700"
+      ]
+    }
+  }
+}

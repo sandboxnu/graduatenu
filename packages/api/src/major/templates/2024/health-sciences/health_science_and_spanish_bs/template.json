@@ -1,0 +1,120 @@
+{
+  "Sample Plan of Study—Bouvé Student Example: Four Years, Two Co-ops in Spring, Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "SPNS 2102",
+        "BIOL 1111",
+        "ENGW 1111",
+        "INSH 1000"
+      ],
+      "Spring": [
+        "SPNS 3101",
+        "BIOL 1113",
+        "CHEM 1161",
+        "PHTH 2350"
+      ],
+      "Summer 1": [
+        "PSYC 1101",
+        "MATH 1241"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHTH 2210",
+        "SPNS 3102",
+        "PHTH 2300",
+        "HSCI 2000"
+      ],
+      "Summer 2": [
+        "PHTH 2515",
+        "PHIL 1165"
+      ],
+      "Spring": [
+        "EESH 2000",
+        "SPNS 3401",
+        "PHTH 2515",
+        "PHTH 2210"
+      ],
+      "Summer 1": [
+        "PHIL 1165"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "SPNS 3401"
+      ],
+      "Summer 2": [
+        "PHTH 4540",
+        "PHTH 4120"
+      ],
+      "Summer 1": [
+        "PHTH 4120",
+        "PHTH 4540"
+      ],
+      "Spring": [
+        "PHTH 4202"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "SPNS 3402",
+        "PHTH 4202"
+      ],
+      "Spring": [
+        "SPNS 3402"
+      ]
+    }
+  },
+  "Sample Plan of Study—CSSH Student Example: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "INSH 1000",
+        "PHTH 1260",
+        "SPNS 2102",
+        "ENGW 1111",
+        "BIOL 1111"
+      ],
+      "Spring": [
+        "SPNS 3101",
+        "PHTH 2350",
+        "BIOL 1113",
+        "CHEM 1161"
+      ],
+      "Summer 1": [
+        "PSYC 1101",
+        "MATH 1241"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "SPNS 3102",
+        "PHTH 2300"
+      ],
+      "Spring": [
+        "EESH 2000",
+        "SPNS 3401",
+        "PHTH 2515",
+        "PHTH 2210"
+      ],
+      "Summer 1": [
+        "PHIL 1165"
+      ]
+    },
+    "Year 3": {
+      "Summer 1": [
+        "PHTH 4120",
+        "PHTH 4540"
+      ],
+      "Spring": [
+        "PHTH 4202"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "SPNS 3402"
+      ]
+    }
+  }
+}

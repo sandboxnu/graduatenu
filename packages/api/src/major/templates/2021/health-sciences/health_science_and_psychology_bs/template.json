@@ -1,0 +1,134 @@
+{
+  "Four Years, One Co-op Plan": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 1241",
+        "PSYC 1101",
+        "PSYC 1000"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "BIOL 1114",
+        "CHEM 1161",
+        "ENGW 1111"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PSYC 2320",
+        "PSYC 3458",
+        "HSCI 2000",
+        "PHIL 1165"
+      ],
+      "Summer 2": [
+        "PHIL 1165",
+        "ENGW 3306"
+      ],
+      "Spring": [
+        "EESC 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "HSCI 2000",
+        "PHIL 1165"
+      ],
+      "Summer 2": [
+        "ENGW 3306",
+        "PHTH 4540"
+      ],
+      "Spring": [
+        "ENGW 3306",
+        "PSYC 3510"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "PSYC 3510"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops Plan (College: Bouvé)": {
+    "Year 1": {
+      "Fall": [
+        "PSYC 1000",
+        "PHTH 1260",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 1241",
+        "PSYC 1101"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "CHEM 1161",
+        "BIOL 1114",
+        "ENGW 1111"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PSYC 2320",
+        "PSYC 3458",
+        "HSCI 2000",
+        "PHIL 1165"
+      ],
+      "Summer 2": [
+        "PHIL 1165",
+        "ENGW 3306"
+      ],
+      "Spring": [
+        "EESC 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3306",
+        "PSYC 3510"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "PSYC 3510"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops Plan (College: Science)": {
+    "Year 1": {
+      "Fall": [
+        "PSYC 1000",
+        "PHTH 1260",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 1241",
+        "PSYC 1101"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "BIOL 1114",
+        "ENGW 1111",
+        "CHEM 1161"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PSYC 2320",
+        "PSYC 3458",
+        "PHIL 1165"
+      ],
+      "Spring": [
+        "EESC 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3306",
+        "PSYC 3510"
+      ]
+    },
+    "Year 4": {}
+  }
+}

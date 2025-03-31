@@ -1,0 +1,42 @@
+{
+  "Sample Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARCH 1310", "ARTF 1122", "ARTG 1250", "ENGW 1111"],
+      "Spring": ["ARCH 1110", "ARCH 1120"]
+    },
+    "Year 2": {
+      "Fall": ["ARCH 2130", "ARCH 2260", "ARTG 2250"],
+      "Spring": ["ARCH 2340", "ARCH 3450", "ARTG 3350", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3314", "ARTG 3350", "EEAM 2000"],
+      "Spring": ["ARTG 3451"]
+    },
+    "Year 4": {
+      "Spring": ["ARTG 4550"],
+      "Fall": ["ARTG 3451"]
+    },
+    "Year 5": {
+      "Spring": ["ARTG 4550"]
+    }
+  },
+  "Sample Five Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1122", "ARTG 1250", "ARCH 1310", "ENGW 1111"],
+      "Spring": ["ARCH 1110", "ARCH 1120"]
+    },
+    "Year 2": {
+      "Fall": ["ARCH 2130", "ARTG 2250", "ARCH 2260"],
+      "Spring": ["ARCH 2340", "ARCH 3450"]
+    },
+    "Year 3": {
+      "Fall": ["ARTG 3350", "ENGW 3314", "EEAM 2000"]
+    },
+    "Year 4": {
+      "Fall": ["ARTG 3451"]
+    },
+    "Year 5": {
+      "Spring": ["ARTG 4550"]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "Sample Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": [
+        "ARTF 1000",
+        "MSCR 1220",
+        "ARTF 1122",
+        "ARTF 2220",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "MSCR 1320",
+        "ARTH 1001",
+        "ARTF 1120"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ARTH 2212",
+        "EEAM 2000"
+      ]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": [
+        "MSCR 3600"
+      ],
+      "Spring": [
+        "ARTD 4530"
+      ]
+    }
+  }
+}

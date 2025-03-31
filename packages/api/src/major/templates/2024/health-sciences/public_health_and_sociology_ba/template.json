@@ -1,0 +1,82 @@
+{
+  "Sample Plan of Study: Four Years/Two Co-ops in Spring/Summer 1— Bouvé Students": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "HSCI 1000",
+        "PHTH 1260",
+        "PSYC 1101",
+        "SOCL 1000"
+      ],
+      "Spring": [
+        "PSYC 1101",
+        "SOCL 1101",
+        "ENGW 1111"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "HSCI 2000",
+        "PHTH 2210",
+        "SOCL 3300"
+      ],
+      "Spring": [
+        "ANTH 2305",
+        "EESH 2000",
+        "SOCL 2320"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "ANTH 2305",
+        "ENGW 3306",
+        "SOCL 3441"
+      ],
+      "Spring": [
+        "ENGW 3308",
+        "SOCL 3441"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "SOCL 2321",
+        "SOCL 4600"
+      ]
+    }
+  },
+  "Sample Plan of Study: Four Years/Two Co-ops in Summer 2/Fall—CSSH Students": {
+    "Year 1": {
+      "Fall": [
+        "PHTH 1260",
+        "PSYC 1101",
+        "SOCL 1000"
+      ],
+      "Spring": [
+        "ENGW 1111",
+        "SOCL 1101"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "SOCL 3300"
+      ],
+      "Spring": [
+        "ANTH 2305",
+        "EESH 2000",
+        "SOCL 2320"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3308",
+        "SOCL 3441"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "SOCL 2321",
+        "SOCL 4600"
+      ]
+    }
+  }
+}

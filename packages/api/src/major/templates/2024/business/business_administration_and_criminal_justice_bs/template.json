@@ -1,0 +1,106 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring, Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "BUSN 1102",
+        "CRIM 1100",
+        "ACCT 1201",
+        "MATH 1231",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "MGSC 2301",
+        "ECON 1115",
+        "CRIM 1110"
+      ]
+    },
+    "Year 2": {
+      "Spring": [
+        "COOP 3945",
+        "BUSN 1103"
+      ],
+      "Summer 1": [
+        "COOP 3945"
+      ],
+      "Fall": [
+        "CRIM 1120",
+        "CRIM 3600",
+        "BUSN 1103"
+      ],
+      "Summer 2": [
+        "COOP 3945"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "COOP 3945",
+        "ENGW 3304"
+      ],
+      "Summer 1": [
+        "COOP 3945"
+      ],
+      "Fall": [
+        "ENGW 3304",
+        "COOP 3945"
+      ],
+      "Summer 2": [
+        "COOP 3945"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "STRT 4501"
+      ],
+      "Fall": [
+        "COOP 3945"
+      ]
+    }
+  },
+  "Sample Plan of Study: Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "BUSN 1102",
+        "CRIM 1100",
+        "ENGW 1111",
+        "MATH 1231",
+        "ACCT 1201"
+      ],
+      "Spring": [
+        "MGSC 2301",
+        "CRIM 1110",
+        "ECON 1115"
+      ]
+    },
+    "Year 2": {
+      "Spring": [
+        "BUSN 1103"
+      ],
+      "Summer 2": [
+        "COOP 3945"
+      ],
+      "Fall": [
+        "CRIM 1120",
+        "CRIM 3600"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "COOP 3945"
+      ],
+      "Spring": [
+        "ENGW 3304"
+      ],
+      "Summer 2": [
+        "COOP 3945"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "COOP 3945"
+      ],
+      "Spring": [
+        "STRT 4501"
+      ]
+    }
+  }
+}

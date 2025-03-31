@@ -1,0 +1,43 @@
+{
+  "Sample Pattern, Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "MUSC 1201", "ENGW 1111"],
+      "Spring": ["CS 2510", "MUST 1220", "MUSC 1202", "MUSC 2350"],
+      "Summer 1": ["CS 3500", "CS 3200"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "MUSC 1001", "CS 3000", "MUST 2431", "MUST 2102"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 3": {
+      "Fall": ["MUSC 3541"],
+      "Summer 2": ["PSYC 1101"]
+    },
+    "Year 4": {
+      "Fall": ["IS 4300", "PSYC 1101", "CS 4500", "MUST 2102"],
+      "Spring": ["MUST 4611"]
+    },
+    "Year 5": {
+      "Fall": ["CS 4500", "MUSC 3541"],
+      "Spring": ["MUST 4611"]
+    }
+  },
+  "Sample Pattern, Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "MUSC 1201", "ENGW 1111"],
+      "Spring": ["CS 2510", "MUST 1220", "MUSC 1202", "MUSC 2350"],
+      "Summer 1": ["CS 3500", "CS 3200"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "MUSC 1001", "CS 3000", "MUST 2431"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 3": {
+      "Summer 2": ["PSYC 1101"]
+    },
+    "Year 4": {
+      "Fall": ["IS 4300", "CS 4500", "MUST 2102"],
+      "Spring": ["MUST 4611"]
+    }
+  }
+}

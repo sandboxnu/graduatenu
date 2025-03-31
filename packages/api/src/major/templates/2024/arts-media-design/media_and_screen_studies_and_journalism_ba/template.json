@@ -1,0 +1,35 @@
+{
+  "Sample Four Years, Two Co-ops  Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "JRNL 1150",
+        "ENGW 1111",
+        "MSCR 1000",
+        "MSCR 1220"
+      ],
+      "Spring": [
+        "JRNL 1101",
+        "MSCR 1230",
+        "MSCR 1320"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "EEAM 2000",
+        "JRNL 2201"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "JRNL 2301",
+        "JRNL 5314",
+        "MSCR 4623"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "JRNL 4650"
+      ]
+    }
+  }
+}

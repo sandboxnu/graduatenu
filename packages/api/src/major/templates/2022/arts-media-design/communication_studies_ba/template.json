@@ -1,0 +1,22 @@
+{
+  "Sample Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": [
+        "COMM 1000",
+        "COMM 1101",
+        "COMM 1112"
+      ],
+      "Spring": [
+        "ENGW 1111"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "COMM 2301",
+        "EEAM 2000"
+      ]
+    },
+    "Year 3": {},
+    "Year 4": {}
+  }
+}

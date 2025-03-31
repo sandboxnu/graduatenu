@@ -1,0 +1,267 @@
+{
+  "Premed Track": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "PSYC 1101",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 1241"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "BIOL 1114",
+        "ENGW 1111",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHTH 2350",
+        "PHTH 2210"
+      ],
+      "Spring": [
+        "PHTH 2515",
+        "HSCI 2000",
+        "HLTH 1200"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHIL 1165",
+        "ENGW 3306",
+        "PHTH 2300"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "HLTH 5450",
+        "PHTH 4540"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "PHTH 4120",
+        "HSCI 4700"
+      ],
+      "Spring": [
+        "HSCI 4720"
+      ]
+    }
+  },
+  "Pre-PA Track": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "PSYC 1101",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 1241"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "BIOL 1114",
+        "ENGW 1111",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHTH 2350",
+        "PHTH 2210"
+      ],
+      "Spring": [
+        "PHTH 2515",
+        "HSCI 2000",
+        "HLTH 1200"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHIL 1165",
+        "ENGW 3306",
+        "PHTH 2300"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "HLTH 5450",
+        "PHTH 4540"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "PHTH 4120",
+        "HSCI 4700"
+      ],
+      "Spring": [
+        "HSCI 4720"
+      ]
+    }
+  },
+  "Pre-Pharmacy Track": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "PSYC 1101",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 1241"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "BIOL 1114",
+        "ENGW 1111",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHTH 2350",
+        "PHTH 2210"
+      ],
+      "Spring": [
+        "PHTH 2515",
+        "HSCI 2000",
+        "HLTH 1200"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHIL 1165",
+        "ENGW 3306",
+        "PHTH 2300"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "HLTH 5450",
+        "PHTH 4540"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "PHTH 4120",
+        "HSCI 4700"
+      ],
+      "Spring": [
+        "HSCI 4720"
+      ]
+    }
+  },
+  "Pre-Physical Therapy Track*": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "PSYC 1101",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 1241"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "BIOL 1114",
+        "ENGW 1111",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHTH 2350",
+        "PHTH 2210"
+      ],
+      "Spring": [
+        "PHTH 2515",
+        "HSCI 2000",
+        "HLTH 1200"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHIL 1165",
+        "ENGW 3306",
+        "PHTH 2300"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "HLTH 5450",
+        "PHTH 4540"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "PHTH 4120",
+        "HSCI 4700"
+      ],
+      "Spring": [
+        "HSCI 4720"
+      ]
+    }
+  },
+  "Five Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "HSCI 1000",
+        "PHTH 1260",
+        "PSYC 1101",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 1241"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "BIOL 1114",
+        "ENGW 1111",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHTH 2350",
+        "PHTH 2210"
+      ],
+      "Spring": [
+        "PHTH 2515",
+        "HSCI 2000",
+        "HLTH 1200"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHIL 1165",
+        "ENGW 3306",
+        "PHTH 2300"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "HLTH 5450",
+        "PHTH 4540"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "PHTH 4120",
+        "HSCI 4700"
+      ],
+      "Spring": [
+        "HSCI 4720"
+      ]
+    }
+  }
+}

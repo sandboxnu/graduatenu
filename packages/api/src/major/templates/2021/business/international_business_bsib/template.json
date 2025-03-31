@@ -1,0 +1,17 @@
+{
+  "Four-Year Program: Year Three Abroad with Two Co-ops": {
+    "Year 1": {
+      "Fall": ["INTB 1202", "MGSC 2301", "ECON 1116", "ACCT 1201", "BUSN 1102"],
+      "Spring": ["ENGW 1111", "MKTG 2201", "INTB 2202", "ECON 1116"],
+      "Summer 1": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["INTB 3202", "BUSN 1103"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["INTB 4202"],
+      "Fall": ["ORGB 3201", "ENGW 3304"]
+    }
+  }
+}

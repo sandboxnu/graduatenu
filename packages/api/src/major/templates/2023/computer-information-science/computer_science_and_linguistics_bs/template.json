@@ -1,0 +1,94 @@
+{
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "LING 1150"
+      ],
+      "Spring": [
+        "CS 2510",
+        "LING 2350"
+      ],
+      "Summer 1": [
+        "CS 3500"
+      ],
+      "Summer 2": [
+        "CS 3000"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "LING 3412",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CS 1210",
+        "CS 3800"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CS 4120",
+        "CS 4400"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CS 4100",
+        "CS 4530"
+      ]
+    }
+  },
+  "Four Years, One Co-op in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "LING 1150"
+      ],
+      "Spring": [
+        "CS 2510",
+        "LING 2350"
+      ],
+      "Summer 1": [
+        "CS 3500"
+      ],
+      "Summer 2": [
+        "CS 3000"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "LING 3412",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CS 1210",
+        "CS 3800"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CS 4120",
+        "CS 4400"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CS 4100",
+        "CS 4530"
+      ]
+    }
+  }
+}

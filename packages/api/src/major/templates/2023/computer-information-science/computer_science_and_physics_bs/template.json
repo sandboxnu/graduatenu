@@ -1,0 +1,109 @@
+{
+  "Sample Plan of Study:": {},
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "MATH 1341",
+        "PHYS 1161",
+        "PHYS 1162"
+      ],
+      "Spring": [
+        "CS 2510",
+        "ENGW 1111",
+        "MATH 1342",
+        "PHYS 1165",
+        "PHYS 1166"
+      ],
+      "Summer 1": [
+        "CS 3500",
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 1210",
+        "CS 3000",
+        "MATH 2341",
+        "PHYS 2371",
+        "PHYS 2372"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CS 2800",
+        "PHYS 3602",
+        "PHYS 2303"
+      ],
+      "Summer 2": [
+        "PHYS 3600",
+        "PHYS 4305"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CS 3800",
+        "CS 4500",
+        "MATH 3081"
+      ],
+      "Spring": [
+        "ENGW 3302"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "MATH 1341",
+        "PHYS 1161",
+        "PHYS 1162"
+      ],
+      "Spring": [
+        "CS 2510",
+        "ENGW 1111",
+        "MATH 1342",
+        "PHYS 1165",
+        "PHYS 1166"
+      ],
+      "Summer 1": [
+        "CS 3000",
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 3500",
+        "MATH 2341",
+        "PHYS 2371",
+        "PHYS 2372"
+      ],
+      "Spring": [
+        "CS 1210",
+        "CS 2800",
+        "PHYS 2303",
+        "PHYS 3602"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CS 3800",
+        "MATH 3081",
+        "PHYS 4305"
+      ],
+      "Summer 1": [
+        "PHYS 3600",
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CS 4530"
+      ]
+    }
+  }
+}

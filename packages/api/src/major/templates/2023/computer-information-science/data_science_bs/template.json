@@ -1,0 +1,104 @@
+{
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "DS 2000",
+        "ENGW 1111",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "DS 2500",
+        "MATH 1342",
+        "PHIL 1145"
+      ],
+      "Summer 1": [
+        "CS 3200",
+        "MATH 3081"
+      ],
+      "Summer 2": [
+        "MATH 2331"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 3520",
+        "DS 3000",
+        "DS 3500"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 4200",
+        "DS 4300"
+      ],
+      "Summer 1": [
+        "CS 3000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4400"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "DS 4420"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "DS 2000",
+        "ENGW 1111",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "DS 2500",
+        "MATH 1342",
+        "PHIL 1145"
+      ],
+      "Summer 1": [
+        "CS 3200",
+        "MATH 3081"
+      ],
+      "Summer 2": [
+        "MATH 2331"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 3520",
+        "DS 3000",
+        "DS 3500"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 4200",
+        "DS 4300"
+      ],
+      "Summer 1": [
+        "CS 3000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4400"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "DS 4420"
+      ]
+    }
+  }
+}

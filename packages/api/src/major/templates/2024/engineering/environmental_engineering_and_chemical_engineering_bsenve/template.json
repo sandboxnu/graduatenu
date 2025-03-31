@@ -1,0 +1,360 @@
+{
+  "Sample Plan of Study: Four Years, One Co-op in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": [
+        "CHME 2308",
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CIVE 2300",
+        "CIVE 2301",
+        "CIVE 2334",
+        "CHME 2310",
+        "MATH 2341",
+        "CHME 2320",
+        "ENCP 2000"
+      ],
+      "Spring": [
+        "ENCP 2000",
+        "CHME 2320",
+        "CHME 3312",
+        "CIVE 3430"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ],
+      "Summer 2": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 3322",
+        "CIVE 3435",
+        "CHME 2310",
+        "CIVE 3430"
+      ],
+      "Spring": [
+        "ENCP 3000",
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 3464",
+        "CIVE 4534",
+        "CIVE 4535",
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 3322",
+        "CIVE 3435"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CIVE 4765",
+        "CHME 4512",
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 3464",
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000"
+      ],
+      "Fall": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 4534",
+        "CIVE 4535",
+        "CIVE 3464",
+        "ENCP 3000",
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 3312",
+        "CIVE 3435"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "CHME 4512",
+        "CIVE 4765"
+      ],
+      "Fall": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 3464",
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000"
+      ]
+    }
+  },
+  "Sample Plan of Study: Four Years, One Co-op in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": [
+        "CHME 2308",
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHME 2310",
+        "CIVE 2300",
+        "CIVE 2334",
+        "MATH 2341",
+        "CIVE 2301",
+        "CHME 2320",
+        "ENCP 2000"
+      ],
+      "Spring": [
+        "CHME 2320",
+        "CHME 3312",
+        "CIVE 3430",
+        "ENCP 2000"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ],
+      "Summer 2": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CHME 3305",
+        "CHME 3322",
+        "CIVE 3435",
+        "CHME 2310",
+        "CIVE 3430"
+      ],
+      "Spring": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 3322",
+        "CIVE 3435"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 4534",
+        "CIVE 4535",
+        "CIVE 3464",
+        "ENCP 3000",
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 3312",
+        "CIVE 3435"
+      ],
+      "Spring": [
+        "CHME 4512",
+        "CIVE 4765",
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 3464",
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "CHME 4512",
+        "CIVE 4765"
+      ],
+      "Fall": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 3464",
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000"
+      ]
+    }
+  },
+  "Sample Plan of Study: Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": [
+        "CHME 2308",
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHME 2310",
+        "CIVE 2300",
+        "CIVE 2301",
+        "CIVE 2334",
+        "MATH 2341",
+        "CHME 2320",
+        "ENCP 2000"
+      ],
+      "Spring": [
+        "CHME 2320",
+        "CHME 3312",
+        "CIVE 3430",
+        "ENCP 2000"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ],
+      "Summer 2": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 3322",
+        "CIVE 3435"
+      ],
+      "Fall": [
+        "CHME 2310",
+        "CHME 3322",
+        "CIVE 3430"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 3464",
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000"
+      ],
+      "Fall": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 3312",
+        "CIVE 3435"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "CHME 4512",
+        "CIVE 4765"
+      ],
+      "Fall": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 3464",
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000"
+      ]
+    }
+  },
+  "Sample Plan of Study: Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": [
+        "CHME 2308",
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHME 2320",
+        "CIVE 2300",
+        "CIVE 2334",
+        "ENCP 2000",
+        "MATH 2341"
+      ],
+      "Summer 2": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CHME 2310",
+        "CHME 3322",
+        "CIVE 3430"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 3312",
+        "CIVE 3435"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 3464",
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000"
+      ],
+      "Spring": [
+        "CHME 4512",
+        "CIVE 4765"
+      ]
+    }
+  }
+}

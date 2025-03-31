@@ -1,0 +1,105 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "PHIL 1000",
+        "PHIL 1115"
+      ],
+      "Spring": [
+        "PHIL 2325",
+        "PHIL 2330"
+      ]
+    },
+    "Year 2": {
+      "Spring": [
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3309"
+      ]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "PHIL 1000",
+        "PHIL 1115"
+      ],
+      "Spring": [
+        "PHIL 2325",
+        "PHIL 2330"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": [
+        "ENGW 3315"
+      ]
+    }
+  },
+  "Philosophy with Concentration in Law and Ethics: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "PHIL 1000",
+        "PHIL 1101",
+        "PHIL 1115"
+      ],
+      "Spring": [
+        "PHIL 2325",
+        "PHIL 2330"
+      ]
+    },
+    "Year 2": {
+      "Spring": [
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3315",
+        "PHIL 3435"
+      ]
+    },
+    "Year 4": {}
+  },
+  "Philosophy with Concentration in Religious Studies: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "PHIL 1000",
+        "PHIL 1110",
+        "PHIL 1115"
+      ],
+      "Spring": [
+        "PHIL 2325",
+        "PHIL 2330"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHIL 2325"
+      ],
+      "Spring": [
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3315"
+      ]
+    },
+    "Year 4": {}
+  }
+}

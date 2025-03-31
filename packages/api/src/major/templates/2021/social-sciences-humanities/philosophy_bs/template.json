@@ -1,0 +1,66 @@
+{
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "MATH 1215",
+        "ENGW 1111",
+        "PHIL 1101"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHIL 2325",
+        "EESH 2000"
+      ],
+      "Spring": [
+        "PHIL 2330",
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHIL 1115",
+        "ENGW 3315"
+      ],
+      "Fall": [
+        "PHIL 2330"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "PHIL 1115",
+        "ENGW 3315"
+      ]
+    },
+    "Year 5": {}
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "MATH 1215",
+        "ENGW 1111",
+        "PHIL 1101"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHIL 2325",
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "PHIL 2330"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "PHIL 1115",
+        "ENGW 3315"
+      ]
+    },
+    "Year 5": {}
+  },
+  "Philosophy with Concentration in Law and Ethics, BS": {},
+  "Philosophy with Concentration in Religious Studies, BS": {}
+}

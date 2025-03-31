@@ -1,0 +1,23 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ARTF 1000",
+        "ENGW 1111",
+        "INAM 1300"
+      ],
+      "Spring": [
+        "ARTG 2262",
+        "INAM 2000"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ARTD 2000",
+        "EEAM 2000"
+      ]
+    },
+    "Year 3": {},
+    "Year 4": {}
+  }
+}

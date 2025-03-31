@@ -1,0 +1,114 @@
+{
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "HUSV 1000",
+        "CRIM 1100",
+        "HUSV 1101",
+        "ENGW 1111",
+        "MATH 1215"
+      ],
+      "Spring": [
+        "CRIM 1300",
+        "HUSV 2300",
+        "CS 1100"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CRIM 1110",
+        "CRIM 1120",
+        "HUSV 2300",
+        "EESH 2000"
+      ],
+      "Spring": [
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CRIM 3000",
+        "HUSV 3900"
+      ],
+      "Summer 1": [
+        "CRIM 3600"
+      ],
+      "Summer 2": [
+        "HUSV 3900"
+      ],
+      "Fall": [
+        "CRIM 3000"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CRIM 4000",
+        "ENGW 3315",
+        "CRIM 3700"
+      ],
+      "Fall": [
+        "CRIM 3600",
+        "CRIM 4000"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "HUSV 4994",
+        "CRIM 4949"
+      ],
+      "Fall": [
+        "CRIM 3700",
+        "HUSV 4994",
+        "ENGW 3315"
+      ]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "HUSV 1000",
+        "CRIM 1100",
+        "HUSV 1101",
+        "ENGW 1111",
+        "MATH 1215"
+      ],
+      "Spring": [
+        "CRIM 1300",
+        "HUSV 2300",
+        "CS 1100"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CRIM 1110",
+        "CRIM 1120",
+        "HUSV 2300",
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Summer 2": [
+        "HUSV 3900"
+      ],
+      "Fall": [
+        "CRIM 3000"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CRIM 3600",
+        "CRIM 4000"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "CRIM 3700",
+        "HUSV 4994",
+        "ENGW 3315"
+      ],
+      "Spring": [
+        "CRIM 4949"
+      ]
+    }
+  }
+}

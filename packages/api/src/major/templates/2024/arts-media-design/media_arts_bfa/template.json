@@ -1,0 +1,42 @@
+{
+  "Animation": {},
+  "Sample Four Years, Two Co-ops in Spring/Summer 1/Sample—A Plan of Study Only": {
+    "Year 1": {
+      "Fall": [
+        "ARTF 1000",
+        "ARTF 1240",
+        "ARTD 1001",
+        "ARTH 1001",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "ARTD 2370"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ARTD 2100",
+        "ARTD 3470",
+        "EEAM 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "ARTD 4570",
+        "ARTG 1290",
+        "ARTH 3000"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ARTH 4000"
+      ],
+      "Spring": [
+        "ARTD 4530"
+      ]
+    }
+  },
+  "Photography": {},
+  "Video Arts": {},
+  "Electives Option (No Concentration)": {}
+}

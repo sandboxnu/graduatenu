@@ -1,0 +1,50 @@
+{
+  "Sample Pattern: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "DS 2000",
+        "ECON 1115",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "CS 3200",
+        "DS 2500",
+        "ECON 1116",
+        "MATH 1231"
+      ],
+      "Summer 1": [
+        "CS 3200"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "DS 3000",
+        "DS 3500",
+        "ECON 2315",
+        "ECON 2350"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 4200",
+        "DS 4300",
+        "ECON 2316"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4400",
+        "ECON 2560"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "ECON 4692"
+      ]
+    }
+  }
+}

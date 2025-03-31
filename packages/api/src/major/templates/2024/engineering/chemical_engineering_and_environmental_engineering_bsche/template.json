@@ -1,0 +1,228 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years, One Co-op in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CHME 2308",
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151"
+      ],
+      "Summer 1": [
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHME 2320",
+        "MATH 2341",
+        "CIVE 2300",
+        "CIVE 2334"
+      ],
+      "Spring": [
+        "CHME 2310",
+        "CHME 3322",
+        "CIVE 3430",
+        "CIVE 3435"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CHME 3305",
+        "CHME 3312",
+        "ENGW 3302",
+        "CIVE 3464"
+      ],
+      "Spring": [
+        "CHME 4510",
+        "CHME 4701",
+        "ENCP 2000",
+        "CIVE 4534",
+        "CIVE 4535"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CHME 4512",
+        "CHME 4703",
+        "ENCP 3000"
+      ]
+    }
+  },
+  "Four Years, One Co-op in Spring/Summer I": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CHME 2308",
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151"
+      ],
+      "Summer 1": [
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHME 2320",
+        "MATH 2341",
+        "CIVE 2300",
+        "CIVE 2334"
+      ],
+      "Spring": [
+        "CHME 2310",
+        "CHME 3322",
+        "CIVE 3430",
+        "CIVE 3435"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CHME 3305",
+        "CHME 3312",
+        "ENGW 3302",
+        "CIVE 3464",
+        "ENCP 2000"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 4534"
+      ],
+      "Spring": [
+        "CHME 4512",
+        "CHME 4703",
+        "ENCP 3000"
+      ]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CHME 2308",
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151"
+      ],
+      "Summer 1": [
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHME 2320",
+        "MATH 2341",
+        "CIVE 2300",
+        "CIVE 2334"
+      ],
+      "Spring": [
+        "CHME 2310",
+        "CHME 3322",
+        "CIVE 3430",
+        "CIVE 3435",
+        "ENCP 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CHME 3305",
+        "CHME 3312",
+        "ENGW 3302",
+        "CIVE 3464"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 4534",
+        "ENCP 3000"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "CHME 4512",
+        "CHME 4703"
+      ]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer I": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CHME 2308",
+        "GE 1502",
+        "MATH 1342",
+        "PHYS 1151"
+      ],
+      "Summer 1": [
+        "MATH 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHME 2320",
+        "MATH 2341",
+        "CIVE 2300",
+        "CIVE 2334",
+        "ENCP 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CHME 2310",
+        "CHME 3322",
+        "CIVE 3430",
+        "CIVE 3435"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CHME 3305",
+        "CHME 3312",
+        "ENGW 3302",
+        "CIVE 3464"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "CHME 4510",
+        "CHME 4701",
+        "CIVE 4534",
+        "ENCP 3000"
+      ],
+      "Spring": [
+        "CHME 4512",
+        "CHME 4703"
+      ]
+    }
+  }
+}

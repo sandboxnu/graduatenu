@@ -1,0 +1,48 @@
+{
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ENVR 1000",
+        "EEMB 1101",
+        "MATH 1251",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "EEMB 1105",
+        "EEMB 2700",
+        "CHEM 1161"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "EEMB 2302",
+        "EEMB 2400",
+        "ENVR 1500",
+        "EESC 2000"
+      ],
+      "Summer 2": [
+        "PHYS 1161"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "ENVR 2500",
+        "ENVR 3410",
+        "ENVR 3600"
+      ],
+      "Summer 2": [
+        "ENGW 3303"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "BIOL 2301",
+        "EEMB 3460"
+      ],
+      "Spring": [
+        "ENVR 4000",
+        "ENVR 4900"
+      ]
+    }
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "Four Years, No Co-op": {
+    "Year 1": {
+      "Fall": [
+        "DEAF 1500",
+        "AMSL 1101",
+        "ENGW 1111",
+        "INTP 1000"
+      ],
+      "Spring": [
+        "AMSL 1102",
+        "MATH 1215",
+        "LING 1150"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "DEAF 2500",
+        "AMSL 2101",
+        "INTP 3500"
+      ],
+      "Spring": [
+        "AMSL 2102",
+        "DEAF 2700"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "INTP 3510",
+        "ENGW 3315",
+        "AMSL 3101"
+      ],
+      "Spring": [
+        "INTP 3515",
+        "INTP 3550",
+        "AMSL 3102"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "INTP 4650",
+        "INTP 4510",
+        "INTP 4651",
+        "INTP 3970"
+      ],
+      "Spring": [
+        "INTP 4515",
+        "INTP 4995",
+        "INTP 4940"
+      ]
+    }
+  }
+}

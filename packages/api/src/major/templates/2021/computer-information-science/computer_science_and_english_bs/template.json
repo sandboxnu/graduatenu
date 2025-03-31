@@ -1,0 +1,61 @@
+{
+  "Sample Patterns:": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGL 1400", "ENGW 1111"],
+      "Spring": ["CS 2510", "ENGL 1160"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "CS 3200", "CS 3500"],
+      "Summer 1": ["ENGW 3302"],
+      "Spring": ["CS 1210", "IS 2000", "ENGL 3340", "CS 3200"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4500", "ENGL 4710"]
+    },
+    "Year 5": {
+      "Spring": ["CS 4500", "ENGL 4710"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGL 1400", "ENGW 1111"],
+      "Spring": ["CS 2510", "ENGL 1160"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "CS 3200", "CS 3500"],
+      "Summer 1": ["ENGW 3302"],
+      "Spring": ["CS 1210", "IS 2000", "ENGL 3340", "CS 3200"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4500", "ENGL 4710"]
+    },
+    "Year 5": {
+      "Spring": ["CS 4500", "ENGL 4710"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "ENGL 1400"],
+      "Spring": ["CS 2510", "ENGL 1160"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "CS 3500"],
+      "Spring": ["CS 3200", "CS 1210", "IS 2000", "ENGL 3340"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {},
+    "Year 5": {
+      "Spring": ["CS 4500", "ENGL 4710"]
+    }
+  }
+}

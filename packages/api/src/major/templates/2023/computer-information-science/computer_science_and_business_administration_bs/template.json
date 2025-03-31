@@ -1,0 +1,118 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ACCT 1201",
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "CS 2510",
+        "CS 3200",
+        "ECON 1116",
+        "MATH 1341"
+      ],
+      "Summer 1": [
+        "ECON 1115",
+        "CS 3500"
+      ],
+      "Summer 2": [
+        "MISM 2301"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ACCT 2301",
+        "CS 3500",
+        "MGSC 2301",
+        "CS 1210",
+        "CS 3000"
+      ],
+      "Spring": [
+        "CS 1210",
+        "CS 3000",
+        "FINA 2201"
+      ],
+      "Summer 1": [
+        "MKTG 2201"
+      ],
+      "Summer 2": [
+        "ENGW 3302",
+        "MKTG 2201"
+      ]
+    },
+    "Year 3": {
+      "Summer 1": [
+        "ENGW 3302",
+        "ORGB 3201"
+      ],
+      "Fall": [
+        "FINA 2201",
+        "MISM 2301"
+      ],
+      "Summer 2": [
+        "ORGB 3201"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CS 4530",
+        "STRT 4501"
+      ],
+      "Fall": [
+        "CS 4530",
+        "STRT 4501"
+      ]
+    }
+  },
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ACCT 1201",
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "CS 2510",
+        "CS 3200",
+        "ECON 1116",
+        "MATH 1341"
+      ],
+      "Summer 1": [
+        "CS 3500",
+        "ECON 1115"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ACCT 2301",
+        "CS 1210",
+        "CS 3000",
+        "MGSC 2301"
+      ],
+      "Summer 2": [
+        "ENGW 3302",
+        "MKTG 2201"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "FINA 2201",
+        "MISM 2301"
+      ],
+      "Summer 2": [
+        "ORGB 3201"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CS 4530",
+        "STRT 4501"
+      ]
+    }
+  }
+}

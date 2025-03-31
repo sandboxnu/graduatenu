@@ -1,0 +1,105 @@
+{
+  "Sample patterns:": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["CS 2510", "PSYC 3466", "MATH 1341"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": [
+        "PSYC 2320",
+        "CS 3000",
+        "PSYC 3464",
+        "CS 3500",
+        "MATH 1341",
+        "CS 1210"
+      ],
+      "Spring": ["IS 4300", "PSYC 3452", "CS 1210", "PSYC 3464", "CS 3000"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4100", "IS 4300", "ENGW 3302"],
+      "Fall": ["PSYC 3464", "CS 3000", "PSYC 3452"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4500", "CS 4100"],
+      "Summer 1": ["ENGW 3302"],
+      "Fall": ["IS 4300", "ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["CS 4500"],
+      "Fall": ["CS 4100"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["CS 2510", "PSYC 3466", "MATH 1341"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": [
+        "PSYC 2320",
+        "CS 3000",
+        "PSYC 3464",
+        "CS 3500",
+        "MATH 1341",
+        "CS 1210"
+      ],
+      "Spring": ["IS 4300", "PSYC 3452", "CS 1210", "PSYC 3464", "CS 3000"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4100", "IS 4300", "ENGW 3302"],
+      "Fall": ["PSYC 3464", "CS 3000", "PSYC 3452"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4500", "CS 4100"],
+      "Summer 1": ["ENGW 3302"],
+      "Fall": ["IS 4300", "ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["CS 4500"],
+      "Fall": ["CS 4100"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["CS 2510", "PSYC 3466"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "MATH 1341", "PSYC 2320", "CS 1210"],
+      "Spring": ["PSYC 3464", "CS 3000", "PSYC 3452", "CS 1210"]
+    },
+    "Year 3": {
+      "Spring": ["IS 4300", "ENGW 3302"],
+      "Fall": ["PSYC 3464", "CS 3000", "PSYC 3452"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4100"],
+      "Fall": ["IS 4300", "ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["CS 4500"],
+      "Fall": ["CS 4100"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CS 1800", "CS 2500", "PSYC 1101", "ENGW 1111", "CS 1200"],
+      "Spring": ["CS 2510", "PSYC 3466"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "MATH 1341", "PSYC 2320", "CS 1210"]
+    },
+    "Year 3": {
+      "Fall": ["PSYC 3464", "CS 3000", "PSYC 3452"]
+    },
+    "Year 4": {
+      "Fall": ["IS 4300", "ENGW 3302"]
+    },
+    "Year 5": {
+      "Fall": ["CS 4100"],
+      "Spring": ["CS 4500"]
+    }
+  }
+}

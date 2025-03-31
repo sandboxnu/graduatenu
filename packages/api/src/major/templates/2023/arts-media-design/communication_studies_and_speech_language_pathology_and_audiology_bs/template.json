@@ -1,0 +1,52 @@
+{
+  "Sample 4 Years, 2 Co-ops": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 2217",
+        "COMM 1000",
+        "COMM 1101",
+        "ENGW 1111",
+        "PSYC 1101"
+      ],
+      "Spring": [
+        "BIOL 2219",
+        "SLPA 1101",
+        "SLPA 1205"
+      ],
+      "Summer 1": [
+        "COMM 1112"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "EEAM 2000",
+        "PHYS 1145",
+        "SLPA 1103",
+        "SLPA 1203"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "COMM 3409",
+        "HLTH 2100",
+        "PHTH 2300"
+      ],
+      "Spring": [
+        "PHTH 2210",
+        "SLPA 1102",
+        "SLPA 1200"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "SLPA 5107",
+        "SLPA 5110"
+      ],
+      "Spring": [
+        "COMM 3201",
+        "SLPA 4651",
+        "SLPA 6219"
+      ]
+    }
+  }
+}

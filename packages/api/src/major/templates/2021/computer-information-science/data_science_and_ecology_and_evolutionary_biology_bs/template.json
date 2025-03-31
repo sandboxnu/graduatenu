@@ -1,0 +1,66 @@
+{
+  "Sample Patterns:": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "EEMB 1101"],
+      "Spring": ["CS 2510", "ENVR 2500", "EEMB 1105", "CS 3200", "MATH 1251"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 1211", "BIOL 2301", "DS 3000", "CS 3500", "ENVR 2500"],
+      "Spring": ["MATH 1251", "DS 4200", "DS 4300", "CS 1210", "DS 3000"]
+    },
+    "Year 3": {
+      "Spring": ["EEMB 2400", "DS 4400", "EEMB 2302", "DS 4200"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["ENVR 4997", "DS 4420", "DS 4300", "DS 4400", "EEMB 2302"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["ENVR 4997", "DS 4420"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "EEMB 1101"],
+      "Spring": ["CS 2510", "ENVR 2500", "EEMB 1105", "CS 3200", "MATH 1251"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 1211", "BIOL 2301", "DS 3000", "CS 3500", "ENVR 2500"],
+      "Spring": ["MATH 1251", "DS 4200", "DS 4300", "CS 1210", "DS 3000"]
+    },
+    "Year 3": {
+      "Spring": ["EEMB 2400", "DS 4400", "EEMB 2302", "DS 4200"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["ENVR 4997", "DS 4420", "DS 4300", "DS 4400", "EEMB 2302"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["ENVR 4997", "DS 4420"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "EEMB 1101"],
+      "Spring": ["CS 2510", "CS 3200", "EEMB 1105", "MATH 1251"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "CHEM 1211", "ENVR 2500", "BIOL 2301"],
+      "Spring": ["DS 3000", "CS 1210"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4200", "EEMB 2400"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4300", "DS 4400", "EEMB 2302"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["ENVR 4997", "DS 4420"]
+    }
+  }
+}

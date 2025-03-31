@@ -1,0 +1,82 @@
+{
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "POLS 1150",
+        "POLS 1155"
+      ],
+      "Spring": [
+        "CS 2510",
+        "IS 2000",
+        "ENGW 1111",
+        "POLS 1160"
+      ],
+      "Summer 1": [
+        "CS 3200",
+        "CS 3500"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 3000",
+        "POLS 2399"
+      ],
+      "Spring": [
+        "CS 1210",
+        "POLS 2400"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": [
+        "POLS 4701"
+      ]
+    }
+  },
+  "Four Year, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "POLS 1150",
+        "POLS 1155"
+      ],
+      "Spring": [
+        "CS 2510",
+        "IS 2000",
+        "ENGW 1111",
+        "POLS 1160"
+      ],
+      "Summer 1": [
+        "CS 3200",
+        "CS 3500"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 3000",
+        "POLS 2399"
+      ],
+      "Spring": [
+        "CS 1210",
+        "POLS 2400"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": [
+        "POLS 4701"
+      ]
+    }
+  }
+}

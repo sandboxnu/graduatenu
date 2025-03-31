@@ -1,0 +1,43 @@
+{
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "HIST 2211",
+        "INTL 1101",
+        "SOCL 1000",
+        "SOCL 1101"
+      ],
+      "Spring": [
+        "ANTH 1101",
+        "ENGW 1111",
+        "POLS 1160"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "SOCL 2320",
+        "SOCL 3300"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "ANTH 2305",
+        "POLS 1155",
+        "POLS 1156",
+        "SOCL 2321"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENGW 3315",
+        "INTL 3400",
+        "SOCL 3465"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "SOCL 4600"
+      ]
+    }
+  }
+}

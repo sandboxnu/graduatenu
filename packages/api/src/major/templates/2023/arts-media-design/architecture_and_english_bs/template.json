@@ -1,0 +1,37 @@
+{
+  "Sample Four Years, No Co-ops": {
+    "Year 1": {
+      "Fall": [
+        "ARCH 1000",
+        "ENGW 1111",
+        "ARCH 1310",
+        "ARCH 1450",
+        "ENGL 1400"
+      ],
+      "Spring": [
+        "ARCH 1110",
+        "ARCH 1120",
+        "ENGL 1160"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ARCH 2130",
+        "ARCH 2240"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3309"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENGL 4710"
+      ],
+      "Spring": [
+        "ENGL 3375"
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "Sample Patterns:": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "MATH 1341", "ENGW 1111"],
+      "Spring": ["CS 2510", "MATH 1342", "MATH 1365"],
+      "Summer 1": ["MATH 2321", "CS 3500"]
+    },
+    "Year 2": {
+      "Fall": [
+        "MATH 2331",
+        "MATH 2341",
+        "CS 3200",
+        "DS 3000",
+        "CS 3500",
+        "MATH 2321"
+      ],
+      "Spring": [
+        "CS 1210",
+        "MATH 3527",
+        "DS 4200",
+        "CS 3200",
+        "MATH 2331",
+        "MATH 3081"
+      ],
+      "Summer 1": ["MATH 3081"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4300", "DS 4400", "MATH 3175", "DS 4200"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420", "MATH 3527", "DS 4400"]
+    },
+    "Year 5": {
+      "Spring": ["DS 4420"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "MATH 1341", "ENGW 1111"],
+      "Spring": ["CS 2510", "MATH 1342", "MATH 1365"],
+      "Summer 1": ["MATH 2321", "CS 3500"]
+    },
+    "Year 2": {
+      "Fall": [
+        "MATH 2331",
+        "MATH 2341",
+        "CS 3200",
+        "DS 3000",
+        "CS 3500",
+        "MATH 2321"
+      ],
+      "Spring": [
+        "CS 1210",
+        "MATH 3527",
+        "DS 4200",
+        "CS 3200",
+        "MATH 2331",
+        "MATH 3081"
+      ],
+      "Summer 1": ["MATH 3081"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4300", "DS 4400", "MATH 3175", "DS 4200"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420", "MATH 3527", "DS 4400"]
+    },
+    "Year 5": {
+      "Spring": ["DS 4420"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1800", "CS 2500", "MATH 1341", "ENGW 1111", "CS 1200"],
+      "Spring": ["CS 2510", "MATH 1342", "MATH 1365"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "MATH 2321", "DS 3000", "MATH 2341"],
+      "Spring": ["CS 1210", "CS 3200", "MATH 2331", "MATH 3081"]
+    },
+    "Year 3": {
+      "Spring": ["MATH 3175", "DS 4200", "DS 4300"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["MATH 3527", "DS 4400"]
+    },
+    "Year 5": {
+      "Spring": ["DS 4420"]
+    }
+  }
+}

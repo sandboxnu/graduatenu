@@ -1,0 +1,92 @@
+{
+  "Sample Patterns": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "CHEM 1211", "ENGW 1111"],
+      "Spring": ["CS 2510", "CHEM 1214", "MATH 1341", "CS 3200"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "MATH 1342", "CHEM 2311", "CS 3200", "DS 3000"],
+      "Spring": [
+        "CS 1210",
+        "DS 3000",
+        "CHEM 2313",
+        "ENVR 2500",
+        "DS 4200",
+        "CHEM 2321"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4200",
+        "PHYS 1151",
+        "CHEM 2321",
+        "DS 4300",
+        "DS 4400",
+        "ENVR 2500"
+      ],
+      "Summer 1": ["ENGW 3302", "CHEM 3431"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4300", "DS 4400", "CHEM 3431", "CHEM 4750"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["CHEM 4750"]
+    }
+  },
+  "Five Years, Three Co-ops": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "CHEM 1211", "ENGW 1111"],
+      "Spring": ["CS 2510", "CHEM 1214", "MATH 1341", "CS 3200"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "MATH 1342", "CHEM 2311", "CS 3200", "DS 3000"],
+      "Spring": [
+        "CS 1210",
+        "DS 3000",
+        "CHEM 2313",
+        "ENVR 2500",
+        "DS 4200",
+        "CHEM 2321"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4200",
+        "PHYS 1151",
+        "CHEM 2321",
+        "DS 4300",
+        "DS 4400",
+        "ENVR 2500"
+      ],
+      "Summer 1": ["ENGW 3302", "CHEM 3431"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4300", "DS 4400", "CHEM 3431", "CHEM 4750"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["CHEM 4750"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "CHEM 1211", "ENGW 1111"],
+      "Spring": ["CS 2510", "CHEM 1214", "MATH 1341"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3200", "DS 3000", "CHEM 2311", "MATH 1342"],
+      "Spring": ["CS 1210", "DS 4200", "CHEM 2313", "CHEM 2321"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4300", "DS 4400", "PHYS 1151", "ENVR 2500"],
+      "Summer 1": ["ENGW 3302", "CHEM 3431"]
+    },
+    "Year 4": {
+      "Spring": ["CHEM 4750"]
+    }
+  }
+}

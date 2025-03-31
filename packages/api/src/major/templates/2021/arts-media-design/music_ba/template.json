@@ -1,0 +1,30 @@
+{
+  "Sample Four Years, No Co-op": {
+    "Year 1": {
+      "Fall": ["MUSC 1001", "MUSC 1201", "ENGW 1111", "MUSC 1000", "MUSC 1119"],
+      "Spring": ["MUSC 1201"]
+    },
+    "Year 2": {
+      "Fall": ["EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3314"]
+    },
+    "Year 4": {},
+    "Year 5": {}
+  },
+  "Sample Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["MUSC 1001", "ENGW 1111", "MUSC 1119", "MUSC 1000"],
+      "Spring": ["MUSC 1201"]
+    },
+    "Year 2": {
+      "Fall": ["EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3314"]
+    },
+    "Year 4": {},
+    "Year 5": {}
+  }
+}
