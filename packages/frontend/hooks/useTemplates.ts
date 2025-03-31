@@ -82,7 +82,7 @@ export function useTemplate(
   );
 
   return {
-    template: data,
+    template: data ?? null,
     isLoading,
     error,
   };
