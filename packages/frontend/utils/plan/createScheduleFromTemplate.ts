@@ -26,15 +26,14 @@ export function createScheduleFromTemplate(
     // Check if we have the template data
     if (!template.templateData || !template.name) {
       console.error("Missing template data or name");
-      return schedule as Schedule2<null>;
+      return schedule;
     }
 
     // Get the plan data from the template
     const planData = template.templateData[template.name];
-
     if (!planData) {
       console.error("No plan data found in template");
-      return schedule as Schedule2<null>;
+      return schedule;
     }
 
     console.log("Processing plan data:", planData);
@@ -150,9 +149,9 @@ export function createScheduleFromTemplate(
     });
 
     console.log("Final schedule:", schedule);
-    return schedule as Schedule2<null>;
+    return schedule;
   } catch (error) {
     console.error("Error creating schedule from template:", error);
-    return createEmptySchedule() as Schedule2<null>;
+    return createEmptySchedule();
   }
 }

@@ -1,5 +1,4 @@
 import { API } from "@graduate/api-client";
-import { Template } from "@graduate/common";
 import useSWR from "swr";
 
 export const USE_TEMPLATES_SWR_KEY = "templates";
@@ -83,7 +82,7 @@ export function useTemplate(
   );
 
   return {
-    template: data as Template | null,
+    template: data,
     isLoading,
     error,
   };

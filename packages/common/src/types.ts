@@ -144,12 +144,10 @@ export interface Major2 {
   yearVersion: number;
   concentrations?: Concentrations2;
   metadata?: MajorMetadata;
-  baseTemplate?: Template;
 }
 
 export interface Template {
   name: string;
-  requirementSections: Section[];
   yearVersion: number;
   templateData?: {
     [templateName: string]: {

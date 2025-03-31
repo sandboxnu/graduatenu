@@ -1,6 +1,7 @@
 import { Template } from "@graduate/common";
 import { useFetchCourses } from "./useFetchCourses";
 
+// Populates a template with proper course data using useFetchCourses hook
 export function useTemplateCourses(
   template: Template | null,
   catalogYear: number | null

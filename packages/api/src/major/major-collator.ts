@@ -153,7 +153,6 @@ async function collateMajors() {
           // Create template object with raw template data (without enhancements)
           const template: Template = {
             name: templateName,
-            requirementSections: [], // Template doesn't need requirements
             yearVersion: parseInt(year),
             templateData: templateJson,
           };
@@ -169,9 +168,6 @@ async function collateMajors() {
 
           // If we have a major, associate the template with it
           if (majorName && MAJORS[year] && MAJORS[year][majorName]) {
-            // Associate the template with the major
-            MAJORS[year][majorName].baseTemplate = template;
-
             // Also store the template under the major name for consistent lookup
             TEMPLATES[year][majorName] = template;
 

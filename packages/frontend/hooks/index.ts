@@ -10,11 +10,3 @@ export * from "./useFetchCourses";
 export * from "./useWindowSize";
 export * from "./useFetchCourse";
 export * from "./useTemplates";
-
-export {
-  useAllTemplates,
-  useTemplatesForYear,
-  useHasTemplate,
-  useTemplate,
-  USE_TEMPLATES_SWR_KEY,
-} from "./useTemplates";
