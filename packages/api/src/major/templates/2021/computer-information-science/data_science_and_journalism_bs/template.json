@@ -1,0 +1,52 @@
+{
+  "Sample Pattern, Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "JRNL 1150", "ENGW 1111"],
+      "Spring": ["CS 2510", "CS 3200", "JRNL 1101", "JRNL 3550"],
+      "Summer 1": ["CS 3500", "MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["JRNL 2301", "JRNL 2201", "CS 3500", "MATH 1341"],
+      "Spring": [
+        "CS 1210",
+        "DS 3000",
+        "DS 4200",
+        "JRNL 3610",
+        "JRNL 3700",
+        "JRNL 2301"
+      ],
+      "Summer 1": ["ECON 2350"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4300", "DS 4400", "JRNL 4650", "DS 4200", "JRNL 3550"],
+      "Summer 1": ["ECON 2350"]
+    },
+    "Year 4": {
+      "Spring": ["CY 4170", "DS 4420", "DS 4400", "JRNL 4650"]
+    },
+    "Year 5": {
+      "Spring": ["CY 4170", "DS 4420", "JRNL 3610"]
+    }
+  },
+  "Sample Pattern, Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "JRNL 1150", "ENGW 1111"],
+      "Spring": ["CS 2510", "CS 3200", "JRNL 1101"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "MATH 1341", "JRNL 2201"],
+      "Spring": ["CS 1210", "DS 3000", "JRNL 2301", "JRNL 3700"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4200", "DS 4300", "JRNL 3550"],
+      "Summer 1": ["ECON 2350"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4400", "JRNL 4650"]
+    },
+    "Year 5": {
+      "Spring": ["CY 4170", "DS 4420", "JRNL 3610"]
+    }
+  },
+  "": {}
+}

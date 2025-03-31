@@ -1,0 +1,95 @@
+{
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "INTL 1000",
+        "INTL 1101",
+        "HUSV 1101"
+      ],
+      "Spring": [
+        "HUSV 2300",
+        "ECON 3290"
+      ]
+    },
+    "Year 2": {
+      "Spring": [
+        "HUSV 2970",
+        "HUSV 3900",
+        "INTL 3400",
+        "EESH 2000"
+      ],
+      "Fall": [
+        "HUSV 3900",
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "SOCL 3440"
+      ],
+      "Fall": [
+        "HUSV 2970"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "ENGW 3315",
+        "HUSV 4994"
+      ],
+      "Fall": [
+        "ENGW 3315",
+        "HUSV 4994"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "HUSV 4700",
+        "INTL 4700"
+      ],
+      "Fall": [
+        "SOCL 3440"
+      ]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "INTL 1000",
+        "INTL 1101",
+        "HUSV 1101"
+      ],
+      "Spring": [
+        "HUSV 2300",
+        "ECON 3290"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "HUSV 3900",
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "HUSV 2970"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENGW 3315",
+        "HUSV 4994"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "SOCL 3440"
+      ],
+      "Spring": [
+        "HUSV 4700",
+        "INTL 4700"
+      ]
+    }
+  }
+}

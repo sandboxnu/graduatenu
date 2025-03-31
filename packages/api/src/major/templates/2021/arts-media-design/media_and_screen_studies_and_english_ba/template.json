@@ -1,0 +1,17 @@
+{
+  "Sample Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["MSCR 1000", "MSCR 1220", "ENGL 1400", "ENGL 1160"],
+      "Spring": ["MSCR 1320"]
+    },
+    "Year 2": {
+      "Fall": ["EEAM 2000"]
+    },
+    "Year 3": {
+      "Spring": ["ENGL 1450"]
+    },
+    "Year 4": {
+      "Spring": ["MSCR 3600", "ENGL 4710"]
+    }
+  }
+}

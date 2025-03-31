@@ -1,0 +1,158 @@
+{
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "PSYC 1101"
+      ],
+      "Spring": [
+        "CS 2510",
+        "PSYC 3466"
+      ],
+      "Summer 1": [
+        "CS 3500"
+      ],
+      "Summer 2": [
+        "CS 3000"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 1210",
+        "MATH 1341",
+        "PSYC 3464"
+      ],
+      "Spring": [
+        "CS 1210",
+        "IS 4300",
+        "PSYC 2320",
+        "PSYC 3452"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CS 4500",
+        "PSYC 2320",
+        "PSYC 3452"
+      ],
+      "Summer 2": [
+        "ENGW 3302"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "IS 4300"
+      ],
+      "Spring": [
+        "CS 4100",
+        "CS 4530"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "PSYC 1101"
+      ],
+      "Spring": [
+        "CS 2510",
+        "PSYC 3466"
+      ],
+      "Summer 1": [
+        "CS 3500"
+      ],
+      "Summer 2": [
+        "CS 3000"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 1210",
+        "MATH 1341",
+        "PSYC 3464"
+      ],
+      "Spring": [
+        "CS 1210",
+        "IS 4300",
+        "PSYC 2320",
+        "PSYC 3452"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CS 4500",
+        "PSYC 2320",
+        "PSYC 3452"
+      ],
+      "Summer 2": [
+        "ENGW 3302"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "IS 4300"
+      ],
+      "Spring": [
+        "CS 4100",
+        "CS 4530"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "PSYC 1101"
+      ],
+      "Spring": [
+        "CS 2510",
+        "PSYC 3466"
+      ],
+      "Summer 1": [
+        "CS 3500"
+      ],
+      "Summer 2": [
+        "CS 3000"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "MATH 1341",
+        "PSYC 3464"
+      ],
+      "Spring": [
+        "CS 1210",
+        "IS 4300",
+        "PSYC 2320",
+        "PSYC 3452"
+      ]
+    },
+    "Year 3": {
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CS 4100",
+        "CS 4530"
+      ]
+    }
+  }
+}

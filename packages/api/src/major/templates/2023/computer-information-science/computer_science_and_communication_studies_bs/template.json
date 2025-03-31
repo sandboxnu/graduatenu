@@ -1,0 +1,94 @@
+{
+  "Sample Pattern, Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "COMM 1101",
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "COMM 1112",
+        "CS 2510",
+        "CS 3200"
+      ],
+      "Summer 1": [
+        "CS 3500"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 1210",
+        "CS 3000",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CS 1210"
+      ]
+    },
+    "Year 3": {
+      "Summer 2": [
+        "ENGW 3302"
+      ],
+      "Spring": [
+        "CS 4120",
+        "CS 4530"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CS 4120",
+        "CS 4500"
+      ],
+      "Spring": [
+        "CS 4550"
+      ]
+    }
+  },
+  "Sample Pattern, Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "COMM 1101",
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "COMM 1112",
+        "CS 2510",
+        "CS 3200"
+      ],
+      "Summer 1": [
+        "CS 3500"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 3000",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "CS 1210"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CS 4120",
+        "CS 4530"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CS 4550"
+      ]
+    }
+  }
+}

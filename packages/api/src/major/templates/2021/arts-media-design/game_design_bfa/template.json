@@ -1,0 +1,18 @@
+{
+  "Sample Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "GAME 1110", "ARTF 1122", "ARTF 2220", "ENGW 1111"],
+      "Spring": ["GAME 2500", "GAME 2650", "ARTD 2370", "ARTF 1124"]
+    },
+    "Year 2": {
+      "Fall": ["GAME 2950", "GAME 3300", "ARTG 2260", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["GAME 3400", "GAME 3700"]
+    },
+    "Year 4": {
+      "Fall": ["GAME 3800"],
+      "Spring": ["GAME 4700", "GAME 2010"]
+    }
+  }
+}
