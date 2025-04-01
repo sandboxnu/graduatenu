@@ -64,6 +64,13 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     useSupportedMajors();
   const { supportedMinorsData, error: supportedMinorsError } =
     useSupportedMinors();
+
+  // Generate default plan title using formatted date and time
+  const generateDefaultPlanTitle = () => {
+    const now = new Date();
+    return `Plan ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+  };
+
   const {
     register,
     handleSubmit,
@@ -95,7 +102,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();
     const newPlan: CreatePlanDto = {
-      name: payload.name,
+      name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
       minor: isNoMinorSelected ? undefined : payload.minor,
@@ -148,7 +155,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     onCloseDisplay();
   };
 
-  const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
   //const minorName = watch("minor");
@@ -172,13 +178,12 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
 
   const isValidForm =
-    (title &&
-      catalogYear &&
+    (catalogYear &&
       majorName &&
       (!isConcentrationRequired || concentration) &&
       (!isValidatedMajor ? agreeToBetaMajor : true)) ||
     // Valid plan for no major selected
-    (title && isNoMajorSelected);
+    isNoMajorSelected;
 
   const noMajorHelperLabel = (
     <Stack>
@@ -238,10 +243,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                   label="Title"
                   id="name"
                   type="text"
-                  placeholder="My Plan"
+                  placeholder={generateDefaultPlanTitle()}
                   error={errors.name}
                   {...register("name", {
-                    required: "Title is required",
                     pattern: noLeadOrTrailWhitespacePattern,
                   })}
                 />
@@ -325,7 +329,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         name="concentration"
                         placeholder="Select a Concentration"
                         options={convertToOptionObjects(
-                          majorConcentrations.concentrations
+                          majorConcentrations.concentrations,
+                          true
                         )}
                         control={control}
                         rules={{

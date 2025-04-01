@@ -18,6 +18,11 @@ const ormconfig: TypeOrmModuleOptions = {
   cli: {
     migrationsDir: "migrations",
   },
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
   keepConnectionAlive: process.env.NODE_ENV === "testing",
 };
 

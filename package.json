@@ -12,6 +12,7 @@
   },
   "scripts": {
     "dev": "concurrently \"yarn foreach '@graduate/(common|api|frontend|api-client)' run dev\" \"yarn dev:proxy\"",
+    "wdev": "yarn concurrently \"yarn workspaces foreach --parallel --verbose --interlaced run dev\" \"yarn dev:proxy\"",
     "prod": "concurrently \"yarn foreach '@graduate/(common|api|frontend|api-client)' run prod\" \"yarn dev:proxy\"",
     "foreach": "yarn workspaces foreach --parallel --verbose --interlaced --include",
     "dev:proxy": "node infrastructure/develop/dev-proxy.js",
@@ -41,6 +42,7 @@
     "@nestjs/axios": "^3.0.2",
     "@nestjs/terminus": "^10.2.2",
     "@nestjs/throttler": "^5.0.1",
+    "@vercel/analytics": "^1.5.0",
     "cross-env": "^7.0.3",
     "fuse.js": "^7.0.0",
     "nodemailer": "^6.9.1",

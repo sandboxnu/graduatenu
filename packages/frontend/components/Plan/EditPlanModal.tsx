@@ -322,7 +322,8 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         name="concentration"
                         placeholder="Select a Concentration"
                         options={convertToOptionObjects(
-                          majorConcentrations.concentrations
+                          majorConcentrations.concentrations,
+                          true
                         )}
                         control={control}
                         rules={{
