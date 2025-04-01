@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $# != 3 ]]; then
-  echo "Usage: redeploy.sh <prod | staging> <COMMIT_TAG | latest-main | local-head> <frontend | backend | both>"
+  echo "Usage: redeploy.sh <prod | staging> <COMMIT_TAG | latest-main | local-head> <backend>"
   exit 1
 fi
 
@@ -23,14 +23,21 @@ else
 fi
 
 # Only deploy the service specified.
-if [[ $3 = "frontend" ]]; then
-  DEPLOY_INDEXES=(1)
-elif [[ $3 = "backend" ]]; then
+# if [[ $3 = "frontend" ]]; then
+#   DEPLOY_INDEXES=(1)
+# elif [[ $3 = "backend" ]]; then
+#   DEPLOY_INDEXES=(0)
+# elif [[ $3 = "both" ]]; then
+#   DEPLOY_INDEXES=(0 1)
+# else
+#   echo "Please choose a service to deploy: 'frontend', 'backend', or 'both'"
+#   exit 1
+# fi
+
+if [[ $3 = "backend" ]]; then
   DEPLOY_INDEXES=(0)
-elif [[ $3 = "both" ]]; then
-  DEPLOY_INDEXES=(0 1)
 else
-  echo "Please choose a service to deploy: 'frontend', 'backend', or 'both'"
+  echo "This script only supports backend AWS deployments. To deploy frontend, check Vercel."
   exit 1
 fi
 
