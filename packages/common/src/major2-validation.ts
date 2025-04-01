@@ -14,6 +14,7 @@ import {
   Result,
   Err,
   Ok,
+  Minor,
 } from "./types";
 import { UNDECIDED_STRING } from "./constants";
 import { assertUnreachable, courseToString } from "./course-utils";
@@ -299,9 +300,11 @@ export type MajorValidationResult = Result<
 export function validateMajor2(
   major: Major2,
   taken: ScheduleCourse2<unknown>[],
+  minor?: Minor,
   concentrations?: SelectedConcentrationsType
 ): MajorValidationResult {
   const tracker = new Major2ValidationTracker(taken);
+
   let concentrationReq: Requirement2[] = [];
   if (major.concentrations) {
     concentrationReq = getConcentrationsRequirement(
@@ -310,7 +313,22 @@ export function validateMajor2(
     );
   }
 
-  const majorReqs = [...major.requirementSections, ...concentrationReq];
+  let minorRequirements: Requirement2[] = [];
+  if (minor) {
+    // Get the minor requirements and assign them
+    minorRequirements = getMinorRequirement(minor);
+  }
+
+  let majorRequirements: Requirement2[] = [];
+  majorRequirements = wrapMajor(major);
+
+  //const majorReqs = [...major.requirementSections, ...(minor?.requirementSections ?? []), ...concentrationReq];
+  const majorReqs = [
+    // ...major.requirementSections,
+    ...majorRequirements,
+    ...minorRequirements,
+    ...concentrationReq,
+  ];
 
   const requiredCourses: Set<string> = new Set();
   tracker.setNecessaryCourses(getNecessaryCourses(majorReqs, requiredCourses));
@@ -324,7 +342,7 @@ export function validateMajor2(
     tracker
   );
   const creditsResult = validateTotalCreditsRequired(
-    major.totalCreditsRequired,
+    major.totalCreditsRequired + (minor?.totalCreditsRequired ?? 0),
     taken
   );
 
@@ -445,6 +463,51 @@ function convertToConcentrationsArray(
   }
   return concentrations;
 }
+
+export function wrapMajor(inputMajor: Major2): Requirement2[] {
+  const majorRequirements: Section[] = inputMajor.requirementSections;
+  return [{ type: "AND", courses: majorRequirements }];
+}
+
+export function getMinorRequirement(
+  inputMinor: undefined | Minor
+): Requirement2[] {
+  // No minor
+  if (!inputMinor) {
+    return [];
+  }
+
+  // put all the minor requirments into minor requirments and assigning type as section
+  const minorRequirements: Section[] = inputMinor.requirementSections;
+
+  //const selectedMinors = convertToMinorsArray(inputMinor);
+
+  //const matchedRequirements = [];
+  // for (const minor of selectedMinors) {
+  //   console.log(selectedMinors);
+  //   const found = minorRequirements.find((m) => {
+  //     // for(const req of )
+  //     console.log(`Comparing title: ${m.title} with minor name: ${minor.name}`);
+  //     return m.title === minor.name;
+  //   });
+  //   if (!found) {
+  //     throw new Error (`Minor was not found: ${minor.name}`);
+  //   }
+  //   matchedRequirements.push(found);
+  // }
+
+  return [{ type: "AND", courses: minorRequirements }];
+}
+
+// function convertToMinorsArray(minors: undefined | Minor | Minor[]): Minor[] {
+//   if (minors === undefined) {
+//     return [];
+//   }
+//   if (!Array.isArray(minors)) {
+//     return [minors];
+//   }
+//   return minors;
+// }
 
 // the solutions returned may have duplicate courses, indicating the # of times a course is taken
 export const validateRequirement = (

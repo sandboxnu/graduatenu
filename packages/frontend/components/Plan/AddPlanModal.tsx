@@ -31,11 +31,13 @@ import {
   useSupportedMajors,
   USE_STUDENT_WITH_PLANS_SWR_KEY,
   useStudentWithPlans,
+  useSupportedMinors,
 } from "../../hooks";
 import {
   cleanDndIdsFromStudent,
   createEmptySchedule,
   extractSupportedMajorOptions,
+  extractSupportedMinorOptions,
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
@@ -60,6 +62,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
+  const { supportedMinorsData, error: supportedMinorsError } =
+    useSupportedMinors();
 
   // Generate default plan title using formatted date and time
   const generateDefaultPlanTitle = () => {
@@ -80,6 +84,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     shouldFocusError: true,
   });
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
+  const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
@@ -90,6 +95,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
   }
+  if (supportedMinorsError) {
+    handleApiClientError(supportedMinorsError, router);
+  }
 
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();
@@ -97,6 +105,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
+      minor: isNoMinorSelected ? undefined : payload.minor,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
       schedule,
     };
@@ -142,11 +151,13 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const onCloseAddPlanModal = () => {
     reset();
     setIsNoMajorSelected(false);
+    setIsNoMinorSelected(false);
     onCloseDisplay();
   };
 
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
+  //const minorName = watch("minor");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
 
@@ -311,12 +322,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       isSearchable
                       useFuzzySearch
                     />
-                    <Flex align="center">
-                      <Text size="xs" mr="xs">
-                        Can&apos;t find your major?
-                      </Text>
-                      <HelperToolTip label="We are working to support all majors, but in the meantime, you can submit feedback requesting your major and select 'No Major' so that you can still use our planner!" />
-                    </Flex>
+
                     {majorHasConcentrations && (
                       <PlanSelect
                         label="Concentrations"
@@ -336,6 +342,26 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         useFuzzySearch
                       />
                     )}
+                    <PlanSelect
+                      label="Minor"
+                      placeholder="Select a Minor"
+                      name="minor"
+                      control={control}
+                      options={extractSupportedMinorOptions(
+                        catalogYear,
+                        supportedMinorsData
+                      )}
+                      //rules={{ required: "Minor is required." }}
+                      isDisabled={!catalogYear}
+                      isSearchable
+                      useFuzzySearch
+                    />
+                    <Flex align="center">
+                      <Text size="xs" mr="xs">
+                        Can&apos;t find your major / minor?
+                      </Text>
+                      <HelperToolTip label="We are working to support all majors, but in the meantime, you can submit feedback requesting your major and select 'No Major' so that you can still use our planner!" />
+                    </Flex>
                     {majorName && !isValidatedMajor && (
                       <Flex alignItems="center">
                         <Checkbox
