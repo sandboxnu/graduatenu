@@ -146,6 +146,18 @@ export interface Major2 {
   metadata?: MajorMetadata;
 }
 
+export interface Template {
+  name: string;
+  yearVersion: number;
+  templateData?: {
+    [templateName: string]: {
+      [yearKey: string]: {
+        [termKey: string]: string[];
+      };
+    };
+  };
+}
+
 /**
  * A Minor, containing all the requirements.
  *
