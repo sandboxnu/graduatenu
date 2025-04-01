@@ -2,7 +2,7 @@
   "name": "Computer Science, BSCS",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "04/01/2025"
   },
   "totalCreditsRequired": 134,
   "yearVersion": 2024,
@@ -1052,47 +1052,48 @@
             ]
           },
           {
-            "type": "COURSE",
-            "classId": 3520,
-            "subject": "CS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4410,
-            "subject": "CS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4520,
-            "subject": "CS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4550,
-            "subject": "CS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4700,
-            "subject": "CS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4730,
-            "subject": "CS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4820,
-            "subject": "CS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4830,
-            "subject": "CS"
+            "type": "XOM",
+            "numCreditsMin": 4,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3520,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4410,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4550,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4700,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4730,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4820,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4830,
+                "subject": "CS"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 11
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
