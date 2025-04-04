@@ -11,6 +11,10 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { GraduateButtonLink, GraduatePreAuthHeader } from "../components";
+import {
+  AlmostGivingDayModalContent,
+  GivingDayModal,
+} from "../components/GivingDay/GivingDayModal";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
 
@@ -30,6 +34,15 @@ const LandingPage: NextPage = () => {
   return (
     <Box>
       <GraduatePreAuthHeader />
+      <GivingDayModal>
+        <AlmostGivingDayModalContent
+          onClose={() => {
+            // This is intentionally empty as the real onClose will be provided via cloneElement
+          }}
+        />
+        {/** Swap out on April 10th */}
+        {/** <GivingDayModalContent onClose={() => {}} /> */}
+      </GivingDayModal>
       <Banner />
       <Info />
       {isMobile && <WhyDesktop />}

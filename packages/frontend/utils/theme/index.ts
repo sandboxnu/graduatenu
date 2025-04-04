@@ -76,6 +76,10 @@ const colors = {
     main: "#5F6CF6",
     back: "#E0EBFC",
   },
+  givingDayAccordion: {
+    back: "#DAFEE6",
+    main: "#5BBF7C",
+  },
 };
 
 const fonts = {
