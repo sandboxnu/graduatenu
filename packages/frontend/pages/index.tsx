@@ -14,7 +14,7 @@ import { GraduateButtonLink, GraduatePreAuthHeader } from "../components";
 import {
   AlmostGivingDayModalContent,
   GivingDayModal,
-} from "../components/GivingDayModal/GivingDayModal";
+} from "../components/GivingDay/GivingDayModal";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
 
@@ -35,7 +35,13 @@ const LandingPage: NextPage = () => {
     <Box>
       <GraduatePreAuthHeader />
       <GivingDayModal>
-        <AlmostGivingDayModalContent onClose={() => {}} />
+        <AlmostGivingDayModalContent
+          onClose={() => {
+            // This is intentionally empty as the real onClose will be provided via cloneElement
+          }}
+        />
+        {/** Swap out on April 10th */}
+        {/** <GivingDayModalContent onClose={() => {}} /> */}
       </GivingDayModal>
       <Banner />
       <Info />

@@ -100,7 +100,7 @@ export const AlmostGivingDayModalContent = ({ onClose }: ModalContentProps) => {
             {`On April 10th, make a donation to Sandbox `}
             <Box as="br" />
             <Link
-              href="https://your-donation-url.com"
+              href="https://givingday.northeastern.edu/campaigns/sandbox-club"
               color="blue.500"
               isExternal
             >
@@ -144,7 +144,10 @@ export const GivingDayModalContent = ({ onClose }: ModalContentProps) => {
             width="full"
             colorScheme="red"
             onClick={() => {
-              window.open("https://your-donation-url.com", "_blank");
+              window.open(
+                "https://givingday.northeastern.edu/campaigns/sandbox-club",
+                "_blank"
+              );
               onClose();
             }}
           >
