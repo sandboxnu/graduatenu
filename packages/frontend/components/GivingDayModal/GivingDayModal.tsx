@@ -14,8 +14,10 @@ import {
   VStack,
   Heading,
   Flex,
+  useTheme,
 } from "@chakra-ui/react";
 import DonateGraduateHusky from "../../public/donate-graduate-husky.svg";
+import ConfettiExplosion from "react-confetti-explosion";
 
 interface GivingDayModalProps {
   isOpen: boolean;
@@ -44,6 +46,7 @@ interface GivingDayContentProps {
   heading: string;
   body: React.ReactNode;
   footer: React.ReactNode;
+  hasConfetti?: boolean;
 }
 
 /** Abstract component for the Giving Day modal content. */
@@ -51,7 +54,10 @@ export const GivingDayContent = ({
   heading,
   body,
   footer,
+  hasConfetti = false,
 }: GivingDayContentProps) => {
+  const theme = useTheme();
+
   return (
     <ModalContent padding={5}>
       <ModalHeader>
@@ -66,6 +72,17 @@ export const GivingDayContent = ({
           maxHeight={300}
           borderRadius="2xl"
         />
+        {hasConfetti && (
+          <ConfettiExplosion
+            {...{
+              force: 0.5,
+              duration: 3000,
+              particleCount: 80,
+              width: 400,
+              zIndex: theme.zIndices.popover,
+            }}
+          />
+        )}
         <VStack>
           <Heading size="lg">{heading}</Heading>
           {body}
@@ -139,14 +156,19 @@ export const GivingDayModalContent = ({ onClose }: ModalContentProps) => {
           <Button
             variant="solidWhite"
             size="md"
-            borderRadius="lg"
+            borderRadius="md"
+            width="full"
             onClick={onClose}
             padding={0}
+            _hover={{
+              backgroundColor: "neutral.100",
+            }}
           >
             Maybe Later
           </Button>
         </VStack>
       }
+      hasConfetti={true}
     />
   );
 };
