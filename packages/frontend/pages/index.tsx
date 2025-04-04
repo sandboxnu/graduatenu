@@ -11,6 +11,10 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { GraduateButtonLink, GraduatePreAuthHeader } from "../components";
+import {
+  AlmostGivingDayModalContent,
+  GivingDayModal,
+} from "../components/GivingDayModal/GivingDayModal";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
 
@@ -30,6 +34,9 @@ const LandingPage: NextPage = () => {
   return (
     <Box>
       <GraduatePreAuthHeader />
+      <GivingDayModal>
+        <AlmostGivingDayModalContent onClose={() => {}} />
+      </GivingDayModal>
       <Banner />
       <Info />
       {isMobile && <WhyDesktop />}

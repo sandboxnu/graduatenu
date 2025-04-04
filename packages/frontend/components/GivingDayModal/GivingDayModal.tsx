@@ -15,25 +15,22 @@ import {
   Heading,
   Flex,
   useTheme,
+  useDisclosure,
 } from "@chakra-ui/react";
 import DonateGraduateHusky from "../../public/donate-graduate-husky.svg";
 import ConfettiExplosion from "react-confetti-explosion";
 
 interface GivingDayModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
+  children: React.ReactElement<{ onClose: () => void }>;
 }
 
-export const GivingDayModal: React.FC<GivingDayModalProps> = ({
-  isOpen,
-  onClose,
-  children,
-}) => {
+export const GivingDayModal: React.FC<GivingDayModalProps> = ({ children }) => {
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="sm" isCentered>
       <ModalOverlay />
-      {children}
+      {React.cloneElement(children, { onClose })}
     </Modal>
   );
 };
