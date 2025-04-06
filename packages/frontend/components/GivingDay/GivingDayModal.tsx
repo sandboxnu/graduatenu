@@ -1,8 +1,6 @@
 import React from "react";
 import {
-  Box,
   Button,
-  Link,
   Modal,
   ModalCloseButton,
   ModalContent,
