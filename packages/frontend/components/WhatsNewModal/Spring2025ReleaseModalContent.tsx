@@ -1,17 +1,24 @@
-import { InfoOutlineIcon } from "@chakra-ui/icons";
 import {
   Stack,
-  chakra,
-  ModalContentProps,
   ModalContent,
   ModalHeader,
   ModalFooter,
   Button,
   Text,
+  VStack,
+  Link,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { ModalBodyPagination } from "./ModalBodyPagination";
-import { FeaturePageData, NewFeaturePage } from "./WhatsNewModal";
+import {
+  FeaturePageData,
+  NewFeaturePage,
+  WhatsNewModalContentProps,
+} from "./WhatsNewModal";
+import MinorDegreeSupportImage from "../../public/new-features-spring-2025/minor-degree-support.png";
+import UndecidedConcentrationImage from "../../public/new-features-spring-2025/undecided-concentration.png";
+import AddCourseModalUpgradeImage from "../../public/new-features-spring-2025/add-course-modal-upgrades.png";
+import TemplatePlansImage from "../../public/new-features-spring-2025/template-plans.png";
 
 const featurePagesData: FeaturePageData[] = [
   {
@@ -23,7 +30,8 @@ const featurePagesData: FeaturePageData[] = [
         <Text>
           To add a minor to a
           <Text as="span" fontWeight="bold">
-            new
+            {" "}
+            new{" "}
           </Text>
           plan, select one under the new “Minor” drop-down menu in the “Add
           Plan” modal.
@@ -31,14 +39,15 @@ const featurePagesData: FeaturePageData[] = [
         <Text>
           To add a minor to an
           <Text as="span" fontWeight="bold">
-            existing
+            {" "}
+            existing{" "}
           </Text>
           plan, select one under the new “Minor” drop-down menu in the “Add
           Plan” modal.
         </Text>
       </Stack>
     ),
-    image: InProgressIndicatorImage.src,
+    image: MinorDegreeSupportImage.src,
   },
   {
     key: "undecided-concentration-support",
@@ -57,7 +66,7 @@ const featurePagesData: FeaturePageData[] = [
         </Text>
       </Stack>
     ),
-    image: CoursesAddedToPlanImage.src,
+    image: UndecidedConcentrationImage.src,
   },
   {
     key: "add-course-modal-upgrade",
@@ -68,14 +77,15 @@ const featurePagesData: FeaturePageData[] = [
         <Text>
           You can now add classes
           <Text as="span" fontWeight="bold">
-            and
+            {" "}
+            and{" "}
           </Text>
           their co-reqs in one step. Our upgraded class blocks tile classes
           together with their co-requisites (labs, recitations, etc.)
         </Text>
       </Stack>
     ),
-    image: SearchNEUIntegrationImage.src,
+    image: AddCourseModalUpgradeImage.src,
   },
   {
     key: "template-plans",
@@ -90,32 +100,22 @@ const featurePagesData: FeaturePageData[] = [
           Sourced from Northeastern’s Academic Catalog, all recommended courses
           will populate under each year upon plan creation.
         </Text>
+
+        <Text fontWeight="bold">Image Source</Text>
+        <Link>
+          <Text wordBreak="break-word">
+            https://catalog.northeastern.edu/undergraduate/computer-information-science
+          </Text>
+        </Link>
       </Stack>
     ),
-    image: GeneralPlaceholdersImage.src,
-  },
-  {
-    key: "2024-beta-majors",
-    title: "Support for 2024-2025 Academic Catalog [BETA]",
-    descriptionSection: (
-      <Stack>
-        <Text>
-          We have added support for the undergraduate catalog of the 2024-2025
-          academic year.
-        </Text>
-        <Text>
-          You can now create plans that align with the new requirements for the
-          2024-2025 academic year.
-        </Text>
-      </Stack>
-    ),
-    image: BetaMajorsImage.src,
+    image: TemplatePlansImage.src,
   },
 ];
 
-export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
-  onClose,
-}) => {
+export const Spring2025ReleaseModalContent: React.FC<
+  WhatsNewModalContentProps
+> = ({ onClose }) => {
   const [featurePages, setFeaturePages] = React.useState<React.ReactNode[]>([]);
 
   useEffect(() => {
@@ -133,7 +133,7 @@ export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
         borderBottom="1px"
         borderColor="neutral.200"
       >
-        <Text>Latest Release: Fall 2024</Text>
+        <Text>Latest Release: Spring 2025</Text>
       </ModalHeader>
       {featurePages.length > 0 && <ModalBodyPagination pages={featurePages} />}
       <ModalFooter alignContent="center" justifyContent="center">
