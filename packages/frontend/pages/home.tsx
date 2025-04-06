@@ -50,8 +50,6 @@ import {
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
-import { ExportPlanModal } from "../components/Plan/ExportPlanModal";
-import { ImportPlanModal } from "../components/Plan/ImportPlanModal";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -155,7 +153,6 @@ const HomePage: NextPage = () => {
   }
 
   const selectedPlan = student.plans.find((plan) => selectedPlanId === plan.id);
-  console.log(selectedPlan);
 
   /**
    * When a course is dragged and dropped onto a semester
@@ -304,13 +301,6 @@ const HomePage: NextPage = () => {
                   planId={selectedPlan.id}
                 />
               )}
-              {selectedPlan && (
-                <ExportPlanModal
-                  plan={selectedPlan}
-                  planName={selectedPlan.name}
-                />
-              )}
-              <ImportPlanModal />
             </Flex>
             {selectedPlan && (
               <>
