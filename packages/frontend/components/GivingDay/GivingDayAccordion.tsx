@@ -13,7 +13,7 @@ import MoneyIcon from "../../public/money-icon.svg";
 /** This component is for the Giving Day Accordion used on the sidebar. */
 export const GivingDayAccordion = () => {
   return (
-    <Accordion allowToggle>
+    <Accordion pb={4} allowToggle>
       <AccordionItem
         borderRadius="lg"
         backgroundColor="givingDayAccordion.back"
