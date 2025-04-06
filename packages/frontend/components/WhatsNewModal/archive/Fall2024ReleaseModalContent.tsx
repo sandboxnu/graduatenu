@@ -16,11 +16,11 @@ import BetaMajorsImage from "../../public/2024-beta-majors.png";
 import CoursesAddedToPlanImage from "../../public/courses-added-to-plan-check.png";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import React, { useEffect } from "react";
-import { FeaturePageData, NewFeaturePage } from "../WhatsNewModal";
-
-interface ModalContentProps {
-  onClose: () => void;
-}
+import {
+  FeaturePageData,
+  NewFeaturePage,
+  WhatsNewModalContentProps,
+} from "../WhatsNewModal";
 
 const InProgressIcon: React.FC = () => {
   return (
@@ -134,9 +134,9 @@ const featurePagesData: FeaturePageData[] = [
   },
 ];
 
-export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
-  onClose,
-}) => {
+export const Fall2024ReleaseModalContent: React.FC<
+  WhatsNewModalContentProps
+> = ({ onClose }) => {
   const [featurePages, setFeaturePages] = React.useState<React.ReactNode[]>([]);
 
   useEffect(() => {

@@ -27,6 +27,10 @@ export const WhatsNewModal: React.FC<WhatsNewModalProps> = ({
   );
 };
 
+export interface WhatsNewModalContentProps {
+  onClose: () => void;
+}
+
 export interface NewFeatureTextProps {
   title: string;
   descriptionSection: React.ReactNode;
