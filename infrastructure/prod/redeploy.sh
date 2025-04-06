@@ -34,12 +34,13 @@ fi
 #   exit 1
 # fi
 
-if [[ $3 = "backend" ]]; then
-  DEPLOY_INDEXES=(0)
-else
-  echo "This script only supports backend AWS deployments. To deploy frontend, check Vercel."
-  exit 1
-fi
+# if [[ $3 = "backend" ]]; then
+#   DEPLOY_INDEXES=(0)
+# else
+#   echo "This script only supports backend AWS deployments. To deploy frontend, check Vercel."
+#   exit 1
+# fi
+DEPLOY_INDEXES=(0)
 
 echo "Deploying $3 repo(s) to $1 with commit "$2" ($ECR_IMAGE_COMMIT_HASH)"
 
