@@ -41,7 +41,10 @@ const LandingPage: NextPage = () => {
           }}
         />
         {/** Swap out on April 10th */}
-        {/** <GivingDayModalContent onClose={() => {}} /> */}
+        {/* <GivingDayModalContent onClose={() => {
+            // This is intentionally empty as the real onClose will be provided via cloneElement
+          }}
+        /> */}
       </GivingDayModal>
       <Banner />
       <Info />

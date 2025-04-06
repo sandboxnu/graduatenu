@@ -93,9 +93,9 @@ export const AlmostGivingDayModalContent = ({ onClose }: ModalContentProps) => {
     <GivingDayContent
       heading="It's almost Giving Day!"
       body={
-        <Flex paddingBottom={6}>
+        <Flex paddingBottom={6} textAlign="center">
           <Text fontSize="md">
-            {`On April 10th, make a donation to Sandbox here to help keep GraduateNU running!`}
+            {`Make a donation to Sandbox to help keep GraduateNU running!`}
           </Text>
         </Flex>
       }
@@ -115,19 +115,6 @@ export const AlmostGivingDayModalContent = ({ onClose }: ModalContentProps) => {
             }}
           >
             Donate
-          </Button>
-          <Button
-            variant="solidWhite"
-            size="md"
-            borderRadius="md"
-            width="full"
-            onClick={onClose}
-            padding={0}
-            _hover={{
-              backgroundColor: "neutral.100",
-            }}
-          >
-            Maybe Later
           </Button>
         </VStack>
       }
@@ -162,19 +149,6 @@ export const GivingDayModalContent = ({ onClose }: ModalContentProps) => {
             }}
           >
             Donate
-          </Button>
-          <Button
-            variant="solidWhite"
-            size="md"
-            borderRadius="md"
-            width="full"
-            onClick={onClose}
-            padding={0}
-            _hover={{
-              backgroundColor: "neutral.100",
-            }}
-          >
-            Maybe Later
           </Button>
         </VStack>
       }
