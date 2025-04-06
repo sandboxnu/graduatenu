@@ -20,14 +20,14 @@ export const GivingDayAccordion = () => {
         border="1px #5BBF7C solid"
       >
         <AccordionButton>
-          <Image src={MoneyIcon.src} alt={"money icon"} boxSize={5} mr="xs" />
+          <Image src={MoneyIcon.src} alt={"money icon"} boxSize={4} mr="xs" />
           <Text fontWeight="semibold" textAlign="left" fontSize="md" flex="1">
             Giving Day!
           </Text>
           <AccordionIcon color="givingDayAccordion.main" />
         </AccordionButton>
         <AccordionPanel>
-          <Text fontSize="md" paddingBottom={2}>
+          <Text fontSize="md" paddingBottom={4}>
             {`On April 10th, make a donation to Sandbox to help keep GraduateNU – and other projects – running!`}
           </Text>
 

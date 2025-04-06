@@ -97,29 +97,41 @@ export const AlmostGivingDayModalContent = ({ onClose }: ModalContentProps) => {
       body={
         <Flex paddingBottom={6}>
           <Text fontSize="md">
-            {`On April 10th, make a donation to Sandbox `}
-            <Box as="br" />
-            <Link
-              href="https://givingday.northeastern.edu/campaigns/sandbox-club"
-              color="blue.500"
-              isExternal
-            >
-              here
-            </Link>
-            {` to help keep GraduateNU running!`}
+            {`On April 10th, make a donation to Sandbox here to help keep GraduateNU running!`}
           </Text>
         </Flex>
       }
       footer={
-        <Button
-          variant="solid"
-          borderRadius="md"
-          width="full"
-          colorScheme="red"
-          onClick={onClose}
-        >
-          Okay
-        </Button>
+        <VStack width="full">
+          <Button
+            variant="solid"
+            borderRadius="md"
+            width="full"
+            colorScheme="red"
+            onClick={() => {
+              window.open(
+                "https://givingday.northeastern.edu/campaigns/sandbox-club",
+                "_blank"
+              );
+              onClose();
+            }}
+          >
+            Donate
+          </Button>
+          <Button
+            variant="solidWhite"
+            size="md"
+            borderRadius="md"
+            width="full"
+            onClick={onClose}
+            padding={0}
+            _hover={{
+              backgroundColor: "neutral.100",
+            }}
+          >
+            Maybe Later
+          </Button>
+        </VStack>
       }
     />
   );
