@@ -1,4 +1,4 @@
-import { AddIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import {
   Text,
   Stack,
@@ -23,7 +23,6 @@ import {
   CreatePlanDto,
   CreatePlanDtoWithoutSchedule,
   PlanModel,
-  Template,
   convertToOptionObjects,
 } from "@graduate/common";
 import { useRouter } from "next/router";
@@ -107,6 +106,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
+
+  const [opened, setOpened] = useState(false); // for component
+  const [scheduleJson, setScheduleJson] = useState<any>(null); // for importing
 
   // watch form fields
   const catalogYear = watch("catalogYear");
@@ -275,8 +277,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   // IMPORT FUNCTIONALITY
 
-  const [scheduleJson, setScheduleJson] = useState<any>(null);
-
   const loadPlan = (event: React.ChangeEvent<HTMLInputElement>) => {
     const extractedFile = event.target.files?.[0];
     if (extractedFile) {
@@ -350,7 +350,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const disableButton = isGuest && getLocalPlansLength() > 4;
   const showCoachMark = !selectedPlanId && !isCreateOpen;
-  const [opened, setOpened] = useState(false);
 
   return (
     <>
