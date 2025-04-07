@@ -1,4 +1,4 @@
-import { AddIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import {
   Text,
   Stack,
@@ -16,7 +16,6 @@ import {
   useDisclosure,
   Tooltip,
   Box,
-  Input,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
@@ -58,7 +57,6 @@ import { IsGuestContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
 import { useTemplateCourses } from "../../hooks/useTemplateCourses";
-import { convertScheduleToTemplate } from "../../utils/plan/convertScheduleToTemplate";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -70,16 +68,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   selectedPlanId,
 }) => {
   const router = useRouter();
-  const {
-    onOpen: onCreateOpen,
-    onClose: onCreateClose,
-    isOpen: isCreateOpen,
-  } = useDisclosure();
-  const {
-    onOpen: onImportOpen,
-    onClose: onImportClose,
-    isOpen: isImportOpen,
-  } = useDisclosure();
+  const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
 
@@ -210,7 +199,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   };
   const onCloseAddPlanModal = () => {
     reset();
-    onCreateClose();
+    onCloseDisplay();
     setIsNoMajorSelected(false);
   };
   const yearSupportedMajors =
@@ -271,80 +260,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     </Stack>
   );
 
-  const loadPlan = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const extractedFile = event.target.files?.[0];
-    if (extractedFile) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        try {
-          const text = e.target?.result as string;
-          const parsed = JSON.parse(text);
-          setScheduleJson(parsed); // <- now it's the parsed schedule
-          console.log("Parsed schedule JSON:", parsed);
-        } catch (err) {
-          console.error("Error parsing JSON file:", err);
-        }
-      };
-
-      reader.readAsText(extractedFile);
-    }
-  };
-
-  const importFile = async () => {
-    if (!scheduleJson || !student) return;
-
-    try {
-      const template = convertScheduleToTemplate(scheduleJson);
-
-      const schedule = createScheduleFromTemplate(template, courseLookup);
-
-      const newPlan: CreatePlanDto = {
-        name: template.name || generateDefaultPlanTitle(),
-        catalogYear: undefined, // can't be derived from import, or extract if present
-        major: undefined,
-        concentration: undefined,
-        schedule,
-      };
-
-      let createdPlanId: number;
-
-      if (isGuest) {
-        createdPlanId = student.plans.length + 1;
-
-        const planInLocalStorage: PlanModel<null> = {
-          ...newPlan,
-          id: createdPlanId,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          student: cleanDndIdsFromStudent(student),
-        } as PlanModel<null>;
-
-        window.localStorage.setItem(
-          "student",
-          JSON.stringify({
-            ...student,
-            plans: [...student.plans, planInLocalStorage],
-          })
-        );
-      } else {
-        const createdPlan = await API.plans.create(newPlan);
-        createdPlanId = createdPlan.id;
-      }
-
-      // refresh plans + close modal
-      mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
-      onImportClose();
-      setSelectedPlanId(createdPlanId);
-    } catch (error) {
-      console.error("Error importing plan:", error);
-    }
-  };
-
   const disableButton = isGuest && getLocalPlansLength() > 4;
-  const showCoachMark = !selectedPlanId && !isCreateOpen;
-  const [opened, setOpened] = useState(false);
-  const [scheduleJson, setScheduleJson] = useState<any>(null);
+  const showCoachMark = !selectedPlanId && !isOpen;
 
   return (
     <>
@@ -363,88 +280,18 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
           isDisabled
           isOpen={showCoachMark}
         >
-          <Box position="relative" overflow="visible" h="40px" marginLeft="8px">
-            <BlueButton
-              rightIcon={
-                opened ? (
-                  <ChevronUpIcon boxSize={6} />
-                ) : (
-                  <ChevronDownIcon boxSize={6} />
-                )
-              }
-              onClick={() => setOpened(!opened)}
-            >
-              New Plan
-            </BlueButton>
-            {opened && (
-              <Box
-                position="absolute"
-                background="white"
-                padding="0"
-                borderRadius="lg"
-              >
-                <BlueButton
-                  w="100%"
-                  border="none"
-                  borderRadius="0"
-                  borderTopRadius="lg"
-                  fontSize="sm"
-                  onClick={() => {
-                    onCreateOpen();
-                    setOpened(false);
-                  }}
-                >
-                  Create plan
-                </BlueButton>
-                <BlueButton
-                  w="100%"
-                  border="none"
-                  borderRadius="0"
-                  borderBottomRadius="lg"
-                  fontSize="sm"
-                  onClick={() => {
-                    onImportOpen();
-                    setOpened(false);
-                  }}
-                >
-                  Import file
-                </BlueButton>
-              </Box>
-            )}
-          </Box>
-          {/* <Box position="relative" zIndex={0}>
-            <Flex direction="column">
-              <BlueButton
-                leftIcon={<AddIcon />}
-                onClick={() => setOpened(!opened)}
-                //onClick={onOpen}
-                ml="xs"
-                size="md"
-                disabled={disableButton}
-                display="flex"
-                flexDirection="row"
-              >
-                New Plan
-              </BlueButton>
-            </Flex>
-            {opened && (
-              <>
-                <BlueButton>
-                  New Plan
-                </BlueButton>
-                <BlueButton>
-                  Import Plan
-                </BlueButton>
-              </>
-            )}
-          </Box> */}
+          <BlueButton
+            leftIcon={<AddIcon />}
+            onClick={onOpen}
+            ml="xs"
+            size="md"
+            disabled={disableButton}
+          >
+            New Plan
+          </BlueButton>
         </Tooltip>
       </GraduateToolTip>
-      <Modal
-        isOpen={isCreateOpen}
-        onClose={() => onCloseAddPlanModal()}
-        size="md"
-      >
+      <Modal isOpen={isOpen} onClose={() => onCloseAddPlanModal()} size="md">
         <ModalOverlay />
         <ModalContent>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -642,37 +489,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
               </Flex>
             </ModalFooter>
           </form>
-        </ModalContent>
-      </Modal>
-      <Modal isOpen={isImportOpen} onClose={onImportClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center" color="primary.blue.dark.main">
-            Import Plan
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>Upload JSON (.json) file</ModalBody>
-          <Input
-            placeholder="Upload"
-            size="md"
-            type="file"
-            onChange={loadPlan}
-            border="none"
-            paddingLeft="24px"
-          />
-          <ModalFooter justifyContent="center">
-            <Flex columnGap="sm">
-              <Button
-                variant="solid"
-                size="md"
-                borderRadius="lg"
-                type="submit"
-                onClick={importFile}
-              >
-                Import Plan
-              </Button>
-            </Flex>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
