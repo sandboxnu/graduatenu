@@ -417,32 +417,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
               </Box>
             )}
           </Box>
-          {/* <Box position="relative" zIndex={0}>
-            <Flex direction="column">
-              <BlueButton
-                leftIcon={<AddIcon />}
-                onClick={() => setOpened(!opened)}
-                //onClick={onOpen}
-                ml="xs"
-                size="md"
-                disabled={disableButton}
-                display="flex"
-                flexDirection="row"
-              >
-                New Plan
-              </BlueButton>
-            </Flex>
-            {opened && (
-              <>
-                <BlueButton>
-                  New Plan
-                </BlueButton>
-                <BlueButton>
-                  Import Plan
-                </BlueButton>
-              </>
-            )}
-          </Box> */}
         </Tooltip>
       </GraduateToolTip>
       <Modal
@@ -505,7 +479,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                             val &&
                             majorName &&
                             supportedMajorsData?.supportedMajors?.[val]?.[
-                            majorName
+                              majorName
                             ]
                           ) {
                             // we can keep the major, but we should check the concentration

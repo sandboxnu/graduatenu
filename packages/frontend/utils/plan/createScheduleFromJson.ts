@@ -1,9 +1,4 @@
-import {
-  Schedule2,
-  ScheduleCourse2,
-  StatusEnum,
-  Template,
-} from "@graduate/common";
+import { Schedule2, ScheduleCourse2, StatusEnum } from "@graduate/common";
 import { createEmptySchedule } from "./createEmptySchedule";
 
 /**
@@ -94,18 +89,6 @@ export function createScheduleFromJson(data: any): Schedule2<null> {
             console.log(courseStr);
             const subject = courseStr["subject"];
             const classId = courseStr["classId"];
-            const courseKey = `${subject} ${classId}`;
-
-            // // Look up the course in the API data
-            // const courseDetails = courseLookup?.[courseKey];
-
-            // // Debug logging to help identify course lookup issues
-            // console.log(
-            //   `Course ${courseKey}: Found in lookup: ${!!courseDetails}`,
-            //   courseDetails
-            //     ? `credits: ${courseDetails.numCreditsMin}-${courseDetails.numCreditsMax}`
-            //     : "not found"
-            // );
 
             // Create a course object
             const course: ScheduleCourse2<null> = {
