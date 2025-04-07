@@ -35,16 +35,9 @@ const LandingPage: NextPage = () => {
     <Box>
       <GraduatePreAuthHeader />
       <GivingDayModal>
-        <AlmostGivingDayModalContent
-          onClose={() => {
-            // This is intentionally empty as the real onClose will be provided via cloneElement
-          }}
-        />
+        <AlmostGivingDayModalContent />
         {/** Swap out on April 10th */}
-        {/* <GivingDayModalContent onClose={() => {
-            // This is intentionally empty as the real onClose will be provided via cloneElement
-          }}
-        /> */}
+        {/* <GivingDayModalContent /> */}
       </GivingDayModal>
       <Banner />
       <Info />

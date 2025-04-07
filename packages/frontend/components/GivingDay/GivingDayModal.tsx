@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -17,6 +17,12 @@ import {
 } from "@chakra-ui/react";
 import DonateGraduateHusky from "../../public/donate-graduate-husky.svg";
 import ConfettiExplosion from "react-confetti-explosion";
+import {
+  GIVING_DAY_LINK,
+  GIVING_DAY_MODAL_HEADING,
+  ITS_ALMOST_GIVING_DAY,
+  MAKE_A_DONATION_DESCRIPTION,
+} from "../../utils";
 
 interface GivingDayModalProps {
   children: React.ReactElement<{ onClose: () => void }>;
@@ -24,31 +30,39 @@ interface GivingDayModalProps {
 
 export const GivingDayModal: React.FC<GivingDayModalProps> = ({ children }) => {
   const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
+  // used to re-render modal after refresh so it goes on top
+  const [shouldRender, setShouldRender] = useState<boolean>(false);
+
+  useEffect(() => {
+    setShouldRender(true);
+  }, []);
+
+  if (!shouldRender) {
+    return null;
+  }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="sm" isCentered>
+    <Modal
+      isCentered
+      isOpen={isOpen}
+      onClose={onClose}
+      size="sm"
+      motionPreset="slideInBottom"
+    >
       <ModalOverlay />
-      {React.cloneElement(children, { onClose })}
+      {children}
     </Modal>
   );
 };
 
-interface ModalContentProps {
-  onClose: () => void;
-}
-
 interface GivingDayContentProps {
   heading: string;
-  body: React.ReactNode;
-  footer: React.ReactNode;
   hasConfetti?: boolean;
 }
 
 /** Abstract component for the Giving Day modal content. */
 export const GivingDayContent = ({
   heading,
-  body,
-  footer,
   hasConfetti = false,
 }: GivingDayContentProps) => {
   const theme = useTheme();
@@ -80,79 +94,37 @@ export const GivingDayContent = ({
         )}
         <VStack>
           <Heading size="lg">{heading}</Heading>
-          {body}
+          <Flex paddingBottom={6} textAlign="center">
+            <Text fontSize="md">{MAKE_A_DONATION_DESCRIPTION}</Text>
+          </Flex>
         </VStack>
       </VStack>
-      <ModalFooter padding={0}>{footer}</ModalFooter>
+      <ModalFooter padding={0}>
+        <VStack width="full">
+          <Button
+            autoFocus
+            variant="solid"
+            borderRadius="md"
+            width="full"
+            colorScheme="red"
+            onClick={() => {
+              window.open(GIVING_DAY_LINK, "_blank");
+            }}
+          >
+            Donate
+          </Button>
+        </VStack>
+      </ModalFooter>
     </ModalContent>
   );
 };
 
-export const AlmostGivingDayModalContent = ({ onClose }: ModalContentProps) => {
-  return (
-    <GivingDayContent
-      heading="It's almost Giving Day!"
-      body={
-        <Flex paddingBottom={6} textAlign="center">
-          <Text fontSize="md">
-            {`Make a donation to Sandbox to help keep GraduateNU running!`}
-          </Text>
-        </Flex>
-      }
-      footer={
-        <VStack width="full">
-          <Button
-            variant="solid"
-            borderRadius="md"
-            width="full"
-            colorScheme="red"
-            onClick={() => {
-              window.open(
-                "https://givingday.northeastern.edu/campaigns/sandbox-club",
-                "_blank"
-              );
-              onClose();
-            }}
-          >
-            Donate
-          </Button>
-        </VStack>
-      }
-    />
-  );
+export const AlmostGivingDayModalContent = () => {
+  return <GivingDayContent heading={ITS_ALMOST_GIVING_DAY} />;
 };
 
-export const GivingDayModalContent = ({ onClose }: ModalContentProps) => {
+export const GivingDayModalContent = () => {
   return (
-    <GivingDayContent
-      heading="It's Giving Day!"
-      body={
-        <Flex textAlign="center" paddingBottom={6} margin={0}>
-          <Text fontSize="md">
-            {`Make a donation to Sandbox to help keep GraduateNU running!`}
-          </Text>
-        </Flex>
-      }
-      footer={
-        <VStack width="full">
-          <Button
-            variant="solid"
-            borderRadius="md"
-            width="full"
-            colorScheme="red"
-            onClick={() => {
-              window.open(
-                "https://givingday.northeastern.edu/campaigns/sandbox-club",
-                "_blank"
-              );
-              onClose();
-            }}
-          >
-            Donate
-          </Button>
-        </VStack>
-      }
-      hasConfetti={true}
-    />
+    <GivingDayContent heading={GIVING_DAY_MODAL_HEADING} hasConfetti={true} />
   );
 };
