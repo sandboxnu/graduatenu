@@ -1,0 +1,86 @@
+diff --git a/packages/api/migrations/1743356663042-change_major_to_list.ts b/packages/api/migrations/1743356663042-change_major_to_list.ts
+new file mode 100644
+index 00000000..a277f76a
+--- /dev/null
++++ b/packages/api/migrations/1743356663042-change_major_to_list.ts
+@@ -0,0 +1,13 @@
++import { MigrationInterface, QueryRunner } from "typeorm";
++
++export class changeMajorToList1743356663042 implements MigrationInterface {
++  name = "changeMajorToList1743356663042";
++
++  public async up(queryRunner: QueryRunner): Promise<void> {
++    await queryRunner.query(`ALTER TABLE "plan" ADD "majors" json`);
++  }
++
++  public async down(queryRunner: QueryRunner): Promise<void> {
++    await queryRunner.query(`ALTER TABLE "plan" DROP COLUMN "majors"`);
++  }
++}
+diff --git a/packages/api/src/plan/entities/plan.entity.ts b/packages/api/src/plan/entities/plan.entity.ts
+index 6622393a..9b412980 100644
+--- a/packages/api/src/plan/entities/plan.entity.ts
++++ b/packages/api/src/plan/entities/plan.entity.ts
+@@ -14,6 +14,9 @@ export class Plan {
+   @PrimaryGeneratedColumn()
+   id: number;
+ 
++  @Column({ type: "json", nullable: true })
++  majors: string[];
++
+   @Column()
+   name: string;
+ 
+diff --git a/packages/api/src/plan/plan.service.ts b/packages/api/src/plan/plan.service.ts
+index f8a902b2..b183d800 100644
+--- a/packages/api/src/plan/plan.service.ts
++++ b/packages/api/src/plan/plan.service.ts
+@@ -24,8 +24,9 @@ export class PlanService {
+   ) {}
+ 
+   create(createPlanDto: CreatePlanDto, student: Student): Promise<Plan> {
++    console.log("createPlanDto", createPlanDto);
+     const {
+-      major: majorName,
++      majors: [majorName],
+       catalogYear,
+       concentration: concentrationName,
+     } = createPlanDto;
+diff --git a/packages/common/src/api-dtos.ts b/packages/common/src/api-dtos.ts
+index 6aebaed7..027f390a 100644
+--- a/packages/common/src/api-dtos.ts
++++ b/packages/common/src/api-dtos.ts
+@@ -23,7 +23,7 @@ export class CreatePlanDtoWithoutSchedule {
+ 
+   @IsString()
+   @IsOptional()
+-  major?: string;
++  majors?: string[];
+ 
+   @IsString()
+   @IsOptional()
+diff --git a/packages/common/src/api-response-types.ts b/packages/common/src/api-response-types.ts
+index 4f92b036..ec6213d6 100644
+--- a/packages/common/src/api-response-types.ts
++++ b/packages/common/src/api-response-types.ts
+@@ -16,6 +16,7 @@ export class PlanModel<T> {
+   student: StudentModel<null>;
+   schedule: Schedule2<T>;
+   major: string;
++  majors: string[];
+   concentration: string | undefined;
+   catalogYear: number;
+   createdAt: Date;
+diff --git a/packages/frontend/components/Plan/AddPlanModal.tsx b/packages/frontend/components/Plan/AddPlanModal.tsx
+index 092d7448..0c45d4d3 100644
+--- a/packages/frontend/components/Plan/AddPlanModal.tsx
++++ b/packages/frontend/components/Plan/AddPlanModal.tsx
+@@ -96,7 +96,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
+     const newPlan: CreatePlanDto = {
+       name: payload.name || generateDefaultPlanTitle(),
+       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
+-      major: isNoMajorSelected ? undefined : payload.major,
++      majors: isNoMajorSelected ? undefined : payload.majors,
+       concentration: isNoMajorSelected ? undefined : payload.concentration,
+       schedule,
+     };

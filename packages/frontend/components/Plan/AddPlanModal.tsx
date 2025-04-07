@@ -146,7 +146,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   };
 
   const catalogYear = watch("catalogYear");
-  const majorName = watch("major");
+  const majorsArray = watch("majors");
+  const majorName = majorsArray?.[0];
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
 
@@ -173,6 +174,15 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       (!isValidatedMajor ? agreeToBetaMajor : true)) ||
     // Valid plan for no major selected
     isNoMajorSelected;
+
+  console.log(majorsArray, "Majors Array");
+
+  // console.log("isValidForm", isValidForm);
+  console.log(catalogYear, "Catalog Year");
+  // console.log(majorName, "Major Name");
+  // console.log(isValidatedMajor, "Is Validated Major");
+  // console.log(agreeToBetaMajor, "Agree to Beta Major");
+  // console.log(isNoMajorSelected, "Is No Major Selected");
 
   const noMajorHelperLabel = (
     <Stack>
@@ -287,7 +297,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                               setValue("concentration", "");
                             }
                           } else {
-                            setValue("major", "");
+                            setValue("majors", []);
                           }
                         }
                       }}
@@ -297,7 +307,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     <PlanSelect
                       label="Major"
                       placeholder="Select a Major"
-                      name="major"
+                      name="majors"
                       control={control}
                       options={extractSupportedMajorOptions(
                         catalogYear,
