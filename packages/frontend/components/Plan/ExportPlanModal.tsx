@@ -76,7 +76,9 @@ export const ExportPlanModal: React.FC<ExportPlanModalProps> = ({
             Export Plan
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>Are you sure you want to export {planName}?</ModalBody>
+          <ModalBody margin="auto">
+            Export plan '{planName}' as a JSON file?
+          </ModalBody>
           <ModalFooter justifyContent="center">
             <Flex columnGap="sm">
               <Button
@@ -93,9 +95,8 @@ export const ExportPlanModal: React.FC<ExportPlanModalProps> = ({
                 borderRadius="lg"
                 type="submit"
                 onClick={exportToJson}
-                backgroundColor="#32CD32"
               >
-                Export
+                Export Plan
               </Button>
             </Flex>
           </ModalFooter>
