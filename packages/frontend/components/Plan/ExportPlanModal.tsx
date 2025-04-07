@@ -2,7 +2,6 @@ import { DownloadIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
-  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,6 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
+import { BlueButton } from "../Button";
 
 interface ExportPlanModalProps {
   plan: PlanModel<String>;
@@ -59,20 +59,15 @@ export const ExportPlanModal: React.FC<ExportPlanModalProps> = ({
 
   return (
     <>
-      <Tooltip label={`Export ${planName}?`} fontSize="md">
-        <IconButton
-          icon={<DownloadIcon />}
-          style={{ transform: "rotate(180deg)" }}
-          aria-label="Export plan"
-          variant="outline"
-          border="1px"
-          borderColor="#32CD32"
-          colorScheme="#32CD32"
-          color="#32CD32"
-          ml="xs"
-          borderRadius="lg"
+      <Tooltip shouldWrapChildren label={`Export ${planName}?`} fontSize="md">
+        <BlueButton
           onClick={onOpen}
-        />
+          leftIcon={<DownloadIcon />}
+          ml="xs"
+          size="md"
+        >
+          Export Plan
+        </BlueButton>
       </Tooltip>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -81,7 +76,9 @@ export const ExportPlanModal: React.FC<ExportPlanModalProps> = ({
             Export Plan
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>Are you sure you want to export {planName}?</ModalBody>
+          <ModalBody margin="auto">
+            Export plan '{planName}' as a JSON file?
+          </ModalBody>
           <ModalFooter justifyContent="center">
             <Flex columnGap="sm">
               <Button
@@ -98,9 +95,8 @@ export const ExportPlanModal: React.FC<ExportPlanModalProps> = ({
                 borderRadius="lg"
                 type="submit"
                 onClick={exportToJson}
-                backgroundColor="#32CD32"
               >
-                Export
+                Export Plan
               </Button>
             </Flex>
           </ModalFooter>

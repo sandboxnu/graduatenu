@@ -51,7 +51,6 @@ import {
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
 import { ExportPlanModal } from "../components/Plan/ExportPlanModal";
-import { ImportPlanModal } from "../components/Plan/ImportPlanModal";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -310,7 +309,6 @@ const HomePage: NextPage = () => {
                   planName={selectedPlan.name}
                 />
               )}
-              <ImportPlanModal />
             </Flex>
             {selectedPlan && (
               <>
