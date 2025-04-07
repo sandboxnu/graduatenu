@@ -23,7 +23,6 @@ import {
   CreatePlanDto,
   CreatePlanDtoWithoutSchedule,
   PlanModel,
-  Template,
   convertToOptionObjects,
 } from "@graduate/common";
 import { useRouter } from "next/router";
