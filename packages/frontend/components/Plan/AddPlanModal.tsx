@@ -60,7 +60,7 @@ import { IsGuestContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
 import { useTemplateCourses } from "../../hooks/useTemplateCourses";
-import { convertScheduleToTemplate } from "../../utils/plan/convertScheduleToTemplate";
+import { createScheduleFromJson } from "../../utils/plan/createScheduleFromJson";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -276,17 +276,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   // IMPORT FUNCTIONALITY
 
   const [scheduleJson, setScheduleJson] = useState<any>(null);
-  const [importedPlan, setImportedPlan] = useState<Template | null>(null);
-
-  useEffect(() => {
-    if (scheduleJson) {
-      const converted = convertScheduleToTemplate(scheduleJson);
-      setImportedPlan(converted);
-    }
-  }, [scheduleJson]);
-
-  const { courseLookup: importedPlanCourseLookup, isLoading } =
-    useTemplateCourses(importedPlan, scheduleJson?.catalogYear);
 
   const loadPlan = (event: React.ChangeEvent<HTMLInputElement>) => {
     const extractedFile = event.target.files?.[0];
@@ -309,18 +298,13 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   };
 
   const importFile = async () => {
-    if (!scheduleJson || !student || !importedPlanCourseLookup) return;
+    if (!scheduleJson || !student) return;
 
     try {
-      const template = convertScheduleToTemplate(scheduleJson);
-      const schedule = createScheduleFromTemplate(
-        template,
-        importedPlanCourseLookup
-      );
-      console.log("HERE: ", importedPlanCourseLookup);
+      const schedule = createScheduleFromJson(scheduleJson);
 
       const newPlan: CreatePlanDto = {
-        name: template.name || generateDefaultPlanTitle(),
+        name: scheduleJson.name || generateDefaultPlanTitle(),
         catalogYear: scheduleJson["catalogYear"],
         major: scheduleJson["major"],
         concentration: scheduleJson["concentration"],

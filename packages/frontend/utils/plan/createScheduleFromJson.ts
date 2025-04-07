@@ -13,10 +13,7 @@ import { createEmptySchedule } from "./createEmptySchedule";
  * @param   courseLookup Optional lookup object with course details from the API
  * @returns              A new schedule populated with courses from the template
  */
-export function createScheduleFromJson(
-  data: any,
-  courseLookup?: Record<string, ScheduleCourse2<null>>
-): Schedule2<null> {
+export function createScheduleFromJson(data: any): Schedule2<null> {
   // Start with an empty schedule
   const schedule = createEmptySchedule();
 
