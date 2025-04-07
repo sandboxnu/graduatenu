@@ -506,7 +506,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                             val &&
                             majorName &&
                             supportedMajorsData?.supportedMajors?.[val]?.[
-                              majorName
+                            majorName
                             ]
                           ) {
                             // we can keep the major, but we should check the concentration
