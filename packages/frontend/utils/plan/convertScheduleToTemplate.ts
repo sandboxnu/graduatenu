@@ -42,7 +42,7 @@ export function convertScheduleToTemplate(scheduleObj: {
 
   return {
     name: templateName,
-    yearVersion: 2024, // <-- required numeric version field
+    yearVersion: 0,
     templateData,
   };
 }

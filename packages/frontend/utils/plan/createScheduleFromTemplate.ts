@@ -99,7 +99,13 @@ export function createScheduleFromTemplate(
           // Process each course
           courses.forEach((courseStr) => {
             // Parse course string format
-            const courseParts = courseStr.match(/([A-Z]+)\s+(\d+[A-Z]*)(.*)/);
+            let courseParts = null;
+
+            if (courseStr === "Experiential Learning") {
+              courseParts = "Experiential Learning";
+            } else {
+              courseParts = courseStr.match(/([A-Z]+)\s+(\d+[A-Z]*)(.*)/);
+            }
             if (!courseParts) {
               console.warn("Couldn't parse course:", courseStr);
               return;
