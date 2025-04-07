@@ -16,7 +16,7 @@ import { PlanModel } from "@graduate/common";
 import { BlueButton } from "../Button";
 
 interface ExportPlanModalProps {
-  plan: PlanModel<String>;
+  plan: PlanModel<string>;
   planName: string;
 }
 interface DownloadPlanParams {
@@ -76,9 +76,7 @@ export const ExportPlanModal: React.FC<ExportPlanModalProps> = ({
             Export Plan
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody margin="auto">
-            Export plan '{planName}' as a JSON file?
-          </ModalBody>
+          <ModalBody margin="auto">Export plan as a JSON file?</ModalBody>
           <ModalFooter justifyContent="center">
             <Flex columnGap="sm">
               <Button
