@@ -1,0 +1,34 @@
+{
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "HUSV 1000",
+        "HUSV 1101",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "HUSV 2300",
+        "MATH 1215"
+      ]
+    },
+    "Year 2": {
+      "Spring": [
+        "HUSV 3570",
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ENGW 3315",
+        "HUSV 2970"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "HUSV 4994",
+        "HUSV 3900",
+        "HUSV 4700"
+      ]
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "Five Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ARCH 1000",
+        "ARCH 1310",
+        "ENGW 1111",
+        "MATH 1241"
+      ],
+      "Spring": [
+        "ARCH 1110",
+        "ARCH 1120",
+        "EEAM 2000",
+        "PHYS 1141"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ARCH 2130",
+        "ARCH 2240"
+      ],
+      "Spring": [
+        "ARCH 2140",
+        "ARCH 2340",
+        "ARCH 3210",
+        "ARCH 3450"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ARCH 3155",
+        "ARCH 3361",
+        "ARCH 3363",
+        "ARCH 3440"
+      ],
+      "Fall": [
+        "ARCH 3155",
+        "ARCH 3361",
+        "ARCH 3363",
+        "ARCH 3440"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ARCH 3170",
+        "ENGW 3314",
+        "ARCH 5230"
+      ],
+      "Spring": [
+        "ARCH 5115",
+        "ARCH 3370",
+        "ARCH 5310"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "ARCH 5120",
+        "ARCH 5220"
+      ],
+      "Fall": [
+        "ARCH 5115",
+        "ARCH 3370",
+        "ARCH 5310"
+      ]
+    }
+  },
+  "Five Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ARCH 1000",
+        "ARCH 1310",
+        "ENGW 1111",
+        "MATH 1241"
+      ],
+      "Spring": [
+        "ARCH 1110",
+        "ARCH 1120",
+        "PHYS 1141",
+        "EEAM 2000"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ARCH 2130",
+        "ARCH 2240"
+      ],
+      "Spring": [
+        "ARCH 2140",
+        "ARCH 2340",
+        "ARCH 3450",
+        "ARCH 3210"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "ARCH 3155",
+        "ARCH 3361",
+        "ARCH 3363",
+        "ARCH 3440"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ARCH 3170",
+        "ENGW 3314",
+        "ARCH 5230"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "ARCH 5115",
+        "ARCH 3370",
+        "ARCH 5310"
+      ],
+      "Spring": [
+        "ARCH 5120",
+        "ARCH 5220"
+      ]
+    }
+  }
+}

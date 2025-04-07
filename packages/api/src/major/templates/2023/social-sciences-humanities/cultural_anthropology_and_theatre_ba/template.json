@@ -1,0 +1,42 @@
+{
+  "Sample Four Years, One Co-op": {
+    "Year 1": {
+      "Fall": [
+        "THTR 1000",
+        "THTR 1100",
+        "THTR 1101",
+        "ANTH 1101",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "THTR 1120",
+        "THTR 1131",
+        "ANTH 2305"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "THTR 2000",
+        "THTR 3325",
+        "INAM 2000"
+      ],
+      "Spring": [
+        "THTR 1270",
+        "ANTH 3421"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "EEAM 2000"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ANTH 3410"
+      ],
+      "Spring": [
+        "THTR 4702"
+      ]
+    }
+  }
+}

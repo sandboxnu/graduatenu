@@ -1,0 +1,39 @@
+{
+  "Sample Pattern, Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "COMM 1101",
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "COMM 1112",
+        "CS 2510",
+        "CS 3200"
+      ],
+      "Summer 1": [
+        "CS 3500",
+        "MATH 1341"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 1210",
+        "CS 3000"
+      ]
+    },
+    "Year 3": {
+      "Summer 2": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CS 4500",
+        "CS 4550"
+      ]
+    }
+  }
+}

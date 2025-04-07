@@ -1,0 +1,99 @@
+{
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1111",
+        "BIOL 1112",
+        "PSYC 1101",
+        "PHMD 1000",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163",
+        "BIOL 1113",
+        "BIOL 1114",
+        "MATH 1245",
+        "PHMD 1001"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CHEM 2311",
+        "CHEM 2312",
+        "CHEM 2319",
+        "PHSC 2301",
+        "PHSC 2302",
+        "PHYS 1149",
+        "PHYS 1150"
+      ],
+      "Spring": [
+        "CHEM 2313",
+        "CHEM 2314",
+        "CHEM 2320",
+        "ENGW 3306",
+        "PHSC 2303",
+        "PHSC 2304",
+        "PHMD 1201",
+        "PHMD 1202"
+      ],
+      "Summer Full Semester": [
+        "COOP 3945"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "PHSC 2320",
+        "PHSC 4501",
+        "PHMD 2350",
+        "PHSC 3411"
+      ],
+      "Spring": [
+        "COOP 3945"
+      ],
+      "Summer Full Semester": [
+        "PHMD 2310",
+        "PHMD 2311",
+        "PHMD 5250",
+        "PHSC 3412",
+        "PHSC 3419",
+        "PHSC 4502"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "COOP 3945"
+      ],
+      "Spring": [
+        "PHSC 3430",
+        "PHSC 2330",
+        "PHMD 3450",
+        "PHMD 4611",
+        "PHMD 4612"
+      ],
+      "Summer Full Semester": [
+        "PHSC 5360",
+        "PHMD 5330",
+        "PHMD 4621",
+        "PHMD 4622",
+        "PHMD 4623"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "PHMD 4631",
+        "PHMD 4632",
+        "PHMD 4633",
+        "PHMD 5560"
+      ],
+      "Spring": [
+        "PHMD 4641",
+        "PHMD 4642",
+        "PHMD 4643",
+        "PHMD 5270",
+        "PHMD 5450"
+      ]
+    }
+  }
+}

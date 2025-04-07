@@ -1,0 +1,51 @@
+{
+  "Four Years, One Co-op in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ARCH 1000",
+        "ARCH 1310",
+        "MATH 1241",
+        "ENVR 2200"
+      ],
+      "Spring": [
+        "ARCH 1110",
+        "ARCH 1120",
+        "ENGW 1111",
+        "EEAM 2000"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "LARC 2130",
+        "LARC 2430",
+        "LARC 2330",
+        "LARC 2230"
+      ],
+      "Spring": [
+        "LARC 2140",
+        "LARC 2240",
+        "LARC 2440",
+        "LARC 2340"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "LARC 3170",
+        "ENGW 3314",
+        "LARC 5210",
+        "ENVR 3300"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "LARC 5110",
+        "LARC 5220",
+        "LARC 5310"
+      ],
+      "Spring": [
+        "LARC 5120",
+        "LARC 5420"
+      ]
+    }
+  }
+}

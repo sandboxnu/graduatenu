@@ -1,0 +1,102 @@
+{
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "JRNL 1150"
+      ],
+      "Spring": [
+        "CS 2510",
+        "CS 3200",
+        "JRNL 1101",
+        "JRNL 3550"
+      ],
+      "Summer 1": [
+        "CS 3500",
+        "MATH 1341"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "JRNL 2201",
+        "JRNL 2301"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 3000",
+        "DS 4200",
+        "JRNL 3610",
+        "JRNL 3700"
+      ],
+      "Summer 1": [
+        "ECON 2350"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4300",
+        "DS 4400",
+        "JRNL 4650"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CY 4170",
+        "DS 4420"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ENGW 1111",
+        "JRNL 1150"
+      ],
+      "Spring": [
+        "CS 2510",
+        "CS 3200",
+        "JRNL 1101",
+        "JRNL 3550"
+      ],
+      "Summer 1": [
+        "CS 3500",
+        "MATH 1341"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "JRNL 2201",
+        "JRNL 2301"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 3000",
+        "DS 4200",
+        "JRNL 3610",
+        "JRNL 3700"
+      ],
+      "Summer 1": [
+        "ECON 2350"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4300",
+        "DS 4400",
+        "JRNL 4650"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CY 4170",
+        "DS 4420"
+      ]
+    }
+  }
+}
