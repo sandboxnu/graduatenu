@@ -51,6 +51,7 @@ import {
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
   createScheduleFromTemplate,
+  toast,
 } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
@@ -354,7 +355,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
       onImportClose();
       setSelectedPlanId(createdPlanId);
+      toast.success("Plan imported successfully!");
     } catch (error) {
+      toast.error("Failed to import plan.");
       console.error("Error importing plan:", error);
     }
   };
