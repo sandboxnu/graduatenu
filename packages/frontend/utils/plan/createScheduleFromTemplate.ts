@@ -100,7 +100,7 @@ export function createScheduleFromTemplate(
           // Process each course
           courses.forEach((courseStr) => {
             if (courseStr === "Experiential Learning") {
-              let course = COOP_BLOCK;
+              const course = COOP_BLOCK;
               termObj.classes.push(course);
 
               console.log(
