@@ -5,6 +5,7 @@ import {
   Template,
 } from "@graduate/common";
 import { createEmptySchedule } from "./createEmptySchedule";
+import { COOP_BLOCK } from "../../components";
 
 /**
  * Creates a schedule from a template
@@ -70,7 +71,7 @@ export function createScheduleFromTemplate(
         // Map the term key to the schedule term
         let termObj: {
           status: StatusEnum;
-          classes: ScheduleCourse2<null>[];
+          classes: ScheduleCourse2<null | string>[];
         };
 
         switch (termKey.toLowerCase()) {
@@ -98,14 +99,18 @@ export function createScheduleFromTemplate(
 
           // Process each course
           courses.forEach((courseStr) => {
-            // Parse course string format
-            let courseParts = null;
-
             if (courseStr === "Experiential Learning") {
-              courseParts = "Experiential Learning";
-            } else {
-              courseParts = courseStr.match(/([A-Z]+)\s+(\d+[A-Z]*)(.*)/);
+              let course = COOP_BLOCK;
+              termObj.classes.push(course);
+
+              console.log(
+                `Added course: ${course.subject} ${course.classId}, credits: ${course.numCreditsMin}-${course.numCreditsMax}`
+              );
             }
+
+            // Parse course string format
+            const courseParts = courseStr.match(/([A-Z]+)\s+(\d+[A-Z]*)(.*)/);
+
             if (!courseParts) {
               console.warn("Couldn't parse course:", courseStr);
               return;
