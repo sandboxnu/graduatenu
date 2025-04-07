@@ -1,0 +1,39 @@
+{
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "PSYC 1101",
+        "MUSC 1000",
+        "MUSC 1001"
+      ],
+      "Spring": [
+        "MATH 1213",
+        "MUSC 1201",
+        "PSYC 2320"
+      ],
+      "Summer 1": [
+        "PSYC 3466"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "MUSC 1202",
+        "MUSC 3300",
+        "PSYC 3458"
+      ],
+      "Spring": [
+        "EESC 2000",
+        "MUSC 2350",
+        "PSYC 3464"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "MUSC 4510",
+        "PSYC 3452"
+      ]
+    },
+    "Year 4": {}
+  }
+}

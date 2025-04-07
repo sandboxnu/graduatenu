@@ -1,0 +1,108 @@
+{
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1107",
+        "CS 1200",
+        "CS 1800",
+        "DS 2000",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "BIOL 2299",
+        "CHEM 1161",
+        "DS 2500",
+        "MATH 1341"
+      ],
+      "Summer 1": [
+        "BIOL 2301"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOL 2309",
+        "CHEM 2311",
+        "DS 3000",
+        "PHYS 1145"
+      ],
+      "Spring": [
+        "CHEM 2313",
+        "CS 1210",
+        "CS 3200",
+        "DS 3500",
+        "DS 4200"
+      ],
+      "Summer 1": [
+        "BIOL 3611"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4300",
+        "DS 4400",
+        "ENVR 2500"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "BIOL 4701"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1107",
+        "CS 1200",
+        "CS 1800",
+        "DS 2000",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "BIOL 2299",
+        "CHEM 1161",
+        "DS 2500",
+        "MATH 1341"
+      ],
+      "Summer 1": [
+        "BIOL 2301"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOL 2309",
+        "CHEM 2311",
+        "DS 3000",
+        "PHYS 1145"
+      ],
+      "Spring": [
+        "CHEM 2313",
+        "CS 1210",
+        "CS 3200",
+        "DS 3500",
+        "DS 4200"
+      ],
+      "Summer 1": [
+        "BIOL 3611"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "DS 4300",
+        "DS 4400",
+        "ENVR 2500"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "BIOL 4701"
+      ]
+    }
+  }
+}

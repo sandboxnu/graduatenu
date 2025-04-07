@@ -1,0 +1,54 @@
+{
+  "Sample Pattern: Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1000",
+        "BIOL 1107",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163",
+        "ENGW 1111",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "BIOL 2299",
+        "CHEM 2311",
+        "CHEM 2312",
+        "MATH 1342",
+        "MATH 1365"
+      ],
+      "Summer 1": [
+        "BIOL 2301",
+        "BIOL 2302"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOL 2309",
+        "CHEM 2313",
+        "CHEM 2314",
+        "EESC 2000",
+        "MATH 2321",
+        "MATH 2341"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "BIOL 3611",
+        "BIOL 3612",
+        "MATH 3000",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163"
+      ],
+      "Summer 1": [
+        "ENGW 3307"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "MATH 3081"
+      ]
+    }
+  }
+}

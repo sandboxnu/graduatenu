@@ -1,0 +1,116 @@
+{
+  "Even-Numbered Year One": {},
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "PHYS 1000",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163",
+        "MATH 1341",
+        "PHIL 1115",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167",
+        "MATH 1342",
+        "PHIL 2325"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHYS 2303",
+        "PHYS 2371",
+        "PHYS 2372",
+        "MATH 2321",
+        "PHIL 2330"
+      ],
+      "Spring": [
+        "MATH 2341",
+        "EESC 2000",
+        "PHYS 3601"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHYS 4115",
+        "PHIL 4500"
+      ],
+      "Summer 1": [
+        "PHYS 3600"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "PHYS 3602",
+        "PHIL 4510",
+        "ENGW 3307"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "PHYS 4305"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "PHYS 1000",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163",
+        "MATH 1341",
+        "PHIL 1115",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167",
+        "MATH 1342",
+        "PHIL 2325",
+        "PHIL 2330"
+      ],
+      "Summer 1": [
+        "MATH 2321"
+      ],
+      "Summer 2": [
+        "MATH 2341"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHYS 2303",
+        "PHYS 2371",
+        "PHYS 2372"
+      ],
+      "Spring": [
+        "PHYS 3601",
+        "PHYS 3602",
+        "EESC 2000"
+      ],
+      "Summer 1": [
+        "PHYS 3600"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHYS 4115",
+        "PHIL 4500",
+        "PHIL 4510"
+      ],
+      "Summer 1": [
+        "ENGW 3307"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "PHYS 4305"
+      ]
+    }
+  },
+  "Offering schedule (subject to changes)": {}
+}

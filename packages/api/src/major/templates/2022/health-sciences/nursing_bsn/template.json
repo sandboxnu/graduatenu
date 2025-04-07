@@ -1,0 +1,113 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "NRSG 1000",
+        "CHEM 1101",
+        "CHEM 1161",
+        "BIOL 2217",
+        "MATH 1215",
+        "HSCI 1105"
+      ],
+      "Spring": [
+        "PSYC 1101",
+        "BIOL 2219",
+        "BIOL 2221",
+        "ENGW 1111"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "NRSG 2000",
+        "NRSG 2210",
+        "NRSG 2220",
+        "NRSG 2350"
+      ],
+      "Summer 2": [
+        "NRSG 3302",
+        "PSYC 3404"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "NRSG 3320",
+        "NRSG 3323",
+        "NRSG 3400",
+        "NRSG 5120"
+      ],
+      "Summer 2": [
+        "NRSG 2150",
+        "NRSG 5220"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "SOCL 1101",
+        "NRSG 4502",
+        "NRSG 3420"
+      ],
+      "Spring": [
+        "NRSG 4604",
+        "NRSG 4610",
+        "NRSG 4995",
+        "ENGW 3306"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "NRSG 1000",
+        "BIOL 2217",
+        "CHEM 1101",
+        "CHEM 1161",
+        "HSCI 1105",
+        "MATH 1215"
+      ],
+      "Spring": [
+        "PSYC 1101",
+        "BIOL 2219",
+        "BIOL 2221",
+        "ENGW 1111"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "NRSG 2210",
+        "NRSG 2220",
+        "NRSG 2350"
+      ],
+      "Spring": [
+        "NRSG 2000",
+        "NRSG 3302",
+        "NRSG 3320",
+        "NRSG 3323",
+        "SOCL 1101"
+      ],
+      "Summer 1": [
+        "NRSG 3400",
+        "PSYC 3404"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "NRSG 3420",
+        "NRSG 4502",
+        "NRSG 5120"
+      ],
+      "Summer 1": [
+        "ENGW 3306",
+        "NRSG 4604"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "NRSG 2150",
+        "NRSG 4610",
+        "NRSG 4995",
+        "NRSG 5220"
+      ]
+    }
+  }
+}

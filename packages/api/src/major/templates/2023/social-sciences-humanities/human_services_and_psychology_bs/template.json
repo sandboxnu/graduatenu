@@ -1,0 +1,45 @@
+{
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "HUSV 1000",
+        "HUSV 1101",
+        "PSYC 1101"
+      ],
+      "Spring": [
+        "HUSV 2300",
+        "MATH 1213",
+        "PSYC 3402",
+        "PSYC 3450"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PSYC 2320",
+        "PSYC 3404"
+      ],
+      "Spring": [
+        "EESH 2000",
+        "HUSV 2970",
+        "HUSV 3570",
+        "PSYC 3466"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "HUSV 3900",
+        "HUSV 4994"
+      ],
+      "Summer 1": [
+        "ENGW 3308"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "HUSV 2355",
+        "HUSV 4700"
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ECON 1115",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "CS 2510",
+        "ECON 1116",
+        "IS 2000",
+        "MATH 1231"
+      ],
+      "Summer 1": [
+        "CS 3200",
+        "CS 3500"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 2800",
+        "CS 3000",
+        "ECON 2315",
+        "ECON 2350"
+      ],
+      "Spring": [
+        "CS 1210",
+        "ECON 2316"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ECON 2560"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "ECON 4692"
+      ]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "ECON 1115",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "CS 2510",
+        "ECON 1116",
+        "IS 2000",
+        "MATH 1231"
+      ],
+      "Summer 1": [
+        "CS 3200",
+        "CS 3500"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 2800",
+        "CS 3000",
+        "ECON 2315",
+        "ECON 2350"
+      ],
+      "Spring": [
+        "CS 1210",
+        "ECON 2316"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ECON 2560"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "ECON 4692"
+      ]
+    }
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "Sample Plans of Study": {},
+  "Four Years, 1 Co-op Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "MATH 1342",
+        "PHTH 2210",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": [
+        "MATH 2321",
+        "PHTH 1260"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CIVE 2221",
+        "CIVE 2222",
+        "CIVE 2334",
+        "CIVE 2300",
+        "PHTH 2515"
+      ],
+      "Spring": [
+        "CIVE 2331",
+        "CIVE 3430",
+        "ENCP 2000",
+        "PHTH 2414",
+        "CIVE 3464"
+      ],
+      "Summer 1": [
+        "MATH 2341",
+        "PHTH 2350"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CIVE 3435",
+        "GE 3300",
+        "PHTH 4120",
+        "PHTH 4202"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000",
+        "ENGW 3302",
+        "PHTH 4540"
+      ],
+      "Spring": [
+        "CIVE 4765",
+        "PHTH 5214"
+      ]
+    }
+  },
+  "Four Years, 1 Co-op Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "MATH 1342",
+        "PHTH 2210",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": [
+        "MATH 2321",
+        "PHTH 1260"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CIVE 2221",
+        "CIVE 2222",
+        "CIVE 2334",
+        "CIVE 2300",
+        "PHTH 2515"
+      ],
+      "Spring": [
+        "CIVE 2331",
+        "CIVE 3430",
+        "ENCP 2000",
+        "PHTH 2414",
+        "CIVE 3464"
+      ],
+      "Summer 1": [
+        "MATH 2341",
+        "PHTH 2350"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CIVE 3435",
+        "GE 3300",
+        "PHTH 4120",
+        "PHTH 4202"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000",
+        "ENGW 3302",
+        "PHTH 4540"
+      ],
+      "Spring": [
+        "CIVE 4765",
+        "PHTH 5214"
+      ]
+    }
+  },
+  "Five Years, 3 Co-ops Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "MATH 1342",
+        "PHTH 2210",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": [
+        "MATH 2321",
+        "PHTH 1260"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CIVE 2221",
+        "CIVE 2222",
+        "CIVE 2334",
+        "CIVE 2300",
+        "PHTH 2515"
+      ],
+      "Spring": [
+        "CIVE 2331",
+        "CIVE 3430",
+        "CIVE 3464",
+        "ENCP 2000",
+        "PHTH 2414"
+      ],
+      "Summer 1": [
+        "MATH 2341",
+        "PHTH 2350"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "CIVE 3435",
+        "GE 3300",
+        "PHTH 4540",
+        "PHTH 4202"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000",
+        "ENGW 3302",
+        "PHTH 4120"
+      ]
+    },
+    "Year 5": {
+      "Spring": [
+        "CIVE 4765",
+        "PHTH 5214"
+      ]
+    }
+  },
+  "Five Years, 3 Co-ops Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "GE 1502",
+        "MATH 1342",
+        "PHTH 2414",
+        "PHYS 1151",
+        "PHYS 1152",
+        "PHYS 1153"
+      ],
+      "Summer 1": [
+        "MATH 2321",
+        "PHTH 1260"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CIVE 2221",
+        "CIVE 2222",
+        "CIVE 2334",
+        "CIVE 2300",
+        "PHTH 2210",
+        "ENCP 2000"
+      ],
+      "Summer 2": [
+        "MATH 2341",
+        "ENGW 3302"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CIVE 2331",
+        "CIVE 3430",
+        "CIVE 3464",
+        "PHTH 2515"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CIVE 3435",
+        "GE 3300",
+        "PHTH 2350"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "CIVE 4534",
+        "CIVE 4535",
+        "ENCP 3000",
+        "PHTH 4120",
+        "PHTH 4540"
+      ],
+      "Spring": [
+        "CIVE 4765",
+        "PHTH 5214",
+        "PHTH 4202"
+      ]
+    }
+  }
+}
