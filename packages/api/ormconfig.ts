@@ -30,7 +30,7 @@ if (
   ormconfig.extra = {
     ssl: {
       ca: readFileSync(
-        join(__dirname, "assets", "RDS.us-east-1.ca-bundle.pem")
+        join("assets", "RDS.us-east-1.ca-bundle.pem")
       ).toString(),
     },
   };
