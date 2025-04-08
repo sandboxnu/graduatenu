@@ -1,9 +1,11 @@
-import { Major2 } from "@graduate/common";
+import { Major2, Template } from "@graduate/common";
 
 const MAJORS: Record<string, Record<string, Major2>> = {};
 const MAJOR_YEARS = new Set<string>();
+const TEMPLATES: Record<string, Record<string, Template>> = {};
 
-const rootDir = "./src/major/majors";
+const reqRootDir = "./src/major/majors";
+const templateRootDir = "./src/major/templates";
 
 interface YearData {
   year: string;
@@ -41,8 +43,11 @@ async function collateMajors() {
   // TODO: determine why these needed to be runtime imports (normal import statements didn't work here).
   const fs = await import("fs/promises");
   const path = await import("path");
+
+  console.log("Starting major collation...");
+
   const years = (
-    await fs.readdir(path.resolve(rootDir), {
+    await fs.readdir(path.resolve(reqRootDir), {
       withFileTypes: true,
     })
   )
@@ -56,7 +61,7 @@ async function collateMajors() {
   const colleges = (
     await Promise.all(
       years.map(async ({ year }) => {
-        const colleges = await fs.readdir(path.join(rootDir, year), {
+        const colleges = await fs.readdir(path.join(reqRootDir, year), {
           withFileTypes: true,
         });
         return colleges
@@ -74,7 +79,7 @@ async function collateMajors() {
   const majors = (
     await Promise.all(
       colleges.map(async ({ year, college }) => {
-        const majors = await fs.readdir(path.join(rootDir, year, college), {
+        const majors = await fs.readdir(path.join(reqRootDir, year, college), {
           withFileTypes: true,
         });
         return majors
@@ -93,33 +98,111 @@ async function collateMajors() {
   years.forEach(({ year }) => {
     MAJOR_YEARS.add(year);
     MAJORS[year] = {};
+    TEMPLATES[year] = {};
   });
 
-  const done = await Promise.all(
+  // Load majors and process templates
+  console.log("Loading majors and processing templates...");
+  await Promise.all(
     majors.map(async ({ year, college, major }) => {
-      const basePath = path.join(rootDir, year, college, major);
+      const basePath = path.join(reqRootDir, year, college, major);
+      const templateBasePath = path.join(templateRootDir, year, college, major);
       const commitFile = path.join(basePath, "parsed.commit.json");
       const initialFile = path.join(basePath, "parsed.initial.json");
+      const templateFile = path.join(templateBasePath, "template.json");
 
-      if (await fileExists(fs, commitFile)) {
-        const fileData = JSON.parse(
-          (await fs.readFile(commitFile)).toString()
-        ) as Major2;
-        MAJORS[year][fileData.name] = fileData;
-      } else if (await fileExists(fs, initialFile)) {
-        const fileData = JSON.parse(
-          (await fs.readFile(initialFile)).toString()
-        ) as Major2;
-        if (MAJORS[year]) MAJORS[year][fileData.name] = fileData;
+      try {
+        // Step 1: Load major data
+        let majorData: Major2 | null = null;
+        let majorName: string | null = null;
+
+        // Load major data from commit file (preferred) or initial file
+        if (await fileExists(fs, commitFile)) {
+          majorData = JSON.parse(
+            (await fs.readFile(commitFile)).toString()
+          ) as Major2;
+          majorName = majorData.name;
+          MAJORS[year][majorName] = majorData;
+        } else if (await fileExists(fs, initialFile)) {
+          majorData = JSON.parse(
+            (await fs.readFile(initialFile)).toString()
+          ) as Major2;
+          majorName = majorData.name;
+          if (MAJORS[year]) {
+            MAJORS[year][majorName] = majorData;
+          }
+        }
+
+        // Step 2: Check for and process template file
+        if (await fileExists(fs, templateFile)) {
+          console.log(`Found template file for ${major} (${year})`);
+
+          // Read and parse template
+          const templateRawData = await fs.readFile(templateFile);
+          const templateJson = JSON.parse(templateRawData.toString());
+
+          if (!templateJson || Object.keys(templateJson).length === 0) {
+            console.log(`Empty template for ${major} (${year})`);
+            return;
+          }
+
+          // Get template name (the top-level key)
+          const templateName = Object.keys(templateJson)[0];
+          console.log(`Processing template: ${templateName}`);
+
+          // Create template object with raw template data (without enhancements)
+          const template: Template = {
+            name: templateName,
+            yearVersion: parseInt(year),
+            templateData: templateJson,
+          };
+
+          // Store the template
+          if (!TEMPLATES[year]) {
+            TEMPLATES[year] = {};
+          }
+
+          // First, store the template keyed by major directory name (fallback)
+          const templateKey = major.replace(/_/g, " ");
+          TEMPLATES[year][templateKey] = template;
+
+          // If we have a major, associate the template with it
+          if (majorName && MAJORS[year] && MAJORS[year][majorName]) {
+            // Also store the template under the major name for consistent lookup
+            TEMPLATES[year][majorName] = template;
+
+            console.log(
+              `Successfully associated template with ${majorName} (${year})`
+            );
+          } else {
+            console.log(
+              `Stored template for ${templateKey} (${year}) but couldn't associate with a major`
+            );
+          }
+        }
+      } catch (error) {
+        console.error(
+          `Error processing major/template ${major} (${year}):`,
+          error
+        );
       }
     })
   );
 
   console.log(
-    `Successfully loaded ${done.length} majors across ${MAJOR_YEARS.size} years!`
+    `Successfully loaded ${Object.values(MAJORS).reduce(
+      (sum, yearMajors) => sum + Object.keys(yearMajors).length,
+      0
+    )} majors across ${MAJOR_YEARS.size} years!`
   );
+
+  const templateCount = Object.values(TEMPLATES).reduce(
+    (count, yearTemplates) => count + Object.keys(yearTemplates).length,
+    0
+  );
+  console.log(`Loaded ${templateCount} templates for majors`);
 }
 
 collateMajors();
 
-export { MAJORS, MAJOR_YEARS };
+export { MAJORS, MAJOR_YEARS, TEMPLATES };

@@ -15,6 +15,7 @@ import {
   VStack,
   useDisclosure,
   Tooltip,
+  Box,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
@@ -24,13 +25,21 @@ import {
   convertToOptionObjects,
 } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useForm } from "react-hook-form";
 import { mutate } from "swr";
 import {
   useSupportedMajors,
   USE_STUDENT_WITH_PLANS_SWR_KEY,
   useStudentWithPlans,
+  useHasTemplate,
+  useTemplate,
 } from "../../hooks";
 import {
   cleanDndIdsFromStudent,
@@ -39,6 +48,7 @@ import {
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
+  createScheduleFromTemplate,
 } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
@@ -46,6 +56,7 @@ import { HelperToolTip } from "../Help";
 import { IsGuestContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
+import { useTemplateCourses } from "../../hooks/useTemplateCourses";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -75,24 +86,72 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     reset,
     setValue,
     control,
-  } = useForm<CreatePlanDtoWithoutSchedule>({
+  } = useForm<CreatePlanDtoWithoutSchedule & { useTemplate: boolean }>({
     mode: "onTouched",
     shouldFocusError: true,
   });
+
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
+  // watch form fields
+  const catalogYear = watch("catalogYear");
+  const majorName = watch("major");
+  const concentration = watch("concentration");
+  const agreeToBetaMajor = watch("agreeToBetaMajor");
+  const usingTemplate = watch("useTemplate");
+
+  // Check if the selected major has a template
+  const { hasTemplate } = useHasTemplate(majorName, catalogYear);
+  const { template } = useTemplate(
+    usingTemplate ? majorName : null,
+    usingTemplate ? catalogYear : null
+  );
+
+  // Fetch actual course data for the template
+  const { courseLookup, isLoading: isLoadingCourses } = useTemplateCourses(
+    usingTemplate ? template : null,
+    usingTemplate
+      ? typeof catalogYear === "number"
+        ? catalogYear
+        : null
+      : null
+  );
+
+  // Reset useTemplate when major or catalog year changes
+  useEffect(() => {
+    setValue("useTemplate", false);
+  }, [majorName, catalogYear, setValue]);
+
   if (!student) {
-    return <></>;
+    return null;
   }
 
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
+    return null; // Ensure we return something when there's an error
   }
 
-  const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
-    const schedule = createEmptySchedule();
+  const onSubmitHandler = async (
+    payload: CreatePlanDtoWithoutSchedule & { useTemplate: boolean }
+  ) => {
+    // Determine which schedule to use - template or empty
+    let schedule;
+
+    if (payload.useTemplate && template) {
+      try {
+        // Use the template to create a schedule with pre-populated courses
+        schedule = createScheduleFromTemplate(template, courseLookup);
+      } catch (error) {
+        console.error("Error creating schedule from template:", error);
+        schedule = createEmptySchedule();
+      }
+    } else {
+      // Default to empty schedule
+      schedule = createEmptySchedule();
+    }
+
     const newPlan: CreatePlanDto = {
       name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
@@ -138,18 +197,11 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     onCloseAddPlanModal();
     setSelectedPlanId(createdPlanId);
   };
-
   const onCloseAddPlanModal = () => {
     reset();
-    setIsNoMajorSelected(false);
     onCloseDisplay();
+    setIsNoMajorSelected(false);
   };
-
-  const catalogYear = watch("catalogYear");
-  const majorName = watch("major");
-  const concentration = watch("concentration");
-  const agreeToBetaMajor = watch("agreeToBetaMajor");
-
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
 
@@ -174,6 +226,12 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     // Valid plan for no major selected
     isNoMajorSelected;
 
+  // Determine if we should disable the Create button
+  const isButtonDisabled =
+    !isValidForm ||
+    // Disable button when template is selected but courses are still loading
+    (usingTemplate && isLoadingCourses);
+
   const noMajorHelperLabel = (
     <Stack>
       <Text>
@@ -184,6 +242,21 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         Without a selected major, we won&apos;t be able to display the major
         requirements.
       </Text>
+    </Stack>
+  );
+
+  const templateHelperLabel = (
+    <Stack>
+      <Text>
+        This major has a recommended template plan of study available.
+      </Text>
+      <Text>
+        Selecting this option will pre-populate your plan with the recommended
+        courses.
+      </Text>
+      {usingTemplate && isLoadingCourses && (
+        <Text color="blue.500">Loading course details...</Text>
+      )}
     </Stack>
   );
 
@@ -336,6 +409,42 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         useFuzzySearch
                       />
                     )}
+
+                    {/* Template option - show when a template is available */}
+                    {hasTemplate && majorName && catalogYear && (
+                      <Box
+                        p="sm"
+                        borderRadius="md"
+                        borderWidth="1px"
+                        borderColor="primary.blue.light.main"
+                        bg="primary.blue.light.faint"
+                        w="100%"
+                      >
+                        <Flex alignItems="center">
+                          <Checkbox
+                            mb="0"
+                            mr="xs"
+                            borderColor="primary.blue.dark.main"
+                            {...register("useTemplate")}
+                          />
+                          <Text
+                            color="primary.blue.dark.main"
+                            size="md"
+                            fontWeight="medium"
+                            mb="0"
+                            mr="2xs"
+                          >
+                            Use recommended template
+                          </Text>
+                          <HelperToolTip label={templateHelperLabel} />
+                        </Flex>
+                        <Text fontSize="sm" color="gray.600" ml="6" mt="1">
+                          This will pre-populate your plan with the recommended
+                          course sequence
+                        </Text>
+                      </Box>
+                    )}
+
                     {majorName && !isValidatedMajor && (
                       <Flex alignItems="center">
                         <Checkbox
@@ -367,8 +476,10 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 </Button>
                 <Button
                   variant="solid"
-                  isLoading={isSubmitting}
-                  isDisabled={!isValidForm}
+                  isLoading={
+                    isSubmitting || (usingTemplate && isLoadingCourses)
+                  }
+                  isDisabled={isButtonDisabled}
                   size="md"
                   borderRadius="lg"
                   type="submit"
