@@ -1,4 +1,5 @@
 import {
+  ArrayNotEmpty,
   IsArray,
   IsBoolean,
   IsEmail,
@@ -21,7 +22,9 @@ export class CreatePlanDtoWithoutSchedule {
   @IsString()
   name: string;
 
-  @IsString()
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsString({ each: true })
   @IsOptional()
   majors?: string[];
 

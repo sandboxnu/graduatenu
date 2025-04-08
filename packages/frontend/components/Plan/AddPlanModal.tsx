@@ -93,6 +93,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
     const schedule = createEmptySchedule();
+
     const newPlan: CreatePlanDto = {
       name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
@@ -175,12 +176,12 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     // Valid plan for no major selected
     isNoMajorSelected;
 
-  console.log(majorsArray, "Majors Array");
+  // console.log(majorsArray, "Majors Array");
 
   // console.log("isValidForm", isValidForm);
-  console.log(catalogYear, "Catalog Year");
+  // console.log(catalogYear, "Catalog Year");
   // console.log(majorName, "Major Name");
-  // console.log(isValidatedMajor, "Is Validated Major");
+  // console.log(isValidaftedMajor, "Is Validated Major");
   // console.log(agreeToBetaMajor, "Agree to Beta Major");
   // console.log(isNoMajorSelected, "Is No Major Selected");
 
