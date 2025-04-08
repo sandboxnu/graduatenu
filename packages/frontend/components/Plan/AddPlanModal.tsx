@@ -349,7 +349,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   // COMPONENTS
 
   const disableButton = isGuest && getLocalPlansLength() > 4;
-  const showCoachMark = !selectedPlanId && !isCreateOpen;
+  const showCoachMark =
+    !selectedPlanId && !opened && !isCreateOpen && !isImportOpen;
 
   return (
     <>
@@ -387,6 +388,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 background="white"
                 padding="0"
                 borderRadius="lg"
+                border="1px"
+                borderColor="primary.blue.light.main"
               >
                 <BlueButton
                   w="100%"
