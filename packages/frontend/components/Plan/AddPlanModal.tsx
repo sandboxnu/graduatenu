@@ -1,4 +1,4 @@
-import { AddIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import {
   Text,
   Stack,
@@ -15,6 +15,8 @@ import {
   VStack,
   useDisclosure,
   Tooltip,
+  Box,
+  Input,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
@@ -24,13 +26,21 @@ import {
   convertToOptionObjects,
 } from "@graduate/common";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useForm } from "react-hook-form";
 import { mutate } from "swr";
 import {
   useSupportedMajors,
   USE_STUDENT_WITH_PLANS_SWR_KEY,
   useStudentWithPlans,
+  useHasTemplate,
+  useTemplate,
 } from "../../hooks";
 import {
   cleanDndIdsFromStudent,
@@ -39,6 +49,8 @@ import {
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
+  createScheduleFromTemplate,
+  toast,
 } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
@@ -46,6 +58,8 @@ import { HelperToolTip } from "../Help";
 import { IsGuestContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
+import { useTemplateCourses } from "../../hooks/useTemplateCourses";
+import { createScheduleFromJson } from "../../utils/plan/createScheduleFromJson";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -57,7 +71,16 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   selectedPlanId,
 }) => {
   const router = useRouter();
-  const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
+  const {
+    onOpen: onCreateOpen,
+    onClose: onCreateClose,
+    isOpen: isCreateOpen,
+  } = useDisclosure();
+  const {
+    onOpen: onImportOpen,
+    onClose: onImportClose,
+    isOpen: isImportOpen,
+  } = useDisclosure();
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
 
@@ -75,24 +98,75 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     reset,
     setValue,
     control,
-  } = useForm<CreatePlanDtoWithoutSchedule>({
+  } = useForm<CreatePlanDtoWithoutSchedule & { useTemplate: boolean }>({
     mode: "onTouched",
     shouldFocusError: true,
   });
+
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
+  const [opened, setOpened] = useState(false); // for component
+  const [scheduleJson, setScheduleJson] = useState<any>(null); // for importing
+
+  // watch form fields
+  const catalogYear = watch("catalogYear");
+  const majorName = watch("major");
+  const concentration = watch("concentration");
+  const agreeToBetaMajor = watch("agreeToBetaMajor");
+  const usingTemplate = watch("useTemplate");
+
+  // Check if the selected major has a template
+  const { hasTemplate } = useHasTemplate(majorName, catalogYear);
+  const { template } = useTemplate(
+    usingTemplate ? majorName : null,
+    usingTemplate ? catalogYear : null
+  );
+
+  // Fetch actual course data for the template
+  const { courseLookup, isLoading: isLoadingCourses } = useTemplateCourses(
+    usingTemplate ? template : null,
+    usingTemplate
+      ? typeof catalogYear === "number"
+        ? catalogYear
+        : null
+      : null
+  );
+
+  // Reset useTemplate when major or catalog year changes
+  useEffect(() => {
+    setValue("useTemplate", false);
+  }, [majorName, catalogYear, setValue]);
+
   if (!student) {
-    return <></>;
+    return null;
   }
 
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
+    return null; // Ensure we return something when there's an error
   }
 
-  const onSubmitHandler = async (payload: CreatePlanDtoWithoutSchedule) => {
-    const schedule = createEmptySchedule();
+  const onSubmitHandler = async (
+    payload: CreatePlanDtoWithoutSchedule & { useTemplate: boolean }
+  ) => {
+    // Determine which schedule to use - template or empty
+    let schedule;
+
+    if (payload.useTemplate && template) {
+      try {
+        // Use the template to create a schedule with pre-populated courses
+        schedule = createScheduleFromTemplate(template, courseLookup);
+      } catch (error) {
+        console.error("Error creating schedule from template:", error);
+        schedule = createEmptySchedule();
+      }
+    } else {
+      // Default to empty schedule
+      schedule = createEmptySchedule();
+    }
+
     const newPlan: CreatePlanDto = {
       name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
@@ -138,18 +212,11 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     onCloseAddPlanModal();
     setSelectedPlanId(createdPlanId);
   };
-
   const onCloseAddPlanModal = () => {
     reset();
+    onCreateClose();
     setIsNoMajorSelected(false);
-    onCloseDisplay();
   };
-
-  const catalogYear = watch("catalogYear");
-  const majorName = watch("major");
-  const concentration = watch("concentration");
-  const agreeToBetaMajor = watch("agreeToBetaMajor");
-
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
 
@@ -174,6 +241,12 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     // Valid plan for no major selected
     isNoMajorSelected;
 
+  // Determine if we should disable the Create button
+  const isButtonDisabled =
+    !isValidForm ||
+    // Disable button when template is selected but courses are still loading
+    (usingTemplate && isLoadingCourses);
+
   const noMajorHelperLabel = (
     <Stack>
       <Text>
@@ -187,8 +260,97 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     </Stack>
   );
 
+  const templateHelperLabel = (
+    <Stack>
+      <Text>
+        This major has a recommended template plan of study available.
+      </Text>
+      <Text>
+        Selecting this option will pre-populate your plan with the recommended
+        courses.
+      </Text>
+      {usingTemplate && isLoadingCourses && (
+        <Text color="blue.500">Loading course details...</Text>
+      )}
+    </Stack>
+  );
+
+  // IMPORT FUNCTIONALITY
+
+  const loadPlan = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const extractedFile = event.target.files?.[0];
+    if (extractedFile) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const text = e.target?.result as string;
+          const parsed = JSON.parse(text);
+          setScheduleJson(parsed);
+          console.log("Parsed schedule JSON:", parsed);
+        } catch (err) {
+          console.error("Error parsing JSON file:", err);
+        }
+      };
+
+      reader.readAsText(extractedFile);
+    }
+  };
+
+  const importFile = async () => {
+    if (!scheduleJson || !student) return;
+
+    try {
+      const schedule = createScheduleFromJson(scheduleJson);
+
+      const newPlan: CreatePlanDto = {
+        name: scheduleJson.name || generateDefaultPlanTitle(),
+        catalogYear: scheduleJson["catalogYear"],
+        major: scheduleJson["major"],
+        concentration: scheduleJson["concentration"],
+        schedule,
+      };
+
+      let createdPlanId: number;
+
+      if (isGuest) {
+        createdPlanId = student.plans.length + 1;
+
+        const planInLocalStorage: PlanModel<null> = {
+          ...newPlan,
+          id: createdPlanId,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          student: cleanDndIdsFromStudent(student),
+        } as PlanModel<null>;
+
+        window.localStorage.setItem(
+          "student",
+          JSON.stringify({
+            ...student,
+            plans: [...student.plans, planInLocalStorage],
+          })
+        );
+      } else {
+        const createdPlan = await API.plans.create(newPlan);
+        createdPlanId = createdPlan.id;
+      }
+
+      mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
+      onImportClose();
+      setSelectedPlanId(createdPlanId);
+      toast.success("Plan imported successfully!");
+    } catch (error) {
+      toast.error("Failed to import plan.");
+      console.error("Error importing plan:", error);
+    }
+  };
+
+  // COMPONENTS
+
   const disableButton = isGuest && getLocalPlansLength() > 4;
-  const showCoachMark = !selectedPlanId && !isOpen;
+  const showCoachMark =
+    !selectedPlanId && !opened && !isCreateOpen && !isImportOpen;
 
   return (
     <>
@@ -207,18 +369,64 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
           isDisabled
           isOpen={showCoachMark}
         >
-          <BlueButton
-            leftIcon={<AddIcon />}
-            onClick={onOpen}
-            ml="xs"
-            size="md"
-            disabled={disableButton}
-          >
-            New Plan
-          </BlueButton>
+          <Box position="relative" overflow="visible" h="40px" marginLeft="8px">
+            <BlueButton
+              rightIcon={
+                opened ? (
+                  <ChevronUpIcon boxSize={6} />
+                ) : (
+                  <ChevronDownIcon boxSize={6} />
+                )
+              }
+              onClick={() => setOpened(!opened)}
+            >
+              New Plan
+            </BlueButton>
+            {opened && (
+              <Box
+                position="absolute"
+                background="white"
+                padding="0"
+                borderRadius="lg"
+                border="1px"
+                borderColor="primary.blue.light.main"
+              >
+                <BlueButton
+                  w="100%"
+                  border="none"
+                  borderRadius="0"
+                  borderTopRadius="lg"
+                  fontSize="sm"
+                  onClick={() => {
+                    onCreateOpen();
+                    setOpened(false);
+                  }}
+                >
+                  Create plan
+                </BlueButton>
+                <BlueButton
+                  w="100%"
+                  border="none"
+                  borderRadius="0"
+                  borderBottomRadius="lg"
+                  fontSize="sm"
+                  onClick={() => {
+                    onImportOpen();
+                    setOpened(false);
+                  }}
+                >
+                  Import file
+                </BlueButton>
+              </Box>
+            )}
+          </Box>
         </Tooltip>
       </GraduateToolTip>
-      <Modal isOpen={isOpen} onClose={() => onCloseAddPlanModal()} size="md">
+      <Modal
+        isOpen={isCreateOpen}
+        onClose={() => onCloseAddPlanModal()}
+        size="md"
+      >
         <ModalOverlay />
         <ModalContent>
           <form onSubmit={handleSubmit(onSubmitHandler)}>
@@ -336,6 +544,42 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         useFuzzySearch
                       />
                     )}
+
+                    {/* Template option - show when a template is available */}
+                    {hasTemplate && majorName && catalogYear && (
+                      <Box
+                        p="sm"
+                        borderRadius="md"
+                        borderWidth="1px"
+                        borderColor="primary.blue.light.main"
+                        bg="primary.blue.light.faint"
+                        w="100%"
+                      >
+                        <Flex alignItems="center">
+                          <Checkbox
+                            mb="0"
+                            mr="xs"
+                            borderColor="primary.blue.dark.main"
+                            {...register("useTemplate")}
+                          />
+                          <Text
+                            color="primary.blue.dark.main"
+                            size="md"
+                            fontWeight="medium"
+                            mb="0"
+                            mr="2xs"
+                          >
+                            Use recommended template
+                          </Text>
+                          <HelperToolTip label={templateHelperLabel} />
+                        </Flex>
+                        <Text fontSize="sm" color="gray.600" ml="6" mt="1">
+                          This will pre-populate your plan with the recommended
+                          course sequence
+                        </Text>
+                      </Box>
+                    )}
+
                     {majorName && !isValidatedMajor && (
                       <Flex alignItems="center">
                         <Checkbox
@@ -367,8 +611,10 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                 </Button>
                 <Button
                   variant="solid"
-                  isLoading={isSubmitting}
-                  isDisabled={!isValidForm}
+                  isLoading={
+                    isSubmitting || (usingTemplate && isLoadingCourses)
+                  }
+                  isDisabled={isButtonDisabled}
                   size="md"
                   borderRadius="lg"
                   type="submit"
@@ -378,6 +624,37 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
               </Flex>
             </ModalFooter>
           </form>
+        </ModalContent>
+      </Modal>
+      <Modal isOpen={isImportOpen} onClose={onImportClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader textAlign="center" color="primary.blue.dark.main">
+            Import Plan
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>Upload JSON (.json) file</ModalBody>
+          <Input
+            placeholder="Upload"
+            size="md"
+            type="file"
+            onChange={loadPlan}
+            border="none"
+            paddingLeft="24px"
+          />
+          <ModalFooter justifyContent="center">
+            <Flex columnGap="sm">
+              <Button
+                variant="solid"
+                size="md"
+                borderRadius="lg"
+                type="submit"
+                onClick={importFile}
+              >
+                Import Plan
+              </Button>
+            </Flex>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

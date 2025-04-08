@@ -2,7 +2,7 @@
   "name": "Computer Science and Business Administration, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "3/3/2025"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2022,
@@ -285,23 +285,6 @@
     },
     {
       "type": "SECTION",
-      "title": "Elective",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 3416,
-          "subject": "ACCT"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4414,
-          "subject": "ACCT"
-        }
-      ],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
       "title": "Information Resource Management",
       "requirements": [
         {
@@ -461,6 +444,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {
@@ -537,6 +526,23 @@
           }
         ],
         "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3416,
+            "subject": "ACCT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4414,
+            "subject": "ACCT"
+          }
+        ],
+        "minRequirementCount": 1
       },
       {
         "type": "SECTION",
@@ -1693,42 +1699,49 @@
             "subject": "ENTR"
           },
           {
-            "type": "COURSE",
-            "classId": 2215,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2303,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2304,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4610,
-            "subject": "FINA"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3302,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2301,
-            "subject": "MKTG"
+            "type": "SECTION",
+            "title": "Additional Electives",
+            "requirements": [
+              {
+                "type": "COURSE",
+                "classId": 2215,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2303,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2304,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4610,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2301,
+                "subject": "MKTG"
+              }
+            ],
+            "minRequirementCount": 7
           }
         ],
-        "minRequirementCount": 10
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
