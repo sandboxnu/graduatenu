@@ -9,6 +9,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import MoneyIcon from "../../public/money-icon.svg";
+import { GIVING_DAY_LINK } from "../../utils";
 
 /** This component is for the Giving Day Accordion used on the sidebar. */
 export const GivingDayAccordion = () => {
@@ -38,10 +39,7 @@ export const GivingDayAccordion = () => {
             colorScheme="green"
             backgroundColor="givingDayAccordion.main"
             onClick={() => {
-              window.open(
-                "https://givingday.northeastern.edu/campaigns/sandbox-club",
-                "_blank"
-              );
+              window.open(GIVING_DAY_LINK, "_blank");
             }}
           >
             Donate
