@@ -84,12 +84,12 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     // grab any coreqs of the course that haven't already been selected/added to the term
     const coreqs = isAutoSelectCoreqs
       ? (await getRequiredCourseCoreqs(course, catalogYear)).filter((coreq) => {
-          const isAlreadySelected = selectedCourses.find((selectedCourse) =>
-            isEqualCourses(selectedCourse, coreq)
-          );
-          const isAlreadyAdded = isCourseAlreadyAdded(coreq);
-          return !(isAlreadyAdded || isAlreadySelected);
-        })
+        const isAlreadySelected = selectedCourses.find((selectedCourse) =>
+          isEqualCourses(selectedCourse, coreq)
+        );
+        const isAlreadyAdded = isCourseAlreadyAdded(coreq);
+        return !(isAlreadyAdded || isAlreadySelected);
+      })
       : [];
 
     const updatedSelectedCourses = [...selectedCourses, course, ...coreqs];
@@ -184,6 +184,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
   //keeps track of selected courses and their coreqs
   const [selectedCourseCoreqsMap, setSelectedCourseCoreqsMap] = useState(
+    new Map<any, ScheduleCourse2<null> | null>()
     new Map<any, ScheduleCourse2<null> | null>()
   );
 
@@ -360,7 +361,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                             )}
                             opened={
                               expandedCourses[
-                                getCourseDisplayString(course)
+                              getCourseDisplayString(course)
                               ] !== false
                             }
                             toggleCoreq={() =>
@@ -370,54 +371,54 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                           {courseCoreqsMap.has(
                             getCourseDisplayString(course)
                           ) && (
-                            <div style={{ width: "100%", display: "block" }}>
-                              <Collapse
-                                in={
-                                  expandedCourses[
+                              <div style={{ width: "100%", display: "block" }}>
+                                <Collapse
+                                  in={
+                                    expandedCourses[
                                     getCourseDisplayString(course)
-                                  ] !== false
-                                }
-                                animateOpacity
-                              >
-                                <div
-                                  style={{
-                                    width: "98%",
-                                    height: "1px",
-                                    backgroundColor: "#F4F6F9",
-                                    margin: "0 auto",
-                                  }}
-                                ></div>
-                                <SearchResult
-                                  key={getCourseDisplayString(course) + "coreq"}
-                                  year={catalogYear}
-                                  season={season}
-                                  course={
-                                    courseCoreqsMap.get(
-                                      getCourseDisplayString(course)
-                                    )!
+                                    ] !== false
                                   }
-                                  addSelectedCourse={addSelectedCourse}
-                                  isResultAlreadyAdded={isCourseAlreadyAdded(
-                                    courseCoreqsMap.get(
-                                      getCourseDisplayString(course)
-                                    )!
-                                  )}
-                                  isResultAlreadySelected={isCourseAlreadySelected(
-                                    courseCoreqsMap.get(
-                                      getCourseDisplayString(course)
-                                    )!
-                                  )}
-                                  isSelectingAnotherCourse={
-                                    isLoadingSelectCourse
-                                  }
-                                  selectedNUPaths={selectedNUPaths}
-                                  coreq={undefined}
-                                  opened={undefined}
-                                  toggleCoreq={undefined}
-                                />
-                              </Collapse>
-                            </div>
-                          )}
+                                  animateOpacity
+                                >
+                                  <div
+                                    style={{
+                                      width: "98%",
+                                      height: "1px",
+                                      backgroundColor: "#F4F6F9",
+                                      margin: "0 auto",
+                                    }}
+                                  ></div>
+                                  <SearchResult
+                                    key={getCourseDisplayString(course) + "coreq"}
+                                    year={catalogYear}
+                                    season={season}
+                                    course={
+                                      courseCoreqsMap.get(
+                                        getCourseDisplayString(course)
+                                      )!
+                                    }
+                                    addSelectedCourse={addSelectedCourse}
+                                    isResultAlreadyAdded={isCourseAlreadyAdded(
+                                      courseCoreqsMap.get(
+                                        getCourseDisplayString(course)
+                                      )!
+                                    )}
+                                    isResultAlreadySelected={isCourseAlreadySelected(
+                                      courseCoreqsMap.get(
+                                        getCourseDisplayString(course)
+                                      )!
+                                    )}
+                                    isSelectingAnotherCourse={
+                                      isLoadingSelectCourse
+                                    }
+                                    selectedNUPaths={selectedNUPaths}
+                                    coreq={undefined}
+                                    opened={undefined}
+                                    toggleCoreq={undefined}
+                                  />
+                                </Collapse>
+                              </div>
+                            )}
                         </Box>
                       )
                     )}
@@ -451,10 +452,10 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                         const coreqInSelected =
                           coreq != null
                             ? selectedCourses.find(
-                                (c) =>
-                                  getCourseDisplayString(c) ===
-                                  getCourseDisplayString(coreq)
-                              )
+                              (c) =>
+                                getCourseDisplayString(c) ===
+                                getCourseDisplayString(coreq)
+                            )
                             : null;
 
                         if (coreq && coreqInSelected) {
