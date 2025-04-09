@@ -211,12 +211,15 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     Record<string, boolean>
   >({});
 
-  const toggleCoreq = (courseKey: string) => {
-    setExpandedCourses((prev) => ({
-      ...prev,
-      [courseKey]: !prev[courseKey],
-    }));
-  };
+  function toggleCoreq(courseKey: string) {
+    setExpandedCourses((prev) => {
+      const current = prev[courseKey] !== false; // true if undefined or true
+      return {
+        ...prev,
+        [courseKey]: !current,
+      };
+    });
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
@@ -350,7 +353,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                                 opened={
                                   expandedCourses[
                                     getCourseDisplayString(course)
-                                  ] || false
+                                  ] !== false
                                 }
                                 toggleCoreq={() =>
                                   toggleCoreq(getCourseDisplayString(course))
@@ -366,7 +369,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                                     in={
                                       expandedCourses[
                                         getCourseDisplayString(course)
-                                      ] || false
+                                      ] !== false
                                     }
                                     animateOpacity
                                   >
@@ -397,11 +400,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                                       }
                                       selectedNUPaths={selectedNUPaths}
                                       coreq={undefined}
-                                      opened={
-                                        expandedCourses[
-                                          getCourseDisplayString(course)
-                                        ] || false
-                                      }
+                                      opened={undefined}
                                       toggleCoreq={undefined}
                                     />
                                   </Collapse>
