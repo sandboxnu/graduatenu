@@ -184,7 +184,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
   //keeps track of selected courses and their coreqs
   const [selectedCourseCoreqsMap, setSelectedCourseCoreqsMap] = useState(
-    new Map<any, ScheduleCourse2<null> | null>()
+    new Map<any, ScheduleCourse2<null>>()
   );
 
   const [courseCoreqsMap, setCourseCoreqsMap] = useState(
@@ -226,15 +226,12 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     Record<string, boolean>
   >({});
 
-  function toggleCoreq(courseKey: string) {
-    setExpandedCourses((prev) => {
-      const current = prev[courseKey] !== false; // true if undefined or true
-      return {
-        ...prev,
-        [courseKey]: !current,
-      };
-    });
-  }
+  const toggleCoreq = (courseKey: string) => {
+    setExpandedCourses((prev) => ({
+      ...prev,
+      [courseKey]: !prev[courseKey],
+    }));
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
@@ -359,9 +356,8 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                               getCourseDisplayString(course)
                             )}
                             opened={
-                              expandedCourses[
-                                getCourseDisplayString(course)
-                              ] !== false
+                              expandedCourses[getCourseDisplayString(course)] ||
+                              false
                             }
                             toggleCoreq={() =>
                               toggleCoreq(getCourseDisplayString(course))
@@ -375,7 +371,7 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                                 in={
                                   expandedCourses[
                                     getCourseDisplayString(course)
-                                  ] !== false
+                                  ] || false
                                 }
                                 animateOpacity
                               >
@@ -412,7 +408,11 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                                   }
                                   selectedNUPaths={selectedNUPaths}
                                   coreq={undefined}
-                                  opened={undefined}
+                                  opened={
+                                    expandedCourses[
+                                      getCourseDisplayString(course)
+                                    ] || false
+                                  }
                                   toggleCoreq={undefined}
                                 />
                               </Collapse>
