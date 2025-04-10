@@ -12,8 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { GraduateButtonLink, GraduatePreAuthHeader } from "../components";
 import {
-  AlmostGivingDayModalContent,
   GivingDayModal,
+  GivingDayModalContent,
 } from "../components/GivingDay/GivingDayModal";
 
 type InfoSectionProps = InfoImageProps & InfoTextProps;
@@ -35,9 +35,7 @@ const LandingPage: NextPage = () => {
     <Box>
       <GraduatePreAuthHeader />
       <GivingDayModal>
-        <AlmostGivingDayModalContent />
-        {/** Swap out on April 10th */}
-        {/* <GivingDayModalContent /> */}
+        <GivingDayModalContent />
       </GivingDayModal>
       <Banner />
       <Info />
