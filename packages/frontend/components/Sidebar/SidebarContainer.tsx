@@ -8,7 +8,6 @@ import ConcentrationDropdownWarning from "./ConcentrationDropdownWarning";
 import { COOP_BLOCK } from "./Sidebar";
 import { SandboxArea } from "./SandboxArea";
 import { UNDECIDED_CONCENTRATION } from "@graduate/common";
-import { GivingDayAccordion } from "../GivingDay/GivingDayAccordion";
 
 interface SidebarContainerProps {
   title: string;
@@ -83,8 +82,6 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
           <ConcentrationDropdownWarning />
         )}
         {renderDropdownWarning && <DropdownWarning />}
-        {/** Remove after April 10th */}
-        <GivingDayAccordion />
         {creditsTaken !== undefined && (
           <Flex mb="sm" alignItems="baseline" columnGap="xs">
             <Text
