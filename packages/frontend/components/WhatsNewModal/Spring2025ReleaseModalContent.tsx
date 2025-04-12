@@ -5,7 +5,6 @@ import {
   ModalFooter,
   Button,
   Text,
-  VStack,
   Link,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
