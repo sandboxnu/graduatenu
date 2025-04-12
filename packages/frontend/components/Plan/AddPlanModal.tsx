@@ -157,7 +157,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const catalogYear = watch("catalogYear");
   const majorName = watch("major");
-  //const minorName = watch("minor");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
 
@@ -351,7 +350,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         catalogYear,
                         supportedMinorsData
                       )}
-                      //rules={{ required: "Minor is required." }}
                       isDisabled={!catalogYear}
                       isSearchable
                       useFuzzySearch

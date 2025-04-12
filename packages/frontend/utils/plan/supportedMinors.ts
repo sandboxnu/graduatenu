@@ -50,8 +50,7 @@ export const extractSupportedMinorOptions = (
   return Object.keys(minorMap ?? {})
     .map((minorName) => {
       return {
-        //label: (minorMap?.[minorName].verified ? "" : "[BETA] ") + majorName,
-        label: "[BETA]" + minorName,
+        label: "[BETA] " + minorName,
         value: minorName,
       };
     })
