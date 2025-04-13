@@ -1,8 +1,6 @@
 import {
   Box,
   Button,
-  HStack,
-  Image,
   ModalContent,
   ModalFooter,
   ModalHeader,
@@ -10,7 +8,7 @@ import {
   Text,
   chakra,
 } from "@chakra-ui/react";
-import { ModalBodyPagination } from "./ModalBodyPagination";
+import { ModalBodyPagination } from "../ModalBodyPagination";
 import InProgressIndicatorImage from "../../public/in-progress-indicator.png";
 import SearchNEUIntegrationImage from "../../public/searchneu-integration.png";
 import GeneralPlaceholdersImage from "../../public/general-placeholders.png";
@@ -18,10 +16,11 @@ import BetaMajorsImage from "../../public/2024-beta-majors.png";
 import CoursesAddedToPlanImage from "../../public/courses-added-to-plan-check.png";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import React, { useEffect } from "react";
-
-interface ModalContentProps {
-  onClose: () => void;
-}
+import {
+  FeaturePageData,
+  NewFeaturePage,
+  WhatsNewModalContentProps,
+} from "../WhatsNewModal";
 
 const InProgressIcon: React.FC = () => {
   return (
@@ -48,13 +47,6 @@ const InProgressIcon: React.FC = () => {
     </Box>
   );
 };
-
-interface FeaturePageData {
-  key: string;
-  title: string;
-  descriptionSection: React.ReactNode;
-  image: string;
-}
 
 const featurePagesData: FeaturePageData[] = [
   {
@@ -142,9 +134,9 @@ const featurePagesData: FeaturePageData[] = [
   },
 ];
 
-export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
-  onClose,
-}) => {
+export const Fall2024ReleaseModalContent: React.FC<
+  WhatsNewModalContentProps
+> = ({ onClose }) => {
   const [featurePages, setFeaturePages] = React.useState<React.ReactNode[]>([]);
 
   useEffect(() => {
@@ -177,61 +169,5 @@ export const Fall2024ReleaseModalContent: React.FC<ModalContentProps> = ({
         </Button>
       </ModalFooter>
     </ModalContent>
-  );
-};
-
-const NewFeaturePage: React.FC<FeaturePageData> = ({
-  key,
-  title,
-  descriptionSection,
-  image,
-}) => {
-  return (
-    <HStack pt="8" alignItems="start" gap="8" key={key} minHeight={"350px"}>
-      <NewFeatureText title={title} descriptionSection={descriptionSection} />
-      <NewFeatureImage src={image} alt={title + " image"} />
-    </HStack>
-  );
-};
-
-interface NewFeatureImageProps {
-  src: string;
-  alt?: string;
-}
-
-const NewFeatureImage: React.FC<NewFeatureImageProps> = ({ src, alt }) => {
-  return (
-    <Stack flex="3">
-      <Image
-        src={src}
-        alt={alt}
-        fit={"contain"}
-        maxWidth={400}
-        maxHeight={300}
-        borderRadius="2xl"
-      />
-    </Stack>
-  );
-};
-
-interface NewFeatureTextProps {
-  title: string;
-  descriptionSection: React.ReactNode;
-}
-
-const NewFeatureText: React.FC<NewFeatureTextProps> = ({
-  title,
-  descriptionSection,
-}) => {
-  return (
-    <Stack flex="2">
-      <Text fontWeight="bold" fontSize="md" textColor="primary.red.main">
-        NEW
-      </Text>
-      <Text textColor="primary.blue.dark.main" fontWeight="bold" fontSize="xl">
-        {title}
-      </Text>
-      {descriptionSection}
-    </Stack>
   );
 };

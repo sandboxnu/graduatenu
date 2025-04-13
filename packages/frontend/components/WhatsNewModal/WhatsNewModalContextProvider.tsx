@@ -7,8 +7,8 @@ import {
   useMemo,
 } from "react";
 import { WhatsNewModal } from "./WhatsNewModal";
-import { Fall2024ReleaseModalContent } from "./Fall2024ReleaseModalContent";
 import Cookies from "universal-cookie";
+import { Spring2025ReleaseModalContent } from "./Spring2025ReleaseModalContent";
 
 const WhatsNewModalContext = createContext<{ openModal: () => void }>({
   openModal: () => {
@@ -45,7 +45,7 @@ export const WhatsNewModalContextProvider = ({
     <WhatsNewModalContext.Provider value={{ openModal }}>
       {children}
       <WhatsNewModal isOpen={isOpen} onClose={handleClose}>
-        <Fall2024ReleaseModalContent onClose={handleClose} />
+        <Spring2025ReleaseModalContent onClose={handleClose} />
       </WhatsNewModal>
     </WhatsNewModalContext.Provider>
   );
