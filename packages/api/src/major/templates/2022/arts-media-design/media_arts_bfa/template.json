@@ -1,39 +1,79 @@
 {
-  "No Concentration": {},
-  "Sample Four Years, Two Co-ops in Spring/Summer 1/Sample—ZA Plan of Study Only": {
+  "No Concentration": {
     "Year 1": {
-      "Fall": [
-        "ARTF 1000",
-        "ARTF 1124",
-        "ARTH 1001",
-        "ARTH 1002",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "ARTF 1122",
-        "ARTF 2220"
-      ]
+      "Fall": ["ARTF 1000", "ARTF 1124", "ARTH 1001", "ARTH 1002", "ENGW 1111"],
+      "Spring": ["ARTF 1122", "ARTF 2220"]
     },
     "Year 2": {
-      "Fall": [
-        "ARTF 2223",
-        "ARTH 3000",
-        "EEAM 2000"
-      ]
+      "Fall": ["ARTF 2223", "ARTH 3000", "EEAM 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "ARTG 2250",
-        "ARTH 4000"
-      ]
+      "Fall": ["ARTG 2250", "ARTH 4000"]
     },
     "Year 4": {
-      "Spring": [
-        "ARTD 4530"
-      ]
+      "Spring": ["ARTD 4530"]
     }
   },
-  "Animation": {},
-  "Photography": {},
-  "Video Arts": {}
+  "Sample Four Years, Two Co-ops in Spring/Summer 1/Sample—ZA Plan of Study Only": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1124", "ARTH 1001", "ARTH 1002", "ENGW 1111"],
+      "Spring": ["ARTF 1122", "ARTF 2220"]
+    },
+    "Year 2": {
+      "Fall": ["ARTF 2223", "ARTH 3000", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ARTG 2250", "ARTH 4000"]
+    },
+    "Year 4": {
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Animation": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 2220", "ARTH 1001", "ENGW 1111"],
+      "Spring": ["ARTF 1122", "ARTF 1124", "ARTD 2370"],
+      "Summer 1": ["ARTF 2223"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 2100", "ARTD 3470", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 4570", "ARTG 2250", "ARTH 3000"]
+    },
+    "Year 4": {
+      "Spring": ["ARTD 4530"],
+      "Fall": ["ARTH 4000"]
+    }
+  },
+  "Photography": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1122", "ARTF 1124", "ARTH 1001", "ENGW 1111"],
+      "Spring": ["ARTF 2220", "ARTF 2223", "ARTD 2360"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 3460", "ARTH 3000", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 4565", "ARTG 2250", "ARTH 4000"]
+    },
+    "Year 4": {
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Video Arts": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1122", "ARTF 1124", "ARTH 1001", "ENGW 1111"],
+      "Spring": ["ARTF 2220", "ARTF 2223"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 2380", "ARTH 3000", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 3480", "ARTG 2250", "ARTH 4000"]
+    },
+    "Year 4": {
+      "Spring": ["ARTD 4530"]
+    }
+  }
 }

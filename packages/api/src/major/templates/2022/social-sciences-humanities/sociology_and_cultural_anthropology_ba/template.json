@@ -1,0 +1,15 @@
+{
+  "Default Plan": {
+    "Year 1": {
+      "Fall": ["ANTH 1000", "ANTH 1101"],
+      "Spring": ["ANTH 3410", "SOCL 2321"]
+    },
+    "Year 2": {
+      "Spring": ["SOCL 3300", "ANTH 2305"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["ANTH 4600", "SOCL 4600"]
+    }
+  }
+}

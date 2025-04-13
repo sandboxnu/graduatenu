@@ -1,5 +1,20 @@
 {
-  "Sample Four Years, Two Co-ops": {},
+  "Sample Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["JRNL 1000", "JRNL 1150", "ENGW 1111", "ENGL 1400"],
+      "Spring": ["JRNL 1101", "ENGL 1160"]
+    },
+    "Year 2": {
+      "Fall": ["JRNL 2201", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["JRNL 2301"]
+    },
+    "Year 4": {
+      "Fall": ["JRNL 3610", "ENGL 2740"],
+      "Spring": ["JRNL 3550", "JRNL 3630", "ENGL 4710"]
+    }
+  },
   "Spring/Summer 1": {
     "Year 1": {
       "Fall": ["JRNL 1000", "JRNL 1150", "ENGW 1111", "ENGL 1400"],
