@@ -86,20 +86,30 @@ export type INEUReqError =
   | INEUReqAndError
   | INEUReqOrError;
 
+export enum ReqErrorType {
+  COURSE = "course",
+  AND = "and",
+  OR = "or",
+}
+
 export interface INEUReqCourseError {
-  type: "course";
+  type: ReqErrorType.COURSE;
   subject: string;
   classId: string;
 }
 
 export interface INEUReqAndError {
-  type: "and";
+  type: ReqErrorType.AND;
   missing: INEUReqError[];
+  subject?: string;
+  classId?: string;
 }
 
 export interface INEUReqOrError {
-  type: "or";
+  type: ReqErrorType.OR;
   missing: INEUReqError[];
+  subject?: string;
+  classId?: string;
 }
 
 export interface TermError {
@@ -144,6 +154,18 @@ export interface Major2 {
   yearVersion: number;
   concentrations?: Concentrations2;
   metadata?: MajorMetadata;
+}
+
+export interface Template {
+  name: string;
+  yearVersion: number;
+  templateData?: {
+    [templateName: string]: {
+      [yearKey: string]: {
+        [termKey: string]: string[];
+      };
+    };
+  };
 }
 
 /**

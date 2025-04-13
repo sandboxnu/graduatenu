@@ -1,0 +1,42 @@
+{
+  "Sample Plans of Study": {},
+  "4 Years, 2 Co-ops: Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "JRNL 1000",
+        "JRNL 1150",
+        "POLS 1150"
+      ],
+      "Spring": [
+        "JRNL 1101",
+        "POLS 1155",
+        "POLS 1160"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "JRNL 2201",
+        "POLS 2399"
+      ],
+      "Spring": [
+        "EEAM 2000",
+        "JRNL 2301",
+        "POLS 2400"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "JRNL 3610"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "JRNL 3550",
+        "JRNL 4650",
+        "POLS 3320",
+        "POLS 4701"
+      ]
+    }
+  }
+}

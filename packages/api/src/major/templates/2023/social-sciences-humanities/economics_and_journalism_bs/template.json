@@ -1,0 +1,46 @@
+{
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ECON 1115",
+        "ENGW 1111",
+        "JRNL 1000",
+        "JRNL 1150",
+        "MATH 1231"
+      ],
+      "Spring": [
+        "CS 1100",
+        "ECON 1116",
+        "JRNL 1101"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ECON 2315",
+        "JRNL 2201"
+      ],
+      "Spring": [
+        "ECON 2316",
+        "ECON 2350",
+        "EESH 2000",
+        "JRNL 2301"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ECON 2560",
+        "JRNL 3700",
+        "JRNL 3610"
+      ],
+      "Summer 1": [
+        "ECON 1260"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "ECON 4692",
+        "JRNL 3550"
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "Five Year, Two Co-op Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 2500", "CS 1800", "BIOL 1111", "ENGW 1111"],
+      "Spring": ["CS 2510", "BIOL 1113", "PSYC 1101", "MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 1260", "PHTH 2300", "CS 3500", "CHEM 1161"],
+      "Spring": ["CS 1210", "PHTH 2515", "DS 3000", "CS 3200"]
+    },
+    "Year 3": {
+      "Spring": ["IS 4300", "DS 4200", "PHTH 2350"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4300", "DS 4400", "ENGW 3302"]
+    },
+    "Year 5": {
+      "Fall": ["PHTH 4540", "HLTH 5450", "PHIL 1145"],
+      "Spring": ["DS 4420", "PHTH 4120"]
+    }
+  }
+}

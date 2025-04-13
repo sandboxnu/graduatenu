@@ -1,0 +1,52 @@
+{
+  "Four Years, One Co-op": {
+    "Year 1": {
+      "Fall": [
+        "AMSL 1101",
+        "DEAF 1500",
+        "THTR 1100",
+        "THTR 1101",
+        "INTP 1000",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "AMSL 1102",
+        "THTR 1120",
+        "DEAF 2500",
+        "INAM 2000"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "AMSL 2101",
+        "LING 1150",
+        "INTP 3500",
+        "THTR 1270",
+        "THTR 2000"
+      ],
+      "Spring": [
+        "AMSL 2102",
+        "DEAF 2700",
+        "THTR 1131"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "INTP 3550",
+        "THTR 3325",
+        "AMSL 3101",
+        "EEAM 2000"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "ENGW 3315",
+        "INTP 3970"
+      ],
+      "Spring": [
+        "THTR 4702",
+        "AMSL 3102"
+      ]
+    }
+  }
+}

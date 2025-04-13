@@ -126,6 +126,18 @@ class APIClient {
       this.req("GET", `/minors/supportedMinors`, GetSupportedMinorsResponse),
   };
 
+  templates = {
+    getForYear: (catalogYear: number): Promise<Record<string, Major2>> =>
+      this.req("GET", `/templates/${catalogYear}`),
+    getForMajor: (
+      majorName: string,
+      catalogYear: number
+    ): Promise<Major2 | null> =>
+      this.req("GET", `/templates/${catalogYear}/${majorName}`),
+    getAll: (): Promise<Record<string, Record<string, Major2>>> =>
+      this.req("GET", "/templates"),
+  };
+
   meta = {
     getInfo: (): Promise<GetMetaInfoResponse> =>
       this.req("GET", "/meta/info", GetMetaInfoResponse),

@@ -1,0 +1,107 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "ARTF 1220",
+        "ARTG 1001",
+        "CS 1800",
+        "DS 2000"
+      ],
+      "Spring": [
+        "ARTG 1290",
+        "ENGW 1111",
+        "DS 2500",
+        "MATH 1341"
+      ],
+      "Summer 1": [
+        "ECON 2350"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 1210",
+        "DS 3500",
+        "CS 3200",
+        "ARTG 1270"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 3000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "DS 3000"
+      ],
+      "Summer 2": [
+        "ENGW 3302"
+      ],
+      "Summer 1": [
+        "ENGW 3302"
+      ],
+      "Spring": [
+        "DS 4200",
+        "DS 4300"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "DS 4200",
+        "DS 4300"
+      ],
+      "Spring": [
+        "ARTG 4550",
+        "DS 4400",
+        "ARTG 5330"
+      ]
+    }
+  },
+  "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "ARTF 1220",
+        "ARTG 1001",
+        "CS 1800",
+        "DS 2000"
+      ],
+      "Spring": [
+        "ARTG 1290",
+        "DS 2500",
+        "MATH 1341",
+        "ENGW 1111"
+      ],
+      "Summer 1": [
+        "ECON 2350"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "DS 3500",
+        "CS 3200",
+        "ARTG 1270"
+      ],
+      "Spring": [
+        "CS 1210",
+        "DS 3000"
+      ]
+    },
+    "Year 3": {
+      "Summer 1": [
+        "ENGW 3302"
+      ],
+      "Spring": [
+        "DS 4200",
+        "DS 4300"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "ARTG 4550",
+        "DS 4400",
+        "ARTG 5330"
+      ]
+    }
+  }
+}

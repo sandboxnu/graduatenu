@@ -1,0 +1,43 @@
+{
+  "Sample Pattern, Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "ARTF 1000",
+        "GAME 1110",
+        "ENGW 1111",
+        "MUSC 1201"
+      ],
+      "Spring": [
+        "GAME 2500",
+        "MUST 1220",
+        "MUSC 1202",
+        "MUSC 2350"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "GAME 2950",
+        "GAME 3400",
+        "MUSC 1002",
+        "EEAM 2000",
+        "MUST 2102"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "GAME 3700",
+        "MUSC 3541",
+        "MUST 2431"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "GAME 3800",
+        "MUSC 3541"
+      ],
+      "Spring": [
+        "GAME 4700"
+      ]
+    }
+  }
+}

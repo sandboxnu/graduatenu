@@ -1,0 +1,195 @@
+{
+  "Additional Recommended Courses for Premedical School Track": {
+    "Year 1": {
+      "Fall": [
+        "PHYS 1000",
+        "ENGW 1111",
+        "MATH 1341",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163",
+        "BIOL 1111",
+        "BIOL 1112"
+      ],
+      "Spring": [
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167",
+        "MATH 1342",
+        "PHYS 1211",
+        "BIOL 1113",
+        "BIOL 1114"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHYS 2303",
+        "PHYS 2371",
+        "PHYS 2372",
+        "MATH 2321",
+        "CHEM 1211",
+        "CHEM 1212",
+        "CHEM 1213",
+        "EESC 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "PHYS 4621",
+        "PHYS 4623"
+      ],
+      "Summer 2": [
+        "MATH 2341",
+        "PHYS 3600"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "PHYS 3602",
+        "PHYS 4651"
+      ],
+      "Summer 2": [
+        "PHYS 4305"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "PHYS 3603",
+        "ENGW 3307"
+      ],
+      "Spring": [
+        "PHYS 4652",
+        "PHYS 5318"
+      ]
+    }
+  },
+  "Note on Biomedical Physics Plans of Study": {
+    "Year 1": {
+      "Fall": [
+        "PHYS 1000",
+        "ENGW 1111",
+        "MATH 1341",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163",
+        "BIOL 1111",
+        "BIOL 1112"
+      ],
+      "Spring": [
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167",
+        "MATH 1342",
+        "PHYS 1211",
+        "BIOL 1113",
+        "BIOL 1114"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHYS 2303",
+        "PHYS 2371",
+        "PHYS 2372",
+        "MATH 2321",
+        "CHEM 1211",
+        "CHEM 1212",
+        "CHEM 1213",
+        "EESC 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "PHYS 4621",
+        "PHYS 4623"
+      ],
+      "Summer 2": [
+        "MATH 2341",
+        "PHYS 3600"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "PHYS 3602",
+        "PHYS 4651"
+      ],
+      "Summer 2": [
+        "PHYS 4305"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "PHYS 3603",
+        "ENGW 3307"
+      ],
+      "Spring": [
+        "PHYS 4652",
+        "PHYS 5318"
+      ]
+    }
+  },
+  "Sample Plan of Study: Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "PHYS 1000",
+        "ENGW 1111",
+        "MATH 1341",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163",
+        "BIOL 1111",
+        "BIOL 1112"
+      ],
+      "Spring": [
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167",
+        "MATH 1342",
+        "PHYS 1211",
+        "BIOL 1113",
+        "BIOL 1114"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "PHYS 2303",
+        "PHYS 2371",
+        "PHYS 2372",
+        "MATH 2321",
+        "CHEM 1211",
+        "CHEM 1212",
+        "CHEM 1213",
+        "EESC 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "PHYS 4621",
+        "PHYS 4623"
+      ],
+      "Summer 2": [
+        "MATH 2341",
+        "PHYS 3600"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "PHYS 3602",
+        "PHYS 4651"
+      ],
+      "Summer 2": [
+        "PHYS 4305"
+      ]
+    },
+    "Year 5": {
+      "Fall": [
+        "PHYS 3603",
+        "ENGW 3307"
+      ],
+      "Spring": [
+        "PHYS 4652",
+        "PHYS 5318"
+      ]
+    }
+  },
+  "Physics Course Offering Schedule": {}
+}

@@ -19,6 +19,10 @@ export const SPRING_4_COOP_ERROR_MSG =
 export const GENERIC_ERROR_MSG = "This is an error.";
 export const UNDECIDED_CONCENTRATION = "Concentration Undecided";
 export const UNDECIDED_STRING = "Undecided";
+export const GIVING_DAY_LINK = "http://bit.ly/sandboxgivingday";
+export const MAKE_A_DONATION_DESCRIPTION = `Make a donation to Sandbox to help keep GraduateNU running!`;
+export const ITS_ALMOST_GIVING_DAY = "It's almost Giving Day!";
+export const GIVING_DAY_MODAL_HEADING = "It's Giving Day!";
 
 export const defaultGuestStudent: GetStudentResponse = {
   uuid: undefined,

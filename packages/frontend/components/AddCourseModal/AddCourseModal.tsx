@@ -2,6 +2,7 @@ import { AddIcon, InfoIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
+  Box,
   Grid,
   Modal,
   ModalBody,
@@ -12,9 +13,10 @@ import {
   ModalOverlay,
   Text,
   VStack,
+  Collapse,
 } from "@chakra-ui/react";
 import { NUPathEnum, ScheduleCourse2, SeasonEnum } from "@graduate/common";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchCourses } from "../../hooks";
 import {
   getCourseDisplayString,
@@ -28,6 +30,7 @@ import { NUPathCheckBox } from "./NUPathCheckBox";
 import { SearchCoursesInput } from "./SearchCoursesInput";
 import { SearchResult } from "./SearchResult";
 import { SelectedCourse } from "./SelectedCourse";
+import { SelectedCourseCombination } from "./SelectedCourseCombination";
 import { SecondaryButton } from "../Button";
 
 interface AddCourseModalProps {
@@ -93,6 +96,18 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
     setSelectedCourses(updatedSelectedCourses);
     setIsLoadingSelectCourse(false);
+
+    //update selectedCourseCoreqsMap to add a new class and its coreqs
+    const updatedSelectedCourseCoreqsMap = new Map(selectedCourseCoreqsMap);
+
+    //add course and coreq
+    if (coreqs.length === 1) {
+      updatedSelectedCourseCoreqsMap.set(
+        getCourseDisplayString(course),
+        coreqs[0]
+      );
+    }
+    setSelectedCourseCoreqsMap(updatedSelectedCourseCoreqsMap);
   };
 
   const removeSelectedCourse = (course: ScheduleCourse2<null>) => {
@@ -101,6 +116,34 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     );
 
     setSelectedCourses(updatedSelectedCourses);
+
+    //update selectedCourseCoreqsMap to remove a class and its coreqs
+    const updatedSelectedCourseCoreqsMap = new Map(selectedCourseCoreqsMap);
+    updatedSelectedCourseCoreqsMap.delete(getCourseDisplayString(course));
+    setSelectedCourseCoreqsMap(updatedSelectedCourseCoreqsMap);
+  };
+
+  const removeSelectedCourses = (coursesToRemove: ScheduleCourse2<null>[]) => {
+    const updatedSelectedCourses = selectedCourses.filter(
+      (selectedCourse) =>
+        !coursesToRemove.some((course) =>
+          isEqualCourses(selectedCourse, course)
+        )
+    );
+    setSelectedCourses(updatedSelectedCourses);
+
+    //update selectedCourseCoreqsMap to remove a class and its coreqs
+    const updatedSelectedCourseCoreqsMap = new Map(selectedCourseCoreqsMap);
+
+    {
+      if (coursesToRemove.length > 0) {
+        updatedSelectedCourseCoreqsMap.delete(
+          getCourseDisplayString(coursesToRemove[0])
+        );
+      }
+    }
+
+    setSelectedCourseCoreqsMap(updatedSelectedCourseCoreqsMap);
   };
 
   const isCourseAlreadySelected = (course: ScheduleCourse2<null>) => {
@@ -123,6 +166,60 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
     setSelectedNUPaths([]);
     closeModalDisplay();
   };
+
+  //keeps track of selected courses and their coreqs
+  const [selectedCourseCoreqsMap, setSelectedCourseCoreqsMap] = useState(
+    new Map<any, ScheduleCourse2<null>>()
+  );
+
+  const [courseCoreqsMap, setCourseCoreqsMap] = useState(
+    new Map<any, ScheduleCourse2<null>>()
+  );
+  useEffect(() => {
+    if (!courses || courses.length === 0) {
+      console.log("Courses are not ready yet...");
+      return;
+    }
+    const fetchCoreqsForAllCourses = async () => {
+      if (!courses || courses.length === 0) return;
+      if (courses) {
+        const newCourseCoreqsMap = new Map<any, ScheduleCourse2<null>>();
+
+        for (const course of courses) {
+          const coreqs = (
+            await getRequiredCourseCoreqs(course, catalogYear)
+          ).filter(
+            (coreq) => !isCourseAlreadyAdded(coreq) && course.numCreditsMax >= 3 // this is hardcoded and for some reason its 3?
+          );
+
+          if (coreqs.length === 1) {
+            newCourseCoreqsMap.set(getCourseDisplayString(course), coreqs[0]);
+            console.log(
+              `Fetching coreqs for course ${getCourseDisplayString(course)}`
+            );
+            console.log(`Coreqs fetched:`, coreqs);
+          }
+        }
+        setCourseCoreqsMap(newCourseCoreqsMap);
+      }
+    };
+
+    fetchCoreqsForAllCourses();
+  }, [courses, catalogYear, isCourseAlreadyAdded]);
+
+  const [expandedCourses, setExpandedCourses] = useState<
+    Record<string, boolean>
+  >({});
+
+  function toggleCoreq(courseKey: string) {
+    setExpandedCourses((prev) => {
+      const current = prev[courseKey] !== false; // true if undefined or true
+      return {
+        ...prev,
+        [courseKey]: !current,
+      };
+    });
+  }
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
@@ -226,21 +323,93 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   {/* Show courses */}
                   {courses &&
                     sortCoursesByNUPath(courses, selectedNUPaths).map(
-                      (course) => (
-                        <SearchResult
-                          key={getCourseDisplayString(course)}
-                          year={catalogYear}
-                          season={season}
-                          course={course}
-                          addSelectedCourse={addSelectedCourse}
-                          isResultAlreadyAdded={isCourseAlreadyAdded(course)}
-                          isResultAlreadySelected={isCourseAlreadySelected(
-                            course
-                          )}
-                          isSelectingAnotherCourse={isLoadingSelectCourse}
-                          selectedNUPaths={selectedNUPaths}
-                        />
-                      )
+                      (course) => {
+                        const courseInQuestion = courseCoreqsMap.get(
+                          getCourseDisplayString(course)
+                        );
+                        return (
+                          courseInQuestion && (
+                            <Box
+                              key={getCourseDisplayString(course)}
+                              borderBottom="1px"
+                              borderColor="#C1CAD9"
+                            >
+                              <SearchResult
+                                year={catalogYear}
+                                season={season}
+                                course={course}
+                                addSelectedCourse={addSelectedCourse}
+                                isResultAlreadyAdded={isCourseAlreadyAdded(
+                                  course
+                                )}
+                                isResultAlreadySelected={isCourseAlreadySelected(
+                                  course
+                                )}
+                                isSelectingAnotherCourse={isLoadingSelectCourse}
+                                selectedNUPaths={selectedNUPaths}
+                                coreq={courseCoreqsMap.has(
+                                  getCourseDisplayString(course)
+                                )}
+                                opened={
+                                  expandedCourses[
+                                    getCourseDisplayString(course)
+                                  ] !== false
+                                }
+                                toggleCoreq={() =>
+                                  toggleCoreq(getCourseDisplayString(course))
+                                }
+                              />
+                              {courseCoreqsMap.has(
+                                getCourseDisplayString(course)
+                              ) && (
+                                <div
+                                  style={{ width: "100%", display: "block" }}
+                                >
+                                  <Collapse
+                                    in={
+                                      expandedCourses[
+                                        getCourseDisplayString(course)
+                                      ] !== false
+                                    }
+                                    animateOpacity
+                                  >
+                                    <div
+                                      style={{
+                                        width: "98%",
+                                        height: "1px",
+                                        backgroundColor: "#F4F6F9",
+                                        margin: "0 auto",
+                                      }}
+                                    ></div>
+                                    <SearchResult
+                                      key={
+                                        getCourseDisplayString(course) + "coreq"
+                                      }
+                                      year={catalogYear}
+                                      season={season}
+                                      course={courseInQuestion}
+                                      addSelectedCourse={addSelectedCourse}
+                                      isResultAlreadyAdded={isCourseAlreadyAdded(
+                                        courseInQuestion
+                                      )}
+                                      isResultAlreadySelected={isCourseAlreadySelected(
+                                        courseInQuestion
+                                      )}
+                                      isSelectingAnotherCourse={
+                                        isLoadingSelectCourse
+                                      }
+                                      selectedNUPaths={selectedNUPaths}
+                                      coreq={undefined}
+                                      opened={undefined}
+                                      toggleCoreq={undefined}
+                                    />
+                                  </Collapse>
+                                </div>
+                              )}
+                            </Box>
+                          )
+                        );
+                      }
                     )}
                 </Flex>
               </Flex>
@@ -256,14 +425,56 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                   overflow="scroll"
                   alignItems="stretch"
                 >
-                  {selectedCourses.map((selectedCourse) => (
-                    <SelectedCourse
-                      key={getCourseDisplayString(selectedCourse)}
-                      selectedCourse={selectedCourse}
-                      removeSelectedCourse={removeSelectedCourse}
-                      selectedNUPaths={selectedNUPaths}
-                    />
-                  ))}
+                  {(() => {
+                    const processed = new Set();
+                    return selectedCourses
+                      .slice()
+                      .sort((a, b) => b.numCreditsMax - a.numCreditsMax)
+                      .map((selectedCourse) => {
+                        const courseKey =
+                          getCourseDisplayString(selectedCourse);
+
+                        // Skip if already processed as part of a coreq pair
+                        if (processed.has(courseKey)) return null;
+
+                        const coreq = selectedCourseCoreqsMap.get(courseKey);
+                        const coreqInSelected =
+                          coreq != null
+                            ? selectedCourses.find(
+                                (c) =>
+                                  getCourseDisplayString(c) ===
+                                  getCourseDisplayString(coreq)
+                              )
+                            : null;
+
+                        if (coreq && coreqInSelected) {
+                          const coreqKey =
+                            getCourseDisplayString(coreqInSelected);
+                          processed.add(courseKey);
+                          processed.add(coreqKey);
+
+                          return (
+                            <SelectedCourseCombination
+                              key={courseKey}
+                              selectedCourse={selectedCourse}
+                              selectedCourseCoreq={coreq}
+                              removeSelectedCourses={removeSelectedCourses}
+                              selectedNUPaths={selectedNUPaths}
+                            />
+                          );
+                        } else {
+                          processed.add(courseKey);
+                          return (
+                            <SelectedCourse
+                              key={courseKey}
+                              selectedCourse={selectedCourse}
+                              removeSelectedCourse={removeSelectedCourse}
+                              selectedNUPaths={selectedNUPaths}
+                            />
+                          );
+                        }
+                      });
+                  })()}
                 </VStack>
               </Flex>
               <ModalFooter justifyContent="end" gap="md">

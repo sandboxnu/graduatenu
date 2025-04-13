@@ -1,0 +1,52 @@
+{
+  "Sample Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "CS 2501",
+        "ARTF 1124",
+        "ENGW 1111"
+      ],
+      "Spring": [
+        "CS 2510",
+        "CS 2511",
+        "CS 3200",
+        "ARTF 1122",
+        "ARTF 2223"
+      ],
+      "Summer 1": [
+        "CS 3500"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "CS 1210",
+        "IS 4300",
+        "CS 3000",
+        "ARTF 2220",
+        "ARTD 2100"
+      ],
+      "Summer 2": [
+        "MATH 2331"
+      ]
+    },
+    "Year 3": {
+      "Fall": [
+        "CS 4300"
+      ],
+      "Spring": [
+        "ENGW 3302"
+      ]
+    },
+    "Year 4": {
+      "Fall": [
+        "CS 4500"
+      ],
+      "Spring": [
+        "ARTD 4530"
+      ]
+    }
+  }
+}
