@@ -328,86 +328,80 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
                           getCourseDisplayString(course)
                         );
                         return (
-                          courseInQuestion && (
-                            <Box
-                              key={getCourseDisplayString(course)}
-                              borderBottom="1px"
-                              borderColor="#C1CAD9"
-                            >
-                              <SearchResult
-                                year={catalogYear}
-                                season={season}
-                                course={course}
-                                addSelectedCourse={addSelectedCourse}
-                                isResultAlreadyAdded={isCourseAlreadyAdded(
-                                  course
-                                )}
-                                isResultAlreadySelected={isCourseAlreadySelected(
-                                  course
-                                )}
-                                isSelectingAnotherCourse={isLoadingSelectCourse}
-                                selectedNUPaths={selectedNUPaths}
-                                coreq={courseCoreqsMap.has(
-                                  getCourseDisplayString(course)
-                                )}
-                                opened={
-                                  expandedCourses[
-                                    getCourseDisplayString(course)
-                                  ] !== false
-                                }
-                                toggleCoreq={() =>
-                                  toggleCoreq(getCourseDisplayString(course))
-                                }
-                              />
-                              {courseCoreqsMap.has(
-                                getCourseDisplayString(course)
-                              ) && (
-                                <div
-                                  style={{ width: "100%", display: "block" }}
-                                >
-                                  <Collapse
-                                    in={
-                                      expandedCourses[
-                                        getCourseDisplayString(course)
-                                      ] !== false
-                                    }
-                                    animateOpacity
-                                  >
-                                    <div
-                                      style={{
-                                        width: "98%",
-                                        height: "1px",
-                                        backgroundColor: "#F4F6F9",
-                                        margin: "0 auto",
-                                      }}
-                                    ></div>
-                                    <SearchResult
-                                      key={
-                                        getCourseDisplayString(course) + "coreq"
-                                      }
-                                      year={catalogYear}
-                                      season={season}
-                                      course={courseInQuestion}
-                                      addSelectedCourse={addSelectedCourse}
-                                      isResultAlreadyAdded={isCourseAlreadyAdded(
-                                        courseInQuestion
-                                      )}
-                                      isResultAlreadySelected={isCourseAlreadySelected(
-                                        courseInQuestion
-                                      )}
-                                      isSelectingAnotherCourse={
-                                        isLoadingSelectCourse
-                                      }
-                                      selectedNUPaths={selectedNUPaths}
-                                      coreq={undefined}
-                                      opened={undefined}
-                                      toggleCoreq={undefined}
-                                    />
-                                  </Collapse>
-                                </div>
+                          <Box
+                            key={getCourseDisplayString(course)}
+                            borderBottom="1px"
+                            borderColor="#C1CAD9"
+                          >
+                            <SearchResult
+                              year={catalogYear}
+                              season={season}
+                              course={course}
+                              addSelectedCourse={addSelectedCourse}
+                              isResultAlreadyAdded={isCourseAlreadyAdded(
+                                course
                               )}
-                            </Box>
-                          )
+                              isResultAlreadySelected={isCourseAlreadySelected(
+                                course
+                              )}
+                              isSelectingAnotherCourse={isLoadingSelectCourse}
+                              selectedNUPaths={selectedNUPaths}
+                              coreq={courseCoreqsMap.has(
+                                getCourseDisplayString(course)
+                              )}
+                              opened={
+                                expandedCourses[
+                                  getCourseDisplayString(course)
+                                ] !== false
+                              }
+                              toggleCoreq={() =>
+                                toggleCoreq(getCourseDisplayString(course))
+                              }
+                            />
+                            {courseInQuestion && (
+                              <div style={{ width: "100%", display: "block" }}>
+                                <Collapse
+                                  in={
+                                    expandedCourses[
+                                      getCourseDisplayString(course)
+                                    ] !== false
+                                  }
+                                  animateOpacity
+                                >
+                                  <div
+                                    style={{
+                                      width: "98%",
+                                      height: "1px",
+                                      backgroundColor: "#F4F6F9",
+                                      margin: "0 auto",
+                                    }}
+                                  ></div>
+                                  <SearchResult
+                                    key={
+                                      getCourseDisplayString(course) + "coreq"
+                                    }
+                                    year={catalogYear}
+                                    season={season}
+                                    course={courseInQuestion}
+                                    addSelectedCourse={addSelectedCourse}
+                                    isResultAlreadyAdded={isCourseAlreadyAdded(
+                                      courseInQuestion
+                                    )}
+                                    isResultAlreadySelected={isCourseAlreadySelected(
+                                      courseInQuestion
+                                    )}
+                                    isSelectingAnotherCourse={
+                                      isLoadingSelectCourse
+                                    }
+                                    selectedNUPaths={selectedNUPaths}
+                                    coreq={undefined}
+                                    opened={undefined}
+                                    toggleCoreq={undefined}
+                                  />
+                                </Collapse>
+                              </div>
+                            )}
+                          </Box>
                         );
                       }
                     )}
