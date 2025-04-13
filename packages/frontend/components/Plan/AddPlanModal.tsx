@@ -38,6 +38,7 @@ import {
   useSupportedMajors,
   USE_STUDENT_WITH_PLANS_SWR_KEY,
   useStudentWithPlans,
+  useSupportedMinors,
   useHasTemplate,
   useTemplate,
 } from "../../hooks";
@@ -45,6 +46,7 @@ import {
   cleanDndIdsFromStudent,
   createEmptySchedule,
   extractSupportedMajorOptions,
+  extractSupportedMinorOptions,
   extractSupportedMajorYears,
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
@@ -71,6 +73,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
+  const { supportedMinorsData, error: supportedMinorsError } =
+    useSupportedMinors();
 
   // Generate default plan title using formatted date and time
   const generateDefaultPlanTitle = () => {
@@ -92,6 +96,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   });
 
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
+  const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
@@ -132,6 +137,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     handleApiClientError(supportedMajorsError, router);
     return null; // Ensure we return something when there's an error
   }
+  if (supportedMinorsError) {
+    handleApiClientError(supportedMinorsError, router);
+  }
 
   const onSubmitHandler = async (
     payload: CreatePlanDtoWithoutSchedule & { useTemplate: boolean }
@@ -156,6 +164,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
+      minor: isNoMinorSelected ? undefined : payload.minor,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
       schedule,
     };
@@ -199,6 +208,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   };
   const onCloseAddPlanModal = () => {
     reset();
+    setIsNoMajorSelected(false);
+    setIsNoMinorSelected(false);
     onCloseDisplay();
     setIsNoMajorSelected(false);
   };
@@ -384,12 +395,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       isSearchable
                       useFuzzySearch
                     />
-                    <Flex align="center">
-                      <Text size="xs" mr="xs">
-                        Can&apos;t find your major?
-                      </Text>
-                      <HelperToolTip label="We are working to support all majors, but in the meantime, you can submit feedback requesting your major and select 'No Major' so that you can still use our planner!" />
-                    </Flex>
+
                     {majorHasConcentrations && (
                       <PlanSelect
                         label="Concentrations"
@@ -409,6 +415,25 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         useFuzzySearch
                       />
                     )}
+                    <PlanSelect
+                      label="Minor"
+                      placeholder="Select a Minor"
+                      name="minor"
+                      control={control}
+                      options={extractSupportedMinorOptions(
+                        catalogYear,
+                        supportedMinorsData
+                      )}
+                      isDisabled={!catalogYear}
+                      isSearchable
+                      useFuzzySearch
+                    />
+                    <Flex align="center">
+                      <Text size="xs" mr="xs">
+                        Can&apos;t find your major / minor?
+                      </Text>
+                      <HelperToolTip label="We are working to support all majors, but in the meantime, you can submit feedback requesting your major and select 'No Major' so that you can still use our planner!" />
+                    </Flex>
 
                     {/* Template option - show when a template is available */}
                     {hasTemplate && majorName && catalogYear && (

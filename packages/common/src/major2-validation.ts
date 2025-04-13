@@ -14,6 +14,7 @@ import {
   Result,
   Err,
   Ok,
+  Minor,
 } from "./types";
 import { UNDECIDED_STRING } from "./constants";
 import { assertUnreachable, courseToString } from "./course-utils";
@@ -299,9 +300,11 @@ export type MajorValidationResult = Result<
 export function validateMajor2(
   major: Major2,
   taken: ScheduleCourse2<unknown>[],
+  minor?: Minor,
   concentrations?: SelectedConcentrationsType
 ): MajorValidationResult {
   const tracker = new Major2ValidationTracker(taken);
+
   let concentrationReq: Requirement2[] = [];
   if (major.concentrations) {
     concentrationReq = getConcentrationsRequirement(
@@ -310,7 +313,20 @@ export function validateMajor2(
     );
   }
 
-  const majorReqs = [...major.requirementSections, ...concentrationReq];
+  let minorRequirements: Requirement2[] = [];
+  if (minor) {
+    // Get the minor requirements and assign them
+    minorRequirements = getMinorRequirement(minor);
+  }
+
+  let majorRequirements: Requirement2[] = [];
+  majorRequirements = wrapMajor(major);
+
+  const majorReqs = [
+    ...majorRequirements,
+    ...minorRequirements,
+    ...concentrationReq,
+  ];
 
   const requiredCourses: Set<string> = new Set();
   tracker.setNecessaryCourses(getNecessaryCourses(majorReqs, requiredCourses));
@@ -324,7 +340,7 @@ export function validateMajor2(
     tracker
   );
   const creditsResult = validateTotalCreditsRequired(
-    major.totalCreditsRequired,
+    major.totalCreditsRequired + (minor?.totalCreditsRequired ?? 0),
     taken
   );
 
@@ -444,6 +460,25 @@ function convertToConcentrationsArray(
     return [concentrations];
   }
   return concentrations;
+}
+
+export function wrapMajor(inputMajor: Major2): Requirement2[] {
+  const majorRequirements: Section[] = inputMajor.requirementSections;
+  return [{ type: "AND", courses: majorRequirements }];
+}
+
+export function getMinorRequirement(
+  inputMinor: undefined | Minor
+): Requirement2[] {
+  // No minor
+  if (!inputMinor) {
+    return [];
+  }
+
+  // put all the minor requirments into minor requirments and assigning type as section
+  const minorRequirements: Section[] = inputMinor.requirementSections;
+
+  return [{ type: "AND", courses: minorRequirements }];
 }
 
 // the solutions returned may have duplicate courses, indicating the # of times a course is taken
