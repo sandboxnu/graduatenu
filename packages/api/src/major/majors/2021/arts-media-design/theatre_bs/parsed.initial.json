@@ -2,7 +2,7 @@
   "name": "Theatre, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "4/1/2025"
   },
   "totalCreditsRequired": 132,
   "yearVersion": 2021,
@@ -54,52 +54,66 @@
       "title": "Theatre Texts and Context",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1220,
-          "subject": "THTR"
+          "type": "SECTION",
+          "title": "Complete one of the following:",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2315,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "THTR"
+            }
+          ],
+          "minRequirementCount": 6
         },
         {
-          "type": "COURSE",
-          "classId": 2300,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2315,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2320,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2500,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3200,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1215,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2340,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3100,
-          "subject": "THTR"
+          "type": "SECTION",
+          "title": "Complete one of the following:",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1215,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "THTR"
+            }
+          ],
+          "minRequirementCount": 3
         }
       ],
-      "minRequirementCount": 9
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
@@ -315,14 +329,7 @@
             "type": "COURSE",
             "classId": 2600,
             "subject": "THTR"
-          }
-        ],
-        "minRequirementCount": 3
-      },
-      {
-        "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
+          },
           {
             "type": "XOM",
             "numCreditsMin": 12,
@@ -435,7 +442,7 @@
             ]
           }
         ],
-        "minRequirementCount": 1
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
@@ -471,14 +478,7 @@
                 "subject": "THTR"
               }
             ]
-          }
-        ],
-        "minRequirementCount": 1
-      },
-      {
-        "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
+          },
           {
             "type": "XOM",
             "numCreditsMin": 8,
@@ -596,7 +596,7 @@
             ]
           }
         ],
-        "minRequirementCount": 1
+        "minRequirementCount": 2
       }
     ]
   }
