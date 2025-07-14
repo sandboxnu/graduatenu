@@ -1,0 +1,20 @@
+{
+  "Default Plan": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "INTB 1202", "ECON 1115", "INTL 1101", "BUSN 1102"],
+      "Spring": ["MGSC 2301", "ACCT 1201"],
+      "Summer 2": ["MKTG 2201"],
+      "Summer 1": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["INTB 2202", "BUSN 1103"]
+    },
+    "Year 3": {
+      "Fall": ["INTL 3400", "ORGB 3201", "ENGW 3304", "INTB 3310"]
+    },
+    "Year 4": {
+      "Fall": ["INTL 4700"],
+      "Spring": ["INTB 4202"]
+    }
+  }
+}

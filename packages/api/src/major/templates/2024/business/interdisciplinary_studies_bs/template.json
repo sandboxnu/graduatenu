@@ -1,16 +1,21 @@
 {
-  "Sample Plan of Study": {},
-  "Four Years, Two Co-ops in Spring/Summer 1": {
+  "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111"
-      ]
+      "Fall": ["ENGW 1111"]
     },
     "Year 2": {},
     "Year 3": {
-      "Fall": [
-        "ENGW 3315"
-      ]
+      "Fall": ["ENGW 3315"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["ENGW 1111"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Fall": ["ENGW 3315"]
     },
     "Year 4": {}
   }

@@ -1,85 +1,53 @@
 {
-  "Sample Plan of Study": {},
-  "Four Years, Two Co-ops in Spring/Summer 1": {
+  "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111",
-        "POLS 1150"
-      ],
-      "Spring": [
-        "CS 2510",
-        "IS 2000",
-        "POLS 1155",
-        "POLS 1160"
-      ],
-      "Summer 1": [
-        "CS 3500"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "POLS 1150"],
+      "Spring": ["CS 2510", "IS 2000", "POLS 1155", "POLS 1160"],
+      "Summer 1": ["CS 3500"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 1210",
-        "CS 3000",
-        "CS 3200",
-        "POLS 2399"
-      ]
+      "Fall": ["CS 1210", "CS 3000", "CS 3200", "POLS 2399"]
     },
     "Year 3": {
-      "Fall": [
-        "POLS 2400"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Fall": ["POLS 2400"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 4": {
-      "Spring": [
-        "POLS 4701"
-      ]
+      "Spring": ["POLS 4701"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "POLS 1150"],
+      "Spring": ["CS 2510", "IS 2000", "POLS 1155", "POLS 1160"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "CS 3200", "POLS 2399"]
+    },
+    "Year 3": {
+      "Fall": ["POLS 2400"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["POLS 4701"]
     }
   },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111",
-        "POLS 1150"
-      ],
-      "Spring": [
-        "CS 2510",
-        "IS 2000",
-        "POLS 1155",
-        "POLS 1160"
-      ],
-      "Summer 1": [
-        "CS 3000"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "POLS 1150"],
+      "Spring": ["CS 2510", "IS 2000", "POLS 1155", "POLS 1160"],
+      "Summer 1": ["CS 3000"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 3200",
-        "CS 3500",
-        "POLS 2399"
-      ],
-      "Spring": [
-        "CS 1210",
-        "POLS 2400"
-      ]
+      "Fall": ["CS 3200", "CS 3500", "POLS 2399"],
+      "Spring": ["CS 1210", "POLS 2400"]
     },
     "Year 3": {
-      "Summer 1": [
-        "ENGW 3302"
-      ]
+      "Summer 1": ["ENGW 3302"]
     },
     "Year 4": {
-      "Spring": [
-        "POLS 4701"
-      ]
+      "Spring": ["POLS 4701"]
     }
   }
 }

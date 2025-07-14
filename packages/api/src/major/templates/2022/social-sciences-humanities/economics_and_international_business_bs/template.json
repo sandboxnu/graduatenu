@@ -1,0 +1,21 @@
+{
+  "Default Plan": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "ECON 1115", "INTB 1205", "MATH 1231", "BUSN 1102"],
+      "Spring": ["MGSC 2301", "ACCT 1201", "ECON 1116"],
+      "Summer 2": ["MKTG 2201"],
+      "Summer 1": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["ECON 2315", "BUSN 1103", "INTB 2205", "INTB 2206"]
+    },
+    "Year 3": {
+      "Fall": ["ORGB 3201", "ECON 2316", "ECON 2560", "INTB 3310"],
+      "Summer 2": ["ENGW 3304"]
+    },
+    "Year 4": {
+      "Fall": ["ECON 3290"],
+      "Spring": ["INTB 4202"]
+    }
+  }
+}

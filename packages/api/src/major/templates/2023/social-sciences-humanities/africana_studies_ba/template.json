@@ -1,43 +1,34 @@
 {
-  "Sample Plan of Study": {},
-  "Four Years, Two  Co-ops in Summer 2/Fall": {
+  "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "AFAM 1101",
-        "AFAM 1104",
-        "CLTR 1000",
-        "ENGW 1111",
-        "MATH 1215"
-      ],
-      "Spring": [
-        "AFAM 1113",
-        "AFAM 1225",
-        "AFAM 2296"
-      ]
+      "Fall": ["AFAM 1101", "AFAM 1104", "CLTR 1000", "ENGW 1111", "MATH 1215"],
+      "Spring": ["AFAM 1113", "AFAM 1225", "AFAM 2296"]
     },
     "Year 2": {
-      "Fall": [
-        "AFAM 1135",
-        "AFAM 1225",
-        "AFRS 3900"
-      ],
-      "Spring": [
-        "EESH 2000"
-      ]
+      "Fall": ["AFAM 1135", "AFAM 1225", "AFRS 3900"],
+      "Spring": ["EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "AFRS 2410",
-        "ENGW 3315"
-      ]
+      "Spring": ["AFRS 2410", "ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "AFAM 4700",
-        "AFRS 2307",
-        "AFRS 2464",
-        "AFRS 3424"
-      ]
+      "Spring": ["AFAM 4700", "AFRS 2307", "AFRS 2464", "AFRS 3424"]
+    }
+  },
+  "Four Years, Two  Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["AFAM 1101", "AFAM 1104", "CLTR 1000", "ENGW 1111", "MATH 1215"],
+      "Spring": ["AFAM 1113", "AFAM 1225", "AFAM 2296"]
+    },
+    "Year 2": {
+      "Fall": ["AFAM 1135", "AFAM 1225", "AFRS 3900"],
+      "Spring": ["EESH 2000"]
+    },
+    "Year 3": {
+      "Spring": ["AFRS 2410", "ENGW 3315"]
+    },
+    "Year 4": {
+      "Spring": ["AFAM 4700", "AFRS 2307", "AFRS 2464", "AFRS 3424"]
     }
   }
 }

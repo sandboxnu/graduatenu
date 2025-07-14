@@ -1,33 +1,29 @@
 {
-  "Sample Plan of Study": {},
-  "Four Years, Two Co-ops in Summer 2/Fall": {
+  "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "HIST 1000",
-        "HIST 1200",
-        "HIST 1201",
-        "ENGW 1111",
-        "ENGL 1400"
-      ],
-      "Spring": [
-        "ENGL 1160"
-      ]
+      "Fall": ["HIST 1000", "HIST 1200", "HIST 1201", "ENGW 1111", "ENGL 1400"],
+      "Spring": ["ENGL 1160"]
     },
     "Year 2": {
-      "Fall": [
-        "HIST 2301",
-        "HIST 2302",
-        "ENGL 1700"
-      ],
-      "Spring": [
-        "EESH 2000",
-        "ENGL 3400"
-      ]
+      "Fall": ["HIST 2301", "HIST 2302", "ENGL 1700"],
+      "Spring": ["EESH 2000", "ENGL 3400"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGL 3710"
-      ]
+      "Spring": ["ENGL 3710"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": ["HIST 1000", "HIST 1200", "HIST 1201", "ENGW 1111", "ENGL 1400"],
+      "Spring": ["ENGL 1160"]
+    },
+    "Year 2": {
+      "Fall": ["HIST 2301", "HIST 2302", "ENGL 1700"],
+      "Spring": ["EESH 2000", "ENGL 3400"]
+    },
+    "Year 3": {
+      "Spring": ["ENGL 3710"]
     },
     "Year 4": {}
   }

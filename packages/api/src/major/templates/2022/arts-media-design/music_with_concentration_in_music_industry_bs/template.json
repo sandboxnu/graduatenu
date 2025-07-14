@@ -1,55 +1,38 @@
 {
-  "Sample Plans of Study": {},
-  "Four Years, Two Co-ops": {
+  "Sample Plans of Study": {
     "Year 1": {
-      "Fall": [
-        "MUSC 1000",
-        "MUSC 1002",
-        "MUSC 1119",
-        "MUSI 1230",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "ACCT 1209",
-        "ECON 1116",
-        "MUSC 1201"
-      ]
+      "Fall": ["MUSC 1000", "MUSC 1002", "MUSC 1119", "MUSI 1230", "ENGW 1111"],
+      "Spring": ["ACCT 1209", "ECON 1116", "MUSC 1201"]
     },
     "Year 2": {
-      "Fall": [
-        "MUSI 1204",
-        "EEAM 2000"
-      ]
+      "Fall": ["MUSI 1204", "EEAM 2000"]
     },
     "Year 3": {},
     "Year 4": {
-      "Fall": [
-        "ENGW 3314"
-      ]
+      "Fall": ["ENGW 3314"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["MUSC 1000", "MUSC 1002", "MUSC 1119", "MUSI 1230", "ENGW 1111"],
+      "Spring": ["ACCT 1209", "ECON 1116", "MUSC 1201"]
+    },
+    "Year 2": {
+      "Fall": ["MUSI 1204", "EEAM 2000"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["ENGW 3314"]
     }
   },
   "Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "MUSC 1002",
-        "MUSC 1119",
-        "MUSI 1230",
-        "ENGW 1111",
-        "MUSC 1000"
-      ],
-      "Spring": [
-        "MUSC 1201",
-        "ACCT 1209",
-        "ECON 1116"
-      ]
+      "Fall": ["MUSC 1002", "MUSC 1119", "MUSI 1230", "ENGW 1111", "MUSC 1000"],
+      "Spring": ["MUSC 1201", "ACCT 1209", "ECON 1116"]
     },
     "Year 2": {
-      "Fall": [
-        "MUSI 1204"
-      ],
-      "Spring": [
-        "EEAM 2000"
-      ]
+      "Fall": ["MUSI 1204"],
+      "Spring": ["EEAM 2000"]
     },
     "Year 3": {},
     "Year 4": {},
@@ -57,24 +40,11 @@
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "MUSC 1002",
-        "MUSC 1119",
-        "MUSI 1230",
-        "ENGW 1111",
-        "MUSC 1000"
-      ],
-      "Spring": [
-        "MUSC 1201",
-        "ACCT 1209",
-        "ECON 1116"
-      ]
+      "Fall": ["MUSC 1002", "MUSC 1119", "MUSI 1230", "ENGW 1111", "MUSC 1000"],
+      "Spring": ["MUSC 1201", "ACCT 1209", "ECON 1116"]
     },
     "Year 2": {
-      "Fall": [
-        "MUSI 1204",
-        "EEAM 2000"
-      ]
+      "Fall": ["MUSI 1204", "EEAM 2000"]
     },
     "Year 3": {},
     "Year 4": {},

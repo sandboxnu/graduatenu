@@ -1,39 +1,34 @@
 {
-  "Sample Four Years, Two Co-ops": {},
-  "Spring/Summer 1": {
+  "Sample Four Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "ENGL 1400",
-        "ENGW 1111",
-        "JRNL 1000",
-        "JRNL 1150"
-      ],
-      "Spring": [
-        "ENGL 1160",
-        "JRNL 1101"
-      ]
+      "Fall": ["ENGL 1400", "ENGW 1111", "JRNL 1000", "JRNL 1150"],
+      "Spring": ["ENGL 1160", "JRNL 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "EEAM 2000",
-        "JRNL 2201"
-      ]
+      "Fall": ["EEAM 2000", "JRNL 2201"]
     },
     "Year 3": {
-      "Fall": [
-        "JRNL 2301"
-      ]
+      "Fall": ["JRNL 2301"]
     },
     "Year 4": {
-      "Fall": [
-        "ENGL 2740",
-        "JRNL 3610"
-      ],
-      "Spring": [
-        "ENGL 4710",
-        "JRNL 3550",
-        "JRNL 3630"
-      ]
+      "Fall": ["ENGL 2740", "JRNL 3610"],
+      "Spring": ["ENGL 4710", "JRNL 3550", "JRNL 3630"]
+    }
+  },
+  "Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["ENGL 1400", "ENGW 1111", "JRNL 1000", "JRNL 1150"],
+      "Spring": ["ENGL 1160", "JRNL 1101"]
+    },
+    "Year 2": {
+      "Fall": ["EEAM 2000", "JRNL 2201"]
+    },
+    "Year 3": {
+      "Fall": ["JRNL 2301"]
+    },
+    "Year 4": {
+      "Fall": ["ENGL 2740", "JRNL 3610"],
+      "Spring": ["ENGL 4710", "JRNL 3550", "JRNL 3630"]
     }
   }
 }
