@@ -135,7 +135,7 @@ async function collateMajors() {
 
         // Step 2: Check for and process template file
         if (await fileExists(fs, templateFile)) {
-          console.log(`Found template file for ${major} (${year})`);
+          //console.log(`Found template file for ${major} (${year})`);
 
           // Read and parse template
           const templateRawData = await fs.readFile(templateFile);
@@ -148,7 +148,7 @@ async function collateMajors() {
 
           // Get template name (the top-level key)
           const templateName = Object.keys(templateJson)[0];
-          console.log(`Processing template: ${templateName}`);
+          //console.log(`Processing template: ${templateName}`);
 
           // Create template object with raw template data (without enhancements)
           const template: Template = {
@@ -171,9 +171,9 @@ async function collateMajors() {
             // Also store the template under the major name for consistent lookup
             TEMPLATES[year][majorName] = template;
 
-            console.log(
-              `Successfully associated template with ${majorName} (${year})`
-            );
+            //console.log(
+            //`Successfully associated template with ${majorName} (${year})`
+            //);
           } else {
             console.log(
               `Stored template for ${templateKey} (${year}) but couldn't associate with a major`
