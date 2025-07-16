@@ -206,6 +206,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       }
     }
 
+    // test
     const getSidebarValidationStatus = (
       validationError: MajorValidationError | undefined
     ): SidebarValidationStatus => {
