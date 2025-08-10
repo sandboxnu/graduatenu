@@ -1,0 +1,28 @@
+{
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "SOCL 1101", "SOCL 2320", "ANTH 1101"],
+      "Spring": ["ANTH 3410", "SOCL 2321"]
+    },
+    "Year 2": {
+      "Spring": ["ANTH 2305", "SOCL 3300", "EESH 2000"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["ANTH 4600"]
+    }
+  },
+  "Four-Year, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "SOCL 1101", "SOCL 2320", "ANTH 1101"],
+      "Spring": ["ANTH 3410", "SOCL 2321"]
+    },
+    "Year 2": {
+      "Spring": ["ANTH 2305", "SOCL 3300", "EESH 2000"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["ANTH 4600"]
+    }
+  }
+}

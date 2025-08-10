@@ -1,0 +1,58 @@
+{
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1000",
+        "BIOL 1107",
+        "BIOL 1108",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163",
+        "ENGW 1111",
+        "MATH 1341"
+      ],
+      "Spring": [
+        "BIOL 2299",
+        "CHEM 2311",
+        "CHEM 2312",
+        "ENGL 1160",
+        "ENGL 1400"
+      ],
+      "Summer 1": [
+        "BIOL 2301",
+        "BIOL 2302"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOL 2309",
+        "CHEM 2313",
+        "CHEM 2314",
+        "EESC 2000",
+        "ENGL 1700"
+      ],
+      "Spring": [
+        "BIOL 3611",
+        "BIOL 3612",
+        "PHYS 1145",
+        "PHYS 1146"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHYS 1147",
+        "PHYS 1148"
+      ],
+      "Summer 1": [
+        "ENGW 3307"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "ENVR 2500",
+        "ENVR 2501",
+        "ENVR 2502"
+      ]
+    }
+  }
+}

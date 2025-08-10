@@ -1,0 +1,18 @@
+{
+  "Default Plan": {
+    "Year 1": {
+      "Spring": ["POLS 1150", "POLS 1160", "HUSV 2300"],
+      "Fall": ["POLS 1155", "ENGW 1111", "HUSV 1101"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "HUSV 3570"]
+    },
+    "Year 3": {
+      "Fall": ["POLS 2400", "POLS 3307", "HUSV 3900"]
+    },
+    "Year 4": {},
+    "Year 5": {
+      "Fall": ["HUSV 4994"]
+    }
+  }
+}

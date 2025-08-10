@@ -1,0 +1,60 @@
+{
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["BIOL 1107", "BNSC 1000", "CHEM 1161", "PHIL 1145", "PSYC 1101"],
+      "Spring": ["BIOL 2299", "ENGW 1111", "MATH 1251", "PSYC 3458"]
+    },
+    "Year 2": {
+      "Fall": ["BIOL 2301", "PHIL 1105", "PHIL 1115", "PSYC 3200"],
+      "Spring": ["CHEM 2311", "EESC 2000", "PHIL 2330", "PSYC 2320"]
+    },
+    "Year 3": {
+      "Summer 1": ["PHIL 2325"]
+    },
+    "Year 4": {
+      "Spring": ["BIOL 4709"],
+      "Summer 2": ["ENGW 3315"]
+    },
+    "Year 5": {
+      "Spring": ["PHIL 4535"]
+    }
+  },
+  "Five Years, Three Co-ops": {
+    "Year 1": {
+      "Fall": ["BIOL 1107", "BNSC 1000", "CHEM 1161", "PHIL 1145", "PSYC 1101"],
+      "Spring": ["BIOL 2299", "ENGW 1111", "MATH 1251", "PSYC 3458"]
+    },
+    "Year 2": {
+      "Fall": ["BIOL 2301", "PHIL 1105", "PHIL 1115", "PSYC 3200"],
+      "Spring": ["CHEM 2311", "EESC 2000", "PHIL 2330", "PSYC 2320"]
+    },
+    "Year 3": {
+      "Summer 1": ["PHIL 2325"]
+    },
+    "Year 4": {
+      "Spring": ["BIOL 4709"],
+      "Summer 2": ["ENGW 3315"]
+    },
+    "Year 5": {
+      "Spring": ["PHIL 4535"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["BIOL 1107", "BNSC 1000", "CHEM 1161", "PHIL 1145", "PSYC 1101"],
+      "Spring": ["BIOL 2299", "ENGW 1111", "MATH 1251", "PSYC 3458"],
+      "Summer 1": ["PHIL 2325"]
+    },
+    "Year 2": {
+      "Fall": ["BIOL 2301", "PHIL 1115", "PHIL 1105", "PSYC 3200"],
+      "Spring": ["CHEM 2311", "EESC 2000", "PHIL 2330"],
+      "Summer 1": ["PSYC 2320"]
+    },
+    "Year 3": {
+      "Summer 2": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Spring": ["BIOL 4709", "PHIL 4535"]
+    }
+  }
+}

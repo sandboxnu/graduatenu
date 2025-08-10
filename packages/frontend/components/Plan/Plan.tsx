@@ -28,6 +28,7 @@ interface PlanProps {
 }
 
 export const TotalYearsContext = createContext<number | null>(null);
+export const PlanContext = createContext<PlanModel<string> | null>(null);
 export const Plan: React.FC<PlanProps> = ({
   plan,
   mutateStudentWithUpdatedPlan,
@@ -112,44 +113,46 @@ export const Plan: React.FC<PlanProps> = ({
 
   return (
     <TotalYearsContext.Provider value={totalYears}>
-      <Flex direction="column" rowGap="sm">
-        <Flex flexDirection="column" rowGap="4xs" ref={setNodeRef}>
-          {plan.schedule.years.map((scheduleYear) => {
-            const isExpanded = expandedYears.has(scheduleYear.year);
+      <PlanContext.Provider value={plan}>
+        <Flex direction="column" rowGap="sm">
+          <Flex flexDirection="column" rowGap="4xs" ref={setNodeRef}>
+            {plan.schedule.years.map((scheduleYear) => {
+              const isExpanded = expandedYears.has(scheduleYear.year);
 
-            return (
-              <Flex key={scheduleYear.year} flexDirection="column">
-                <ScheduleYear
-                  catalogYear={plan.catalogYear}
-                  yearCoReqError={coReqErr?.years.find(
-                    (year) => year.year == scheduleYear.year
-                  )}
-                  yearPreReqError={preReqErr?.years.find(
-                    (year) => year.year == scheduleYear.year
-                  )}
-                  scheduleYear={scheduleYear}
-                  isExpanded={isExpanded}
-                  toggleExpanded={() => toggleExpanded(scheduleYear)}
-                  addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
-                  removeCourseFromTermInCurrPlan={
-                    removeCourseFromTermInCurrPlan
-                  }
-                  removeYearFromCurrPlan={() =>
-                    removeYearFromCurrPlan(scheduleYear.year)
-                  }
-                  setIsRemove={setIsRemove}
-                />
-              </Flex>
-            );
-          })}
+              return (
+                <Flex key={scheduleYear.year} flexDirection="column">
+                  <ScheduleYear
+                    catalogYear={plan.catalogYear}
+                    yearCoReqError={coReqErr?.years.find(
+                      (year) => year.year == scheduleYear.year
+                    )}
+                    yearPreReqError={preReqErr?.years.find(
+                      (year) => year.year == scheduleYear.year
+                    )}
+                    scheduleYear={scheduleYear}
+                    isExpanded={isExpanded}
+                    toggleExpanded={() => toggleExpanded(scheduleYear)}
+                    addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+                    removeCourseFromTermInCurrPlan={
+                      removeCourseFromTermInCurrPlan
+                    }
+                    removeYearFromCurrPlan={() =>
+                      removeYearFromCurrPlan(scheduleYear.year)
+                    }
+                    setIsRemove={setIsRemove}
+                  />
+                </Flex>
+              );
+            })}
+          </Flex>
+          <Flex>
+            <AddYearButton
+              plan={plan}
+              mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+            />
+          </Flex>
         </Flex>
-        <Flex>
-          <AddYearButton
-            plan={plan}
-            mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-          />
-        </Flex>
-      </Flex>
+      </PlanContext.Provider>
     </TotalYearsContext.Provider>
   );
 };

@@ -1,0 +1,20 @@
+{
+  "Default Plan": {
+    "Year 1": {
+      "Fall": ["MATH 1365", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 1342", "PSYC 2320"],
+      "Spring": ["MATH 2321", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["MATH 2331"],
+      "Summer 1": ["MATH 2341"]
+    },
+    "Year 4": {
+      "Spring": ["MATH 3081", "PSYC 4540"]
+    },
+    "Year 5": {}
+  }
+}

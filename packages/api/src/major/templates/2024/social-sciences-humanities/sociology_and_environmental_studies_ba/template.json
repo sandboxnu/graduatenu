@@ -1,0 +1,28 @@
+{
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ANTH 2305",
+        "ENVR 1000",
+        "ENVR 1101",
+        "SOCL 1101",
+        "SOCL 1246"
+      ],
+      "Spring": [
+        "ENVR 1110",
+        "ENVR 2500",
+        "ENVR 2515",
+        "SOCL 2321"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ENVR 3300",
+        "SOCL 2485",
+        "SOCL 3300"
+      ]
+    },
+    "Year 3": {},
+    "Year 4": {}
+  }
+}

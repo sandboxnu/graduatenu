@@ -1,0 +1,44 @@
+{
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "BUSN 1102", "ECON 1116", "INTB 1205", "MGSC 2301"],
+      "Spring": [
+        "ECON 1116",
+        "ENGW 1111",
+        "INTB 2205",
+        "INTB 2206",
+        "MKTG 2201"
+      ],
+      "Summer 1": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["BUSN 1103", "INTB 3205"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["ENGW 3304", "ORGB 3201"],
+      "Spring": ["INTB 4202"]
+    }
+  },
+  "Four-Year Program: Year Three Abroad with Two Co-ops": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "BUSN 1102", "ECON 1116", "INTB 1205", "MGSC 2301"],
+      "Spring": [
+        "ECON 1116",
+        "ENGW 1111",
+        "INTB 2205",
+        "INTB 2206",
+        "MKTG 2201"
+      ],
+      "Summer 1": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["BUSN 1103", "INTB 3205"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["ENGW 3304", "ORGB 3201"],
+      "Spring": ["INTB 4202"]
+    }
+  }
+}

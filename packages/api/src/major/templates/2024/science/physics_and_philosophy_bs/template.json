@@ -1,0 +1,106 @@
+{
+  "Even-Numbered Year One": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "MATH 1341",
+        "PHIL 1115",
+        "PHYS 1000",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163"
+      ],
+      "Spring": [
+        "MATH 1342",
+        "PHIL 2325",
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167"
+      ]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "PHIL 2330", "PHYS 2303", "PHYS 2371", "PHYS 2372"],
+      "Spring": ["EESC 2000", "MATH 2341", "PHYS 3601"]
+    },
+    "Year 3": {
+      "Spring": ["PHIL 4500", "PHYS 4115"],
+      "Summer 1": ["PHYS 3600"]
+    },
+    "Year 4": {
+      "Spring": ["ENGW 3307", "PHIL 4510", "PHYS 3602"]
+    },
+    "Year 5": {
+      "Spring": ["PHYS 4305"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "MATH 1341",
+        "PHIL 1115",
+        "PHYS 1000",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163"
+      ],
+      "Spring": [
+        "MATH 1342",
+        "PHIL 2325",
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167"
+      ]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "PHIL 2330", "PHYS 2303", "PHYS 2371", "PHYS 2372"],
+      "Spring": ["EESC 2000", "MATH 2341", "PHYS 3601"]
+    },
+    "Year 3": {
+      "Spring": ["PHIL 4500", "PHYS 4115"],
+      "Summer 1": ["PHYS 3600"]
+    },
+    "Year 4": {
+      "Spring": ["ENGW 3307", "PHIL 4510", "PHYS 3602"]
+    },
+    "Year 5": {
+      "Spring": ["PHYS 4305"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "MATH 1341",
+        "PHIL 1115",
+        "PHYS 1000",
+        "PHYS 1161",
+        "PHYS 1162",
+        "PHYS 1163"
+      ],
+      "Spring": [
+        "MATH 1342",
+        "PHIL 2325",
+        "PHIL 2330",
+        "PHYS 1165",
+        "PHYS 1166",
+        "PHYS 1167"
+      ],
+      "Summer 1": ["MATH 2321"],
+      "Summer 2": ["MATH 2341"]
+    },
+    "Year 2": {
+      "Fall": ["PHYS 2303", "PHYS 2371", "PHYS 2372"],
+      "Spring": ["EESC 2000", "PHYS 3601", "PHYS 3602"],
+      "Summer 1": ["PHYS 3600"]
+    },
+    "Year 3": {
+      "Spring": ["PHIL 4500", "PHIL 4510", "PHYS 4115"],
+      "Summer 1": ["ENGW 3307"]
+    },
+    "Year 4": {
+      "Spring": ["PHYS 4305"]
+    }
+  },
+  "Physics Course Offering Schedule": {}
+}

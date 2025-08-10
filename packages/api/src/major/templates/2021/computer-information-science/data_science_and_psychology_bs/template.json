@@ -1,0 +1,64 @@
+{
+  "Sample Patterns:": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["CS 2510", "PSYC 2320"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "MATH 1341", "CS 3200", "DS 3000"],
+      "Spring": ["DS 3000", "CS 1210", "DS 4200"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4200", "CS 3200", "DS 4300", "DS 4400"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4300", "DS 4400", "DS 4420"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["DS 4420"]
+    }
+  },
+  "Five Years, Three Co-ops": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["CS 2510", "PSYC 2320"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "MATH 1341", "CS 3200", "DS 3000"],
+      "Spring": ["DS 3000", "CS 1210", "DS 4200"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4200", "CS 3200", "DS 4300", "DS 4400"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4300", "DS 4400", "DS 4420"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Spring": ["DS 4420"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["CS 2510", "PSYC 2320"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3200", "DS 3000", "MATH 1341"],
+      "Spring": ["CS 1210", "DS 4200"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4300", "DS 4400"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420"]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Default Plan": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "CRIM 1100", "ENGW 1111"],
+      "Spring": ["CS 2510", "CY 2550", "CRIM 1110", "CRIM 1120"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3500", "CS 3650", "MATH 1341", "CRIM 3600"],
+      "Spring": ["CS 3000", "CS 1210", "CS 3700", "CRIM 3700"]
+    },
+    "Year 3": {
+      "Spring": ["CY 3740", "CRIM 3000"]
+    },
+    "Year 4": {
+      "Spring": ["CY 4740", "CY 4170", "CRIM 4000"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 5": {}
+  }
+}

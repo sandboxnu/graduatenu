@@ -13,9 +13,9 @@ interface GenericSectionProps {
   loading?: boolean;
 }
 
-export const GENERIC_ELECTIVE: ScheduleCourse2<string> = {
+export const GENERAL_ELECTIVE: ScheduleCourse2<string> = {
   name: "Elective",
-  classId: "Generic Class ",
+  classId: "General Class ",
   subject: "",
   numCreditsMax: 0,
   numCreditsMin: 0,
@@ -23,9 +23,9 @@ export const GENERIC_ELECTIVE: ScheduleCourse2<string> = {
   generic: true,
 };
 
-export const GENERIC_NUPATH: ScheduleCourse2<string> = {
+export const GENERAL_NUPATH: ScheduleCourse2<string> = {
   name: "NUPath",
-  classId: "Generic Class",
+  classId: "General Class",
   subject: "",
   numCreditsMax: 0,
   numCreditsMin: 0,
@@ -33,7 +33,7 @@ export const GENERIC_NUPATH: ScheduleCourse2<string> = {
   generic: true,
 };
 
-const courses = [GENERIC_ELECTIVE, GENERIC_NUPATH];
+const courses = [GENERAL_ELECTIVE, GENERAL_NUPATH];
 
 const GenericSection: React.FC<GenericSectionProps> = ({
   courseData,

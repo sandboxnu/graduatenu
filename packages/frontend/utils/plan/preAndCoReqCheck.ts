@@ -7,6 +7,7 @@ import {
   INEUReqCourse,
   INEUReqError,
   PreReqWarnings,
+  ReqErrorType,
   Schedule2,
   ScheduleCourse2,
   ScheduleTerm2,
@@ -93,7 +94,7 @@ const getReqErrors = (
     return seen.has(courseToString(singleReq))
       ? undefined
       : {
-          type: "course",
+          type: ReqErrorType.COURSE,
           subject: singleReq.subject,
           classId: singleReq.classId,
         };
@@ -104,7 +105,7 @@ const getReqErrors = (
       .filter(isError);
     if (required.length === 0) return undefined;
     return {
-      type: "and",
+      type: ReqErrorType.AND,
       missing: required,
     };
   } else if (isOrCourse(reqs)) {
@@ -116,7 +117,7 @@ const getReqErrors = (
       // Else this or case is not satisfied
     } else {
       return {
-        type: "or",
+        type: ReqErrorType.OR,
         missing: missing.filter(isError),
       };
     }

@@ -1,0 +1,34 @@
+{
+  "Default Plan": {
+    "Year 1": {
+      "Fall": [
+        "ENGW 1111",
+        "MATH 1215",
+        "PSYC 1101",
+        "SLPA 1000",
+        "BIOL 2217",
+        "BIOL 2218"
+      ],
+      "Spring": ["SLPA 1101", "SLPA 1205", "BIOL 2219", "BIOL 2220"]
+    },
+    "Year 2": {
+      "Fall": [
+        "SLPA 2000",
+        "SLPA 1203",
+        "PHYS 1145",
+        "PHYS 1146",
+        "PSYC 3404",
+        "SLPA 1103"
+      ],
+      "Spring": ["COOP 3945"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306", "MATH 2280", "PSYC 3466", "PHTH 2300"],
+      "Spring": ["SLPA 1200", "SLPA 1102", "HLTH 5450"]
+    },
+    "Year 4": {
+      "Fall": ["SLPA 5107", "SLPA 5110"],
+      "Spring": ["SLPA 4651", "PHIL 1165", "SLPA 6219"]
+    }
+  }
+}

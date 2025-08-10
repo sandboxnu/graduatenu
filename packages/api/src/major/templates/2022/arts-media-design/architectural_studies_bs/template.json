@@ -1,0 +1,18 @@
+{
+  "Default Plan": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "ENGW 1111", "ARCH 1310"],
+      "Spring": ["ARCH 1110", "ARCH 1120", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["ARCH 2130", "ARCH 2330", "ARCH 2260"],
+      "Spring": ["ARCH 2340", "ARCH 2140", "ENGW 3314"]
+    },
+    "Year 3": {
+      "Fall": ["ARCH 3155", "ARCH 3361", "ARCH 3363", "ARCH 3440"]
+    },
+    "Year 4": {
+      "Spring": ["ARCH 4960"]
+    }
+  }
+}

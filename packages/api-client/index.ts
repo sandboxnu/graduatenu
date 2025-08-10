@@ -22,6 +22,8 @@ import {
   courseToString,
   NUPathEnum,
   GetMetaInfoResponse,
+  GetSupportedMinorsResponse,
+  Minor,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -116,6 +118,24 @@ class APIClient {
       this.req<Major2>("GET", `/majors/${catalogYear}/${majorName}`),
     getSupportedMajors: (): Promise<GetSupportedMajorsResponse> =>
       this.req("GET", `/majors/supportedMajors`, GetSupportedMajorsResponse),
+  };
+  minors = {
+    get: (catalogYear: number, minorName: string): Promise<Minor> =>
+      this.req<Minor>("GET", `/minors/${catalogYear}/${minorName}`),
+    getSupportedMinors: (): Promise<GetSupportedMinorsResponse> =>
+      this.req("GET", `/minors/supportedMinors`, GetSupportedMinorsResponse),
+  };
+
+  templates = {
+    getForYear: (catalogYear: number): Promise<Record<string, Major2>> =>
+      this.req("GET", `/templates/${catalogYear}`),
+    getForMajor: (
+      majorName: string,
+      catalogYear: number
+    ): Promise<Major2 | null> =>
+      this.req("GET", `/templates/${catalogYear}/${majorName}`),
+    getAll: (): Promise<Record<string, Record<string, Major2>>> =>
+      this.req("GET", "/templates"),
   };
 
   meta = {

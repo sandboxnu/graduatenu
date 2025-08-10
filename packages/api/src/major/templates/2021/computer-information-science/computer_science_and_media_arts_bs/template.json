@@ -1,0 +1,62 @@
+{
+  "Sample Pattern, Four Years, Two Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2500",
+        "CS 2501",
+        "ARTF 1124",
+        "ENGW 1111",
+        "ARTF 1122"
+      ],
+      "Spring": [
+        "CS 2510",
+        "CS 2511",
+        "CS 3200",
+        "ARTF 1122",
+        "ARTF 2223",
+        "ARTF 1120",
+        "ARTF 2220"
+      ],
+      "Summer 1": ["CS 3500", "ARTF 1120"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "IS 4300", "CS 3000", "ARTF 2220", "ARTD 2100"],
+      "Summer 2": ["MATH 2331"]
+    },
+    "Year 3": {
+      "Fall": ["CS 4300", "MATH 2331", "ARTF 1124", "ARTF 2223"],
+      "Spring": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4500", "CS 4300"],
+      "Spring": ["ARTD 4530", "ENGW 3302"]
+    },
+    "Year 5": {
+      "Fall": ["CS 4500"],
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Sample Pattern, Five Years, Three Co-ops in Spring/Summer 1": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ARTF 1122", "ENGW 1111"],
+      "Spring": ["CS 2510", "CS 3200", "ARTF 1120", "ARTF 2220"],
+      "Summer 1": ["CS 3500"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "IS 4300", "CS 3000", "ARTD 2100"]
+    },
+    "Year 3": {
+      "Fall": ["MATH 2331", "ARTF 1124", "ARTF 2223"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4300"],
+      "Spring": ["ENGW 3302"]
+    },
+    "Year 5": {
+      "Fall": ["CS 4500"],
+      "Spring": ["ARTD 4530"]
+    }
+  }
+}

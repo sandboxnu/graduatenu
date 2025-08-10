@@ -1,0 +1,44 @@
+{
+  "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
+    "Year 1": {
+      "Fall": [
+        "ECON 1000",
+        "ECON 1115",
+        "HIST 1200",
+        "HIST 1201",
+        "MATH 1231"
+      ],
+      "Spring": [
+        "ECON 1116",
+        "MISM 2510"
+      ],
+      "Summer 1": [
+        "ECON 2315"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "ECON 2316",
+        "HIST 2301",
+        "HIST 2302"
+      ],
+      "Spring": [
+        "ECON 2350",
+        "EESH 2000"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "ECON 2560",
+        "ECON 3520",
+        "ENGW 3315"
+      ]
+    },
+    "Year 4": {
+      "Spring": [
+        "ECON 3470",
+        "ECON 4692"
+      ]
+    }
+  }
+}

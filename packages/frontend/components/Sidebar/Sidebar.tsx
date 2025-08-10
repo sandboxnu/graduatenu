@@ -1,4 +1,5 @@
-import { Link, Stack, Text } from "@chakra-ui/react";
+import { Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
@@ -11,6 +12,7 @@ import {
   getAllCoursesFromPlan,
   getSectionError,
   getAllCoursesInMajor,
+  getAllCoursesInMinor,
   UNDECIDED_CONCENTRATION,
   UNDECIDED_STRING,
 } from "../../utils";
@@ -26,7 +28,7 @@ import {
   WorkerMessageType,
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
-import { useFetchCourses, useMajor } from "../../hooks";
+import { useFetchCourses, useMajor, useMinor } from "../../hooks";
 import NUPathSection from "./NUPathSection";
 import { NUPathEnum } from "@graduate/common";
 import GenericSection from "./GenericSection";
@@ -79,11 +81,17 @@ const Sidebar: React.FC<SidebarProps> = memo(
     const {
       major,
       isLoading: isMajorLoading,
-      error,
+      error: majorError,
     } = useMajor(selectedPlan.catalogYear, selectedPlan.major);
     const concentration = major?.concentrations?.concentrationOptions.find(
       (concentration) => concentration.title === selectedPlan.concentration
     );
+
+    const {
+      minor,
+      isLoading: isMinorLoading,
+      error: minorError,
+    } = useMinor(selectedPlan.catalogYear, selectedPlan.minor ?? "");
 
     const workerRef = useRef<Worker>();
 
@@ -103,6 +111,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
         major: major,
+        minor: minor,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
@@ -159,47 +168,88 @@ const Sidebar: React.FC<SidebarProps> = memo(
     useEffect(() => revalidateMajor(), [selectedPlan, major]);
 
     const majorCourses = getAllCoursesInMajor(major, concentration);
+    const minorCourses = getAllCoursesInMinor(minor);
 
     const {
       courses,
       isLoading: isCoursesLoading,
       error: courseErrors,
-    } = useFetchCourses(majorCourses, selectedPlan.catalogYear);
+    } = useFetchCourses(
+      majorCourses.concat(minorCourses),
+      selectedPlan.catalogYear
+    );
 
     const courseData = createCourseMap(courses, courseErrors);
 
-    if (isMajorLoading) {
+    if (isMajorLoading || isMinorLoading) {
       return <SidebarContainer title="Loading..." />;
     }
 
     if (!major) {
-      if (error) {
-        if (axios.isAxiosError(error) && error.response?.status === 404) {
+      if (majorError) {
+        if (
+          axios.isAxiosError(majorError) &&
+          majorError.response?.status === 404
+        ) {
           return <SidebarContainer title="Major not found" />;
         }
 
-        handleApiClientError(error, router);
+        handleApiClientError(majorError, router);
       }
 
       return <SidebarContainer title="" />;
     }
 
+    if (selectedPlan.minor && !minor) {
+      if (minorError) {
+        handleApiClientError(minorError, router);
+      }
+    }
+
+    const getSidebarValidationStatus = (
+      validationError: MajorValidationError | undefined
+    ): SidebarValidationStatus => {
+      console.log(validationError);
+      if (validationStatus === undefined) {
+        return SidebarValidationStatus.Loading;
+      } else if (
+        validationError &&
+        validationError.type === "SECTION" &&
+        validationError.maxPossibleChildCount === 0
+      ) {
+        return SidebarValidationStatus.Error;
+      } else if (
+        validationError &&
+        validationError.type === "SECTION" &&
+        validationError.maxPossibleChildCount > 0
+      ) {
+        return SidebarValidationStatus.InProgress;
+      }
+      return SidebarValidationStatus.Complete;
+    };
+
     const concentrationValidationError: MajorValidationError | undefined =
-      getSectionError(major.requirementSections.length, validationStatus);
+      getSectionError(
+        (major ? 1 : 0) + (minor ? 1 : 0), // offset by major and minor length
+        0, // the concentration AND index is always 0
+        validationStatus
+      );
 
     let concentrationValidationStatus = SidebarValidationStatus.Complete;
+
     if (validationStatus === undefined) {
       concentrationValidationStatus = SidebarValidationStatus.Loading;
     } else if (
       concentrationValidationError &&
-      concentrationValidationError.type === "AND" &&
-      concentrationValidationError.error.type === "AND_UNSAT_CHILD" &&
-      concentrationValidationError.error.childErrors[0].type === "SECTION" &&
-      concentrationValidationError.error.childErrors[0]
-        .maxPossibleChildCount === 0
+      concentrationValidationError.type === "SECTION" &&
+      concentrationValidationError.maxPossibleChildCount === 0
     ) {
       concentrationValidationStatus = SidebarValidationStatus.Error;
-    } else {
+    } else if (
+      concentrationValidationError &&
+      concentrationValidationError.type === "SECTION" &&
+      concentrationValidationError.maxPossibleChildCount > 0
+    ) {
       concentrationValidationStatus = SidebarValidationStatus.InProgress;
     }
 
@@ -234,49 +284,120 @@ const Sidebar: React.FC<SidebarProps> = memo(
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-nupath`}
               loading={isCoursesLoading}
             />
-            {major.requirementSections.map((section, index) => {
-              const sectionValidationError: MajorValidationError | undefined =
-                getSectionError(index, validationStatus);
+            <Tabs
+              size="md"
+              variant="enclosed-colored"
+              colorScheme="blue"
+              pt={3}
+              backgroundColor="neutral.50"
+            >
+              <TabList
+                display="flex"
+                gap={2}
+                borderBottom="2px solid"
+                borderColor="neutral.200"
+              >
+                <Tab
+                  _selected={{ color: "white", bg: "blue.800" }}
+                  flex="0.4"
+                  ml={4}
+                  p={1}
+                  borderTopRadius="lg"
+                  fontWeight="bold"
+                >
+                  MAJOR
+                </Tab>
+                {minor && (
+                  <Tab
+                    _selected={{ color: "white", bg: "blue.800" }}
+                    flex="0.4"
+                    p={1}
+                    borderTopRadius="lg"
+                    fontWeight="bold"
+                  >
+                    MINOR
+                  </Tab>
+                )}
+              </TabList>
+              <TabPanels>
+                <TabPanel width="100%" p={0} m={0}>
+                  {major.requirementSections.map((section, index) => {
+                    const sectionValidationError:
+                      | MajorValidationError
+                      | undefined = getSectionError(
+                      0, // AND index for the current major requirement
+                      index, // Section index, aligning with the array structure
+                      validationStatus
+                    );
 
-              let sectionValidationStatus = SidebarValidationStatus.Complete;
+                    const sectionValidationStatus = getSidebarValidationStatus(
+                      sectionValidationError
+                    );
+                    return (
+                      <SidebarSection
+                        key={section.title}
+                        section={section}
+                        validationStatus={sectionValidationStatus}
+                        courseData={courseData}
+                        dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
+                        loading={isCoursesLoading}
+                        coursesTaken={coursesTaken}
+                      />
+                    );
+                  })}
 
-              if (validationStatus === undefined) {
-                sectionValidationStatus = SidebarValidationStatus.Loading;
-              } else if (
-                sectionValidationError &&
-                sectionValidationError.type === "SECTION" &&
-                sectionValidationError.maxPossibleChildCount === 0
-              ) {
-                sectionValidationStatus = SidebarValidationStatus.Error;
-              } else if (
-                sectionValidationError &&
-                sectionValidationError.type === "SECTION" &&
-                sectionValidationError.maxPossibleChildCount > 0
-              ) {
-                sectionValidationStatus = SidebarValidationStatus.InProgress;
-              }
+                  {concentration && (
+                    <SidebarSection
+                      validationStatus={concentrationValidationStatus}
+                      section={concentration}
+                      courseData={courseData}
+                      dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
+                      loading={isCoursesLoading}
+                      coursesTaken={coursesTaken}
+                    />
+                  )}
+                </TabPanel>
+                <TabPanel width="100%" p={0} m={0}>
+                  {minor && (
+                    <>
+                      <Flex>
+                        <Heading
+                          color="primary.blue.dark.main"
+                          fontSize="md"
+                          py={4}
+                          px={4}
+                        >
+                          Minor Requirements
+                        </Heading>
+                      </Flex>
+                      {minor.requirementSections.map((section, index) => {
+                        const sectionValidationError:
+                          | MajorValidationError
+                          | undefined = getSectionError(
+                          1, // Offset by major length
+                          index, // Section index for minor
+                          validationStatus
+                        );
 
-              return (
-                <SidebarSection
-                  key={section.title}
-                  section={section}
-                  validationStatus={sectionValidationStatus}
-                  courseData={courseData}
-                  dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
-                  loading={isCoursesLoading}
-                  coursesTaken={coursesTaken}
-                />
-              );
-            })}
-            {concentration && (
-              <SidebarSection
-                validationStatus={concentrationValidationStatus}
-                section={concentration}
-                courseData={courseData}
-                dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
-                coursesTaken={[]}
-              />
-            )}
+                        const sectionValidationStatus =
+                          getSidebarValidationStatus(sectionValidationError);
+                        return (
+                          <SidebarSection
+                            key={index}
+                            section={section}
+                            courseData={courseData}
+                            dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
+                            validationStatus={sectionValidationStatus}
+                            loading={isCoursesLoading}
+                            coursesTaken={coursesTaken}
+                          ></SidebarSection>
+                        );
+                      })}
+                    </>
+                  )}
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
           </>
         )}
       </SidebarContainer>
