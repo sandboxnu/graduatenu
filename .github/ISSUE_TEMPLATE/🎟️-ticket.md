@@ -7,7 +7,10 @@ assignees: ''
 
 ---
 
-**Problem**: [ what is happening when where why? ]
-**Solution** : [ how to fix, what to add, why? ]
-**Est. Time** : [ half week / full week ]
-**Notes** : [ specs, questions, etc. ]
+❓**Problem**: [ what is happening when where why? ]
+
+💡 **Solution** : [ how to fix, what to add, why? ]
+
+⏰ **Est. Time** : [ half week / full week ]
+
+📝 **Notes** : [ specs, questions, etc. ]
