@@ -25,11 +25,12 @@ export class PlanService {
 
   create(createPlanDto: CreatePlanDto, student: Student): Promise<Plan> {
     const {
-      major: majorName,
+      majors: majorName,
       catalogYear,
       concentration: concentrationName,
     } = createPlanDto;
 
+    console.log("Received DTO:", createPlanDto);
     // if the plan has a major, then validate the major, year, concentration
     if (majorName) {
       const major = this.majorService.findByMajorAndYear(
@@ -78,6 +79,7 @@ export class PlanService {
     } catch (error) {
       return null;
     }
+    console.log("About to save plan with:", { ...createPlanDto, student });
   }
 
   /** Returns the plan if it exists, else returns nothing. */
@@ -121,7 +123,7 @@ export class PlanService {
     updatePlanDto: UpdatePlanDto
   ): Promise<UpdateResult> {
     const {
-      major: newMajorName,
+      majors: newMajorName,
       minor: newMinorName,
       catalogYear: newCatalogYear,
       concentration: newConcentrationName,
@@ -155,7 +157,7 @@ export class PlanService {
       !newMajorName &&
       !newCatalogYear &&
       !newConcentrationName &&
-      currentPlan.major;
+      currentPlan.majors?.[0];
 
     /** Wipe Minor => Remove existing minor from the plan. */
     const isWipeMinorUpdate =
@@ -245,7 +247,7 @@ export class PlanService {
      */
     let name = currentPlan.name;
     let schedule = currentPlan.schedule;
-    let major = isWipeMajorUpdate ? undefined : currentPlan.major;
+    let major = isWipeMajorUpdate ? undefined : currentPlan.majors[0];
     let minor = isWipeMinorUpdate ? undefined : currentPlan.minor;
     let catalogYear = isWipeMajorUpdate ? undefined : currentPlan.catalogYear;
     let concentration = isWipeMajorUpdate
@@ -261,7 +263,7 @@ export class PlanService {
     }
 
     if (newMajorName) {
-      major = newMajorName;
+      major = newMajorName[0];
       catalogYear = newCatalogYear;
       concentration = newConcentrationName;
     }

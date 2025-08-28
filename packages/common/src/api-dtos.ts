@@ -23,7 +23,7 @@ export class CreatePlanDtoWithoutSchedule {
 
   @IsString()
   @IsOptional()
-  major?: string;
+  majors?: string[];
 
   @IsString()
   @IsOptional()
@@ -60,7 +60,7 @@ export class UpdatePlanDto {
 
   @IsOptional()
   @IsString()
-  major?: string;
+  majors?: string[];
 
   @IsOptional()
   @IsString()
@@ -128,7 +128,7 @@ export class UpdateStudentDto {
 
   @IsOptional()
   @IsString()
-  major?: string;
+  majors?: string[];
 
   @IsOptional()
   @IsString()
@@ -183,7 +183,7 @@ export class OnboardStudentDto {
   catalogYear: number;
 
   @IsString()
-  major: string;
+  majors: string[];
 
   @IsString()
   minor: string;
