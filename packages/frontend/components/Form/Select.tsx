@@ -16,7 +16,7 @@ type PlanSelectProps = {
   /** List of (label, value) if for label and value */
   options: OptionObject[];
   /** Any side effects as a result of this field changing. */
-  onChangeSideEffect?: (val: string | null) => void;
+  onChangeSideEffect?: (val: string | string[] | null) => void;
   /** The name of the react hook form field. */
   name: string;
   /** Returned by useForm. */
@@ -31,6 +31,8 @@ type PlanSelectProps = {
   placeholder?: string;
   /** Fuzzy options to use */
   useFuzzySearch?: boolean;
+  // Is the form field multi select (used for)
+  isMulti?: boolean;
 };
 
 export const PlanSelect: React.FC<PlanSelectProps> = ({
@@ -45,6 +47,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   isSearchable,
   isDisabled,
   placeholder,
+  isMulti,
   // useFuzzySearch,
 }) => {
   const customFilterOption = (
@@ -86,13 +89,17 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   } = useController({ name, control, rules });
 
   const onChange = (option: any) => {
-    let val = option ? option.value : null;
-    onChangeSideEffect && onChangeSideEffect(val);
-
-    if (isNumeric && val) {
-      val = parseInt(val, 10);
+    let val;
+    if (isMulti) {
+      val = option ? option.map((opt: any) => opt.value) : [];
+    } else {
+      val = option ? option.value : null;
+      if (isNumeric && val) {
+        val = parseInt(val, 10);
+      }
     }
 
+    onChangeSideEffect && onChangeSideEffect(val);
     onChangeUpdateValue(val);
   };
 
@@ -100,9 +107,9 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   if (isNumeric) {
     selectedValue = value ? value.toString() : null;
   }
-  const selectedOption = options.find(
-    (option: any) => option.value === selectedValue
-  );
+  const selectedOption = isMulti
+    ? options.filter((option) => value?.includes(option.value))
+    : options.find((option) => option.value === selectedValue);
 
   return (
     <FormControl isInvalid={error != null}>
@@ -117,6 +124,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
       <Select
         options={options}
         onChange={onChange}
+        isMulti={isMulti}
         value={selectedOption}
         isSearchable={isSearchable}
         isDisabled={isDisabled}

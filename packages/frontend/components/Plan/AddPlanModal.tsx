@@ -361,27 +361,32 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       options={convertToOptionObjects(
                         extractSupportedMajorYears(supportedMajorsData)
                       )}
-                      onChangeSideEffect={(val: string | null) => {
-                        const newYear = val ? parseInt(val, 10) : null;
+                      onChangeSideEffect={(val: string | string[] | null) => {
+                        const stringVal = Array.isArray(val) ? val[0] : val;
+                        const newYear = stringVal
+                          ? parseInt(stringVal, 10)
+                          : null;
                         if (newYear !== catalogYear) {
                           if (
-                            val &&
+                            stringVal &&
                             majors &&
-                            supportedMajorsData?.supportedMajors?.[val]?.[
+                            supportedMajorsData?.supportedMajors?.[stringVal]?.[
                               majors[0]
                             ]
                           ) {
                             // we can keep the major, but we should check the concentration
                             if (
                               majors &&
-                              !supportedMajorsData?.supportedMajors?.[val]?.[
-                                majors[0]
-                              ]?.concentrations?.includes(concentration ?? "")
+                              !supportedMajorsData?.supportedMajors?.[
+                                stringVal
+                              ]?.[majors[0]]?.concentrations?.includes(
+                                concentration ?? ""
+                              )
                             ) {
                               setValue("concentration", "");
                             }
                           } else {
-                            setValue("majors", [""]);
+                            setValue("majors", []);
                           }
                         }
                       }}
@@ -391,7 +396,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     <PlanSelect
                       label="Major"
                       placeholder="Select a Major"
-                      name="major"
+                      name="majors"
                       control={control}
                       options={extractSupportedMajorOptions(
                         catalogYear,
@@ -404,6 +409,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       isDisabled={!catalogYear}
                       isSearchable
                       useFuzzySearch
+                      isMulti={true}
                     />
 
                     {majorHasConcentrations && (

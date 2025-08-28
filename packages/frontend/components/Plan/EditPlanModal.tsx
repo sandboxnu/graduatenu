@@ -291,7 +291,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                               setValue("concentration", "");
                             }
                           } else {
-                            setValue("majors", [""]);
+                            setValue("majors", []);
                           }
                         }
                       }}
