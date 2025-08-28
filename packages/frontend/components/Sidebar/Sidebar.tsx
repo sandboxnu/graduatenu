@@ -82,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       major,
       isLoading: isMajorLoading,
       error: majorError,
-    } = useMajor(selectedPlan.catalogYear, selectedPlan.major);
+    } = useMajor(selectedPlan.catalogYear, selectedPlan.majors[0]);
     const concentration = major?.concentrations?.concentrationOptions.find(
       (concentration) => concentration.title === selectedPlan.concentration
     );

@@ -15,7 +15,7 @@ export class PlanModel<T> {
   name: string;
   student: StudentModel<null>;
   schedule: Schedule2<T>;
-  major: string;
+  majors: string[];
   concentration: string | undefined;
   catalogYear: number;
   createdAt: Date;
@@ -37,7 +37,7 @@ export class StudentModel<T> {
   academicYear: number | undefined;
   graduateYear: number | undefined;
   catalogYear: number | undefined;
-  major: string | undefined;
+  majors: string[] | undefined;
   minor?: string | undefined;
   coopCycle: string | undefined;
   coursesCompleted: ScheduleCourse[] | undefined;

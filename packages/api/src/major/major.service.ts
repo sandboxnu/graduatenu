@@ -13,7 +13,7 @@ import { MAJOR_YEARS, MAJORS } from "./major-collator";
 export class MajorService {
   private readonly logger: Logger = new Logger();
 
-  findByMajorAndYear(majorName: string, catalogYear: number): Major2 | null {
+  findByMajorAndYear(majorNames: string[], catalogYear: number): Major2 | null {
     if (!MAJOR_YEARS.has(String(catalogYear))) {
       this.logger.debug(
         { mesage: "Major year not found", catalogYear },
@@ -22,15 +22,15 @@ export class MajorService {
       return null;
     }
 
-    if (!MAJORS[catalogYear][majorName]) {
+    if (!MAJORS[catalogYear][majorNames[0]]) {
       this.logger.debug(
-        { mesage: "Major within year not found", majorName, catalogYear },
+        { mesage: "Major within year not found", majorNames, catalogYear },
         MajorService.formatMajorServiceCtx("findByMajorAndYear")
       );
       return null;
     }
 
-    return MAJORS[catalogYear][majorName];
+    return MAJORS[catalogYear][majorNames[0]];
   }
 
   getSupportedMajors(): SupportedMajors {
@@ -41,7 +41,7 @@ export class MajorService {
       const supportedMajorForYear: SupportedMajorsForYear = {};
       supportedMajorNames.forEach((majorName) => {
         const supportedConcentrations = this.getConcentrationsInfoForMajor(
-          majorName,
+          [majorName],
           parseInt(year)
         );
         supportedMajorForYear[majorName] = supportedConcentrations;
@@ -54,10 +54,10 @@ export class MajorService {
   }
 
   getConcentrationsInfoForMajor(
-    majorName: string,
+    majorNames: string[],
     catalogYear: number
   ): SupportedConcentrations | null {
-    const major = this.findByMajorAndYear(majorName, catalogYear);
+    const major = this.findByMajorAndYear(majorNames, catalogYear);
     if (!major) {
       return null;
     }
@@ -75,12 +75,12 @@ export class MajorService {
   }
 
   isValidConcentrationForMajor(
-    majorName: string,
+    majorNames: string[],
     catalogYear: number,
     concentrationName: string
   ): boolean {
     const concentrationsInfo = this.getConcentrationsInfoForMajor(
-      majorName,
+      majorNames,
       catalogYear
     );
 
@@ -88,7 +88,7 @@ export class MajorService {
       this.logger.debug(
         {
           message: "Concentration info for major not found.",
-          majorName,
+          majorNames,
           catalogYear,
           concentrationName,
         },
@@ -110,7 +110,7 @@ export class MajorService {
         {
           message:
             "Concentration not provided for major with a required concentration.",
-          majorName,
+          majorNames,
           catalogYear,
           concentrationName,
           minRequiredConcentrations,
@@ -129,7 +129,7 @@ export class MajorService {
       this.logger.debug(
         {
           message: "Invalid concentration name for major.",
-          majorName,
+          majorNames,
           catalogYear,
           concentrationName,
         },
@@ -141,17 +141,17 @@ export class MajorService {
   }
 
   isValidCatalogueYear(
-    majorName: string,
+    majorNames: string[],
     catalogYear: number,
     concentrationName: string
   ): boolean {
-    const majorsByCatalogue = this.findByMajorAndYear(majorName, catalogYear);
+    const majorsByCatalogue = this.findByMajorAndYear(majorNames, catalogYear);
 
     if (!majorsByCatalogue) {
       this.logger.debug(
         {
           message: "Invalid catalogue year for major",
-          majorName,
+          majorNames,
           catalogYear,
           concentrationName,
         },

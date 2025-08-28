@@ -104,15 +104,15 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   // watch form fields
   const catalogYear = watch("catalogYear");
-  const majorName = watch("major");
+  const majors = watch("majors");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
   const usingTemplate = watch("useTemplate");
 
   // Check if the selected major has a template
-  const { hasTemplate } = useHasTemplate(majorName, catalogYear);
+  const { hasTemplate } = useHasTemplate(majors, catalogYear);
   const { template } = useTemplate(
-    usingTemplate ? majorName : null,
+    usingTemplate ? majors : null,
     usingTemplate ? catalogYear : null
   );
 
@@ -129,7 +129,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   // Reset useTemplate when major or catalog year changes
   useEffect(() => {
     setValue("useTemplate", false);
-  }, [majorName, catalogYear, setValue]);
+  }, [majors, catalogYear, setValue]);
 
   // handle keyboard shortcut modal opening
   useEffect(() => {
@@ -173,7 +173,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     const newPlan: CreatePlanDto = {
       name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
-      major: isNoMajorSelected ? undefined : payload.major,
+      majors: isNoMajorSelected ? undefined : payload.majors,
       minor: isNoMinorSelected ? undefined : payload.minor,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
       schedule,
@@ -229,7 +229,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
 
   const majorConcentrations =
-    yearSupportedMajors?.[majorName ?? ""] ?? noConcentrations;
+    yearSupportedMajors?.[majors?.[0] ?? ""] ?? noConcentrations;
 
   const isConcentrationRequired =
     majorConcentrations.minRequiredConcentrations > 0;
@@ -237,11 +237,11 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
   const isValidatedMajor =
-    yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
+    yearSupportedMajors?.[majors?.[0] ?? ""]?.verified ?? false;
 
   const isValidForm =
     (catalogYear &&
-      majorName &&
+      majors &&
       (!isConcentrationRequired || concentration) &&
       (!isValidatedMajor ? agreeToBetaMajor : true)) ||
     // Valid plan for no major selected
@@ -366,22 +366,22 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         if (newYear !== catalogYear) {
                           if (
                             val &&
-                            majorName &&
+                            majors &&
                             supportedMajorsData?.supportedMajors?.[val]?.[
-                              majorName
+                              majors[0]
                             ]
                           ) {
                             // we can keep the major, but we should check the concentration
                             if (
-                              majorName &&
+                              majors &&
                               !supportedMajorsData?.supportedMajors?.[val]?.[
-                                majorName
+                                majors[0]
                               ]?.concentrations?.includes(concentration ?? "")
                             ) {
                               setValue("concentration", "");
                             }
                           } else {
-                            setValue("major", "");
+                            setValue("majors", [""]);
                           }
                         }
                       }}
@@ -446,7 +446,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     </Flex>
 
                     {/* Template option - show when a template is available */}
-                    {hasTemplate && majorName && catalogYear && (
+                    {hasTemplate && majors && catalogYear && (
                       <Box
                         p="sm"
                         borderRadius="md"
@@ -480,7 +480,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       </Box>
                     )}
 
-                    {majorName && !isValidatedMajor && (
+                    {majors && !isValidatedMajor && (
                       <Flex alignItems="center">
                         <Checkbox
                           mr="md"

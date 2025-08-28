@@ -50,7 +50,7 @@ type EditPlanModalProps = {
 
 type EditPlanInput = {
   name: string;
-  major: string;
+  majors: string[];
   minor?: string;
   catalogYear: number;
   concentration: string;
@@ -90,12 +90,12 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     reset({
       name: plan.name,
       catalogYear: plan.catalogYear,
-      major: plan.major,
+      majors: plan.majors,
       minor: plan.minor,
       concentration: plan.concentration,
     });
 
-    if (!plan.major) {
+    if (!plan.majors) {
       setIsNoMajorSelected(true);
     } else {
       setIsNoMajorSelected(false);
@@ -119,7 +119,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
   const title = watch("name");
   const catalogYear = watch("catalogYear");
-  const majorName = watch("major");
+  const majors = watch("majors");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
 
@@ -129,7 +129,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
 
   const majorConcentrations =
-    yearSupportedMajors?.[majorName ?? ""] ?? noConcentrations;
+    yearSupportedMajors?.[majors[0] ?? ""] ?? noConcentrations;
 
   const isConcentrationRequired =
     majorConcentrations.minRequiredConcentrations > 0;
@@ -137,12 +137,12 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
   const isValidatedMajor =
-    yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
+    yearSupportedMajors?.[majors[0] ?? ""]?.verified ?? false;
 
   const isValidForm =
     (title &&
       catalogYear &&
-      majorName &&
+      majors &&
       (!isConcentrationRequired || concentration) &&
       (!isValidatedMajor ? agreeToBetaMajor : true)) ||
     // Valid plan for no major selected
@@ -154,7 +154,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       return;
     }
 
-    const isNoMajorSelectedPrev = !plan.major;
+    const isNoMajorSelectedPrev = !plan.majors;
 
     // If no field has been changed, don't send an update request
     if (!isDirty && isNoMajorSelectedPrev === isNoMajorSelected) {
@@ -165,7 +165,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     const newPlan: UpdatePlanDto = {
       name: payload.name,
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
-      major: isNoMajorSelected ? undefined : payload.major,
+      majors: isNoMajorSelected ? undefined : payload.majors,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
       minor: payload.minor,
     };
@@ -279,19 +279,19 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                           if (
                             val &&
                             supportedMajorsData?.supportedMajors?.[val]?.[
-                              majorName
+                              majors[0]
                             ]
                           ) {
                             // we can keep the major, but we should check the concentration
                             if (
                               !supportedMajorsData?.supportedMajors?.[val]?.[
-                                majorName
+                                majors[0]
                               ]?.concentrations?.includes(concentration)
                             ) {
                               setValue("concentration", "");
                             }
                           } else {
-                            setValue("major", "");
+                            setValue("majors", [""]);
                           }
                         }
                       }}
@@ -347,7 +347,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       isSearchable
                       useFuzzySearch
                     />
-                    {majorName && !isValidatedMajor && (
+                    {majors && !isValidatedMajor && (
                       <Flex alignItems="center">
                         <Checkbox
                           mr="md"
