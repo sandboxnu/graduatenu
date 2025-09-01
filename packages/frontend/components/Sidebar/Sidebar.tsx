@@ -209,7 +209,6 @@ const Sidebar: React.FC<SidebarProps> = memo(
     const getSidebarValidationStatus = (
       validationError: MajorValidationError | undefined
     ): SidebarValidationStatus => {
-      console.log(validationError);
       if (validationStatus === undefined) {
         return SidebarValidationStatus.Loading;
       } else if (
