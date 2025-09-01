@@ -164,9 +164,9 @@ async function collateMajors() {
             // Also store the template under the major name for consistent lookup
             TEMPLATES[year][majorName] = template;
           } else {
-            console.log(
-              `Stored template for ${templateKey} (${year}) but couldn't associate with a major`
-            );
+            //console.log(
+            //`Stored template for ${templateKey} (${year}) but couldn't associate with a major`
+            //);
           }
         }
       } catch (error) {

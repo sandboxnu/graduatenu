@@ -1,11 +1,6 @@
-import {
-  ClassSerializerInterceptor,
-  LogLevel,
-  LoggerService,
-  ValidationPipe,
-} from "@nestjs/common";
+import { LogLevel, LoggerService, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
-import { NestFactory, Reflector } from "@nestjs/core";
+import { NestFactory } from "@nestjs/core";
 import { GraduateLogger } from "./graduate-logger";
 import { AppModule } from "./app.module";
 import { EnvironmentVariables } from "./environment-variables";
@@ -47,7 +42,7 @@ async function bootstrap() {
    * work, returned objects in controllers have to be an actual instance of the
    * type with the appropriate decorators.
    */
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+  //app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   /** All paths are prefixed with /api. */
   app.setGlobalPrefix("api");
