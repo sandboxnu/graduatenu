@@ -78,14 +78,21 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = memo(
   ({ selectedPlan, transferCourses }) => {
     const router = useRouter();
+    // probably need to iterate through each major in majors not just do it once
     const {
-      major,
+      majors,
       isLoading: isMajorLoading,
       error: majorError,
-    } = useMajor(selectedPlan.catalogYear, selectedPlan.majors[0]);
-    const concentration = major?.concentrations?.concentrationOptions.find(
-      (concentration) => concentration.title === selectedPlan.concentration
-    );
+    } = useMajor(selectedPlan.catalogYear, selectedPlan.majors);
+
+    // Concentrations not supported for double / tripple majors at the moment
+    const concentration =
+      majors.length > 1
+        ? undefined
+        : majors[0]?.concentrations?.concentrationOptions.find(
+            (concentration) =>
+              concentration.title === selectedPlan.concentration
+          );
 
     const {
       minor,
@@ -106,11 +113,11 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const revalidateMajor = () => {
       setValidationStatus(undefined);
-      if (!selectedPlan || !major || !workerRef.current) return;
+      if (!selectedPlan || !majors[0] || !workerRef.current) return;
 
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
-        major: major,
+        major: majors[0],
         minor: minor,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
@@ -165,9 +172,9 @@ const Sidebar: React.FC<SidebarProps> = memo(
     // revalidateMajor because it will change every time, so we're choosing
     // to omit it here:
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => revalidateMajor(), [selectedPlan, major]);
+    useEffect(() => revalidateMajor(), [selectedPlan, majors[0]]);
 
-    const majorCourses = getAllCoursesInMajor(major, concentration);
+    const majorCourses = getAllCoursesInMajor(majors[0], concentration);
     const minorCourses = getAllCoursesInMinor(minor);
 
     const {
@@ -185,7 +192,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       return <SidebarContainer title="Loading..." />;
     }
 
-    if (!major) {
+    if (!majors[0]) {
       if (majorError) {
         if (
           axios.isAxiosError(majorError) &&
@@ -229,7 +236,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const concentrationValidationError: MajorValidationError | undefined =
       getSectionError(
-        (major ? 1 : 0) + (minor ? 1 : 0), // offset by major and minor length
+        (majors[0] ? 1 : 0) + (minor ? 1 : 0), // offset by major and minor length
         0, // the concentration AND index is always 0
         validationStatus
       );
@@ -259,16 +266,16 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     return (
       <SidebarContainer
-        title={major.name}
+        title={majors[0].name}
         subtitle={
           selectedPlan.concentration === UNDECIDED_STRING
             ? UNDECIDED_CONCENTRATION
             : selectedPlan.concentration
         }
         creditsTaken={creditsTaken}
-        creditsToTake={major.totalCreditsRequired}
+        creditsToTake={majors[0].totalCreditsRequired}
         renderCoopBlock
-        renderBetaMajorBlock={major.metadata?.verified !== true}
+        renderBetaMajorBlock={majors[0].metadata?.verified !== true}
         planId={selectedPlan.id}
       >
         {courseData && (
@@ -320,7 +327,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
               </TabList>
               <TabPanels>
                 <TabPanel width="100%" p={0} m={0}>
-                  {major.requirementSections.map((section, index) => {
+                  {majors[0].requirementSections.map((section, index) => {
                     const sectionValidationError:
                       | MajorValidationError
                       | undefined = getSectionError(

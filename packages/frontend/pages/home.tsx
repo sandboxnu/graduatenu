@@ -242,7 +242,7 @@ const HomePage: NextPage = () => {
 
   let renderedSidebar = <NoPlanSidebar />;
   if (selectedPlan) {
-    if (selectedPlan.major) {
+    if (selectedPlan.majors) {
       renderedSidebar = (
         <Sidebar
           selectedPlan={selectedPlan}
