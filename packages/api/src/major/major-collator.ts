@@ -178,18 +178,18 @@ async function collateMajors() {
     })
   );
 
-  console.log(
-    `Successfully loaded ${Object.values(MAJORS).reduce(
-      (sum, yearMajors) => sum + Object.keys(yearMajors).length,
-      0
-    )} majors across ${MAJOR_YEARS.size} years!`
-  );
+  // console.log(
+  //   `Successfully loaded ${Object.values(MAJORS).reduce(
+  //     (sum, yearMajors) => sum + Object.keys(yearMajors).length,
+  //     0
+  //   )} majors across ${MAJOR_YEARS.size} years!`
+  // );
 
-  const templateCount = Object.values(TEMPLATES).reduce(
-    (count, yearTemplates) => count + Object.keys(yearTemplates).length,
-    0
-  );
-  console.log(`Loaded ${templateCount} templates for majors`);
+  // const templateCount = Object.values(TEMPLATES).reduce(
+  //   (count, yearTemplates) => count + Object.keys(yearTemplates).length,
+  //   0
+  // );
+  // console.log(`Loaded ${templateCount} templates for majors`);
 }
 
 collateMajors();
