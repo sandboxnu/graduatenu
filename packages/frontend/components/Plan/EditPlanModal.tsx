@@ -273,20 +273,25 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       options={convertToOptionObjects(
                         extractSupportedMajorYears(supportedMajorsData)
                       )}
-                      onChangeSideEffect={(val: string | null) => {
-                        const newYear = val ? parseInt(val, 10) : null;
+                      onChangeSideEffect={(val: string | string[] | null) => {
+                        const stringVal = Array.isArray(val) ? val[0] : val;
+                        const newYear = stringVal
+                          ? parseInt(stringVal, 10)
+                          : null;
                         if (newYear !== catalogYear) {
                           if (
-                            val &&
-                            supportedMajorsData?.supportedMajors?.[val]?.[
+                            stringVal &&
+                            supportedMajorsData?.supportedMajors?.[stringVal]?.[
                               majors[0]
                             ]
                           ) {
                             // we can keep the major, but we should check the concentration
                             if (
-                              !supportedMajorsData?.supportedMajors?.[val]?.[
-                                majors[0]
-                              ]?.concentrations?.includes(concentration)
+                              !supportedMajorsData?.supportedMajors?.[
+                                stringVal
+                              ]?.[majors[0]]?.concentrations?.includes(
+                                concentration
+                              )
                             ) {
                               setValue("concentration", "");
                             }
@@ -301,7 +306,8 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                     <PlanSelect
                       label="Major"
                       placeholder="Select a Major"
-                      name="major"
+                      name="majors"
+                      isMulti={true}
                       control={control}
                       options={extractSupportedMajorOptions(
                         catalogYear,
