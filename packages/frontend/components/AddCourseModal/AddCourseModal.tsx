@@ -177,7 +177,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
   );
   useEffect(() => {
     if (!courses || courses.length === 0) {
-      console.log("Courses are not ready yet...");
       return;
     }
     const fetchCoreqsForAllCourses = async () => {
@@ -194,10 +193,6 @@ export const AddCourseModal: React.FC<AddCourseModalProps> = ({
 
           if (coreqs.length === 1) {
             newCourseCoreqsMap.set(getCourseDisplayString(course), coreqs[0]);
-            console.log(
-              `Fetching coreqs for course ${getCourseDisplayString(course)}`
-            );
-            console.log(`Coreqs fetched:`, coreqs);
           }
         }
         setCourseCoreqsMap(newCourseCoreqsMap);

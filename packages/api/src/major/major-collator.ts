@@ -44,8 +44,6 @@ async function collateMajors() {
   const fs = await import("fs/promises");
   const path = await import("path");
 
-  console.log("Starting major collation...");
-
   const years = (
     await fs.readdir(path.resolve(reqRootDir), {
       withFileTypes: true,
@@ -102,7 +100,6 @@ async function collateMajors() {
   });
 
   // Load majors and process templates
-  console.log("Loading majors and processing templates...");
   await Promise.all(
     majors.map(async ({ year, college, major }) => {
       const basePath = path.join(reqRootDir, year, college, major);
@@ -135,20 +132,16 @@ async function collateMajors() {
 
         // Step 2: Check for and process template file
         if (await fileExists(fs, templateFile)) {
-          //console.log(`Found template file for ${major} (${year})`);
-
           // Read and parse template
           const templateRawData = await fs.readFile(templateFile);
           const templateJson = JSON.parse(templateRawData.toString());
 
           if (!templateJson || Object.keys(templateJson).length === 0) {
-            console.log(`Empty template for ${major} (${year})`);
             return;
           }
 
           // Get template name (the top-level key)
           const templateName = Object.keys(templateJson)[0];
-          //console.log(`Processing template: ${templateName}`);
 
           // Create template object with raw template data (without enhancements)
           const template: Template = {
@@ -170,14 +163,10 @@ async function collateMajors() {
           if (majorName && MAJORS[year] && MAJORS[year][majorName]) {
             // Also store the template under the major name for consistent lookup
             TEMPLATES[year][majorName] = template;
-
-            //console.log(
-            //`Successfully associated template with ${majorName} (${year})`
-            //);
           } else {
-            console.log(
-              `Stored template for ${templateKey} (${year}) but couldn't associate with a major`
-            );
+            //console.log(
+            //`Stored template for ${templateKey} (${year}) but couldn't associate with a major`
+            //);
           }
         }
       } catch (error) {
@@ -189,18 +178,18 @@ async function collateMajors() {
     })
   );
 
-  console.log(
-    `Successfully loaded ${Object.values(MAJORS).reduce(
-      (sum, yearMajors) => sum + Object.keys(yearMajors).length,
-      0
-    )} majors across ${MAJOR_YEARS.size} years!`
-  );
+  // console.log(
+  //   `Successfully loaded ${Object.values(MAJORS).reduce(
+  //     (sum, yearMajors) => sum + Object.keys(yearMajors).length,
+  //     0
+  //   )} majors across ${MAJOR_YEARS.size} years!`
+  // );
 
-  const templateCount = Object.values(TEMPLATES).reduce(
-    (count, yearTemplates) => count + Object.keys(yearTemplates).length,
-    0
-  );
-  console.log(`Loaded ${templateCount} templates for majors`);
+  // const templateCount = Object.values(TEMPLATES).reduce(
+  //   (count, yearTemplates) => count + Object.keys(yearTemplates).length,
+  //   0
+  // );
+  // console.log(`Loaded ${templateCount} templates for majors`);
 }
 
 collateMajors();

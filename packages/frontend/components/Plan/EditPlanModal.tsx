@@ -187,7 +187,6 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       );
     } else {
       try {
-        console.log("Updating plan", plan.id, newPlan);
         await API.plans.update(plan.id, newPlan);
       } catch (error) {
         handleApiClientError(error as Error, router);

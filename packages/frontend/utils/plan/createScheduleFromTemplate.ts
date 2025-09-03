@@ -21,8 +21,6 @@ export function createScheduleFromTemplate(
   const schedule = createEmptySchedule();
 
   try {
-    console.log("Creating schedule from template:", template);
-
     // Check if we have the template data
     if (!template.templateData || !template.name) {
       console.error("Missing template data or name");
@@ -35,8 +33,6 @@ export function createScheduleFromTemplate(
       console.error("No plan data found in template");
       return schedule;
     }
-
-    console.log("Processing plan data:", planData);
 
     // Process each year in the template
     Object.keys(planData).forEach((yearKey) => {
@@ -58,14 +54,11 @@ export function createScheduleFromTemplate(
       yearObj.summer2.status = StatusEnum.INACTIVE;
 
       const yearData = planData[yearKey];
-      console.log(`Processing ${yearKey}:`, yearData);
 
       // Process each term in the year
       Object.keys(yearData).forEach((termKey) => {
         const courses = yearData[termKey];
         if (!Array.isArray(courses)) return;
-
-        console.log(`Processing ${termKey} with ${courses.length} courses`);
 
         // Map the term key to the schedule term
         let termObj: {
@@ -87,7 +80,6 @@ export function createScheduleFromTemplate(
             termObj = yearObj.summer2;
             break;
           default:
-            console.log("Unknown term:", termKey);
             return; // Skip unknown terms
         }
 
