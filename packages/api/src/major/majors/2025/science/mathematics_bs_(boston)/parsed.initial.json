@@ -1,0 +1,328 @@
+{
+  "name": "Mathematics, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Problem Solving",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1365,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1465,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Calculus",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate and Advanced Mathematics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "MATH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3081,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3181,
+              "subject": "MATH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3175,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3275,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Reflections",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "RANGE",
+              "subject": "MATH",
+              "idRangeStart": 3101,
+              "idRangeEnd": 4899,
+              "exceptions": []
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Physics",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Physics 1",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1161,
+                  "description": "Physics 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1162,
+                  "description": "Lab for PHYS 1161",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1151,
+                  "description": "Physics for Engineering 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1152,
+                  "description": "Lab for PHYS 1151",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1153,
+                  "description": "Interactive Learning Seminar for PHYS 1151",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Physics 2",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1165,
+                  "description": "Physics 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1166,
+                  "description": "Lab for PHYS 1165",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1155,
+                  "description": "Physics for Engineering 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1156,
+                  "description": "Lab for PHYS 1155",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1157,
+                  "description": "Interactive Learning Seminar for PHYS 1155",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4025,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5131,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4020,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Upper-Division Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "INSC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning Introduction",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirements",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "ENGW"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

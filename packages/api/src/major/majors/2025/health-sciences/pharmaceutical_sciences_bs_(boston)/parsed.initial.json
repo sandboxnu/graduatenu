@@ -1,0 +1,405 @@
+{
+  "name": "Pharmaceutical Sciences, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 135,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 2",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2650,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 3",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2100,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 4",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 5",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHSC",
+              "classId": 2301,
+              "description": "Human Physiology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHSC",
+              "classId": 2302,
+              "description": "Human Anatomy Lab",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 6",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3411,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3419,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3801,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4995,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 7",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 8",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3802,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4997,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 9",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3430,
+          "subject": "PHSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4998,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 1",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1245,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 2",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1113,
+              "description": "General Biology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1114,
+              "description": "Lab for BIOL 1113",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 3",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1145,
+              "description": "Physics for Life Sciences 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1146,
+              "description": "Lab for PHYS 1145",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 4",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3611,
+              "description": "Biochemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3612,
+              "description": "Lab for BIOL 3611",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2313,
+              "description": "Organic Chemistry 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2314,
+              "description": "Lab for CHEM 2313",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1147,
+              "description": "Physics for Life Sciences 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1148,
+              "description": "Lab for PHYS 1147",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 1",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 8",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

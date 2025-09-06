@@ -1,0 +1,605 @@
+{
+  "name": "Environmental and Sustainability Sciences and Journalism, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 132,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Core Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1200,
+                  "description": "Dynamic Earth",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1201,
+                  "description": "Lab for ENVR 1200",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2200,
+              "subject": "ENVR"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1400,
+              "description": "Foundations in Environmental and Sustainability Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1401,
+              "description": "Lab for ENVR 1400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 5,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1500,
+                  "description": "Introduction to Environmental, Social, and Biological Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1501,
+                  "description": "Lab for ENVR 1500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 3300,
+                  "description": "Geographic Information Systems",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 3301,
+                  "description": "Lab for ENVR 3300",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Environmental and Sustainability Sciences Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4970,
+          "subject": "ENVR"
+        },
+        {
+          "type": "SECTION",
+          "title": "Earth Oceans and Environmental Change",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2310,
+                  "description": "Earth Materials",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2311,
+                  "description": "Lab for ENVR 2310",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2340,
+                  "description": "Earth Landforms and Processes",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2341,
+                  "description": "Lab for ENVR 2340",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3125,
+                  "subject": "ENVR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3600,
+                  "subject": "ENVR"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 4500,
+                  "description": "Applied Hydrogeology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 4501,
+                  "description": "Lab for ENVR 4500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5190,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5600,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5670,
+              "subject": "ENVR"
+            }
+          ],
+          "minRequirementCount": 8
+        },
+        {
+          "type": "SECTION",
+          "title": "Conservation, Restoration, and Management",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4001,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4505,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5700,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5750,
+              "subject": "ENVR"
+            }
+          ],
+          "minRequirementCount": 7
+        },
+        {
+          "type": "SECTION",
+          "title": "Sustainable Planning and Development",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5000,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5210,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5350,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5563,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5800,
+              "subject": "ENVR"
+            }
+          ],
+          "minRequirementCount": 7
+        },
+        {
+          "type": "SECTION",
+          "title": "Environment and Society",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 5220,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5450,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5260,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5268,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2485,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 6
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "JRNL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Visual Storytelling",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5309,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5314,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Law and Ethics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3550,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4650,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EEAM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4050,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4997,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4971,
+              "subject": "ENVR"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3650,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "English Requirements (First-Year Writing and Advanced Writing in the Disciplines)",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "ENGW"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3303,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism  GPA Requirement",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 3
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

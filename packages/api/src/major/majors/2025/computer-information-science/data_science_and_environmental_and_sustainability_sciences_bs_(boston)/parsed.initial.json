@@ -1,0 +1,732 @@
+{
+  "name": "Data Science and Environmental and Sustainability Sciences, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 131,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Computer Science Overview",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1210,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2000,
+              "description": "Introduction to Program Design and Implementation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2001,
+              "description": "Lab for CS 2000",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "CS"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Programming Sequence Pathways",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Computer Science Option",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2100,
+                  "description": "Program Design and Implementation 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2101,
+                  "description": "Lab for CS 2100",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 3100,
+                  "description": "Program Design and Implementation 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 3101,
+                  "description": "Lab for CS 3100",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "Data Science Option",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2500,
+                  "description": "Intermediate Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2501,
+                  "description": "Lab for DS 2500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3500,
+              "subject": "DS"
+            }
+          ],
+          "minRequirementCount": 2
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Data Science Foundations",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4200,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4300,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4400,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4420,
+          "subject": "DS"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Khoury Approved Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "CS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "CS",
+              "classId": 5010,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "CY",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "CY",
+              "classId": 4930,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "DS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "DS",
+              "classId": 4900,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "MKTG"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Environmental and Sustainability Sciences Major Requirements",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1400,
+              "description": "Foundations in Environmental and Sustainability Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1401,
+              "description": "Lab for ENVR 1400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1200,
+                  "description": "Dynamic Earth",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1201,
+                  "description": "Lab for ENVR 1200",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2200,
+              "subject": "ENVR"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Skills Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5260,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Environmental and Sustainability Sciences Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4970,
+          "subject": "ENVR"
+        },
+        {
+          "type": "SECTION",
+          "title": "Earth Oceans and Environmental Change",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2310,
+                  "description": "Earth Materials",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2311,
+                  "description": "Lab for ENVR 2310",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2340,
+                  "description": "Earth Landforms and Processes",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2341,
+                  "description": "Lab for ENVR 2340",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3125,
+                  "subject": "ENVR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3600,
+                  "subject": "ENVR"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 4500,
+                  "description": "Applied Hydrogeology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 4501,
+                  "description": "Lab for ENVR 4500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5190,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5600,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5670,
+              "subject": "ENVR"
+            }
+          ],
+          "minRequirementCount": 8
+        },
+        {
+          "type": "SECTION",
+          "title": "Conservation, Restoration, and Management",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4001,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4505,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5700,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5750,
+              "subject": "ENVR"
+            }
+          ],
+          "minRequirementCount": 7
+        },
+        {
+          "type": "SECTION",
+          "title": "Sustainable Planning and Development",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5000,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5210,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5350,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5563,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5800,
+              "subject": "ENVR"
+            }
+          ],
+          "minRequirementCount": 7
+        },
+        {
+          "type": "SECTION",
+          "title": "Environment and Society",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 5220,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5450,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5800,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5260,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5268,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2485,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 7
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Calculus",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "College Writing",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3302,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3303,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3307,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3315,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4050,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4971,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4997,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

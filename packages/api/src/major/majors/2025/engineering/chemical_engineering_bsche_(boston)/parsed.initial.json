@@ -1,0 +1,1055 @@
+{
+  "name": "Chemical Engineering, BSChE (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 134,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Engineering Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2308,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "CHME"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHME",
+              "classId": 3305,
+              "description": "Chemical Engineering Laboratory",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHME",
+              "classId": 3306,
+              "description": "Recitation for CHME 3305",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3312,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3322,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4512,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "CHME"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemical Engineering Capstone",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHME",
+              "classId": 4703,
+              "description": "Chemical Process Design Capstone",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHME",
+              "classId": 4705,
+              "description": "Recitation for CHME 4703",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "BIOL"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1155,
+                  "description": "Physics for Engineering 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1156,
+                  "description": "Lab for PHYS 1155",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1157,
+                  "description": "Interactive Learning Seminar for PHYS 1155",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses: Advanced Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2315,
+              "description": "Organic Chemistry 1 for Chemistry Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2316,
+              "description": "Lab for CHEM 2315",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2313,
+              "description": "Organic Chemistry 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2314,
+              "description": "Lab for CHEM 2313",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2317,
+              "description": "Organic Chemistry 2 for Chemistry Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2318,
+              "description": "Lab for CHEM 2317",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemical Engineering Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Engineering Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "BIOE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "CHME",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "CIVE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "EECE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ENGR",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "IE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ME",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "MEIE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "GE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Science Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2327,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3421,
+              "description": "Microbiology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3422,
+              "description": "Lab for BIOL 3421",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3603,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3611,
+              "description": "Biochemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3612,
+              "description": "Lab for BIOL 3611",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2321,
+              "description": "Analytical Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2322,
+              "description": "Lab for CHEM 2321",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2323,
+              "description": "Recitation for CHEM 2321",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 3403,
+              "description": "Quantum Chemistry and Spectroscopy",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3404,
+              "description": "Lab for CHEM 3403",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 3431,
+              "description": "Physical Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3432,
+              "description": "Lab for CHEM 3431",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 3501,
+              "description": "Inorganic Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3502,
+              "description": "Lab for CHEM 3501",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3503,
+              "description": "Recitation for CHEM 3501",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 4628,
+              "description": "Introduction to Spectroscopy of Organic Compounds",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 4629,
+              "description": "Identification of Organic Compounds",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5202,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "NRSG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1211,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "PHYS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 2371,
+              "description": "Electronics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 2372,
+              "description": "Lab for PHYS 2371",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3602,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Concentration in Biomolecular and Biomedical Systems",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 5115,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5250,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5410,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5411,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5420,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5430,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5160,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5185,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5630,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5631,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5632,
+            "subject": "CHME"
+          }
+        ],
+        "minRequirementCount": 11
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Biomolecular and Biomedical Systems: Advanced Science Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3411,
+            "subject": "BIOL"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4707,
+            "subject": "BIOL"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5593,
+            "subject": "BIOL"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5595,
+            "subject": "BIOL"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5270,
+            "subject": "NNMD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5271,
+            "subject": "NNMD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5370,
+            "subject": "NNMD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5470,
+            "subject": "NNMD"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5570,
+            "subject": "NNMD"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Complex and Computational Systems",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 5115,
+            "subject": "BIOE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5137,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5649,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2000,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2100,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3100,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4100,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4694,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5639,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5645,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2500,
+            "subject": "GE"
+          }
+        ],
+        "minRequirementCount": 11
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Complex and Computational Systems: Advanced Science Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3403,
+            "subject": "CHEM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5641,
+            "subject": "CHEM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5130,
+            "subject": "EEMB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1211,
+            "subject": "PHYS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4606,
+            "subject": "PHYS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5352,
+            "subject": "PHYS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Energy and Sustainability",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 5137,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5621,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4540,
+            "subject": "CIVE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5275,
+            "subject": "CIVE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5365,
+            "subject": "CIVE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5527,
+            "subject": "CIVE"
+          }
+        ],
+        "minRequirementCount": 6
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Energy and Sustainability: Advanced Science Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 5651,
+            "subject": "CHEM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2302,
+            "subject": "EEMB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3455,
+            "subject": "EEMB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3460,
+            "subject": "EEMB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5546,
+            "subject": "EEMB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3150,
+            "subject": "ENVR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3850,
+            "subject": "ENVR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5350,
+            "subject": "ENVR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5800,
+            "subject": "ENVR"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Materials and Nanotechnology",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 5105,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5179,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5632,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5683,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5600,
+            "subject": "ME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5620,
+            "subject": "ME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5630,
+            "subject": "ME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5661,
+            "subject": "ME"
+          }
+        ],
+        "minRequirementCount": 8
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Materials and Nanotechnology: Advanced Science Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 5610,
+            "subject": "CHEM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5627,
+            "subject": "CHEM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5113,
+            "subject": "PHYS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5260,
+            "subject": "PHYS"
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

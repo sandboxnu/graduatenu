@@ -1,0 +1,435 @@
+{
+  "name": "Criminal Justice and Sociology, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to Crime, Law, and the Justice System",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CRIM"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Current Crime and Justice Issues",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "CRIM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Understanding and Experiencing Criminal Justice Institutions and Systems",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "CRIM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Crime Problems",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3210,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3010,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3030,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3040,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3050,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3060,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3070,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3540,
+              "subject": "CRIM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Criminal Justice Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Introductory Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "SOCL",
+          "idRangeStart": 1100,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Intermediate Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "SOCL",
+          "idRangeStart": 2000,
+          "idRangeEnd": 3999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Advanced Elective",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "SOCL",
+          "idRangeStart": 4000,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Research Methods",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2321,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "INSH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Statistics",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "INSH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Digital Skills",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1100,
+              "description": "Computer Science and Its Applications",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1101,
+              "description": "Lab for CS 1100",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2000,
+              "description": "Introduction to Program Design and Implementation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2101,
+              "description": "Lab for CS 2100",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Integration Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "CRIM"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Capstone Requirement",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4949,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4600,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Elective Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3030,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3110,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3120,
+          "subject": "CRIM"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1245,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2270,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3407,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

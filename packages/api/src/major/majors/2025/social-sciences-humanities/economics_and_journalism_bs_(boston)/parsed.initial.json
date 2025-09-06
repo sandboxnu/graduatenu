@@ -1,0 +1,374 @@
+{
+  "name": "Economics and Journalism, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 89,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ECON"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EEAM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Economics Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1116,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 1200,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 2990,
+          "idRangeEnd": 3559,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 3561,
+          "idRangeEnd": 4689,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 4900,
+          "idRangeEnd": 4999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 5200,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3610,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Law and Ethics",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3550,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4650,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Calculus",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1231,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1245,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1340,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1100,
+              "description": "Computer Science and Its Applications",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1101,
+              "description": "Lab for CS 1100",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2000,
+              "description": "Introduction to Program Design and Implementation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2001,
+              "description": "Lab for CS 2000",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2510,
+          "subject": "MISM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3680,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1260,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3423,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3440,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3635,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4640,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics GPA/Credit Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

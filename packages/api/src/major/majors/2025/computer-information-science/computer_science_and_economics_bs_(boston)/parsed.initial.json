@@ -1,0 +1,540 @@
+{
+  "name": "Computer Science and Economics, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 133,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Computer Science Overview",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ECON"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1210,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Fundamental Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2000,
+              "description": "Introduction to Program Design and Implementation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2001,
+              "description": "Lab for CS 2000",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2100,
+              "description": "Program Design and Implementation 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2101,
+              "description": "Lab for CS 2100",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2800,
+          "subject": "CS"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2484,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4220,
+              "subject": "CS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "CS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 3100,
+              "description": "Program Design and Implementation 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 3101,
+              "description": "Lab for CS 3100",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "CS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4530,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4535,
+              "subject": "CS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Khoury Approved Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "CS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "CS",
+              "classId": 5010,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "CY",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "CY",
+              "classId": 4930,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "DS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "DS",
+              "classId": 4900,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "MKTG"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Economics Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1116,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 1200,
+          "idRangeEnd": 1999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 2990,
+          "idRangeEnd": 3559,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 3561,
+          "idRangeEnd": 4689,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 4900,
+          "idRangeEnd": 4996,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ECON",
+          "idRangeStart": 5200,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics Capstone",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4692,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4997,
+              "subject": "ECON"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1231,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1245,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1340,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computing and Social Issues",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4170,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5240,
+          "subject": "CY"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "PHIL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2220,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4528,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "College Writing",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3308,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Economics GPA Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2316,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "ECON"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

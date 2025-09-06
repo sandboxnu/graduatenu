@@ -1,0 +1,492 @@
+{
+  "name": "Communication Studies and Theatre, BA (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 130,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Communication Studies Common Requirements",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "THTR"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "COMM"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1112,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1225,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1231,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1255,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Cluster Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1131,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2304,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2501,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2551,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing-Intensive Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3230,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3304,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3320,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3415,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3500,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3501,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3530,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3532,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4535,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4605,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4631,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Communication Studies Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1131,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3325,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Making Theatre",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Texts, Community, & Social Context",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "INAM",
+              "classId": 1300,
+              "description": "The Politics of Narrative in Theatre",
+              "type": "COURSE"
+            },
+            {
+              "subject": "INAM",
+              "classId": 1301,
+              "description": "The Politics of Narrative in Theatre Seminar",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1215,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2983,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 11
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2335,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2342,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2345,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2346,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2385,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2983,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2993,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3550,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3670,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3973,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4345,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5300,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5700,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 27
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "INAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4102,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4530,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

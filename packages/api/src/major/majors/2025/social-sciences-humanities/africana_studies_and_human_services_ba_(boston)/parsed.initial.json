@@ -1,0 +1,329 @@
+{
+  "name": "Africana Studies and Human Services, BA (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to Africana Studies",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Approaches to the Field",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1140,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2270,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3120,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3305,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3323,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5544,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 10
+    },
+    {
+      "type": "SECTION",
+      "title": "Exploring Intellectual Traditions and Cultural Production",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1113,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2296,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2455,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2619,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2690,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3664,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4588,
+              "subject": "AFCS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Understanding Society and Social Movements",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2318,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2337,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2390,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2410,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2900,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3210,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4526,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4939,
+              "subject": "AFCS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "HUSV"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "CLTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Human Services Overview",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2300,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2970,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3570,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3900,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4994,
+          "subject": "HUSV"
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2618,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Senior Capstone",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "HUSV"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
