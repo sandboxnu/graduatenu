@@ -2,7 +2,7 @@
   "name": "Chemical Engineering, BSChE",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "9/6/2025"
   },
   "totalCreditsRequired": 134,
   "yearVersion": 2024,
@@ -596,7 +596,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Advanced Engineering Electives",
+        "title": "Concentration in Biomolecular and Biomedical Systems",
         "requirements": [
           {
             "type": "COURSE",
@@ -658,7 +658,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Advanced Science Elective",
+        "title": "Concentration in Biomolecular and Biomedical Systems: Advanced Science Elective",
         "requirements": [
           {
             "type": "COURSE",
@@ -710,7 +710,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Advanced Engineering Electives",
+        "title": "Concentration in Complex and Computational Systems",
         "requirements": [
           {
             "type": "COURSE",
@@ -767,7 +767,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Advanced Science Elective",
+        "title": "Concentration in Complex and Computational Systems: Advanced Science Elective",
         "requirements": [
           {
             "type": "COURSE",
@@ -799,7 +799,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Advanced Engineering Electives",
+        "title": "Concentration in Energy and Sustainability",
         "requirements": [
           {
             "type": "COURSE",
@@ -831,7 +831,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Advanced Science Elective",
+        "title": "Concentration in Energy and Sustainability: Advanced Science Elective",
         "requirements": [
           {
             "type": "COURSE",
@@ -878,7 +878,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Advanced Engineering Electives",
+        "title": "Concentration in Materials and Nanotechnology",
         "requirements": [
           {
             "type": "COURSE",
@@ -935,7 +935,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Advanced Science Elective",
+        "title": "Concentration in Materials and Nanotechnology: Advanced Science Elective",
         "requirements": [
           {
             "type": "COURSE",
