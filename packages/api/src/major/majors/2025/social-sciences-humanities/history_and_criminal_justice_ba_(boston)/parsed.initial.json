@@ -1,0 +1,415 @@
+{
+  "name": "History and Criminal Justice, BA (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "History Colloquium",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Level Elective",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "HIST",
+          "idRangeStart": 1001,
+          "idRangeEnd": 1999,
+          "exceptions": [
+            {
+              "subject": "HIST",
+              "classId": 1100,
+              "type": "COURSE"
+            },
+            {
+              "subject": "HIST",
+              "classId": 1200,
+              "type": "COURSE"
+            },
+            {
+              "subject": "HIST",
+              "classId": 1201,
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced Level Elective",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "HIST",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "HIST",
+              "classId": 2301,
+              "type": "COURSE"
+            },
+            {
+              "subject": "HIST",
+              "classId": 2302,
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Level Elective",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "HIST",
+          "idRangeStart": 3000,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "History Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Pre-1800 History Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1185,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1218,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1252,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1272,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1389,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2311,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2375,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2390,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3334,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to Crime, Law, and the Justice System",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CRIM"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Current Crime and Justice Issues",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "CRIM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Crime Problems and Criminal Justice Institutions",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3210,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3010,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3030,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3040,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3050,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3060,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3070,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3540,
+              "subject": "CRIM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Creating Knowledge about Crime and Justice",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "CRIM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Systemic Issues",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3110,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3120,
+              "subject": "CRIM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Criminal Justice Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Other Requirements",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Methods",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4949,
+          "subject": "CRIM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "HIST"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

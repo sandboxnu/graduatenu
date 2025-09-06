@@ -1,0 +1,927 @@
+{
+  "name": "Design and Public Health, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "ARTF"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1250,
+              "description": "Designing Interactive Experiences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1251,
+              "description": "Designing Interactive Experiences Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTG",
+                  "classId": 1001,
+                  "description": "Design Perspectives: An Introduction to Design in the World",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTG",
+                  "classId": 1002,
+                  "description": "Seminar for Design Perspectives",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1450,
+              "subject": "ARCH"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1270,
+              "description": "Design: Process + Practices",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1271,
+              "description": "Studio for Design: Process + Practices",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Public Health Core",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4120,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4202,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Science Core Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "SECTION",
+          "title": "Biology",
+          "requirements": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1141,
+                  "subject": "BIOL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1143,
+                  "subject": "BIOL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1147,
+              "subject": "BIOL"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1111,
+                  "description": "General Biology 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1112,
+                  "description": "Lab for BIOL 1111",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1113,
+                  "description": "General Biology 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1114,
+                  "description": "Lab for BIOL 1113",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 4
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Public Health Social Science Requirements",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Introductory Course",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ANTH"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ECON",
+                  "classId": 1115,
+                  "description": "Principles of Macroeconomics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ECON",
+                  "classId": 1125,
+                  "description": "Recitation for ECON 1115",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ECON",
+                  "classId": 1116,
+                  "description": "Principles of Microeconomics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ECON",
+                  "classId": 1126,
+                  "description": "Recitation for ECON 1116",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "HUSV"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 9
+        },
+        {
+          "type": "SECTION",
+          "title": "Upper-Level Course",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3441,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3040,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5280,
+              "subject": "HLTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5222,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3402,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3241,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3441,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3423,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5238,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5001,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5002,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3413,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3340,
+              "subject": "MGMT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "ORGB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4511,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5232,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5234,
+              "subject": "PHTH"
+            }
+          ],
+          "minRequirementCount": 30
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-Op Preparation",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EEAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "SECTION",
+          "title": "Advanced Writing in the Disciplines",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3306,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3314,
+              "subject": "ENGW"
+            }
+          ],
+          "minRequirementCount": 2
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone and Integrative Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4960,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5312,
+          "subject": "ARCH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "HSCI",
+              "classId": 4970,
+              "description": "Junior/Senior Honors Project 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "HSCI",
+              "classId": 4971,
+              "description": "Junior/Senior Honors Project 2",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Concentration in Built Environment",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 1120,
+            "subject": "ARCH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1310,
+            "subject": "ARCH"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2260,
+            "subject": "ARCH"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Built Environment: Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 1453,
+                "subject": "ARCH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2130,
+                "subject": "ARCH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2140,
+                "subject": "ARCH"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ARCH",
+                    "classId": 2340,
+                    "description": "Modern Architecture",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ARCH",
+                    "classId": 2341,
+                    "description": "Recitation for ARCH 2340",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 3170,
+                "subject": "ARCH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3210,
+                "subject": "ARCH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4850,
+                "subject": "ARCH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5115,
+                "subject": "ARCH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5310,
+                "subject": "ARCH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2130,
+                "subject": "LARC"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2140,
+                "subject": "LARC"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2330,
+                "subject": "LARC"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2340,
+                "subject": "LARC"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2430,
+                "subject": "LARC"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Integrated Design",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 1200,
+            "subject": "ARTF"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1210,
+            "subject": "ARTF"
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ARTF",
+                "classId": 1230,
+                "description": "Making with Form and Materials",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ARTF",
+                "classId": 1231,
+                "description": "Making with Form and Materials Tools",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ARTF",
+                "classId": 1240,
+                "description": "Making with Video, Sound, and Animation",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ARTF",
+                "classId": 1241,
+                "description": "Making with Video, Sound, and Animation Tools",
+                "type": "COURSE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 4
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Integrated Design: Required Course",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ARTG",
+                "classId": 1290,
+                "description": "Typographic Systems",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ARTG",
+                "classId": 1291,
+                "description": "Studio for Typographic Systems",
+                "type": "COURSE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Integrated Design: Design Electives",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ARTG",
+                "classId": 2262,
+                "description": "Prototyping with Code",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ARTG",
+                "classId": 2263,
+                "description": "Lab for ARTG 2262",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 5000,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5710,
+            "subject": "ARTG"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Integrated Design: Art+Design History Elective",
+        "requirements": [],
+        "minRequirementCount": 0
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Integrated Design: Design Options",
+        "requirements": [
+          {
+            "type": "SECTION",
+            "title": "Creative Fabrication",
+            "requirements": [
+              {
+                "type": "COURSE",
+                "classId": 2810,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3810,
+                "subject": "ARTG"
+              }
+            ],
+            "minRequirementCount": 2
+          },
+          {
+            "type": "SECTION",
+            "title": "Experience Design",
+            "requirements": [
+              {
+                "type": "COURSE",
+                "classId": 3462,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3464,
+                "subject": "ARTG"
+              }
+            ],
+            "minRequirementCount": 2
+          },
+          {
+            "type": "SECTION",
+            "title": "Graphic Design",
+            "requirements": [
+              {
+                "type": "COURSE",
+                "classId": 2252,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3452,
+                "subject": "ARTG"
+              }
+            ],
+            "minRequirementCount": 2
+          },
+          {
+            "type": "SECTION",
+            "title": "Information Design",
+            "requirements": [
+              {
+                "type": "COURSE",
+                "classId": 2242,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3444,
+                "subject": "ARTG"
+              }
+            ],
+            "minRequirementCount": 2
+          },
+          {
+            "type": "SECTION",
+            "title": "Interaction Design",
+            "requirements": [
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ARTG",
+                    "classId": 2400,
+                    "description": "Interaction Design Principles",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ARTG",
+                    "classId": 2401,
+                    "description": "Interaction Design Principles Tools",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 3400,
+                "subject": "ARTG"
+              }
+            ],
+            "minRequirementCount": 2
+          }
+        ],
+        "minRequirementCount": 5
+      }
+    ]
+  }
+}

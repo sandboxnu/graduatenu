@@ -1,0 +1,668 @@
+{
+  "name": "Electrical Engineering and Music with Concentration in Music Technology, BSEE (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 137,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2140,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2160,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electrical Engineering Fundamentals",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2412,
+              "description": "Fundamentals of Electronics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2413,
+              "description": "Lab for EECE 2412",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2520,
+          "subject": "EECE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2530,
+              "description": "Fundamentals of Electromagnetics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2531,
+              "description": "Lab for EECE 2530",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Engineering Fundamentals",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2322,
+              "description": "Fundamentals of Digital Design and Computer Organization",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2323,
+              "description": "Lab for EECE 2322",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2540,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electrical Engineering Capstone Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4791,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4792,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Technical Electives",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2322,
+              "description": "Fundamentals of Digital Design and Computer Organization",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2323,
+              "description": "Lab for EECE 2322",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2540,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2750,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3324,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4512,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "EECE"
+        },
+        {
+          "type": "RANGE",
+          "subject": "EECE",
+          "idRangeStart": 5115,
+          "idRangeEnd": 5699,
+          "exceptions": []
+        },
+        {
+          "type": "COURSE",
+          "classId": 5670,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 10
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3468,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Theory",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "MUSC",
+              "classId": 1119,
+              "description": "Fundamentals of Western Music Theory",
+              "type": "COURSE"
+            },
+            {
+              "subject": "MUSC",
+              "classId": 1201,
+              "description": "Music Theory 1",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "MUSC",
+              "classId": 1201,
+              "description": "Music Theory 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "MUSC",
+              "classId": 1202,
+              "description": "Music Theory 2",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "MUSC",
+              "classId": 1202,
+              "description": "Music Theory 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "MUSC",
+              "classId": 3541,
+              "description": "Music Analysis Seminar",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Music in Context",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "MUSC",
+              "classId": 1002,
+              "description": "Music in Everyday Life",
+              "type": "COURSE"
+            },
+            {
+              "subject": "MUSC",
+              "classId": 1003,
+              "description": "Lab for MUSC 1002",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Contemporary/Popular Music",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2311,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2317,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2336,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2351,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3352,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3353,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3354,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Acoustics or Music Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "MUSC"
+        },
+        {
+          "type": "RANGE",
+          "subject": "MUSC",
+          "idRangeStart": 2000,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Technology",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2431,
+          "subject": "MUST"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Technology Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3602,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3603,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3973,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5973,
+          "subject": "MUST"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses: Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1155,
+              "description": "Physics for Engineering 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1156,
+              "description": "Lab for PHYS 1155",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1157,
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3468,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ENCP"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

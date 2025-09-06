@@ -1,0 +1,209 @@
+{
+  "name": "Spanish, BA (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Spanish Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3502,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Language & Linguistics Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "LING"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Culture, Literature & History Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3805,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1187,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "LACS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1504,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1505,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3240,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3715,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3720,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4655,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4944,
+              "subject": "SPNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Language & Linguistics Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2900,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3401,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3402,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3403,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3601,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3602,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3603,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "SPNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Study Abroad/Experiential Learning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4700,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

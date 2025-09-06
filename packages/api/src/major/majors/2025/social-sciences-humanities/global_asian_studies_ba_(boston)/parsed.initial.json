@@ -1,0 +1,397 @@
+{
+  "name": "Global Asian Studies, BA (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/6/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "ASNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "HIST"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1215,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2211,
+              "subject": "HIST"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Asia in Global Context",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2245,
+          "subject": "ASNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3485,
+          "subject": "ASNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4350,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4520,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3290,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2470,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2011,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1275,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3487,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4526,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4900,
+          "subject": "ASNS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "International Experience",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "History Focus Area",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2245,
+              "subject": "ASNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1246,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1252,
+              "subject": "HIST"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1500,
+                  "subject": "HIST"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1500,
+                  "subject": "CLTR"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2011,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2308,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2360,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3330,
+              "subject": "HIST"
+            }
+          ],
+          "minRequirementCount": 10
+        },
+        {
+          "type": "SECTION",
+          "title": "Society and Politics Focus Area",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2305,
+              "subject": "ANTH"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4220,
+                  "subject": "ANTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4220,
+                  "subject": "ASNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4350,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4515,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3290,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4983,
+              "subject": "INTB"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2290,
+                  "subject": "POLS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2290,
+                  "subject": "ASNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2378,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3482,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4526,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 15
+        },
+        {
+          "type": "SECTION",
+          "title": "Language, Literature, and Culture Focus Area",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "ASNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1800,
+              "subject": "KORE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2470,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3161,
+              "subject": "ENGL"
+            }
+          ],
+          "minRequirementCount": 6
+        },
+        {
+          "type": "SECTION",
+          "title": "Religious Studies Focus Area",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1130,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1133,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1275,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1280,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1290,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "PHIL"
+            }
+          ],
+          "minRequirementCount": 6
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
