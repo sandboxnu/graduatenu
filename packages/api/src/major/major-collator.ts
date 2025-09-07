@@ -67,7 +67,7 @@ function mergeConcentrationSections(
       (Number(s.minRequirementCount) || 0);
     // merge other fields as needed
     map.set(baseTitle, target);
-    console.log(majorName, "added", rawTitle, "to", baseTitle);
+    //console.log(majorName, "added", rawTitle, "to", baseTitle);
   }
 
   return {
