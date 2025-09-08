@@ -3,8 +3,7 @@
 # docker run --rm frontend ls -la
 # 
 
-FROM node:16-alpine AS builder
-RUN apk add --no-cache libc6-compat
+FROM node:20-alpine AS builder
 WORKDIR /app
 
 # package.json of root and of needed packages
@@ -26,19 +25,19 @@ ARG COMMIT
 ARG BUILD_TIMESTAMP
 ARG COMMIT_MESSAGE
 
-ENV NEXT_PUBLIC_COMMIT_HASH $COMMIT
-ENV NEXT_PUBLIC_COMMIT_MESSAGE $COMMIT_MESSAGE
-ENV NEXT_PUBLIC_BUILD_TIMESTAMP $BUILD_TIMESTAMP
+ENV NEXT_PUBLIC_COMMIT_HASH=$COMMIT
+ENV NEXT_PUBLIC_COMMIT_MESSAGE=$COMMIT_MESSAGE
+ENV NEXT_PUBLIC_BUILD_TIMESTAMP=$BUILD_TIMESTAMP
 
 RUN yarn packages/api-client build
 RUN yarn packages/common build
 RUN yarn packages/frontend build
 
 # Production image 
-FROM node:16-alpine AS runner
+FROM node:20-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -51,6 +50,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/packages/frontend/.next/static ./
 USER nextjs
 
 EXPOSE 3000
-ENV PORT 3000
+ENV PORT=3000
 
 CMD ["node", "server.js"]
