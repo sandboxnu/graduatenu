@@ -33,6 +33,7 @@ type PlanSelectProps = {
   useFuzzySearch?: boolean;
   // Is the form field multi select (used for)
   isMulti?: boolean;
+  removeButton?: React.ReactNode;
 };
 
 export const PlanSelect: React.FC<PlanSelectProps> = ({
@@ -48,6 +49,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   isDisabled,
   placeholder,
   isMulti,
+  removeButton,
   // useFuzzySearch,
 }) => {
   const customFilterOption = (
@@ -112,7 +114,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     : options.find((option) => option.value === selectedValue);
 
   return (
-    <FormControl isInvalid={error != null}>
+    <FormControl isInvalid={error != null} w="100%">
       <FormLabel
         color="primary.blue.dark.main"
         size="md"
@@ -134,6 +136,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
       <FormErrorMessage>{error?.message}</FormErrorMessage>
+      {removeButton}
     </FormControl>
   );
 };
