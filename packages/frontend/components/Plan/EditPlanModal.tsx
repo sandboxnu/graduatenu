@@ -1,4 +1,4 @@
-import { EditIcon } from "@chakra-ui/icons";
+import { EditIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import {
   Button,
   Checkbox,
@@ -14,6 +14,7 @@ import {
   useDisclosure,
   VStack,
   Text,
+  Box,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
@@ -303,24 +304,82 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       rules={{ required: "Catalog year is required." }}
                       isNumeric
                     />
-                    <PlanSelect
-                      label="Major"
-                      placeholder="Select a Major"
-                      name="majors"
-                      isMulti={true}
-                      control={control}
-                      options={extractSupportedMajorOptions(
-                        catalogYear,
-                        supportedMajorsData
-                      )}
-                      onChangeSideEffect={() => {
-                        setValue("concentration", "");
-                      }}
-                      rules={{ required: "Major is required." }}
-                      isSearchable
-                      useFuzzySearch
-                      isDisabled={!catalogYear}
-                    />
+                    {majors?.map((major, index) => (
+                      <Box key={index} w="100%">
+                        <PlanSelect
+                          label={
+                            index === 0 ? "Major(s)" : `Major ${index + 1}`
+                          }
+                          placeholder="Select a Major"
+                          name={`majors.${index}`}
+                          isMulti={false}
+                          control={control}
+                          options={extractSupportedMajorOptions(
+                            catalogYear,
+                            supportedMajorsData
+                          )}
+                          onChangeSideEffect={() => {
+                            setValue("concentration", "");
+                          }}
+                          rules={
+                            index === 0
+                              ? { required: "Major is required." }
+                              : {}
+                          }
+                          isSearchable
+                          useFuzzySearch
+                          isDisabled={!catalogYear}
+                          removeButton={
+                            index > 0 ? (
+                              <SmallCloseIcon
+                                position="absolute"
+                                top="8px"
+                                right="8px"
+                                cursor="pointer"
+                                color="red.500"
+                                boxSize="16px"
+                                _hover={{ color: "red.700" }}
+                                onClick={() => {
+                                  const newMajors = majors.filter(
+                                    (_, i) => i !== index
+                                  );
+                                  setValue("majors", newMajors);
+                                  setValue("concentration", "");
+                                }}
+                              />
+                            ) : undefined
+                          }
+                        />
+                        {majors.length > 1 && (
+                          <SmallCloseIcon
+                            position="absolute"
+                            top="60px"
+                            right="8px"
+                            transition="opacity 0.25s ease"
+                            transitionDelay="0.1s"
+                            boxSize="13px"
+                            cursor="pointer"
+                            color="red.500"
+                            _hover={{ color: "red.700" }}
+                            onClick={() => {
+                              const newMajors = majors.filter(
+                                (_, i) => i !== index
+                              );
+                              setValue("majors", newMajors);
+                              setValue("concentration", "");
+                            }}
+                          />
+                        )}
+                      </Box>
+                    ))}
+                    <Text
+                      cursor="pointer"
+                      textColor="blue.500"
+                      fontWeight="bold"
+                      onClick={() => setValue("majors", [...majors, ""])}
+                    >
+                      + Add a Major
+                    </Text>
                     {majorHasConcentrations && (
                       <PlanSelect
                         label="Concentrations"
