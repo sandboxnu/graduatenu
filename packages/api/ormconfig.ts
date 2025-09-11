@@ -2,8 +2,6 @@ import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { config } from "dotenv";
 import { Plan } from "./src/plan/entities/plan.entity";
 import { Student } from "./src/student/entities/student.entity";
-import { readFileSync } from "fs";
-import { join } from "path";
 
 config({ path: `.env.${process.env.NODE_ENV}.local` });
 
