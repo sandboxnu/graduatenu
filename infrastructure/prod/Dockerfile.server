@@ -14,6 +14,7 @@ RUN yarn install > /dev/null
 # Get src files
 COPY packages/api packages/api
 COPY packages/common packages/common
+COPY packages/api/assets packages/api/assets
 
 # Build server and common dependency
 RUN yarn packages/common build
