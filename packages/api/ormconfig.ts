@@ -21,19 +21,16 @@ const ormconfig: TypeOrmModuleOptions = {
     migrationsDir: "migrations",
   },
   keepConnectionAlive: process.env.NODE_ENV === "testing",
+  ssl:
+    process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging"
+      ? {
+          require: true,
+          rejectUnauthorized: true,
+          ca: readFileSync(
+            join("assets", "RDS.us-east-1.ca-bundle.pem")
+          ).toString(),
+        }
+      : false,
 };
-
-if (
-  process.env.NODE_ENV === "production" ||
-  process.env.NODE_ENV === "staging"
-) {
-  ormconfig.extra = {
-    ssl: {
-      ca: readFileSync(
-        join("assets", "RDS.us-east-1.ca-bundle.pem")
-      ).toString(),
-    },
-  };
-}
 
 export default ormconfig;
