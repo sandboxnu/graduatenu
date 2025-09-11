@@ -25,12 +25,15 @@ const ormconfig: TypeOrmModuleOptions = {
     process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging"
       ? {
           require: true,
-          rejectUnauthorized: true,
-          ca: readFileSync(
-            join("assets", "RDS.us-east-1.ca-bundle.pem")
-          ).toString(),
+          rejectUnauthorized: false,
         }
       : false,
 };
+
+console.log(
+  `Database SSL: ${ormconfig.ssl ? "enabled" : "disabled"} (NODE_ENV: ${
+    process.env.NODE_ENV
+  })`
+);
 
 export default ormconfig;
