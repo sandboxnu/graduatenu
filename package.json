@@ -29,7 +29,6 @@
     "backend:build": "docker build --platform linux/amd64 --build-arg=\"COMMIT=$(git rev-parse HEAD)\" --build-arg=\"BUILD_TIMESTAMP=$(date +%s)\" --build-arg=\"COMMIT_MESSAGE=$(git --no-pager show -s --format=%s)\" -t $(sh ./infrastructure/prod/get-ecr-image-name.sh local-head backend) -f ./infrastructure/prod/Dockerfile.server .",
     "backend:run": "docker run -p 4001:3001 $(sh ./infrastructure/prod/get-ecr-image-name.sh local-head backend)",
     "backend:push": "docker push $(sh ./infrastructure/prod/get-ecr-image-name.sh local-head backend)",
-    "prod:migration:run": "yarn build && NODE_ENV=production yarn g:cross-env ts-node --project ./tsconfig.json ../../node_modules/typeorm/cli.js migration:run",
     "ecr:docker:auth": "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $(aws sts get-caller-identity --query Account --output text).dkr.ecr.us-east-1.amazonaws.com",
     "lint": "eslint packages/ --ext .ts,.tsx .",
     "tsc": "yarn workspaces foreach -v --exclude . run tsc",
