@@ -350,26 +350,6 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                             ) : undefined
                           }
                         />
-                        {majors.length > 1 && (
-                          <SmallCloseIcon
-                            position="absolute"
-                            top="60px"
-                            right="8px"
-                            transition="opacity 0.25s ease"
-                            transitionDelay="0.1s"
-                            boxSize="13px"
-                            cursor="pointer"
-                            color="red.500"
-                            _hover={{ color: "red.700" }}
-                            onClick={() => {
-                              const newMajors = majors.filter(
-                                (_, i) => i !== index
-                              );
-                              setValue("majors", newMajors);
-                              setValue("concentration", "");
-                            }}
-                          />
-                        )}
                       </Box>
                     ))}
                     <Text
