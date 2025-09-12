@@ -34,7 +34,7 @@ export const defaultGuestStudent: GetStudentResponse = {
   academicYear: undefined,
   graduateYear: undefined,
   catalogYear: undefined,
-  major: undefined,
+  majors: undefined,
   coopCycle: undefined,
   coursesCompleted: undefined,
   coursesTransfered: undefined,
