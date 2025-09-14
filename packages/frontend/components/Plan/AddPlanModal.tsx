@@ -164,7 +164,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       majors: isNoMajorSelected ? undefined : payload.majors,
-      minor: isNoMinorSelected ? undefined : payload.minor,
+      minors: isNoMinorSelected ? undefined : payload.minors,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
       schedule,
     };

@@ -124,7 +124,7 @@ export class PlanService {
   ): Promise<UpdateResult> {
     const {
       majors: newMajors,
-      minor: newMinorName,
+      minors: newMinorNames,
       catalogYear: newCatalogYear,
       concentration: newConcentrationName,
       schedule: newSchedule,
@@ -161,7 +161,7 @@ export class PlanService {
 
     /** Wipe Minor => Remove existing minor from the plan. */
     const isWipeMinorUpdate =
-      !newMinorName && !newCatalogYear && currentPlan.minors;
+      !newMinorNames && !newCatalogYear && currentPlan.minors;
 
     const isScheduleUpdate = newSchedule && !isMajorInfoUpdate;
 
@@ -248,7 +248,7 @@ export class PlanService {
     let name = currentPlan.name;
     let schedule = currentPlan.schedule;
     let majors = isWipeMajorUpdate ? undefined : currentPlan.majors;
-    let minor = isWipeMinorUpdate ? undefined : currentPlan.minors;
+    let minors = isWipeMinorUpdate ? undefined : currentPlan.minors;
     let catalogYear = isWipeMajorUpdate ? undefined : currentPlan.catalogYear;
     let concentration = isWipeMajorUpdate
       ? undefined
@@ -268,14 +268,14 @@ export class PlanService {
       concentration = newConcentrationName;
     }
 
-    if (newMinorName) {
-      minor = [newMinorName];
+    if (newMinorNames) {
+      minors = newMinorNames;
     }
 
     const newPlan = {
       name,
       majors,
-      minor,
+      minors,
       catalogYear,
       concentration,
       schedule,
