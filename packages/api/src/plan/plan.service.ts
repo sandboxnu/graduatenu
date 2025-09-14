@@ -161,7 +161,7 @@ export class PlanService {
 
     /** Wipe Minor => Remove existing minor from the plan. */
     const isWipeMinorUpdate =
-      !newMinorName && !newCatalogYear && currentPlan.minor;
+      !newMinorName && !newCatalogYear && currentPlan.minors;
 
     const isScheduleUpdate = newSchedule && !isMajorInfoUpdate;
 
@@ -248,7 +248,7 @@ export class PlanService {
     let name = currentPlan.name;
     let schedule = currentPlan.schedule;
     let majors = isWipeMajorUpdate ? undefined : currentPlan.majors;
-    let minor = isWipeMinorUpdate ? undefined : currentPlan.minor;
+    let minor = isWipeMinorUpdate ? undefined : currentPlan.minors;
     let catalogYear = isWipeMajorUpdate ? undefined : currentPlan.catalogYear;
     let concentration = isWipeMajorUpdate
       ? undefined
@@ -269,7 +269,7 @@ export class PlanService {
     }
 
     if (newMinorName) {
-      minor = newMinorName;
+      minor = [newMinorName];
     }
 
     const newPlan = {
