@@ -22,7 +22,7 @@ export function useMinor(
       : null;
 
   const { data, error } = useSWR(key, async () => {
-    const promises = minorNames.map((minorName) =>
+    const promises = minorNames?.map((minorName) =>
       API.minors.get(catalogYear, minorName)
     );
     return Promise.all(promises);
