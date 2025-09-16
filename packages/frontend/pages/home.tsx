@@ -1,4 +1,4 @@
-import { Box, Divider, Flex } from "@chakra-ui/react";
+import { Box, Divider, Flex, Button } from "@chakra-ui/react";
 import {
   CollisionDetection,
   DndContext,
@@ -91,6 +91,7 @@ const HomePage: NextPage = () => {
   const [isTransferCoursesExpanded, setIsTransferCoursesExpanded] =
     useState<boolean>(false);
 
+  const [lastDeletedPlan, setLastDeletedPlan] = useState<any | null>(null);
   const { isGuest } = useContext(IsGuestContext);
 
   useEffect(() => {
@@ -240,6 +241,28 @@ const HomePage: NextPage = () => {
     });
   };
 
+  const handleUndoDelete = async () => {
+    if (!lastDeletedPlan) return;
+
+    if (isGuest) {
+      window.localStorage.setItem(
+        "student",
+        JSON.stringify({
+          ...student,
+          plans: [...student.plans, lastDeletedPlan],
+        })
+      );
+    } else {
+      // Insert plan back into database
+      await API.plans.create(lastDeletedPlan);
+    }
+
+    mutateStudent();
+    setSelectedPlanId(lastDeletedPlan.id);
+    setLastDeletedPlan(null);
+    toast.success("Plan restored!");
+  };
+
   let renderedSidebar = <NoPlanSidebar />;
   if (selectedPlan) {
     if (selectedPlan.major) {
@@ -287,6 +310,16 @@ const HomePage: NextPage = () => {
                 setSelectedPlanId={setSelectedPlanId}
                 selectedPlanId={selectedPlanId}
               />
+              {lastDeletedPlan && (
+                <Button
+                  variant="outline"
+                  size="md"
+                  borderRadius="lg"
+                  onClick={handleUndoDelete}
+                >
+                  Undo Delete
+                </Button>
+              )}
               {selectedPlan && <EditPlanModal plan={selectedPlan} />}
               {selectedPlan && (
                 <DuplicatePlanButton
@@ -299,6 +332,9 @@ const HomePage: NextPage = () => {
                   setSelectedPlanId={setSelectedPlanId}
                   planName={selectedPlan.name}
                   planId={selectedPlan.id}
+                  onPlanDeleted={(deletedPlan) =>
+                    setLastDeletedPlan(deletedPlan)
+                  }
                 />
               )}
             </Flex>

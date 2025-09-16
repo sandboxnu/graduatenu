@@ -28,11 +28,13 @@ interface DeletePlanModalProps {
   planName: string;
   planId: number;
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
+  onPlanDeleted: (deletedPlan: any) => void;
 }
 export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
   planName,
   planId,
   setSelectedPlanId,
+  onPlanDeleted,
 }) => {
   const router = useRouter();
   const { onOpen, onClose, isOpen } = useDisclosure();
@@ -45,6 +47,9 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
 
   const deletePlan = async () => {
     try {
+      const deletedPlan = student.plans.find((plan) => plan.id === planId);
+      if (!deletedPlan) return;
+
       if (isGuest) {
         window.localStorage.setItem(
           "student",
@@ -54,13 +59,18 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
           })
         );
       } else {
+        window.localStorage.setItem(
+          "lastDeletedPlan",
+          JSON.stringify(deletedPlan)
+        );
         await API.plans.delete(planId);
       }
 
-      // refresh the cache, show success message, and close the modal
       mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
       setSelectedPlanId(null);
       toast.success("Plan deleted successfully.");
+
+      onPlanDeleted(deletedPlan);
       onClose();
     } catch (error) {
       handleApiClientError(error as Error, router);
