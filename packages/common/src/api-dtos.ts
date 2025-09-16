@@ -64,7 +64,7 @@ export class UpdatePlanDto {
 
   @IsOptional()
   @IsString()
-  minor?: string;
+  minor?: string | null;
 
   @IsOptional()
   @IsString()

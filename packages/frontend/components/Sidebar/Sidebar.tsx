@@ -165,7 +165,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
     // revalidateMajor because it will change every time, so we're choosing
     // to omit it here:
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => revalidateMajor(), [selectedPlan, major]);
+    useEffect(() => revalidateMajor(), [selectedPlan, major, minor]);
 
     const majorCourses = getAllCoursesInMajor(major, concentration);
     const minorCourses = getAllCoursesInMinor(minor);

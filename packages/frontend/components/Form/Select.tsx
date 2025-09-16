@@ -87,10 +87,14 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
 
   const onChange = (option: any) => {
     let val = option ? option.value : null;
+
     onChangeSideEffect && onChangeSideEffect(val);
 
     if (isNumeric && val) {
       val = parseInt(val, 10);
+    }
+    if (val && val === "") {
+      val = null;
     }
 
     onChangeUpdateValue(val);

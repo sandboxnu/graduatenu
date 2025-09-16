@@ -51,7 +51,7 @@ type EditPlanModalProps = {
 type EditPlanInput = {
   name: string;
   major: string;
-  minor?: string;
+  minor?: string | null;
   catalogYear: number;
   concentration: string;
   agreeToBetaMajor: boolean;
@@ -167,7 +167,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
-      minor: payload.minor,
+      minor: payload.minor || null,
     };
 
     if (isGuest) {
