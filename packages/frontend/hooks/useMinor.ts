@@ -13,7 +13,9 @@ export function useMinor(
   catalogYear: number,
   minorNames?: string[]
 ): MinorReturn {
-  const safeMinorNames = minorNames || [];
+  const safeMinorNames = (minorNames || []).filter(
+    (name) => name && name.trim() !== ""
+  );
   const key =
     safeMinorNames.length > 0
       ? `api/minors/${catalogYear}/${safeMinorNames.join(",")}`
