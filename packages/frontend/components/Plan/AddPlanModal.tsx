@@ -55,7 +55,7 @@ import {
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
 import { HelperToolTip } from "../Help";
-import { IsGuestContext } from "../../pages/_app";
+import { IsGuestContext, NewPlanModalContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
 import { useTemplateCourses } from "../../hooks/useTemplateCourses";
@@ -71,6 +71,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 }) => {
   const router = useRouter();
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
+  const { isNewPlanModalOpen, setIsNewPlanModalOpen } =
+    useContext(NewPlanModalContext);
   const { supportedMajorsData, error: supportedMajorsError } =
     useSupportedMajors();
   const { supportedMinorsData, error: supportedMinorsError } =
@@ -128,6 +130,14 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   useEffect(() => {
     setValue("useTemplate", false);
   }, [majorName, catalogYear, setValue]);
+
+  // handle keyboard shortcut modal opening
+  useEffect(() => {
+    if (isNewPlanModalOpen) {
+      onOpen();
+      setIsNewPlanModalOpen(false);
+    }
+  }, [isNewPlanModalOpen, onOpen, setIsNewPlanModalOpen]);
 
   if (!student) {
     return null;

@@ -1,4 +1,10 @@
-import { Dispatch, SetStateAction, createContext, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useState,
+  useEffect,
+} from "react";
 import { ChakraProvider, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import "@fontsource/montserrat-alternates";
 import type { AppProps } from "next/app";
@@ -22,6 +28,16 @@ export const IsGuestContext = createContext<IsGuestContextType>({
   setIsGuest: () => undefined,
 });
 
+interface NewPlanModalContextType {
+  isNewPlanModalOpen: boolean;
+  setIsNewPlanModalOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export const NewPlanModalContext = createContext<NewPlanModalContextType>({
+  isNewPlanModalOpen: false,
+  setIsNewPlanModalOpen: () => undefined,
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const { width } = useWindowSize();
@@ -29,6 +45,27 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isLandingPage = router.asPath === "/";
   const disableApp = !isLandingPage && width && width <= 1100;
   const [isGuest, setIsGuest] = useState(false);
+
+  const [isNewPlanModalOpen, setIsNewPlanModalOpen] = useState(false);
+
+  // keyboard shortcut for new plan (ctrl+shift+n)
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        !isLandingPage &&
+        !disableApp &&
+        event.ctrlKey &&
+        event.shiftKey &&
+        event.key === "N"
+      ) {
+        console.log("Shortcut triggered!");
+        event.preventDefault();
+        setIsNewPlanModalOpen(true);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isLandingPage, disableApp]);
 
   return (
     <>
@@ -44,7 +81,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <ChakraProvider theme={theme}>
           <IsGuestContext.Provider value={{ isGuest, setIsGuest }}>
-            {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+            <NewPlanModalContext.Provider
+              value={{ isNewPlanModalOpen, setIsNewPlanModalOpen }}
+            >
+              {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+            </NewPlanModalContext.Provider>
           </IsGuestContext.Provider>
         </ChakraProvider>
         <ToastContainer position="bottom-right" />
