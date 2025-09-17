@@ -43,6 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { width } = useWindowSize();
 
   const isLandingPage = router.asPath === "/";
+  const isLoginPage = router.asPath === "/login";
   const disableApp = !isLandingPage && width && width <= 1100;
   const [isGuest, setIsGuest] = useState(false);
 
@@ -54,18 +55,18 @@ function MyApp({ Component, pageProps }: AppProps) {
       if (
         !isLandingPage &&
         !disableApp &&
+        !isLoginPage &&
         event.ctrlKey &&
         event.shiftKey &&
         event.key === "N"
       ) {
-        console.log("Shortcut triggered!");
         event.preventDefault();
         setIsNewPlanModalOpen(true);
       }
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isLandingPage, disableApp]);
+  }, [isLandingPage, isLoginPage, disableApp]);
 
   return (
     <>
