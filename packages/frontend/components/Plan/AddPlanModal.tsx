@@ -424,7 +424,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     <PlanSelect
                       label="Minor"
                       placeholder="Select a Minor"
-                      name="minor"
+                      name="minors"
                       control={control}
                       options={extractSupportedMinorOptions(
                         catalogYear,
@@ -433,6 +433,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       isDisabled={!catalogYear}
                       isSearchable
                       useFuzzySearch
+                      isMulti={true}
                     />
                     <Flex align="center">
                       <Text size="xs" mr="xs">

@@ -30,7 +30,7 @@ export function useMinor(
 
   return {
     minors: data || [],
-    isLoading: !data && !error,
+    isLoading: key !== null && !data && !error,
     error,
   };
 }
