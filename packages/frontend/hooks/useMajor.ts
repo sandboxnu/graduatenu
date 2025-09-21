@@ -13,13 +13,16 @@ export function useMajor(
   catalogYear: number,
   majorNames: string[]
 ): MajorReturn {
+  const safeMajorNames = (majorNames || []).filter(
+    (name) => name && name.trim() !== ""
+  );
   const key =
-    majorNames.length > 0
-      ? `api/majors/${catalogYear}/${majorNames.join(",")}`
+    safeMajorNames.length > 0
+      ? `api/majors/${catalogYear}/${safeMajorNames.join(",")}`
       : null;
 
   const { data, error } = useSWR(key, async () => {
-    const promises = majorNames.map((majorName) =>
+    const promises = safeMajorNames.map((majorName) =>
       API.majors.get(catalogYear, majorName)
     );
     return Promise.all(promises);
@@ -27,7 +30,7 @@ export function useMajor(
 
   return {
     majors: data || [],
-    isLoading: !data && !error,
+    isLoading: key !== null && !data && !error,
     error,
   };
 }

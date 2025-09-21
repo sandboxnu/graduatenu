@@ -49,8 +49,8 @@ export class Student {
   @Column("text", { array: true, nullable: true })
   majors: string[];
 
-  @Column({ nullable: true })
-  minor: string;
+  @Column("text", { array: true, nullable: true })
+  minors: string[];
 
   @Column({ nullable: true })
   coopCycle: string;
