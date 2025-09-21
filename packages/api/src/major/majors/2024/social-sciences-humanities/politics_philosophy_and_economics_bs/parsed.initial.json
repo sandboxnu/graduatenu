@@ -2,7 +2,7 @@
   "name": "Politics, Philosophy, and Economics, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "9/6/2025"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2024,
@@ -978,7 +978,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Course",
+        "title": "Concentration in Public and Economic Policy",
         "requirements": [
           {
             "type": "COURSE",
@@ -990,7 +990,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective Courses",
+        "title": "Concentration in Public and Economic Policy: Elective Courses",
         "requirements": [
           {
             "type": "XOM",
@@ -1093,7 +1093,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Racial Justice",
         "requirements": [
           {
             "type": "XOM",
@@ -1121,7 +1121,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective Course",
+        "title": "Concentration in Racial Justice: Elective Course",
         "requirements": [
           {
             "type": "COURSE",

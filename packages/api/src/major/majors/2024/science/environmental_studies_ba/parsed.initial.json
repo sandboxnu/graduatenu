@@ -2,7 +2,7 @@
   "name": "Environmental Studies, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "9/6/2025"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2024,
@@ -239,7 +239,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Environmental and Human Health",
         "requirements": [
           {
             "type": "AND",
@@ -278,7 +278,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Environmental and Human Health: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -351,7 +351,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Environmental Ethics and Social Justice",
         "requirements": [
           {
             "type": "COURSE",
@@ -378,7 +378,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Environmental Ethics and Social Justice: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -461,7 +461,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Environmental Law, Governance, and Management",
         "requirements": [
           {
             "type": "COURSE",
@@ -510,7 +510,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Environmental Law, Governance, and Management: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -588,7 +588,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Communication and Visualization: Environmental Problems and Solutions",
         "requirements": [
           {
             "type": "COURSE",
@@ -642,7 +642,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Communication and Visualization: Environmental Problems and Solutions: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -720,7 +720,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in the Green Economy: Business, Entrepreneurship, and Environmental Sustainability",
         "requirements": [
           {
             "type": "COURSE",
@@ -774,7 +774,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in the Green Economy: Business, Entrepreneurship, and Environmental Sustainability: Electives",
         "requirements": [
           {
             "type": "XOM",

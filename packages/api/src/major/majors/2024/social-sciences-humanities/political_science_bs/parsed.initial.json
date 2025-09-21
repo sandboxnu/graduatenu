@@ -2,7 +2,7 @@
   "name": "Political Science, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "9/6/2025"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2024,
@@ -182,7 +182,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Campaigns and Elections",
         "requirements": [
           {
             "type": "COURSE",
@@ -199,7 +199,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Campaigns and Elections Electives",
+        "title": "Concentration in Campaigns and Elections: Campaigns and Elections Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -324,7 +324,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Course",
+        "title": "Concentration in Identity, Culture, and Politics",
         "requirements": [
           {
             "type": "COURSE",
@@ -336,7 +336,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Identity, Culture, and Politics: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -487,7 +487,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Requirement",
+        "title": "Concentration in Public Policy",
         "requirements": [
           {
             "type": "COURSE",
@@ -499,7 +499,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Public Policy: Electives",
         "requirements": [
           {
             "type": "XOM",
