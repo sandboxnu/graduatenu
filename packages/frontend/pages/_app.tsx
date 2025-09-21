@@ -1,10 +1,4 @@
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useState,
-  useEffect,
-} from "react";
+import { Dispatch, SetStateAction, createContext, useState } from "react";
 import { ChakraProvider, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import "@fontsource/montserrat-alternates";
 import type { AppProps } from "next/app";
@@ -17,6 +11,7 @@ import { useWindowSize } from "../hooks";
 import { theme } from "../utils";
 import { ClientSideError } from "../components/Error/ClientSideError";
 import { Analytics } from "@vercel/analytics/react";
+import { ShortcutsProvider } from "../components/Shorcuts/ShortcutsProvider";
 
 interface IsGuestContextType {
   isGuest: boolean;
@@ -43,30 +38,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { width } = useWindowSize();
 
   const isLandingPage = router.asPath === "/";
-  const isLoginPage = router.asPath === "/login";
   const disableApp = !isLandingPage && width && width <= 1100;
   const [isGuest, setIsGuest] = useState(false);
-
   const [isNewPlanModalOpen, setIsNewPlanModalOpen] = useState(false);
-
-  // keyboard shortcut for new plan (ctrl+shift+n)
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (
-        !isLandingPage &&
-        !disableApp &&
-        !isLoginPage &&
-        event.ctrlKey &&
-        event.shiftKey &&
-        event.key === "N"
-      ) {
-        event.preventDefault();
-        setIsNewPlanModalOpen(true);
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isLandingPage, isLoginPage, disableApp]);
 
   return (
     <>
@@ -85,7 +59,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             <NewPlanModalContext.Provider
               value={{ isNewPlanModalOpen, setIsNewPlanModalOpen }}
             >
-              {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+              <ShortcutsProvider>
+                {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+              </ShortcutsProvider>
             </NewPlanModalContext.Provider>
           </IsGuestContext.Provider>
         </ChakraProvider>
