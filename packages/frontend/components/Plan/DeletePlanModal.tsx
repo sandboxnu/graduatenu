@@ -68,7 +68,9 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
 
       mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
       setSelectedPlanId(null);
-      toast.success("Plan deleted successfully.");
+      toast.success(
+        "Plan deleted successfully. Press CTRL+Z or Click 'Restore Plan' to undo"
+      );
 
       onPlanDeleted(deletedPlan);
       onClose();

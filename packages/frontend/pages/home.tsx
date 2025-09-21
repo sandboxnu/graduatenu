@@ -50,6 +50,7 @@ import {
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
+import { RepeatIcon } from "@chakra-ui/icons";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -300,7 +301,7 @@ const HomePage: NextPage = () => {
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>
           <Flex flexDirection="column" rowGap="sm">
-            <Flex alignItems="center">
+            <Flex alignItems="center" gap="2">
               <PlanDropdown
                 selectedPlanId={selectedPlanId}
                 setSelectedPlanId={setSelectedPlanId}
@@ -312,12 +313,18 @@ const HomePage: NextPage = () => {
               />
               {lastDeletedPlan && (
                 <Button
-                  variant="outline"
+                  leftIcon={<RepeatIcon />}
+                  variant="solid"
                   size="md"
                   borderRadius="lg"
+                  borderColor="blue.700"
+                  borderWidth="2px"
+                  bg="blue.100"
+                  color="blue.700"
+                  _hover={{ bg: "blue.200" }}
                   onClick={handleUndoDelete}
                 >
-                  Undo Delete
+                  Restore Plan
                 </Button>
               )}
               {selectedPlan && <EditPlanModal plan={selectedPlan} />}
