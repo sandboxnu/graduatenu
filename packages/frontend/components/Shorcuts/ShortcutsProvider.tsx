@@ -7,6 +7,9 @@ interface ShortcutsProviderProps {
   children?: React.ReactNode;
 }
 
+// Shortcuts provider to manage app-wide keyboard shortcuts
+// is currently wrapped around _app.tsx to enable shortcuts throughout the app
+// shortcuts are automatically disabled on the landing, login, and disabled screen pages
 export const ShortcutsProvider = ({ children }: ShortcutsProviderProps) => {
   const { setIsNewPlanModalOpen } = useContext(NewPlanModalContext);
   const { width } = useWindowSize();
@@ -23,7 +26,8 @@ export const ShortcutsProvider = ({ children }: ShortcutsProviderProps) => {
         // disable shortcuts when app is disabled
         disabled: disableApp,
       },
-      // we can add more shorcuts here in the future
+      // to add a new shortcut, add it to this array, following the same structure
+      // as the one above
     ],
     // by default disabled on landing + login pages
     disabledRoutes: ["/", "/login"],
