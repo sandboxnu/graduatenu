@@ -1,0 +1,634 @@
+{
+  "name": "Bioengineering and Behavioral Neuroscience, BSBioE (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 137,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "BIOE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOE",
+              "classId": 2365,
+              "description": "Bioengineering Measurement, Experimentation, and Statistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOE",
+              "classId": 2366,
+              "description": "Lab for BIOE 2365",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3210,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3310,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3380,
+          "subject": "BIOE"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Bioengineering Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4790,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4792,
+          "subject": "BIOE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 5,
+          "courses": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "AND",
+                  "courses": [
+                    {
+                      "subject": "PHYS",
+                      "classId": 1151,
+                      "description": "Physics for Engineering 1",
+                      "type": "COURSE"
+                    },
+                    {
+                      "subject": "PHYS",
+                      "classId": 1152,
+                      "description": "Lab for PHYS 1151",
+                      "type": "COURSE"
+                    },
+                    {
+                      "subject": "PHYS",
+                      "classId": 1153,
+                      "description": "Interactive Learning Seminar for PHYS 1151",
+                      "type": "COURSE"
+                    }
+                  ]
+                },
+                {
+                  "type": "AND",
+                  "courses": [
+                    {
+                      "subject": "PHYS",
+                      "classId": 1171,
+                      "description": "Physics 1 for Bioscience and Bioengineering",
+                      "type": "COURSE"
+                    },
+                    {
+                      "subject": "PHYS",
+                      "classId": 1172,
+                      "description": "Lab for PHYS 1171",
+                      "type": "COURSE"
+                    },
+                    {
+                      "subject": "PHYS",
+                      "classId": 1173,
+                      "description": "Interactive Learning Seminar for PHYS 1171",
+                      "type": "COURSE"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 5,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1155,
+                  "description": "Physics for Engineering 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1156,
+                  "description": "Lab for PHYS 1155",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1157,
+                  "description": "Interactive Learning Seminar for PHYS 1155",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1175,
+                  "description": "Physics 2 for Bioscience and Bioengineering",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1176,
+                  "description": "Lab for PHYS 1175",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1177,
+                  "description": "Interactive Learning Seminar for PHYS 1175",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 10
+    },
+    {
+      "type": "SECTION",
+      "title": "Behavioral Neuroscience Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3415,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3601,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3605,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4705,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4709,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5587,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5595,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5601,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3506,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3508,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3510,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4512,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4514,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4570,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3302,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4790,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4792,
+          "subject": "BIOE"
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Concentration in Bioengineering of Neural Structure and Function",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3405,
+            "subject": "BIOL"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3200,
+                "subject": "PSYC"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "PT",
+                    "classId": 5410,
+                    "description": "Functional Human Neuroanatomy",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "PT",
+                    "classId": 5411,
+                    "description": "Lab for PT 5410",
+                    "type": "COURSE"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 3458,
+            "subject": "PSYC"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Bioengineering of Neural Structure and Function: Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4991,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5115,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5235,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5250,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5410,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5411,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5420,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5430,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5630,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5640,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5648,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5650,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5660,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5710,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5720,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5750,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5800,
+                "subject": "BIOE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5810,
+                "subject": "BIOE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

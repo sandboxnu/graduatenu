@@ -1,0 +1,242 @@
+{
+  "name": "Environmental and Sustainability Sciences, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Classes",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "AND",
+                  "courses": [
+                    {
+                      "subject": "ENVR",
+                      "classId": 1200,
+                      "description": "Dynamic Earth",
+                      "type": "COURSE"
+                    },
+                    {
+                      "subject": "ENVR",
+                      "classId": 1201,
+                      "description": "Lab for ENVR 1200",
+                      "type": "COURSE"
+                    }
+                  ]
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2200,
+                  "subject": "ENVR"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1400,
+                  "description": "Foundations in Environmental and Sustainability Sciences",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1401,
+                  "description": "Lab for ENVR 1400",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EEMB",
+                  "classId": 2302,
+                  "description": "Ecology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EEMB",
+                  "classId": 2303,
+                  "description": "Lab for EEMB 2302",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2515,
+              "subject": "ENVR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Coursework",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1450,
+          "subject": "EEMB"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3465,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4001,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1200,
+              "description": "Dynamic Earth",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1201,
+              "description": "Lab for ENVR 1200",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2310,
+              "description": "Earth Materials",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2311,
+              "description": "Lab for ENVR 2310",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3125,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3150,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3151,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5210,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5350,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5260,
+          "subject": "PPUA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5268,
+          "subject": "PPUA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 21
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "name": "Japanese, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "JPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "JPNS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "JPNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2302,
+              "subject": "JPNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3301,
+              "subject": "JPNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "JPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "JPNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "ASNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1252,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2351,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1260,
+          "subject": "JPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1700,
+          "subject": "JPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1944,
+          "subject": "JPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "JPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 9
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

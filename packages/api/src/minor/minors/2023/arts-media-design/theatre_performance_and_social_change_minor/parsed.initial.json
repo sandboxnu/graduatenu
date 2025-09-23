@@ -1,0 +1,126 @@
+{
+  "name": "Theatre, Performance, and Social Change, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1215,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Theatrical Interventions in Social Issues",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5300,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Community Engagement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1412,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3520,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5309,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "JRNL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "WMNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

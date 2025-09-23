@@ -1,0 +1,660 @@
+{
+  "name": "Computer Science and Media Arts, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 133,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Computer Science Overview",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ARTF"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1210,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EEAM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Fundamental Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 1800,
+              "description": "Discrete Structures",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 1802,
+              "description": "Seminar for CS 1800",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2000,
+              "description": "Introduction to Program Design and Implementation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2001,
+              "description": "Lab for CS 2000",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2100,
+              "description": "Program Design and Implementation 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2101,
+              "description": "Lab for CS 2100",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Science Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2484,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "CS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 3100,
+              "description": "Program Design and Implementation 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 3101,
+              "description": "Lab for CS 3100",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4300,
+          "subject": "CS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4530,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4535,
+              "subject": "CS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Khoury Approved Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "CS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "CS",
+              "classId": 5010,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "CY",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "CY",
+              "classId": 4930,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "DS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
+            {
+              "subject": "DS",
+              "classId": 4900,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "MKTG"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "College Writing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3314,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Fundamentals Required",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "ARTF"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1240,
+              "description": "Making with Video, Sound, and Animation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1241,
+              "description": "Making with Video, Sound, and Animation Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Fundamentals Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "ARTF"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1230,
+              "description": "Making with Form and Materials",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1231,
+              "description": "Making with Form and Materials Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1250,
+              "description": "Designing Interactive Experiences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1251,
+              "description": "Designing Interactive Experiences Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Media Arts Required",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 1001,
+              "description": "Media Art, Culture, and Social Justice",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 1002,
+              "description": "Seminar for ARTD 1001",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2100,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Media Arts Electives",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Basics",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "ARTD"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2360,
+                  "description": "Introduction to Photography",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2361,
+                  "description": "Photo Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2370,
+                  "description": "Animation Basics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2371,
+                  "description": "Animation Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2380,
+                  "description": "Video Basics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2381,
+                  "description": "Video Tools",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 4
+        },
+        {
+          "type": "SECTION",
+          "title": "Photography",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4565,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4660,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4661,
+              "subject": "ARTD"
+            }
+          ],
+          "minRequirementCount": 4
+        },
+        {
+          "type": "SECTION",
+          "title": "Animation",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3470,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3471,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3472,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3473,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3490,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4570,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4575,
+              "subject": "ARTD"
+            }
+          ],
+          "minRequirementCount": 7
+        },
+        {
+          "type": "SECTION",
+          "title": "Video",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3480,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3485,
+              "subject": "ARTD"
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "History",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2212,
+              "subject": "ARTH"
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Media Arts Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4530,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computing and Social Issues",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4170,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5240,
+          "subject": "CY"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "PHIL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2220,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4528,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2484,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4300,
+          "subject": "CS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

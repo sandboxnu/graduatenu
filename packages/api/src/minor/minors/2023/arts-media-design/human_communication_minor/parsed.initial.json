@@ -1,0 +1,111 @@
+{
+  "name": "Human Communication, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1131,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1231,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2131,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2135,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2304,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2534,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2535,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3230,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3530,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3532,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4535,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

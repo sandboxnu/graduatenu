@@ -1,0 +1,213 @@
+{
+  "name": "Cell and Molecular Biology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introductory Biology 1",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1107,
+              "description": "Foundations of Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1108,
+              "description": "Lab for BIOL 1107",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Biology 2",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1113,
+              "description": "General Biology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1114,
+              "description": "Lab for BIOL 1113",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2299,
+          "subject": "BIOL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Genetics and Cell Biology",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4707,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5591,
+              "subject": "BIOL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3405,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3411,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3421,
+              "description": "Microbiology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3422,
+              "description": "Lab for BIOL 3421",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3605,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3611,
+              "description": "Biochemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3612,
+              "description": "Lab for BIOL 3611",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 4705,
+          "idRangeEnd": 4709,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 5301,
+          "idRangeEnd": 5306,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 5499,
+          "idRangeEnd": 5583,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 5587,
+          "idRangeEnd": 5597,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 10
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

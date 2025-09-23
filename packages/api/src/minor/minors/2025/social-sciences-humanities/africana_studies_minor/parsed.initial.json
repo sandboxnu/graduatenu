@@ -1,0 +1,214 @@
+{
+  "name": "Africana Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to Africana Studies",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Approaches to the Field",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1140,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1225,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2270,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3120,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3305,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3323,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5544,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Exploring Intellectual Traditions and Cultural Production",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2296,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2455,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2619,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2690,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3404,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3664,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3900,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4588,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Understanding Social Organization and Structures",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1261,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2318,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2337,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2390,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2410,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2900,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3424,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4526,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4939,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

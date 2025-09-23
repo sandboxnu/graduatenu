@@ -1,0 +1,104 @@
+{
+  "name": "Design and Innovation in Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3462,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2160,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2010,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2030,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4993,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3412,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "INNO"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

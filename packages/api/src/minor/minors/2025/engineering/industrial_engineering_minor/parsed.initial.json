@@ -1,0 +1,132 @@
+{
+  "name": "Industrial Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 2310,
+              "description": "Introduction to Industrial Engineering",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 2311,
+              "description": "Recitation for IE 2310",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3412,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "IE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Technical Elective",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 3425,
+              "description": "Engineering Database Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 3426,
+              "description": "Recitation for IE 3425",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4512,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4516,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4520,
+          "subject": "IE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 4522,
+              "description": "Human-Machine Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 4523,
+              "description": "Lab for IE 4522",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4525,
+          "subject": "IE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 4530,
+              "description": "Manufacturing Systems and Techniques",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 4531,
+              "description": "Lab for IE 4530",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

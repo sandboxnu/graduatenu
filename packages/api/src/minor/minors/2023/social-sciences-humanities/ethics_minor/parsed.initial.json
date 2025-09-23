@@ -1,0 +1,237 @@
+{
+  "name": "Ethics, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1106,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1112,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1133,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1162,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1170,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1185,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1195,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1271,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1275,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1666,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1667,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2016,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2143,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2155,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2390,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2395,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2619,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3305,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3822,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4050,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5005,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 43
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

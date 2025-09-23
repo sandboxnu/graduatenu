@@ -1,0 +1,136 @@
+{
+  "name": "Interdisciplinary Artificial Intelligence, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Technology and Ethics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential, Project-Based, and Applied Coursework",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2710,
+          "subject": "INMI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4604,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3203,
+          "subject": "ORGB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3501,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1801,
+          "subject": "CRWT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4390,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5800,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2710,
+          "subject": "INMI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3330,
+          "subject": "INTB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4604,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3203,
+          "subject": "ORGB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5360,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4211,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 15
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,1190 @@
+{
+  "name": "Business Administration and Psychology, BS (Oakland)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Business Core Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "ACCT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "ACCT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1203,
+          "subject": "INTB"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "MISM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "SCHM"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "MKTG"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "ORGB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3203,
+              "subject": "ORGB"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4501,
+          "subject": "STRT"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses for Business",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1115,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1116,
+              "subject": "ECON"
+            }
+          ]
+        },
+        {
+          "type": "SECTION",
+          "title": "Mathematics",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1231,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1245,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1340,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ],
+          "minRequirementCount": 6
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3402,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3404,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Statistics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "MGSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4656,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4658,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4662,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4664,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4666,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4668,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4674,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4676,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4678,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4682,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Lab",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4604,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4612,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4614,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4616,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4622,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4624,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4626,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4628,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "PSYC",
+          "idRangeStart": 1001,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "ORGB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3203,
+              "subject": "ORGB"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "BUSN"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Preparation",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1103,
+              "subject": "BUSN"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirement",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "ENGW"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3304,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Business Experiential Learning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4945,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3945,
+          "subject": "COOP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3946,
+          "subject": "COOP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3947,
+          "subject": "COOP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3948,
+          "subject": "COOP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2945,
+          "subject": "EEBA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2948,
+          "subject": "EEBA"
+        }
+      ],
+      "minRequirementCount": 7
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Concentration in Entrepreneurial Startups",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4501,
+            "subject": "ENTR"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Entrepreneurial Startups: Electives",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2303,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3305,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3330,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2215,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2225,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3217,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3304,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3401,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4414,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4983,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5000,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4610,
+            "subject": "FINA"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2206,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2304,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2414,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3303,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3309,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3335,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4225,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4983,
+            "subject": "INNO"
+          }
+        ],
+        "minRequirementCount": 20
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Finance",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3303,
+                "subject": "FINA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Finance: Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "OR",
+                "courses": [
+                  {
+                    "type": "COURSE",
+                    "classId": 2720,
+                    "subject": "FINA"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 3520,
+                    "subject": "INNO"
+                  },
+                  {
+                    "type": "COURSE",
+                    "classId": 3309,
+                    "subject": "INNO"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 2730,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3303,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3305,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3401,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4219,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4220,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4310,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4320,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4330,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4335,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4340,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4350,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4370,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4390,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4410,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4412,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4420,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4460,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4512,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4514,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4516,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4524,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4526,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4602,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4604,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4605,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4610,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "FINA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Fintech",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3303,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "FINA"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "CS",
+                "classId": 2000,
+                "description": "Introduction to Program Design and Implementation",
+                "type": "COURSE"
+              },
+              {
+                "subject": "CS",
+                "classId": 2001,
+                "description": "Lab for CS 2000",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "CS",
+                "classId": 2100,
+                "description": "Program Design and Implementation 1",
+                "type": "COURSE"
+              },
+              {
+                "subject": "CS",
+                "classId": 2101,
+                "description": "Lab for CS 2100",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "DS",
+                "classId": 2500,
+                "description": "Intermediate Programming with Data",
+                "type": "COURSE"
+              },
+              {
+                "subject": "DS",
+                "classId": 2501,
+                "description": "Lab for DS 2500",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 2560,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4335,
+            "subject": "FINA"
+          }
+        ],
+        "minRequirementCount": 6
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Fintech: Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4520,
+                "subject": "CS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2730,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4340,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4350,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4390,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4460,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4605,
+                "subject": "FINA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Marketing",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2602,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3401,
+                "subject": "MKTG"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Marketing: Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4414,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2301,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2602,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2720,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3401,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3402,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3501,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3720,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4120,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4220,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4420,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4502,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4504,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4506,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4508,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4510,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4512,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4604,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4606,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4720,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "MKTG"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Social Innovation and Entrepreneurship",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4506,
+            "subject": "INNO"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Social Innovation and Entrepreneurship: Electives",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2206,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2414,
+            "subject": "INNO"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3309,
+            "subject": "INNO"
+          },
+          {
+            "type": "SECTION",
+            "title": "Additional Electives",
+            "requirements": [
+              {
+                "type": "COURSE",
+                "classId": 2303,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3217,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3304,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3305,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3330,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2304,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3335,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3520,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4225,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2301,
+                "subject": "MKTG"
+              }
+            ],
+            "minRequirementCount": 12
+          }
+        ],
+        "minRequirementCount": 4
+      }
+    ]
+  }
+}

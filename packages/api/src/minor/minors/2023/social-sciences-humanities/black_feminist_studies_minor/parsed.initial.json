@@ -1,0 +1,90 @@
+{
+  "name": "Black Feminist Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1103,
+          "subject": "WMNS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "AFAM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "AFRS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1113,
+              "subject": "AFAM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "AFRS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2455,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1225,
+              "subject": "WMNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2505,
+              "subject": "WMNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "WMNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

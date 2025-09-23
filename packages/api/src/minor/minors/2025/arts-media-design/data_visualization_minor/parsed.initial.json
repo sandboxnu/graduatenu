@@ -1,0 +1,98 @@
+{
+  "name": "Data Visualization, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2262,
+              "description": "Prototyping with Code",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2263,
+              "description": "Lab for ARTG 2262",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2242,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3444,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5110,
+              "subject": "ARTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 6,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5310,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5320,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5330,
+              "subject": "ARTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "name": "Environmental Chemistry, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Environmental Chemistry Core",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2335,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemistry Core",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2321,
+              "description": "Analytical Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2322,
+              "description": "Lab for CHEM 2321",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2323,
+              "description": "Recitation for CHEM 2321",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 3331,
+              "description": "Bioanalytical Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3332,
+              "description": "Lab for CHEM 3331",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Research Experience",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4750,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4901,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "CIVE"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4900,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4997,
+              "subject": "ENVR"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4992,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2335,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3435,
+              "subject": "CIVE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CIVE",
+                  "classId": 5300,
+                  "description": "Environmental Sampling and Analysis",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CIVE",
+                  "classId": 5301,
+                  "description": "Lab for CIVE 5300",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3125,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3410,
+              "subject": "ENVR"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 4500,
+                  "description": "Applied Hydrogeology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 4501,
+                  "description": "Lab for ENVR 4500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4504,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4505,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5190,
+              "subject": "ENVR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

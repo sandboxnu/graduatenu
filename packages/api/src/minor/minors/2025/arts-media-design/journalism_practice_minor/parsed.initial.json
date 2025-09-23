@@ -1,0 +1,133 @@
+{
+  "name": "Journalism Practice, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Restricted Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3370,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3610,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3630,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3650,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3680,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5309,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5310,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5311,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5314,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5316,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5360,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5460,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5500,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
