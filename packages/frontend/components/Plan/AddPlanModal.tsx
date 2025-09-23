@@ -1,4 +1,4 @@
-import { AddIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import { AddIcon, ChevronDownIcon, SmallCloseIcon } from "@chakra-ui/icons";
 import {
   Text,
   Stack,
@@ -98,6 +98,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
+  const [showAdvancedEdit, setShowAdvancedEdit] = useState(false);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
@@ -480,7 +481,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         useFuzzySearch
                       />
                     )}
-                    {minors?.map((minor, index) => (
+                    {/* {minors?.map((minor, index) => (
                       <Box key={index} w="100%">
                         <PlanSelect
                           label={
@@ -518,8 +519,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                           }
                         />
                       </Box>
-                    ))}
-                    <Text
+                    ))} */}
+                    {/* <Text
                       cursor="pointer"
                       textColor="blue.500"
                       fontWeight="bold"
@@ -529,13 +530,38 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       }}
                     >
                       + Add a Minor
-                    </Text>
+                    </Text> */}
                     <Flex align="center">
                       <Text size="xs" mr="xs">
                         Can&apos;t find your major / minor?
                       </Text>
                       <HelperToolTip label="We are working to support all majors, but in the meantime, you can submit feedback requesting your major and select 'No Major' so that you can still use our planner!" />
                     </Flex>
+
+                    <Box w="100%">
+                      <Flex justify="flex-end" w="100%" mb="sm">
+                        <Text
+                          cursor="pointer"
+                          color="primary"
+                          fontWeight="medium"
+                          fontSize="sm"
+                          onClick={() => setShowAdvancedEdit(!showAdvancedEdit)}
+                          display="flex"
+                          alignItems="center"
+                        >
+                          Advanced edit
+                          <ChevronDownIcon
+                            ml="1"
+                            transform={
+                              showAdvancedEdit
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)"
+                            }
+                            transition="transform 0.2s"
+                          />
+                        </Text>
+                      </Flex>
+                    </Box>
 
                     {/* Template option - show when a template is available */}
                     {hasTemplate && majors && catalogYear && (
