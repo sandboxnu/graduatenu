@@ -1,4 +1,4 @@
-import { EditIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import { EditIcon } from "@chakra-ui/icons";
 import {
   Button,
   Checkbox,

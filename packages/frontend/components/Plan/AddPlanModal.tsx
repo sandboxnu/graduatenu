@@ -1,4 +1,4 @@
-import { AddIcon, ChevronDownIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Text,
   Stack,
