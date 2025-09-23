@@ -1,0 +1,118 @@
+{
+  "name": "Early Intervention, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5150,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5151,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5153,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5152,
+          "subject": "SLPA"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Practicum and Electives Options",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Option 1: Practicum Courses",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 5154,
+              "subject": "SLPA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5155,
+              "subject": "SLPA"
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "Option 2: Electives",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3480,
+              "subject": "CAEP"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1717,
+              "subject": "HLTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "HUSV"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "HUSV"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3520,
+              "subject": "HUSV"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "PSYC"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1255,
+                  "subject": "SOCL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1255,
+                  "subject": "WMNS"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 7
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

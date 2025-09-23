@@ -1,0 +1,85 @@
+{
+  "name": "Photojournalism, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Photography Foundation",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ARTE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2360,
+              "description": "Introduction to Photography",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2361,
+              "description": "Photo Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Photography Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5314,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

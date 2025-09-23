@@ -1,0 +1,126 @@
+{
+  "name": "Ethnomusicology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1001,
+              "subject": "MUSC"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "MUSC",
+                  "classId": 1002,
+                  "description": "Music in Everyday Life",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "MUSC",
+                  "classId": 1003,
+                  "description": "Lab for MUSC 1002",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Ethnomusicology Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1128,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1137,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2313,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2336,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3353,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3354,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3355,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3210,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3351,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 13
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

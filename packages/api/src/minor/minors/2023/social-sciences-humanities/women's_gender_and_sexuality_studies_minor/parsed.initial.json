@@ -1,0 +1,600 @@
+{
+  "name": "Women's, Gender, and Sexuality Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1103,
+          "subject": "WMNS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1101,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1102,
+                  "subject": "SOCL"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1105,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1105,
+                  "subject": "HIST"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1225,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1225,
+                  "subject": "AFAM"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1225,
+                  "subject": "HIST"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1990,
+              "subject": "WMNS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2259,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2259,
+                  "subject": "JWSS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2259,
+                  "subject": "PHIL"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2303,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2303,
+                  "subject": "HIST"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2303,
+                  "subject": "SOCL"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2325,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2325,
+                  "subject": "AFRS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2373,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2373,
+                  "subject": "HIST"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2455,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2455,
+                  "subject": "ENGL"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2505,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2505,
+                  "subject": "MSCR"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2990,
+              "subject": "WMNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2991,
+              "subject": "WMNS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3100,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3100,
+                  "subject": "ANTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3100,
+                  "subject": "POLS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3305,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3305,
+                  "subject": "AFRS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3305,
+                  "subject": "HIST"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3500,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3500,
+                  "subject": "PHIL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3500,
+                  "subject": "POLS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3900,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3900,
+                  "subject": "AFRS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3900,
+                  "subject": "ENGL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3990,
+              "subject": "WMNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4990,
+              "subject": "WMNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4992,
+              "subject": "WMNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4994,
+              "subject": "WMNS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 5240,
+                  "subject": "WMNS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 5240,
+                  "subject": "HIST"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 5240,
+                  "subject": "SOCL"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2302,
+                  "subject": "ANTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2302,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2304,
+                  "subject": "COMM"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2304,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3530,
+              "subject": "COMM"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3110,
+                  "subject": "CRIM"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3110,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3412,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5292,
+              "subject": "ECON"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3678,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3678,
+                  "subject": "JWSS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3678,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2755,
+              "subject": "GAME"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2800,
+                  "subject": "HUSV"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2800,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2480,
+                  "subject": "INTL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2480,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5250,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3456,
+              "subject": "LING"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3392,
+                  "subject": "MSCR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3392,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3437,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "NRSG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3303,
+              "subject": "NRSG"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1104,
+                  "subject": "PHIL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1104,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1271,
+                  "subject": "PHIL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1271,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3309,
+              "subject": "POLS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1255,
+                  "subject": "SOCL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1255,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1260,
+                  "subject": "SOCL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1260,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4520,
+                  "subject": "SOCL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4520,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2500,
+                  "subject": "THTR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2501,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3200,
+                  "subject": "THTR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3200,
+                  "subject": "WMNS"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

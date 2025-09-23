@@ -1,0 +1,52 @@
+{
+  "name": "Early Intervention, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5150,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5151,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5153,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5152,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5154,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5155,
+          "subject": "SLPA"
+        }
+      ],
+      "minRequirementCount": 6
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

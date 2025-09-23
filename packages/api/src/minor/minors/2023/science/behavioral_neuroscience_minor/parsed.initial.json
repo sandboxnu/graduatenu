@@ -1,0 +1,143 @@
+{
+  "name": "Behavioral Neuroscience, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Intermediate Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3458,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3405,
+              "subject": "BIOL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Core Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3506,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3508,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3510,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4512,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4514,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4570,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Biology Core Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3415,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3601,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3605,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4705,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4709,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5587,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5595,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5601,
+              "subject": "BIOL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

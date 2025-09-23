@@ -1,0 +1,69 @@
+{
+  "name": "Business Administration, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Accounting",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1209,
+          "subject": "ACCT"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Organizational Behavior",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3209,
+          "subject": "ORGB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Finance",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2209,
+          "subject": "FINA"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Marketing",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2209,
+          "subject": "MKTG"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Business Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

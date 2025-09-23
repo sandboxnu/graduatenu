@@ -1,0 +1,211 @@
+{
+  "name": "Consulting, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3110,
+          "subject": "BUSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "MGMT"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Consulting Skills",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4533,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3220,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4602,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3302,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3315,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3530,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4310,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4410,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4301,
+          "subject": "STRT"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Consulting Contexts",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3403,
+          "subject": "ACCT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3416,
+          "subject": "ACCT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2550,
+          "subject": "CY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "DS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "EMGT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3330,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4420,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4514,
+          "subject": "FINA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4525,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4625,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5400,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5640,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2501,
+          "subject": "INTB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3305,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3420,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3301,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4506,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5575,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

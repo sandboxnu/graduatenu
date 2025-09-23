@@ -1,0 +1,232 @@
+{
+  "name": "Public Health, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4604,
+              "subject": "NRSG"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4202,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ECON"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2280,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "MGSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5120,
+          "subject": "NRSG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3450,
+          "subject": "PHMD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 13
+    },
+    {
+      "type": "SECTION",
+      "title": "Complete one course from the options below. Categories are provided to assist with selection.",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Nutrition and Wellness",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "EXSC"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1105,
+                  "subject": "HSCI"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1106,
+                  "subject": "HSCI"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2300,
+                  "subject": "PHTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2301,
+                  "subject": "PHTH"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4540,
+              "subject": "PHTH"
+            }
+          ],
+          "minRequirementCount": 4
+        },
+        {
+          "type": "SECTION",
+          "title": "Policy and Administration",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2515,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4511,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4515,
+              "subject": "PHTH"
+            }
+          ],
+          "minRequirementCount": 3
+        },
+        {
+          "type": "SECTION",
+          "title": "Society and Health",
+          "requirements": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1270,
+                  "subject": "PHTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1270,
+                  "subject": "AFRS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2414,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4120,
+              "subject": "PHTH"
+            }
+          ],
+          "minRequirementCount": 3
+        },
+        {
+          "type": "SECTION",
+          "title": "Research Methods",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3250,
+              "subject": "PHTH"
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

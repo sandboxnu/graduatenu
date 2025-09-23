@@ -1,0 +1,117 @@
+{
+  "name": "Mechanical Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "ME"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ME",
+              "classId": 2380,
+              "description": "Thermodynamics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ME",
+              "classId": 2381,
+              "description": "Recitation for ME 2380",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Mechanical Engineering Technical Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2355,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3455,
+              "subject": "ME"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3475,
+                  "subject": "ME"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3480,
+                  "subject": "ME"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4508,
+                  "subject": "ME"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4565,
+                  "subject": "ME"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4550,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4555,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4570,
+              "subject": "ME"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

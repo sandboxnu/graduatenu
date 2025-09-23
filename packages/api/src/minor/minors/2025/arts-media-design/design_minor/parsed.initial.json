@@ -1,0 +1,142 @@
+{
+  "name": "Design, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Art and Design Fundamentals Required",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "ARTF"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Art and Design Fundamentals Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "ARTF"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "ARTF"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1230,
+              "description": "Making with Form and Materials",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1231,
+              "description": "Making with Form and Materials Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1240,
+              "description": "Making with Video, Sound, and Animation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1241,
+              "description": "Making with Video, Sound, and Animation Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1250,
+              "description": "Designing Interactive Experiences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1251,
+              "description": "Designing Interactive Experiences Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Required",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1001,
+              "description": "Design Perspectives: An Introduction to Design in the World",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1002,
+              "description": "Seminar for Design Perspectives",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1270,
+              "description": "Design: Process + Practices",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1271,
+              "description": "Studio for Design: Process + Practices",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

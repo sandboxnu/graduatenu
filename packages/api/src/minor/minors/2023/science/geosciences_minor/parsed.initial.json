@@ -1,0 +1,176 @@
+{
+  "name": "Geosciences, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1200,
+              "description": "Dynamic Earth",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1201,
+              "description": "Lab for ENVR 1200",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "ENVR"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 5,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2310,
+                  "description": "Earth Materials",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2311,
+                  "description": "Lab for ENVR 2310",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2340,
+                  "description": "Earth Landforms and Processes",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2341,
+                  "description": "Lab for ENVR 2340",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Geology Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2340,
+                  "description": "Earth Landforms and Processes",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2341,
+                  "description": "Lab for ENVR 2340",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3125,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "ENVR"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 3300,
+                  "description": "Geographic Information Systems",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 3301,
+                  "description": "Lab for ENVR 3300",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3410,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3600,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5150,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5190,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5202,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5210,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5350,
+              "subject": "ENVR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "name": "Computer Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Core Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2160,
+          "subject": "EECE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2310,
+              "description": "Introduction to Digital Design and Computer Architecture",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2311,
+              "description": "Lab for EECE 2310",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Fundamental Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2322,
+              "description": "Fundamentals of Digital Design and Computer Organization",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2323,
+              "description": "Lab for EECE 2322",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2540,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2560,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Engineering Technical Elective",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "EECE",
+          "idRangeStart": 2322,
+          "idRangeEnd": 2750,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "EECE",
+          "idRangeStart": 3324,
+          "idRangeEnd": 4698,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "EECE",
+          "idRangeStart": 5576,
+          "idRangeEnd": 5698,
+          "exceptions": []
+        },
+        {
+          "type": "COURSE",
+          "classId": 5670,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

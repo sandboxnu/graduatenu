@@ -1,0 +1,115 @@
+{
+  "name": "Strategy, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4501,
+              "subject": "STRT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4202,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4509,
+              "subject": "STRT"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3305,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4420,
+              "subject": "FINA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2414,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4225,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3320,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4310,
+              "subject": "MGMT"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4550,
+                  "subject": "MGMT"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3110,
+                  "subject": "BUSN"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3301,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4301,
+              "subject": "STRT"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

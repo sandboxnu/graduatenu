@@ -1,0 +1,48 @@
+{
+  "name": "Philosophy, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "POLS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

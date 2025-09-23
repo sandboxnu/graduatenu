@@ -1,0 +1,138 @@
+{
+  "name": "Human Movement Science, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "PT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "PT"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1113,
+              "subject": "BIOL"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 2217,
+                  "description": "Integrated Anatomy and Physiology 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 2218,
+                  "description": "Lab for BIOL 2217",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2219,
+              "description": "Integrated Anatomy and Physiology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2220,
+              "description": "Lab for BIOL 2219",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5601,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "EXSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1880,
+          "subject": "PT"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PT",
+              "classId": 3300,
+              "description": "Human Gross Anatomy",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PT",
+              "classId": 3301,
+              "description": "Lab for PT 3300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PT",
+              "classId": 5410,
+              "description": "Functional Human Neuroanatomy",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PT",
+              "classId": 5411,
+              "description": "Lab for PT 5410",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

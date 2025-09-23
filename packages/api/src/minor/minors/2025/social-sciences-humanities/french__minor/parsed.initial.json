@@ -1,0 +1,149 @@
+{
+  "name": "French,  Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "FRNH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "FRNH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "FRNH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2900,
+              "subject": "FRNH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "FRNH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2900,
+              "subject": "FRNH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "FRNH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "FRNH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "FRNH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "FRNH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "FRNH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "FRNH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1973,
+          "subject": "FRNH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2900,
+          "subject": "FRNH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "FRNH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "FRNH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3900,
+          "subject": "FRNH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4800,
+          "subject": "FRNH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4944,
+          "subject": "FRNH"
+        }
+      ],
+      "minRequirementCount": 10
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

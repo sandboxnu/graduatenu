@@ -1,0 +1,347 @@
+{
+  "name": "Chemical Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Chemical Engineering Core Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2308,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5101,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5102,
+          "subject": "CHME"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Thermodynamics Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3380,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3611,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1151,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1161,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1214,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2161,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2315,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3431,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3322,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2335,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4305,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4621,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Transport Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3310,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3312,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5179,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5621,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2221,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2412,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2530,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3475,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3480,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4565,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4570,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1147,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1161,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1171,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1175,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2371,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3602,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3603,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Reaction Engineering and Kinetics Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3331,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5630,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5683,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3335,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4534,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3470,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4670,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3430,
+          "subject": "PHSC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemical Engineering Elective",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "CHME",
+          "idRangeStart": 2000,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

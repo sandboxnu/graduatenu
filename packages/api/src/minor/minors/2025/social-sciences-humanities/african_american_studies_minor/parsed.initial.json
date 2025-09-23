@@ -1,0 +1,82 @@
+{
+  "name": "African American Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Humanities",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2296,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3210,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Social Sciences",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3305,
+          "subject": "AFCS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4939,
+          "subject": "AFCS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
