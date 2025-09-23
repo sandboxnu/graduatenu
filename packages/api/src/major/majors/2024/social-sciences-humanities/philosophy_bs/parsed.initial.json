@@ -2,7 +2,7 @@
   "name": "Philosophy, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "9/6/2025"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2024,
@@ -12,7 +12,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Philosophy Required Courses",
+        "title": "Philosophy Major (no concentration)",
         "requirements": [
           {
             "type": "COURSE",
@@ -44,19 +44,19 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Advanced Electives/Seminar",
+        "title": "Philosophy Major (no concentration): Philosophy Advanced Electives/Seminar",
         "requirements": [],
         "minRequirementCount": 0
       },
       {
         "type": "SECTION",
-        "title": "Additional Electives",
+        "title": "Philosophy Major (no concentration): Additional Electives",
         "requirements": [],
         "minRequirementCount": 0
       },
       {
         "type": "SECTION",
-        "title": "Critical Philosophy Electives",
+        "title": "Philosophy Major (no concentration): Critical Philosophy Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -103,7 +103,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Required Courses",
+        "title": "Philosophy Major with a Concentration in Law and Ethics",
         "requirements": [
           {
             "type": "COURSE",
@@ -140,13 +140,13 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Advanced Electives/Seminar",
+        "title": "Philosophy Major with a Concentration in Law and Ethics: Philosophy Advanced Electives/Seminar",
         "requirements": [],
         "minRequirementCount": 0
       },
       {
         "type": "SECTION",
-        "title": "Ethics-Related Electives",
+        "title": "Philosophy Major with a Concentration in Law and Ethics: Ethics-Related Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -314,7 +314,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Law-Related Electives",
+        "title": "Philosophy Major with a Concentration in Law and Ethics: Law-Related Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -407,7 +407,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Critical Philosophy Electives",
+        "title": "Philosophy Major with a Concentration in Law and Ethics: Critical Philosophy Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -454,7 +454,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Required Courses",
+        "title": "Philosophy Major with a Concentration in Ethics",
         "requirements": [
           {
             "type": "COURSE",
@@ -491,7 +491,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Advanced Electives/Seminar",
+        "title": "Philosophy Major with a Concentration in Ethics: Philosophy Advanced Electives/Seminar",
         "requirements": [
           {
             "type": "COURSE",
@@ -558,7 +558,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Ethics Courses",
+        "title": "Philosophy Major with a Concentration in Ethics: Ethics Courses",
         "requirements": [
           {
             "type": "XOM",
@@ -726,7 +726,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Critical Philosophy Electives",
+        "title": "Philosophy Major with a Concentration in Ethics: Critical Philosophy Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -773,7 +773,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Required Courses",
+        "title": "Philosophy Major with a Concentration in Religious Studies",
         "requirements": [
           {
             "type": "COURSE",
@@ -810,13 +810,13 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Advanced Electives/Seminar",
+        "title": "Philosophy Major with a Concentration in Religious Studies: Philosophy Advanced Electives/Seminar",
         "requirements": [],
         "minRequirementCount": 0
       },
       {
         "type": "SECTION",
-        "title": "Religious Studies Courses",
+        "title": "Philosophy Major with a Concentration in Religious Studies: Religious Studies Courses",
         "requirements": [
           {
             "type": "XOM",
@@ -919,7 +919,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Required Courses",
+        "title": "Philosophy Major with a Concentration in Formal Methods",
         "requirements": [
           {
             "type": "COURSE",
@@ -956,7 +956,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Formal Methods Courses",
+        "title": "Philosophy Major with a Concentration in Formal Methods: Formal Methods Courses",
         "requirements": [
           {
             "type": "COURSE",
@@ -1053,13 +1053,13 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Electives",
+        "title": "Philosophy Major with a Concentration in Formal Methods: Philosophy Electives",
         "requirements": [],
         "minRequirementCount": 0
       },
       {
         "type": "SECTION",
-        "title": "Critical Philosophy Electives",
+        "title": "Philosophy Major with a Concentration in Formal Methods: Critical Philosophy Electives",
         "requirements": [
           {
             "type": "COURSE",

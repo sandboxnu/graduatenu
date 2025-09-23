@@ -2,8 +2,6 @@ import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { config } from "dotenv";
 import { Plan } from "./src/plan/entities/plan.entity";
 import { Student } from "./src/student/entities/student.entity";
-import { readFileSync } from "fs";
-import { join } from "path";
 
 config({ path: `.env.${process.env.NODE_ENV}.local` });
 
@@ -21,19 +19,19 @@ const ormconfig: TypeOrmModuleOptions = {
     migrationsDir: "migrations",
   },
   keepConnectionAlive: process.env.NODE_ENV === "testing",
+  ssl:
+    process.env.NODE_ENV === "production" || process.env.NODE_ENV === "staging"
+      ? {
+          require: true,
+          rejectUnauthorized: false,
+        }
+      : false,
 };
 
-if (
-  process.env.NODE_ENV === "production" ||
-  process.env.NODE_ENV === "staging"
-) {
-  ormconfig.extra = {
-    ssl: {
-      ca: readFileSync(
-        join("assets", "RDS.us-east-1.ca-bundle.pem")
-      ).toString(),
-    },
-  };
-}
+console.log(
+  `Database SSL: ${ormconfig.ssl ? "enabled" : "disabled"} (NODE_ENV: ${
+    process.env.NODE_ENV
+  })`
+);
 
 export default ormconfig;
