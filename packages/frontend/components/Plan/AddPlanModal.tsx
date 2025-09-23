@@ -517,9 +517,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         minors?.map((minor, index) => (
                           <Box key={index} w="100%">
                             <PlanSelect
-                              label={
-                                index === 0 ? "Minor(s)" : `Minor ${index + 1}`
-                              }
+                              label={index === 0 ? "Minor(s)" : undefined}
                               placeholder="Select a Minor"
                               name={`minors.${index}`}
                               isMulti={false}
