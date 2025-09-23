@@ -398,19 +398,22 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                           useFuzzySearch
                           removeButton={
                             index > 0 ? (
-                              <SmallCloseIcon
+                              <CloseButton
                                 position="absolute"
-                                top="8px"
-                                right="8px"
+                                top="-5px"
+                                right="-5px"
                                 cursor="pointer"
-                                color="red.500"
+                                color="white"
+                                bg="red.500"
                                 boxSize="16px"
+                                fontSize="8px"
                                 _hover={{ color: "red.700" }}
                                 onClick={() => {
                                   const newMinors = minors.filter(
                                     (_, i) => i !== index
                                   );
                                   setValue("minors", newMinors);
+                                  setValue("concentration", "");
                                 }}
                               />
                             ) : undefined
