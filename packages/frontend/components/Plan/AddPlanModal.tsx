@@ -513,57 +513,60 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         </Text>
                       </Flex>
 
-                      {showAdvancedEdit &&
-                        minors?.map((minor, index) => (
-                          <Box key={index} w="100%">
-                            <PlanSelect
-                              label={index === 0 ? "Minor(s)" : undefined}
-                              placeholder="Select a Minor"
-                              name={`minors.${index}`}
-                              isMulti={false}
-                              control={control}
-                              options={extractSupportedMinorOptions(
-                                catalogYear,
-                                supportedMinorsData
-                              )}
-                              isDisabled={!catalogYear}
-                              isSearchable
-                              useFuzzySearch
-                              removeButton={
-                                index > 0 ? (
-                                  <SmallCloseIcon
-                                    position="absolute"
-                                    top="8px"
-                                    right="8px"
-                                    cursor="pointer"
-                                    color="red.500"
-                                    boxSize="16px"
-                                    _hover={{ color: "red.700" }}
-                                    onClick={() => {
-                                      const newMinors = minors.filter(
-                                        (_, i) => i !== index
-                                      );
-                                      setValue("minors", newMinors);
-                                    }}
-                                  />
-                                ) : undefined
-                              }
-                            />
-                          </Box>
-                        ))}
-
                       {showAdvancedEdit && (
-                        <Text
-                          cursor="pointer"
-                          textColor="blue.500"
-                          fontWeight="bold"
-                          onClick={() => {
-                            const currentMinors = minors || [];
-                            setValue("minors", [...currentMinors, ""]);
-                          }}
-                        >
-                          + Add a Minor
-                        </Text>
+                        <Box bg="gray.100" padding="5">
+                          {minors?.map((minor, index) => (
+                            <Box key={index} w="100%">
+                              <PlanSelect
+                                label={index === 0 ? "Minor(s)" : undefined}
+                                placeholder="Select a Minor"
+                                name={`minors.${index}`}
+                                isMulti={false}
+                                control={control}
+                                options={extractSupportedMinorOptions(
+                                  catalogYear,
+                                  supportedMinorsData
+                                )}
+                                isDisabled={!catalogYear}
+                                isSearchable
+                                useFuzzySearch
+                                removeButton={
+                                  index > 0 ? (
+                                    <SmallCloseIcon
+                                      position="absolute"
+                                      top="8px"
+                                      right="8px"
+                                      cursor="pointer"
+                                      color="red.500"
+                                      boxSize="16px"
+                                      _hover={{ color: "red.700" }}
+                                      onClick={() => {
+                                        const newMinors = minors.filter(
+                                          (_, i) => i !== index
+                                        );
+                                        setValue("minors", newMinors);
+                                      }}
+                                    />
+                                  ) : undefined
+                                }
+                              />
+                            </Box>
+                          ))}
+
+                          {showAdvancedEdit && (
+                            <Text
+                              cursor="pointer"
+                              textColor="blue.500"
+                              fontWeight="bold"
+                              onClick={() => {
+                                const currentMinors = minors || [];
+                                setValue("minors", [...currentMinors, ""]);
+                              }}
+                            >
+                              + Add a Minor
+                            </Text>
+                          )}
+                        </Box>
                       )}
                     </Box>
 
