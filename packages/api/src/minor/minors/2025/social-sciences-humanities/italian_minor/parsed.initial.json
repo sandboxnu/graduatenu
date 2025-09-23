@@ -1,0 +1,89 @@
+{
+  "name": "Italian, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ITLN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "ITLN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "ITLN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "ITLN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "ITLN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "ITLN"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2311,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1251,
+          "subject": "ITLN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "ITLN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1503,
+          "subject": "ITLN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1973,
+          "subject": "ITLN"
+        }
+      ],
+      "minRequirementCount": 6
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

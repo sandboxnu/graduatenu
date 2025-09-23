@@ -1,0 +1,134 @@
+{
+  "name": "Biomechanical Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Biology 1",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Anatomy and Physiology",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2217,
+              "description": "Integrated Anatomy and Physiology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2218,
+              "description": "Lab for BIOL 2217",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Mechanical Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5665,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "MEIE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "MEIE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Technical Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4520,
+          "subject": "IE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 4522,
+              "description": "Human-Machine Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 4523,
+              "description": "Lab for IE 4522",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4640,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5650,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5655,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4621,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

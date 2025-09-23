@@ -1,0 +1,107 @@
+{
+  "name": "Podcasting, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3370,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1450,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "COMM"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "JRNL",
+                  "classId": 1101,
+                  "description": "Journalism 1: Fundamentals of Reporting and Writing",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "JRNL",
+                  "classId": 1102,
+                  "description": "Journalist’s Toolbox",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3610,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4370,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1141,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "MUST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2600,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

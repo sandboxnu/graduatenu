@@ -1,0 +1,224 @@
+{
+  "name": "Entrepreneurial Startups, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "INNO"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3305,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3330,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4501,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2215,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2225,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3304,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3305,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3330,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4414,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4501,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4983,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5000,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2206,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2304,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2414,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3303,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3309,
+          "subject": "INNO"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3335,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "MKTG"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4225,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4504,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4506,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4983,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3462,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4520,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "CS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2010,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2550,
+          "subject": "HLTH"
+        }
+      ],
+      "minRequirementCount": 36
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

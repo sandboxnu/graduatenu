@@ -1,0 +1,121 @@
+{
+  "name": "Argumentation and Law, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Argumentation",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1210,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2100,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3310,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3311,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3409,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Law",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1331,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2551,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3308,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3309,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3501,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "LPSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "LPSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3303,
+              "subject": "LPSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "LPSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

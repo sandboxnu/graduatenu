@@ -1,0 +1,130 @@
+{
+  "name": "Sustainable Business Practices, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2720,
+          "subject": "FINA"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2334,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3423,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3425,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3401,
+              "subject": "FINA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2206,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2414,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3520,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4506,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1203,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1209,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1180,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1132,
+              "subject": "PHYS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1246,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

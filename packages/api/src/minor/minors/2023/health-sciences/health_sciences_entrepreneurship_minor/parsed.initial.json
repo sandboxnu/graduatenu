@@ -1,0 +1,124 @@
+{
+  "name": "Health Sciences Entrepreneurship, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2100,
+          "subject": "PHMD"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHMD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2550,
+          "subject": "PHMD"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3305,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3330,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4505,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2206,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2304,
+          "subject": "INNO"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2351,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5234,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "name": "Chinese, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "CHNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "CHNS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2101,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2900,
+              "subject": "CHNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2102,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2302,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2900,
+              "subject": "CHNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3301,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "CHNS"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "CHNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "CHNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "ASNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1944,
+          "subject": "CHNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "CHNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4800,
+          "subject": "CHNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2308,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3485,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 10
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

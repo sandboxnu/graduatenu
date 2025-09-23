@@ -1,0 +1,422 @@
+{
+  "name": "Biochemistry, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Core Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3611,
+              "description": "Biochemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3612,
+              "description": "Lab for BIOL 3611",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4707,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5620,
+          "subject": "CHEM"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Biology Core Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2327,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2329,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3405,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3409,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3411,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3413,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3415,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3421,
+              "description": "Microbiology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3422,
+              "description": "Lab for BIOL 3421",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3603,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3605,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3607,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4705,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4709,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5301,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5541,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5543,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5549,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5573,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5581,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5583,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5585,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5587,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5591,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5593,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5595,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5597,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5601,
+          "subject": "BIOL"
+        }
+      ],
+      "minRequirementCount": 29
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemistry Core Course",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2321,
+              "description": "Analytical Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2322,
+              "description": "Lab for CHEM 2321",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 3331,
+              "description": "Bioanalytical Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3332,
+              "description": "Lab for CHEM 3331",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "CHEM"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 3431,
+              "description": "Physical Chemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 3432,
+              "description": "Lab for CHEM 3431",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 4456,
+              "description": "Organic Chemistry 3: Organic Chemistry of Drug Design and Development",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 4457,
+              "description": "Lab for CHEM 4456",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 4628,
+              "description": "Introduction to Spectroscopy of Organic Compounds",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 4629,
+              "description": "Identification of Organic Compounds",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5550,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5611,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5612,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5614,
+          "subject": "CHEM"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 5621,
+              "description": "Principles of Chemical Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 5622,
+              "description": "Lab for CHEM 5621",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5625,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5626,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5627,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5628,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5630,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5636,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5638,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5640,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5641,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5648,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5655,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5660,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5670,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5676,
+          "subject": "CHEM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5688,
+          "subject": "CHEM"
+        }
+      ],
+      "minRequirementCount": 26
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

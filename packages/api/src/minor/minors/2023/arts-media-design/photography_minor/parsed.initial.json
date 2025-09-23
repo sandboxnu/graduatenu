@@ -1,0 +1,172 @@
+{
+  "name": "Photography, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1122,
+          "subject": "ARTF"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2360,
+              "description": "Introduction to Photography",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2361,
+              "description": "Photo Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4565,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4661,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2212,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4901,
+          "subject": "ARTE"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2360,
+              "description": "Introduction to Photography",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2361,
+              "description": "Photo Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4565,
+          "subject": "ARTD"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4661,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2212,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4901,
+          "subject": "ARTE"
+        }
+      ],
+      "minRequirementCount": 7
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

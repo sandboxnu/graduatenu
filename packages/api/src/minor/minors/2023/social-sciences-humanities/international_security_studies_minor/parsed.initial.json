@@ -1,0 +1,85 @@
+{
+  "name": "International Security Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Core Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3420,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5408,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3425,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3430,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4910,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5408,
+              "subject": "POLS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

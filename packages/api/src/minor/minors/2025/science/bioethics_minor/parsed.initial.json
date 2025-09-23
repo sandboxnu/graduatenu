@@ -1,0 +1,135 @@
+{
+  "name": "Bioethics, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Biology Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1111,
+              "description": "General Biology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1112,
+              "description": "Lab for BIOL 1111",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2329,
+          "subject": "BIOL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate Biological Ethics Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3419,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3423,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "NRSG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3065,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "General Ethics Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2300,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1145,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1180,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1185,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1195,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 8
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
