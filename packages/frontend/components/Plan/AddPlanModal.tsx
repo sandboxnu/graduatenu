@@ -514,7 +514,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       </Flex>
 
                       {showAdvancedEdit && (
-                        <Box bg="gray.100" padding="5">
+                        <VStack padding="5" bg="gray.100">
                           {minors?.map((minor, index) => (
                             <Box key={index} w="100%">
                               <PlanSelect
@@ -569,7 +569,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                               + Add a Minor
                             </Text>
                           )}
-                        </Box>
+                        </VStack>
                       )}
                     </Box>
 
