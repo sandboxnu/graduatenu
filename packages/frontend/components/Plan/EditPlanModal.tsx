@@ -308,9 +308,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                     {majors?.map((major, index) => (
                       <Box key={index} w="100%">
                         <PlanSelect
-                          label={
-                            index === 0 ? "Major(s)" : `Major ${index + 1}`
-                          }
+                          label={index === 0 ? "Major(s)" : undefined}
                           placeholder="Select a Major"
                           name={`majors.${index}`}
                           isMulti={false}
