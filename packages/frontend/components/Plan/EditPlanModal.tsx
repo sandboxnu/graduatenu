@@ -15,6 +15,7 @@ import {
   VStack,
   Text,
   Box,
+  CloseButton,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
@@ -330,13 +331,15 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                           isDisabled={!catalogYear}
                           removeButton={
                             index > 0 ? (
-                              <SmallCloseIcon
+                              <CloseButton
                                 position="absolute"
-                                top="8px"
-                                right="8px"
+                                top="-5px"
+                                right="-5px"
                                 cursor="pointer"
-                                color="red.500"
+                                color="white"
+                                bg="red.500"
                                 boxSize="16px"
+                                fontSize="8px"
                                 _hover={{ color: "red.700" }}
                                 onClick={() => {
                                   const newMajors = majors.filter(
