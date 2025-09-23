@@ -337,7 +337,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                                 right="-5px"
                                 cursor="pointer"
                                 color="white"
-                                bg="red.500"
+                                bg="red.400"
                                 boxSize="16px"
                                 fontSize="8px"
                                 _hover={{ color: "red.700" }}
@@ -357,7 +357,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                     <Text
                       cursor="pointer"
                       textColor="blue.500"
-                      fontWeight="bold"
+                      fontWeight="medium"
                       onClick={() => setValue("majors", [...majors, ""])}
                     >
                       + Add a Major
@@ -404,7 +404,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                                 right="-5px"
                                 cursor="pointer"
                                 color="white"
-                                bg="red.500"
+                                bg="red.400"
                                 boxSize="16px"
                                 fontSize="8px"
                                 _hover={{ color: "red.700" }}
@@ -424,7 +424,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                     <Text
                       cursor="pointer"
                       textColor="blue.500"
-                      fontWeight="bold"
+                      fontWeight="medium"
                       onClick={() => {
                         const currentMinors = minors || [];
                         setValue("minors", [...currentMinors, ""]);
