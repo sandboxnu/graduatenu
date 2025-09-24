@@ -490,6 +490,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     </Flex>
 
                     <Box w="100%">
+                      <hr />
                       <Flex justify="flex-end" w="100%" mb="sm">
                         <Text
                           cursor="pointer"
