@@ -16,6 +16,7 @@ import {
   useDisclosure,
   Tooltip,
   Box,
+  Input,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
@@ -30,6 +31,7 @@ import {
   SetStateAction,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { useForm } from "react-hook-form";
@@ -41,6 +43,7 @@ import {
   useSupportedMinors,
   useHasTemplate,
   useTemplate,
+  useFetchCourses,
 } from "../../hooks";
 import {
   cleanDndIdsFromStudent,
@@ -84,6 +87,31 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     return `Plan ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
   };
 
+  // const handlePdfUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (!file || file.type !== 'application/pdf') {
+  //     console.error('Please select a PDF file');
+  //     return;
+  //   }
+
+  //   setIsParsingPdf(true);
+
+  //   try {
+  //     const { extractPDFText, parsePdfCourses } = await import('../../utils/pdfParser');
+
+  //     const text = await extractPDFText(file);
+  //     const courses = parsePdfCourses(text);
+
+  //     setUploadedCourses(courses);
+  //     console.log(`Found ${courses.length} courses:`, courses);
+
+  //   } catch (error) {
+  //     console.error('Error parsing PDF:', error);
+  //   } finally {
+  //     setIsParsingPdf(false);
+  //   }
+  // };
+
   const {
     register,
     handleSubmit,
@@ -99,6 +127,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
+  // const [uploadedCourses, setUploadedCourses] = useState<{subject: string, classId: string}[]>([]);
+  // const [isParsingPdf, setIsParsingPdf] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
@@ -125,6 +156,19 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         : null
       : null
   );
+
+  // Instead of using useTemplateCourses, use useFetchCourses directly
+  // const { courses: uploadedCourseDetails, isLoading: isLoadingUploadedCourses } = useFetchCourses(
+  //   uploadedCourses, // We already have the parsed {subject, classId}[] format
+  //   catalogYear || new Date().getFullYear()
+  // );
+
+  // // Create a lookup map for easy access (same as useTemplateCourses does)
+  // const uploadedCourseLookup = uploadedCourseDetails?.reduce((acc, course) => {
+  //   const key = `${course.subject} ${course.classId}`;
+  //   acc[key] = course;
+  //   return acc;
+  // }, {} as Record<string, any>) || {};
 
   // Reset useTemplate when major or catalog year changes
   useEffect(() => {
@@ -479,6 +523,34 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         </Text>
                       </Box>
                     )}
+
+                    {/* {!isNoMajorSelected && (
+                      <Box
+                        p="sm"
+                        borderRadius="md"
+                        borderWidth="1px"
+                        borderColor="primary.blue.light.main"
+                        bg="primary.blue.light.faint"
+                        w="100%"
+                      >
+                        <Text fontWeight="medium" mb="xs">Import from UAchieve PDF</Text>
+                        <Input
+                          type="file"
+                          accept=".pdf"
+                          onChange={handlePdfUpload}
+                          ref={fileInputRef}
+                          size="sm"
+                          border="1px dashed"
+                          borderColor="primary.blue.light.main"
+                          p="xs"
+                        />
+                        {uploadedCourses.length > 0 && (
+                          <Text color="green.500" mt="xs">
+                            Found {uploadedCourses.length} courses
+                          </Text>
+                        )}
+                      </Box>
+                    )} */}
 
                     {majorName && !isValidatedMajor && (
                       <Flex alignItems="center">
