@@ -11,7 +11,7 @@ import { FilterOptionOption } from "react-select/dist/declarations/src/filters";
 
 type PlanSelectProps = {
   error?: FieldError;
-  label: string;
+  label?: string;
   helperText?: string;
   /** List of (label, value) if for label and value */
   options: OptionObject[];
