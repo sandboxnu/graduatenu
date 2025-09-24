@@ -1,4 +1,4 @@
-import { Box, Divider, Flex } from "@chakra-ui/react";
+import { Box, Divider, Flex, Button } from "@chakra-ui/react";
 import {
   CollisionDetection,
   DndContext,
@@ -50,6 +50,7 @@ import {
   getPreReqWarnings,
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
+import { RepeatIcon } from "@chakra-ui/icons";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -91,6 +92,7 @@ const HomePage: NextPage = () => {
   const [isTransferCoursesExpanded, setIsTransferCoursesExpanded] =
     useState<boolean>(false);
 
+  const [lastDeletedPlan, setLastDeletedPlan] = useState<any | null>(null);
   const { isGuest } = useContext(IsGuestContext);
 
   useEffect(() => {
@@ -240,6 +242,28 @@ const HomePage: NextPage = () => {
     });
   };
 
+  const handleUndoDelete = async () => {
+    if (!lastDeletedPlan) return;
+
+    if (isGuest) {
+      window.localStorage.setItem(
+        "student",
+        JSON.stringify({
+          ...student,
+          plans: [...student.plans, lastDeletedPlan],
+        })
+      );
+    } else {
+      // Insert plan back into database
+      await API.plans.create(lastDeletedPlan);
+    }
+
+    mutateStudent();
+    setSelectedPlanId(lastDeletedPlan.id);
+    setLastDeletedPlan(null);
+    toast.success("Plan restored!");
+  };
+
   let renderedSidebar = <NoPlanSidebar />;
   if (selectedPlan) {
     if (selectedPlan.major) {
@@ -277,7 +301,7 @@ const HomePage: NextPage = () => {
         </Box>
         <Box p="md" overflow="auto" flexGrow={1}>
           <Flex flexDirection="column" rowGap="sm">
-            <Flex alignItems="center">
+            <Flex alignItems="center" gap="2">
               <PlanDropdown
                 selectedPlanId={selectedPlanId}
                 setSelectedPlanId={setSelectedPlanId}
@@ -287,6 +311,22 @@ const HomePage: NextPage = () => {
                 setSelectedPlanId={setSelectedPlanId}
                 selectedPlanId={selectedPlanId}
               />
+              {lastDeletedPlan && (
+                <Button
+                  leftIcon={<RepeatIcon />}
+                  variant="solid"
+                  size="md"
+                  borderRadius="lg"
+                  borderColor="blue.700"
+                  borderWidth="2px"
+                  bg="blue.100"
+                  color="blue.700"
+                  _hover={{ bg: "blue.200" }}
+                  onClick={handleUndoDelete}
+                >
+                  Restore Plan
+                </Button>
+              )}
               {selectedPlan && <EditPlanModal plan={selectedPlan} />}
               {selectedPlan && (
                 <DuplicatePlanButton
@@ -299,6 +339,9 @@ const HomePage: NextPage = () => {
                   setSelectedPlanId={setSelectedPlanId}
                   planName={selectedPlan.name}
                   planId={selectedPlan.id}
+                  onPlanDeleted={(deletedPlan) =>
+                    setLastDeletedPlan(deletedPlan)
+                  }
                 />
               )}
             </Flex>
