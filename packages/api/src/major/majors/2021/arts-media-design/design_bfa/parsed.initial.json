@@ -2,7 +2,7 @@
   "name": "Design, BFA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "4/1/2025"
   },
   "totalCreditsRequired": 129,
   "yearVersion": 2021,
@@ -223,7 +223,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Graphic and Information Design",
         "requirements": [
           {
             "type": "COURSE",
@@ -234,181 +234,74 @@
             "type": "COURSE",
             "classId": 3450,
             "subject": "ARTG"
-          }
-        ],
-        "minRequirementCount": 2
-      },
-      {
-        "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 2260,
-            "subject": "ARTG"
           },
           {
-            "type": "COURSE",
-            "classId": 2400,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3460,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3462,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3700,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4554,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4555,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 5150,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3901,
-            "subject": "ARTE"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4901,
-            "subject": "ARTE"
-          },
-          {
-            "type": "COURSE",
-            "classId": 5901,
-            "subject": "ARTE"
-          }
-        ],
-        "minRequirementCount": 11
-      },
-      {
-        "type": "SECTION",
-        "title": "Required Courses",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 2252,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2260,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2400,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3700,
-            "subject": "ARTG"
-          }
-        ],
-        "minRequirementCount": 4
-      },
-      {
-        "type": "SECTION",
-        "title": "Electives",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 3250,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3450,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3460,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3462,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3463,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4554,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4555,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3901,
-            "subject": "ARTE"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4901,
-            "subject": "ARTE"
-          },
-          {
-            "type": "COURSE",
-            "classId": 5901,
-            "subject": "ARTE"
-          }
-        ],
-        "minRequirementCount": 10
-      },
-      {
-        "type": "SECTION",
-        "title": "Required Courses",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 2260,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3462,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3463,
-            "subject": "ARTG"
+            "type": "XOM",
+            "numCreditsMin": 20,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2260,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2400,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3460,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3462,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3700,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4554,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4555,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5150,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3901,
+                "subject": "ARTE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4901,
+                "subject": "ARTE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5901,
+                "subject": "ARTE"
+              }
+            ]
           }
         ],
         "minRequirementCount": 3
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Interaction Design",
         "requirements": [
           {
             "type": "COURSE",
@@ -417,17 +310,12 @@
           },
           {
             "type": "COURSE",
-            "classId": 3250,
+            "classId": 2260,
             "subject": "ARTG"
           },
           {
             "type": "COURSE",
-            "classId": 3450,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3460,
+            "classId": 2400,
             "subject": "ARTG"
           },
           {
@@ -436,32 +324,141 @@
             "subject": "ARTG"
           },
           {
-            "type": "COURSE",
-            "classId": 4554,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4555,
-            "subject": "ARTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3901,
-            "subject": "ARTE"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4901,
-            "subject": "ARTE"
-          },
-          {
-            "type": "COURSE",
-            "classId": 5901,
-            "subject": "ARTE"
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3250,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3450,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3460,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3462,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3463,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4554,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4555,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3901,
+                "subject": "ARTE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4901,
+                "subject": "ARTE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5901,
+                "subject": "ARTE"
+              }
+            ]
           }
         ],
-        "minRequirementCount": 10
+        "minRequirementCount": 5
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Experience Design",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2260,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3462,
+            "subject": "ARTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3463,
+            "subject": "ARTG"
+          },
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2252,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3250,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3450,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3460,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3700,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4554,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4555,
+                "subject": "ARTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3901,
+                "subject": "ARTE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4901,
+                "subject": "ARTE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5901,
+                "subject": "ARTE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 4
       }
     ]
   }
