@@ -66,6 +66,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const router = useRouter();
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -122,6 +123,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const majorName = watch("major");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
+  const editMajor = watch("major");
+  const currentMajor = plan.major;
+  const isMajorChanged = currentMajor != editMajor;
 
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
@@ -347,20 +351,23 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       isSearchable
                       useFuzzySearch
                     />
-                    {majorName && !isValidatedMajor && (
-                      <Flex alignItems="center">
-                        <Checkbox
-                          mr="md"
-                          {...register("agreeToBetaMajor", {
-                            required: "You must agree to continue",
-                          })}
-                        />
-                        <Text>
-                          I understand that I am selecting a beta major and that
-                          the requirements may not be accurate.
-                        </Text>
-                      </Flex>
-                    )}
+                    {editMajor &&
+                      isMajorChanged &&
+                      majorName &&
+                      !isValidatedMajor && (
+                        <Flex alignItems="center">
+                          <Checkbox
+                            mr="md"
+                            {...register("agreeToBetaMajor", {
+                              required: "You must agree to continue",
+                            })}
+                          />
+                          <Text>
+                            I understand that I am selecting a beta major and
+                            that the requirements may not be accurate.
+                          </Text>
+                        </Flex>
+                      )}
                   </>
                 )}
               </VStack>
