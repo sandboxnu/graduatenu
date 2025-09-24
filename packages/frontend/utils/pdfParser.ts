@@ -1,33 +1,45 @@
-import * as pdfjsLib from "pdfjs-dist";
-
-// Configure PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+// src/utils/pdfParser.ts
 
 export interface ParsedCourse {
   subject: string;
   classId: string;
 }
 
-/** Extracts text content from a PDF file */
+/**
+ * Temporary mock function to test the workflow This simulates extracting text
+ * from your actual PDF
+ */
 export async function extractPDFText(file: File): Promise<string> {
-  const arrayBuffer = await file.arrayBuffer();
-  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+  console.log("Mock: Extracting text from PDF:", file.name);
 
-  let fullText = "";
+  // Return mock text that looks like your degree audit
+  const mockText = `
+    CS 1990 (4.0 Hours) Elective
+    ECON1115 (4.0 Hours) Principles of Macroeconomics
+    ECON1116 (4.0 Hours) Principles of Microeconomics
+    ENGW1111 (4.0 Hours) First-Year Writing
+    MATH1341 (4.0 Hours) Calculus BC ++
+    MATH1342 (4.0 Hours) Calculus BC ++
+    PHYS1145 (4.0 Hours) Physics for Life Sciences 1
+    CS 1800 (4.0 Hours) Discrete Structures
+    CS 2500 (4.0 Hours) Fundamentals of Computer Sci
+    CS 2510 (4.0 Hours) Fundamentals of Computer Sci 2
+    CS 3500 (4.0 Hours) Object-Oriented Design
+  `;
 
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
-    const textContent = await page.getTextContent();
-    const pageText = textContent.items.map((item: any) => item.str).join(" ");
-    fullText += pageText + "\n";
-  }
-
-  return fullText;
+  console.log("Mock: Processing PDF pages...");
+  return mockText;
 }
 
-/** Parses course codes from UAchieve PDF text */
+/**
+ * Parses course codes from UAchieve PDF text Looks for patterns like "CS 1990"
+ * or "ECON1115" followed by any text
+ */
 export function parsePdfCourses(pdfText: string): ParsedCourse[] {
-  // Regex to match course patterns:
+  // Simplified regex to match course patterns:
+  // - Subject: 2-4 capital letters
+  // - Optional space
+  // - Course number: 4 digits optionally followed by letters
   const courseRegex = /([A-Z]{2,4})\s*(\d{4}[A-Z]*)/g;
 
   const courses: ParsedCourse[] = [];
@@ -39,6 +51,9 @@ export function parsePdfCourses(pdfText: string): ParsedCourse[] {
     const classId = match[2];
     const courseKey = `${subject}${classId}`;
 
+    // Debug: log each course found
+    console.log(`Found course: ${subject} ${classId}`);
+
     // Avoid duplicates
     if (!seenCourses.has(courseKey)) {
       seenCourses.add(courseKey);
@@ -46,6 +61,7 @@ export function parsePdfCourses(pdfText: string): ParsedCourse[] {
     }
   }
 
+  console.log(`Total unique courses parsed: ${courses.length}`);
   return courses;
 }
 

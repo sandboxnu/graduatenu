@@ -62,6 +62,7 @@ import { IsGuestContext, NewPlanModalContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
 import { useTemplateCourses } from "../../hooks/useTemplateCourses";
+import { addTransferCoursesToStudent } from "../../utils/student/addTransferCoursesToStudent.ts";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -87,30 +88,33 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     return `Plan ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
   };
 
-  // const handlePdfUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
-  //   if (!file || file.type !== 'application/pdf') {
-  //     console.error('Please select a PDF file');
-  //     return;
-  //   }
+  const handlePdfUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file || file.type !== "application/pdf") {
+      console.error("Please select a PDF file");
+      return;
+    }
 
-  //   setIsParsingPdf(true);
+    setIsParsingPdf(true);
 
-  //   try {
-  //     const { extractPDFText, parsePdfCourses } = await import('../../utils/pdfParser');
+    try {
+      const { extractPDFText, parsePdfCourses } = await import(
+        "../../utils/pdfParser"
+      );
 
-  //     const text = await extractPDFText(file);
-  //     const courses = parsePdfCourses(text);
+      const text = await extractPDFText(file);
+      const courses = parsePdfCourses(text);
 
-  //     setUploadedCourses(courses);
-  //     console.log(`Found ${courses.length} courses:`, courses);
-
-  //   } catch (error) {
-  //     console.error('Error parsing PDF:', error);
-  //   } finally {
-  //     setIsParsingPdf(false);
-  //   }
-  // };
+      setUploadedCourses(courses);
+      console.log(`Found ${courses.length} courses:`, courses);
+    } catch (error) {
+      console.error("Error parsing PDF:", error);
+    } finally {
+      setIsParsingPdf(false);
+    }
+  };
 
   const {
     register,
@@ -127,8 +131,10 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
-  // const [uploadedCourses, setUploadedCourses] = useState<{subject: string, classId: string}[]>([]);
-  // const [isParsingPdf, setIsParsingPdf] = useState(false);
+  const [uploadedCourses, setUploadedCourses] = useState<
+    { subject: string; classId: string }[]
+  >([]);
+  const [isParsingPdf, setIsParsingPdf] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
@@ -158,17 +164,21 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   );
 
   // Instead of using useTemplateCourses, use useFetchCourses directly
-  // const { courses: uploadedCourseDetails, isLoading: isLoadingUploadedCourses } = useFetchCourses(
-  //   uploadedCourses, // We already have the parsed {subject, classId}[] format
-  //   catalogYear || new Date().getFullYear()
-  // );
+  const {
+    courses: uploadedCourseDetails,
+    isLoading: isLoadingUploadedCourses,
+  } = useFetchCourses(
+    uploadedCourses, // We already have the parsed {subject, classId}[] format
+    catalogYear || new Date().getFullYear()
+  );
 
-  // // Create a lookup map for easy access (same as useTemplateCourses does)
-  // const uploadedCourseLookup = uploadedCourseDetails?.reduce((acc, course) => {
-  //   const key = `${course.subject} ${course.classId}`;
-  //   acc[key] = course;
-  //   return acc;
-  // }, {} as Record<string, any>) || {};
+  // Create a lookup map for easy access (same as useTemplateCourses does)
+  const uploadedCourseLookup =
+    uploadedCourseDetails?.reduce((acc, course) => {
+      const key = `${course.subject} ${course.classId}`;
+      acc[key] = course;
+      return acc;
+    }, {} as Record<string, any>) || {};
 
   // Reset useTemplate when major or catalog year changes
   useEffect(() => {
@@ -198,19 +208,31 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const onSubmitHandler = async (
     payload: CreatePlanDtoWithoutSchedule & { useTemplate: boolean }
   ) => {
-    // Determine which schedule to use - template or empty
-    let schedule;
+    // Handle uploaded courses by adding them to student's transfer courses
+    if (uploadedCourses.length > 0) {
+      try {
+        await addTransferCoursesToStudent(
+          student,
+          uploadedCourses,
+          uploadedCourseLookup,
+          isGuest
+        );
+      } catch (error) {
+        console.error("Error adding transfer courses:", error);
+        return; // Don't proceed with plan creation if transfer courses failed
+      }
+    }
 
+    // Create normal plan (template or empty)
+    let schedule;
     if (payload.useTemplate && template) {
       try {
-        // Use the template to create a schedule with pre-populated courses
         schedule = createScheduleFromTemplate(template, courseLookup);
       } catch (error) {
         console.error("Error creating schedule from template:", error);
         schedule = createEmptySchedule();
       }
     } else {
-      // Default to empty schedule
       schedule = createEmptySchedule();
     }
 
@@ -524,7 +546,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       </Box>
                     )}
 
-                    {/* {!isNoMajorSelected && (
+                    {!isNoMajorSelected && (
                       <Box
                         p="sm"
                         borderRadius="md"
@@ -533,7 +555,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         bg="primary.blue.light.faint"
                         w="100%"
                       >
-                        <Text fontWeight="medium" mb="xs">Import from UAchieve PDF</Text>
+                        <Text fontWeight="medium" mb="xs">
+                          Import from UAchieve PDF
+                        </Text>
                         <Input
                           type="file"
                           accept=".pdf"
@@ -550,7 +574,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                           </Text>
                         )}
                       </Box>
-                    )} */}
+                    )}
 
                     {majorName && !isValidatedMajor && (
                       <Flex alignItems="center">
