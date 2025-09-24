@@ -51,7 +51,7 @@ type EditPlanModalProps = {
 type EditPlanInput = {
   name: string;
   major: string;
-  minor?: string | null;
+  minor?: string | undefined;
   catalogYear: number;
   concentration: string;
   agreeToBetaMajor: boolean;
@@ -161,9 +161,15 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     }
 
     const isNoMajorSelectedPrev = !plan.major;
+    const minorChanged =
+      plan.minor !== (payload.minor === undefined ? undefined : payload.minor);
 
     // If no field has been changed, don't send an update request
-    if (!isDirty && isNoMajorSelectedPrev === isNoMajorSelected) {
+    if (
+      !isDirty &&
+      isNoMajorSelectedPrev === isNoMajorSelected &&
+      !minorChanged
+    ) {
       toast.info("No fields have been updated.");
       return;
     }
@@ -173,7 +179,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       major: isNoMajorSelected ? undefined : payload.major,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
-      minor: payload.minor || null,
+      minor: payload.minor === undefined ? undefined : payload.minor,
     };
 
     if (isGuest) {

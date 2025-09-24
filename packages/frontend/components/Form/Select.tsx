@@ -86,15 +86,12 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   } = useController({ name, control, rules });
 
   const onChange = (option: any) => {
-    let val = option ? option.value : null;
+    let val = option ? option.value : "";
 
     onChangeSideEffect && onChangeSideEffect(val);
 
     if (isNumeric && val) {
       val = parseInt(val, 10);
-    }
-    if (val && val === "") {
-      val = null;
     }
 
     onChangeUpdateValue(val);

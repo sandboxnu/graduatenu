@@ -111,7 +111,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
         major: major,
-        minor: minor,
+        minor: minor || undefined,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
@@ -165,7 +165,16 @@ const Sidebar: React.FC<SidebarProps> = memo(
     // revalidateMajor because it will change every time, so we're choosing
     // to omit it here:
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => revalidateMajor(), [selectedPlan, major, minor]);
+    useEffect(
+      () => revalidateMajor(),
+      [selectedPlan, major, selectedPlan.minor]
+    );
+
+    useEffect(() => {
+      if (!selectedPlan.minor) {
+        setValidationStatus(undefined);
+      }
+    }, [selectedPlan.minor]);
 
     const majorCourses = getAllCoursesInMajor(major, concentration);
     const minorCourses = getAllCoursesInMinor(minor);
