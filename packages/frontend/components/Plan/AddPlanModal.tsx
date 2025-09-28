@@ -607,7 +607,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       </Box>
                     )}
 
-                    {majors && !hasValidMajors && (
+                    {majors && hasValidMajors && (
                       <Flex alignItems="center">
                         <Checkbox
                           mr="md"
