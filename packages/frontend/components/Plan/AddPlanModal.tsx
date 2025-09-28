@@ -230,6 +230,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     reset();
     setIsNoMajorSelected(false);
     setIsNoMinorSelected(false);
+    setShowAdvancedEdit(false);
     onCloseDisplay();
     setIsNoMajorSelected(false);
   };
