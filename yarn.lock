@@ -4557,6 +4557,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/multer@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@types/multer@npm:2.0.0"
+  dependencies:
+    "@types/express": "*"
+  checksum: 64efb1076412c69678a58b283139c8bc1547446a7b5cb8064f72af50157b151e29f125952539d133bff1606ed03dbbf2bfae49a9b5def01e84641fde46d63f83
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 24.5.2
   resolution: "@types/node@npm:24.5.2"
@@ -9452,6 +9461,7 @@ __metadata:
     "@nestjs/axios": ^3.0.2
     "@nestjs/terminus": ^10.2.2
     "@nestjs/throttler": ^5.0.1
+    "@types/multer": ^2.0.0
     "@types/nodemailer": ^6.4.7
     "@typescript-eslint/eslint-plugin": ^5.15.0
     "@typescript-eslint/parser": ^5.15.0

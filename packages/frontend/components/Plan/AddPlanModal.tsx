@@ -22,6 +22,7 @@ import { API } from "@graduate/api-client";
 import {
   CreatePlanDto,
   CreatePlanDtoWithoutSchedule,
+  ParsedCourse,
   PlanModel,
   convertToOptionObjects,
 } from "@graduate/common";
@@ -100,13 +101,9 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     setIsParsingPdf(true);
 
     try {
-      const { extractPDFText, parsePdfCourses } = await import(
-        "../../utils/pdfParser"
-      );
+      const courses = await API.utils.parsePdfCourses(file);
 
-      const text = await extractPDFText(file);
-      const courses = parsePdfCourses(text);
-
+      console.log(courses, "courses parsed from API");
       setUploadedCourses(courses);
       console.log(`Found ${courses.length} courses:`, courses);
     } catch (error) {
@@ -131,9 +128,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
-  const [uploadedCourses, setUploadedCourses] = useState<
-    { subject: string; classId: string }[]
-  >([]);
+  const [uploadedCourses, setUploadedCourses] = useState<ParsedCourse[]>([]);
   const [isParsingPdf, setIsParsingPdf] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isGuest } = useContext(IsGuestContext);
