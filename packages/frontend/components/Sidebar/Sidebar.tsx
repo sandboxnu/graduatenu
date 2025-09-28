@@ -95,10 +95,10 @@ const Sidebar: React.FC<SidebarProps> = memo(
           );
 
     const {
-      minor,
+      minors,
       isLoading: isMinorLoading,
       error: minorError,
-    } = useMinor(selectedPlan.catalogYear, selectedPlan.minor ?? "");
+    } = useMinor(selectedPlan.catalogYear, selectedPlan.minors);
 
     const workerRef = useRef<Worker>();
 
@@ -118,7 +118,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
         major: majors[0],
-        minor: minor,
+        minor: minors[0],
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
@@ -175,7 +175,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
     useEffect(() => revalidateMajor(), [selectedPlan, majors[0]]);
 
     const majorCourses = getAllCoursesInMajor(majors[0], concentration);
-    const minorCourses = getAllCoursesInMinor(minor);
+    const minorCourses = getAllCoursesInMinor(minors[0]);
 
     const {
       courses,
@@ -207,7 +207,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       return <SidebarContainer title="" />;
     }
 
-    if (selectedPlan.minor && !minor) {
+    if (selectedPlan.minors && !minors[0]) {
       if (minorError) {
         handleApiClientError(minorError, router);
       }
@@ -236,7 +236,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const concentrationValidationError: MajorValidationError | undefined =
       getSectionError(
-        (majors[0] ? 1 : 0) + (minor ? 1 : 0), // offset by major and minor length
+        (majors[0] ? 1 : 0) + (minors[0] ? 1 : 0), // offset by major and minor length
         0, // the concentration AND index is always 0
         validationStatus
       );
@@ -313,7 +313,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 >
                   MAJOR
                 </Tab>
-                {minor && (
+                {minors[0] && (
                   <Tab
                     _selected={{ color: "white", bg: "blue.800" }}
                     flex="0.4"
@@ -364,7 +364,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                   )}
                 </TabPanel>
                 <TabPanel width="100%" p={0} m={0}>
-                  {minor && (
+                  {minors[0] && (
                     <>
                       <Flex>
                         <Heading
@@ -376,7 +376,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                           Minor Requirements
                         </Heading>
                       </Flex>
-                      {minor.requirementSections.map((section, index) => {
+                      {minors[0].requirementSections.map((section, index) => {
                         const sectionValidationError:
                           | MajorValidationError
                           | undefined = getSectionError(

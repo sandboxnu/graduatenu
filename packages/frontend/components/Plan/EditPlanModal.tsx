@@ -52,7 +52,7 @@ type EditPlanModalProps = {
 type EditPlanInput = {
   name: string;
   majors: string[];
-  minor?: string;
+  minors?: string[];
   catalogYear: number;
   concentration: string;
   agreeToBetaMajor: boolean;
@@ -92,7 +92,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       name: plan.name,
       catalogYear: plan.catalogYear,
       majors: plan.majors,
-      minor: plan.minor,
+      minors: plan.minors,
       concentration: plan.concentration,
     });
 
@@ -121,6 +121,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const title = watch("name");
   const catalogYear = watch("catalogYear");
   const majors = watch("majors");
+  const minors = watch("minors");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
 
@@ -130,7 +131,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
 
   const majorConcentrations =
-    yearSupportedMajors?.[majors[0] ?? ""] ?? noConcentrations;
+    yearSupportedMajors?.[majors?.[0] ?? ""] ?? noConcentrations;
 
   const isConcentrationRequired =
     majorConcentrations.minRequiredConcentrations > 0;
@@ -138,7 +139,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
   const isValidatedMajor =
-    yearSupportedMajors?.[majors[0] ?? ""]?.verified ?? false;
+    yearSupportedMajors?.[majors?.[0] ?? ""]?.verified ?? false;
 
   const isValidForm =
     (title &&
@@ -168,7 +169,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
       majors: isNoMajorSelected ? undefined : payload.majors,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
-      minor: payload.minor,
+      minors: payload.minors,
     };
 
     if (isGuest) {
@@ -379,19 +380,56 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         useFuzzySearch
                       />
                     )}
-                    <PlanSelect
-                      label="Minor"
-                      placeholder="Select a Minor"
-                      name="minor"
-                      control={control}
-                      options={extractSupportedMinorOptions(
-                        catalogYear,
-                        supportedMinorsData
-                      )}
-                      isDisabled={!catalogYear}
-                      isSearchable
-                      useFuzzySearch
-                    />
+                    {minors?.map((minor, index) => (
+                      <Box key={index} w="100%">
+                        <PlanSelect
+                          label={
+                            index === 0 ? "Minor(s)" : `Minor ${index + 1}`
+                          }
+                          placeholder="Select a Minor"
+                          name={`minors.${index}`}
+                          isMulti={false}
+                          control={control}
+                          options={extractSupportedMinorOptions(
+                            catalogYear,
+                            supportedMinorsData
+                          )}
+                          isDisabled={!catalogYear}
+                          isSearchable
+                          useFuzzySearch
+                          removeButton={
+                            index > 0 ? (
+                              <SmallCloseIcon
+                                position="absolute"
+                                top="8px"
+                                right="8px"
+                                cursor="pointer"
+                                color="red.500"
+                                boxSize="16px"
+                                _hover={{ color: "red.700" }}
+                                onClick={() => {
+                                  const newMinors = minors.filter(
+                                    (_, i) => i !== index
+                                  );
+                                  setValue("minors", newMinors);
+                                }}
+                              />
+                            ) : undefined
+                          }
+                        />
+                      </Box>
+                    ))}
+                    <Text
+                      cursor="pointer"
+                      textColor="blue.500"
+                      fontWeight="bold"
+                      onClick={() => {
+                        const currentMinors = minors || [];
+                        setValue("minors", [...currentMinors, ""]);
+                      }}
+                    >
+                      + Add a Minor
+                    </Text>
                     {majors && !isValidatedMajor && (
                       <Flex alignItems="center">
                         <Checkbox

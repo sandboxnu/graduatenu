@@ -26,9 +26,10 @@ export class CreatePlanDtoWithoutSchedule {
   @IsOptional()
   majors?: string[];
 
-  @IsString()
   @IsOptional()
-  minor?: string;
+  @IsArray()
+  @IsString({ each: true })
+  minors?: string[];
 
   @IsString()
   @IsOptional()
@@ -65,8 +66,9 @@ export class UpdatePlanDto {
   majors?: string[];
 
   @IsOptional()
-  @IsString()
-  minor?: string;
+  @IsArray()
+  @IsString({ each: true })
+  minors?: string[];
 
   @IsOptional()
   @IsString()
@@ -134,8 +136,9 @@ export class UpdateStudentDto {
   majors?: string[];
 
   @IsOptional()
-  @IsString()
-  minor?: string;
+  @IsArray()
+  @IsString({ each: true })
+  minors?: string[];
 
   @IsOptional()
   @IsString()
@@ -189,8 +192,9 @@ export class OnboardStudentDto {
   @IsString({ each: true })
   majors: string[];
 
-  @IsString()
-  minor: string;
+  @IsArray()
+  @IsString({ each: true })
+  minors: string[];
 
   @IsString()
   coopCycle: string;
