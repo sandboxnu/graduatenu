@@ -165,10 +165,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
     // revalidateMajor because it will change every time, so we're choosing
     // to omit it here:
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(
-      () => revalidateMajor(),
-      [selectedPlan, major, selectedPlan.minor]
-    );
+    useEffect(revalidateMajor, [selectedPlan, major]);
 
     useEffect(() => {
       if (!selectedPlan.minor) {
@@ -315,7 +312,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 >
                   MAJOR
                 </Tab>
-                {minor && (
+                {selectedPlan.minor && (
                   <Tab
                     _selected={{ color: "white", bg: "blue.800" }}
                     flex="0.4"
