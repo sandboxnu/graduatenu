@@ -204,6 +204,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     payload: CreatePlanDtoWithoutSchedule & { useTemplate: boolean }
   ) => {
     // Handle uploaded courses by adding them to student's transfer courses
+    console.log(student.coursesTransfered, "existing transfer courses");
     if (uploadedCourses.length > 0) {
       try {
         await addTransferCoursesToStudent(
@@ -217,6 +218,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         return; // Don't proceed with plan creation if transfer courses failed
       }
     }
+    console.log(student.coursesTransfered, "new transfer courses");
 
     // Create normal plan (template or empty)
     let schedule;
@@ -253,10 +255,14 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         student: cleanDndIdsFromStudent(student),
       } as PlanModel<null>;
 
+      const currentStudentData = JSON.parse(
+        window.localStorage.getItem("student") || "{}"
+      );
+
       window.localStorage.setItem(
         "student",
         JSON.stringify({
-          ...student,
+          ...currentStudentData,
           plans: [...student.plans, planInLocalStorage],
         })
       );

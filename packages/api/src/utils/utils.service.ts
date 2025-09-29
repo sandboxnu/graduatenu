@@ -1,33 +1,23 @@
 import { Injectable } from "@nestjs/common";
 import { ParsedCourse } from "@graduate/common";
-import * as pdfjsLib from "pdfjs-dist";
+import * as pdf from "pdf-parse";
 
 @Injectable()
 export class UtilsService {
   async parsePdfCourses(fileBuffer: Buffer): Promise<ParsedCourse[]> {
-    try {
-      // Extract text from PDF
-      const text = await this.extractPDFText(fileBuffer);
+    console.log("Starting PDF parsing...");
+    console.log("File buffer length:", fileBuffer?.length);
 
-      // Parse courses from text
-      return this.parseCourses(text);
+    try {
+      // Use pdf-parse instead of pdfjs-dist
+      const data = await pdf(fileBuffer);
+      console.log("Extracted text length:", data.text.length);
+
+      return this.parseCourses(data.text);
     } catch (error) {
+      console.error("PDF parsing error:", error);
       throw new Error(`Failed to parse PDF: ${error.message}`);
     }
-  }
-
-  private async extractPDFText(fileBuffer: Buffer): Promise<string> {
-    const pdf = await pdfjsLib.getDocument({ data: fileBuffer }).promise;
-    let fullText = "";
-
-    for (let i = 1; i <= pdf.numPages; i++) {
-      const page = await pdf.getPage(i);
-      const textContent = await page.getTextContent();
-      const pageText = textContent.items.map((item: any) => item.str).join(" ");
-      fullText += pageText + "\n";
-    }
-
-    return fullText;
   }
 
   private parseCourses(pdfText: string): ParsedCourse[] {
