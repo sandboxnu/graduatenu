@@ -1,0 +1,158 @@
+{
+  "name": "Environmental Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2334,
+          "subject": "CIVE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 2300,
+              "description": "Environmental Measurements in Natural and Engineered Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 2301,
+              "description": "Lab for CIVE 2300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2335,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3430,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "CIVE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 4534,
+              "description": "Water Treatment Systems Design",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 4535,
+              "description": "Lab for CIVE 4534",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4777,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5150,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5250,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5260,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5261,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5271,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5275,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5280,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5281,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5363,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5366,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5536,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 20
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

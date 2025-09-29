@@ -1,0 +1,143 @@
+{
+  "name": "Emerging Markets, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Emerging Markets",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "INTB",
+              "classId": 2205,
+              "description": "Business Decision Making in Developed Country Environments",
+              "type": "COURSE"
+            },
+            {
+              "subject": "INTB",
+              "classId": 2206,
+              "description": "International Business Decision Making in Emerging Markets",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2501,
+          "subject": "INTB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4983,
+          "subject": "INTB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Field Study",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2305,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "ASNS"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1500,
+                  "subject": "CLTR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1500,
+                  "subject": "HIST"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2311,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2206,
+              "subject": "INNO"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3310,
+              "subject": "INTB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3405,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1505,
+              "subject": "SPNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

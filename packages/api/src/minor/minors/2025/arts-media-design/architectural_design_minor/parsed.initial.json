@@ -1,0 +1,154 @@
+{
+  "name": "Architectural Design, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Foundation Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Architecture Design",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1450,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1120,
+              "subject": "ARCH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Technology Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2260,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required History Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1310,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "ARCH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 2330,
+              "description": "Architecture and the City in the Nineteenth Century",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 2331,
+              "description": "Recitation for ARCH 2330",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 2340,
+              "description": "Modern Architecture",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 2341,
+              "description": "Recitation for ARCH 2340",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2345,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3351,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3352,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4850,
+          "subject": "ARCH"
+        },
+        {
+          "type": "RANGE",
+          "subject": "ARCH",
+          "idRangeStart": 2300,
+          "idRangeEnd": 2399,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

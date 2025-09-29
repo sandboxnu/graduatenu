@@ -1,0 +1,187 @@
+{
+  "name": "Marine Sciences, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 1101,
+              "description": "Foundations in Ecology and Evolutionary Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 1102,
+              "description": "Lab for EEMB 1101",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3600,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3125,
+              "subject": "ENVR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Skills Course",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1500,
+              "description": "Introduction to Environmental, Social, and Biological Data",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1501,
+              "description": "Lab for ENVR 1500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 11,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EEMB",
+                  "classId": 2700,
+                  "description": "Marine Biology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EEMB",
+                  "classId": 2701,
+                  "description": "Lab for EEMB 2700",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3125,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3202,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3600,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5510,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5522,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5542,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5546,
+              "subject": "EEMB"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

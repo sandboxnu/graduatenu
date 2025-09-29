@@ -1,0 +1,94 @@
+{
+  "name": "Mindfulness Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1133,
+          "subject": "PHIL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1275,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2395,
+              "subject": "PHIL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2280,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2290,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3899,
+          "subject": "CAEP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1130,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1290,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

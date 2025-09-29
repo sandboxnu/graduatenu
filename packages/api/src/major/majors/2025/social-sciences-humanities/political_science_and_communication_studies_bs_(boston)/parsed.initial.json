@@ -1,0 +1,758 @@
+{
+  "name": "Political Science and Communication Studies, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Core Courses in Political Science",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1155,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Political Thought",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2325,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2328,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2332,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Methodology",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2399,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Political Science Electives",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Note: You may use these four courses from the elective area to fulfill a concentration",
+          "requirements": [
+            {
+              "type": "XOM",
+              "numCreditsMin": 16,
+              "courses": [
+                {
+                  "type": "RANGE",
+                  "subject": "POLS",
+                  "idRangeStart": 2000,
+                  "idRangeEnd": 5999,
+                  "exceptions": []
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Communication Studies Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "COMM"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1112,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1210,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1225,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1231,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1255,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Cluster Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1131,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2304,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2501,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2551,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Intensive",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3201,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3230,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3304,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3320,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3415,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3501,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3530,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3532,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4535,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4605,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4631,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 13
+    },
+    {
+      "type": "SECTION",
+      "title": "Communication Studies Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3320,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3320,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4102,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4530,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4608,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4625,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4755,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "POLS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4703,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 7
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Concentration in American Political Institutions",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3160,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3300,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3307,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3310,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Campaigns and Elections",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3160,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3302,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Campaigns and Elections: Campaigns and Elections Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2345,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3310,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3320,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Theoretical Requirement",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2282,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2356,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2359,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2370,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3418,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3430,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3487,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Regional Requirements",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3435,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3465,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Experiential/Practicum Requirement",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 4915,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4918,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4937,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Identity, Culture, and Politics",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3418,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Identity, Culture, and Politics: Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2359,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2368,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2370,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3309,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3324,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Experiential/Practicum Requirement",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 4910,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4915,
+            "subject": "POLS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4938,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Core Courses",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3405,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3406,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3435,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5408,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Law and Legal Studies",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2330,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3300,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3324,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3406,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4500,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4505,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Public Policy",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3307,
+            "subject": "POLS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Public Policy: Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2345,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2390,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2395,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3425,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Security Studies",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3420,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3423,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3425,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3430,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3487,
+                "subject": "POLS"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5408,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

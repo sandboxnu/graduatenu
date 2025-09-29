@@ -1,0 +1,628 @@
+{
+  "name": "Performance and Extended Realities, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 130,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Performance and Extended Realities Major Requirements",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ARTF"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "THTR"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EEAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "XR Core Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ARTD"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTG",
+                  "classId": 2262,
+                  "description": "Prototyping with Code",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTG",
+                  "classId": 2263,
+                  "description": "Lab for ARTG 2262",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2431,
+              "subject": "MUST"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "INAM",
+                  "classId": 1300,
+                  "description": "The Politics of Narrative in Theatre",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "INAM",
+                  "classId": 1301,
+                  "description": "The Politics of Narrative in Theatre Seminar",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2100,
+              "subject": "ARTD"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "INAM"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Basic Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "ARTD"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2380,
+              "description": "Video Basics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2381,
+              "description": "Video Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 2223,
+              "description": "Experience and Interaction",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 2224,
+              "description": "Experience and Interaction Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2211,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1125,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1600,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2346,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 12
+    },
+    {
+      "type": "SECTION",
+      "title": "Breadth Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3485,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3211,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5030,
+          "subject": "EXRE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3352,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5700,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Depth Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5020,
+          "subject": "EXRE"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3670,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 6670,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Project",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4530,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Major Elective Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "INAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3603,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3973,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1125,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1235,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2342,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2345,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2346,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2370,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2600,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2993,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3325,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3550,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3973,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4345,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "ARTD"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2370,
+              "description": "Animation Basics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2371,
+              "description": "Animation Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTD",
+              "classId": 2380,
+              "description": "Video Basics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTD",
+              "classId": 2381,
+              "description": "Video Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3471,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3472,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3473,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4901,
+          "subject": "ARTE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 2223,
+              "description": "Experience and Interaction",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 2224,
+              "description": "Experience and Interaction Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3250,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5000,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5640,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "EXRE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1850,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2950,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3400,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3800,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "GAME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4155,
+          "subject": "GAME"
+        }
+      ],
+      "minRequirementCount": 56
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

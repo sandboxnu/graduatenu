@@ -1,0 +1,257 @@
+{
+  "name": "Interaction Design, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTF",
+              "classId": 1250,
+              "description": "Designing Interactive Experiences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTF",
+              "classId": 1251,
+              "description": "Designing Interactive Experiences Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1270,
+              "description": "Design: Process + Practices",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1271,
+              "description": "Studio for Design: Process + Practices",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2400,
+              "description": "Interaction Design Principles",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2401,
+              "description": "Interaction Design Principles Tools",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2262,
+              "description": "Prototyping with Code",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2263,
+              "description": "Lab for ARTG 2262",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "ARTF"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1290,
+              "description": "Typographic Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1291,
+              "description": "Studio for Typographic Systems",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2252,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3462,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5000,
+          "subject": "ARTG"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1270,
+              "description": "Design: Process + Practices",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1271,
+              "description": "Studio for Design: Process + Practices",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 1290,
+              "description": "Typographic Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 1291,
+              "description": "Studio for Typographic Systems",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2400,
+              "description": "Interaction Design Principles",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2401,
+              "description": "Interaction Design Principles Tools",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTG",
+                  "classId": 2262,
+                  "description": "Prototyping with Code",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTG",
+                  "classId": 2263,
+                  "description": "Lab for ARTG 2262",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3462,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5000,
+              "subject": "ARTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

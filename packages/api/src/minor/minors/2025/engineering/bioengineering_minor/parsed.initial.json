@@ -1,0 +1,355 @@
+{
+  "name": "Bioengineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2355,
+          "subject": "BIOE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOE",
+              "classId": 2365,
+              "description": "Bioengineering Measurement, Experimentation, and Statistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOE",
+              "classId": 2366,
+              "description": "Lab for BIOE 2365",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2309,
+              "description": "Biology Project Lab",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHTH",
+              "classId": 2210,
+              "description": "Foundations of Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHSC",
+              "classId": 2100,
+              "description": "Lab Research Rotation",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "BIOE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ME",
+                  "classId": 2355,
+                  "description": "Mechanics of Materials",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ME",
+                  "classId": 2356,
+                  "description": "Lab for ME 2355",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3210,
+              "subject": "BIOE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "EECE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2210,
+                  "description": "Electrical Engineering",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2211,
+                  "description": "Lab for EECE 2210",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3310,
+              "subject": "BIOE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "CHME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3475,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3480,
+              "subject": "ME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2331,
+              "subject": "CIVE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3380,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5115,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5235,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5250,
+          "subject": "BIOE"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5410,
+              "subject": "BIOE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5411,
+              "subject": "BIOE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5420,
+              "subject": "BIOE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5630,
+              "subject": "CHME"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5430,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5510,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5630,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5640,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5648,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5650,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5660,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5710,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5720,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5750,
+          "subject": "BIOE"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5800,
+              "subject": "BIOE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2520,
+              "subject": "EECE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5810,
+          "subject": "BIOE"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5820,
+              "subject": "BIOE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5631,
+              "subject": "CHME"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5850,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5632,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3430,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2750,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5665,
+          "subject": "ME"
+        }
+      ],
+      "minRequirementCount": 30
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

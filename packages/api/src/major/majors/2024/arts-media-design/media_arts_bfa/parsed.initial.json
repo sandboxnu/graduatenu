@@ -2,7 +2,7 @@
   "name": "Media Arts, BFA",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "9/6/2025"
   },
   "totalCreditsRequired": 130,
   "yearVersion": 2024,
@@ -483,7 +483,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Animation Requirements",
+        "title": "Concentration in Animation",
         "requirements": [
           {
             "type": "COURSE",
@@ -527,7 +527,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Animation Electives",
+        "title": "Concentration in Animation: Animation Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -554,13 +554,13 @@
       },
       {
         "type": "SECTION",
-        "title": "Art and Design Electives",
+        "title": "Concentration in Animation: Art and Design Electives",
         "requirements": [],
         "minRequirementCount": 0
       },
       {
         "type": "SECTION",
-        "title": "Photography Requirements",
+        "title": "Concentration in Photography",
         "requirements": [
           {
             "type": "AND",
@@ -594,7 +594,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Photography Electives",
+        "title": "Concentration in Photography: Photography Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -616,13 +616,13 @@
       },
       {
         "type": "SECTION",
-        "title": "Art and Design Electives",
+        "title": "Concentration in Photography: Art and Design Electives",
         "requirements": [],
         "minRequirementCount": 0
       },
       {
         "type": "SECTION",
-        "title": "Video Arts Requirements",
+        "title": "Concentration in Video Arts",
         "requirements": [
           {
             "type": "AND",
@@ -651,7 +651,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Video Arts Electives",
+        "title": "Concentration in Video Arts: Video Arts Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -693,7 +693,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Art and Design Electives",
+        "title": "Concentration in Video Arts: Art and Design Electives",
         "requirements": [],
         "minRequirementCount": 0
       }

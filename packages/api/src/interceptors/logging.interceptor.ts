@@ -75,7 +75,11 @@ export class LoggingInterceptor implements NestInterceptor {
     const { statusCode } = res;
     const ctx = this.formatCtx(LogType.Response, method, url, statusCode);
 
-    this.logger.log({ body }, ctx);
+    if (url.includes("/major") || url.includes("/minor")) {
+      this.logger.log({ body: { hidden: true } }, ctx);
+    } else {
+      this.logger.log({ body }, ctx);
+    }
   }
 
   /**

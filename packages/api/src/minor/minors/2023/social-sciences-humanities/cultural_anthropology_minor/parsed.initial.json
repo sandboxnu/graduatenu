@@ -1,0 +1,33 @@
+{
+  "name": "Cultural Anthropology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Anthropology Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

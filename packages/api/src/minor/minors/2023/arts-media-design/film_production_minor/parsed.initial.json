@@ -1,0 +1,75 @@
+{
+  "name": "Film Production, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1230,
+          "subject": "MSCR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3480,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3485,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2160,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2895,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3389,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3446,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2345,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

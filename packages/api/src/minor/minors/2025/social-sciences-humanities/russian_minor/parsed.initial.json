@@ -1,0 +1,89 @@
+{
+  "name": "Russian, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Language Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "RSSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "RSSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "RSSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "RSSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "RSSN"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "RSSN"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "CLTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1286,
+          "subject": "HIST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1390,
+          "subject": "HIST"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3455,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3455,
+              "subject": "POLS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

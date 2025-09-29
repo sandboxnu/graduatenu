@@ -1,0 +1,651 @@
+{
+  "name": "Electrical Engineering, BSEE (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 133,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2140,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2160,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electrical Engineering Fundamentals",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2412,
+              "description": "Fundamentals of Electronics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2413,
+              "description": "Lab for EECE 2412",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2520,
+          "subject": "EECE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2530,
+              "description": "Fundamentals of Electromagnetics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2531,
+              "description": "Lab for EECE 2530",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Computer Engineering Fundamentals",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2322,
+                  "description": "Fundamentals of Digital Design and Computer Organization",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2323,
+                  "description": "Lab for EECE 2322",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2540,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2560,
+              "subject": "EECE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electrical Engineering Capstone Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4791,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4792,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electrical Engineering Technical Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2322,
+                  "description": "Fundamentals of Digital Design and Computer Organization",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2323,
+                  "description": "Lab for EECE 2322",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "RANGE",
+              "subject": "EECE",
+              "idRangeStart": 2540,
+              "idRangeEnd": 2750,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "EECE",
+              "idRangeStart": 3324,
+              "idRangeEnd": 3410,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "EECE",
+              "idRangeStart": 4512,
+              "idRangeEnd": 4698,
+              "exceptions": []
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4992,
+              "subject": "EECE"
+            },
+            {
+              "type": "RANGE",
+              "subject": "EECE",
+              "idRangeStart": 5115,
+              "idRangeEnd": 5699,
+              "exceptions": []
+            },
+            {
+              "type": "COURSE",
+              "classId": 5670,
+              "subject": "EECE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3468,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses: Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1155,
+              "description": "Physics for Engineering 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1156,
+              "description": "Lab for PHYS 1155",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1157,
+              "description": "Interactive Learning Seminar for PHYS 1155",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3468,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "EECE Core",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3392,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3410,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4534,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4574,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4604,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4632,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4646,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5161,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5170,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5606,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5608,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5647,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5649,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5651,
+            "subject": "EECE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5653,
+            "subject": "EECE"
+          }
+        ],
+        "minRequirementCount": 15
+      },
+      {
+        "type": "SECTION",
+        "title": "Engineering and Science Breadth",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2310,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2320,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3312,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3322,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4512,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5105,
+            "subject": "CHME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4530,
+            "subject": "IE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5617,
+            "subject": "IE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2340,
+            "subject": "ME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5600,
+            "subject": "ME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5620,
+            "subject": "ME"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4305,
+            "subject": "PHYS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4623,
+            "subject": "PHYS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5114,
+            "subject": "PHYS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5260,
+            "subject": "PHYS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5318,
+            "subject": "PHYS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5352,
+            "subject": "PHYS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Project Management, Product Development, and Entrepreneurship",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3330,
+            "subject": "ENTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5010,
+            "subject": "GE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5020,
+            "subject": "GE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5030,
+            "subject": "GE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5100,
+            "subject": "GE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2310,
+            "subject": "IE"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "MISM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2420,
+            "subject": "MISM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4510,
+            "subject": "MKTG"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2301,
+            "subject": "SCHM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3301,
+            "subject": "SCHM"
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

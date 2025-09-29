@@ -1,0 +1,97 @@
+{
+  "name": "Leadership and Human Capital, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Organizational Behavior",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "ORGB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3209,
+              "subject": "ORGB"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Managing Human Capital",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3420,
+          "subject": "MGMT"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "MGMT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3305,
+              "subject": "MGMT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "MGMT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3350,
+              "subject": "MGMT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3380,
+              "subject": "MGMT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4310,
+              "subject": "MGMT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4410,
+              "subject": "MGMT"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "Audiology, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1203,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4203,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4219,
+          "subject": "SLPA"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

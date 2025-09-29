@@ -2,7 +2,7 @@
   "name": "Cybersecurity, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "9/6/2025"
   },
   "totalCreditsRequired": 134,
   "yearVersion": 2024,
@@ -581,7 +581,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Cyber Operations Required Courses",
+        "title": "Concentration in Cyber Operations",
         "requirements": [
           {
             "type": "OR",
@@ -613,7 +613,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Cyber Operations: Electives",
         "requirements": [
           {
             "type": "XOM",

@@ -1,0 +1,212 @@
+{
+  "name": "Entrepreneurial Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "For Undergraduates in the College of Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5020,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5030,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "For Undergraduates outside the College of Engineering",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1110,
+          "subject": "GE"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5010,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5020,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5030,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "GE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Venture Creation",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3305,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3306,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3330,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4501,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "ENTR"
+            }
+          ],
+          "minRequirementCount": 6
+        },
+        {
+          "type": "SECTION",
+          "title": "Design",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1122,
+                  "description": "Color and Composition",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1123,
+                  "description": "Color and Composition Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTF",
+                  "classId": 1124,
+                  "description": "Form and Structure",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTF",
+                  "classId": 1125,
+                  "description": "Form and Structure Tools",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1250,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3462,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3463,
+              "subject": "ARTG"
+            }
+          ],
+          "minRequirementCount": 6
+        },
+        {
+          "type": "SECTION",
+          "title": "Manufacturing",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4512,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4525,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4530,
+              "subject": "IE"
+            }
+          ],
+          "minRequirementCount": 4
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

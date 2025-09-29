@@ -1,0 +1,870 @@
+{
+  "name": "Theatre, BA (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 132,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Theatre Major Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "INAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1131,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "INAM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1120,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1131,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1270,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3325,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4702,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Making Theatre",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3702,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Theatre Texts and Context",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "INAM",
+              "classId": 1300,
+              "description": "The Politics of Narrative in Theatre",
+              "type": "COURSE"
+            },
+            {
+              "subject": "INAM",
+              "classId": 1301,
+              "description": "The Politics of Narrative in Theatre Seminar",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2983,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Community Engaged Theatre",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1215,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3550,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3670,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5300,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "THTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5700,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives Option",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 16,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "INAM",
+                  "classId": 1300,
+                  "description": "The Politics of Narrative in Theatre",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "INAM",
+                  "classId": 1301,
+                  "description": "The Politics of Narrative in Theatre Seminar",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1215,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1600,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2200,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2335,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2342,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2345,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2346,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2385,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2600,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2983,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2993,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3550,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3650,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3670,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3973,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4345,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5300,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5450,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5700,
+              "subject": "THTR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Performance Concentration",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 1600,
+            "subject": "THTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2342,
+            "subject": "THTR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2600,
+            "subject": "THTR"
+          }
+        ],
+        "minRequirementCount": 3
+      },
+      {
+        "type": "SECTION",
+        "title": "Performance Concentration: Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "INAM",
+                    "classId": 1300,
+                    "description": "The Politics of Narrative in Theatre",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "INAM",
+                    "classId": 1301,
+                    "description": "The Politics of Narrative in Theatre Seminar",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 1150,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1215,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1220,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1400,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1500,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2200,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2310,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2330,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2335,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2340,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2345,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2346,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2370,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2380,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2385,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2400,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2500,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2983,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2993,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3100,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3200,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3400,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3550,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3650,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3670,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3973,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4345,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5300,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5450,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5700,
+                "subject": "THTR"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Production Concentration",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 1230,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2370,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2380,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2385,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2400,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3670,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5700,
+                "subject": "THTR"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Production Concentration: Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 8,
+            "courses": [
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "INAM",
+                    "classId": 1300,
+                    "description": "The Politics of Narrative in Theatre",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "INAM",
+                    "classId": 1301,
+                    "description": "The Politics of Narrative in Theatre Seminar",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 1215,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1220,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1235,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1400,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1500,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1600,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2200,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2310,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2330,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2335,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2340,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2342,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2345,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2346,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2370,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2380,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2385,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2400,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2500,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2600,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2983,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3100,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3200,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3400,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3550,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3650,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3670,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3973,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4345,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5300,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5450,
+                "subject": "THTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5700,
+                "subject": "THTR"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

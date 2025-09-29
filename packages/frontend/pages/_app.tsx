@@ -11,6 +11,7 @@ import { useWindowSize } from "../hooks";
 import { theme } from "../utils";
 import { ClientSideError } from "../components/Error/ClientSideError";
 import { Analytics } from "@vercel/analytics/react";
+import { ShortcutsProvider } from "../components/Shorcuts/ShortcutsProvider";
 
 interface IsGuestContextType {
   isGuest: boolean;
@@ -22,6 +23,16 @@ export const IsGuestContext = createContext<IsGuestContextType>({
   setIsGuest: () => undefined,
 });
 
+interface NewPlanModalContextType {
+  isNewPlanModalOpen: boolean;
+  setIsNewPlanModalOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export const NewPlanModalContext = createContext<NewPlanModalContextType>({
+  isNewPlanModalOpen: false,
+  setIsNewPlanModalOpen: () => undefined,
+});
+
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const { width } = useWindowSize();
@@ -29,6 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const isLandingPage = router.asPath === "/";
   const disableApp = !isLandingPage && width && width <= 1100;
   const [isGuest, setIsGuest] = useState(false);
+  const [isNewPlanModalOpen, setIsNewPlanModalOpen] = useState(false);
 
   return (
     <>
@@ -44,7 +56,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <ChakraProvider theme={theme}>
           <IsGuestContext.Provider value={{ isGuest, setIsGuest }}>
-            {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+            <NewPlanModalContext.Provider
+              value={{ isNewPlanModalOpen, setIsNewPlanModalOpen }}
+            >
+              <ShortcutsProvider>
+                {disableApp ? <DisabledApp /> : <Component {...pageProps} />}
+              </ShortcutsProvider>
+            </NewPlanModalContext.Provider>
           </IsGuestContext.Provider>
         </ChakraProvider>
         <ToastContainer position="bottom-right" />

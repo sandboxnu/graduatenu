@@ -1,0 +1,110 @@
+{
+  "name": "Data Storytelling, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundation",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2242,
+          "subject": "ARTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3610,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "JRNL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTG",
+              "classId": 2262,
+              "description": "Prototyping with Code",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTG",
+              "classId": 2263,
+              "description": "Lab for ARTG 2262",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CS",
+              "classId": 2000,
+              "description": "Introduction to Program Design and Implementation",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CS",
+              "classId": 2001,
+              "description": "Lab for CS 2000",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5500,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 7
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

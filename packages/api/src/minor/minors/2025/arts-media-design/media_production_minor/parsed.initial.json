@@ -1,0 +1,90 @@
+{
+  "name": "Media Production, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1450,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2550,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2655,
+          "subject": "COMM"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2650,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2750,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3655,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3750,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4755,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

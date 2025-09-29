@@ -1,0 +1,106 @@
+{
+  "name": "Healthcare System Operations, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "IE",
+              "classId": 5617,
+              "description": "Lean Concepts and Applications",
+              "type": "COURSE"
+            },
+            {
+              "subject": "IE",
+              "classId": 5618,
+              "description": "Recitation for IE 5617",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5400,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3500,
+              "subject": "IE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1260,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5374,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5500,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5640,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5121,
+          "subject": "NRSG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4511,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5226,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5232,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3315,
+          "subject": "SCHM"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "name": "Marketing, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2201,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2209,
+              "subject": "MKTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2602,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2720,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3301,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3401,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3402,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3501,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3720,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4120,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4420,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4720,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4502,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4504,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4506,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4508,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4512,
+              "subject": "MKTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "MKTG"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

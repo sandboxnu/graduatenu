@@ -1,0 +1,526 @@
+{
+  "name": "Environmental Engineering and Chemical Engineering, BSEnvE (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 133,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Core Environmental Engineering Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 2300,
+              "description": "Environmental Measurements in Natural and Engineered Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 2301,
+              "description": "Lab for CIVE 2300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2334,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "CIVE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 4534,
+              "description": "Water Treatment Systems Design",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 4535,
+              "description": "Lab for CIVE 4534",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4765,
+          "subject": "CIVE"
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Environmental Engineering Elective Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3335,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4777,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5150,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5250,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5255,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5260,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5261,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5271,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5275,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5280,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5281,
+          "subject": "CIVE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 5300,
+              "description": "Environmental Sampling and Analysis",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 5301,
+              "description": "Lab for CIVE 5300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5363,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5365,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5366,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5368,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5369,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5536,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5670,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5699,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 23
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3430,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3455,
+              "subject": "EEMB"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3464,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Core Chemical Engineering Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2308,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "CHME"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHME",
+              "classId": 3305,
+              "description": "Chemical Engineering Laboratory",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHME",
+              "classId": 3306,
+              "description": "Recitation for CHME 3305",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3312,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3322,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4512,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "CHME"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Mathematics/Science",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1151,
+              "description": "General Chemistry for Engineers",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1153,
+              "description": "Recitation for CHEM 1151",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1151,
+              "description": "Physics for Engineering 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1152,
+              "description": "Lab for PHYS 1151",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1153,
+              "description": "Interactive Learning Seminar for PHYS 1151",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Science Elective (Earth)",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2200,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3125,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5201,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Supplemental Credit",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3430,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3455,
+              "subject": "EEMB"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3464,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Professional Development",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3000,
+          "subject": "ENCP"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3302,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4765,
+          "subject": "CIVE"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

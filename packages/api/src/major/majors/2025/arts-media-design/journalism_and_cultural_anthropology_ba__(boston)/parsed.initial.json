@@ -1,0 +1,309 @@
+{
+  "name": "Journalism and Cultural Anthropology, BA  (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 129,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundation Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "JRNL",
+              "classId": 1101,
+              "description": "Journalism 1: Fundamentals of Reporting and Writing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "JRNL",
+              "classId": 1102,
+              "description": "Journalist’s Toolbox",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2201,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Visual Storytelling",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3370,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5309,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5310,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5314,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5316,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5320,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Law and Ethics",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3550,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4650,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Core Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3421,
+          "subject": "ANTH"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Anthropology Area Requirements",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ANTH",
+          "idRangeStart": 4101,
+          "idRangeEnd": 4520,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Anthropology Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "ANTH",
+          "idRangeStart": 2000,
+          "idRangeEnd": 4999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4600,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4100,
+              "subject": "ANTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Preparatory Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EEAM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3418,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4100,
+              "subject": "ANTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "JRNL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5250,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3308,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "JRNL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
