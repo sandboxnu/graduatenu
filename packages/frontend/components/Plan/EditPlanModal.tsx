@@ -1,4 +1,4 @@
-import { EditIcon, SmallCloseIcon } from "@chakra-ui/icons";
+import { EditIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Button,
   Checkbox,
@@ -15,6 +15,7 @@ import {
   VStack,
   Text,
   Box,
+  CloseButton,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
@@ -67,6 +68,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const router = useRouter();
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
+  const [showAdvancedEdit, setShowAdvancedEdit] = useState(false);
   const {
     register,
     handleSubmit,
@@ -216,6 +218,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
   const onCloseModal = () => {
     resetValuesToCurrPlan();
+    setShowAdvancedEdit(false);
     onCloseDisplay();
   };
 
@@ -308,9 +311,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                     {majors?.map((major, index) => (
                       <Box key={index} w="100%">
                         <PlanSelect
-                          label={
-                            index === 0 ? "Major(s)" : `Major ${index + 1}`
-                          }
+                          label={index === 0 ? "Major(s)" : undefined}
                           placeholder="Select a Major"
                           name={`majors.${index}`}
                           isMulti={false}
@@ -332,13 +333,15 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                           isDisabled={!catalogYear}
                           removeButton={
                             index > 0 ? (
-                              <SmallCloseIcon
+                              <CloseButton
                                 position="absolute"
-                                top="8px"
-                                right="8px"
+                                top="-5px"
+                                right="-5px"
                                 cursor="pointer"
-                                color="red.500"
+                                color="white"
+                                bg="red.400"
                                 boxSize="16px"
+                                fontSize="8px"
                                 _hover={{ color: "red.700" }}
                                 onClick={() => {
                                   const newMajors = majors.filter(
@@ -356,7 +359,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                     <Text
                       cursor="pointer"
                       textColor="blue.500"
-                      fontWeight="bold"
+                      fontWeight="medium"
                       onClick={() => setValue("majors", [...majors, ""])}
                     >
                       + Add a Major
@@ -380,56 +383,89 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         useFuzzySearch
                       />
                     )}
-                    {minors?.map((minor, index) => (
-                      <Box key={index} w="100%">
-                        <PlanSelect
-                          label={
-                            index === 0 ? "Minor(s)" : `Minor ${index + 1}`
-                          }
-                          placeholder="Select a Minor"
-                          name={`minors.${index}`}
-                          isMulti={false}
-                          control={control}
-                          options={extractSupportedMinorOptions(
-                            catalogYear,
-                            supportedMinorsData
-                          )}
-                          isDisabled={!catalogYear}
-                          isSearchable
-                          useFuzzySearch
-                          removeButton={
-                            index > 0 ? (
-                              <SmallCloseIcon
-                                position="absolute"
-                                top="8px"
-                                right="8px"
-                                cursor="pointer"
-                                color="red.500"
-                                boxSize="16px"
-                                _hover={{ color: "red.700" }}
-                                onClick={() => {
-                                  const newMinors = minors.filter(
-                                    (_, i) => i !== index
-                                  );
-                                  setValue("minors", newMinors);
-                                }}
+
+                    <Box w="100%">
+                      <hr />
+                      <Flex justify="flex-end" w="100%" mb="sm">
+                        <Text
+                          cursor="pointer"
+                          color="primary"
+                          fontWeight="medium"
+                          fontSize="sm"
+                          onClick={() => setShowAdvancedEdit(!showAdvancedEdit)}
+                          display="flex"
+                          alignItems="center"
+                        >
+                          Advanced edit
+                          <ChevronDownIcon
+                            ml="1"
+                            transform={
+                              showAdvancedEdit
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)"
+                            }
+                            transition="transform 0.2s"
+                          />
+                        </Text>
+                      </Flex>
+
+                      {showAdvancedEdit && (
+                        <VStack padding="5" bg="gray.100" alignItems="start">
+                          {minors?.map((minor, index) => (
+                            <Box key={index} w="100%">
+                              <PlanSelect
+                                label={index === 0 ? "Minor(s)" : undefined}
+                                placeholder="Select a Minor"
+                                name={`minors.${index}`}
+                                isMulti={false}
+                                control={control}
+                                options={extractSupportedMinorOptions(
+                                  catalogYear,
+                                  supportedMinorsData
+                                )}
+                                isDisabled={!catalogYear}
+                                isSearchable
+                                useFuzzySearch
+                                removeButton={
+                                  index > 0 ? (
+                                    <CloseButton
+                                      position="absolute"
+                                      top="-5px"
+                                      right="-5px"
+                                      cursor="pointer"
+                                      color="white"
+                                      bg="red.400"
+                                      boxSize="16px"
+                                      fontSize="8px"
+                                      _hover={{ color: "red.700" }}
+                                      onClick={() => {
+                                        const newMinors = minors.filter(
+                                          (_, i) => i !== index
+                                        );
+                                        setValue("minors", newMinors);
+                                        setValue("concentration", "");
+                                      }}
+                                    />
+                                  ) : undefined
+                                }
                               />
-                            ) : undefined
-                          }
-                        />
-                      </Box>
-                    ))}
-                    <Text
-                      cursor="pointer"
-                      textColor="blue.500"
-                      fontWeight="bold"
-                      onClick={() => {
-                        const currentMinors = minors || [];
-                        setValue("minors", [...currentMinors, ""]);
-                      }}
-                    >
-                      + Add a Minor
-                    </Text>
+                            </Box>
+                          ))}
+                          <Text
+                            cursor="pointer"
+                            textColor="blue.500"
+                            fontWeight="medium"
+                            onClick={() => {
+                              const currentMinors = minors || [];
+                              setValue("minors", [...currentMinors, ""]);
+                            }}
+                          >
+                            + Add a Minor
+                          </Text>
+                        </VStack>
+                      )}
+                    </Box>
+
                     {majors && !isValidatedMajor && (
                       <Flex alignItems="center">
                         <Checkbox
