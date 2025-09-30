@@ -4,14 +4,10 @@ import * as pdf from "pdf-parse";
 
 @Injectable()
 export class UtilsService {
+  // Reads the pdf and returns it as a string to be parsed for courses
   async parsePdfCourses(fileBuffer: Buffer): Promise<ParsedCourse[]> {
-    console.log("Starting PDF parsing...");
-    console.log("File buffer length:", fileBuffer?.length);
-
     try {
-      // Use pdf-parse instead of pdfjs-dist
       const data = await pdf(fileBuffer);
-      console.log("Extracted text length:", data.text.length);
 
       return this.parseCourses(data.text);
     } catch (error) {
@@ -20,6 +16,7 @@ export class UtilsService {
     }
   }
 
+  // Parses through the text and extracts unique course subjects and class IDs
   private parseCourses(pdfText: string): ParsedCourse[] {
     const courseRegex = /([A-Z]{2,4})\s*(\d{4}[A-Z]*)/g;
     const courses: ParsedCourse[] = [];

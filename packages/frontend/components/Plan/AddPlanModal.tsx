@@ -98,18 +98,12 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       return;
     }
 
-    setIsParsingPdf(true);
-
     try {
       const courses = await API.utils.parsePdfCourses(file);
 
-      console.log(courses, "courses parsed from API");
       setUploadedCourses(courses);
-      console.log(`Found ${courses.length} courses:`, courses);
     } catch (error) {
       console.error("Error parsing PDF:", error);
-    } finally {
-      setIsParsingPdf(false);
     }
   };
 
@@ -129,7 +123,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
   const [uploadedCourses, setUploadedCourses] = useState<ParsedCourse[]>([]);
-  const [isParsingPdf, setIsParsingPdf] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
@@ -159,10 +152,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   );
 
   // Instead of using useTemplateCourses, use useFetchCourses directly
-  const {
-    courses: uploadedCourseDetails,
-    isLoading: isLoadingUploadedCourses,
-  } = useFetchCourses(
+  const { courses: uploadedCourseDetails } = useFetchCourses(
     uploadedCourses, // We already have the parsed {subject, classId}[] format
     catalogYear || new Date().getFullYear()
   );
@@ -204,7 +194,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     payload: CreatePlanDtoWithoutSchedule & { useTemplate: boolean }
   ) => {
     // Handle uploaded courses by adding them to student's transfer courses
-    console.log(student.coursesTransfered, "existing transfer courses");
     if (uploadedCourses.length > 0) {
       try {
         await addTransferCoursesToStudent(
@@ -218,9 +207,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         return; // Don't proceed with plan creation if transfer courses failed
       }
     }
-    console.log(student.coursesTransfered, "new transfer courses");
 
-    // Create normal plan (template or empty)
+    // Create normal plan
     let schedule;
     if (payload.useTemplate && template) {
       try {

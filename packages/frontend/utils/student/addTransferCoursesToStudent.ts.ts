@@ -29,10 +29,6 @@ export async function addTransferCoursesToStudent(
         const courseKey = `${subject} ${classId}`;
         const courseDetails = courseLookup[courseKey];
 
-        console.log(
-          `Adding transfer course ${courseKey}: Found in lookup: ${!!courseDetails}`
-        );
-
         return {
           name: courseDetails?.name || `${subject} ${classId}`,
           subject,
@@ -47,11 +43,10 @@ export async function addTransferCoursesToStudent(
       }
     );
 
-    // Update student's transfer courses (avoid duplicates)
+    // Update student's transfer courses while avoiding dup's
     const existingTransferCourses = student.coursesTransfered || [];
     const combinedTransferCourses = [...existingTransferCourses];
 
-    // Only add courses that don't already exist
     newTransferCourses.forEach((newCourse) => {
       const isDuplicate = existingTransferCourses.some(
         (existing) =>
@@ -81,10 +76,6 @@ export async function addTransferCoursesToStudent(
     } else {
       await API.student.update(studentWithoutDndIds);
     }
-
-    console.log(
-      `Successfully added ${newTransferCourses.length} transfer courses to student`
-    );
   } catch (error) {
     console.error("Error adding transfer courses to student:", error);
     throw error;
