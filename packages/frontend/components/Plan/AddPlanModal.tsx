@@ -548,33 +548,43 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                     )}
 
                     {!isNoMajorSelected && (
-                      <Box
-                        p="sm"
-                        borderRadius="md"
-                        borderWidth="1px"
-                        borderColor="primary.blue.light.main"
-                        bg="primary.blue.light.faint"
-                        w="100%"
-                      >
-                        <Text fontWeight="medium" mb="xs">
-                          Import from UAchieve PDF
+                      <Flex alignItems="center" w="100%" gap="sm">
+                        <Text fontWeight="medium">
+                          Import from UAchieve PDF:
                         </Text>
-                        <Input
-                          type="file"
-                          accept=".pdf"
-                          onChange={handlePdfUpload}
-                          ref={fileInputRef}
-                          size="sm"
-                          border="1px dashed"
-                          borderColor="primary.blue.light.main"
-                          p="xs"
-                        />
+                        <Box position="relative">
+                          <Input
+                            type="file"
+                            accept=".pdf"
+                            onChange={handlePdfUpload}
+                            ref={fileInputRef}
+                            position="absolute"
+                            opacity="0"
+                            width="100%"
+                            height="100%"
+                            cursor="pointer"
+                            zIndex="1"
+                          />
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            borderColor="primary.blue.light.main"
+                            color="primary.blue.dark.main"
+                            leftIcon={<AddIcon />}
+                            _hover={{
+                              bg: "primary.blue.light.faint",
+                              borderColor: "primary.blue.dark.main",
+                            }}
+                          >
+                            Choose PDF File
+                          </Button>
+                        </Box>
                         {uploadedCourses.length > 0 && (
-                          <Text color="green.500" mt="xs">
-                            Found {uploadedCourses.length} courses
+                          <Text color="green.500" fontSize="sm">
+                            ✓ {uploadedCourses.length} courses
                           </Text>
                         )}
-                      </Box>
+                      </Flex>
                     )}
 
                     {majorName && !isValidatedMajor && (
