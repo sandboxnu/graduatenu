@@ -68,6 +68,11 @@ export interface INEUOrReq {
   values: INEUReq[];
 }
 
+export interface ParsedCourse {
+  subject: string;
+  classId: string;
+}
+
 /**
  * A SearchNEU prerequisite course.
  *
