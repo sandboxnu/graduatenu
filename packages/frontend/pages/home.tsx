@@ -1,4 +1,5 @@
 import { Box, Divider, Flex, Button } from "@chakra-ui/react";
+import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 import {
   CollisionDetection,
   DndContext,
@@ -94,6 +95,39 @@ const HomePage: NextPage = () => {
 
   const [lastDeletedPlan, setLastDeletedPlan] = useState<any | null>(null);
   const { isGuest } = useContext(IsGuestContext);
+
+  const handleUndoDelete = async () => {
+    if (!lastDeletedPlan || !student) return;
+
+    if (isGuest) {
+      window.localStorage.setItem(
+        "student",
+        JSON.stringify({
+          ...student,
+          plans: [...student.plans, lastDeletedPlan],
+        })
+      );
+    } else {
+      await API.plans.create(lastDeletedPlan);
+    }
+
+    mutateStudent();
+    setSelectedPlanId(lastDeletedPlan.id);
+    setLastDeletedPlan(null);
+    toast.success("Plan restored!");
+  };
+
+  useKeyboardShortcuts({
+    shortcuts: [
+      {
+        key: "z",
+        ctrlKey: true,
+        callback: handleUndoDelete,
+        disabled: !lastDeletedPlan,
+      },
+    ],
+    disabledRoutes: ["/", "/login"],
+  });
 
   useEffect(() => {
     // once the student is fetched, set the selected plan id to the last updated plan
@@ -240,28 +274,6 @@ const HomePage: NextPage = () => {
     ).catch((error) => {
       handleApiClientError(error, router);
     });
-  };
-
-  const handleUndoDelete = async () => {
-    if (!lastDeletedPlan) return;
-
-    if (isGuest) {
-      window.localStorage.setItem(
-        "student",
-        JSON.stringify({
-          ...student,
-          plans: [...student.plans, lastDeletedPlan],
-        })
-      );
-    } else {
-      // Insert plan back into database
-      await API.plans.create(lastDeletedPlan);
-    }
-
-    mutateStudent();
-    setSelectedPlanId(lastDeletedPlan.id);
-    setLastDeletedPlan(null);
-    toast.success("Plan restored!");
   };
 
   let renderedSidebar = <NoPlanSidebar />;
