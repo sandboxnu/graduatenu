@@ -106,12 +106,6 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     resetValuesToCurrPlan();
   }, [resetValuesToCurrPlan]);
 
-  useEffect(() => {
-    if (!isOpen) {
-      resetValuesToCurrPlan();
-    }
-  }, [isOpen, resetValuesToCurrPlan]);
-
   if (supportedMajorsError) {
     handleApiClientError(supportedMajorsError, router);
   }
@@ -225,6 +219,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   );
 
   const onCloseModal = () => {
+    resetValuesToCurrPlan();
     onCloseDisplay();
   };
 

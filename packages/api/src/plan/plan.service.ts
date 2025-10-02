@@ -160,7 +160,7 @@ export class PlanService {
     /** Wipe Minor => Remove existing minor from the plan. */
     const isWipeMinorUpdate = newMinorName === "" && currentPlan.minor;
 
-    const isMinorUpdate = newMinorName !== undefined;
+    const isMinorInfoUpdate = newMinorName || newCatalogYear;
 
     const isScheduleUpdate = newSchedule && !isMajorInfoUpdate;
 
@@ -168,7 +168,7 @@ export class PlanService {
       !(
         isWipeMajorUpdate ||
         isMajorInfoUpdate ||
-        isMinorUpdate ||
+        isMinorInfoUpdate ||
         isScheduleUpdate ||
         newName
       )
