@@ -155,8 +155,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     }
 
     const isNoMajorSelectedPrev = !plan.major;
-    const minorChanged =
-      plan.minor !== (payload.minor === undefined ? undefined : payload.minor);
+    const minorChanged = plan.minor !== payload.minor;
 
     // If no field has been changed, don't send an update request
     if (
