@@ -173,10 +173,22 @@ const LatestReleaseNotesIcon: React.FC<IconProps> = (props) => {
 
 const FeedbackIcon: React.FC<IconProps> = (props) => {
   return (
-    <Icon as={MdChatBubbleOutline} height="20px" width="20px" {...props} />
+    <Icon
+      as={MdChatBubbleOutline as any}
+      height="20px"
+      width="20px"
+      {...props}
+    />
   );
 };
 
 const BugIcon: React.FC<IconProps> = (props) => {
-  return <Icon as={MdOutlineBugReport} height="20px" width="20px" {...props} />;
+  return (
+    <Icon
+      as={MdOutlineBugReport as any}
+      height="20px"
+      width="20px"
+      {...props}
+    />
+  );
 };
