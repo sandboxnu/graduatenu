@@ -275,6 +275,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     reset();
     setIsNoMajorSelected(false);
     setIsNoMinorSelected(false);
+    setUploadedCourses([]);
     onCloseDisplay();
     setIsNoMajorSelected(false);
   };

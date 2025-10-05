@@ -51,7 +51,12 @@ export const DeletePlanModal: React.FC<DeletePlanModalProps> = ({
           JSON.stringify({
             ...student,
             plans: student.plans.filter((plan) => plan.id !== planId),
+            coursesTransfered: [],
           })
+        );
+        console.log(
+          student.coursesTransfered,
+          "these are the stdeutsn transfered courses"
         );
       } else {
         await API.plans.delete(planId);
