@@ -1,0 +1,87 @@
+{
+  "name": "Architectural Science and Systems, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Building Systems Required Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2260,
+          "subject": "ARCH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Building Systems Core",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2240,
+              "subject": "ARCH"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3210,
+                  "subject": "ARCH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 5210,
+                  "subject": "ARCH"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5230,
+              "subject": "ARCH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5200,
+          "subject": "SBSY"
+        }
+      ],
+      "minRequirementCount": 3
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

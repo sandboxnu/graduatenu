@@ -1,0 +1,707 @@
+{
+  "name": "Spanish and Public Health, BA (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Spanish Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3101,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3102,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Culture, Literature & History Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3805,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1504,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1505,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1973,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3240,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3715,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3720,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4655,
+              "subject": "SPNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Language & Linguistics Electives",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2900,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3403,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3502,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3601,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3602,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3603,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "SPNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4944,
+              "subject": "SPNS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Public Health Core",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4120,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4202,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Science Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "SECTION",
+          "title": "Biology",
+          "requirements": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1141,
+                  "subject": "BIOL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1143,
+                  "subject": "BIOL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1147,
+              "subject": "BIOL"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1111,
+                  "description": "General Biology 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1112,
+                  "description": "Lab for BIOL 1111",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1113,
+                  "description": "General Biology 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1114,
+                  "description": "Lab for BIOL 1113",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 4
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Public Health Social Science Requirement",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Introductory Course",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1225,
+              "subject": "COMM"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ECON",
+                  "classId": 1115,
+                  "description": "Principles of Macroeconomics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ECON",
+                  "classId": 1125,
+                  "description": "Recitation for ECON 1115",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ECON",
+                  "classId": 1116,
+                  "description": "Principles of Microeconomics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ECON",
+                  "classId": 1126,
+                  "description": "Recitation for ECON 1116",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "HUSV"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Upper-Level Course",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3441,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4102,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3040,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5280,
+              "subject": "HLTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5222,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3402,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3241,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3441,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "AFCS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "ECON"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3200,
+                  "subject": "INTL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3201,
+                  "subject": "INTL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3500,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3423,
+              "subject": "ECON"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 5100,
+                  "subject": "INTL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 5100,
+                  "subject": "PPUA"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 5238,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5001,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5002,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3413,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "ORGB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4511,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5232,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5234,
+              "subject": "PHTH"
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "SPNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3402,
+          "subject": "SPNS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College (Based on Home College)",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "INSH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing in the First Year",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Preparation (Based on Home College)",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Discipline",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3308,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3309,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3315,
+          "subject": "ENGW"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Bouvé",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4720,
+              "subject": "HSCI"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4730,
+              "subject": "HSCI"
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "CSSH",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "SPNS"
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

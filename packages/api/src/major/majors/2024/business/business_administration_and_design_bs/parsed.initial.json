@@ -2,7 +2,7 @@
   "name": "Business Administration and Design, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "1/19/2025"
+    "lastEdited": "9/6/2025"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2024,
@@ -483,7 +483,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Accounting",
         "requirements": [
           {
             "type": "COURSE",
@@ -500,7 +500,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Accounting: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -533,7 +533,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Accounting and Advisory Services",
         "requirements": [
           {
             "type": "OR",
@@ -580,7 +580,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective",
+        "title": "Concentration in Accounting and Advisory Services: Elective",
         "requirements": [
           {
             "type": "COURSE",
@@ -597,7 +597,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Course",
+        "title": "Concentration in Brand Management",
         "requirements": [
           {
             "type": "COURSE",
@@ -609,7 +609,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Brand Management: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -686,7 +686,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Business Analytics",
         "requirements": [
           {
             "type": "COURSE",
@@ -718,7 +718,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective",
+        "title": "Concentration in Business Analytics: Elective",
         "requirements": [
           {
             "type": "COURSE",
@@ -740,7 +740,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Corporate Innovation",
         "requirements": [
           {
             "type": "COURSE",
@@ -757,7 +757,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Corporate Innovation: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -829,7 +829,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Entrepreneurial Startups",
         "requirements": [
           {
             "type": "COURSE",
@@ -846,7 +846,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Entrepreneurial Startups: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -918,7 +918,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Family Business",
         "requirements": [
           {
             "type": "COURSE",
@@ -935,7 +935,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Family Business: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -997,7 +997,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Course",
+        "title": "Concentration in Finance",
         "requirements": [
           {
             "type": "OR",
@@ -1019,7 +1019,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Finance: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1197,7 +1197,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Fintech",
         "requirements": [
           {
             "type": "OR",
@@ -1241,7 +1241,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Fintech: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1289,7 +1289,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Healthcare Management and Consulting",
         "requirements": [
           {
             "type": "COURSE",
@@ -1306,7 +1306,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Implementation/Consulting Elective",
+        "title": "Concentration in Healthcare Management and Consulting: Implementation/Consulting Elective",
         "requirements": [
           {
             "type": "COURSE",
@@ -1363,7 +1363,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Interdisciplinary Healthcare Focus",
+        "title": "Concentration in Healthcare Management and Consulting: Interdisciplinary Healthcare Focus",
         "requirements": [
           {
             "type": "COURSE",
@@ -1410,7 +1410,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in International Business",
         "requirements": [
           {
             "type": "OR",
@@ -1442,7 +1442,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in International Business: Electives",
         "requirements": [
           {
             "type": "SECTION",
@@ -1498,7 +1498,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Course",
+        "title": "Concentration in Management",
         "requirements": [
           {
             "type": "OR",
@@ -1520,7 +1520,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Management: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1628,7 +1628,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Management Information Systems",
         "requirements": [
           {
             "type": "COURSE",
@@ -1640,7 +1640,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Management Information Systems: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1725,7 +1725,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Marketing",
         "requirements": [
           {
             "type": "OR",
@@ -1747,7 +1747,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Marketing: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1875,7 +1875,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Marketing Analytics",
         "requirements": [
           {
             "type": "COURSE",
@@ -1897,7 +1897,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective",
+        "title": "Concentration in Marketing Analytics: Elective",
         "requirements": [
           {
             "type": "AND",
@@ -1938,7 +1938,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Social Innovation and Entrepreneurship",
         "requirements": [
           {
             "type": "COURSE",
@@ -1955,7 +1955,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Social Innovation and Entrepreneurship: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -2024,7 +2024,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Supply Chain Management",
         "requirements": [
           {
             "type": "COURSE",
@@ -2046,7 +2046,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective",
+        "title": "Concentration in Supply Chain Management: Elective",
         "requirements": [
           {
             "type": "XOM",

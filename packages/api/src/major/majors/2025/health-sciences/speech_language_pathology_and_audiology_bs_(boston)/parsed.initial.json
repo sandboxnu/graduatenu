@@ -1,0 +1,239 @@
+{
+  "name": "Speech-Language Pathology and Audiology, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 132,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Speech-Language Pathology and Audiology Major Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1103,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1203,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1205,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4203,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4651,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5107,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6219,
+          "subject": "SLPA"
+        }
+      ],
+      "minRequirementCount": 14
+    },
+    {
+      "type": "SECTION",
+      "title": "Biology Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2217,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2218,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2219,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2220,
+          "subject": "BIOL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Physical Science Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1101,
+              "description": "General Chemistry for Health Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1102,
+              "description": "Lab for CHEM 1101",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1103,
+              "description": "Recitation for CHEM 1101",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 1145,
+              "description": "Physics for Life Sciences 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 1146,
+              "description": "Lab for PHYS 1145",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Other Supporting Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "HLTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1215,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2300,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3404,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 10
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

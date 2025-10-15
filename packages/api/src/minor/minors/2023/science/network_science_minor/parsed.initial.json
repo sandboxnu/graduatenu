@@ -1,0 +1,114 @@
+{
+  "name": "Network Science, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Network Science Core",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 12,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2105,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3545,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1125,
+              "subject": "PHYS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5116,
+              "subject": "PHYS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Data and Computational Methods",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2500,
+          "subject": "CS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "DS",
+              "classId": 2000,
+              "description": "Programming with Data",
+              "type": "COURSE"
+            },
+            {
+              "subject": "DS",
+              "classId": 2001,
+              "description": "Data Science Programming Practicum",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1500,
+          "subject": "INSH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Applied Topics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2105,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2102,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5304,
+          "subject": "INSH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "MGMT"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5116,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

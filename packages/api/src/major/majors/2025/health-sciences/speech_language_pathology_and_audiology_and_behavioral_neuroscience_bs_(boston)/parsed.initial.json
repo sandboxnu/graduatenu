@@ -1,0 +1,448 @@
+{
+  "name": "Speech-Language Pathology and Audiology and Behavioral Neuroscience, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 132,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "First-Year Seminar",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "SLPA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Speech-Language Pathology and Audiology Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1102,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1103,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1200,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1203,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1205,
+          "subject": "SLPA"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "SLPA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESC"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4651,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5107,
+          "subject": "SLPA"
+        },
+        {
+          "type": "COURSE",
+          "classId": 6219,
+          "subject": "SLPA"
+        }
+      ],
+      "minRequirementCount": 11
+    },
+    {
+      "type": "SECTION",
+      "title": "Behavioral Neuroscience Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2299,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3405,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3458,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Psychology Elective",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3451,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3464,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3466,
+              "subject": "PSYC"
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Behavioral Neuroscience Electives",
+          "requirements": [
+            {
+              "type": "XOM",
+              "numCreditsMin": 8,
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3415,
+                  "subject": "BIOL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3601,
+                  "subject": "BIOL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3605,
+                  "subject": "BIOL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4705,
+                  "subject": "BIOL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4709,
+                  "subject": "BIOL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 5595,
+                  "subject": "BIOL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 5601,
+                  "subject": "BIOL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3506,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3508,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3510,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4510,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4512,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4514,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4540,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4570,
+                  "subject": "PSYC"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Upper-Level Elective",
+          "requirements": [
+            {
+              "type": "RANGE",
+              "subject": "BIOL",
+              "idRangeStart": 3405,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "BNSC",
+              "idRangeStart": 4970,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "PSYC",
+              "idRangeStart": 3404,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 3
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1107,
+              "description": "Foundations of Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1108,
+              "description": "Lab for BIOL 1107",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "ENGW"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3306,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3308,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5450,
+          "subject": "HLTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1241,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1165,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2300,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "SLPA"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

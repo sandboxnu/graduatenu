@@ -1,0 +1,105 @@
+{
+  "name": "Middle East and Mediterranean Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1290,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1160,
+              "subject": "INTL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1150,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3465,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1502,
+              "subject": "ARAB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1292,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1185,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1290,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2100,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2200,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1280,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1285,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "POLS"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

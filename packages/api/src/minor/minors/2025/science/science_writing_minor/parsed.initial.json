@@ -1,0 +1,222 @@
+{
+  "name": "Science Writing, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introductory Science Course",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1107,
+              "subject": "BIOL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1151,
+              "subject": "CHEM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1161,
+              "subject": "CHEM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1214,
+              "subject": "CHEM"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1400,
+          "subject": "ENVR"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1242,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1342,
+              "subject": "MATH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1155,
+              "subject": "PHYS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1165,
+              "subject": "PHYS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1175,
+              "subject": "PHYS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced Science Course",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "BIOL",
+          "idRangeStart": 2301,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "CHEM",
+          "idRangeStart": 2311,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "EEMB",
+          "idRangeStart": 2400,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ENVR",
+          "idRangeStart": 2310,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "MATH",
+          "idRangeStart": 2280,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "PHYS",
+          "idRangeStart": 2303,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "PSYC",
+          "idRangeStart": 2290,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Writing/Communication Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1125,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2650,
+          "subject": "ENGL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Science Writing Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "COMM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2620,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2780,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3340,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3650,
+          "subject": "JRNL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3700,
+          "subject": "JRNL"
+        }
+      ],
+      "minRequirementCount": 7
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "name": "Digital Communication, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/7/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundational Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1255,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2105,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2551,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1450,
+              "subject": "ENGL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2505,
+                  "subject": "MSCR"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2505,
+                  "subject": "WMNS"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Courses",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4605,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4625,
+              "subject": "COMM"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

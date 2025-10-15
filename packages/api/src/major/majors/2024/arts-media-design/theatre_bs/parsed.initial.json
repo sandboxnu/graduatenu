@@ -2,7 +2,7 @@
   "name": "Theatre, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "9/6/2025"
   },
   "totalCreditsRequired": 132,
   "yearVersion": 2024,
@@ -427,7 +427,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Performance",
+        "title": "Performance Concentration",
         "requirements": [
           {
             "type": "COURSE",
@@ -449,7 +449,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Performance Concentration: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -629,7 +629,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Design and Production",
+        "title": "Production Concentration",
         "requirements": [
           {
             "type": "XOM",
@@ -677,7 +677,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Production Concentration: Electives",
         "requirements": [
           {
             "type": "XOM",

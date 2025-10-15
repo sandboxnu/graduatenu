@@ -1,0 +1,277 @@
+{
+  "name": "Mathematics and Sociology, BS (Boston)",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "SOCL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Experiential Learning Introduction",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Problem Solving",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1365,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Calculus",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate and Advanced Mathematics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2331,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3081,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Math Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "MATH",
+          "idRangeStart": 3001,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "INSH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2321,
+              "subject": "SOCL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "INSH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Sociology Electives",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Introductory Elective",
+          "requirements": [],
+          "minRequirementCount": 0
+        },
+        {
+          "type": "SECTION",
+          "title": "Intermediate Elective",
+          "requirements": [],
+          "minRequirementCount": 0
+        },
+        {
+          "type": "SECTION",
+          "title": "Advanced Elective",
+          "requirements": [],
+          "minRequirementCount": 0
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4025,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5131,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1280,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2485,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4528,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Requirements",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "ENGW"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3315,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3308,
+              "subject": "ENGW"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

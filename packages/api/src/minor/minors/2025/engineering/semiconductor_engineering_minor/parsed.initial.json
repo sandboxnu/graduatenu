@@ -1,0 +1,301 @@
+{
+  "name": "Semiconductor Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Fundamental Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3210,
+          "subject": "BIOE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "EECE"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EECE",
+              "classId": 2210,
+              "description": "Electrical Engineering",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EECE",
+              "classId": 2211,
+              "description": "Lab for EECE 2210",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2412,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2530,
+              "subject": "EECE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "EECE Core Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3392,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3410,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4534,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4574,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4604,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4632,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4646,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5170,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5606,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5608,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5647,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5649,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5651,
+          "subject": "EECE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5698,
+          "subject": "EECE"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Engineering and Science Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3312,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3322,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4512,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5105,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5510,
+          "subject": "CHME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4530,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5617,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5600,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5620,
+          "subject": "ME"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4305,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4623,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5114,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5260,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5318,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5352,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Project Management, Product Development, and Entrepreneurship Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3330,
+          "subject": "ENTR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5020,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5030,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "IE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "MISM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2420,
+          "subject": "MISM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "MKTG"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2301,
+          "subject": "SCHM"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3301,
+          "subject": "SCHM"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

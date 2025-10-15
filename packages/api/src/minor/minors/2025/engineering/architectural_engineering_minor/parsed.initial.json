@@ -1,0 +1,228 @@
+{
+  "name": "Architectural Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 3210,
+              "description": "Environmental Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 3211,
+              "description": "Recitation for ARCH 3210",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 2221,
+              "description": "Statics and Solid Mechanics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 2222,
+              "description": "Recitation for CIVE 2221",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Architecture Electives",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2240,
+          "subject": "ARCH"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 2330,
+              "description": "Architecture and the City in the Nineteenth Century",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 2331,
+              "description": "Recitation for ARCH 2330",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARCH",
+              "classId": 2340,
+              "description": "Modern Architecture",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARCH",
+              "classId": 2341,
+              "description": "Recitation for ARCH 2340",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "ARCH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2230,
+          "subject": "LARC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2240,
+          "subject": "LARC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Engineering Electives",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 2320,
+              "description": "Structural Analysis",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 2321,
+              "description": "Recitation for CIVE 2320",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2324,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3425,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5281,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5363,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5520,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5522,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5524,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5100,
+          "subject": "SBSY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5200,
+          "subject": "SBSY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5250,
+          "subject": "SBSY"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5300,
+          "subject": "SBSY"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CIVE",
+              "classId": 2340,
+              "description": "Geotechnical Engineering",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CIVE",
+              "classId": 2341,
+              "description": "Lab for CIVE 2340",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4542,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5275,
+          "subject": "CIVE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 16
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

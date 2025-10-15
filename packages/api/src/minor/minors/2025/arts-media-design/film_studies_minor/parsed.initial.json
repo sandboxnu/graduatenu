@@ -1,0 +1,140 @@
+{
+  "name": "Film Studies, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Foundation",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1100,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2895,
+          "subject": "MSCR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Analysis",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ARTH",
+              "classId": 1001,
+              "description": "Visual Intelligence",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ARTH",
+              "classId": 1002,
+              "description": "Seminar in Visual Intelligence",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2212,
+          "subject": "ARTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2335,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2336,
+          "subject": "MSCR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Creative",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3485,
+          "subject": "ARTD"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1230,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2160,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3389,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3390,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3446,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3670,
+          "subject": "THTR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Theory",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3392,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "MSCR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1113,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

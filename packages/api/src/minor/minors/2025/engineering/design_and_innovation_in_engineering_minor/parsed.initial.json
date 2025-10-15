@@ -1,0 +1,320 @@
+{
+  "name": "Design and Innovation in Engineering, Minor",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "9/15/2025"
+  },
+  "totalCreditsRequired": 0,
+  "yearVersion": 2025,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1501,
+          "subject": "GE"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1502,
+          "subject": "GE"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 8,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "BIOE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2355,
+              "subject": "BIOE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOE",
+                  "classId": 2365,
+                  "description": "Bioengineering Measurement, Experimentation, and Statistics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOE",
+                  "classId": 2366,
+                  "description": "Lab for BIOE 2365",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2308,
+              "subject": "CHME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2204,
+              "subject": "CHME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "CHME"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "CIVE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CIVE",
+                  "classId": 2221,
+                  "description": "Statics and Solid Mechanics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CIVE",
+                  "classId": 2222,
+                  "description": "Recitation for CIVE 2221",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2334,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2335,
+              "subject": "CIVE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CIVE",
+                  "classId": 2260,
+                  "description": "Materials for the Built Environment",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CIVE",
+                  "classId": 2261,
+                  "description": "Lab for CIVE 2260",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CIVE",
+                  "classId": 2300,
+                  "description": "Environmental Measurements in Natural and Engineered Systems",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CIVE",
+                  "classId": 2301,
+                  "description": "Lab for CIVE 2300",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CIVE",
+                  "classId": 2320,
+                  "description": "Structural Analysis",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CIVE",
+                  "classId": 2321,
+                  "description": "Recitation for CIVE 2320",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2331,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2140,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2150,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2160,
+              "subject": "EECE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2210,
+                  "description": "Electrical Engineering",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2211,
+                  "description": "Lab for EECE 2210",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2322,
+                  "description": "Fundamentals of Digital Design and Computer Organization",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2323,
+                  "description": "Lab for EECE 2322",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2412,
+                  "description": "Fundamentals of Electronics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2413,
+                  "description": "Lab for EECE 2412",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2540,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2560,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2750,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2750,
+              "subject": "GE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3300,
+              "subject": "GE"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "IE",
+                  "classId": 2310,
+                  "description": "Introduction to Industrial Engineering",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "IE",
+                  "classId": 2311,
+                  "description": "Recitation for IE 2310",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3412,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4510,
+              "subject": "IE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "ME"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ME",
+                  "classId": 2380,
+                  "description": "Thermodynamics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ME",
+                  "classId": 2381,
+                  "description": "Recitation for ME 2380",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}
