@@ -253,3 +253,14 @@ export class ResetPasswordDto {
   @IsNotEmpty()
   passwordConfirm: string;
 }
+
+export class CreatePlanShareDto {
+  @IsObject()
+  planJson!: Record<string, any>;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  @Max(90)
+  expiresInDays?: number;
+}

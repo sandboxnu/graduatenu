@@ -1,71 +1,74 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { PlanShare } from "./entities/plan-share.entity";
-import { Plan } from "../plan/entities/plan.entity";
 import { Student } from "../student/entities/student.entity";
+import { generateCode } from "../utils/generate-code";
+
+type CreateShareInput = {
+  studentUuid: string;
+  planJson: any;
+  // default in 14 days
+  expiresInDays?: number;
+};
 
 @Injectable()
 export class PlanShareService {
   constructor(
-    @InjectRepository(PlanShare)
-    private planShareRepository: Repository<PlanShare>,
-    @InjectRepository(Plan)
-    private planRepository: Repository<Plan>
+    @InjectRepository(PlanShare) private readonly shares: Repository<PlanShare>,
+    @InjectRepository(Student) private readonly students: Repository<Student>
   ) {}
 
-  async getPlanByCode(planCode: string): Promise<PlanShare> {
-    const planShare = await this.planShareRepository.findOne({
-      where: { planCode },
-      relations: ["student"],
-    });
-
-    if (!planShare) {
-      throw new NotFoundException("Plan not found");
-    }
-
-    const now = new Date();
-    if (planShare.expiresAt < now || planShare.revokedAt) {
-      throw new NotFoundException("Plan share has expired or been revoked");
-    }
-
-    return planShare;
+  // gets the correct url for sharing
+  private getSharingUrl() {
+    return process.env.SHARE_BASE_URL || "https://graduatenu.com/share";
   }
 
-  async importPlanByCode(planCode: string, student: Student): Promise<Plan> {
-    const planShare = await this.getPlanByCode(planCode);
-
-    const newPlan = this.planRepository.create({
-      name: `${planShare.planJson.name} (Imported)`,
-      schedule: planShare.planJson.schedule,
-      major: planShare.planJson.major,
-      minor: planShare.planJson.minor,
-      concentration: planShare.planJson.concentration,
-      catalogYear: planShare.planJson.catalogYear,
-      student,
-    });
-
-    const savedPlan = await this.planRepository.save(newPlan);
-
-    // Fetch the plan with student relation to match GetPlanResponse type
-    return this.planRepository.findOne({
-      where: { id: savedPlan.id },
-      relations: ["student"],
-    });
+  // tells us if the db error is caused by a duplicate
+  private isDuplicateError(e: any) {
+    return String(e?.code || "").includes("duplicate");
   }
 
-  async deleteShareCode(planCode: string, student: Student): Promise<void> {
-    const planShare = await this.planShareRepository.findOne({
-      where: { planCode, student: { uuid: student.uuid } },
-    });
+  // creates a plan share and saves it
+  async createShare({
+    studentUuid,
+    planJson,
+    expiresInDays = 14,
+  }: CreateShareInput): Promise<{
+    planCode: string;
+    url: string;
+    expiresAt: string;
+  }> {
+    const student = await this.students.findOneOrFail({ uuid: studentUuid });
+    const expiresAt = new Date(
+      Date.now() + expiresInDays * 24 * 60 * 60 * 1000
+    );
 
-    if (!planShare) {
-      throw new NotFoundException(
-        "Plan share not found or does not belong to student"
-      );
+    // generate a code and save it
+    // allowing retries for the slim chance that codes are dupes
+    for (let tries = 0; tries < 10; tries++) {
+      const planCode = generateCode(5).toUpperCase();
+      try {
+        const share = this.shares.create({
+          planCode,
+          planJson,
+          expiresAt,
+          student,
+        });
+        await this.shares.save(share);
+
+        const shareLink = this.getSharingUrl();
+        return {
+          planCode,
+          url: `${shareLink}/${planCode}`,
+          expiresAt: share.expiresAt.toISOString(),
+        };
+      } catch (e: any) {
+        // if the code is a dupe, try again
+        if (this.isDuplicateError(e)) continue;
+        throw e;
+      }
     }
-
-    planShare.revokedAt = new Date();
-    await this.planShareRepository.save(planShare);
+    throw new Error("Unable to share plan. Please try again.");
   }
 }

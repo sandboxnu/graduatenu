@@ -1,13 +1,12 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { PlanShare } from "./entities/plan-share.entity";
-import { Plan } from "../plan/entities/plan.entity";
-import { Student } from "../student/entities/student.entity";
 import { PlanShareService } from "./plan-share.service";
 import { PlanShareController } from "./plan-share.controller";
+import { Student } from "../student/entities/student.entity";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PlanShare, Plan, Student])],
+  imports: [TypeOrmModule.forFeature([PlanShare, Student])],
   providers: [PlanShareService],
   controllers: [PlanShareController],
 })
