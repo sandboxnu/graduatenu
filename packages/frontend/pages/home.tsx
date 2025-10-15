@@ -52,7 +52,7 @@ import {
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
 import { RepeatIcon } from "@chakra-ui/icons";
-import { ExportPlanModal } from "../components/Plan/ExportPlanModal";
+import { SharePlanModal } from "../components/Plan/SharePlanModal";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -348,6 +348,12 @@ const HomePage: NextPage = () => {
                 />
               )}
               {selectedPlan && (
+                <SharePlanModal
+                  plan={selectedPlan}
+                  planName={selectedPlan.name}
+                />
+              )}
+              {selectedPlan && (
                 <DeletePlanModal
                   setSelectedPlanId={setSelectedPlanId}
                   planName={selectedPlan.name}
@@ -355,12 +361,6 @@ const HomePage: NextPage = () => {
                   onPlanDeleted={(deletedPlan) =>
                     setLastDeletedPlan(deletedPlan)
                   }
-                />
-              )}
-              {selectedPlan && (
-                <ExportPlanModal
-                  plan={selectedPlan}
-                  planName={selectedPlan.name}
                 />
               )}
             </Flex>

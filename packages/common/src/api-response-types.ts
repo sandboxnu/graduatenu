@@ -67,3 +67,9 @@ export class GetMetaInfoResponse implements MetaInfo {
   build_timestamp: Maybe<number>;
   environment: Maybe<string>;
 }
+
+export class SharePlanResponse {
+  planCode!: string;
+  url!: string;
+  expiresAt!: string;
+}

@@ -1,1 +1,23 @@
-export class PlanShareController {}
+import { Body, Controller, Post, Req, UseGuards } from "@nestjs/common";
+import { PlanShareService } from "./plan-share.service";
+import { JwtAuthGuard } from "../guards/jwt-auth.guard";
+import { AuthenticatedRequest } from "../auth/interfaces/authenticated-request";
+import { CreatePlanShareDto, SharePlanResponse } from "@graduate/common";
+
+@Controller("plans/share")
+export class PlanShareController {
+  constructor(private readonly planShareService: PlanShareService) {}
+
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  async sharePlan(
+    @Req() req: AuthenticatedRequest,
+    @Body() body: CreatePlanShareDto
+  ): Promise<SharePlanResponse> {
+    return this.planShareService.createShare({
+      studentUuid: req.user.uuid,
+      planJson: body.planJson,
+      expiresInDays: body.expiresInDays,
+    });
+  }
+}
