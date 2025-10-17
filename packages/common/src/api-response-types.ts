@@ -21,6 +21,7 @@ export class PlanModel<T> {
   createdAt: Date;
   updatedAt: Date;
   minor?: string;
+  starred?: boolean;
 }
 
 export class GetPlanResponse extends PlanModel<null> {}

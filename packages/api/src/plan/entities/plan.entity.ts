@@ -25,6 +25,9 @@ export class Plan {
   @Column({ type: "json" })
   schedule: Schedule2<null>;
 
+  @Column({ default: false })
+  starred: boolean;
+
   @Column({ nullable: true })
   major: string;
 

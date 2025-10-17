@@ -127,6 +127,7 @@ export class PlanService {
       concentration: newConcentrationName,
       schedule: newSchedule,
       name: newName,
+      starred: newStarred,
     } = updatePlanDto;
 
     const currentPlan = await this.findOne(id);
@@ -258,6 +259,7 @@ export class PlanService {
     let concentration = isWipeMajorUpdate
       ? undefined
       : currentPlan.concentration;
+    let starred = currentPlan.starred;
 
     if (newSchedule) {
       schedule = newSchedule;
@@ -281,6 +283,10 @@ export class PlanService {
       minor = null;
     }
 
+    if (newStarred) {
+      starred = newStarred;
+    }
+
     const newPlan = {
       name,
       major,
@@ -288,6 +294,7 @@ export class PlanService {
       catalogYear,
       concentration,
       schedule,
+      starred,
     };
     const updateResult = await this.planRepository.update(id, newPlan);
 
