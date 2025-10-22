@@ -125,7 +125,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const agreeToBetaMajor = watch("agreeToBetaMajor");
   const editMajor = watch("major");
   const currentMajor = plan.major;
-  const isMajorChanged = currentMajor != editMajor;
+  const isMajorChanged = currentMajor !== editMajor;
 
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
@@ -148,7 +148,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       catalogYear &&
       majorName &&
       (!isConcentrationRequired || concentration) &&
-      (!isValidatedMajor ? agreeToBetaMajor : true)) ||
+      (isValidatedMajor || !isMajorChanged || agreeToBetaMajor)) ||
     // Valid plan for no major selected
     (title && isNoMajorSelected);
 
@@ -285,29 +285,18 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       onChangeSideEffect={(val: string | null) => {
                         const newYear = val ? parseInt(val, 10) : null;
                         if (newYear !== catalogYear) {
-                          if (
-                            val &&
-                            supportedMajorsData?.supportedMajors?.[val]?.[
-                              majorName
-                            ]
-                          ) {
-                            // we can keep the major, but we should check the concentration
-                            if (
-                              !supportedMajorsData?.supportedMajors?.[val]?.[
-                                majorName
-                              ]?.concentrations?.includes(concentration)
-                            ) {
-                              setValue("concentration", "");
-                            }
-                          } else {
-                            setValue("major", "");
-                          }
+                          setValue("major", "");
+                          setValue("concentration", "");
+                          setValue("minor", "");
+                          setValue("agreeToBetaMajor", false);
                         }
                       }}
                       rules={{ required: "Catalog year is required." }}
                       isNumeric
                     />
                     <PlanSelect
+                      // key so the drop down visully resets
+                      key={`major-${catalogYear}`}
                       label="Major"
                       placeholder="Select a Major"
                       name="major"
@@ -318,6 +307,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       )}
                       onChangeSideEffect={() => {
                         setValue("concentration", "");
+                        setValue("agreeToBetaMajor", false);
                       }}
                       rules={{ required: "Major is required." }}
                       isSearchable
