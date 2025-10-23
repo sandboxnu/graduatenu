@@ -71,4 +71,63 @@ export class PlanShareService {
     }
     throw new Error("Unable to share plan. Please try again.");
   }
+
+  async getSharedPlan(code: string) {
+    const share = await this.shares.findOne({
+      where: { planCode: code.toUpperCase() },
+      relations: ["student"],
+    });
+
+    //no plan found
+    if (!share) {
+      throw new Error("plan code not found");
+    }
+
+    //expired
+    if (share.revokedAt) {
+      throw new Error("plan code has been revoked");
+    }
+
+    return {
+      planJson: share.planJson,
+      createdAt: share.createdAt,
+      expiresAt: share.expiresAt,
+    };
+  }
+
+  async importSharedPlan(studentUuid: string, code: string) {
+    const plan = await this.getSharedPlan(code);
+
+    return {
+      success: true,
+      planJson: plan.planJson,
+      message: "plan imported",
+    };
+  }
+
+  async deletePlanCode(studentUuid: string, code: string) {
+    const share = await this.shares.findOne({
+      where: { planCode: code.toUpperCase() },
+      relations: ["student"],
+    });
+
+    //no plan found
+    if (!share) {
+      throw new Error("plan code not found");
+    }
+
+    //student can only delete their own plan
+    if (share.student.uuid !== studentUuid) {
+      throw new Error("you do not have permission to delete this shared plan");
+    }
+
+    //revokedAt
+    share.revokedAt = new Date();
+    await this.shares.save(share);
+
+    return {
+      success: true,
+      message: "share link revoked",
+    };
+  }
 }
