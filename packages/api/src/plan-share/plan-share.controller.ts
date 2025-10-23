@@ -1,4 +1,12 @@
-import { Body, Controller, Post, Req, UseGuards } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Param,
+  Get,
+  Post,
+  Req,
+  UseGuards,
+} from "@nestjs/common";
 import { PlanShareService } from "./plan-share.service";
 import { JwtAuthGuard } from "../guards/jwt-auth.guard";
 import { AuthenticatedRequest } from "../auth/interfaces/authenticated-request";
@@ -19,5 +27,10 @@ export class PlanShareController {
       planJson: body.planJson,
       expiresInDays: body.expiresInDays,
     });
+  }
+
+  @Get("view/:code")
+  async viewSharedPlan(@Param("code") code: string) {
+    return this.planShareService.getSharedPlan(code);
   }
 }
