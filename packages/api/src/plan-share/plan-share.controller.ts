@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Param,
+  Delete,
   Get,
   Post,
   Req,
@@ -29,8 +30,26 @@ export class PlanShareController {
     });
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Post("share/import/:code")
+  async importSharedPlan(
+    @Req() req: AuthenticatedRequest,
+    @Param("code") code: string
+  ) {
+    return this.planShareService.importSharedPlan(req.user.uuid, code);
+  }
+
   @Get("view/:code")
   async viewSharedPlan(@Param("code") code: string) {
     return this.planShareService.getSharedPlan(code);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(":code")
+  async deletePlanCode(
+    @Req() req: AuthenticatedRequest,
+    @Param("code") code: string
+  ) {
+    return this.planShareService.deletePlanCode(req.user.uuid, code);
   }
 }
