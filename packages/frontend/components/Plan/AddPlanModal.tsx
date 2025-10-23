@@ -84,16 +84,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     useSupportedMajors();
   const { supportedMinorsData, error: supportedMinorsError } =
     useSupportedMinors();
-  const {
-    onOpen: onCreateOpen,
-    onClose: onCreateClose,
-    isOpen: isCreateOpen,
-  } = useDisclosure();
-  const {
-    onOpen: onImportOpen,
-    onClose: onImportClose,
-    isOpen: isImportOpen,
-  } = useDisclosure();
+  const { onClose: onCreateClose, isOpen: isCreateOpen } = useDisclosure();
+  const { onClose: onImportClose, isOpen: isImportOpen } = useDisclosure();
 
   // Generate default plan title using formatted date and time
   const generateDefaultPlanTitle = () => {
