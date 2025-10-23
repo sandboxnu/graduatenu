@@ -31,7 +31,7 @@ export class PlanShareController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post("share/import/:code")
+  @Post("import/:code")
   async importSharedPlan(
     @Req() req: AuthenticatedRequest,
     @Param("code") code: string
