@@ -1,4 +1,4 @@
-import { AddIcon, ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
+import { AddIcon } from "@chakra-ui/icons";
 import {
   Text,
   Stack,
@@ -138,7 +138,6 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
-  const [opened, setOpened] = useState(false); // for component
   const [scheduleJson, setScheduleJson] = useState<any>(null); // for importing
 
   // watch form fields

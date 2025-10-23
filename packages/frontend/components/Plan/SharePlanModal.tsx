@@ -23,11 +23,6 @@ interface SharePlanModalProps {
   plan: PlanModel<string>;
   planName: string;
 }
-interface DownloadPlanParams {
-  data: string;
-  fileName: string;
-  fileType: string;
-}
 export const SharePlanModal: React.FC<SharePlanModalProps> = ({
   plan,
   planName,
