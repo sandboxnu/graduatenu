@@ -14,6 +14,11 @@ jobs:
           node-version: 16
       - uses: bahmutov/npm-install@v1
       - run: yarn lint
+  check-major-req-jsons:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check major req jsons for branch name
+        run: yarn major-scanner
   run-api-tests:
     runs-on: ubuntu-latest
     name: API Tests
