@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Button } from "@chakra-ui/react";
+import { Box, Divider, Flex, Button, Icon, IconButton } from "@chakra-ui/react";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 import {
   CollisionDetection,
@@ -22,6 +22,7 @@ import { useRouter } from "next/router";
 import { PropsWithChildren, useContext, useEffect, useState } from "react";
 import {
   AddPlanModal,
+  BlueButton,
   DeletePlanModal,
   DraggedScheduleCourse,
   EditPlanModal,
@@ -52,6 +53,7 @@ import {
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
 import { RepeatIcon } from "@chakra-ui/icons";
+import { FaRegStar, FaStar } from "react-icons/fa6";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -115,6 +117,15 @@ const HomePage: NextPage = () => {
     setSelectedPlanId(lastDeletedPlan.id);
     setLastDeletedPlan(null);
     toast.success("Plan restored!");
+  };
+
+  const handleChangeStarredPlan = async (newStarredValue: boolean) => {
+    if (!selectedPlan) return;
+
+    const updatedPlan = { ...selectedPlan, starred: newStarredValue };
+    mutateStudentWithUpdatedPlan(updatedPlan);
+
+    toast.success("Plan favorited!");
   };
 
   useKeyboardShortcuts({
@@ -354,6 +365,34 @@ const HomePage: NextPage = () => {
                   onPlanDeleted={(deletedPlan) =>
                     setLastDeletedPlan(deletedPlan)
                   }
+                />
+              )}
+              {selectedPlan && (
+                <IconButton
+                  as={BlueButton}
+                  colorScheme="primary.blue.light"
+                  borderRadius="lg"
+                  ml={2}
+                  aria-label={
+                    selectedPlan.starred ? "Unstar plan" : "Star plan"
+                  }
+                  icon={
+                    selectedPlan.starred ? (
+                      <Icon
+                        as={FaStar}
+                        boxSize="24px"
+                        color="primary.blue.light.main"
+                      />
+                    ) : (
+                      <Icon
+                        as={FaRegStar}
+                        boxSize="24px"
+                        color="primary.blue.light.main"
+                      />
+                    )
+                  }
+                  onClick={() => handleChangeStarredPlan(!selectedPlan.starred)}
+                  variant="ghost"
                 />
               )}
             </Flex>

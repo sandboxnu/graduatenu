@@ -33,21 +33,33 @@ export const PlanDropdown: React.FC<PlanDropdownProps> = ({
         borderColor="primary.blue.light.main"
         colorScheme="primary.blue.light"
         color="primary.blue.light.main"
+        width="300px"
       >
-        {selectedPlanId
-          ? plans.find((p) => p.id === selectedPlanId)?.name
-          : "Select Plan"}
+        <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+          {selectedPlanId
+            ? plans.find((p) => p.id === selectedPlanId)?.name
+            : "Select Plan"}
+        </Text>
       </MenuButton>
-      <MenuList>
+      <MenuList width="300px">
         {plans.map((plan) => (
           <MenuItem key={plan.id} onClick={() => setSelectedPlanId(plan.id)}>
-            <Text flex="1">{plan.name}</Text>
-            <Icon
-              as={FaStar}
-              boxSize="20px"
-              ml={5}
-              color="primary.blue.light.main"
-            />
+            <Text
+              flex="1"
+              overflow="hidden"
+              textOverflow="ellipsis"
+              whiteSpace="nowrap"
+            >
+              {plan.name}
+            </Text>
+            {plan.starred && (
+              <Icon
+                as={FaStar}
+                boxSize="20px"
+                ml={5}
+                color="primary.blue.light.main"
+              />
+            )}
           </MenuItem>
         ))}
       </MenuList>
