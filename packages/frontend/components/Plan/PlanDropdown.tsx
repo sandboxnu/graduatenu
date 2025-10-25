@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { FaStar } from "react-icons/fa6";
+import { IoIosStar } from "react-icons/io";
 
 interface PlanDropdownProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -35,7 +35,12 @@ export const PlanDropdown: React.FC<PlanDropdownProps> = ({
         color="primary.blue.light.main"
         width="300px"
       >
-        <Text overflow="hidden" textOverflow="ellipsis" whiteSpace="nowrap">
+        <Text
+          overflow="hidden"
+          textOverflow="ellipsis"
+          whiteSpace="nowrap"
+          textAlign="left"
+        >
           {selectedPlanId
             ? plans.find((p) => p.id === selectedPlanId)?.name
             : "Select Plan"}
@@ -53,12 +58,7 @@ export const PlanDropdown: React.FC<PlanDropdownProps> = ({
               {plan.name}
             </Text>
             {plan.starred && (
-              <Icon
-                as={FaStar}
-                boxSize="20px"
-                ml={5}
-                color="primary.blue.light.main"
-              />
+              <Icon as={IoIosStar} boxSize="20px" color="yellow.400" />
             )}
           </MenuItem>
         ))}
