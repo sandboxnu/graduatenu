@@ -20,6 +20,7 @@ export class PlanModel<T> {
   catalogYear: number;
   createdAt: Date;
   updatedAt: Date;
+  starred: boolean;
   minor?: string;
 }
 

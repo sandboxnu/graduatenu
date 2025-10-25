@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Button } from "@chakra-ui/react";
+import { Box, Divider, Flex, Button, Icon } from "@chakra-ui/react";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 import {
   CollisionDetection,
@@ -52,6 +52,7 @@ import {
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
 import { RepeatIcon } from "@chakra-ui/icons";
+import { IoIosStar, IoIosStarOutline } from "react-icons/io";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -115,6 +116,15 @@ const HomePage: NextPage = () => {
     setSelectedPlanId(lastDeletedPlan.id);
     setLastDeletedPlan(null);
     toast.success("Plan restored!");
+  };
+
+  const handleChangeStarredPlan = async (newStarredValue: boolean) => {
+    if (!selectedPlan) return;
+
+    const updatedPlan = { ...selectedPlan, starred: newStarredValue };
+    mutateStudentWithUpdatedPlan(updatedPlan);
+
+    toast.success(newStarredValue ? "Plan favorited!" : "Plan unfavorited!");
   };
 
   useKeyboardShortcuts({
@@ -355,6 +365,41 @@ const HomePage: NextPage = () => {
                     setLastDeletedPlan(deletedPlan)
                   }
                 />
+              )}
+              {selectedPlan && (
+                <Button
+                  ml="auto"
+                  borderColor={
+                    selectedPlan.starred ? "yellow.400" : "neutral.400"
+                  }
+                  color={selectedPlan.starred ? "yellow.400" : "neutral.400"}
+                  bg="transparent"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    bg: selectedPlan.starred ? "yellow.50" : "neutral.100",
+                  }}
+                  _active={{
+                    bg: selectedPlan.starred ? "yellow.50" : "neutral.100",
+                  }}
+                  border="1px"
+                  borderRadius="lg"
+                  aria-label={
+                    selectedPlan.starred ? "Unstar plan" : "Star plan"
+                  }
+                  leftIcon={
+                    <Icon
+                      as={selectedPlan.starred ? IoIosStar : IoIosStarOutline}
+                      boxSize="24px"
+                      color={
+                        selectedPlan.starred ? "yellow.400" : "neutral.400"
+                      }
+                      transition="all 0.3s ease"
+                    />
+                  }
+                  onClick={() => handleChangeStarredPlan(!selectedPlan.starred)}
+                >
+                  Favorite
+                </Button>
               )}
             </Flex>
             {selectedPlan && (
