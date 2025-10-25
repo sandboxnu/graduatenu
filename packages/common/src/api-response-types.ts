@@ -20,8 +20,8 @@ export class PlanModel<T> {
   catalogYear: number;
   createdAt: Date;
   updatedAt: Date;
+  starred: boolean;
   minor?: string;
-  starred?: boolean;
 }
 
 export class GetPlanResponse extends PlanModel<null> {}

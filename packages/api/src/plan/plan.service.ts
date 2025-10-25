@@ -283,7 +283,7 @@ export class PlanService {
       minor = null;
     }
 
-    if (newStarred) {
+    if (newStarred !== undefined) {
       starred = newStarred;
     }
 
