@@ -347,7 +347,7 @@ const HomePage: NextPage = () => {
                   setSelectedPlanId={setSelectedPlanId}
                 />
               )}
-              {selectedPlan && (
+              {selectedPlan && !isGuest && (
                 <SharePlanModal
                   plan={selectedPlan}
                   planName={selectedPlan.name}
