@@ -28,7 +28,7 @@ jobs:
       - name: Run Jest Tests
         run: yarn packages/api test
       - name: Check major req jsons for branch name
-        run: yarn verify-major-req-jsons
+        run: yarn verify-scraper-branch
   # build-frontend-image:
   #   runs-on: ubuntu-latest
   #   steps:
