@@ -14,14 +14,9 @@ jobs:
           node-version: 16
       - uses: bahmutov/npm-install@v1
       - run: yarn lint
-  check-major-req-jsons:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check major req jsons for branch name
-        run: yarn major-scanner
   run-api-tests:
     runs-on: ubuntu-latest
-    name: API Tests
+    name: API Tests + major req json check
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -32,6 +27,8 @@ jobs:
       - run: yarn install --immutable
       - name: Run Jest Tests
         run: yarn packages/api test
+      - name: Check major req jsons for branch name
+        run: yarn verify-major-req-jsons
   # build-frontend-image:
   #   runs-on: ubuntu-latest
   #   steps:
