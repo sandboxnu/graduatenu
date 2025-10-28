@@ -1,4 +1,8 @@
-import { Injectable } from "@nestjs/common";
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { PlanShare } from "./entities/plan-share.entity";
@@ -113,12 +117,14 @@ export class PlanShareService {
 
     //no plan found
     if (!share) {
-      throw new Error("plan code not found");
+      throw new NotFoundException("plan code not found");
     }
 
     //student can only delete their own plan
     if (share.student.uuid !== studentUuid) {
-      throw new Error("you do not have permission to delete this shared plan");
+      throw new ForbiddenException(
+        "you do not have permission to delete this shared plan"
+      );
     }
 
     //revokedAt
