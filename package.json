@@ -64,7 +64,7 @@
     "@types/pdf-parse": "^1.1.5",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
-    "concurrently": "^7.0.0",
+    "concurrently": "^9.2.1",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.25.4",
