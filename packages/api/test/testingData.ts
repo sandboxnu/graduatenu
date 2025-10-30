@@ -1,17 +1,17 @@
 export const testUser1 = {
-  email: "test-1@husky.neu.edu.com",
+  email: "test-1@husky.neu.edu",
   password: "1234567890a",
   passwordConfirm: "1234567890a",
 };
 
 export const testUser2 = {
-  email: "test-2@husky.neu.edu.com",
+  email: "test-2@husky.neu.edu",
   password: "1234567890a",
   passwordConfirm: "1234567890a",
 };
 
 export const testUser3 = {
-  email: "test-3@husky.neu.edu.com",
+  email: "test-3@husky.neu.edu",
   password: "1234567890a",
   passwordConfirm: "1234567890a",
 };
