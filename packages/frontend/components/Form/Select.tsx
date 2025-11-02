@@ -162,7 +162,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
       if (String(a.label).length >= String(b.label).length) return 1;
       return -1;
     });
-  }, [options, fieldRest?.name]);
+  }, [options]);
 
   return (
     <FormControl isInvalid={error != null}>
