@@ -29,7 +29,7 @@ describe("AuthController (e2e)", () => {
     const res = await request(app.getHttpServer())
       .post("/auth/register")
       .send({
-        email: "test-register@gmail.com",
+        email: "test-register@husky.neu.edu",
         password: "1234567890a",
         passwordConfirm: "1234567890a",
       })
@@ -81,7 +81,7 @@ describe("AuthController (e2e)", () => {
     return request(app.getHttpServer())
       .post("/auth/login")
       .send({
-        email: "test-auth@gmail.com",
+        email: "test-auth@husky.neu.edu",
         password: "i<3graduate",
       })
       .expect(401);

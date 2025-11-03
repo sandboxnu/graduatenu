@@ -17,6 +17,7 @@ import {
   forgotPasswordTokenExpiredError,
   GetStudentResponse,
   LoginStudentDto,
+  mustUseHuskyEmailError,
   ResetPasswordDto,
   SignUpStudentDto,
   weakPasswordError,
@@ -26,6 +27,7 @@ import EmailConfirmationService from "../emailConfirmation/emailConfirmation.ser
 import {
   EmailAlreadyExists,
   EmailNotConfirmed,
+  MustUseHuskyEmail,
   NoSuchEmail,
   WeakPassword,
 } from "../student/student.errors";
@@ -49,6 +51,10 @@ export class AuthController {
 
     if (student instanceof EmailAlreadyExists) {
       throw new BadRequestException(emailAlreadyExistsError);
+    }
+
+    if (student instanceof MustUseHuskyEmail) {
+      throw new BadRequestException(mustUseHuskyEmailError);
     }
 
     if (student instanceof WeakPassword) {

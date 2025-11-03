@@ -67,7 +67,12 @@ function mergeConcentrationSections(
       (Number(s.minRequirementCount) || 0);
     // merge other fields as needed
     map.set(baseTitle, target);
-    console.log(majorName, "added", rawTitle, "to", baseTitle);
+    const isJest = Boolean(process.env.JEST_WORKER_ID);
+    const isTestEnv =
+      process.env.NODE_ENV === "test" || process.env.NODE_ENV === "testing";
+    if (!isJest && !isTestEnv) {
+      console.log(majorName, "added", rawTitle, "to", baseTitle);
+    }
   }
 
   return {

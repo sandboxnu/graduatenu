@@ -26,6 +26,7 @@ import {
   UpdateStudentDto,
   UpdateStudentResponse,
   emailAlreadyExistsError,
+  mustUseHuskyEmailError,
   weakPasswordError,
   ChangePasswordDto,
   wrongPasswordError,
@@ -33,6 +34,7 @@ import {
 import {
   EmailAlreadyExists,
   WeakPassword,
+  MustUseHuskyEmail,
   WrongPassword,
 } from "./student.errors";
 
@@ -149,6 +151,10 @@ export class StudentController {
 
     if (student instanceof EmailAlreadyExists) {
       throw new BadRequestException(emailAlreadyExistsError);
+    }
+
+    if (student instanceof MustUseHuskyEmail) {
+      throw new BadRequestException(mustUseHuskyEmailError);
     }
 
     if (student instanceof WeakPassword) {

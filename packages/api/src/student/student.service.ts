@@ -18,6 +18,7 @@ import {
 import { Student } from "./entities/student.entity";
 import {
   EmailAlreadyExists,
+  MustUseHuskyEmail,
   NewPasswordsDontMatch,
   WeakPassword,
   WrongPassword,
@@ -34,7 +35,7 @@ export class StudentService {
 
   async create(
     createStudentDto: SignUpStudentDto
-  ): Promise<Student | EmailAlreadyExists | WeakPassword> {
+  ): Promise<Student | EmailAlreadyExists | MustUseHuskyEmail | WeakPassword> {
     // make sure the user doesn't already exists
     const { email, fullName, password, passwordConfirm } = createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });
@@ -44,6 +45,10 @@ export class StudentService {
         StudentService.formatStudentServiceCtx("create")
       );
       return new EmailAlreadyExists();
+    }
+
+    if (!email.endsWith("@husky.neu.edu")) {
+      return new MustUseHuskyEmail();
     }
 
     if (password !== passwordConfirm) {
