@@ -4,6 +4,12 @@ export class EmailAlreadyExists extends Error {
   }
 }
 
+export class MustUseHuskyEmail extends Error {
+  constructor() {
+    super();
+  }
+}
+
 export class WeakPassword extends Error {
   constructor() {
     super();

@@ -17,11 +17,13 @@ import {
   Tooltip,
   Box,
   CloseButton,
+  Input,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
   CreatePlanDto,
   CreatePlanDtoWithoutSchedule,
+  ParsedCourse,
   PlanModel,
   convertToOptionObjects,
 } from "@graduate/common";
@@ -31,6 +33,7 @@ import {
   SetStateAction,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import { useForm } from "react-hook-form";
@@ -42,6 +45,7 @@ import {
   useSupportedMinors,
   useHasTemplate,
   useTemplate,
+  useFetchCourses,
 } from "../../hooks";
 import {
   cleanDndIdsFromStudent,
@@ -60,6 +64,7 @@ import { IsGuestContext, NewPlanModalContext } from "../../pages/_app";
 import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
 import { useTemplateCourses } from "../../hooks/useTemplateCourses";
+import { addTransferCoursesToStudent } from "../../utils/student/addTransferCoursesToStudent.ts";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -85,6 +90,24 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     return `Plan ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
   };
 
+  const handlePdfUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file || file.type !== "application/pdf") {
+      console.error("Please select a PDF file");
+      return;
+    }
+
+    try {
+      const courses = await API.utils.parsePdfCourses(file);
+
+      setUploadedCourses(courses);
+    } catch (error) {
+      console.error("Error parsing PDF:", error);
+    }
+  };
+
   const {
     register,
     handleSubmit,
@@ -101,6 +124,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
   const [showAdvancedEdit, setShowAdvancedEdit] = useState(false);
+  const [uploadedCourses, setUploadedCourses] = useState<ParsedCourse[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
@@ -128,6 +153,20 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         : null
       : null
   );
+
+  // Instead of using useTemplateCourses, use useFetchCourses directly
+  const { courses: uploadedCourseDetails } = useFetchCourses(
+    uploadedCourses, // We already have the parsed {subject, classId}[] format
+    catalogYear || new Date().getFullYear()
+  );
+
+  // Create a lookup map for easy access (same as useTemplateCourses does)
+  const uploadedCourseLookup =
+    uploadedCourseDetails?.reduce((acc, course) => {
+      const key = `${course.subject} ${course.classId}`;
+      acc[key] = course;
+      return acc;
+    }, {} as Record<string, any>) || {};
 
   // Reset useTemplate when major or catalog year changes
   useEffect(() => {
@@ -174,19 +213,31 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const onSubmitHandler = async (
     payload: CreatePlanDtoWithoutSchedule & { useTemplate: boolean }
   ) => {
-    // Determine which schedule to use - template or empty
-    let schedule;
+    // Handle uploaded courses by adding them to student's transfer courses
+    if (uploadedCourses.length > 0) {
+      try {
+        await addTransferCoursesToStudent(
+          student,
+          uploadedCourses,
+          uploadedCourseLookup,
+          isGuest
+        );
+      } catch (error) {
+        console.error("Error adding transfer courses:", error);
+        return; // Don't proceed with plan creation if transfer courses failed
+      }
+    }
 
+    // Create normal plan
+    let schedule;
     if (payload.useTemplate && template) {
       try {
-        // Use the template to create a schedule with pre-populated courses
         schedule = createScheduleFromTemplate(template, courseLookup);
       } catch (error) {
         console.error("Error creating schedule from template:", error);
         schedule = createEmptySchedule();
       }
     } else {
-      // Default to empty schedule
       schedule = createEmptySchedule();
     }
 
@@ -212,10 +263,14 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
         student: cleanDndIdsFromStudent(student),
       } as PlanModel<null>;
 
+      const currentStudentData = JSON.parse(
+        window.localStorage.getItem("student") || "{}"
+      );
+
       window.localStorage.setItem(
         "student",
         JSON.stringify({
-          ...student,
+          ...currentStudentData,
           plans: [...student.plans, planInLocalStorage],
         })
       );
@@ -241,6 +296,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     setIsNoMajorSelected(false);
     setIsNoMinorSelected(false);
     setShowAdvancedEdit(false);
+    setUploadedCourses([]);
     onCloseDisplay();
     setIsNoMajorSelected(false);
   };
@@ -621,7 +677,47 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       </Box>
                     )}
 
-                    {majors && hasValidMajors && (
+                    {!isNoMajorSelected && majors && hasValidMajors && (
+                      <Flex alignItems="center" w="100%" gap="sm">
+                        <Text fontWeight="medium">
+                          Import from UAchieve PDF:
+                        </Text>
+                        <Box position="relative">
+                          <Input
+                            type="file"
+                            accept=".pdf"
+                            onChange={handlePdfUpload}
+                            ref={fileInputRef}
+                            position="absolute"
+                            opacity="0"
+                            width="100%"
+                            height="100%"
+                            cursor="pointer"
+                            zIndex="1"
+                          />
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            borderColor="primary.blue.light.main"
+                            color="primary.blue.dark.main"
+                            leftIcon={<AddIcon />}
+                            _hover={{
+                              bg: "primary.blue.light.faint",
+                              borderColor: "primary.blue.dark.main",
+                            }}
+                          >
+                            Choose PDF File
+                          </Button>
+                        </Box>
+                        {uploadedCourses.length > 0 && (
+                          <Text color="green.500" fontSize="sm">
+                            ✓ {uploadedCourses.length} courses
+                          </Text>
+                        )}
+                      </Flex>
+                    )}
+
+                    {majors && !hasValidMajors && (
                       <Flex alignItems="center">
                         <Checkbox
                           mr="md"

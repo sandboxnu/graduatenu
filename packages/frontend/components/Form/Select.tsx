@@ -5,8 +5,9 @@ import {
   FormHelperText,
 } from "@chakra-ui/react";
 import { OptionObject } from "@graduate/common";
+import { useMemo } from "react";
 import { Control, FieldError, useController } from "react-hook-form";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import { FilterOptionOption } from "react-select/dist/declarations/src/filters";
 
 type PlanSelectProps = {
@@ -63,6 +64,57 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
       true
     );
   };
+
+  const highlightMatch = (label: string, rawInput: string) => {
+    if (!rawInput) return label;
+
+    const escapedQuery = rawInput.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp(`(${escapedQuery})`, "gi");
+    const parts = label.split(regex);
+
+    return parts.map((part, index) =>
+      regex.test(part) ? (
+        <strong key={index}>{part}</strong>
+      ) : (
+        <span key={index}>{part}</span>
+      )
+    );
+  };
+
+  const CustomOption = (props: any) => {
+    return (
+      <components.Option {...props}>
+        {highlightMatch(props.data.label, props.selectProps.inputValue)}
+      </components.Option>
+    );
+  };
+
+  // sorts the majors so that 'pure' majors are at top of search
+  // prior to 'and' being in the input
+  // const customFilterOptions = (
+  //   options: FilterOptionOption<any>[],
+  //   rawInput: string
+  // ) => {
+  //   const filtered = options.filter((option: FilterOptionOption<any>) =>
+  //     customFilterOption(option, rawInput)
+  //   );
+
+  //   const words = rawInput.split(',');
+  //   const containsAnd = words.includes('and');
+
+  //   return filtered.sort((a, b) => {
+  //     const aContainsAnd = a.label.toLowerCase().includes("and");
+  //     const bContainsAnd = b.label.toLowerCase().includes("and");
+
+  //     if (!containsAnd) {
+  //       if (aContainsAnd && !bContainsAnd) return 1;  // push 'and' ones down
+  //       if (!aContainsAnd && bContainsAnd) return -1; // bring non-'and' ones up
+  //     }
+
+  //     return a.label.localeCompare(b.label);
+  //   });
+  // };
+
   // TODO: Find a more efficient way to implement fuzzy search
   // const filterOptions = useFuzzySearch
   //   ? (option: FilterOptionOption<any>, inputValue: string) => {
@@ -95,7 +147,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     if (isMulti) {
       val = option ? option.map((opt: any) => opt.value) : [];
     } else {
-      val = option ? option.value : null;
+      val = option ? option.value : "";
       if (isNumeric && val) {
         val = parseInt(val, 10);
       }
@@ -113,6 +165,13 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
     ? options.filter((option) => value?.includes(option.value))
     : options.find((option) => option.value === selectedValue);
 
+  const sortedOptions = useMemo(() => {
+    return [...options].sort((a, b) => {
+      if (String(a.label).length >= String(b.label).length) return 1;
+      return -1;
+    });
+  }, [options]);
+
   return (
     <FormControl isInvalid={error != null} w="100%">
       <FormLabel
@@ -124,7 +183,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         {label}
       </FormLabel>
       <Select
-        options={options}
+        options={sortedOptions}
         onChange={onChange}
         isMulti={isMulti}
         value={selectedOption}
@@ -132,6 +191,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
         isDisabled={isDisabled}
         placeholder={placeholder}
         filterOption={customFilterOption}
+        components={{ Option: CustomOption }}
         {...fieldRest}
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}

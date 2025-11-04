@@ -159,14 +159,25 @@ export class PlanService {
       !newConcentrationName &&
       currentPlan.majors?.[0];
 
-    /** Wipe Minor => Remove existing minor from the plan. */
+    /** Wipe Minor => Remove all minors from the plan. */
     const isWipeMinorUpdate =
-      !newMinorNames && !newCatalogYear && currentPlan.minors;
+      (!newMinorNames || newMinorNames.length === 0) &&
+      currentPlan.minors &&
+      currentPlan.minors.length > 0;
+
+    const isMinorInfoUpdate =
+      (newMinorNames && newMinorNames.length > 0) || newCatalogYear;
 
     const isScheduleUpdate = newSchedule && !isMajorInfoUpdate;
 
     if (
-      !(isWipeMajorUpdate || isMajorInfoUpdate || isScheduleUpdate || newName)
+      !(
+        isWipeMajorUpdate ||
+        isMajorInfoUpdate ||
+        isMinorInfoUpdate ||
+        isScheduleUpdate ||
+        newName
+      )
     ) {
       this.logger.debug(
         { message: "Either update all major fields or only the schedule", id },
@@ -269,6 +280,10 @@ export class PlanService {
     }
 
     if (newMinorNames) {
+      minors = newMinorNames;
+    }
+
+    if (newMinorNames && newMinorNames.length > 0) {
       minors = newMinorNames;
     }
 

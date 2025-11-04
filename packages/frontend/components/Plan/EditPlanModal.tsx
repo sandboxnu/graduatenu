@@ -69,6 +69,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const [showAdvancedEdit, setShowAdvancedEdit] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -126,6 +127,12 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const minors = watch("minors");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
+  const editMajors = watch("majors");
+  const currentMajors = plan.majors;
+  // Check if majors changed from the original plan
+  const isMajorsChanged =
+    JSON.stringify(currentMajors?.sort()) !==
+    JSON.stringify(editMajors?.sort());
 
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
@@ -149,7 +156,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       catalogYear &&
       majors &&
       (!isConcentrationRequired || concentration) &&
-      (!isValidatedMajors ? agreeToBetaMajor : true)) ||
+      (isValidatedMajors || !isMajorsChanged || agreeToBetaMajor)) ||
     // Valid plan for no major selected
     (title && isNoMajorSelected);
 
@@ -161,8 +168,16 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
     const isNoMajorSelectedPrev = !plan.majors;
 
+    const minorsChanged =
+      JSON.stringify(plan.minors?.sort()) !==
+      JSON.stringify(payload.minors?.sort());
+
     // If no field has been changed, don't send an update request
-    if (!isDirty && isNoMajorSelectedPrev === isNoMajorSelected) {
+    if (
+      !isDirty &&
+      isNoMajorSelectedPrev === isNoMajorSelected &&
+      !minorsChanged
+    ) {
       toast.info("No fields have been updated.");
       return;
     }
@@ -294,7 +309,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                                 ]?.[major]
                             )
                           ) {
-                            // we can keep the major, but we should check the concentration
+                            // we can keep the majors, but check the concentration
                             if (
                               !supportedMajorsData?.supportedMajors?.[
                                 stringVal
@@ -305,7 +320,11 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                               setValue("concentration", "");
                             }
                           } else {
+                            // Clear everything if majors aren't supported in new year
                             setValue("majors", []);
+                            setValue("concentration", "");
+                            setValue("minors", []);
+                            setValue("agreeToBetaMajor", false);
                           }
                         }
                       }}
@@ -315,6 +334,8 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                     {majors?.map((major, index) => (
                       <Box key={index} w="100%">
                         <PlanSelect
+                          // key so the dropdown visually resets when catalog year changes
+                          key={`major-${catalogYear}-${index}`}
                           label={index === 0 ? "Major(s)" : undefined}
                           placeholder="Select a Major"
                           name={`majors.${index}`}
@@ -326,6 +347,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                           )}
                           onChangeSideEffect={() => {
                             setValue("concentration", "");
+                            setValue("agreeToBetaMajor", false);
                           }}
                           rules={
                             index === 0
@@ -356,6 +378,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                                     shouldValidate: true,
                                   });
                                   setValue("concentration", "");
+                                  setValue("agreeToBetaMajor", false);
                                 }}
                               />
                             ) : undefined
@@ -473,20 +496,24 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       )}
                     </Box>
 
-                    {majors && !isValidatedMajors && (
-                      <Flex alignItems="center">
-                        <Checkbox
-                          mr="md"
-                          {...register("agreeToBetaMajor", {
-                            required: "You must agree to continue",
-                          })}
-                        />
-                        <Text>
-                          I understand that I am selecting a beta major and that
-                          the requirements may not be accurate.
-                        </Text>
-                      </Flex>
-                    )}
+                    {editMajors &&
+                      isMajorsChanged &&
+                      majors &&
+                      majors.length > 0 &&
+                      !isValidatedMajors && (
+                        <Flex alignItems="center">
+                          <Checkbox
+                            mr="md"
+                            {...register("agreeToBetaMajor", {
+                              required: "You must agree to continue",
+                            })}
+                          />
+                          <Text>
+                            I understand that I am selecting a beta major and
+                            that the requirements may not be accurate.
+                          </Text>
+                        </Flex>
+                      )}
                   </>
                 )}
               </VStack>

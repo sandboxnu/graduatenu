@@ -24,6 +24,7 @@ import {
   GetMetaInfoResponse,
   GetSupportedMinorsResponse,
   Minor,
+  ParsedCourse,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -63,6 +64,24 @@ class APIClient {
       withCredentials: true,
     });
   }
+
+  utils = {
+    parsePdfCourses: (file: File): Promise<ParsedCourse[]> => {
+      const formData = new FormData();
+      formData.append("pdf", file);
+
+      return this.req(
+        "POST",
+        "/utils/parse-pdf-courses",
+        undefined,
+        formData,
+        undefined,
+        {
+          "content-type": "multipart/form-data",
+        }
+      );
+    },
+  };
 
   auth = {
     login: (body: LoginStudentDto): Promise<GetStudentResponse> =>

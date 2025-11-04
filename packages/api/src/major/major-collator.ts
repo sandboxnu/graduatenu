@@ -1,4 +1,4 @@
-import { Major2, Template } from "@graduate/common";
+import { Concentrations2, Major2, Template, Section } from "@graduate/common";
 
 const MAJORS: Record<string, Record<string, Major2>> = {};
 const MAJOR_YEARS = new Set<string>();
@@ -30,6 +30,55 @@ async function fileExists(
     () => true,
     () => false
   );
+}
+
+function mergeConcentrationSections(
+  majorName: string,
+  concs?: Concentrations2
+): Concentrations2 {
+  if (!concs) return concs;
+  const options = Array.isArray(concs.concentrationOptions)
+    ? concs.concentrationOptions
+    : [];
+
+  const map = new Map<string, Section>();
+
+  for (const s of options) {
+    const rawTitle = (s.title || "").toString();
+    const baseTitle = rawTitle.split(":")[0].trim() || rawTitle;
+
+    if (!map.has(baseTitle)) {
+      map.set(baseTitle, {
+        ...s,
+        title: baseTitle,
+        requirements: Array.isArray(s.requirements) ? [...s.requirements] : [],
+        minRequirementCount: Number(s.minRequirementCount) || 0,
+      });
+      continue;
+    }
+
+    const target = map.get(baseTitle)!;
+    if (Array.isArray(s.requirements) && s.requirements.length) {
+      target.requirements = [...(target.requirements || []), ...s.requirements];
+    }
+    // choose merge strategy for minRequirementCount: sum here (change if you want max)
+    target.minRequirementCount =
+      (Number(target.minRequirementCount) || 0) +
+      (Number(s.minRequirementCount) || 0);
+    // merge other fields as needed
+    map.set(baseTitle, target);
+    const isJest = Boolean(process.env.JEST_WORKER_ID);
+    const isTestEnv =
+      process.env.NODE_ENV === "test" || process.env.NODE_ENV === "testing";
+    if (!isJest && !isTestEnv) {
+      console.log(majorName, "added", rawTitle, "to", baseTitle);
+    }
+  }
+
+  return {
+    ...concs,
+    concentrationOptions: Array.from(map.values()),
+  };
 }
 
 // TODO: this code is quick and dirty but works. this should be replaced with some dry-er code later.
@@ -125,6 +174,10 @@ async function collateMajors() {
             (await fs.readFile(initialFile)).toString()
           ) as Major2;
           majorName = majorData.name;
+          majorData.concentrations = mergeConcentrationSections(
+            majorName,
+            majorData.concentrations
+          );
           if (MAJORS[year]) {
             MAJORS[year][majorName] = majorData;
           }
