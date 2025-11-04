@@ -133,22 +133,23 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
 
   const majorConcentrations =
-    yearSupportedMajors?.[majors?.[0] ?? ""] ?? noConcentrations;
+    yearSupportedMajors?.[majors?.[0] ?? ""] ?? noConcentrations; // Currently we only support concentrations for the single majors
 
   const isConcentrationRequired =
     majorConcentrations.minRequiredConcentrations > 0;
 
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
-  const isValidatedMajor =
-    yearSupportedMajors?.[majors?.[0] ?? ""]?.verified ?? false;
+  const isValidatedMajors = majors?.every(
+    (major) => yearSupportedMajors?.[major ?? ""]?.verified ?? false
+  );
 
   const isValidForm =
     (title &&
       catalogYear &&
       majors &&
       (!isConcentrationRequired || concentration) &&
-      (!isValidatedMajor ? agreeToBetaMajor : true)) ||
+      (!isValidatedMajors ? agreeToBetaMajor : true)) ||
     // Valid plan for no major selected
     (title && isNoMajorSelected);
 
@@ -286,9 +287,12 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         if (newYear !== catalogYear) {
                           if (
                             stringVal &&
-                            supportedMajorsData?.supportedMajors?.[stringVal]?.[
-                              majors[0]
-                            ]
+                            majors.every(
+                              (major) =>
+                                supportedMajorsData?.supportedMajors?.[
+                                  stringVal
+                                ]?.[major]
+                            )
                           ) {
                             // we can keep the major, but we should check the concentration
                             if (
@@ -466,7 +470,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       )}
                     </Box>
 
-                    {majors && !isValidatedMajor && (
+                    {majors && !isValidatedMajors && (
                       <Flex alignItems="center">
                         <Checkbox
                           mr="md"
