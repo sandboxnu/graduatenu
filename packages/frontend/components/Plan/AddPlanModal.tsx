@@ -250,7 +250,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
 
   const majorConcentrations =
-    yearSupportedMajors?.[majors?.[0] ?? ""] ?? noConcentrations;
+    yearSupportedMajors?.[majors?.[0] ?? ""] ?? noConcentrations; // Currently we only support concentrations for the single majors
 
   const isConcentrationRequired =
     majorConcentrations.minRequiredConcentrations > 0;
@@ -258,7 +258,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
   const hasValidMajors =
-    majors && majors.length > 0 && majors[0] && majors[0].trim() !== "";
+    majors && majors.length > 0 && majors && majors.length > 0;
 
   const isValidForm =
     (catalogYear &&
@@ -391,11 +391,15 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                           if (
                             stringVal &&
                             majors &&
-                            supportedMajorsData?.supportedMajors?.[stringVal]?.[
-                              majors[0]
-                            ]
+                            majors.every(
+                              (major) =>
+                                supportedMajorsData?.supportedMajors?.[
+                                  stringVal
+                                ]?.[major]
+                            )
                           ) {
                             // we can keep the major, but we should check the concentration
+                            // (again with flexible majors currently only supporting single major concetrations)
                             if (
                               majors &&
                               !supportedMajorsData?.supportedMajors?.[
