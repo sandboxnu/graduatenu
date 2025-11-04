@@ -92,7 +92,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
     const [currentMajorIndex, setCurrentMajorIndex] = useState(0);
     const [currentMinorIndex, setCurrentMinorIndex] = useState(0);
 
-    // probably need to iterate through each major in majors not just do it once
+    // need to iterate through each major in majors not just do it once
     const {
       majors,
       isLoading: isMajorLoading,
@@ -137,7 +137,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const revalidateMajor = () => {
       setValidationStatus(undefined);
-      if (!selectedPlan || !majors[0] || !workerRef.current) return;
+      if (!selectedPlan || !currentMajor || !workerRef.current) return;
 
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
@@ -355,39 +355,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                   borderTopRadius="lg"
                   fontWeight="bold"
                 >
-                  <Flex align="center" gap={2} width="100%">
-                    {majors.length > 1 && (
-                      <IconButton
-                        aria-label="Previous major"
-                        icon={<ChevronLeftIcon />}
-                        size="xs"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handlePrevMajor();
-                        }}
-                        variant="ghost"
-                        _hover={{ bg: "blue.700" }}
-                      />
-                    )}
-                    <Box flex="1" textAlign="center">
-                      MAJOR{" "}
-                      {majors.length > 1 &&
-                        `${currentMajorIndex + 1}/${majors.length}`}
-                    </Box>
-                    {majors.length > 1 && (
-                      <IconButton
-                        aria-label="Next major"
-                        icon={<ChevronRightIcon />}
-                        size="xs"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleNextMajor();
-                        }}
-                        variant="ghost"
-                        _hover={{ bg: "blue.700" }}
-                      />
-                    )}
-                  </Flex>
+                  MAJOR
                 </Tab>
                 {currentMinor && (
                   <Tab
@@ -397,44 +365,56 @@ const Sidebar: React.FC<SidebarProps> = memo(
                     borderTopRadius="lg"
                     fontWeight="bold"
                   >
-                    <Flex align="center" gap={2} width="100%">
-                      {minors.length > 1 && (
-                        <IconButton
-                          aria-label="Previous minor"
-                          icon={<ChevronLeftIcon />}
-                          size="xs"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handlePrevMinor();
-                          }}
-                          variant="ghost"
-                          _hover={{ bg: "blue.700" }}
-                        />
-                      )}
-                      <Box flex="1" textAlign="center">
-                        MINOR{" "}
-                        {minors.length > 1 &&
-                          `${currentMinorIndex + 1}/${minors.length}`}
-                      </Box>
-                      {minors.length > 1 && (
-                        <IconButton
-                          aria-label="Next minor"
-                          icon={<ChevronRightIcon />}
-                          size="xs"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleNextMinor();
-                          }}
-                          variant="ghost"
-                          _hover={{ bg: "blue.700" }}
-                        />
-                      )}
-                    </Flex>
+                    MINOR
                   </Tab>
                 )}
               </TabList>
               <TabPanels>
                 <TabPanel width="100%" p={0} m={0}>
+                  {/* Major navigation header */}
+                  <Flex
+                    align="center"
+                    justify="space-between"
+                    px={4}
+                    py={3}
+                    bg="blue.50"
+                    borderBottom="1px solid"
+                    borderColor="neutral.200"
+                  >
+                    <IconButton
+                      aria-label="Previous major"
+                      icon={<ChevronLeftIcon />}
+                      size="sm"
+                      onClick={handlePrevMajor}
+                      isDisabled={majors.length <= 1}
+                      variant="ghost"
+                      colorScheme="blue"
+                    />
+                    <Heading
+                      fontSize="md"
+                      fontWeight="semibold"
+                      color="primary.blue.dark.main"
+                      textAlign="center"
+                      flex="1"
+                    >
+                      {currentMajor.name}
+                      {majors.length > 1 && (
+                        <Text as="span" fontSize="sm" color="gray.600" ml={2}>
+                          ({currentMajorIndex + 1}/{majors.length})
+                        </Text>
+                      )}
+                    </Heading>
+                    <IconButton
+                      aria-label="Next major"
+                      icon={<ChevronRightIcon />}
+                      size="sm"
+                      onClick={handleNextMajor}
+                      isDisabled={majors.length <= 1}
+                      variant="ghost"
+                      colorScheme="blue"
+                    />
+                  </Flex>
+
                   {currentMajor.requirementSections.map((section, index) => {
                     const sectionValidationError:
                       | MajorValidationError
@@ -472,8 +452,57 @@ const Sidebar: React.FC<SidebarProps> = memo(
                   )}
                 </TabPanel>
                 <TabPanel width="100%" p={0} m={0}>
-                  {minors[0] && (
+                  {currentMinor && (
                     <>
+                      {/* Minor navigation header */}
+                      <Flex
+                        align="center"
+                        justify="space-between"
+                        px={4}
+                        py={3}
+                        bg="blue.50"
+                        borderBottom="1px solid"
+                        borderColor="neutral.200"
+                      >
+                        <IconButton
+                          aria-label="Previous minor"
+                          icon={<ChevronLeftIcon />}
+                          size="sm"
+                          onClick={handlePrevMinor}
+                          isDisabled={minors.length <= 1}
+                          variant="ghost"
+                          colorScheme="blue"
+                        />
+                        <Heading
+                          fontSize="md"
+                          fontWeight="semibold"
+                          color="primary.blue.dark.main"
+                          textAlign="center"
+                          flex="1"
+                        >
+                          {currentMinor.name}
+                          {minors.length > 1 && (
+                            <Text
+                              as="span"
+                              fontSize="sm"
+                              color="gray.600"
+                              ml={2}
+                            >
+                              ({currentMinorIndex + 1}/{minors.length})
+                            </Text>
+                          )}
+                        </Heading>
+                        <IconButton
+                          aria-label="Next minor"
+                          icon={<ChevronRightIcon />}
+                          size="sm"
+                          onClick={handleNextMinor}
+                          isDisabled={minors.length <= 1}
+                          variant="ghost"
+                          colorScheme="blue"
+                        />
+                      </Flex>
+
                       <Flex>
                         <Heading
                           color="primary.blue.dark.main"
