@@ -131,8 +131,8 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const currentMajors = plan.majors;
   // Check if majors changed from the original plan
   const isMajorsChanged =
-    JSON.stringify(currentMajors?.sort()) !==
-    JSON.stringify(editMajors?.sort());
+    JSON.stringify(currentMajors?.slice().sort()) !==
+    JSON.stringify(editMajors?.slice().sort());
 
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
