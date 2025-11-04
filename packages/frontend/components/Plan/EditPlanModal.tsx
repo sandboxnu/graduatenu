@@ -351,7 +351,10 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                                   const newMajors = majors.filter(
                                     (_, i) => i !== index
                                   );
-                                  setValue("majors", newMajors);
+                                  setValue("majors", newMajors, {
+                                    shouldDirty: true,
+                                    shouldValidate: true,
+                                  });
                                   setValue("concentration", "");
                                 }}
                               />

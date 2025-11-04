@@ -20,8 +20,8 @@ export type ValidationResult = {
 export type Loaded = { type: WorkerMessageType.Loaded };
 
 export interface WorkerPostInfo {
-  major: Major2;
-  minor?: Minor;
+  majors: Major2[];
+  minors?: Minor[];
   taken: ScheduleCourse2<unknown>[];
   concentration?: string;
   requestNumber: number;

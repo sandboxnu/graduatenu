@@ -1,12 +1,4 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  IconButton,
-  Link,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Flex, Heading, IconButton, Link, Stack, Text } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import {
   MajorValidationError,
@@ -141,8 +133,8 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
-        major: majors[0],
-        minor: minors[0],
+        majors: majors,
+        minors: minors,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
