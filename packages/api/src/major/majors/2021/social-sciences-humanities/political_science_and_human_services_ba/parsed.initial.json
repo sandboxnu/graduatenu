@@ -2,7 +2,8 @@
   "name": "Political Science and Human Services, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -159,6 +160,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Human Services Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Integrative Courses",
       "requirements": [
         {
@@ -196,41 +203,55 @@
       "title": "Capstone and Elective",
       "requirements": [
         {
-          "type": "OR",
-          "courses": [
+          "type": "SECTION",
+          "title": "Option A",
+          "requirements": [
             {
-              "type": "COURSE",
-              "classId": 4701,
-              "subject": "POLS"
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4701,
+                  "subject": "POLS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4703,
+                  "subject": "POLS"
+                }
+              ]
             },
             {
-              "type": "COURSE",
-              "classId": 4703,
-              "subject": "POLS"
+              "type": "RANGE",
+              "subject": "HUSV",
+              "idRangeStart": 2000,
+              "idRangeEnd": 5999,
+              "exceptions": []
             }
-          ]
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "RANGE",
-          "subject": "HUSV",
-          "idRangeStart": 2000,
-          "idRangeEnd": 5999,
-          "exceptions": []
-        },
-        {
-          "type": "COURSE",
-          "classId": 4700,
-          "subject": "HUSV"
-        },
-        {
-          "type": "RANGE",
-          "subject": "POLS",
-          "idRangeStart": 2300,
-          "idRangeEnd": 5999,
-          "exceptions": []
+          "type": "SECTION",
+          "title": "Option B",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "HUSV"
+            },
+            {
+              "type": "RANGE",
+              "subject": "POLS",
+              "idRangeStart": 2300,
+              "idRangeEnd": 5999,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 2
         }
       ],
-      "minRequirementCount": 4
+      "minRequirementCount": 2
     }
   ],
   "concentrations": {
@@ -281,7 +302,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Campaigns and Elections",
         "requirements": [
           {
             "type": "COURSE",
@@ -298,7 +319,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Campaigns and Elections Electives",
+        "title": "Concentration in Campaigns and Elections: Campaigns and Elections Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -418,7 +439,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Course",
+        "title": "Concentration in Identity, Culture, and Politics",
         "requirements": [
           {
             "type": "COURSE",
@@ -430,7 +451,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Identity, Culture, and Politics: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -581,7 +602,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Requirement",
+        "title": "Concentration in Public Policy",
         "requirements": [
           {
             "type": "COURSE",
@@ -593,7 +614,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Public Policy: Electives",
         "requirements": [
           {
             "type": "XOM",

@@ -1,0 +1,541 @@
+{
+  "name": "Psychology and Music, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/4/2025",
+    "branch": "main"
+  },
+  "totalCreditsRequired": 130,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3452,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3458,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3464,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3466,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Lab",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4600,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4612,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4614,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4616,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4622,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4624,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4626,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4628,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Seminar",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4654,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4656,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4658,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4660,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4662,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4664,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4666,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4668,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4674,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4676,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4678,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1201,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1202,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Music in Context",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1001,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Creative Category",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2208,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2209,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1220,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1301,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUST"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1901,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1902,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1904,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1905,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1906,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1907,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1911,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1912,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1913,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1914,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1915,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1917,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1918,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1919,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1920,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 22
+    },
+    {
+      "type": "SECTION",
+      "title": "Contemporary / Popular Music or Global Music / Ethnomusicology Category",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2101,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2130,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2310,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2311,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2313,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2317,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2320,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2340,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2351,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2380,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3353,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3560,
+          "subject": "MUSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3351,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "MUSI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5900,
+          "subject": "MUSI"
+        }
+      ],
+      "minRequirementCount": 18
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Requirements",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "MUSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "INAM"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Music Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Other Requirements Outside Major",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "MUSC"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EESC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "EEAM"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1213,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1215,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Bridge/Integrative Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "MUSC"
+        }
+      ],
+      "minRequirementCount": 1
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

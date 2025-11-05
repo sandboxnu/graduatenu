@@ -2,11 +2,18 @@
   "name": "English and Cultural Anthropology, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
   "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "English Course-Level Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
     {
       "type": "SECTION",
       "title": "Introduction to College",
@@ -103,7 +110,7 @@
         {
           "type": "COURSE",
           "classId": 3685,
-          "subject": "ENGL/JWSS"
+          "subject": "JWSS"
         }
       ],
       "minRequirementCount": 11
@@ -135,7 +142,7 @@
         {
           "type": "COURSE",
           "classId": 3678,
-          "subject": "ENGL/JWSS"
+          "subject": "JWSS"
         },
         {
           "type": "COURSE",
@@ -192,7 +199,7 @@
         {
           "type": "COURSE",
           "classId": 3685,
-          "subject": "ENGL/JWSS"
+          "subject": "JWSS"
         },
         {
           "type": "COURSE",
@@ -507,6 +514,12 @@
     },
     {
       "type": "SECTION",
+      "title": "English Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Foundation Courses",
       "requirements": [
         {
@@ -581,6 +594,18 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Anthropology Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

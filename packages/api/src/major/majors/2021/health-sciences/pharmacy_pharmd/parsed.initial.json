@@ -2,7 +2,8 @@
   "name": "Pharmacy, PharmD",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 204,
   "yearVersion": 2021,
@@ -334,9 +335,21 @@
           "type": "COURSE",
           "classId": 5450,
           "subject": "PHMD"
+        },
+        {
+          "type": "SECTION",
+          "title": "Students are eligible to begin Advance Pharmacy Practice Experiences (APPEs) following successful completion of didactic coursework. Completing didactic coursework during P4 year is prohibited. 2",
+          "requirements": [],
+          "minRequirementCount": 0
         }
       ],
-      "minRequirementCount": 5
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Open Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -650,9 +663,15 @@
           "type": "COURSE",
           "classId": 1111,
           "subject": "ENGW"
+        },
+        {
+          "type": "SECTION",
+          "title": "The university requires a minimum grade of C for First-Year Writing (ENGW 1111). The university’s minimum passing grade for the course will be accepted for all other courses.",
+          "requirements": [],
+          "minRequirementCount": 0
         }
       ],
-      "minRequirementCount": 3
+      "minRequirementCount": 4
     },
     {
       "type": "SECTION",
@@ -776,9 +795,15 @@
           "type": "COURSE",
           "classId": 3306,
           "subject": "ENGW"
+        },
+        {
+          "type": "SECTION",
+          "title": "The university requires a minimum grade of C for Advanced Writing in the Health Professions (ENGW 3306). The university’s minimum passing grade for the course will be accepted for all other courses.",
+          "requirements": [],
+          "minRequirementCount": 0
         }
       ],
-      "minRequirementCount": 2
+      "minRequirementCount": 3
     }
   ],
   "concentrations": {

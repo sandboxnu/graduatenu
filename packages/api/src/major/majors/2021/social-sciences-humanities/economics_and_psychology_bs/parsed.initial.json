@@ -2,7 +2,8 @@
   "name": "Economics and Psychology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -239,6 +240,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Psychology Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Other Requirements Outside Major",
       "requirements": [
         {
@@ -372,6 +379,18 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "NUpath Not Fulfilled by Major",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Open Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

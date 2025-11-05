@@ -2,7 +2,8 @@
   "name": "Journalism and English, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 129,
   "yearVersion": 2021,
@@ -79,6 +80,18 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "English Course-Level Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -557,6 +570,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "English Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

@@ -2,7 +2,8 @@
   "name": "Computer Science and Design, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2021,
@@ -283,6 +284,24 @@
     },
     {
       "type": "SECTION",
+      "title": "Design Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design History Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Degree Capstone Project",
       "requirements": [
         {
@@ -292,6 +311,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Options",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -349,137 +374,157 @@
       "title": "Degree-Focused Electives",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1101,
-          "subject": "PSYC"
+          "type": "SECTION",
+          "title": "Art + Design",
+          "requirements": [],
+          "minRequirementCount": 0
         },
         {
-          "type": "COURSE",
-          "classId": 3452,
-          "subject": "PSYC"
+          "type": "SECTION",
+          "title": "Psychology",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3464,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3466,
+              "subject": "PSYC"
+            }
+          ],
+          "minRequirementCount": 4
         },
         {
-          "type": "COURSE",
-          "classId": 3464,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3466,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3200,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3520,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3540,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3650,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3700,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3800,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4100,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4150,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4300,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4400,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4520,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4550,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4850,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4991,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4992,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4993,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3000,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4200,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4300,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4400,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4420,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2000,
-          "subject": "IS"
+          "type": "SECTION",
+          "title": "Computer Science",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3520,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3540,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3650,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4100,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4150,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4300,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4550,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4850,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4992,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4993,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4200,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4300,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4420,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "IS"
+            }
+          ],
+          "minRequirementCount": 22
         }
       ],
-      "minRequirementCount": 26
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
@@ -603,6 +648,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

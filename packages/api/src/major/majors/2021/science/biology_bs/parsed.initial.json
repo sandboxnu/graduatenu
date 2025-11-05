@@ -2,7 +2,8 @@
   "name": "Biology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 136,
   "yearVersion": 2021,
@@ -36,65 +37,100 @@
       "title": "Required Biology",
       "requirements": [
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Foundations",
+          "requirements": [
             {
-              "subject": "BIOL",
-              "classId": 1107,
-              "description": "Foundations of Biology",
-              "type": "COURSE"
-            },
-            {
-              "subject": "BIOL",
-              "classId": 1108,
-              "description": "Lab for BIOL 1107",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1107,
+                  "description": "Foundations of Biology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1108,
+                  "description": "Lab for BIOL 1107",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "COURSE",
-          "classId": 2299,
-          "subject": "BIOL"
-        },
-        {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Inquiries",
+          "requirements": [
             {
-              "subject": "BIOL",
-              "classId": 2301,
-              "description": "Genetics and Molecular Biology",
-              "type": "COURSE"
-            },
-            {
-              "subject": "BIOL",
-              "classId": 2302,
-              "description": "Lab for BIOL 2301",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 2299,
+              "subject": "BIOL"
             }
-          ]
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "COURSE",
-          "classId": 2309,
-          "subject": "BIOL"
-        },
-        {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Genetics",
+          "requirements": [
             {
-              "subject": "BIOL",
-              "classId": 3611,
-              "description": "Biochemistry",
-              "type": "COURSE"
-            },
-            {
-              "subject": "BIOL",
-              "classId": 3612,
-              "description": "Lab for BIOL 3611",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 2301,
+                  "description": "Genetics and Molecular Biology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 2302,
+                  "description": "Lab for BIOL 2301",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Project Lab",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2309,
+              "subject": "BIOL"
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Biochemistry",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 3611,
+                  "description": "Biochemistry",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 3612,
+                  "description": "Lab for BIOL 3611",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 5
@@ -327,185 +363,213 @@
       "title": "Chemistry",
       "requirements": [
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "General Chemistry",
+          "requirements": [
             {
-              "subject": "CHEM",
-              "classId": 1161,
-              "description": "General Chemistry for Science Majors",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CHEM",
-              "classId": 1162,
-              "description": "Lab for CHEM 1161",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CHEM",
-              "classId": 1163,
-              "description": "Recitation for CHEM 1161",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 1161,
+                  "description": "General Chemistry for Science Majors",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 1162,
+                  "description": "Lab for CHEM 1161",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 1163,
+                  "description": "Recitation for CHEM 1161",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Organic Chemistry",
+          "requirements": [
             {
-              "subject": "CHEM",
-              "classId": 2311,
-              "description": "Organic Chemistry 1",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 2311,
+                  "description": "Organic Chemistry 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 2312,
+                  "description": "Lab for CHEM 2311",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CHEM",
-              "classId": 2312,
-              "description": "Lab for CHEM 2311",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 2313,
+                  "description": "Organic Chemistry 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 2314,
+                  "description": "Lab for CHEM 2313",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "CHEM",
-              "classId": 2313,
-              "description": "Organic Chemistry 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CHEM",
-              "classId": 2314,
-              "description": "Lab for CHEM 2313",
-              "type": "COURSE"
-            }
-          ]
+          ],
+          "minRequirementCount": 2
         }
       ],
-      "minRequirementCount": 3
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
       "title": "Physics",
       "requirements": [
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Physics 1",
+          "requirements": [
             {
-              "subject": "PHYS",
-              "classId": 1145,
-              "description": "Physics for Life Sciences 1",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1145,
+                  "description": "Physics for Life Sciences 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1146,
+                  "description": "Lab for PHYS 1145",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "PHYS",
-              "classId": 1146,
-              "description": "Lab for PHYS 1145",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1151,
+                  "description": "Physics for Engineering 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1152,
+                  "description": "Lab for PHYS 1151",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1153,
+                  "description": "Interactive Learning Seminar for PHYS 1151",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1161,
+                  "description": "Physics 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1162,
+                  "description": "Lab for PHYS 1161",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 3
         },
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Physics 2",
+          "requirements": [
             {
-              "subject": "PHYS",
-              "classId": 1151,
-              "description": "Physics for Engineering 1",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1147,
+                  "description": "Physics for Life Sciences 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1148,
+                  "description": "Lab for PHYS 1147",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "PHYS",
-              "classId": 1152,
-              "description": "Lab for PHYS 1151",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1155,
+                  "description": "Physics for Engineering 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1156,
+                  "description": "Lab for PHYS 1155",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1157,
+                  "description": "Interactive Learning Seminar for PHYS 1155",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "PHYS",
-              "classId": 1153,
-              "description": "Interactive Learning Seminar for PHYS 1151",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1165,
+                  "description": "Physics 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1166,
+                  "description": "Lab for PHYS 1165",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1161,
-              "description": "Physics 1",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1162,
-              "description": "Lab for PHYS 1161",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1147,
-              "description": "Physics for Life Sciences 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1148,
-              "description": "Lab for PHYS 1147",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1155,
-              "description": "Physics for Engineering 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1156,
-              "description": "Lab for PHYS 1155",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1157,
-              "description": "Interactive Learning Seminar for PHYS 1155",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1165,
-              "description": "Physics 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1166,
-              "description": "Lab for PHYS 1165",
-              "type": "COURSE"
-            }
-          ]
+          ],
+          "minRequirementCount": 3
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",

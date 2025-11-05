@@ -2,7 +2,8 @@
   "name": "Data Science and Ecology and Evolutionary Biology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2021,
@@ -29,97 +30,111 @@
       "title": "Programming Sequence Pathways",
       "requirements": [
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Computer Science Option",
+          "requirements": [
             {
-              "subject": "CS",
-              "classId": 2500,
-              "description": "Fundamentals of Computer Science 1",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2500,
+                  "description": "Fundamentals of Computer Science 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2501,
+                  "description": "Lab for CS 2500",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CS",
-              "classId": 2501,
-              "description": "Lab for CS 2500",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "CS",
-              "classId": 2510,
-              "description": "Fundamentals of Computer Science 2",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 2510,
+                  "description": "Fundamentals of Computer Science 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 2511,
+                  "description": "Lab for CS 2510",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CS",
-              "classId": 2511,
-              "description": "Lab for CS 2510",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 3500,
+                  "description": "Object-Oriented Design",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 3501,
+                  "description": "Lab for CS 3500",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 3
         },
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Data Science Option",
+          "requirements": [
             {
-              "subject": "CS",
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2000,
+                  "description": "Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2001,
+                  "description": "Data Science Programming Practicum",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2500,
+                  "description": "Intermediate Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2501,
+                  "description": "Lab for DS 2500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
               "classId": 3500,
-              "description": "Object-Oriented Design",
-              "type": "COURSE"
-            },
-            {
-              "subject": "CS",
-              "classId": 3501,
-              "description": "Lab for CS 3500",
-              "type": "COURSE"
+              "subject": "DS"
             }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "DS",
-              "classId": 2000,
-              "description": "Programming with Data",
-              "type": "COURSE"
-            },
-            {
-              "subject": "DS",
-              "classId": 2001,
-              "description": "Data Science Programming Practicum",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "DS",
-              "classId": 2500,
-              "description": "Intermediate Programming with Data",
-              "type": "COURSE"
-            },
-            {
-              "subject": "DS",
-              "classId": 2501,
-              "description": "Lab for DS 2500",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 3500,
-          "subject": "DS"
+          ],
+          "minRequirementCount": 3
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
@@ -361,116 +376,137 @@
       "title": "Ecology and Evolutionary Biology Topical Requirement",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2290,
-          "subject": "EEMB"
-        },
-        {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Evolution of Organisms",
+          "requirements": [
             {
-              "subject": "EEMB",
-              "classId": 2700,
-              "description": "Marine Biology",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 2290,
+              "subject": "EEMB"
             },
             {
-              "subject": "EEMB",
-              "classId": 2701,
-              "description": "Lab for EEMB 2700",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 3001,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3450,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3700,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4010,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3460,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3475,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3465,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3470,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4001,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3125,
-          "subject": "ENVR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3150,
-          "subject": "ENVR"
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 3300,
-              "description": "Geographic Information Systems",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EEMB",
+                  "classId": 2700,
+                  "description": "Marine Biology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EEMB",
+                  "classId": 2701,
+                  "description": "Lab for EEMB 2700",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "ENVR",
-              "classId": 3301,
-              "description": "Lab for ENVR 3300",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 3001,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4010,
+              "subject": "EEMB"
             }
-          ]
+          ],
+          "minRequirementCount": 6
         },
         {
-          "type": "COURSE",
-          "classId": 3465,
-          "subject": "EEMB"
+          "type": "SECTION",
+          "title": "Ecology and Conservation Biology",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3475,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3470,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4001,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3125,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3150,
+              "subject": "ENVR"
+            }
+          ],
+          "minRequirementCount": 7
         },
         {
-          "type": "COURSE",
-          "classId": 5130,
-          "subject": "EEMB"
-        },
-        {
-          "type": "COURSE",
-          "classId": 5500,
-          "subject": "ENVR"
+          "type": "SECTION",
+          "title": "Analytical Skills",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 3300,
+                  "description": "Geographic Information Systems",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 3301,
+                  "description": "Lab for ENVR 3300",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5130,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5500,
+              "subject": "ENVR"
+            }
+          ],
+          "minRequirementCount": 4
         }
       ],
-      "minRequirementCount": 17
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
@@ -666,6 +702,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

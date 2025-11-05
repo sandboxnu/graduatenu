@@ -2,7 +2,8 @@
   "name": "Computer Engineering, BSCmpE",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2021,
@@ -68,41 +69,47 @@
       "title": "Electrical Engineering Fundamentals",
       "requirements": [
         {
-          "type": "AND",
+          "type": "XOM",
+          "numCreditsMin": 4,
           "courses": [
             {
-              "subject": "EECE",
-              "classId": 2412,
-              "description": "Fundamentals of Electronics",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2412,
+                  "description": "Fundamentals of Electronics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2413,
+                  "description": "Lab for EECE 2412",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "EECE",
-              "classId": 2413,
-              "description": "Lab for EECE 2412",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 2520,
-          "subject": "EECE"
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "EECE",
-              "classId": 2530,
-              "description": "Fundamentals of Electromagnetics",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 2520,
+              "subject": "EECE"
             },
             {
-              "subject": "EECE",
-              "classId": 2531,
-              "description": "Lab for EECE 2530",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2530,
+                  "description": "Fundamentals of Electromagnetics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2531,
+                  "description": "Lab for EECE 2530",
+                  "type": "COURSE"
+                }
+              ]
             }
           ]
         }
@@ -427,6 +434,12 @@
         }
       ],
       "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

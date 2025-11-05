@@ -2,7 +2,8 @@
   "name": "History, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -248,12 +249,31 @@
       "title": "Capstone or Project",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 4701,
-          "subject": "HIST"
+          "type": "SECTION",
+          "title": "Requirement for Non–Public History Concentrators",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4701,
+              "subject": "HIST"
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Requirement for Public History Concentrators",
+          "requirements": [],
+          "minRequirementCount": 0
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced History Course Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

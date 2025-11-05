@@ -2,7 +2,8 @@
   "name": "Sociology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -104,6 +105,18 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Students must complete nine elective courses in the SOCL major, at least five of which must be at the 3000-level or higher",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Social Science Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

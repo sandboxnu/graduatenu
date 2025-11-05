@@ -2,7 +2,8 @@
   "name": "Philosophy, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -125,6 +126,12 @@
         }
       ],
       "minRequirementCount": 16
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {
@@ -132,7 +139,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Philosophy Required Courses",
+        "title": "Concentration in Law and Ethics",
         "requirements": [
           {
             "type": "COURSE",
@@ -174,7 +181,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Advanced Elective/Seminar",
+        "title": "Concentration in Law and Ethics: Philosophy Advanced Elective/Seminar",
         "requirements": [
           {
             "type": "COURSE",
@@ -261,7 +268,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Ethics-Related Electives",
+        "title": "Concentration in Law and Ethics: Ethics-Related Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -438,7 +445,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Law-Related Electives",
+        "title": "Concentration in Law and Ethics: Law-Related Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -575,7 +582,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Required Courses",
+        "title": "Concentration in Ethics",
         "requirements": [
           {
             "type": "COURSE",
@@ -612,7 +619,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Advanced Elective/Seminar",
+        "title": "Concentration in Ethics: Philosophy Advanced Elective/Seminar",
         "requirements": [
           {
             "type": "COURSE",
@@ -699,7 +706,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Ethics Courses",
+        "title": "Concentration in Ethics: Ethics Courses",
         "requirements": [
           {
             "type": "COURSE",
@@ -886,7 +893,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Required Courses",
+        "title": "Concentration in Religious Studies",
         "requirements": [
           {
             "type": "COURSE",
@@ -923,7 +930,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Advanced Elective/Seminar",
+        "title": "Concentration in Religious Studies: Philosophy Advanced Elective/Seminar",
         "requirements": [
           {
             "type": "COURSE",
@@ -1010,7 +1017,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Religious Studies Courses",
+        "title": "Concentration in Religious Studies: Religious Studies Courses",
         "requirements": [
           {
             "type": "COURSE",
@@ -1102,7 +1109,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Required Courses",
+        "title": "Concentration in Formal Methods",
         "requirements": [
           {
             "type": "COURSE",
@@ -1139,7 +1146,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Formal Methods Courses",
+        "title": "Concentration in Formal Methods: Formal Methods Courses",
         "requirements": [
           {
             "type": "COURSE",
@@ -1236,7 +1243,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Philosophy Electives",
+        "title": "Concentration in Formal Methods: Philosophy Electives",
         "requirements": [],
         "minRequirementCount": 0
       }

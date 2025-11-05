@@ -2,7 +2,8 @@
   "name": "Industrial Engineering, BSIE",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 137,
   "yearVersion": 2021,
@@ -118,66 +119,64 @@
       "type": "SECTION",
       "title": "Engineering Electives",
       "requirements": [
-        [
-          {
-            "type": "RANGE",
-            "subject": "CHME",
-            "idRangeStart": 0,
-            "idRangeEnd": 9999,
-            "exceptions": []
-          },
-          {
-            "type": "RANGE",
-            "subject": "CIVE",
-            "idRangeStart": 0,
-            "idRangeEnd": 9999,
-            "exceptions": []
-          },
-          {
-            "type": "RANGE",
-            "subject": "EECE",
-            "idRangeStart": 0,
-            "idRangeEnd": 9999,
-            "exceptions": []
-          },
-          {
-            "type": "RANGE",
-            "subject": "EMGT",
-            "idRangeStart": 0,
-            "idRangeEnd": 9999,
-            "exceptions": []
-          },
-          {
-            "type": "RANGE",
-            "subject": "ENSY",
-            "idRangeStart": 0,
-            "idRangeEnd": 9999,
-            "exceptions": []
-          },
-          {
-            "type": "RANGE",
-            "subject": "IE",
-            "idRangeStart": 0,
-            "idRangeEnd": 9999,
-            "exceptions": []
-          },
-          {
-            "type": "RANGE",
-            "subject": "ME",
-            "idRangeStart": 0,
-            "idRangeEnd": 9999,
-            "exceptions": []
-          },
-          {
-            "type": "RANGE",
-            "subject": "MEIE",
-            "idRangeStart": 0,
-            "idRangeEnd": 9999,
-            "exceptions": []
-          }
-        ]
+        {
+          "type": "RANGE",
+          "subject": "CHME",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "CIVE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "EECE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "EMGT",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ENSY",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "IE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "ME",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "MEIE",
+          "idRangeStart": 0,
+          "idRangeEnd": 9999,
+          "exceptions": []
+        }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 8
     },
     {
       "type": "SECTION",
@@ -550,6 +549,12 @@
         }
       ],
       "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

@@ -2,7 +2,8 @@
   "name": "Mathematics and Sociology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/4/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -65,6 +66,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Math Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Sociology Required Courses",
       "requirements": [
         {
@@ -100,25 +107,46 @@
       "title": "Sociology Electives",
       "requirements": [
         {
-          "type": "RANGE",
-          "subject": "SOCL",
-          "idRangeStart": 1101,
-          "idRangeEnd": 1999,
-          "exceptions": []
+          "type": "SECTION",
+          "title": "Introductory Elective",
+          "requirements": [
+            {
+              "type": "RANGE",
+              "subject": "SOCL",
+              "idRangeStart": 1101,
+              "idRangeEnd": 1999,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "RANGE",
-          "subject": "SOCL",
-          "idRangeStart": 2000,
-          "idRangeEnd": 3999,
-          "exceptions": []
+          "type": "SECTION",
+          "title": "Intermediate Elective",
+          "requirements": [
+            {
+              "type": "RANGE",
+              "subject": "SOCL",
+              "idRangeStart": 2000,
+              "idRangeEnd": 3999,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "RANGE",
-          "subject": "SOCL",
-          "idRangeStart": 4000,
-          "idRangeEnd": 4999,
-          "exceptions": []
+          "type": "SECTION",
+          "title": "Advanced Elective",
+          "requirements": [
+            {
+              "type": "RANGE",
+              "subject": "SOCL",
+              "idRangeStart": 4000,
+              "idRangeEnd": 4999,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 3
