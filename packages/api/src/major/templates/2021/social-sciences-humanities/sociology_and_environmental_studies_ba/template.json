@@ -1,26 +1,15 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ENVR 1000",
-        "ENVR 1101",
-        "SOCL 1246",
-        "SOCL 1101",
-        "ANTH 2305"
-      ],
-      "Spring": [
-        "ENVR 1110",
-        "ENVR 2515",
-        "SOCL 2321",
-        "ENVR 2500"
-      ]
+      "Fall": ["ENVR 1000", "ENVR 1101", "SOCL 1246", "SOCL 1101", "ANTH 2305"],
+      "Spring": ["ENVR 1110", "ENVR 2515", "SOCL 2321", "ENVR 2500"]
     },
     "Year 2": {
-      "Fall": [
-        "ENVR 3300",
-        "SOCL 3300",
-        "SOCL 2485"
-      ]
+      "Fall": ["ENVR 3300", "SOCL 3300", "SOCL 2485"]
     },
     "Year 3": {},
     "Year 4": {},

@@ -1,33 +1,19 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Four Years, Two Co-ops Summer 2/ Fall": {
     "Year 1": {
-      "Fall": [
-        "PHIL 1160",
-        "PHIL 1000",
-        "MATH 1231",
-        "POLS 1160"
-      ],
-      "Spring": [
-        "ENGW 1111",
-        "ECON 1116",
-        "PHIL 1115",
-        "PHIL 2303"
-      ]
+      "Fall": ["PHIL 1160", "PHIL 1000", "MATH 1231", "POLS 1160"],
+      "Spring": ["ENGW 1111", "ECON 1116", "PHIL 1115", "PHIL 2303"]
     },
     "Year 2": {
-      "Fall": [
-        "ECON 1115",
-        "POLS 1150",
-        "PHIL 3435"
-      ],
-      "Spring": [
-        "ECON 2315"
-      ]
+      "Fall": ["ECON 1115", "POLS 1150", "PHIL 3435"],
+      "Spring": ["ECON 2315"]
     },
     "Year 3": {
-      "Spring": [
-        "PHIL 3000"
-      ]
+      "Spring": ["PHIL 3000"]
     },
     "Year 4": {}
   }

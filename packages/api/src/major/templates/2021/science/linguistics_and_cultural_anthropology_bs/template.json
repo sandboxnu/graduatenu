@@ -1,74 +1,41 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "LING 1150",
-        "ANTH 1101",
-        "ENGW 1111",
-        "MATH 1215"
-      ],
-      "Spring": [
-        "LING 2350",
-        "ANTH 2305",
-        "LING 3412"
-      ]
+      "Fall": ["LING 1150", "ANTH 1101", "ENGW 1111", "MATH 1215"],
+      "Spring": ["LING 2350", "ANTH 2305", "LING 3412"]
     },
     "Year 2": {
-      "Spring": [
-        "LING 3442"
-      ]
+      "Spring": ["LING 3442"]
     },
     "Year 3": {
-      "Spring": [
-        "LING 3456"
-      ],
-      "Fall": [
-        "ENGW 3315"
-      ]
+      "Spring": ["LING 3456"],
+      "Fall": ["ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "ENGW 3315",
-        "ANTH 4600"
-      ]
+      "Spring": ["ENGW 3315", "ANTH 4600"]
     },
     "Year 5": {
-      "Spring": [
-        "ANTH 4600"
-      ]
+      "Spring": ["ANTH 4600"]
     }
   },
   "Four Years, No Co-op": {
     "Year 1": {
-      "Fall": [
-        "LING 1150",
-        "ANTH 1101",
-        "ENGW 1111",
-        "MATH 1215"
-      ],
-      "Spring": [
-        "LING 2350",
-        "ANTH 2305",
-        "LING 3412"
-      ]
+      "Fall": ["LING 1150", "ANTH 1101", "ENGW 1111", "MATH 1215"],
+      "Spring": ["LING 2350", "ANTH 2305", "LING 3412"]
     },
     "Year 2": {
-      "Spring": [
-        "LING 3442"
-      ]
+      "Spring": ["LING 3442"]
     },
     "Year 3": {
-      "Spring": [
-        "LING 3456"
-      ],
-      "Fall": [
-        "ENGW 3315"
-      ]
+      "Spring": ["LING 3456"],
+      "Fall": ["ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "ANTH 4600"
-      ]
+      "Spring": ["ANTH 4600"]
     }
   }
 }

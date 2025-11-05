@@ -1,87 +1,42 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Four-Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "LARC 2430",
-        "ENVR 1400",
-        "ENVR 2200",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "ARCH 1110",
-        "ARCH 1120",
-        "EEMB 2302",
-        "EEAM 2000"
-      ],
-      "Summer 1": [
-        "ENGW 1111"
-      ]
+      "Fall": ["LARC 2430", "ENVR 1400", "ENVR 2200", "ENGW 1111"],
+      "Spring": ["ARCH 1110", "ARCH 1120", "EEMB 2302", "EEAM 2000"],
+      "Summer 1": ["ENGW 1111"]
     },
     "Year 2": {
-      "Fall": [
-        "LARC 2130",
-        "LARC 2230",
-        "LARC 2330"
-      ],
-      "Spring": [
-        "LARC 2340",
-        "ENVR 3300"
-      ]
+      "Fall": ["LARC 2130", "LARC 2230", "LARC 2330"],
+      "Spring": ["LARC 2340", "ENVR 3300"]
     },
     "Year 3": {
-      "Summer 1": [
-        "ENGW 3314"
-      ],
-      "Fall": [
-        "ENVR 3300",
-        "ENGW 3314"
-      ]
+      "Summer 1": ["ENGW 3314"],
+      "Fall": ["ENVR 3300", "ENGW 3314"]
     },
     "Year 4": {
-      "Spring": [
-        "ENVR 2515"
-      ],
-      "Fall": [
-        "ENVR 2515"
-      ]
+      "Spring": ["ENVR 2515"],
+      "Fall": ["ENVR 2515"]
     },
     "Year 5": {}
   },
   "Five-Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "LARC 2430",
-        "ENVR 1400",
-        "ENVR 2200",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "ARCH 1110",
-        "ARCH 1120",
-        "EEMB 2302",
-        "EEAM 2000"
-      ]
+      "Fall": ["LARC 2430", "ENVR 1400", "ENVR 2200", "ENGW 1111"],
+      "Spring": ["ARCH 1110", "ARCH 1120", "EEMB 2302", "EEAM 2000"]
     },
     "Year 2": {
-      "Fall": [
-        "LARC 2130",
-        "LARC 2230",
-        "LARC 2330"
-      ],
-      "Spring": [
-        "LARC 2340"
-      ]
+      "Fall": ["LARC 2130", "LARC 2230", "LARC 2330"],
+      "Spring": ["LARC 2340"]
     },
     "Year 3": {
-      "Fall": [
-        "ENVR 3300",
-        "ENGW 3314"
-      ]
+      "Fall": ["ENVR 3300", "ENGW 3314"]
     },
     "Year 4": {
-      "Fall": [
-        "ENVR 2515"
-      ]
+      "Fall": ["ENVR 2515"]
     },
     "Year 5": {}
   }

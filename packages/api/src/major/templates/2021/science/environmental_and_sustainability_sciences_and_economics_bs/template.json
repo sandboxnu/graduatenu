@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -9,37 +13,17 @@
         "ENVR 1400",
         "ENVR 1401"
       ],
-      "Spring": [
-        "CS 1100",
-        "ECON 1116",
-        "ENVR 2200"
-      ]
+      "Spring": ["CS 1100", "ECON 1116", "ENVR 2200"]
     },
     "Year 2": {
-      "Fall": [
-        "EEMB 2302",
-        "EEMB 2303",
-        "ECON 2315"
-      ],
-      "Spring": [
-        "ECON 2316",
-        "ECON 2350",
-        "ENVR 2515"
-      ]
+      "Fall": ["EEMB 2302", "EEMB 2303", "ECON 2315"],
+      "Spring": ["ECON 2316", "ECON 2350", "ENVR 2515"]
     },
     "Year 3": {
-      "Spring": [
-        "ECON 2560",
-        "ECON 3423",
-        "ENVR 3150",
-        "ENGW 3308"
-      ]
+      "Spring": ["ECON 2560", "ECON 3423", "ENVR 3150", "ENGW 3308"]
     },
     "Year 4": {
-      "Spring": [
-        "ENVR 4050",
-        "ECON 1711"
-      ]
+      "Spring": ["ENVR 4050", "ECON 1711"]
     }
   }
 }

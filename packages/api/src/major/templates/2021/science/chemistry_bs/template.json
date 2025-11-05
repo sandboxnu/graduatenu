@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -17,11 +21,7 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "PHYS 1155",
-        "PHYS 1156",
-        "PHYS 1157"
-      ]
+      "Summer 1": ["PHYS 1155", "PHYS 1156", "PHYS 1157"]
     },
     "Year 2": {
       "Fall": [
@@ -61,11 +61,7 @@
       ]
     },
     "Year 5": {
-      "Spring": [
-        "CHEM 4621",
-        "CHEM 4622",
-        "CHEM 4750"
-      ]
+      "Spring": ["CHEM 4621", "CHEM 4622", "CHEM 4750"]
     }
   },
   "Four Years, Two Co-ops in Summer 2/Fall": {
@@ -86,20 +82,10 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "PHYS 1155",
-        "PHYS 1156",
-        "PHYS 1157"
-      ]
+      "Summer 1": ["PHYS 1155", "PHYS 1156", "PHYS 1157"]
     },
     "Year 2": {
-      "Fall": [
-        "CHEM 2161",
-        "CHEM 2162",
-        "CHEM 2163",
-        "CHEM 2317",
-        "CHEM 2318"
-      ],
+      "Fall": ["CHEM 2161", "CHEM 2162", "CHEM 2163", "CHEM 2317", "CHEM 2318"],
       "Spring": [
         "EESC 2000",
         "CHEM 2321",
@@ -109,11 +95,7 @@
       ]
     },
     "Year 3": {
-      "Spring": [
-        "CHEM 3401",
-        "CHEM 3402",
-        "ENGW 3307"
-      ]
+      "Spring": ["CHEM 3401", "CHEM 3402", "ENGW 3307"]
     },
     "Year 4": {
       "Spring": [

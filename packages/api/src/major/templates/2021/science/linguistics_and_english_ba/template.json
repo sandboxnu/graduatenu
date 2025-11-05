@@ -1,35 +1,22 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Sample Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "LING 1150",
-        "ENGW 1111",
-        "MATH 1215"
-      ],
-      "Spring": [
-        "LING 2350",
-        "ENGL 1400"
-      ]
+      "Fall": ["LING 1150", "ENGW 1111", "MATH 1215"],
+      "Spring": ["LING 2350", "ENGL 1400"]
     },
     "Year 2": {
-      "Fall": [
-        "LING 3454",
-        "ENGL 1410"
-      ],
-      "Spring": [
-        "LING 3412",
-        "EESC 2000"
-      ]
+      "Fall": ["LING 3454", "ENGL 1410"],
+      "Spring": ["LING 3412", "EESC 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3315"
-      ]
+      "Spring": ["ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "LING 3412"
-      ]
+      "Spring": ["LING 3412"]
     },
     "Year 5": {}
   }

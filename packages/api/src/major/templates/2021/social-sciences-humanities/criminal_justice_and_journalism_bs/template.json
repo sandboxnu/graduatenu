@@ -1,82 +1,38 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Four Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "CRIM 1000",
-        "CRIM 1100",
-        "JRNL 1150",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "JRNL 1101"
-      ]
+      "Fall": ["CRIM 1000", "CRIM 1100", "JRNL 1150", "ENGW 1111"],
+      "Spring": ["JRNL 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "CRIM 1110",
-        "CRIM 1120",
-        "JRNL 2201",
-        "EESH 2000"
-      ]
+      "Fall": ["CRIM 1110", "CRIM 1120", "JRNL 2201", "EESH 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "CRIM 1700",
-        "CRIM 3600",
-        "JRNL 2301",
-        "CRIM 3000"
-      ]
+      "Fall": ["CRIM 1700", "CRIM 3600", "JRNL 2301", "CRIM 3000"]
     },
     "Year 4": {
-      "Fall": [
-        "CRIM 3700",
-        "JRNL 3550",
-        "JRNL 3610"
-      ],
-      "Spring": [
-        "CRIM 4949",
-        "JRNL 4650"
-      ]
+      "Fall": ["CRIM 3700", "JRNL 3550", "JRNL 3610"],
+      "Spring": ["CRIM 4949", "JRNL 4650"]
     }
   },
   "Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "CRIM 1000",
-        "CRIM 1100",
-        "JRNL 1150",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "JRNL 1101"
-      ]
+      "Fall": ["CRIM 1000", "CRIM 1100", "JRNL 1150", "ENGW 1111"],
+      "Spring": ["JRNL 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "CRIM 1110",
-        "CRIM 1120",
-        "JRNL 2201",
-        "EESH 2000"
-      ]
+      "Fall": ["CRIM 1110", "CRIM 1120", "JRNL 2201", "EESH 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "CRIM 1700",
-        "CRIM 3600",
-        "JRNL 2301",
-        "CRIM 3000"
-      ]
+      "Fall": ["CRIM 1700", "CRIM 3600", "JRNL 2301", "CRIM 3000"]
     },
     "Year 4": {
-      "Fall": [
-        "CRIM 3700",
-        "JRNL 3550",
-        "JRNL 3610"
-      ],
-      "Spring": [
-        "CRIM 4949",
-        "JRNL 4650"
-      ]
+      "Fall": ["CRIM 3700", "JRNL 3550", "JRNL 3610"],
+      "Spring": ["CRIM 4949", "JRNL 4650"]
     }
   }
 }

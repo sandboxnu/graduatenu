@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Default Plan": {
     "Year 1": {
       "Fall": ["HIST 1200", "HIST 1201", "ENGW 1111", "PHIL 1115", "PHIL 2325"],

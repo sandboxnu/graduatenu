@@ -1,83 +1,44 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "POLS 1155",
-        "POLS 1156",
-        "POLS 1000",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "POLS 1150",
-        "POLS 1151",
-        "MATH 1215",
-        "POLS 1160"
-      ]
+      "Fall": ["POLS 1155", "POLS 1156", "POLS 1000", "ENGW 1111"],
+      "Spring": ["POLS 1150", "POLS 1151", "MATH 1215", "POLS 1160"]
     },
     "Year 2": {
-      "Fall": [
-        "POLS 2399",
-        "EESH 2000"
-      ],
-      "Spring": [
-        "POLS 2400",
-        "EESH 2000"
-      ]
+      "Fall": ["POLS 2399", "EESH 2000"],
+      "Spring": ["POLS 2400", "EESH 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "POLS 2400"
-      ]
+      "Fall": ["POLS 2400"]
     },
     "Year 4": {
-      "Spring": [
-        "ENGW 3315"
-      ],
-      "Fall": [
-        "ENGW 3315"
-      ]
+      "Spring": ["ENGW 3315"],
+      "Fall": ["ENGW 3315"]
     },
     "Year 5": {
-      "Spring": [
-        "POLS 4701"
-      ]
+      "Spring": ["POLS 4701"]
     }
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "POLS 1155",
-        "POLS 1156",
-        "POLS 1000",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "POLS 1150",
-        "POLS 1151",
-        "MATH 1215",
-        "POLS 1160"
-      ]
+      "Fall": ["POLS 1155", "POLS 1156", "POLS 1000", "ENGW 1111"],
+      "Spring": ["POLS 1150", "POLS 1151", "MATH 1215", "POLS 1160"]
     },
     "Year 2": {
-      "Fall": [
-        "POLS 2399",
-        "EESH 2000"
-      ]
+      "Fall": ["POLS 2399", "EESH 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "POLS 2400"
-      ]
+      "Fall": ["POLS 2400"]
     },
     "Year 4": {
-      "Fall": [
-        "ENGW 3315"
-      ]
+      "Fall": ["ENGW 3315"]
     },
     "Year 5": {
-      "Spring": [
-        "POLS 4701"
-      ]
+      "Spring": ["POLS 4701"]
     }
   }
 }

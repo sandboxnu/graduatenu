@@ -1,50 +1,24 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Four Years, No Co-op": {
     "Year 1": {
-      "Fall": [
-        "AMSL 1101",
-        "DEAF 1500",
-        "HUSV 1101",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "AMSL 1102",
-        "MATH 1215"
-      ]
+      "Fall": ["AMSL 1101", "DEAF 1500", "HUSV 1101", "ENGW 1111"],
+      "Spring": ["AMSL 1102", "MATH 1215"]
     },
     "Year 2": {
-      "Fall": [
-        "AMSL 2101",
-        "LING 1150",
-        "INTP 3500"
-      ],
-      "Spring": [
-        "AMSL 2102",
-        "DEAF 2700",
-        "HUSV 2300"
-      ]
+      "Fall": ["AMSL 2101", "LING 1150", "INTP 3500"],
+      "Spring": ["AMSL 2102", "DEAF 2700", "HUSV 2300"]
     },
     "Year 3": {
-      "Fall": [
-        "DEAF 2500",
-        "INTP 3510",
-        "AMSL 3101"
-      ],
-      "Spring": [
-        "HUSV 2970",
-        "ENGW 3315",
-        "AMSL 3102"
-      ]
+      "Fall": ["DEAF 2500", "INTP 3510", "AMSL 3101"],
+      "Spring": ["HUSV 2970", "ENGW 3315", "AMSL 3102"]
     },
     "Year 4": {
-      "Fall": [
-        "HUSV 3900",
-        "HUSV 4994"
-      ],
-      "Spring": [
-        "HUSV 4700",
-        "INTP 4940"
-      ]
+      "Fall": ["HUSV 3900", "HUSV 4994"],
+      "Spring": ["HUSV 4700", "INTP 4940"]
     }
   }
 }

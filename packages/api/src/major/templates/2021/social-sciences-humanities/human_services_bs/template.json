@@ -1,90 +1,47 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "HUSV 1000",
-        "HUSV 1101",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "HUSV 2300",
-        "MATH 1215"
-      ]
+      "Fall": ["HUSV 1000", "HUSV 1101", "ENGW 1111"],
+      "Spring": ["HUSV 2300", "MATH 1215"]
     },
     "Year 2": {
-      "Spring": [
-        "HUSV 3570",
-        "EESH 2000"
-      ],
-      "Fall": [
-        "EESH 2000"
-      ]
+      "Spring": ["HUSV 3570", "EESH 2000"],
+      "Fall": ["EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3315",
-        "HUSV 2970"
-      ],
-      "Fall": [
-        "HUSV 3570",
-        "ENGW 3315"
-      ]
+      "Spring": ["ENGW 3315", "HUSV 2970"],
+      "Fall": ["HUSV 3570", "ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "HUSV 3900",
-        "HUSV 4994"
-      ],
-      "Fall": [
-        "HUSV 2970"
-      ]
+      "Spring": ["HUSV 3900", "HUSV 4994"],
+      "Fall": ["HUSV 2970"]
     },
     "Year 5": {
-      "Spring": [
-        "HUSV 4700"
-      ],
-      "Fall": [
-        "HUSV 4994",
-        "HUSV 3900"
-      ]
+      "Spring": ["HUSV 4700"],
+      "Fall": ["HUSV 4994", "HUSV 3900"]
     }
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "HUSV 1000",
-        "HUSV 1101",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "HUSV 2300",
-        "MATH 1215"
-      ]
+      "Fall": ["HUSV 1000", "HUSV 1101", "ENGW 1111"],
+      "Spring": ["HUSV 2300", "MATH 1215"]
     },
     "Year 2": {
-      "Fall": [
-        "EESH 2000"
-      ]
+      "Fall": ["EESH 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "HUSV 3570",
-        "ENGW 3315"
-      ]
+      "Fall": ["HUSV 3570", "ENGW 3315"]
     },
     "Year 4": {
-      "Fall": [
-        "HUSV 2970"
-      ]
+      "Fall": ["HUSV 2970"]
     },
     "Year 5": {
-      "Fall": [
-        "HUSV 4994",
-        "HUSV 3900"
-      ],
-      "Spring": [
-        "HUSV 4700"
-      ]
+      "Fall": ["HUSV 4994", "HUSV 3900"],
+      "Spring": ["HUSV 4700"]
     }
   }
 }

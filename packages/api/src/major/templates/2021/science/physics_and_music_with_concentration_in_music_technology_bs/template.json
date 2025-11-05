@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Note on Physics courses in Plans of Study": {
     "Year 1": {
       "Fall": [
@@ -19,47 +23,19 @@
       ]
     },
     "Year 2": {
-      "Fall": [
-        "PHYS 2303",
-        "MATH 2321",
-        "MUSC 1201"
-      ],
-      "Spring": [
-        "PHYS 3602",
-        "MATH 2341",
-        "MUSC 1202",
-        "MUSC 2350"
-      ]
+      "Fall": ["PHYS 2303", "MATH 2321", "MUSC 1201"],
+      "Spring": ["PHYS 3602", "MATH 2341", "MUSC 1202", "MUSC 2350"]
     },
     "Year 3": {
-      "Fall": [
-        "PHYS 2371",
-        "PHYS 2372",
-        "MUST 2431",
-        "EESC 2000",
-        "MUSC 3541"
-      ],
-      "Summer 2": [
-        "PHYS 3600",
-        "PHYS 4305"
-      ]
+      "Fall": ["PHYS 2371", "PHYS 2372", "MUST 2431", "EESC 2000", "MUSC 3541"],
+      "Summer 2": ["PHYS 3600", "PHYS 4305"]
     },
     "Year 4": {
-      "Fall": [
-        "MUSC 3541",
-        "MUST 3540",
-        "PHYS 4115"
-      ]
+      "Fall": ["MUSC 3541", "MUST 3540", "PHYS 4115"]
     },
     "Year 5": {
-      "Fall": [
-        "ENGW 3307",
-        "MUST 4610"
-      ],
-      "Spring": [
-        "PHYS 5318",
-        "MUST 4611"
-      ]
+      "Fall": ["ENGW 3307", "MUST 4610"],
+      "Spring": ["PHYS 5318", "MUST 4611"]
     }
   },
   "Five Years, Two Co-ops in Spring/Summer 1": {
@@ -82,47 +58,19 @@
       ]
     },
     "Year 2": {
-      "Fall": [
-        "PHYS 2303",
-        "MATH 2321",
-        "MUSC 1201"
-      ],
-      "Spring": [
-        "PHYS 3602",
-        "MATH 2341",
-        "MUSC 1202",
-        "MUSC 2350"
-      ]
+      "Fall": ["PHYS 2303", "MATH 2321", "MUSC 1201"],
+      "Spring": ["PHYS 3602", "MATH 2341", "MUSC 1202", "MUSC 2350"]
     },
     "Year 3": {
-      "Fall": [
-        "PHYS 2371",
-        "PHYS 2372",
-        "MUST 2431",
-        "EESC 2000",
-        "MUSC 3541"
-      ],
-      "Summer 2": [
-        "PHYS 3600",
-        "PHYS 4305"
-      ]
+      "Fall": ["PHYS 2371", "PHYS 2372", "MUST 2431", "EESC 2000", "MUSC 3541"],
+      "Summer 2": ["PHYS 3600", "PHYS 4305"]
     },
     "Year 4": {
-      "Fall": [
-        "MUSC 3541",
-        "MUST 3540",
-        "PHYS 4115"
-      ]
+      "Fall": ["MUSC 3541", "MUST 3540", "PHYS 4115"]
     },
     "Year 5": {
-      "Fall": [
-        "ENGW 3307",
-        "MUST 4610"
-      ],
-      "Spring": [
-        "PHYS 5318",
-        "MUST 4611"
-      ]
+      "Fall": ["ENGW 3307", "MUST 4610"],
+      "Spring": ["PHYS 5318", "MUST 4611"]
     }
   },
   "Four Years, One Co-op in Spring/Summer 1": {
@@ -145,45 +93,17 @@
       ]
     },
     "Year 2": {
-      "Fall": [
-        "PHYS 2303",
-        "PHYS 2371",
-        "PHYS 2372",
-        "MATH 2321",
-        "MUSC 1201"
-      ],
-      "Spring": [
-        "MATH 2341",
-        "MUSC 1202",
-        "MUSC 2350",
-        "PHYS 3602"
-      ],
-      "Summer 2": [
-        "PHYS 3600"
-      ]
+      "Fall": ["PHYS 2303", "PHYS 2371", "PHYS 2372", "MATH 2321", "MUSC 1201"],
+      "Spring": ["MATH 2341", "MUSC 1202", "MUSC 2350", "PHYS 3602"],
+      "Summer 2": ["PHYS 3600"]
     },
     "Year 3": {
-      "Fall": [
-        "MUST 2431",
-        "MUSC 3541",
-        "PHYS 4115",
-        "EESC 2000"
-      ],
-      "Summer 2": [
-        "ENGW 3307",
-        "PHYS 4305"
-      ]
+      "Fall": ["MUST 2431", "MUSC 3541", "PHYS 4115", "EESC 2000"],
+      "Summer 2": ["ENGW 3307", "PHYS 4305"]
     },
     "Year 4": {
-      "Fall": [
-        "MUSC 3541",
-        "MUST 3540",
-        "MUST 4610"
-      ],
-      "Spring": [
-        "PHYS 5318",
-        "MUST 4611"
-      ]
+      "Fall": ["MUSC 3541", "MUST 3540", "MUST 4610"],
+      "Spring": ["PHYS 5318", "MUST 4611"]
     }
   },
   "Offerings schedule (subject to changes)": {}

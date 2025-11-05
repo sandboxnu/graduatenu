@@ -1,43 +1,24 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CRIM 1100",
-        "PHIL 1115",
-        "ENGW 1111",
-        "PHIL 1000"
-      ],
-      "Spring": [
-        "CRIM 1110",
-        "CRIM 1120",
-        "PHIL 2325",
-        "PHIL 2303"
-      ]
+      "Fall": ["CRIM 1100", "PHIL 1115", "ENGW 1111", "PHIL 1000"],
+      "Spring": ["CRIM 1110", "CRIM 1120", "PHIL 2325", "PHIL 2303"]
     },
     "Year 2": {
-      "Fall": [
-        "CRIM 3600",
-        "EESH 2000",
-        "PHIL 2330"
-      ]
+      "Fall": ["CRIM 3600", "EESH 2000", "PHIL 2330"]
     },
     "Year 3": {
-      "Spring": [
-        "CRIM 3700",
-        "CRIM 3000"
-      ]
+      "Spring": ["CRIM 3700", "CRIM 3000"]
     },
     "Year 4": {
-      "Spring": [
-        "PHIL 2301",
-        "CRIM 1400",
-        "CRIM 4000"
-      ]
+      "Spring": ["PHIL 2301", "CRIM 1400", "CRIM 4000"]
     },
     "Year 5": {
-      "Spring": [
-        "CRIM 4949"
-      ]
+      "Spring": ["CRIM 4949"]
     }
   }
 }

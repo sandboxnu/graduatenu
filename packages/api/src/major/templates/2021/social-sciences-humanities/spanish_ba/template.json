@@ -1,52 +1,24 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "MATH 1215",
-        "SPNS 2101",
-        "CLTR 1504",
-        "CLTR 1000"
-      ],
-      "Spring": [
-        "CLTR 1120",
-        "SPNS 2102",
-        "LING 1150",
-        "CLTR 1240"
-      ],
-      "Summer 1": [
-        "CLTR 1504",
-        "SPNS 3101"
-      ]
+      "Fall": ["ENGW 1111", "MATH 1215", "SPNS 2101", "CLTR 1504", "CLTR 1000"],
+      "Spring": ["CLTR 1120", "SPNS 2102", "LING 1150", "CLTR 1240"],
+      "Summer 1": ["CLTR 1504", "SPNS 3101"]
     },
     "Year 2": {
-      "Fall": [
-        "CLTR 1505",
-        "CLTR 3715",
-        "CLTR 3805"
-      ],
-      "Spring": [
-        "CLTR 2715",
-        "SPNS 3102",
-        "EESH 2000",
-        "LACS 1220"
-      ]
+      "Fall": ["CLTR 1505", "CLTR 3715", "CLTR 3805"],
+      "Spring": ["CLTR 2715", "SPNS 3102", "EESH 2000", "LACS 1220"]
     },
     "Year 3": {
-      "Spring": [
-        "SPNS 2900"
-      ],
-      "Summer 1": [
-        "ENGW 3315"
-      ]
+      "Spring": ["SPNS 2900"],
+      "Summer 1": ["ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "CLTR 4655",
-        "SPNS 3401",
-        "SPNS 3501",
-        "LANG 4700"
-      ]
+      "Spring": ["CLTR 4655", "SPNS 3401", "SPNS 3501", "LANG 4700"]
     }
   }
 }

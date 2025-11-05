@@ -1,22 +1,15 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/4/2025"
+  },
   "Sample Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "HIST 1000",
-        "HIST 1200",
-        "HIST 1201",
-        "ENGW 1111",
-        "ENGL 1400"
-      ],
-      "Spring": [
-        "ENGL 1160"
-      ]
+      "Fall": ["HIST 1000", "HIST 1200", "HIST 1201", "ENGW 1111", "ENGL 1400"],
+      "Spring": ["ENGL 1160"]
     },
     "Year 2": {
-      "Fall": [
-        "HIST 2301",
-        "HIST 2302"
-      ]
+      "Fall": ["HIST 2301", "HIST 2302"]
     },
     "Year 3": {},
     "Year 4": {},
