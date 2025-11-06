@@ -2,7 +2,8 @@
   "name": "Criminal Justice and Political Science, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -34,24 +35,30 @@
       "title": "Current Crime and Justice Issues",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1300,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1400,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1500,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1700,
-          "subject": "CRIM"
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "CRIM"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -61,29 +68,35 @@
       "title": "Understanding and Experiencing Criminal Justice Institutions and Systems",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2310,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2320,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2330,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2340,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2350,
-          "subject": "CRIM"
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "CRIM"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -93,39 +106,45 @@
       "title": "Crime Problems",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3010,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3030,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3040,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3050,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3060,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3070,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3540,
-          "subject": "CRIM"
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3010,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3030,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3040,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3050,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3060,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3070,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3540,
+              "subject": "CRIM"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -135,14 +154,20 @@
       "title": "Systemic Issues",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3110,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3120,
-          "subject": "CRIM"
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3110,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3120,
+              "subject": "CRIM"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -242,135 +267,198 @@
       "title": "Option A",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3600,
-          "subject": "CRIM"
+          "type": "SECTION",
+          "title": "Research Methods",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3600,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3700,
+              "subject": "CRIM"
+            }
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "COURSE",
-          "classId": 3700,
-          "subject": "CRIM"
-        },
-        {
-          "type": "RANGE",
-          "subject": "CRIM",
-          "idRangeStart": 3001,
-          "idRangeEnd": 5999,
-          "exceptions": []
-        },
-        {
-          "type": "XOM",
-          "numCreditsMin": 20,
-          "courses": [
+          "type": "SECTION",
+          "title": "Criminal Justice Electives",
+          "requirements": [
             {
               "type": "RANGE",
-              "subject": "POLS",
-              "idRangeStart": 2000,
+              "subject": "CRIM",
+              "idRangeStart": 3001,
               "idRangeEnd": 5999,
               "exceptions": []
             }
-          ]
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Political Science Electives",
+          "requirements": [
+            {
+              "type": "XOM",
+              "numCreditsMin": 20,
+              "courses": [
+                {
+                  "type": "RANGE",
+                  "subject": "POLS",
+                  "idRangeStart": 2000,
+                  "idRangeEnd": 5999,
+                  "exceptions": []
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
-      "minRequirementCount": 4
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
       "title": "Option B",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2399,
-          "subject": "POLS"
+          "type": "SECTION",
+          "title": "Research Methods",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2399,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "COURSE",
-          "classId": 2400,
-          "subject": "POLS"
-        },
-        {
-          "type": "RANGE",
-          "subject": "CRIM",
-          "idRangeStart": 3001,
-          "idRangeEnd": 5999,
-          "exceptions": []
-        },
-        {
-          "type": "XOM",
-          "numCreditsMin": 20,
-          "courses": [
+          "type": "SECTION",
+          "title": "Criminal Justice Electives",
+          "requirements": [
             {
               "type": "RANGE",
-              "subject": "POLS",
-              "idRangeStart": 2000,
+              "subject": "CRIM",
+              "idRangeStart": 3001,
               "idRangeEnd": 5999,
               "exceptions": []
             }
-          ]
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Political Science Electives",
+          "requirements": [
+            {
+              "type": "XOM",
+              "numCreditsMin": 20,
+              "courses": [
+                {
+                  "type": "RANGE",
+                  "subject": "POLS",
+                  "idRangeStart": 2000,
+                  "idRangeEnd": 5999,
+                  "exceptions": []
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
-      "minRequirementCount": 4
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
       "title": "Option C",
       "requirements": [
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Research Methods",
+          "requirements": [
             {
-              "subject": "CRIM",
-              "classId": 3600,
-              "description": "Criminal Justice Research Methods",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CRIM",
+                  "classId": 3600,
+                  "description": "Criminal Justice Research Methods",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "POLS",
+                  "classId": 2400,
+                  "description": "Quantitative Techniques",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "POLS",
-              "classId": 2400,
-              "description": "Quantitative Techniques",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CRIM",
+                  "classId": 3700,
+                  "description": "Analyzing and Using Data on Crime and Justice",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "POLS",
+                  "classId": 2399,
+                  "description": "Research Methods in Political Science",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "CRIM",
-              "classId": 3700,
-              "description": "Analyzing and Using Data on Crime and Justice",
-              "type": "COURSE"
-            },
-            {
-              "subject": "POLS",
-              "classId": 2399,
-              "description": "Research Methods in Political Science",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "RANGE",
-          "subject": "CRIM",
-          "idRangeStart": 3001,
-          "idRangeEnd": 5999,
-          "exceptions": []
-        },
-        {
-          "type": "XOM",
-          "numCreditsMin": 20,
-          "courses": [
+          "type": "SECTION",
+          "title": "Criminal Justice Electives",
+          "requirements": [
             {
               "type": "RANGE",
-              "subject": "POLS",
-              "idRangeStart": 2000,
+              "subject": "CRIM",
+              "idRangeStart": 3001,
               "idRangeEnd": 5999,
               "exceptions": []
             }
-          ]
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Political Science Electives",
+          "requirements": [
+            {
+              "type": "XOM",
+              "numCreditsMin": 20,
+              "courses": [
+                {
+                  "type": "RANGE",
+                  "subject": "POLS",
+                  "idRangeStart": 2000,
+                  "idRangeEnd": 5999,
+                  "exceptions": []
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
-      "minRequirementCount": 4
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
@@ -503,7 +591,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Campaigns and Elections",
         "requirements": [
           {
             "type": "COURSE",
@@ -520,7 +608,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Campaigns and Elections Electives",
+        "title": "Concentration in Campaigns and Elections: Campaigns and Elections Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -640,7 +728,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Course",
+        "title": "Concentration in Identity, Culture, and Politics",
         "requirements": [
           {
             "type": "COURSE",
@@ -652,7 +740,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Identity, Culture, and Politics: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -803,7 +891,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Requirement",
+        "title": "Concentration in Public Policy",
         "requirements": [
           {
             "type": "COURSE",
@@ -815,7 +903,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Public Policy: Electives",
         "requirements": [
           {
             "type": "XOM",
