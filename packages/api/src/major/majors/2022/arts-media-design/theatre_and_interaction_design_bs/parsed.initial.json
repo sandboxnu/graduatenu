@@ -2,7 +2,8 @@
   "name": "Theatre and Interaction Design, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -273,46 +274,59 @@
       "title": "Major Electives",
       "requirements": [
         {
-          "type": "XOM",
-          "numCreditsMin": 8,
-          "courses": [
+          "type": "SECTION",
+          "title": "Art and Design History",
+          "requirements": [
             {
-              "type": "AND",
+              "type": "XOM",
+              "numCreditsMin": 8,
               "courses": [
                 {
-                  "subject": "ARTH",
-                  "classId": 1001,
-                  "description": "Visual Intelligence",
-                  "type": "COURSE"
+                  "type": "AND",
+                  "courses": [
+                    {
+                      "subject": "ARTH",
+                      "classId": 1001,
+                      "description": "Visual Intelligence",
+                      "type": "COURSE"
+                    },
+                    {
+                      "subject": "ARTH",
+                      "classId": 1002,
+                      "description": "Seminar in Visual Intelligence",
+                      "type": "COURSE"
+                    }
+                  ]
                 },
                 {
-                  "subject": "ARTH",
-                  "classId": 1002,
-                  "description": "Seminar in Visual Intelligence",
-                  "type": "COURSE"
+                  "type": "COURSE",
+                  "classId": 2210,
+                  "subject": "ARTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2215,
+                  "subject": "ARTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3000,
+                  "subject": "ARTH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4000,
+                  "subject": "ARTH"
                 }
               ]
-            },
-            {
-              "type": "COURSE",
-              "classId": 2210,
-              "subject": "ARTH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2215,
-              "subject": "ARTH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3000,
-              "subject": "ARTH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4000,
-              "subject": "ARTH"
-            },
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Art and Design Elective",
+          "requirements": [
             {
               "type": "AND",
               "courses": [
@@ -392,10 +406,11 @@
               "classId": 5000,
               "subject": "ARTG"
             }
-          ]
+          ],
+          "minRequirementCount": 11
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",

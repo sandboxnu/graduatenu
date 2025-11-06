@@ -2,7 +2,8 @@
   "name": "Architectural Studies and Design, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 132,
   "yearVersion": 2022,
@@ -55,6 +56,12 @@
         }
       ],
       "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Architecture History Elective",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -227,6 +234,24 @@
     },
     {
       "type": "SECTION",
+      "title": "Design Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design History Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Art + Design Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Degree Capstone Project",
       "requirements": [
         {
@@ -236,6 +261,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Design Option",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
