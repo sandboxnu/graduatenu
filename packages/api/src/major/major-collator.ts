@@ -1,4 +1,10 @@
-import { Concentrations2, Major2, Template, Section } from "@graduate/common";
+import {
+  Concentrations2,
+  Major2,
+  Template,
+  Section,
+  TemplateMetadata,
+} from "@graduate/common";
 
 const MAJORS: Record<string, Record<string, Major2>> = {};
 const MAJOR_YEARS = new Set<string>();
@@ -194,13 +200,14 @@ async function collateMajors() {
           }
 
           // Get template name (the top-level key)
-          const templateName = Object.keys(templateJson)[0];
+          const templateName = Object.keys(templateJson)[1];
 
           // Create template object with raw template data (without enhancements)
           const template: Template = {
             name: templateName,
             yearVersion: parseInt(year),
             templateData: templateJson,
+            metadata: templateJson.metadata as TemplateMetadata,
           };
 
           // Store the template
