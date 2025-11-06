@@ -13,6 +13,7 @@ import { formatServiceCtx } from "../utils";
 import {
   EmailAlreadyExists,
   EmailNotConfirmed,
+  MustUseHuskyEmail,
   NoSuchEmail,
   WeakPassword,
 } from "../student/student.errors";
@@ -42,13 +43,14 @@ export class AuthService {
   /** Registers a new student in the db and logs the student in. */
   async register(
     createStudentDto: SignUpStudentDto
-  ): Promise<Student | EmailAlreadyExists | WeakPassword> {
+  ): Promise<Student | EmailAlreadyExists | MustUseHuskyEmail | WeakPassword> {
     // create a new student
     const newStudent = await this.studentService.create(createStudentDto);
 
     if (
       newStudent instanceof EmailAlreadyExists ||
-      newStudent instanceof WeakPassword
+      newStudent instanceof WeakPassword ||
+      newStudent instanceof MustUseHuskyEmail
     ) {
       return newStudent;
     }

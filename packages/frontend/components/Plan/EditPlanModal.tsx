@@ -66,6 +66,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const router = useRouter();
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -122,6 +123,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const majorName = watch("major");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
+  const editMajor = watch("major");
+  const currentMajor = plan.major;
+  const isMajorChanged = currentMajor !== editMajor;
 
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
@@ -144,7 +148,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       catalogYear &&
       majorName &&
       (!isConcentrationRequired || concentration) &&
-      (!isValidatedMajor ? agreeToBetaMajor : true)) ||
+      (isValidatedMajor || !isMajorChanged || agreeToBetaMajor)) ||
     // Valid plan for no major selected
     (title && isNoMajorSelected);
 
@@ -281,29 +285,18 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       onChangeSideEffect={(val: string | null) => {
                         const newYear = val ? parseInt(val, 10) : null;
                         if (newYear !== catalogYear) {
-                          if (
-                            val &&
-                            supportedMajorsData?.supportedMajors?.[val]?.[
-                              majorName
-                            ]
-                          ) {
-                            // we can keep the major, but we should check the concentration
-                            if (
-                              !supportedMajorsData?.supportedMajors?.[val]?.[
-                                majorName
-                              ]?.concentrations?.includes(concentration)
-                            ) {
-                              setValue("concentration", "");
-                            }
-                          } else {
-                            setValue("major", "");
-                          }
+                          setValue("major", "");
+                          setValue("concentration", "");
+                          setValue("minor", "");
+                          setValue("agreeToBetaMajor", false);
                         }
                       }}
                       rules={{ required: "Catalog year is required." }}
                       isNumeric
                     />
                     <PlanSelect
+                      // key so the drop down visully resets
+                      key={`major-${catalogYear}`}
                       label="Major"
                       placeholder="Select a Major"
                       name="major"
@@ -314,6 +307,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       )}
                       onChangeSideEffect={() => {
                         setValue("concentration", "");
+                        setValue("agreeToBetaMajor", false);
                       }}
                       rules={{ required: "Major is required." }}
                       isSearchable
@@ -352,20 +346,23 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       isSearchable
                       useFuzzySearch
                     />
-                    {majorName && !isValidatedMajor && (
-                      <Flex alignItems="center">
-                        <Checkbox
-                          mr="md"
-                          {...register("agreeToBetaMajor", {
-                            required: "You must agree to continue",
-                          })}
-                        />
-                        <Text>
-                          I understand that I am selecting a beta major and that
-                          the requirements may not be accurate.
-                        </Text>
-                      </Flex>
-                    )}
+                    {editMajor &&
+                      isMajorChanged &&
+                      majorName &&
+                      !isValidatedMajor && (
+                        <Flex alignItems="center">
+                          <Checkbox
+                            mr="md"
+                            {...register("agreeToBetaMajor", {
+                              required: "You must agree to continue",
+                            })}
+                          />
+                          <Text>
+                            I understand that I am selecting a beta major and
+                            that the requirements may not be accurate.
+                          </Text>
+                        </Flex>
+                      )}
                   </>
                 )}
               </VStack>
