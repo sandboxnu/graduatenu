@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, One Co-op in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -18,10 +22,7 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "MATH 2321",
-        "ME 2350"
-      ]
+      "Summer 1": ["MATH 2321", "ME 2350"]
     },
     "Year 2": {
       "Fall": [
@@ -49,10 +50,7 @@
       ]
     },
     "Year 3": {
-      "Fall": [
-        "BIOE 3210",
-        "ME 3475"
-      ],
+      "Fall": ["BIOE 3210", "ME 3475"],
       "Spring": [
         "BIOE 3380",
         "BIOE 5640",
@@ -64,11 +62,7 @@
         "ME 2340",
         "ME 2341"
       ],
-      "Summer 1": [
-        "ME 4550",
-        "MEIE 4701",
-        "ME 3475"
-      ]
+      "Summer 1": ["ME 4550", "MEIE 4701", "ME 3475"]
     },
     "Year 4": {
       "Spring": [
@@ -80,17 +74,10 @@
         "ME 3456",
         "ME 4570"
       ],
-      "Summer 1": [
-        "ENGW 3302",
-        "MEIE 4701",
-        "ME 4550"
-      ]
+      "Summer 1": ["ENGW 3302", "MEIE 4701", "ME 4550"]
     },
     "Year 5": {
-      "Spring": [
-        "ENCP 3000",
-        "MEIE 4702"
-      ]
+      "Spring": ["ENCP 3000", "MEIE 4702"]
     }
   },
   "Five Years, Three Co-ops in Summer 2/Fall": {
@@ -133,35 +120,15 @@
       ]
     },
     "Year 3": {
-      "Spring": [
-        "BIOE 2355",
-        "BIOE 3210",
-        "ME 2340",
-        "ME 2341",
-        "ME 3455"
-      ],
-      "Summer 1": [
-        "ME 3475"
-      ]
+      "Spring": ["BIOE 2355", "BIOE 3210", "ME 2340", "ME 2341", "ME 3455"],
+      "Summer 1": ["ME 3475"]
     },
     "Year 4": {
-      "Spring": [
-        "BIOE 3380",
-        "BIOE 5640",
-        "ME 3456",
-        "ME 4570"
-      ],
-      "Summer 1": [
-        "ENGW 3302",
-        "MEIE 4701",
-        "ME 4550"
-      ]
+      "Spring": ["BIOE 3380", "BIOE 5640", "ME 3456", "ME 4570"],
+      "Summer 1": ["ENGW 3302", "MEIE 4701", "ME 4550"]
     },
     "Year 5": {
-      "Spring": [
-        "ENCP 3000",
-        "MEIE 4702"
-      ]
+      "Spring": ["ENCP 3000", "MEIE 4702"]
     }
   }
 }

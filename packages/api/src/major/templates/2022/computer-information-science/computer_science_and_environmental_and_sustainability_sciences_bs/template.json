@@ -1,100 +1,44 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study:": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111",
-        "ENVR 1400"
-      ],
-      "Spring": [
-        "CS 2510",
-        "CS 3200",
-        "ENVR 2200"
-      ],
-      "Summer 1": [
-        "CS 3500"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "ENVR 1400"],
+      "Spring": ["CS 2510", "CS 3200", "ENVR 2200"],
+      "Summer 1": ["CS 3500"]
     },
     "Year 2": {
-      "Fall": [
-        "CHEM 1211",
-        "CS 3000",
-        "EEMB 2302",
-        "ENVR 2515"
-      ],
-      "Spring": [
-        "CHEM 1214",
-        "CS 1210",
-        "MATH 1251"
-      ],
-      "Summer 1": [
-        "MATH 1252"
-      ]
+      "Fall": ["CHEM 1211", "CS 3000", "EEMB 2302", "ENVR 2515"],
+      "Spring": ["CHEM 1214", "CS 1210", "MATH 1251"],
+      "Summer 1": ["MATH 1252"]
     },
     "Year 3": {
-      "Spring": [
-        "CS 3800"
-      ],
-      "Summer 1": [
-        "ENGW 3302",
-        "MATH 3081"
-      ]
+      "Spring": ["CS 3800"],
+      "Summer 1": ["ENGW 3302", "MATH 3081"]
     },
     "Year 4": {
-      "Spring": [
-        "CS 4500"
-      ]
+      "Spring": ["CS 4500"]
     }
   },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111",
-        "ENVR 1400"
-      ],
-      "Spring": [
-        "CS 2510",
-        "CS 3200",
-        "ENVR 2200"
-      ],
-      "Summer 1": [
-        "CS 3500"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "ENVR 1400"],
+      "Spring": ["CS 2510", "CS 3200", "ENVR 2200"],
+      "Summer 1": ["CS 3500"]
     },
     "Year 2": {
-      "Fall": [
-        "CHEM 1211",
-        "CS 3000",
-        "EEMB 2302",
-        "ENVR 2515"
-      ],
-      "Spring": [
-        "CHEM 1214",
-        "CS 1210",
-        "MATH 1251"
-      ],
-      "Summer 1": [
-        "MATH 1252"
-      ]
+      "Fall": ["CHEM 1211", "CS 3000", "EEMB 2302", "ENVR 2515"],
+      "Spring": ["CHEM 1214", "CS 1210", "MATH 1251"],
+      "Summer 1": ["MATH 1252"]
     },
     "Year 3": {
-      "Spring": [
-        "CS 3800"
-      ],
-      "Summer 1": [
-        "ENGW 3302",
-        "MATH 3081"
-      ]
+      "Spring": ["CS 3800"],
+      "Summer 1": ["ENGW 3302", "MATH 3081"]
     },
     "Year 4": {
-      "Spring": [
-        "CS 4500"
-      ]
+      "Spring": ["CS 4500"]
     }
   }
 }

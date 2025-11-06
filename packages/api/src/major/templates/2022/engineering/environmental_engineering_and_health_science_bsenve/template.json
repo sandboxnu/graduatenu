@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, 1 Co-op Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -17,10 +21,7 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHTH 1260"
-      ]
+      "Summer 1": ["MATH 2321", "PHTH 1260"]
     },
     "Year 2": {
       "Fall": [
@@ -38,18 +39,10 @@
         "ENCP 2000",
         "PHTH 2414"
       ],
-      "Summer 1": [
-        "MATH 2341",
-        "PHTH 2350"
-      ]
+      "Summer 1": ["MATH 2341", "PHTH 2350"]
     },
     "Year 3": {
-      "Spring": [
-        "CIVE 3435",
-        "GE 3300",
-        "HLTH 5450",
-        "PHTH 4120"
-      ]
+      "Spring": ["CIVE 3435", "GE 3300", "HLTH 5450", "PHTH 4120"]
     },
     "Year 4": {
       "Fall": [
@@ -60,12 +53,7 @@
         "ENGW 3302",
         "PHTH 4540"
       ],
-      "Spring": [
-        "CIVE 4765",
-        "CIVE 5300",
-        "CIVE 5301",
-        "PHTH 5214"
-      ]
+      "Spring": ["CIVE 4765", "CIVE 5300", "CIVE 5301", "PHTH 5214"]
     }
   },
   "Five Years, 3 Co-ops Summer 2/Fall": {
@@ -86,10 +74,7 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHTH 1260"
-      ]
+      "Summer 1": ["MATH 2321", "PHTH 1260"]
     },
     "Year 2": {
       "Fall": [
@@ -107,18 +92,10 @@
         "ENCP 2000",
         "PHTH 2414"
       ],
-      "Summer 1": [
-        "MATH 2341",
-        "PHTH 2350"
-      ]
+      "Summer 1": ["MATH 2341", "PHTH 2350"]
     },
     "Year 3": {
-      "Spring": [
-        "CIVE 3435",
-        "GE 3300",
-        "HLTH 5450",
-        "PHTH 4540"
-      ]
+      "Spring": ["CIVE 3435", "GE 3300", "HLTH 5450", "PHTH 4540"]
     },
     "Year 4": {
       "Spring": [
@@ -131,12 +108,7 @@
       ]
     },
     "Year 5": {
-      "Spring": [
-        "CIVE 4765",
-        "CIVE 5300",
-        "CIVE 5301",
-        "PHTH 5214"
-      ]
+      "Spring": ["CIVE 4765", "CIVE 5300", "CIVE 5301", "PHTH 5214"]
     }
   }
 }

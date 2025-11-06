@@ -1,152 +1,72 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "MATH 1215",
-        "ENGW 1111",
-        "PHIL 1101"
-      ]
+      "Fall": ["MATH 1215", "ENGW 1111", "PHIL 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "PHIL 2325",
-        "EESH 2000"
-      ],
-      "Spring": [
-        "PHIL 2330",
-        "EESH 2000"
-      ]
+      "Fall": ["PHIL 2325", "EESH 2000"],
+      "Spring": ["PHIL 2330", "EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "PHIL 1115",
-        "ENGW 3315",
-        "PHIL 3435"
-      ],
-      "Fall": [
-        "PHIL 2330"
-      ]
+      "Spring": ["PHIL 1115", "ENGW 3315", "PHIL 3435"],
+      "Fall": ["PHIL 2330"]
     },
     "Year 4": {
-      "Fall": [
-        "PHIL 1115",
-        "ENGW 3315",
-        "PHIL 3435"
-      ],
-      "Spring": [
-        "PHIL 6962"
-      ]
+      "Fall": ["PHIL 1115", "ENGW 3315", "PHIL 3435"],
+      "Spring": ["PHIL 6962"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "MATH 1215",
-        "ENGW 1111",
-        "PHIL 1101"
-      ]
+      "Fall": ["MATH 1215", "ENGW 1111", "PHIL 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "PHIL 2325",
-        "EESH 2000"
-      ],
-      "Spring": [
-        "PHIL 2330",
-        "EESH 2000"
-      ]
+      "Fall": ["PHIL 2325", "EESH 2000"],
+      "Spring": ["PHIL 2330", "EESH 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "PHIL 2330"
-      ],
-      "Spring": [
-        "PHIL 1115",
-        "PHIL 3435",
-        "ENGW 3315"
-      ]
+      "Fall": ["PHIL 2330"],
+      "Spring": ["PHIL 1115", "PHIL 3435", "ENGW 3315"]
     },
     "Year 4": {
-      "Fall": [
-        "PHIL 1115",
-        "ENGW 3315",
-        "PHIL 3435"
-      ],
-      "Spring": [
-        "PHIL 6962"
-      ]
+      "Fall": ["PHIL 1115", "ENGW 3315", "PHIL 3435"],
+      "Spring": ["PHIL 6962"]
     }
   },
   "Philosophy with Concentration in Law and Ethics:  Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "MATH 1215",
-        "ENGW 1111",
-        "PHIL 1101"
-      ]
+      "Fall": ["MATH 1215", "ENGW 1111", "PHIL 1101"]
     },
     "Year 2": {
-      "Spring": [
-        "PHIL 2330",
-        "EESH 2000"
-      ],
-      "Fall": [
-        "PHIL 2325",
-        "EESH 2000"
-      ]
+      "Spring": ["PHIL 2330", "EESH 2000"],
+      "Fall": ["PHIL 2325", "EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "PHIL 1115",
-        "PHIL 3435",
-        "ENGW 3315"
-      ],
-      "Fall": [
-        "PHIL 2330"
-      ]
+      "Spring": ["PHIL 1115", "PHIL 3435", "ENGW 3315"],
+      "Fall": ["PHIL 2330"]
     },
     "Year 4": {
-      "Fall": [
-        "PHIL 1115",
-        "PHIL 3435",
-        "ENGW 3315"
-      ]
+      "Fall": ["PHIL 1115", "PHIL 3435", "ENGW 3315"]
     }
   },
   "Philosophy with Concentration in Religious Studies: Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "MATH 1215",
-        "ENGW 1111",
-        "PHIL 1101"
-      ]
+      "Fall": ["MATH 1215", "ENGW 1111", "PHIL 1101"]
     },
     "Year 2": {
-      "Spring": [
-        "PHIL 2330",
-        "EESH 2000"
-      ],
-      "Fall": [
-        "PHIL 2325",
-        "EESH 2000"
-      ]
+      "Spring": ["PHIL 2330", "EESH 2000"],
+      "Fall": ["PHIL 2325", "EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "PHIL 1115",
-        "PHIL 3435",
-        "ENGW 3315"
-      ],
-      "Fall": [
-        "PHIL 2330"
-      ]
+      "Spring": ["PHIL 1115", "PHIL 3435", "ENGW 3315"],
+      "Fall": ["PHIL 2330"]
     },
     "Year 4": {
-      "Fall": [
-        "PHIL 1115",
-        "PHIL 3435",
-        "ENGW 3315"
-      ]
+      "Fall": ["PHIL 1115", "PHIL 3435", "ENGW 3315"]
     }
   }
 }

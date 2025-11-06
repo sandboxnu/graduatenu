@@ -1,14 +1,12 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CLTR 1000",
-        "ENGL 1160",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "ENGL 1400"
-      ]
+      "Fall": ["CLTR 1000", "ENGL 1160", "ENGW 1111"],
+      "Spring": ["ENGL 1400"]
     },
     "Year 2": {},
     "Year 3": {},

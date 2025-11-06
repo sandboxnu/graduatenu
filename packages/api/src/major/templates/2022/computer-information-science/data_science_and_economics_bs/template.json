@@ -1,96 +1,42 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Pattern:": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ECON 1115",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "CS 2510",
-        "CS 3200",
-        "ECON 1116",
-        "MATH 1231"
-      ],
-      "Summer 1": [
-        "CS 3500",
-        "ECON 2315"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ECON 1115", "ENGW 1111"],
+      "Spring": ["CS 2510", "CS 3200", "ECON 1116", "MATH 1231"],
+      "Summer 1": ["CS 3500", "ECON 2315"]
     },
     "Year 2": {
-      "Fall": [
-        "DS 3000",
-        "ECON 2350",
-        "DS 4200"
-      ],
-      "Spring": [
-        "CS 1210",
-        "ECON 2316",
-        "DS 4300"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ]
+      "Fall": ["DS 3000", "ECON 2350", "DS 4200"],
+      "Spring": ["CS 1210", "ECON 2316", "DS 4300"],
+      "Summer 1": ["ENGW 3302"]
     },
     "Year 3": {
-      "Spring": [
-        "DS 4400",
-        "ECON 2560"
-      ]
+      "Spring": ["DS 4400", "ECON 2560"]
     },
     "Year 4": {
-      "Spring": [
-        "ECON 4692"
-      ]
+      "Spring": ["ECON 4692"]
     }
   },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ECON 1115",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "CS 2510",
-        "CS 3200",
-        "ECON 1116",
-        "MATH 1231"
-      ],
-      "Summer 1": [
-        "CS 3500",
-        "ECON 2315"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ECON 1115", "ENGW 1111"],
+      "Spring": ["CS 2510", "CS 3200", "ECON 1116", "MATH 1231"],
+      "Summer 1": ["CS 3500", "ECON 2315"]
     },
     "Year 2": {
-      "Fall": [
-        "DS 3000",
-        "ECON 2350",
-        "DS 4200"
-      ],
-      "Spring": [
-        "CS 1210",
-        "ECON 2316",
-        "DS 4300"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ]
+      "Fall": ["DS 3000", "ECON 2350", "DS 4200"],
+      "Spring": ["CS 1210", "ECON 2316", "DS 4300"],
+      "Summer 1": ["ENGW 3302"]
     },
     "Year 3": {
-      "Spring": [
-        "DS 4400",
-        "ECON 2560"
-      ]
+      "Spring": ["DS 4400", "ECON 2560"]
     },
     "Year 4": {
-      "Spring": [
-        "ECON 4692"
-      ]
+      "Spring": ["ECON 4692"]
     }
   }
 }

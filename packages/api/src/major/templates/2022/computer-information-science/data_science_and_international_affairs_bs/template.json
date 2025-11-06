@@ -1,50 +1,24 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "DS 2000",
-        "ENGW 1111",
-        "INTL 1101"
-      ],
-      "Spring": [
-        "ANTH 1101",
-        "DS 2500",
-        "POLS 1160"
-      ],
-      "Summer 1": [
-        "CS 3200"
-      ],
-      "Summer 2": [
-        "MATH 1341"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "DS 2000", "ENGW 1111", "INTL 1101"],
+      "Spring": ["ANTH 1101", "DS 2500", "POLS 1160"],
+      "Summer 1": ["CS 3200"],
+      "Summer 2": ["MATH 1341"]
     },
     "Year 2": {
-      "Fall": [
-        "DS 3000",
-        "DS 3500"
-      ],
-      "Spring": [
-        "CS 1210",
-        "DS 4200",
-        "ECON 2350",
-        "INTL 2718"
-      ]
+      "Fall": ["DS 3000", "DS 3500"],
+      "Spring": ["CS 1210", "DS 4200", "ECON 2350", "INTL 2718"]
     },
     "Year 3": {
-      "Spring": [
-        "DS 4300",
-        "ENGW 3302",
-        "INTL 3400"
-      ]
+      "Spring": ["DS 4300", "ENGW 3302", "INTL 3400"]
     },
     "Year 4": {
-      "Spring": [
-        "CY 4170",
-        "DS 4400",
-        "INTL 4700"
-      ]
+      "Spring": ["CY 4170", "DS 4400", "INTL 4700"]
     }
   }
 }

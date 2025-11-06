@@ -1,24 +1,16 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ENVR 1200",
-        "CHEM 1161",
-        "ENVR 1400"
-      ],
-      "Spring": [
-        "ENVR 2515",
-        "CHEM 2161",
-        "EEMB 2302"
-      ]
+      "Fall": ["ENVR 1200", "CHEM 1161", "ENVR 1400"],
+      "Spring": ["ENVR 2515", "CHEM 2161", "EEMB 2302"]
     },
     "Year 2": {
-      "Fall": [
-        "CHEM 2311"
-      ],
-      "Spring": [
-        "CHEM 2313"
-      ]
+      "Fall": ["CHEM 2311"],
+      "Spring": ["CHEM 2313"]
     },
     "Year 3": {},
     "Year 4": {}

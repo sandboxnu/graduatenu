@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, One Co-op in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -17,20 +21,10 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHYS 1155",
-        "PHYS 1156",
-        "PHYS 1157"
-      ]
+      "Summer 1": ["MATH 2321", "PHYS 1155", "PHYS 1156", "PHYS 1157"]
     },
     "Year 2": {
-      "Fall": [
-        "CHME 2310",
-        "CHME 2320",
-        "CIVE 2334",
-        "MATH 2341"
-      ],
+      "Fall": ["CHME 2310", "CHME 2320", "CIVE 2334", "MATH 2341"],
       "Spring": [
         "CHME 3312",
         "CIVE 2335",
@@ -78,11 +72,7 @@
       ]
     },
     "Year 5": {
-      "Spring": [
-        "CHME 4512",
-        "CHME 4703",
-        "CHME 4705"
-      ]
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705"]
     }
   },
   "Five Years, Three Co-ops in Summer 2/Fall": {
@@ -103,20 +93,10 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHYS 1155",
-        "PHYS 1156",
-        "PHYS 1157"
-      ]
+      "Summer 1": ["MATH 2321", "PHYS 1155", "PHYS 1156", "PHYS 1157"]
     },
     "Year 2": {
-      "Fall": [
-        "CHME 2310",
-        "CHME 2320",
-        "CIVE 2334",
-        "MATH 2341"
-      ],
+      "Fall": ["CHME 2310", "CHME 2320", "CIVE 2334", "MATH 2341"],
       "Spring": [
         "CHME 3312",
         "CIVE 2335",
@@ -147,11 +127,7 @@
       ]
     },
     "Year 5": {
-      "Spring": [
-        "CHME 4512",
-        "CHME 4703",
-        "CHME 4705"
-      ]
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705"]
     }
   }
 }
