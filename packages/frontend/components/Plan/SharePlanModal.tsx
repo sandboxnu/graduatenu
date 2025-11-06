@@ -1,4 +1,4 @@
-import { CopyIcon, DownloadIcon } from "@chakra-ui/icons";
+import { CheckIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
@@ -14,11 +14,11 @@ import {
   Spinner,
   Tooltip,
   useDisclosure,
-  IconButton,
 } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
 import { useState } from "react";
 import { BlueButton } from "../Button";
+import { CopyIcon, DownloadIcon } from "@chakra-ui/icons";
 
 interface SharePlanModalProps {
   plan: PlanModel<string>;
@@ -33,9 +33,11 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
   const [shareUrl, setShareUrl] = useState<string | null>(null);
   const [planCode, setPlanCode] = useState<string | null>(null);
   const [expiresAt, setExpiresAt] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const createSharingLink = async () => {
     try {
+      setCopied(false);
       setLoading(true);
       const response = await fetch("/api/plans/share", {
         method: "POST",
@@ -56,6 +58,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
 
   const copyLink = async () => {
     if (!shareUrl) return;
+    setCopied(true);
     await navigator.clipboard.writeText(shareUrl);
   };
 
@@ -103,15 +106,29 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                     mb="2"
                     mr="4"
                   />
-                  <Button
-                    leftIcon={<CopyIcon />}
-                    variant="solid"
-                    size="md"
-                    borderRadius="lg"
-                    onClick={copyLink}
-                  >
-                    Copy Link
-                  </Button>
+                  {!copied ? (
+                    <Button
+                      leftIcon={<CopyIcon />}
+                      variant="solid"
+                      size="md"
+                      borderRadius="lg"
+                      onClick={copyLink}
+                    >
+                      Copy Link
+                    </Button>
+                  ) : (
+                    <Button
+                      leftIcon={<CheckIcon />}
+                      variant="solid"
+                      size="md"
+                      borderRadius="lg"
+                      onClick={copyLink}
+                      bg="primary.red.800"
+                      color="white"
+                    >
+                      Copied
+                    </Button>
+                  )}
                 </Flex>
 
                 <Text fontSize="sm" align="center" mt="4px">
