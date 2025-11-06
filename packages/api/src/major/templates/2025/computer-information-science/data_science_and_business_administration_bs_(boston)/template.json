@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["CS 3200", "DS 2500", "ECON 1115", "MATH 1341"],
+      "Summer 1": ["ACCT 2301"],
+      "Summer 2": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["DS 3500", "INTB 1203", "MGSC 2301", "DS 3000"],
+      "Spring": ["CS 1210", "DS 4300", "DS 4200"],
+      "Summer 1": ["MKTG 2201"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4400"],
+      "Summer 1": ["ENGW 3302", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420", "MKTG 4604"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["CS 3200", "DS 2500", "ECON 1115", "MATH 1341"],
+      "Summer 1": ["ACCT 2301"],
+      "Summer 2": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["DS 3500", "INTB 1203", "MGSC 2301", "DS 3000"],
+      "Spring": ["CS 1210", "DS 4300", "DS 4200"],
+      "Summer 1": ["MKTG 2201"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4400"],
+      "Summer 1": ["ENGW 3302", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420", "MKTG 4604"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["CS 3200", "DS 2500", "ECON 1115", "MATH 1341"],
+      "Summer 1": ["ACCT 2301"],
+      "Summer 2": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "DS 3500", "INTB 1203", "MGSC 2301", "DS 3000"],
+      "Summer 2": ["MKTG 2201"]
+    },
+    "Year 3": {
+      "Fall": ["DS 4200", "DS 4300"],
+      "Summer 2": ["ORGB 3201"]
+    },
+    "Year 4": {
+      "Fall": ["DS 4400", "ENGW 3302"],
+      "Spring": ["DS 4420", "MKTG 4604"]
+    }
+  }
+}

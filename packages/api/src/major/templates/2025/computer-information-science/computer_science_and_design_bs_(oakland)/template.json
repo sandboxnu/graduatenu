@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["ARTG 1001", "ARTF 1220", "CS 1200", "CS 1800", "CS 2000"],
+      "Spring": ["ARTG 1270", "ARTG 1290", "CS 2100", "ENGW 1111", "EEAM 2000"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["ARTG 2262", "CS 1210", "CS 3000"]
+    },
+    "Year 3": {
+      "Fall": ["CS 2484"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4530"],
+      "Spring": ["ARTG 4550"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ARTG 1001", "ARTF 1220", "CS 1200", "CS 1800", "CS 2000"],
+      "Spring": ["ARTG 1270", "ARTG 1290", "CS 2100", "ENGW 1111", "EEAM 2000"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["ARTG 2262", "CS 1210", "CS 3000"]
+    },
+    "Year 3": {
+      "Fall": ["CS 2484"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4530"],
+      "Spring": ["ARTG 4550"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ARTG 1001", "ARTF 1220", "CS 1200", "CS 1800", "CS 2000"],
+      "Spring": ["ARTG 1270", "ARTG 1290", "CS 2100", "ENGW 1111", "EEAM 2000"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["ARTG 2262", "CS 3000"],
+      "Spring": ["CS 1210", "CS 2484"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4530"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["ARTG 4550"]
+    }
+  }
+}

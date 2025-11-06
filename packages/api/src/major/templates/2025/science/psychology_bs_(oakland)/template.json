@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "INSC 1000", "PSYC 1101", "PSYC 1214"]
+    },
+    "Year 2": {
+      "Fall": ["EESC 2000", "PSYC 2320"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "INSC 1000", "PSYC 1101", "PSYC 1214"]
+    },
+    "Year 2": {
+      "Fall": ["EESC 2000", "PSYC 2320"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "INSC 1000", "PSYC 1101", "PSYC 1214"]
+    },
+    "Year 2": {
+      "Fall": ["EESC 2000", "PSYC 2320"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["ENGW 3315"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "INSC 1000", "PSYC 1101", "PSYC 1214"]
+    },
+    "Year 2": {
+      "Fall": ["PSYC 2320"],
+      "Spring": ["EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315"]
+    },
+    "Year 4": {},
+    "Year 5": {}
+  },
+  "Five Years, Three Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "INSC 1000", "PSYC 1101", "PSYC 1214"]
+    },
+    "Year 2": {
+      "Fall": ["EESC 2000", "PSYC 2320"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3315"]
+    },
+    "Year 4": {},
+    "Year 5": {}
+  }
+}

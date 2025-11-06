@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["MATH 1341", "ENGW 1111", "PHYS 1161", "PHYS 1162", "MATH 1000"],
+      "Spring": ["MATH 1342", "PHYS 1165", "PHYS 1166"],
+      "Summer 1": ["MATH 2321", "MATH 2341"],
+      "Summer 2": ["MATH 2331", "MATH 3081"]
+    },
+    "Year 2": {
+      "Summer 2": ["PHYS 3600"],
+      "Fall": ["PHYS 2303", "PHYS 2371", "PHYS 2372", "EESC 2000"]
+    },
+    "Year 3": {
+      "Fall": ["PHYS 3601", "MATH 3000", "MATH 3175"]
+    },
+    "Year 4": {
+      "Fall": ["PHYS 3602", "PHYS 4305", "MATH 4545"],
+      "Spring": ["ENGW 3315", "MATH 4025"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["MATH 1341", "ENGW 1111", "PHYS 1161", "PHYS 1162", "MATH 1000"],
+      "Spring": ["MATH 1342", "PHYS 1165", "PHYS 1166"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "PHYS 2303", "PHYS 2371", "PHYS 2372"],
+      "Spring": ["MATH 2341", "MATH 2331", "EESC 2000", "PHYS 3601"]
+    },
+    "Year 3": {
+      "Spring": ["PHYS 3602", "PHYS 4305", "MATH 3000"],
+      "Summer 1": ["PHYS 3600", "MATH 3081"]
+    },
+    "Year 4": {
+      "Spring": ["MATH 3175", "ENGW 3315"]
+    },
+    "Year 5": {
+      "Spring": ["MATH 4025", "MATH 4545"]
+    }
+  },
+  "Physics Course Offering Schedule": {}
+}

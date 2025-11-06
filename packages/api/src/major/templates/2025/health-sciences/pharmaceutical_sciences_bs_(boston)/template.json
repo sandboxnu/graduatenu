@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Default Plan": {
+    "Year 1": {
+      "Fall": [
+        "BIOL 1111",
+        "BIOL 1112",
+        "ENGW 1111",
+        "MATH 1241",
+        "PHMD 1000",
+        "PHSC 1001"
+      ],
+      "Spring": [
+        "BIOL 1113",
+        "BIOL 1114",
+        "CHEM 1161",
+        "CHEM 1162",
+        "CHEM 1163",
+        "PHSC 2650",
+        "PHTH 2210"
+      ]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOL 2301",
+        "BIOL 2302",
+        "CHEM 2311",
+        "CHEM 2312",
+        "PHSC 2100",
+        "PHYS 1145",
+        "PHYS 1146"
+      ],
+      "Spring": [
+        "BIOL 3611",
+        "BIOL 3612",
+        "CHEM 2313",
+        "CHEM 2314",
+        "PHSC 2000",
+        "PHYS 1147",
+        "PHYS 1148"
+      ],
+      "Summer 1": ["PHSC 2301", "PHSC 2302"]
+    },
+    "Year 3": {
+      "Spring": [
+        "PHSC 2330",
+        "PHSC 3411",
+        "PHSC 3419",
+        "PHSC 3801",
+        "PHSC 4995"
+      ]
+    },
+    "Year 4": {
+      "Fall": ["ENGW 3306", "PHSC 2400", "PHSC 3802", "PHSC 4997"],
+      "Spring": ["PHSC 3430", "PHSC 4998"]
+    }
+  }
+}

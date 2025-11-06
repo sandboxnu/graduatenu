@@ -1,0 +1,237 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1171", "PHYS 1172", "PHYS 1173"],
+      "Summer 1": ["PHYS 1155", "PHYS 1156", "PHYS 1157"]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOE 2355",
+        "BIOE 2365",
+        "BIOE 2366",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 2341"
+      ],
+      "Spring": [
+        "BIOE 2350",
+        "BIOL 2301",
+        "BIOL 2302",
+        "CHEM 2311",
+        "CHEM 2312",
+        "MATH 2321",
+        "ENCP 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": ["BIOE 3380", "BIOE 5430", "CHEM 2313", "CHEM 2314"],
+      "Spring": [
+        "BIOE 3210",
+        "BIOE 5410",
+        "BIOE 5420",
+        "BIOL 3611",
+        "BIOL 3612"
+      ],
+      "Summer 1": ["BIOE 3310", "BIOE 4790"]
+    },
+    "Year 4": {
+      "Spring": ["BIOE 4792", "ENCP 3000", "ENGW 3302"]
+    }
+  },
+  "Four Years, One Co-op in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1171", "PHYS 1172", "PHYS 1173"],
+      "Summer 1": ["PHYS 1155", "PHYS 1156", "PHYS 1157"]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOE 2355",
+        "BIOE 2365",
+        "BIOE 2366",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 2341"
+      ],
+      "Spring": [
+        "BIOE 2350",
+        "BIOL 2301",
+        "BIOL 2302",
+        "CHEM 2311",
+        "CHEM 2312",
+        "MATH 2321",
+        "ENCP 2000"
+      ]
+    },
+    "Year 3": {
+      "Fall": ["BIOE 3380", "BIOE 5430", "CHEM 2313", "CHEM 2314"],
+      "Spring": [
+        "BIOE 3210",
+        "BIOE 5410",
+        "BIOE 5420",
+        "BIOL 3611",
+        "BIOL 3612"
+      ],
+      "Summer 1": ["BIOE 3310", "BIOE 4790"]
+    },
+    "Year 4": {
+      "Spring": ["BIOE 4792", "ENCP 3000", "ENGW 3302"]
+    }
+  },
+  "Four Years, One Co-op in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1171", "PHYS 1172", "PHYS 1173"],
+      "Summer 1": ["PHYS 1155", "PHYS 1156", "PHYS 1157"]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOE 2355",
+        "BIOE 2365",
+        "BIOE 2366",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 2341",
+        "ENCP 2000"
+      ],
+      "Spring": [
+        "BIOE 2350",
+        "BIOL 2301",
+        "BIOL 2302",
+        "CHEM 2311",
+        "CHEM 2312",
+        "MATH 2321"
+      ]
+    },
+    "Year 3": {
+      "Fall": ["BIOE 3310", "BIOE 3380", "BIOE 5410", "CHEM 2313", "CHEM 2314"],
+      "Summer 2": ["BIOE 3210", "BIOE 4790"]
+    },
+    "Year 4": {
+      "Fall": [
+        "BIOE 4792",
+        "BIOE 5430",
+        "BIOL 3611",
+        "BIOL 3612",
+        "ENCP 3000",
+        "ENGW 3302"
+      ],
+      "Spring": ["BIOE 5420"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1171", "PHYS 1172", "PHYS 1173"]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOE 2365",
+        "BIOE 2366",
+        "BIOL 1111",
+        "BIOL 1112",
+        "MATH 2321",
+        "PHYS 1175",
+        "PHYS 1176",
+        "PHYS 1177"
+      ],
+      "Spring": [
+        "BIOE 2355",
+        "BIOL 2301",
+        "BIOL 2302",
+        "CHEM 2311",
+        "CHEM 2312",
+        "ENCP 2000",
+        "MATH 2341"
+      ]
+    },
+    "Year 3": {
+      "Spring": [
+        "BIOE 2350",
+        "BIOE 3380",
+        "CHEM 2313",
+        "CHEM 2314",
+        "ENGW 3302"
+      ],
+      "Summer 1": ["BIOE 3310", "BIOL 3611", "BIOL 3612"]
+    },
+    "Year 4": {
+      "Spring": ["BIOE 3210", "BIOE 5410", "ENCP 3000"],
+      "Summer 1": ["BIOE 4790"]
+    },
+    "Year 5": {
+      "Spring": ["BIOE 4792", "BIOE 5420", "BIOE 5430"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "GE 1000",
+        "GE 1501",
+        "ENGW 1111",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1171", "PHYS 1172", "PHYS 1173"]
+    },
+    "Year 2": {
+      "Fall": [
+        "BIOE 2365",
+        "BIOE 2366",
+        "BIOL 1111",
+        "BIOL 1112",
+        "ENCP 2000",
+        "MATH 2321",
+        "PHYS 1175",
+        "PHYS 1176",
+        "PHYS 1177"
+      ]
+    },
+    "Year 3": {
+      "Fall": ["BIOE 2350", "BIOE 2355", "CHEM 2311", "CHEM 2312", "MATH 2341"],
+      "Summer 2": ["BIOE 3210", "CHEM 2313", "CHEM 2314"]
+    },
+    "Year 4": {
+      "Fall": ["BIOE 3310", "BIOE 3380", "BIOL 2301", "BIOL 2302", "ENGW 3302"],
+      "Summer 2": ["BIOE 4790"]
+    },
+    "Year 5": {
+      "Fall": ["BIOE 4792", "BIOE 5410", "BIOL 3611", "BIOL 3612", "ENCP 3000"],
+      "Spring": ["BIOE 5420", "BIOE 5430"]
+    }
+  }
+}

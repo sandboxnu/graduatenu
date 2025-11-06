@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["BIOL 2217", "CS 2100", "SLPA 1101", "SLPA 1205"],
+      "Summer 1": ["PHIL 1145"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3100", "MATH 1341", "SLPA 1103", "SLPA 1203"]
+    },
+    "Year 3": {
+      "Fall": ["CS 2484", "CS 3000", "PHTH 2210", "PHYS 1145"],
+      "Spring": ["ENGW 3302", "SLPA 1200", "SLPA 1102", "CS 3200"]
+    },
+    "Year 4": {
+      "Fall": ["SLPA 4500", "SLPA 5107", "CS 4120"],
+      "Spring": ["CS 4530", "SLPA 4651", "SLPA 6219"]
+    }
+  },
+  "Four Years, One Co-op in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["BIOL 2217", "CS 2100", "SLPA 1101", "SLPA 1205"],
+      "Summer 1": ["PHIL 1145"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3100", "MATH 1341", "SLPA 1103", "SLPA 1203"]
+    },
+    "Year 3": {
+      "Fall": ["CS 2484", "CS 3000", "PHTH 2210", "PHYS 1145"],
+      "Spring": ["ENGW 3302", "SLPA 1200", "SLPA 1102", "CS 3200"]
+    },
+    "Year 4": {
+      "Fall": ["SLPA 4500", "SLPA 5107", "CS 4120"],
+      "Spring": ["CS 4530", "SLPA 4651", "SLPA 6219"]
+    }
+  },
+  "Four Years, One Co-op in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["BIOL 2217", "CS 2100", "SLPA 1101", "SLPA 1205"],
+      "Summer 1": ["PHIL 1145"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3100", "MATH 1341", "SLPA 1103", "SLPA 1203"],
+      "Spring": ["CS 2484", "CS 3000", "PHTH 2210", "PHYS 1145"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3302", "SLPA 1200", "SLPA 1102", "CS 3200"]
+    },
+    "Year 4": {
+      "Fall": ["SLPA 4500", "SLPA 5107", "CS 4120"],
+      "Spring": ["CS 4530", "SLPA 4651", "SLPA 6219"]
+    }
+  }
+}

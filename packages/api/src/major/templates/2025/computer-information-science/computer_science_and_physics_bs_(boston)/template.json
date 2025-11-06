@@ -1,0 +1,43 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "MATH 1341", "PHYS 1161"],
+      "Spring": ["CS 2100", "ENGW 1111", "MATH 1342", "PHYS 1165"],
+      "Summer 1": ["CS 3000", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3100", "MATH 2341", "PHYS 2371"],
+      "Spring": ["CS 1210", "CS 2800", "PHYS 2303", "PHYS 3602"]
+    },
+    "Year 3": {
+      "Spring": ["CS 3800", "MATH 3081", "PHYS 4305"],
+      "Summer 1": ["PHYS 3600", "ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530", "PHYS 5318"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "MATH 1341", "PHYS 1161"],
+      "Spring": ["CS 2100", "ENGW 1111", "MATH 1342", "PHYS 1165"],
+      "Summer 1": ["CS 3000", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3100", "MATH 2341", "PHYS 2371"],
+      "Spring": ["CS 1210", "CS 2800", "PHYS 2303", "PHYS 3602"]
+    },
+    "Year 3": {
+      "Spring": ["CS 3800", "MATH 3081", "PHYS 4305"],
+      "Summer 1": ["PHYS 3600", "ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530", "PHYS 5318"]
+    }
+  },
+  "Physics Course Offering Schedule": {}
+}

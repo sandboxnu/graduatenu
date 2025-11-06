@@ -1,0 +1,255 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CHME 2320", "CS 1800", "CS 1802", "MATH 2341", "CS 2000"],
+      "Spring": ["CHME 2310", "ENCP 2000", "DS 2500", "DS 2501", "MATH 3081"],
+      "Summer 1": ["CS 3200", "ENGW 3302"]
+    },
+    "Year 3": {
+      "Fall": ["CHME 3312", "CHME 3322", "DS 3000", "DS 3500"],
+      "Spring": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 4510",
+        "CHME 4701",
+        "DS 4200",
+        "ENCP 3000"
+      ]
+    },
+    "Year 4": {
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705", "DS 4300", "DS 4400"]
+    }
+  },
+  "Four Years, One Co-op in Summer Second Half/Fall - Data Science Option": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CHME 2320", "CS 1800", "CS 1802", "MATH 2341", "CS 2000"],
+      "Spring": ["CHME 2310", "ENCP 2000", "DS 2500", "DS 2501", "MATH 3081"],
+      "Summer 1": ["CS 3200", "ENGW 3302"]
+    },
+    "Year 3": {
+      "Fall": ["CHME 3312", "CHME 3322", "DS 3000", "DS 3500"],
+      "Spring": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 4510",
+        "CHME 4701",
+        "DS 4200",
+        "ENCP 3000"
+      ]
+    },
+    "Year 4": {
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705", "DS 4300", "DS 4400"]
+    }
+  },
+  "Four Years, One Co-op in Summer Second Half/Fall - Computer Science Option": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CHME 2320", "CS 1800", "CS 1802", "MATH 2341", "CS 2000"],
+      "Spring": ["CHME 2310", "ENCP 2000", "CS 2100", "CS 2101", "MATH 3081"],
+      "Summer 1": ["CS 3200", "ENGW 3302"]
+    },
+    "Year 3": {
+      "Fall": ["CHME 3312", "CHME 3322", "DS 3000", "CS 3100", "CS 3101"],
+      "Spring": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 4510",
+        "CHME 4701",
+        "DS 4200",
+        "ENCP 3000"
+      ]
+    },
+    "Year 4": {
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705", "DS 4300", "DS 4400"]
+    }
+  },
+  "Four Years, One Co-op in Spring/Summer First Half - DS Pathway": {
+    "Year 1": {
+      "Fall": ["CHEM 1151", "ENGW 1111", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CHME 2320", "CS 1800", "MATH 2341", "CS 2000"],
+      "Spring": ["CHME 2310", "DS 2500", "ENCP 2000", "MATH 3081"],
+      "Summer 1": ["CS 3200", "ENGW 3302"]
+    },
+    "Year 3": {
+      "Fall": ["CHME 3312", "CHME 3322", "DS 3000", "DS 3500", "ENCP 3000"]
+    },
+    "Year 4": {
+      "Fall": ["CHME 3305", "CHME 4510", "CHME 4701", "DS 4200"],
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705", "DS 4300", "DS 4400"]
+    }
+  },
+  "Four Years, One Co-op in Spring/Summer First Half - CS Pathway": {
+    "Year 1": {
+      "Fall": ["CHEM 1151", "ENGW 1111", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CHME 2320", "CS 1800", "MATH 2341", "CS 2000"],
+      "Spring": ["CHME 2310", "ENCP 2000", "CS 2100", "MATH 3081"],
+      "Summer 1": ["CS 3200", "ENGW 3302"]
+    },
+    "Year 3": {
+      "Fall": ["CHME 3312", "CHME 3322", "DS 3000", "CS 3100", "ENCP 3000"]
+    },
+    "Year 4": {
+      "Fall": ["CHME 3305", "CHME 4510", "CHME 4701", "DS 4200"],
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705", "DS 4300", "DS 4400"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer First Half - DS Pathway": {
+    "Year 1": {
+      "Fall": ["CHEM 1151", "ENGW 1111", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CHME 2310", "CS 1800", "ENCP 2000", "CS 2000", "MATH 2341"],
+      "Summer 2": ["CHME 2320", "ENGW 3302"]
+    },
+    "Year 3": {
+      "Fall": ["CHME 3312", "CHME 3322", "DS 3000", "DS 2500"]
+    },
+    "Year 4": {
+      "Fall": ["CHME 3305", "DS 4200", "ENCP 3000", "MATH 3081", "CS 3200"]
+    },
+    "Year 5": {
+      "Fall": ["CHME 4510", "CHME 4701", "DS 3500"],
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705", "DS 4300", "DS 4400"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer First Half - CS Pathway": {
+    "Year 1": {
+      "Fall": ["CHEM 1151", "ENGW 1111", "GE 1000", "GE 1501", "MATH 1341"],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CHME 2310", "CS 1800", "ENCP 2000", "CS 2000", "MATH 2341"],
+      "Summer 2": ["CHME 2320", "ENGW 3302"]
+    },
+    "Year 3": {
+      "Fall": ["CHME 3312", "CHME 3322", "DS 3000", "CS 2100"]
+    },
+    "Year 4": {
+      "Fall": ["CHME 3305", "DS 4200", "ENCP 3000", "MATH 3081", "CS 3200"]
+    },
+    "Year 5": {
+      "Fall": ["CHME 4510", "CHME 4701", "CS 3100"],
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705", "DS 4300", "DS 4400"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer Second Half/Fall - DS Pathway": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CHME 2320", "CS 1800", "CS 1802", "CS 2000", "MATH 2341"],
+      "Spring": ["CHME 2310", "ENCP 2000", "DS 2500", "DS 2501", "MATH 3081"]
+    },
+    "Year 3": {
+      "Spring": ["CHME 3312", "CHME 3322", "DS 3000", "DS 3500"],
+      "Summer 1": ["CS 3200", "ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 4510",
+        "CHME 4701",
+        "ENCP 3000",
+        "DS 4200"
+      ]
+    },
+    "Year 5": {
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705", "DS 4300", "DS 4400"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer Second Half/Fall - CS Pathway": {
+    "Year 1": {
+      "Fall": [
+        "CHEM 1151",
+        "CHEM 1153",
+        "ENGW 1111",
+        "GE 1000",
+        "GE 1501",
+        "MATH 1341"
+      ],
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
+    },
+    "Year 2": {
+      "Fall": ["CHME 2320", "CS 1800", "CS 1802", "CS 2000", "MATH 2341"],
+      "Spring": ["CHME 2310", "ENCP 2000", "MATH 3081", "CS 2100"]
+    },
+    "Year 3": {
+      "Spring": ["CHME 3312", "CHME 3322", "DS 3000", "CS 3100"],
+      "Summer 1": ["CS 3200", "ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": [
+        "CHME 3305",
+        "CHME 3306",
+        "CHME 4510",
+        "CHME 4701",
+        "ENCP 3000",
+        "DS 4200"
+      ]
+    },
+    "Year 5": {
+      "Spring": ["CHME 4512", "CHME 4703", "CHME 4705", "DS 4300", "DS 4400"]
+    }
+  }
+}

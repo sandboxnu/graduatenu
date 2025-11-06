@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "BIOL 1111", "MATH 1241", "ENGW 1111"],
+      "Spring": ["PHIL 1165", "BIOL 1113", "CHEM 1161", "PSYC 1101"],
+      "Summer 1": ["PHTH 2350", "PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 2210", "HSCI 2000", "LAW 3101", "LAW 3102"],
+      "Summer 2": ["PHTH 2300"]
+    },
+    "Year 3": {
+      "Fall": ["LAW 3120", "LAW 3130", "LAW 4335"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4202", "LAW 3140", "LAW 3235", "LAW 3800"],
+      "Spring": ["LAW 3800"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "BIOL 1111", "MATH 1241", "ENGW 1111"],
+      "Spring": ["PHIL 1165", "BIOL 1113", "CHEM 1161", "PSYC 1101"],
+      "Summer 1": ["PHTH 2350", "PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 2210", "HSCI 2000", "LAW 3101", "LAW 3102"],
+      "Summer 2": ["PHTH 2300"]
+    },
+    "Year 3": {
+      "Fall": ["LAW 3120", "LAW 3130", "LAW 4335"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4202", "LAW 3140", "LAW 3235", "LAW 3800"],
+      "Spring": ["LAW 3800"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "BIOL 1111", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["MATH 1241", "BIOL 1113", "CHEM 1161", "PHIL 1165"],
+      "Summer 1": ["PHTH 2350", "PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 2300", "PHTH 2210"],
+      "Spring": ["HSCI 2000", "LAW 3101", "LAW 3102"]
+    },
+    "Year 3": {
+      "Spring": ["PHTH 4202", "LAW 4335", "LAW 3130", "LAW 3120"],
+      "Summer 1": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Spring": ["LAW 3140", "LAW 3235", "LAW 3800"],
+      "Fall": ["LAW 3800"]
+    }
+  }
+}

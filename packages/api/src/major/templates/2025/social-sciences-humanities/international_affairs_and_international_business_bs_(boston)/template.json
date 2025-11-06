@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["BUSN 1102", "ECON 1115", "ENGW 1111", "INTB 1205", "INTL 1101"],
+      "Spring": ["ACCT 1201", "MGSC 2301"],
+      "Summer 1": ["FINA 2201"],
+      "Summer 2": ["MKTG 2201"]
+    },
+    "Year 2": {
+      "Fall": ["BUSN 1103", "INTB 2205", "INTB 2206", "ACCT 2301"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3304", "INTB 3310", "INTL 3400", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Fall": ["INTL 4700"],
+      "Spring": ["INTB 4202"]
+    }
+  }
+}

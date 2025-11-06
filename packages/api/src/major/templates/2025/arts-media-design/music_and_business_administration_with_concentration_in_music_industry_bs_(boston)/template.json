@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["MUSC 1000", "ACCT 1201", "MUSC 1001", "ENGW 1111", "MUSI 1230"],
+      "Spring": ["MATH 1231", "MGSC 2301", "MKTG 2201"],
+      "Summer 2": ["MUSC 1119"],
+      "Summer 1": ["ECON 1115"]
+    },
+    "Year 2": {
+      "Fall": ["EEAM 2000", "FINA 2201", "MUSC 1201"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 3": {
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 4": {
+      "Spring": ["ENGW 3314", "MUSI 4601"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["MUSC 1000", "ACCT 1201", "MUSC 1001", "ENGW 1111", "MUSI 1230"],
+      "Spring": ["MATH 1231", "MGSC 2301", "MKTG 2201"],
+      "Summer 2": ["MUSC 1119"],
+      "Summer 1": ["ECON 1115"]
+    },
+    "Year 2": {
+      "Fall": ["EEAM 2000", "FINA 2201", "MUSC 1201"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 3": {
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 4": {
+      "Spring": ["ENGW 3314", "MUSI 4601"]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "MUSC 1000", "MUSC 1001", "MUSC 1201"]
+    },
+    "Year 2": {},
+    "Year 3": {},
+    "Year 4": {}
+  },
+  "Four Years, No Co-op": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "MUSC 1000", "MUSC 1001", "MUSC 1201"]
+    },
+    "Year 2": {},
+    "Year 3": {},
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "MUSC 1000", "MUSC 1002", "MUSC 1119"],
+      "Spring": ["MUSC 1201", "EEAM 2000"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Fall": ["ENGW 3314"]
+    },
+    "Year 4": {}
+  }
+}

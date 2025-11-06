@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 2000", "CS 1800", "PHTH 1260"],
+      "Spring": ["ENGW 1111", "CS 2100", "PSYC 1101"],
+      "Summer 1": ["PHTH 2350", "CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 1341", "CS 3000", "PHTH 2300"],
+      "Spring": ["CS 1210", "CS 3200"],
+      "Summer 1": ["PHTH 2515"]
+    },
+    "Year 3": {
+      "Spring": ["PHTH 4202", "CS 2484"],
+      "Summer 1": ["PHTH 4540"],
+      "Fall": ["ENGW 3306"]
+    },
+    "Year 4": {
+      "Spring": ["PHTH 4120", "CS 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 2000", "CS 1800", "PHTH 1260"],
+      "Spring": ["ENGW 1111", "CS 2100", "PSYC 1101"],
+      "Summer 1": ["PHTH 2350", "CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 1341", "CS 3000", "PHTH 2300"],
+      "Spring": ["CS 1210", "CS 3200"],
+      "Summer 1": ["PHTH 2515"]
+    },
+    "Year 3": {
+      "Spring": ["PHTH 4202", "CS 2484"],
+      "Summer 1": ["PHTH 4540"],
+      "Fall": ["ENGW 3306"]
+    },
+    "Year 4": {
+      "Spring": ["PHTH 4120", "CS 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "PHTH 1260"],
+      "Spring": ["ENGW 1111", "CS 2100", "PSYC 1101"],
+      "Summer 1": ["PHTH 2350", "CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "MATH 1341", "PHTH 2300", "CS 3000"],
+      "Summer 2": ["PHTH 2515"]
+    },
+    "Year 3": {
+      "Fall": ["CS 3200", "CS 2484"],
+      "Spring": ["ENGW 3302"],
+      "Summer 2": ["PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4202", "CS 4530"],
+      "Spring": ["PHTH 4120"]
+    }
+  }
+}

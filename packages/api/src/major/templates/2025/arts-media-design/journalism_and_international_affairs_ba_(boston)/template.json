@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "INTL 1101", "JRNL 1000", "JRNL 1150"],
+      "Spring": ["ANTH 1101", "JRNL 1101", "POLS 1160", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["ECON 1115", "JRNL 2201", "EESH 2000"]
+    },
+    "Year 3": {
+      "Fall": ["INTL 2718", "INTL 3400", "JRNL 3550"]
+    },
+    "Year 4": {}
+  }
+}
