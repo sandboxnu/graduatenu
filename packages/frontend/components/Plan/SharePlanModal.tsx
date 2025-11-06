@@ -16,7 +16,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BlueButton } from "../Button";
 import { CopyIcon, DownloadIcon } from "@chakra-ui/icons";
 
@@ -61,6 +61,12 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
     setCopied(true);
     await navigator.clipboard.writeText(shareUrl);
   };
+
+  useEffect(() => {
+    if (!isOpen) {
+      setCopied(false);
+    }
+  }, [isOpen]);
 
   return (
     <>
