@@ -94,12 +94,24 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                 <Text fontWeight="medium" mb="2">
                   Shareable link
                 </Text>
-                <Input
-                  value={shareUrl}
-                  readOnly
-                  onFocus={(e) => e.currentTarget.select()}
-                  mb="2"
-                />
+                <Flex>
+                  <Input
+                    value={shareUrl}
+                    readOnly
+                    onFocus={(e) => e.currentTarget.select()}
+                    mb="2"
+                    mr="4"
+                  />
+                  <Button
+                    variant="outline"
+                    size="md"
+                    borderRadius="lg"
+                    onClick={copyLink}
+                  >
+                    Copy Link
+                  </Button>
+                </Flex>
+
                 <Text fontSize="sm" align="center" mt="4px">
                   Anyone with this link can view your plan
                 </Text>
@@ -111,7 +123,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
               </>
             )}
           </ModalBody>
-          <ModalFooter justifyContent="center">
+          {/* <ModalFooter justifyContent="center">
             <Flex columnGap="sm">
               <Button
                 variant="solidWhite"
@@ -155,7 +167,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                 </>
               )}
             </Flex>
-          </ModalFooter>
+          </ModalFooter> */}
         </ModalContent>
       </Modal>
     </>
