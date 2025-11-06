@@ -2,7 +2,8 @@
   "name": "Computer Science and Game Development, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2023,
@@ -285,50 +286,48 @@
           "type": "XOM",
           "numCreditsMin": 12,
           "courses": [
-            [
-              {
-                "type": "RANGE",
-                "subject": "ARTD",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "ARTE",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "ARTF",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "ARTG",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "ARTH",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              },
-              {
-                "type": "RANGE",
-                "subject": "GAME",
-                "idRangeStart": 0,
-                "idRangeEnd": 9999,
-                "exceptions": []
-              }
-            ],
+            {
+              "type": "RANGE",
+              "subject": "ARTD",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTE",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTF",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTG",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ARTH",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "GAME",
+              "idRangeStart": 0,
+              "idRangeEnd": 9999,
+              "exceptions": []
+            },
             {
               "type": "RANGE",
               "subject": "CS",
@@ -491,6 +490,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

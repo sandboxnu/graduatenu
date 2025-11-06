@@ -2,7 +2,8 @@
   "name": "Media and Screen Studies and Political Science, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 0,
   "yearVersion": 2023,
@@ -229,6 +230,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Elective Courses",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Required Courses",
       "requirements": [
         {
@@ -325,7 +332,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Campaigns and Elections",
         "requirements": [
           {
             "type": "COURSE",
@@ -342,7 +349,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Campaigns and Elections Electives",
+        "title": "Concentration in Campaigns and Elections: Campaigns and Elections Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -467,7 +474,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Course",
+        "title": "Concentration in Identity, Culture, and Politics",
         "requirements": [
           {
             "type": "COURSE",
@@ -479,7 +486,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Identity, Culture, and Politics: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -640,7 +647,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Requirement",
+        "title": "Concentration in Public Policy",
         "requirements": [
           {
             "type": "COURSE",
@@ -652,7 +659,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Public Policy: Electives",
         "requirements": [
           {
             "type": "XOM",
