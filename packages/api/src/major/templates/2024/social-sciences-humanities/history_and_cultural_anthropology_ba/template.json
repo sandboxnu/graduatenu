@@ -1,26 +1,16 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ANTH 1101",
-        "ENGW 1111",
-        "HIST 1000",
-        "HIST 1200",
-        "HIST 1201"
-      ],
-      "Spring": [
-        "ANTH 2305"
-      ]
+      "Fall": ["ANTH 1101", "ENGW 1111", "HIST 1000", "HIST 1200", "HIST 1201"],
+      "Spring": ["ANTH 2305"]
     },
     "Year 2": {
-      "Fall": [
-        "ANTH 3410",
-        "HIST 2301",
-        "HIST 2302"
-      ],
-      "Spring": [
-        "ANTH 3421"
-      ]
+      "Fall": ["ANTH 3410", "HIST 2301", "HIST 2302"],
+      "Spring": ["ANTH 3421"]
     },
     "Year 3": {},
     "Year 4": {},

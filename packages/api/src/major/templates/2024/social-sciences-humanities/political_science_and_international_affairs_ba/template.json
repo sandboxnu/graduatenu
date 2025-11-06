@@ -1,33 +1,19 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "INTL 1101",
-        "MATH 1215",
-        "POLS 1155",
-        "POLS 1000"
-      ],
-      "Spring": [
-        "HIST 2211",
-        "MATH 1215",
-        "POLS 1150",
-        "POLS 1160"
-      ]
+      "Fall": ["ENGW 1111", "INTL 1101", "MATH 1215", "POLS 1155", "POLS 1000"],
+      "Spring": ["HIST 2211", "MATH 1215", "POLS 1150", "POLS 1160"]
     },
     "Year 2": {
-      "Fall": [
-        "ECON 3290"
-      ],
-      "Spring": [
-        "POLS 2400"
-      ]
+      "Fall": ["ECON 3290"],
+      "Spring": ["POLS 2400"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3315",
-        "INTL 3400"
-      ]
+      "Spring": ["ENGW 3315", "INTL 3400"]
     },
     "Year 4": {}
   }

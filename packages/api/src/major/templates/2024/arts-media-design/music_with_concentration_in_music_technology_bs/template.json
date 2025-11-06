@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plans of Study": {
     "Year 1": {
       "Fall": [
@@ -10,33 +14,17 @@
         "MUSC 1002",
         "MUSC 1201"
       ],
-      "Spring": [
-        "MUSC 1201",
-        "MUSC 2350",
-        "MUSC 1202"
-      ]
+      "Spring": ["MUSC 1201", "MUSC 2350", "MUSC 1202"]
     },
     "Year 2": {
-      "Fall": [
-        "EEAM 2000",
-        "MUSC 1202",
-        "MUST 2431",
-        "MUSC 2350",
-        "MUST 2102"
-      ]
+      "Fall": ["EEAM 2000", "MUSC 1202", "MUST 2431", "MUSC 2350", "MUST 2102"]
     },
     "Year 3": {
-      "Fall": [
-        "MUST 2102"
-      ]
+      "Fall": ["MUST 2102"]
     },
     "Year 4": {
-      "Fall": [
-        "ENGW 3314"
-      ],
-      "Spring": [
-        "MUST 4611"
-      ]
+      "Fall": ["ENGW 3314"],
+      "Spring": ["MUST 4611"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
@@ -50,61 +38,30 @@
         "MUSC 1002",
         "MUSC 1201"
       ],
-      "Spring": [
-        "MUSC 1201",
-        "MUSC 2350",
-        "MUSC 1202"
-      ]
+      "Spring": ["MUSC 1201", "MUSC 2350", "MUSC 1202"]
     },
     "Year 2": {
-      "Fall": [
-        "EEAM 2000",
-        "MUSC 1202",
-        "MUST 2431",
-        "MUSC 2350",
-        "MUST 2102"
-      ]
+      "Fall": ["EEAM 2000", "MUSC 1202", "MUST 2431", "MUSC 2350", "MUST 2102"]
     },
     "Year 3": {
-      "Fall": [
-        "MUST 2102"
-      ]
+      "Fall": ["MUST 2102"]
     },
     "Year 4": {
-      "Fall": [
-        "ENGW 3314"
-      ],
-      "Spring": [
-        "MUST 4611"
-      ]
+      "Fall": ["ENGW 3314"],
+      "Spring": ["MUST 4611"]
     }
   },
   "Four Years, No Co-op": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "MUSC 1000",
-        "MUSC 1002",
-        "MUSC 1201",
-        "MUST 1220"
-      ],
-      "Spring": [
-        "MUSC 1202",
-        "MUSC 2350"
-      ]
+      "Fall": ["ENGW 1111", "MUSC 1000", "MUSC 1002", "MUSC 1201", "MUST 1220"],
+      "Spring": ["MUSC 1202", "MUSC 2350"]
     },
     "Year 2": {
-      "Fall": [
-        "MUSC 2350",
-        "MUST 2102",
-        "MUST 2431"
-      ]
+      "Fall": ["MUSC 2350", "MUST 2102", "MUST 2431"]
     },
     "Year 3": {},
     "Year 4": {
-      "Spring": [
-        "MUST 4611"
-      ]
+      "Spring": ["MUST 4611"]
     }
   }
 }

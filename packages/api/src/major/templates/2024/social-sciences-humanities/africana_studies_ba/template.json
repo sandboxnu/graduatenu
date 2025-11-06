@@ -1,39 +1,22 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two  Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "AFCS 1101",
-        "CLTR 1000",
-        "ENGW 1111",
-        "MATH 1215"
-      ],
-      "Spring": [
-        "AFCS 1113",
-        "AFCS 1225"
-      ]
+      "Fall": ["AFCS 1101", "CLTR 1000", "ENGW 1111", "MATH 1215"],
+      "Spring": ["AFCS 1113", "AFCS 1225"]
     },
     "Year 2": {
-      "Fall": [
-        "AFCS 2355",
-        "AFCS 3900"
-      ],
-      "Spring": [
-        "AFCS 1261",
-        "EESH 2000"
-      ]
+      "Fall": ["AFCS 2355", "AFCS 3900"],
+      "Spring": ["AFCS 1261", "EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "AFCS 2410",
-        "AFCS 4526",
-        "ENGW 3315"
-      ]
+      "Spring": ["AFCS 2410", "AFCS 4526", "ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "AFCS 3424",
-        "AFCS 4700"
-      ]
+      "Spring": ["AFCS 3424", "AFCS 4700"]
     }
   }
 }

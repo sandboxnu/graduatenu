@@ -1,27 +1,14 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "ARTG 1001",
-        "BIOL 1107",
-        "BNSC 1000",
-        "CHEM 1161",
-        "PSYC 1101"
-      ],
-      "Spring": [
-        "ARTF 1220",
-        "BIOL 2299",
-        "ENGW 1111",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "ARTG 1270",
-        "PSYC 2320"
-      ],
-      "Summer 2": [
-        "ARTG 1290",
-        "PSYC 3452"
-      ]
+      "Fall": ["ARTG 1001", "BIOL 1107", "BNSC 1000", "CHEM 1161", "PSYC 1101"],
+      "Spring": ["ARTF 1220", "BIOL 2299", "ENGW 1111", "MATH 1341"],
+      "Summer 1": ["ARTG 1270", "PSYC 2320"],
+      "Summer 2": ["ARTG 1290", "PSYC 3452"]
     },
     "Year 2": {
       "Fall": [
@@ -33,90 +20,40 @@
         "ARTG 1290",
         "PSYC 3452"
       ],
-      "Summer 2": [
-        "PSYC 2320"
-      ]
+      "Summer 2": ["PSYC 2320"]
     },
     "Year 3": {
-      "Fall": [
-        "ARTG 5310",
-        "PSYC 3200",
-        "BIOL 2301",
-        "PSYC 3458"
-      ],
-      "Summer 2": [
-        "ENGW 3315"
-      ]
+      "Fall": ["ARTG 5310", "PSYC 3200", "BIOL 2301", "PSYC 3458"],
+      "Summer 2": ["ENGW 3315"]
     },
     "Year 4": {
-      "Fall": [
-        "BIOL 5587"
-      ],
-      "Spring": [
-        "ARTG 4550"
-      ],
-      "Summer 2": [
-        "ENGW 3315"
-      ]
+      "Fall": ["BIOL 5587"],
+      "Spring": ["ARTG 4550"],
+      "Summer 2": ["ENGW 3315"]
     },
     "Year 5": {
-      "Fall": [
-        "ARTG 5310",
-        "BIOL 5587"
-      ],
-      "Spring": [
-        "ARTG 4550"
-      ]
+      "Fall": ["ARTG 5310", "BIOL 5587"],
+      "Spring": ["ARTG 4550"]
     }
   },
   "Sample Plan of Study: Five Years, Three Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "ARTG 1001",
-        "BIOL 1107",
-        "BNSC 1000",
-        "CHEM 1161",
-        "PSYC 1101"
-      ],
-      "Spring": [
-        "ARTF 1220",
-        "BIOL 2299",
-        "ENGW 1111",
-        "MATH 1341"
-      ]
+      "Fall": ["ARTG 1001", "BIOL 1107", "BNSC 1000", "CHEM 1161", "PSYC 1101"],
+      "Spring": ["ARTF 1220", "BIOL 2299", "ENGW 1111", "MATH 1341"]
     },
     "Year 2": {
-      "Fall": [
-        "ARTG 1270",
-        "ARTG 1290",
-        "CHEM 2311",
-        "EESC 2000",
-        "PSYC 3452"
-      ],
-      "Summer 2": [
-        "PSYC 2320"
-      ]
+      "Fall": ["ARTG 1270", "ARTG 1290", "CHEM 2311", "EESC 2000", "PSYC 3452"],
+      "Summer 2": ["PSYC 2320"]
     },
     "Year 3": {
-      "Fall": [
-        "BIOL 2301",
-        "PSYC 3200",
-        "PSYC 3458"
-      ]
+      "Fall": ["BIOL 2301", "PSYC 3200", "PSYC 3458"]
     },
     "Year 4": {
-      "Summer 2": [
-        "ENGW 3315"
-      ]
+      "Summer 2": ["ENGW 3315"]
     },
     "Year 5": {
-      "Fall": [
-        "ARTG 5310",
-        "BIOL 5587"
-      ],
-      "Spring": [
-        "ARTG 4550"
-      ]
+      "Fall": ["ARTG 5310", "BIOL 5587"],
+      "Spring": ["ARTG 4550"]
     }
   }
 }

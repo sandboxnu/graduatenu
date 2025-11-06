@@ -1,40 +1,22 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ARCH 1310",
-        "ARTF 1000",
-        "ARTF 1220",
-        "ARTG 1001",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "ARCH 1110",
-        "ARCH 1120",
-        "ARTG 1270"
-      ]
+      "Fall": ["ARCH 1310", "ARTF 1000", "ARTF 1220", "ARTG 1001", "ENGW 1111"],
+      "Spring": ["ARCH 1110", "ARCH 1120", "ARTG 1270"]
     },
     "Year 2": {
-      "Fall": [
-        "ARCH 2130",
-        "ARCH 2260",
-        "ARTG 1290"
-      ],
-      "Spring": [
-        "ARCH 2340",
-        "ARCH 3450",
-        "EEAM 2000"
-      ]
+      "Fall": ["ARCH 2130", "ARCH 2260", "ARTG 1290"],
+      "Spring": ["ARCH 2340", "ARCH 3450", "EEAM 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "ENGW 3314"
-      ]
+      "Fall": ["ENGW 3314"]
     },
     "Year 4": {
-      "Spring": [
-        "ARTG 4550"
-      ]
+      "Spring": ["ARTG 4550"]
     }
   }
 }
