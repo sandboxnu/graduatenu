@@ -136,27 +136,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                   Generate Link
                 </Button>
               ) : (
-                <>
-                  <Button
-                    variant="outline"
-                    size="md"
-                    borderRadius="lg"
-                    onClick={copyLink}
-                  >
-                    Copy Link
-                  </Button>
-                  <Button
-                    as="a"
-                    href={shareUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    variant="solid"
-                    size="md"
-                    borderRadius="lg"
-                  >
-                    Open
-                  </Button>
-                </>
+                <></>
               )}
             </Flex>
           </ModalFooter>
