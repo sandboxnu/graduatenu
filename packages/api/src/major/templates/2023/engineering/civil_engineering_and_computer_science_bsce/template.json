@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, One Co-op in Spring/Summer 1": {
     "Year 1": {
       "Fall": [
@@ -9,19 +13,8 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "GE 1502",
-        "MATH 1342",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ],
-      "Summer 1": [
-        "CS 1800",
-        "CS 1802",
-        "CS 2500",
-        "CS 2501"
-      ]
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CS 1800", "CS 1802", "CS 2500", "CS 2501"]
     },
     "Year 2": {
       "Fall": [
@@ -43,11 +36,7 @@
         "CIVE 2331",
         "CIVE 3464"
       ],
-      "Summer 2": [
-        "CIVE 2340",
-        "CIVE 2341",
-        "MATH 2341"
-      ]
+      "Summer 2": ["CIVE 2340", "CIVE 2341", "MATH 2341"]
     },
     "Year 3": {
       "Fall": [
@@ -73,21 +62,11 @@
         "CS 3001",
         "CS 3200"
       ],
-      "Spring": [
-        "CS 4500",
-        "GE 3300"
-      ]
+      "Spring": ["CS 4500", "GE 3300"]
     },
     "Year 5": {
-      "Fall": [
-        "CS 3500",
-        "ENCP 3000",
-        "ENGW 3302"
-      ],
-      "Spring": [
-        "CS 4500",
-        "GE 3300"
-      ]
+      "Fall": ["CS 3500", "ENCP 3000", "ENGW 3302"],
+      "Spring": ["CS 4500", "GE 3300"]
     }
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
@@ -100,19 +79,8 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "GE 1502",
-        "MATH 1342",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ],
-      "Summer 1": [
-        "CS 1800",
-        "CS 1802",
-        "CS 2500",
-        "CS 2501"
-      ]
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CS 1800", "CS 1802", "CS 2500", "CS 2501"]
     },
     "Year 2": {
       "Fall": [
@@ -124,11 +92,7 @@
         "ENCP 2000",
         "MATH 2321"
       ],
-      "Summer 2": [
-        "CIVE 2340",
-        "CIVE 2341",
-        "MATH 2341"
-      ]
+      "Summer 2": ["CIVE 2340", "CIVE 2341", "MATH 2341"]
     },
     "Year 3": {
       "Fall": [
@@ -141,23 +105,11 @@
       ]
     },
     "Year 4": {
-      "Fall": [
-        "CIVE 2324",
-        "CS 3000",
-        "CS 3001",
-        "CS 3200"
-      ]
+      "Fall": ["CIVE 2324", "CS 3000", "CS 3001", "CS 3200"]
     },
     "Year 5": {
-      "Fall": [
-        "CS 3500",
-        "ENCP 3000",
-        "ENGW 3302"
-      ],
-      "Spring": [
-        "CS 4500",
-        "GE 3300"
-      ]
+      "Fall": ["CS 3500", "ENCP 3000", "ENGW 3302"],
+      "Spring": ["CS 4500", "GE 3300"]
     }
   }
 }

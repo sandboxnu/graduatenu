@@ -1,50 +1,23 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "AFAM 1101",
-        "AFAM 1104",
-        "AFAM 1113",
-        "CLTR 1000",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "AFAM 2690",
-        "AFRS 2307",
-        "MSCR 1220"
-      ]
+      "Fall": ["AFAM 1101", "AFAM 1104", "AFAM 1113", "CLTR 1000", "ENGW 1111"],
+      "Spring": ["AFAM 2690", "AFRS 2307", "MSCR 1220"]
     },
     "Year 2": {
-      "Fall": [
-        "AFAM 2296",
-        "AFRS 2464",
-        "AFRS 3424",
-        "MSCR 1320"
-      ],
-      "Spring": [
-        "AFAM 3270",
-        "MSCR 2220",
-        "MSCR 2505",
-        "MSCR 3420"
-      ],
-      "Summer 1": [
-        "AFAM 3664",
-        "COMM 3655"
-      ]
+      "Fall": ["AFAM 2296", "AFRS 2464", "AFRS 3424", "MSCR 1320"],
+      "Spring": ["AFAM 3270", "MSCR 2220", "MSCR 2505", "MSCR 3420"],
+      "Summer 1": ["AFAM 3664", "COMM 3655"]
     },
     "Year 3": {
-      "Spring": [
-        "AFAM 2619",
-        "ARTD 2380",
-        "COMM 2655",
-        "MSCR 2335"
-      ]
+      "Spring": ["AFAM 2619", "ARTD 2380", "COMM 2655", "MSCR 2335"]
     },
     "Year 4": {
-      "Spring": [
-        "AFAM 4700",
-        "COMM 4755"
-      ]
+      "Spring": ["AFAM 4700", "COMM 4755"]
     }
   }
 }

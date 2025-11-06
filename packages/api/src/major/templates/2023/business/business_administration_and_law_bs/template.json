@@ -1,127 +1,55 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "ACCT 1201",
-        "BUSN 1102",
-        "ECON 1115",
-        "INTB 1203",
-        "MATH 1231"
-      ],
-      "Spring": [
-        "ACCT 2301",
-        "ENGW 1111",
-        "INNO 2301",
-        "MGSC 2301"
-      ],
-      "Summer 1": [
-        "FINA 2201"
-      ]
+      "Fall": ["ACCT 1201", "BUSN 1102", "ECON 1115", "INTB 1203", "MATH 1231"],
+      "Spring": ["ACCT 2301", "ENGW 1111", "INNO 2301", "MGSC 2301"],
+      "Summer 1": ["FINA 2201"]
     },
     "Year 2": {
-      "Fall": [
-        "BUSN 1103",
-        "LAW 3101",
-        "LAW 3102"
-      ],
-      "Summer 2": [
-        "ORGB 3201"
-      ],
-      "Spring": [
-        "LAW 3101",
-        "LAW 3102",
-        "BUSN 1103"
-      ]
+      "Fall": ["BUSN 1103", "LAW 3101", "LAW 3102"],
+      "Summer 2": ["ORGB 3201"],
+      "Spring": ["LAW 3101", "LAW 3102", "BUSN 1103"]
     },
     "Year 3": {
-      "Summer 1": [
-        "ORGB 3201",
-        "STRT 4501"
-      ]
+      "Summer 1": ["ORGB 3201", "STRT 4501"]
     },
     "Year 4": {
-      "Spring": [
-        "STRT 4501"
-      ]
+      "Spring": ["STRT 4501"]
     }
   },
   "Fours Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "ACCT 1201",
-        "BUSN 1102",
-        "ECON 1115",
-        "INTB 1203",
-        "MATH 1231"
-      ],
-      "Spring": [
-        "ACCT 2301",
-        "ENGW 1111",
-        "INNO 2301",
-        "MGSC 2301"
-      ],
-      "Summer 1": [
-        "FINA 2201"
-      ]
+      "Fall": ["ACCT 1201", "BUSN 1102", "ECON 1115", "INTB 1203", "MATH 1231"],
+      "Spring": ["ACCT 2301", "ENGW 1111", "INNO 2301", "MGSC 2301"],
+      "Summer 1": ["FINA 2201"]
     },
     "Year 2": {
-      "Fall": [
-        "BUSN 1103",
-        "LAW 3101",
-        "LAW 3102"
-      ],
-      "Summer 2": [
-        "ORGB 3201"
-      ],
-      "Spring": [
-        "LAW 3101",
-        "LAW 3102",
-        "BUSN 1103"
-      ]
+      "Fall": ["BUSN 1103", "LAW 3101", "LAW 3102"],
+      "Summer 2": ["ORGB 3201"],
+      "Spring": ["LAW 3101", "LAW 3102", "BUSN 1103"]
     },
     "Year 3": {
-      "Summer 1": [
-        "ORGB 3201",
-        "STRT 4501"
-      ]
+      "Summer 1": ["ORGB 3201", "STRT 4501"]
     },
     "Year 4": {
-      "Spring": [
-        "STRT 4501"
-      ]
+      "Spring": ["STRT 4501"]
     }
   },
   "Four Years, Two Co-ops in Summer2/Fall": {
     "Year 1": {
-      "Fall": [
-        "BUSN 1102",
-        "ACCT 1201",
-        "ECON 1115",
-        "MATH 1231",
-        "INTB 1203"
-      ],
-      "Spring": [
-        "ACCT 2301",
-        "MGSC 2301",
-        "INNO 2301",
-        "ENGW 1111"
-      ],
-      "Summer 1": [
-        "FINA 2201"
-      ]
+      "Fall": ["BUSN 1102", "ACCT 1201", "ECON 1115", "MATH 1231", "INTB 1203"],
+      "Spring": ["ACCT 2301", "MGSC 2301", "INNO 2301", "ENGW 1111"],
+      "Summer 1": ["FINA 2201"]
     },
     "Year 2": {
-      "Spring": [
-        "LAW 3101",
-        "LAW 3102",
-        "BUSN 1103"
-      ]
+      "Spring": ["LAW 3101", "LAW 3102", "BUSN 1103"]
     },
     "Year 3": {
-      "Summer 1": [
-        "ORGB 3201",
-        "STRT 4501"
-      ]
+      "Summer 1": ["ORGB 3201", "STRT 4501"]
     },
     "Year 4": {}
   }

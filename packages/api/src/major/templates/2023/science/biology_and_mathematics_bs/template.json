@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Pattern:": {
     "Year 1": {
       "Fall": [
@@ -17,10 +21,7 @@
         "MATH 1342",
         "MATH 1365"
       ],
-      "Summer 1": [
-        "BIOL 2301",
-        "BIOL 2302"
-      ]
+      "Summer 1": ["BIOL 2301", "BIOL 2302"]
     },
     "Year 2": {
       "Fall": [
@@ -41,14 +42,10 @@
         "PHYS 1162",
         "PHYS 1163"
       ],
-      "Summer 1": [
-        "ENGW 3307"
-      ]
+      "Summer 1": ["ENGW 3307"]
     },
     "Year 4": {
-      "Fall": [
-        "MATH 3081"
-      ]
+      "Fall": ["MATH 3081"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
@@ -69,10 +66,7 @@
         "MATH 1342",
         "MATH 1365"
       ],
-      "Summer 1": [
-        "BIOL 2301",
-        "BIOL 2302"
-      ]
+      "Summer 1": ["BIOL 2301", "BIOL 2302"]
     },
     "Year 2": {
       "Fall": [
@@ -93,14 +87,10 @@
         "PHYS 1162",
         "PHYS 1163"
       ],
-      "Summer 1": [
-        "ENGW 3307"
-      ]
+      "Summer 1": ["ENGW 3307"]
     },
     "Year 4": {
-      "Fall": [
-        "MATH 3081"
-      ]
+      "Fall": ["MATH 3081"]
     }
   }
 }
