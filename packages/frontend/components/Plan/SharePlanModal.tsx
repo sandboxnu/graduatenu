@@ -100,9 +100,12 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                   onFocus={(e) => e.currentTarget.select()}
                   mb="2"
                 />
+                <Text fontSize="sm" align="center" mt="4px">
+                  Anyone with this link can view your plan
+                </Text>
                 {expiresAt && (
-                  <Text fontSize="sm" color="gray.500">
-                    Expires: {new Date(expiresAt).toLocaleString()}
+                  <Text fontSize="sm" color="gray.500" align="center">
+                    This link will expire {new Date(expiresAt).toLocaleString()}
                   </Text>
                 )}
               </>
