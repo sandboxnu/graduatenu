@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, 1 Co-op in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -9,26 +13,11 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "ARCH 1110",
-        "ARCH 1120",
-        "GE 1502",
-        "MATH 1342"
-      ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ]
+      "Spring": ["ARCH 1110", "ARCH 1120", "GE 1502", "MATH 1342"],
+      "Summer 1": ["MATH 2321", "PHYS 1151", "PHYS 1152", "PHYS 1153"]
     },
     "Year 2": {
-      "Fall": [
-        "CIVE 2334",
-        "LARC 2230",
-        "LARC 2430",
-        "MATH 2341"
-      ],
+      "Fall": ["CIVE 2334", "LARC 2230", "LARC 2430", "MATH 2341"],
       "Spring": [
         "ARCH 1310",
         "ARCH 1311",
@@ -38,11 +27,7 @@
         "CIVE 3430",
         "ENCP 2000"
       ],
-      "Summer 1": [
-        "CIVE 2221",
-        "CIVE 2222",
-        "GE 3300"
-      ]
+      "Summer 1": ["CIVE 2221", "CIVE 2222", "GE 3300"]
     },
     "Year 3": {
       "Spring": [
@@ -97,26 +82,11 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "ARCH 1110",
-        "ARCH 1120",
-        "GE 1502",
-        "MATH 1342"
-      ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ]
+      "Spring": ["ARCH 1110", "ARCH 1120", "GE 1502", "MATH 1342"],
+      "Summer 1": ["MATH 2321", "PHYS 1151", "PHYS 1152", "PHYS 1153"]
     },
     "Year 2": {
-      "Fall": [
-        "CIVE 2334",
-        "LARC 2230",
-        "LARC 2430",
-        "MATH 2341"
-      ],
+      "Fall": ["CIVE 2334", "LARC 2230", "LARC 2430", "MATH 2341"],
       "Spring": [
         "ARCH 1310",
         "ARCH 1311",
@@ -126,18 +96,10 @@
         "CIVE 3430",
         "ENCP 2000"
       ],
-      "Summer 1": [
-        "CIVE 2221",
-        "CIVE 2222",
-        "GE 3300"
-      ]
+      "Summer 1": ["CIVE 2221", "CIVE 2222", "GE 3300"]
     },
     "Year 3": {
-      "Spring": [
-        "CIVE 2331",
-        "CIVE 3435",
-        "LARC 2440"
-      ]
+      "Spring": ["CIVE 2331", "CIVE 3435", "LARC 2440"]
     },
     "Year 4": {
       "Spring": [

@@ -1,50 +1,25 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "ACCT 1201",
-        "ECON 1000",
-        "ENGW 1111",
-        "MATH 1231",
-        "ECON 1115"
-      ],
-      "Spring": [
-        "ECON 1116",
-        "MGSC 2301",
-        "FINA 2201",
-        "INTB 1203"
-      ],
-      "Summer 1": [
-        "ECON 2315"
-      ],
-      "Summer 2": [
-        "MKTG 2201",
-        "FINA 2201"
-      ]
+      "Fall": ["ACCT 1201", "ECON 1000", "ENGW 1111", "MATH 1231", "ECON 1115"],
+      "Spring": ["ECON 1116", "MGSC 2301", "FINA 2201", "INTB 1203"],
+      "Summer 1": ["ECON 2315"],
+      "Summer 2": ["MKTG 2201", "FINA 2201"]
     },
     "Year 2": {
-      "Fall": [
-        "ECON 2316",
-        "ACCT 2301",
-        "CS 1100",
-        "BUSN 1103"
-      ],
-      "Summer 2": [
-        "ORGB 3201"
-      ]
+      "Fall": ["ECON 2316", "ACCT 2301", "CS 1100", "BUSN 1103"],
+      "Summer 2": ["ORGB 3201"]
     },
     "Year 3": {
-      "Fall": [
-        "ECON 2560"
-      ]
+      "Fall": ["ECON 2560"]
     },
     "Year 4": {
-      "Spring": [
-        "ECON 4692"
-      ],
-      "Fall": [
-        "STRT 4501"
-      ]
+      "Spring": ["ECON 4692"],
+      "Fall": ["STRT 4501"]
     }
   }
 }

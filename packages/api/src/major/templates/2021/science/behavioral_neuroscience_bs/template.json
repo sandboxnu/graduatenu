@@ -1,104 +1,48 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "BNSC 1000",
-        "MATH 1251",
-        "PSYC 1101",
-        "BIOL 1107",
-        "CHEM 1161"
-      ],
-      "Spring": [
-        "ENGW 1111",
-        "PSYC 3458",
-        "BIOL 2299",
-        "CHEM 2311"
-      ],
-      "Summer 1": [
-        "BIOL 2301"
-      ]
+      "Fall": ["BNSC 1000", "MATH 1251", "PSYC 1101", "BIOL 1107", "CHEM 1161"],
+      "Spring": ["ENGW 1111", "PSYC 3458", "BIOL 2299", "CHEM 2311"],
+      "Summer 1": ["BIOL 2301"]
     },
     "Year 2": {
-      "Fall": [
-        "PSYC 3200",
-        "CHEM 2313",
-        "BIOL 2301",
-        "CHEM 2311",
-        "EESC 2000"
-      ],
-      "Spring": [
-        "BIOL 2309",
-        "DS 2000",
-        "EESC 2000"
-      ],
-      "Summer 1": [
-        "PSYC 2320"
-      ],
-      "Summer 2": [
-        "CHEM 2313",
-        "PSYC 2320"
-      ]
+      "Fall": ["PSYC 3200", "CHEM 2313", "BIOL 2301", "CHEM 2311", "EESC 2000"],
+      "Spring": ["BIOL 2309", "DS 2000", "EESC 2000"],
+      "Summer 1": ["PSYC 2320"],
+      "Summer 2": ["CHEM 2313", "PSYC 2320"]
     },
     "Year 3": {
-      "Summer 1": [
-        "ENGW 3307"
-      ],
-      "Fall": [
-        "BIOL 2309"
-      ]
+      "Summer 1": ["ENGW 3307"],
+      "Fall": ["BIOL 2309"]
     },
     "Year 4": {
-      "Fall": [
-        "DS 2000"
-      ]
+      "Fall": ["DS 2000"]
     },
     "Year 5": {
-      "Fall": [
-        "ENGW 3307"
-      ]
+      "Fall": ["ENGW 3307"]
     }
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "BNSC 1000",
-        "MATH 1251",
-        "PSYC 1101",
-        "BIOL 1107",
-        "CHEM 1161"
-      ],
-      "Spring": [
-        "ENGW 1111",
-        "PSYC 3458",
-        "BIOL 2299"
-      ]
+      "Fall": ["BNSC 1000", "MATH 1251", "PSYC 1101", "BIOL 1107", "CHEM 1161"],
+      "Spring": ["ENGW 1111", "PSYC 3458", "BIOL 2299"]
     },
     "Year 2": {
-      "Fall": [
-        "BIOL 2301",
-        "CHEM 2311",
-        "PSYC 3200",
-        "EESC 2000"
-      ],
-      "Summer 2": [
-        "CHEM 2313",
-        "PSYC 2320"
-      ]
+      "Fall": ["BIOL 2301", "CHEM 2311", "PSYC 3200", "EESC 2000"],
+      "Summer 2": ["CHEM 2313", "PSYC 2320"]
     },
     "Year 3": {
-      "Fall": [
-        "BIOL 2309"
-      ]
+      "Fall": ["BIOL 2309"]
     },
     "Year 4": {
-      "Fall": [
-        "DS 2000"
-      ]
+      "Fall": ["DS 2000"]
     },
     "Year 5": {
-      "Fall": [
-        "ENGW 3307"
-      ]
+      "Fall": ["ENGW 3307"]
     }
   }
 }

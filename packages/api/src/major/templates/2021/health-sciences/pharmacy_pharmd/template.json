@@ -1,13 +1,11 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "BIOL 1111",
-        "BIOL 1112",
-        "PSYC 1101",
-        "PHMD 1000",
-        "ENGW 1111"
-      ],
+      "Fall": ["BIOL 1111", "BIOL 1112", "PSYC 1101", "PHMD 1000", "ENGW 1111"],
       "Spring": [
         "CHEM 1161",
         "CHEM 1162",
@@ -38,20 +36,11 @@
         "PHMD 1201",
         "PHMD 1202"
       ],
-      "Summer Full Semester": [
-        "COOP 3945"
-      ]
+      "Summer Full Semester": ["COOP 3945"]
     },
     "Year 3": {
-      "Fall": [
-        "PHSC 2320",
-        "PHSC 4501",
-        "PHMD 2350",
-        "PHSC 3411"
-      ],
-      "Spring": [
-        "COOP 3945"
-      ],
+      "Fall": ["PHSC 2320", "PHSC 4501", "PHMD 2350", "PHSC 3411"],
+      "Spring": ["COOP 3945"],
       "Summer Full Semester": [
         "PHMD 2310",
         "PHMD 2311",
@@ -62,9 +51,7 @@
       ]
     },
     "Year 4": {
-      "Fall": [
-        "COOP 3945"
-      ],
+      "Fall": ["COOP 3945"],
       "Spring": [
         "PHSC 3430",
         "PHSC 2330",
@@ -81,12 +68,7 @@
       ]
     },
     "Year 5": {
-      "Fall": [
-        "PHMD 4631",
-        "PHMD 4632",
-        "PHMD 4633",
-        "PHMD 5560"
-      ],
+      "Fall": ["PHMD 4631", "PHMD 4632", "PHMD 4633", "PHMD 5560"],
       "Spring": [
         "PHMD 4641",
         "PHMD 4642",
