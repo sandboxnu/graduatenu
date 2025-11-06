@@ -1,4 +1,4 @@
-import { DownloadIcon } from "@chakra-ui/icons";
+import { CopyIcon, DownloadIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
@@ -14,6 +14,7 @@ import {
   Spinner,
   Tooltip,
   useDisclosure,
+  IconButton,
 } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
 import { useState } from "react";
@@ -103,6 +104,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                     mr="4"
                   />
                   <Button
+                    leftIcon={<CopyIcon />}
                     variant="solid"
                     size="md"
                     borderRadius="lg"
