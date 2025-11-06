@@ -103,7 +103,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                     mr="4"
                   />
                   <Button
-                    variant="outline"
+                    variant="solid"
                     size="md"
                     borderRadius="lg"
                     onClick={copyLink}
@@ -123,16 +123,8 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
               </>
             )}
           </ModalBody>
-          {/* <ModalFooter justifyContent="center">
+          <ModalFooter justifyContent="center">
             <Flex columnGap="sm">
-              <Button
-                variant="solidWhite"
-                size="md"
-                borderRadius="lg"
-                onClick={onClose}
-              >
-                Close
-              </Button>
               {!shareUrl ? (
                 <Button
                   variant="solid"
@@ -167,7 +159,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                 </>
               )}
             </Flex>
-          </ModalFooter> */}
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>
