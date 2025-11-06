@@ -45,6 +45,7 @@ export class StudentModel<T> {
   primaryPlanId: number | undefined;
   plans: PlanModel<T>[];
   concentration: string | undefined;
+  starredPlan: number | undefined;
   createdAt: Date;
   updatedAt: Date;
 }

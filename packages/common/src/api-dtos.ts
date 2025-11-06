@@ -157,6 +157,10 @@ export class UpdateStudentDto {
   @IsOptional()
   @IsBoolean()
   isOnboarded?: boolean;
+
+  @IsOptional()
+  @IsString()
+  starredPlan?: number;
 }
 
 export class OnboardStudentDto {
