@@ -129,7 +129,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                       size="md"
                       borderRadius="lg"
                       onClick={copyLink}
-                      bg="primary.red.800"
+                      bg="#9F201B"
                       color="white"
                     >
                       Copied
