@@ -92,7 +92,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
             ) : (
               <>
                 <Text fontWeight="medium" mb="2">
-                  Your share link
+                  Shareable link
                 </Text>
                 <Input
                   value={shareUrl}
