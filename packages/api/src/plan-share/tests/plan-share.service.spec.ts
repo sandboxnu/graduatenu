@@ -8,7 +8,7 @@ jest.mock("../../utils/generate-code", () => ({
   generateCode: jest.fn(),
 }));
 
-type Repo<T> = {
+type Repo<_T> = {
   create: jest.Mock;
   save: jest.Mock;
   findOne: jest.Mock;
