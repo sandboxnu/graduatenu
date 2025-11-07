@@ -58,9 +58,9 @@ const SharePlanPage: NextPage = () => {
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <GraduatePreAuthHeader />
-      <Flex height="100%" overflow="hidden" flexDirection="column" p="md">
+      <Flex height="100%" overflowY="auto" flexDirection="column" p="md">
         <Text fontSize="xl" fontWeight="bold" mb="md">
-          Shared Plan
+          Viewing {plan.name}
         </Text>
         <Plan
           plan={plan}
