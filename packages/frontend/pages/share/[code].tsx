@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import { Flex, Heading, Spinner, Text } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
 import { Plan, GraduatePreAuthHeader } from "../../components";
 import { ClientSideError } from "../../components/Error/ClientSideError";
@@ -59,9 +59,15 @@ const SharePlanPage: NextPage = () => {
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <GraduatePreAuthHeader />
       <Flex height="100%" overflowY="auto" flexDirection="column" p="md">
-        <Text fontSize="xl" fontWeight="bold" mb="md">
-          Viewing {plan.name}
-        </Text>
+        <Heading
+          as="h1"
+          fontSize="2xl"
+          color="primary.blue.dark.main"
+          fontWeight="bold"
+          mb="5"
+        >
+          Viewing Plan '{plan.name}'
+        </Heading>
         <Plan
           plan={plan}
           mutateStudentWithUpdatedPlan={() => {
