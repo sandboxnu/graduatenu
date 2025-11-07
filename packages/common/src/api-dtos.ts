@@ -256,7 +256,7 @@ export class ResetPasswordDto {
 
 export class CreatePlanShareDto {
   @IsObject()
-  planJson!: Record<string, any>;
+  planJson: Record<string, any>;
 
   @IsOptional()
   @IsInt()
