@@ -263,10 +263,10 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
           width: "100%",
         }}
         onMouseEnter={() => {
-          setHovered(true);
+          !isSharedPlan && setHovered(true);
         }}
         onMouseLeave={() => {
-          setHovered(false);
+          !isSharedPlan && setHovered(false);
         }}
         ref={ref}
         {...attributes}
