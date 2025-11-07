@@ -94,7 +94,7 @@ export const DraggableScheduleCourse: React.FC<
       isDisabled={isDisabled}
       isFromSidebar={isCourseFromSidebar(scheduleCourse.id)}
       isDraggable
-      isSharedPlan={true}
+      isSharedPlan={isSharedPlan}
     />
   );
 };

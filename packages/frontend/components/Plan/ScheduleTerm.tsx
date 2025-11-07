@@ -92,6 +92,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
           isEditable
           key={scheduleCourse.id}
           setIsRemove={setIsRemove}
+          isSharedPlan={isSharedPlan}
         />
       ))}
       {!isSharedPlan && <AddCourseButton onOpen={onOpen} />}
