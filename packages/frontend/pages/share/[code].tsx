@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Flex, Heading, Spinner, Text } from "@chakra-ui/react";
+import { Flex, Heading, Spinner } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
 import { Plan, GraduatePreAuthHeader } from "../../components";
 import { ClientSideError } from "../../components/Error/ClientSideError";
@@ -66,7 +66,7 @@ const SharePlanPage: NextPage = () => {
           fontWeight="bold"
           mb="5"
         >
-          Viewing Plan '{plan.name}'
+          Viewing Plan &apos;{plan.name}&apos;
         </Heading>
         <Plan
           plan={plan}
