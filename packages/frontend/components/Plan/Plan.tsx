@@ -38,7 +38,12 @@ export const Plan: React.FC<PlanProps> = ({
   setIsRemove,
   isSharedPlan = false,
 }) => {
-  const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
+  const [expandedYears, setExpandedYears] = useState<Set<number>>(() => {
+    if (isSharedPlan) {
+      return new Set(plan.schedule.years.map((year) => year.year));
+    }
+    return new Set();
+  });
   const totalYears = plan.schedule.years.length;
 
   const toggleExpanded = (year: ScheduleYear2<unknown>) => {
