@@ -44,6 +44,7 @@ interface DraggableScheduleCourseProps {
   isDisabled?: boolean;
   /** Only provide this prop to the overlay course being dragged around the screen. */
   setIsRemove?: (val: boolean) => void;
+  isSharedPlan?: boolean;
 }
 
 /** This is the static course on the page that can be dragged around. */
@@ -60,6 +61,7 @@ export const DraggableScheduleCourse: React.FC<
   isEditable = false,
   isDisabled = false,
   setIsRemove,
+  isSharedPlan,
 }) => {
   const { setNodeRef, transform, listeners, attributes, isDragging, over } =
     useDraggable({
@@ -92,6 +94,7 @@ export const DraggableScheduleCourse: React.FC<
       isDisabled={isDisabled}
       isFromSidebar={isCourseFromSidebar(scheduleCourse.id)}
       isDraggable
+      isSharedPlan={true}
     />
   );
 };
@@ -189,6 +192,7 @@ interface ScheduleCourseProps
   isRemove?: boolean;
   isFromSidebar?: boolean;
   isDraggable?: boolean;
+  isSharedPlan?: boolean;
 }
 
 /** A ScheduleCourse is purely stylistic. */
@@ -211,6 +215,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
       isRemove,
       isFromSidebar,
       isDraggable,
+      isSharedPlan,
     },
     ref
   ) => {
@@ -271,6 +276,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
           listeners={listeners}
           isOverlay={isOverlay}
           isDraggable={isDraggable}
+          isSharedPlan={isSharedPlan}
         />
         <Flex alignItems={"center"}>
           {isCourseError && (
@@ -282,7 +288,7 @@ const ScheduleCourse = forwardRef<HTMLElement | null, ScheduleCourseProps>(
               preReqErr={preReqErr}
             />
           )}
-          {isEditable && hovered && (
+          {isEditable && hovered && !isSharedPlan && (
             <CourseTrashButton
               onClick={
                 removeCourse ? () => removeCourse(scheduleCourse) : undefined
@@ -368,11 +374,12 @@ interface ScheduleCourseDraggedContentsProps {
   listeners: any;
   isOverlay: boolean;
   isDraggable?: boolean;
+  isSharedPlan?: boolean;
 }
 
 const ScheduleCourseDraggedContents: React.FC<
   ScheduleCourseDraggedContentsProps
-> = ({ scheduleCourse, listeners, isOverlay, isDraggable }) => {
+> = ({ scheduleCourse, listeners, isOverlay, isDraggable, isSharedPlan }) => {
   return (
     <div
       style={{
@@ -390,7 +397,7 @@ const ScheduleCourseDraggedContents: React.FC<
           height: "100%",
         }}
       >
-        {isDraggable && <CourseDragIcon />}
+        {isDraggable && !isSharedPlan && <CourseDragIcon />}
         <p style={{ lineHeight: 1.3 }}>
           <span style={{ marginRight: "2px", fontWeight: "bold" }}>
             {`${courseToString(scheduleCourse)} `}
