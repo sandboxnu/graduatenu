@@ -70,6 +70,7 @@ const SharePlanPage: NextPage = () => {
         </Heading>
         <Plan
           plan={plan}
+          isSharedPlan={true}
           mutateStudentWithUpdatedPlan={() => {
             //no updates
           }}

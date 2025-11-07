@@ -19,6 +19,7 @@ interface PlanProps {
   preReqErr?: PreReqWarnings;
   coReqErr?: CoReqWarnings;
   setIsRemove?: (val: boolean) => void;
+  isSharedPlan?: boolean;
 
   /**
    * Function to POST the plan and update the SWR cache for "student with plans"
@@ -35,6 +36,7 @@ export const Plan: React.FC<PlanProps> = ({
   preReqErr = undefined,
   coReqErr = undefined,
   setIsRemove,
+  isSharedPlan = false,
 }) => {
   const [expandedYears, setExpandedYears] = useState<Set<number>>(new Set());
   const totalYears = plan.schedule.years.length;
@@ -140,16 +142,19 @@ export const Plan: React.FC<PlanProps> = ({
                       removeYearFromCurrPlan(scheduleYear.year)
                     }
                     setIsRemove={setIsRemove}
+                    isSharedPlan={isSharedPlan}
                   />
                 </Flex>
               );
             })}
           </Flex>
           <Flex>
-            <AddYearButton
-              plan={plan}
-              mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
-            />
+            {!isSharedPlan && (
+              <AddYearButton
+                plan={plan}
+                mutateStudentWithUpdatedPlan={mutateStudentWithUpdatedPlan}
+              />
+            )}
           </Flex>
         </Flex>
       </PlanContext.Provider>

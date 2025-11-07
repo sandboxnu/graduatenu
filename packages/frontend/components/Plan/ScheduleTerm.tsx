@@ -21,6 +21,7 @@ interface ScheduleTermProps {
   yearNum: number;
   termCoReqErr?: TermError;
   termPreReqErr?: TermError;
+  isSharedPlan?: boolean;
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
@@ -49,6 +50,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
   setIsRemove,
   termCoReqErr = undefined,
   termPreReqErr = undefined,
+  isSharedPlan,
 }) => {
   const { isOver, setNodeRef } = useDroppable({ id: scheduleTerm.id });
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -92,7 +94,7 @@ export const ScheduleTerm: React.FC<ScheduleTermProps> = ({
           setIsRemove={setIsRemove}
         />
       ))}
-      <AddCourseButton onOpen={onOpen} />
+      {!isSharedPlan && <AddCourseButton onOpen={onOpen} />}
       <AddCourseModal
         season={scheduleTerm.season}
         isOpen={isOpen}
