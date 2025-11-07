@@ -142,7 +142,8 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
                 </Text>
                 {expiresAt && (
                   <Text fontSize="sm" color="gray.500" align="center">
-                    This link will expire {new Date(expiresAt).toLocaleString()}
+                    The code {planCode} will expire{" "}
+                    {new Date(expiresAt).toLocaleString()}
                   </Text>
                 )}
               </>
