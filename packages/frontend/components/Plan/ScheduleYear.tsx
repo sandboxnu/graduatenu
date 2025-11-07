@@ -83,55 +83,57 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         displayReqErrors={displayReqErrors}
         isSharedPlan={isSharedPlan}
       />
-      {isExpanded && (
-        <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
-          <ScheduleTerm
-            yearNum={scheduleYear.year}
-            catalogYear={catalogYear}
-            termCoReqErr={yearCoReqError?.fall}
-            termPreReqErr={yearPreReqError?.fall}
-            scheduleTerm={scheduleYear.fall}
-            addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
-            removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
-            setIsRemove={setIsRemove}
-            isSharedPlan={isSharedPlan}
-          />
-          <ScheduleTerm
-            yearNum={scheduleYear.year}
-            catalogYear={catalogYear}
-            termCoReqErr={yearCoReqError?.spring}
-            termPreReqErr={yearPreReqError?.spring}
-            scheduleTerm={scheduleYear.spring}
-            addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
-            removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
-            setIsRemove={setIsRemove}
-            isSharedPlan={isSharedPlan}
-          />
-          {/* TODO: support summer full term */}
-          <ScheduleTerm
-            catalogYear={catalogYear}
-            yearNum={scheduleYear.year}
-            termCoReqErr={yearCoReqError?.summer1}
-            termPreReqErr={yearPreReqError?.summer1}
-            scheduleTerm={scheduleYear.summer1}
-            addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
-            removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
-            setIsRemove={setIsRemove}
-            isSharedPlan={isSharedPlan}
-          />
-          <ScheduleTerm
-            catalogYear={catalogYear}
-            yearNum={scheduleYear.year}
-            termCoReqErr={yearCoReqError?.summer2}
-            termPreReqErr={yearPreReqError?.summer2}
-            scheduleTerm={scheduleYear.summer2}
-            addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
-            removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
-            setIsRemove={setIsRemove}
-            isSharedPlan={isSharedPlan}
-          />
-        </Grid>
-      )}
+
+      {isExpanded ||
+        (isSharedPlan && (
+          <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
+            <ScheduleTerm
+              yearNum={scheduleYear.year}
+              catalogYear={catalogYear}
+              termCoReqErr={yearCoReqError?.fall}
+              termPreReqErr={yearPreReqError?.fall}
+              scheduleTerm={scheduleYear.fall}
+              addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+              removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+              setIsRemove={setIsRemove}
+              isSharedPlan={isSharedPlan}
+            />
+            <ScheduleTerm
+              yearNum={scheduleYear.year}
+              catalogYear={catalogYear}
+              termCoReqErr={yearCoReqError?.spring}
+              termPreReqErr={yearPreReqError?.spring}
+              scheduleTerm={scheduleYear.spring}
+              addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+              removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+              setIsRemove={setIsRemove}
+              isSharedPlan={isSharedPlan}
+            />
+            {/* TODO: support summer full term */}
+            <ScheduleTerm
+              catalogYear={catalogYear}
+              yearNum={scheduleYear.year}
+              termCoReqErr={yearCoReqError?.summer1}
+              termPreReqErr={yearPreReqError?.summer1}
+              scheduleTerm={scheduleYear.summer1}
+              addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+              removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+              setIsRemove={setIsRemove}
+              isSharedPlan={isSharedPlan}
+            />
+            <ScheduleTerm
+              catalogYear={catalogYear}
+              yearNum={scheduleYear.year}
+              termCoReqErr={yearCoReqError?.summer2}
+              termPreReqErr={yearPreReqError?.summer2}
+              scheduleTerm={scheduleYear.summer2}
+              addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
+              removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
+              setIsRemove={setIsRemove}
+              isSharedPlan={isSharedPlan}
+            />
+          </Grid>
+        ))}
     </Flex>
   );
 };
