@@ -298,49 +298,69 @@ export type MajorValidationResult = Result<
 >;
 
 export function validateMajor2(
-  major: Major2,
+  majors: Major2[],
   taken: ScheduleCourse2<unknown>[],
-  minor?: Minor,
+  minors?: Minor[],
   concentrations?: SelectedConcentrationsType
 ): MajorValidationResult {
   const tracker = new Major2ValidationTracker(taken);
 
   let concentrationReq: Requirement2[] = [];
-  if (major.concentrations) {
+  if (majors.length == 1 && majors[0].concentrations) {
     concentrationReq = getConcentrationsRequirement(
       concentrations,
-      major.concentrations
+      majors[0].concentrations
     );
   }
 
-  let minorRequirements: Requirement2[] = [];
-  if (minor) {
+  const minorRequirements: Requirement2[] = [];
+  if (minors && minors.length > 0) {
     // Get the minor requirements and assign them
-    minorRequirements = getMinorRequirement(minor);
+    minors.forEach((minor) => {
+      minorRequirements.push(...getMinorRequirement(minor));
+    });
   }
 
-  let majorRequirements: Requirement2[] = [];
-  majorRequirements = wrapMajor(major);
+  const majorRequirements: Requirement2[] = [];
+  if (majors && majors.length > 0) {
+    majors.forEach((major) => {
+      majorRequirements.push(...wrapMajor(major));
+    });
+  }
 
-  const majorReqs = [
+  const allRequirements = [
     ...majorRequirements,
     ...minorRequirements,
     ...concentrationReq,
   ];
 
   const requiredCourses: Set<string> = new Set();
-  tracker.setNecessaryCourses(getNecessaryCourses(majorReqs, requiredCourses));
+  tracker.setNecessaryCourses(
+    getNecessaryCourses(allRequirements, requiredCourses)
+  );
 
   // create a big AND requirement of all the sections and selected concentrations
   const requirementsResult = validateRequirement(
     {
       type: "AND",
-      courses: majorReqs,
+      courses: allRequirements,
     },
     tracker
   );
+
+  // Most majors require the same total (e.g., 128), so take the max
+  const totalMajorCredits =
+    majors && majors.length > 0
+      ? Math.max(...majors.map((m) => m.totalCreditsRequired))
+      : 0;
+
+  const totalMinorCredits =
+    minors && minors.length > 0
+      ? Math.max(...minors.map((m) => m.totalCreditsRequired ?? 0))
+      : 0;
+
   const creditsResult = validateTotalCreditsRequired(
-    major.totalCreditsRequired + (minor?.totalCreditsRequired ?? 0),
+    Math.max(totalMajorCredits, totalMinorCredits), // Take max of both
     taken
   );
 

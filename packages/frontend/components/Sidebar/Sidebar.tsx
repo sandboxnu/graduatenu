@@ -1,4 +1,4 @@
-import { Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
+import { Flex, Heading, IconButton, Link, Stack, Text } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import {
   MajorValidationError,
@@ -33,6 +33,7 @@ import NUPathSection from "./NUPathSection";
 import { NUPathEnum } from "@graduate/common";
 import GenericSection from "./GenericSection";
 import SidebarContainer from "./SidebarContainer";
+import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -78,20 +79,42 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = memo(
   ({ selectedPlan, transferCourses }) => {
     const router = useRouter();
+
+    // State to track which major/minor is currently being viewed
+    const [currentMajorIndex, setCurrentMajorIndex] = useState(0);
+    const [currentMinorIndex, setCurrentMinorIndex] = useState(0);
+
+    // need to iterate through each major in majors not just do it once
     const {
-      major,
+      majors,
       isLoading: isMajorLoading,
       error: majorError,
-    } = useMajor(selectedPlan.catalogYear, selectedPlan.major);
-    const concentration = major?.concentrations?.concentrationOptions.find(
-      (concentration) => concentration.title === selectedPlan.concentration
-    );
+    } = useMajor(selectedPlan.catalogYear, selectedPlan.majors);
+
+    // Concentrations not supported for double / tripple majors at the moment
+    const concentration =
+      majors.length > 1
+        ? undefined
+        : majors[0]?.concentrations?.concentrationOptions.find(
+            (concentration) =>
+              concentration.title === selectedPlan.concentration
+          );
 
     const {
-      minor,
+      minors,
       isLoading: isMinorLoading,
       error: minorError,
-    } = useMinor(selectedPlan.catalogYear, selectedPlan.minor ?? "");
+    } = useMinor(selectedPlan.catalogYear, selectedPlan.minors);
+
+    // Reset indices when plan changes or majors/minors change
+    useEffect(() => {
+      setCurrentMajorIndex(0);
+      setCurrentMinorIndex(0);
+    }, [selectedPlan.id, majors.length, minors.length]);
+
+    // Get the currently viewed major and minor
+    const currentMajor = majors[currentMajorIndex];
+    const currentMinor = minors[currentMinorIndex];
 
     const workerRef = useRef<Worker>();
 
@@ -106,12 +129,12 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const revalidateMajor = () => {
       setValidationStatus(undefined);
-      if (!selectedPlan || !major || !workerRef.current) return;
+      if (!selectedPlan || !currentMajor || !workerRef.current) return;
 
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
-        major: major,
-        minor: minor || undefined,
+        majors: majors,
+        minors: minors,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
@@ -165,10 +188,13 @@ const Sidebar: React.FC<SidebarProps> = memo(
     // revalidateMajor because it will change every time, so we're choosing
     // to omit it here:
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(revalidateMajor, [selectedPlan, major, minor]);
+    useEffect(
+      () => revalidateMajor(),
+      [selectedPlan, currentMajor, currentMinor]
+    );
 
-    const majorCourses = getAllCoursesInMajor(major, concentration);
-    const minorCourses = getAllCoursesInMinor(minor);
+    const majorCourses = getAllCoursesInMajor(currentMajor, concentration);
+    const minorCourses = getAllCoursesInMinor(currentMinor);
 
     const {
       courses,
@@ -185,7 +211,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       return <SidebarContainer title="Loading..." />;
     }
 
-    if (!major) {
+    if (!currentMajor) {
       if (majorError) {
         if (
           axios.isAxiosError(majorError) &&
@@ -200,7 +226,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
       return <SidebarContainer title="" />;
     }
 
-    if (selectedPlan.minor && !minor) {
+    if (selectedPlan.minors && !minors[0]) {
       if (minorError) {
         handleApiClientError(minorError, router);
       }
@@ -229,7 +255,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
     const concentrationValidationError: MajorValidationError | undefined =
       getSectionError(
-        (major ? 1 : 0) + (minor ? 1 : 0), // offset by major and minor length
+        (currentMajor ? 1 : 0) + (currentMajor ? 1 : 0), // offset by major and minor length
         0, // the concentration AND index is always 0
         validationStatus
       );
@@ -257,18 +283,35 @@ const Sidebar: React.FC<SidebarProps> = memo(
       transferCourses
     );
 
+    // Navigation handlers
+    const handlePrevMajor = () => {
+      setCurrentMajorIndex((prev) => (prev > 0 ? prev - 1 : majors.length - 1));
+    };
+
+    const handleNextMajor = () => {
+      setCurrentMajorIndex((prev) => (prev < majors.length - 1 ? prev + 1 : 0));
+    };
+
+    const handlePrevMinor = () => {
+      setCurrentMinorIndex((prev) => (prev > 0 ? prev - 1 : minors.length - 1));
+    };
+
+    const handleNextMinor = () => {
+      setCurrentMinorIndex((prev) => (prev < minors.length - 1 ? prev + 1 : 0));
+    };
+
     return (
       <SidebarContainer
-        title={major.name}
+        title={currentMajor.name}
         subtitle={
           selectedPlan.concentration === UNDECIDED_STRING
             ? UNDECIDED_CONCENTRATION
             : selectedPlan.concentration
         }
         creditsTaken={creditsTaken}
-        creditsToTake={major.totalCreditsRequired}
+        creditsToTake={currentMajor.totalCreditsRequired}
         renderCoopBlock
-        renderBetaMajorBlock={major.metadata?.verified !== true}
+        renderBetaMajorBlock={currentMajor.metadata?.verified !== true}
         planId={selectedPlan.id}
       >
         {courseData && (
@@ -306,7 +349,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 >
                   MAJOR
                 </Tab>
-                {selectedPlan.minor && (
+                {currentMinor && (
                   <Tab
                     _selected={{ color: "white", bg: "blue.800" }}
                     flex="0.4"
@@ -320,7 +363,51 @@ const Sidebar: React.FC<SidebarProps> = memo(
               </TabList>
               <TabPanels>
                 <TabPanel width="100%" p={0} m={0}>
-                  {major.requirementSections.map((section, index) => {
+                  {/* Major navigation header */}
+                  <Flex
+                    align="center"
+                    justify="space-between"
+                    px={4}
+                    py={3}
+                    bg="blue.50"
+                    borderBottom="1px solid"
+                    borderColor="neutral.200"
+                  >
+                    <IconButton
+                      aria-label="Previous major"
+                      icon={<ChevronLeftIcon />}
+                      size="sm"
+                      onClick={handlePrevMajor}
+                      isDisabled={majors.length <= 1}
+                      variant="ghost"
+                      colorScheme="blue"
+                    />
+                    <Heading
+                      fontSize="md"
+                      fontWeight="semibold"
+                      color="primary.blue.dark.main"
+                      textAlign="center"
+                      flex="1"
+                    >
+                      {currentMajor.name}
+                      {majors.length > 1 && (
+                        <Text as="span" fontSize="sm" color="gray.600" ml={2}>
+                          ({currentMajorIndex + 1}/{majors.length})
+                        </Text>
+                      )}
+                    </Heading>
+                    <IconButton
+                      aria-label="Next major"
+                      icon={<ChevronRightIcon />}
+                      size="sm"
+                      onClick={handleNextMajor}
+                      isDisabled={majors.length <= 1}
+                      variant="ghost"
+                      colorScheme="blue"
+                    />
+                  </Flex>
+
+                  {currentMajor.requirementSections.map((section, index) => {
                     const sectionValidationError:
                       | MajorValidationError
                       | undefined = getSectionError(
@@ -357,8 +444,57 @@ const Sidebar: React.FC<SidebarProps> = memo(
                   )}
                 </TabPanel>
                 <TabPanel width="100%" p={0} m={0}>
-                  {minor && (
+                  {currentMinor && (
                     <>
+                      {/* Minor navigation header */}
+                      <Flex
+                        align="center"
+                        justify="space-between"
+                        px={4}
+                        py={3}
+                        bg="blue.50"
+                        borderBottom="1px solid"
+                        borderColor="neutral.200"
+                      >
+                        <IconButton
+                          aria-label="Previous minor"
+                          icon={<ChevronLeftIcon />}
+                          size="sm"
+                          onClick={handlePrevMinor}
+                          isDisabled={minors.length <= 1}
+                          variant="ghost"
+                          colorScheme="blue"
+                        />
+                        <Heading
+                          fontSize="md"
+                          fontWeight="semibold"
+                          color="primary.blue.dark.main"
+                          textAlign="center"
+                          flex="1"
+                        >
+                          {currentMinor.name}
+                          {minors.length > 1 && (
+                            <Text
+                              as="span"
+                              fontSize="sm"
+                              color="gray.600"
+                              ml={2}
+                            >
+                              ({currentMinorIndex + 1}/{minors.length})
+                            </Text>
+                          )}
+                        </Heading>
+                        <IconButton
+                          aria-label="Next minor"
+                          icon={<ChevronRightIcon />}
+                          size="sm"
+                          onClick={handleNextMinor}
+                          isDisabled={minors.length <= 1}
+                          variant="ghost"
+                          colorScheme="blue"
+                        />
+                      </Flex>
+
                       <Flex>
                         <Heading
                           color="primary.blue.dark.main"
@@ -369,29 +505,31 @@ const Sidebar: React.FC<SidebarProps> = memo(
                           Minor Requirements
                         </Heading>
                       </Flex>
-                      {minor.requirementSections.map((section, index) => {
-                        const sectionValidationError:
-                          | MajorValidationError
-                          | undefined = getSectionError(
-                          1, // Offset by major length
-                          index, // Section index for minor
-                          validationStatus
-                        );
+                      {currentMinor.requirementSections.map(
+                        (section, index) => {
+                          const sectionValidationError:
+                            | MajorValidationError
+                            | undefined = getSectionError(
+                            1, // Offset by major length
+                            index, // Section index for minor
+                            validationStatus
+                          );
 
-                        const sectionValidationStatus =
-                          getSidebarValidationStatus(sectionValidationError);
-                        return (
-                          <SidebarSection
-                            key={index}
-                            section={section}
-                            courseData={courseData}
-                            dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
-                            validationStatus={sectionValidationStatus}
-                            loading={isCoursesLoading}
-                            coursesTaken={coursesTaken}
-                          ></SidebarSection>
-                        );
-                      })}
+                          const sectionValidationStatus =
+                            getSidebarValidationStatus(sectionValidationError);
+                          return (
+                            <SidebarSection
+                              key={index}
+                              section={section}
+                              courseData={courseData}
+                              dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
+                              validationStatus={sectionValidationStatus}
+                              loading={isCoursesLoading}
+                              coursesTaken={coursesTaken}
+                            ></SidebarSection>
+                          );
+                        }
+                      )}
                     </>
                   )}
                 </TabPanel>

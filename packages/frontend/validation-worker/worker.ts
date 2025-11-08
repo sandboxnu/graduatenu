@@ -14,9 +14,9 @@ addEventListener("message", ({ data }: MessageEvent<WorkerPostInfo>) => {
   const validationResult: ValidationResult = {
     type: WorkerMessageType.ValidationResult,
     result: validateMajor2(
-      data.major,
+      data.majors,
       data.taken,
-      data.minor,
+      data.minors,
       data.concentration
     ),
     requestNumber: data.requestNumber,
