@@ -1,48 +1,25 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "BUSN 1102",
-        "ACCT 1201",
-        "ENGW 1111",
-        "COMM 1101",
-        "MATH 1231"
-      ],
-      "Spring": [
-        "COMM 1112",
-        "MGSC 2301",
-        "MKTG 2201"
-      ]
+      "Fall": ["BUSN 1102", "ACCT 1201", "ENGW 1111", "COMM 1101", "MATH 1231"],
+      "Spring": ["COMM 1112", "MGSC 2301", "MKTG 2201"]
     },
     "Year 2": {
-      "Fall": [
-        "FINA 2201",
-        "BUSN 1103",
-        "ECON 1115"
-      ],
-      "Spring": [
-        "COOP 3945"
-      ],
-      "Summer 1": [
-        "COOP 3945"
-      ]
+      "Fall": ["FINA 2201", "BUSN 1103", "ECON 1115"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
     },
     "Year 3": {
-      "Spring": [
-        "COOP 3945"
-      ],
-      "Summer 1": [
-        "COOP 3945"
-      ],
-      "Fall": [
-        "MKTG 4504"
-      ]
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"],
+      "Fall": ["MKTG 4504"]
     },
     "Year 4": {
-      "Spring": [
-        "COMM 4608",
-        "COMM 3409"
-      ]
+      "Spring": ["COMM 4608", "COMM 3409"]
     }
   }
 }

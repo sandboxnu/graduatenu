@@ -2,11 +2,18 @@
   "name": "English and Graphic and Information Design, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
   "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "English Course-Level Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
     {
       "type": "SECTION",
       "title": "Introduction to College",
@@ -103,7 +110,7 @@
         {
           "type": "COURSE",
           "classId": 3685,
-          "subject": "ENGL/JWSS"
+          "subject": "JWSS"
         }
       ],
       "minRequirementCount": 11
@@ -135,7 +142,7 @@
         {
           "type": "COURSE",
           "classId": 3678,
-          "subject": "ENGL/JWSS"
+          "subject": "JWSS"
         },
         {
           "type": "COURSE",
@@ -192,7 +199,7 @@
         {
           "type": "COURSE",
           "classId": 3685,
-          "subject": "ENGL/JWSS"
+          "subject": "JWSS"
         },
         {
           "type": "COURSE",
@@ -504,6 +511,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "English Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

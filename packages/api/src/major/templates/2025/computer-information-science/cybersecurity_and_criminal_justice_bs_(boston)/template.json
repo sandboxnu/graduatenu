@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CRIM 1100", "CS 1200", "CS 2000", "CS 1800", "ENGW 1111"],
+      "Spring": ["CRIM 1110", "CRIM 1120", "CS 2100"],
+      "Summer 1": ["CS 3100", "MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["CRIM 3600", "CRIM 3700", "CY 2550", "CS 3650"],
+      "Spring": ["CS 1210", "CS 4700"],
+      "Summer 1": ["CS 3000"]
+    },
+    "Year 3": {
+      "Spring": ["CRIM 3000", "CY 3740"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CY 4740", "CRIM 4000", "CY 4170"]
+    }
+  }
+}

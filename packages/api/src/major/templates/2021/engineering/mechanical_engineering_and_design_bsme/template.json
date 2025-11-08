@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "4 Years, One Co-op in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -38,15 +42,8 @@
         "ME 2340",
         "ME 2341"
       ],
-      "Summer 1": [
-        "ARTG 2250",
-        "ME 3475"
-      ],
-      "Summer 2": [
-        "ENGW 3302",
-        "ME 3475",
-        "ARTG 2250"
-      ]
+      "Summer 1": ["ARTG 2250", "ME 3475"],
+      "Summer 2": ["ENGW 3302", "ME 3475", "ARTG 2250"]
     },
     "Year 3": {
       "Fall": [
@@ -74,13 +71,8 @@
         "ME 2355",
         "ME 2356"
       ],
-      "Summer 1": [
-        "MEIE 4701",
-        "ME 3475"
-      ],
-      "Summer 2": [
-        "MEIE 4701"
-      ]
+      "Summer 1": ["MEIE 4701", "ME 3475"],
+      "Summer 2": ["MEIE 4701"]
     },
     "Year 4": {
       "Spring": [
@@ -101,21 +93,12 @@
         "ME 4505",
         "ME 4506"
       ],
-      "Summer 1": [
-        "MEIE 4701"
-      ],
-      "Summer 2": [
-        "MEIE 4701"
-      ]
+      "Summer 1": ["MEIE 4701"],
+      "Summer 2": ["MEIE 4701"]
     },
     "Year 5": {
-      "Spring": [
-        "MEIE 4702",
-        "ENGW 3302"
-      ],
-      "Fall": [
-        "MEIE 4702"
-      ]
+      "Spring": ["MEIE 4702", "ENGW 3302"],
+      "Fall": ["MEIE 4702"]
     }
   },
   "4 Years, One Co-op in Spring/Summer 1": {
@@ -157,11 +140,7 @@
         "ME 2381",
         "ENCP 2000"
       ],
-      "Summer 2": [
-        "ENGW 3302",
-        "ME 3475",
-        "ARTG 2250"
-      ]
+      "Summer 2": ["ENGW 3302", "ME 3475", "ARTG 2250"]
     },
     "Year 3": {
       "Fall": [
@@ -176,18 +155,9 @@
         "ME 2380",
         "ME 2381"
       ],
-      "Summer 2": [
-        "MEIE 4701"
-      ],
-      "Spring": [
-        "ARTG 2250",
-        "ENGW 3302",
-        "ME 2355",
-        "ME 2356"
-      ],
-      "Summer 1": [
-        "ME 3475"
-      ]
+      "Summer 2": ["MEIE 4701"],
+      "Spring": ["ARTG 2250", "ENGW 3302", "ME 2355", "ME 2356"],
+      "Summer 1": ["ME 3475"]
     },
     "Year 4": {
       "Fall": [
@@ -200,28 +170,13 @@
         "ME 4505",
         "ME 4506"
       ],
-      "Spring": [
-        "ENCP 3000",
-        "ME 3455",
-        "ME 3456",
-        "ME 4505",
-        "ME 4506"
-      ],
-      "Summer 1": [
-        "MEIE 4701"
-      ],
-      "Summer 2": [
-        "MEIE 4701"
-      ]
+      "Spring": ["ENCP 3000", "ME 3455", "ME 3456", "ME 4505", "ME 4506"],
+      "Summer 1": ["MEIE 4701"],
+      "Summer 2": ["MEIE 4701"]
     },
     "Year 5": {
-      "Spring": [
-        "MEIE 4702",
-        "ENGW 3302"
-      ],
-      "Fall": [
-        "MEIE 4702"
-      ]
+      "Spring": ["MEIE 4702", "ENGW 3302"],
+      "Fall": ["MEIE 4702"]
     }
   },
   "5 Years, Three Co-ops in Summer 2/Fall": {
@@ -261,40 +216,16 @@
         "ME 2380",
         "ME 2381"
       ],
-      "Summer 2": [
-        "ARTG 2250",
-        "ME 3475"
-      ]
+      "Summer 2": ["ARTG 2250", "ME 3475"]
     },
     "Year 3": {
-      "Spring": [
-        "ARTG 2250",
-        "ENGW 3302",
-        "ME 2355",
-        "ME 2356"
-      ],
-      "Summer 1": [
-        "ME 3475"
-      ],
-      "Fall": [
-        "MATH 2341",
-        "ME 2355",
-        "ME 2356",
-        "ME 2380",
-        "ME 2381"
-      ]
+      "Spring": ["ARTG 2250", "ENGW 3302", "ME 2355", "ME 2356"],
+      "Summer 1": ["ME 3475"],
+      "Fall": ["MATH 2341", "ME 2355", "ME 2356", "ME 2380", "ME 2381"]
     },
     "Year 4": {
-      "Spring": [
-        "ENCP 3000",
-        "ME 3455",
-        "ME 3456",
-        "ME 4505",
-        "ME 4506"
-      ],
-      "Summer 1": [
-        "MEIE 4701"
-      ],
+      "Spring": ["ENCP 3000", "ME 3455", "ME 3456", "ME 4505", "ME 4506"],
+      "Summer 1": ["MEIE 4701"],
       "Fall": [
         "ENCP 3000",
         "ME 2340",
@@ -304,18 +235,11 @@
         "ME 4505",
         "ME 4506"
       ],
-      "Summer 2": [
-        "MEIE 4701"
-      ]
+      "Summer 2": ["MEIE 4701"]
     },
     "Year 5": {
-      "Spring": [
-        "MEIE 4702",
-        "ENGW 3302"
-      ],
-      "Fall": [
-        "MEIE 4702"
-      ]
+      "Spring": ["MEIE 4702", "ENGW 3302"],
+      "Fall": ["MEIE 4702"]
     }
   },
   "5 Years, Three Co-ops in Spring/Summer 1": {
@@ -347,19 +271,10 @@
         "PHYS 1156",
         "PHYS 1157"
       ],
-      "Summer 2": [
-        "ARTG 2250",
-        "ME 3475"
-      ]
+      "Summer 2": ["ARTG 2250", "ME 3475"]
     },
     "Year 3": {
-      "Fall": [
-        "MATH 2341",
-        "ME 2355",
-        "ME 2356",
-        "ME 2380",
-        "ME 2381"
-      ]
+      "Fall": ["MATH 2341", "ME 2355", "ME 2356", "ME 2380", "ME 2381"]
     },
     "Year 4": {
       "Fall": [
@@ -371,17 +286,11 @@
         "ME 4505",
         "ME 4506"
       ],
-      "Summer 2": [
-        "MEIE 4701"
-      ]
+      "Summer 2": ["MEIE 4701"]
     },
     "Year 5": {
-      "Fall": [
-        "MEIE 4702"
-      ],
-      "Spring": [
-        "ENGW 3302"
-      ]
+      "Fall": ["MEIE 4702"],
+      "Spring": ["ENGW 3302"]
     }
   }
 }

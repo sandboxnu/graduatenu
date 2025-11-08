@@ -2,7 +2,8 @@
   "name": "Linguistics and Psychology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -325,6 +326,12 @@
         }
       ],
       "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Language Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

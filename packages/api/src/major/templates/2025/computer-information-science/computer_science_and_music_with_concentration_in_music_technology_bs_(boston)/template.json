@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "ENGW 1111", "CS 2000", "MUSC 1001"],
+      "Spring": ["CS 2100", "MUSC 2350", "MUSC 1119", "MUST 1220", "EEAM 2000"],
+      "Summer 1": ["CS 3100", "MUSC 1201"],
+      "Summer 2": ["PSYC 1101"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "CS 3200", "MUST 2431", "MUSC 1202"]
+    },
+    "Year 3": {
+      "Fall": ["MUSC 2111", "CS 2484"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["MUST 2102", "CS 4530"],
+      "Spring": ["MUST 4611"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "ENGW 1111", "CS 2000", "MUSC 1001"],
+      "Spring": ["CS 2100", "MUSC 2350", "MUSC 1119", "MUST 1220", "EEAM 2000"],
+      "Summer 1": ["CS 3100", "MUSC 1201"],
+      "Summer 2": ["PSYC 1101"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "CS 3200", "MUST 2431", "MUSC 1202"]
+    },
+    "Year 3": {
+      "Fall": ["MUSC 2111", "CS 2484"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["MUST 2102", "CS 4530"],
+      "Spring": ["MUST 4611"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "ENGW 1111", "CS 2000", "MUSC 1001"],
+      "Spring": ["CS 2100", "MUSC 2350", "MUST 1220", "MUSC 1119", "EEAM 2000"],
+      "Summer 1": ["CS 3100", "MUSC 1201"],
+      "Summer 2": ["PSYC 1101"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "CS 3200", "MUST 2431", "MUSC 1202"],
+      "Spring": ["CS 1210", "MUSC 2111", "CS 2484"]
+    },
+    "Year 3": {
+      "Spring": ["MUST 2102", "CS 4530"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["MUST 4611"]
+    }
+  }
+}

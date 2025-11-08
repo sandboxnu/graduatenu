@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
       "Fall": [
@@ -9,23 +13,11 @@
         "PHTH 1260",
         "PSYC 1101"
       ],
-      "Spring": [
-        "BIOL 1113",
-        "BIOL 1114",
-        "CHEM 1161",
-        "ENGW 1111"
-      ]
+      "Spring": ["BIOL 1113", "BIOL 1114", "CHEM 1161", "ENGW 1111"]
     },
     "Year 2": {
-      "Fall": [
-        "COMM 1101",
-        "COMM 1112",
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "ENGW 3306"
-      ]
+      "Fall": ["COMM 1101", "COMM 1112", "HSCI 2000", "PHTH 2210"],
+      "Summer 2": ["ENGW 3306"]
     },
     "Year 3": {},
     "Year 4": {}
@@ -40,27 +32,14 @@
         "PHTH 1260",
         "PSYC 1101"
       ],
-      "Spring": [
-        "BIOL 1113",
-        "BIOL 1114",
-        "CHEM 1161",
-        "ENGW 1111"
-      ]
+      "Spring": ["BIOL 1113", "BIOL 1114", "CHEM 1161", "ENGW 1111"]
     },
     "Year 2": {
-      "Fall": [
-        "COMM 1101",
-        "COMM 1112"
-      ],
-      "Spring": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ]
+      "Fall": ["COMM 1101", "COMM 1112"],
+      "Spring": ["HSCI 2000", "PHTH 2210"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306"
-      ]
+      "Spring": ["ENGW 3306"]
     },
     "Year 4": {},
     "Year 5": {}

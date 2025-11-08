@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Default Plan": {
     "Year 1": {
       "Fall": ["CS 1100", "ECON 1115", "MATH 1000", "MATH 1341", "MATH 1365"],

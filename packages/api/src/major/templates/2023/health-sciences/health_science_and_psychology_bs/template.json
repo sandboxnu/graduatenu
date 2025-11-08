@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, One Co-op Plan": {
     "Year 1": {
       "Fall": [
@@ -10,46 +14,20 @@
         "PSYC 1101",
         "PSYC 1000"
       ],
-      "Spring": [
-        "BIOL 1113",
-        "BIOL 1114",
-        "CHEM 1161",
-        "ENGW 1111"
-      ]
+      "Spring": ["BIOL 1113", "BIOL 1114", "CHEM 1161", "ENGW 1111"]
     },
     "Year 2": {
-      "Fall": [
-        "PSYC 2320",
-        "PSYC 3458",
-        "HSCI 2000",
-        "PHIL 1165"
-      ],
-      "Summer 2": [
-        "ENGW 3306",
-        "PHIL 1165"
-      ],
-      "Spring": [
-        "EESC 2000"
-      ]
+      "Fall": ["PSYC 2320", "PSYC 3458", "HSCI 2000", "PHIL 1165"],
+      "Summer 2": ["ENGW 3306", "PHIL 1165"],
+      "Spring": ["EESC 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "HSCI 2000",
-        "PHIL 1165"
-      ],
-      "Summer 2": [
-        "ENGW 3306",
-        "PHTH 4540"
-      ],
-      "Spring": [
-        "ENGW 3306",
-        "PSYC 3510"
-      ]
+      "Fall": ["HSCI 2000", "PHIL 1165"],
+      "Summer 2": ["ENGW 3306", "PHTH 4540"],
+      "Spring": ["ENGW 3306", "PSYC 3510"]
     },
     "Year 4": {
-      "Spring": [
-        "PSYC 3510"
-      ]
+      "Spring": ["PSYC 3510"]
     }
   },
   "Four Years, Two Co-ops Plan (College: Bouvé)": {
@@ -62,38 +40,18 @@
         "PSYC 1000",
         "PSYC 1101"
       ],
-      "Spring": [
-        "BIOL 1113",
-        "BIOL 1114",
-        "CHEM 1161",
-        "ENGW 1111"
-      ]
+      "Spring": ["BIOL 1113", "BIOL 1114", "CHEM 1161", "ENGW 1111"]
     },
     "Year 2": {
-      "Fall": [
-        "HSCI 2000",
-        "PSYC 2320",
-        "PSYC 3458",
-        "PHIL 1165"
-      ],
-      "Summer 2": [
-        "ENGW 3306",
-        "PHIL 1165"
-      ],
-      "Spring": [
-        "EESC 2000"
-      ]
+      "Fall": ["HSCI 2000", "PSYC 2320", "PSYC 3458", "PHIL 1165"],
+      "Summer 2": ["ENGW 3306", "PHIL 1165"],
+      "Spring": ["EESC 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306",
-        "PSYC 3510"
-      ]
+      "Spring": ["ENGW 3306", "PSYC 3510"]
     },
     "Year 4": {
-      "Spring": [
-        "PSYC 3510"
-      ]
+      "Spring": ["PSYC 3510"]
     }
   },
   "Four Years, Two Co-ops Plan (College: Science)": {
@@ -106,28 +64,14 @@
         "PSYC 1000",
         "PSYC 1101"
       ],
-      "Spring": [
-        "BIOL 1113",
-        "BIOL 1114",
-        "CHEM 1161",
-        "ENGW 1111"
-      ]
+      "Spring": ["BIOL 1113", "BIOL 1114", "CHEM 1161", "ENGW 1111"]
     },
     "Year 2": {
-      "Fall": [
-        "PHIL 1165",
-        "PSYC 2320",
-        "PSYC 3458"
-      ],
-      "Spring": [
-        "EESC 2000"
-      ]
+      "Fall": ["PHIL 1165", "PSYC 2320", "PSYC 3458"],
+      "Spring": ["EESC 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306",
-        "PSYC 3510"
-      ]
+      "Spring": ["ENGW 3306", "PSYC 3510"]
     },
     "Year 4": {}
   }

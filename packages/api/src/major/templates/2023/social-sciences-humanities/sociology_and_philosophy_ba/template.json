@@ -1,24 +1,16 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/ Fall": {
     "Year 1": {
-      "Fall": [
-        "PHIL 1115",
-        "SOCL 1101"
-      ],
-      "Spring": [
-        "PHIL 2325",
-        "PHIL 2330"
-      ]
+      "Fall": ["PHIL 1115", "SOCL 1101"],
+      "Spring": ["PHIL 2325", "PHIL 2330"]
     },
     "Year 2": {
-      "Fall": [
-        "ANTH 2305",
-        "SOCL 2320"
-      ],
-      "Spring": [
-        "SOCL 2321",
-        "SOCL 3300"
-      ]
+      "Fall": ["ANTH 2305", "SOCL 2320"],
+      "Spring": ["SOCL 2321", "SOCL 3300"]
     },
     "Year 3": {},
     "Year 4": {}

@@ -1,0 +1,404 @@
+{
+  "name": "Physics and Philosophy, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/5/2025",
+    "branch": "main"
+  },
+  "totalCreditsRequired": 132,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introductory Physics",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Physics 1",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1161,
+                  "description": "Physics 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1162,
+                  "description": "Lab for PHYS 1161",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1151,
+                  "description": "Physics for Engineering 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1152,
+                  "description": "Lab for PHYS 1151",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1153,
+                  "description": "Interactive Learning Seminar for PHYS 1151",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Physics 2",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1165,
+                  "description": "Physics 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1166,
+                  "description": "Lab for PHYS 1165",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1155,
+                  "description": "Physics for Engineering 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1156,
+                  "description": "Lab for PHYS 1155",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1157,
+                  "description": "Interactive Learning Seminar for PHYS 1155",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate Physics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "PHYS"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHYS",
+              "classId": 2371,
+              "description": "Electronics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHYS",
+              "classId": 2372,
+              "description": "Lab for PHYS 2371",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Physics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3600,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3602,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4115,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4305,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Physics Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4606,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5111,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5113,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5116,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5260,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4621,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4623,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4651,
+          "subject": "PHYS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4652,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy Required Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1115,
+          "subject": "PHIL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "POLS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2330,
+          "subject": "PHIL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4500,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3050,
+              "subject": "PHIL"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy Advanced Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3343,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3360,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3435,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4500,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4515,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4535,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4555,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4903,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5001,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5002,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5005,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5010,
+          "subject": "PHIL"
+        }
+      ],
+      "minRequirementCount": 15
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Course Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "PHYS"
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1341,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1342,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2321,
+          "subject": "MATH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2341,
+          "subject": "MATH"
+        }
+      ],
+      "minRequirementCount": 4
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

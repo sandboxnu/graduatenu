@@ -1,25 +1,16 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, One Co-op Plan": {
     "Year 1": {
-      "Fall": [
-        "CRIM 1000",
-        "ENGW 1111",
-        "CRIM 1100",
-        "ENGL 1400"
-      ],
-      "Spring": [
-        "ENGL 1160",
-        "CRIM 1110",
-        "CRIM 1120"
-      ]
+      "Fall": ["CRIM 1000", "ENGW 1111", "CRIM 1100", "ENGL 1400"],
+      "Spring": ["ENGL 1160", "CRIM 1110", "CRIM 1120"]
     },
     "Year 2": {},
     "Year 3": {
-      "Fall": [
-        "CRIM 3600",
-        "CRIM 3700",
-        "ENGL 3710"
-      ]
+      "Fall": ["CRIM 3600", "CRIM 3700", "ENGL 3710"]
     },
     "Year 4": {}
   }

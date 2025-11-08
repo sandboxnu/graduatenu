@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "PHIL 1110"]
+    },
+    "Year 2": {},
+    "Year 3": {},
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "PHIL 1110"]
+    },
+    "Year 2": {},
+    "Year 3": {},
+    "Year 4": {}
+  },
+  "Five Years, Three Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "PHIL 1110"]
+    },
+    "Year 2": {},
+    "Year 3": {},
+    "Year 4": {},
+    "Year 5": {}
+  }
+}

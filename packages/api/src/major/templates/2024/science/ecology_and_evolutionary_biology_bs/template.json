@@ -1,40 +1,22 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Spring Co-ops": {
     "Year 1": {
-      "Fall": [
-        "EEMB 1101",
-        "ENVR 1000",
-        "ENVR 1500",
-        "MATH 1241"
-      ],
-      "Spring": [
-        "CHEM 1161",
-        "EEMB 1105",
-        "PHYS 1145"
-      ]
+      "Fall": ["EEMB 1101", "ENVR 1000", "ENVR 1500", "MATH 1241"],
+      "Spring": ["CHEM 1161", "EEMB 1105", "PHYS 1145"]
     },
     "Year 2": {
-      "Fall": [
-        "BIOL 2301",
-        "CHEM 2311",
-        "EESC 2000",
-        "ENVR 2500"
-      ]
+      "Fall": ["BIOL 2301", "CHEM 2311", "EESC 2000", "ENVR 2500"]
     },
     "Year 3": {
-      "Fall": [
-        "EEMB 2302",
-        "EEMB 2400"
-      ]
+      "Fall": ["EEMB 2302", "EEMB 2400"]
     },
     "Year 4": {
-      "Fall": [
-        "EEMB 3460"
-      ],
-      "Spring": [
-        "ENVR 4000",
-        "ENVR 4997"
-      ]
+      "Fall": ["EEMB 3460"],
+      "Spring": ["ENVR 4000", "ENVR 4997"]
     }
   }
 }

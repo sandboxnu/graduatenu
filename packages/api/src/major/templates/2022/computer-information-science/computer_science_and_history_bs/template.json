@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study:": {
     "Year 1": {
       "Fall": [
@@ -9,24 +13,12 @@
         "HIST 1200",
         "HIST 1201"
       ],
-      "Spring": [
-        "CS 2510",
-        "CS 3200",
-        "IS 2000"
-      ],
-      "Summer 1": [
-        "CS 3500"
-      ]
+      "Spring": ["CS 2510", "CS 3200", "IS 2000"],
+      "Summer 1": ["CS 3500"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 3000",
-        "HIST 2301",
-        "HIST 2302"
-      ],
-      "Spring": [
-        "CS 1210"
-      ]
+      "Fall": ["CS 3000", "HIST 2301", "HIST 2302"],
+      "Spring": ["CS 1210"]
     },
     "Year 3": {},
     "Year 4": {}
@@ -41,24 +33,12 @@
         "HIST 1200",
         "HIST 1201"
       ],
-      "Spring": [
-        "CS 2510",
-        "CS 3200",
-        "IS 2000"
-      ],
-      "Summer 1": [
-        "CS 3500"
-      ]
+      "Spring": ["CS 2510", "CS 3200", "IS 2000"],
+      "Summer 1": ["CS 3500"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 3000",
-        "HIST 2301",
-        "HIST 2302"
-      ],
-      "Spring": [
-        "CS 1210"
-      ]
+      "Fall": ["CS 3000", "HIST 2301", "HIST 2302"],
+      "Spring": ["CS 1210"]
     },
     "Year 3": {},
     "Year 4": {}

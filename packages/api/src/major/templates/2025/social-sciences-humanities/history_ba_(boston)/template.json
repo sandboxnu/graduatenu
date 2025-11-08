@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "HIST 1000", "HIST 1170", "HIST 1200", "HIST 1201"],
+      "Spring": ["HIST 1130", "MATH 1215"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Spring": ["HIST 2301", "HIST 2302"]
+    },
+    "Year 4": {
+      "Spring": ["HIST 4701"]
+    }
+  },
+  "Four Years, One Co-0p": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "HIST 1000", "HIST 1170", "HIST 1200", "HIST 1201"],
+      "Spring": ["HIST 1130", "MATH 1215"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Spring": ["HIST 2301", "HIST 2302"]
+    },
+    "Year 4": {
+      "Spring": ["HIST 4701"]
+    }
+  },
+  "Five Years, Three Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "HIST 1170", "HIST 1200", "HIST 1201"],
+      "Spring": ["HIST 1130", "MATH 1215"]
+    },
+    "Year 2": {},
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["HIST 2301", "HIST 2302"]
+    },
+    "Year 5": {
+      "Spring": ["HIST 4701"]
+    }
+  }
+}

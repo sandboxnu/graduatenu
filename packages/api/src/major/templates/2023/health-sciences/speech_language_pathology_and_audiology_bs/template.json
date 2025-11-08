@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, One Co-op": {
     "Year 1": {
       "Fall": [
@@ -9,12 +13,7 @@
         "PSYC 1101",
         "SLPA 1000"
       ],
-      "Spring": [
-        "BIOL 2219",
-        "BIOL 2220",
-        "SLPA 1101",
-        "SLPA 1205"
-      ]
+      "Spring": ["BIOL 2219", "BIOL 2220", "SLPA 1101", "SLPA 1205"]
     },
     "Year 2": {
       "Fall": [
@@ -25,36 +24,16 @@
         "SLPA 1203",
         "SLPA 2000"
       ],
-      "Spring": [
-        "COOP 3945"
-      ],
-      "Summer 1": [
-        "COOP 3945"
-      ]
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
     },
     "Year 3": {
-      "Fall": [
-        "ENGW 3306",
-        "PHTH 2210",
-        "PHTH 2300",
-        "PSYC 3466"
-      ],
-      "Spring": [
-        "HLTH 5450",
-        "SLPA 1102",
-        "SLPA 1200"
-      ]
+      "Fall": ["ENGW 3306", "PHTH 2210", "PHTH 2300", "PSYC 3466"],
+      "Spring": ["HLTH 5450", "SLPA 1102", "SLPA 1200"]
     },
     "Year 4": {
-      "Fall": [
-        "SLPA 5107",
-        "SLPA 5110"
-      ],
-      "Spring": [
-        "PHIL 1165",
-        "SLPA 4651",
-        "SLPA 6219"
-      ]
+      "Fall": ["SLPA 5107", "SLPA 5110"],
+      "Spring": ["PHIL 1165", "SLPA 4651", "SLPA 6219"]
     }
   }
 }

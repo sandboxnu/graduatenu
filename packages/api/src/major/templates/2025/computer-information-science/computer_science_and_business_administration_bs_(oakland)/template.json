@@ -1,0 +1,61 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["CS 2100", "CS 3200", "ECON 1115", "MATH 1341"],
+      "Summer 1": ["MKTG 2201", "ECON 1116"],
+      "Summer 2": ["MISM 2301"]
+    },
+    "Year 2": {
+      "Fall": ["ACCT 2301", "CS 3100", "FINA 2201"],
+      "Spring": ["CS 1210", "CS 3000", "MGSC 2301"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3302", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530", "STRT 4501"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["CS 2100", "CS 3200", "ECON 1115", "MATH 1341"],
+      "Summer 1": ["MKTG 2201", "ECON 1116"],
+      "Summer 2": ["MISM 2301"]
+    },
+    "Year 2": {
+      "Fall": ["ACCT 2301", "CS 3100", "FINA 2201"],
+      "Spring": ["CS 1210", "CS 3000", "MGSC 2301"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3302", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530", "STRT 4501"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["CS 2100", "CS 3200", "MATH 1341", "ECON 1115"],
+      "Summer 1": ["CS 3100", "ECON 1116"]
+    },
+    "Year 2": {
+      "Fall": ["ACCT 2301", "CS 1210", "CS 3000", "MKTG 2201"],
+      "Summer 2": ["MGSC 2301"]
+    },
+    "Year 3": {
+      "Fall": ["FINA 2201", "MISM 2301"],
+      "Summer 2": ["ENGW 3302", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4530"],
+      "Spring": ["STRT 4501"]
+    }
+  }
+}

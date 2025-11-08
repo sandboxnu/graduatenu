@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CHEM 1161", "ENVR 1000", "ENVR 1200", "ENVR 1400"],
+      "Spring": ["CHEM 2161", "EEMB 2302", "ENGW 1111", "ENVR 2515"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 2311", "MATH 1241"],
+      "Spring": ["CHEM 2313", "EESC 2000", "PHYS 1151"],
+      "Summer 1": ["CHEM 2321", "MATH 1242"]
+    },
+    "Year 3": {
+      "Spring": ["CHEM 3401", "ENGW 3307"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CHEM 1161", "ENVR 1000", "ENVR 1200", "ENVR 1400"],
+      "Spring": ["CHEM 2161", "EEMB 2302", "ENGW 1111", "ENVR 2515"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 2311", "MATH 1241"],
+      "Spring": ["CHEM 2313", "EESC 2000", "PHYS 1151"],
+      "Summer 1": ["CHEM 2321", "MATH 1242"]
+    },
+    "Year 3": {
+      "Spring": ["CHEM 3401", "ENGW 3307"]
+    },
+    "Year 4": {}
+  }
+}

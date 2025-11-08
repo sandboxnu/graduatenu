@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plans of Study": {
     "Year 1": {
       "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGL 1400", "ENGW 1111"],
@@ -10,7 +14,7 @@
       "Fall": ["CS 1210", "CS 3200", "ENGL 1700"]
     },
     "Year 3": {
-      "Fall": ["ENGL 3340", "IS 2000", "ENGL 3710"],
+      "Fall": ["ENGL 3340", "CS  4500", "ENGL 3710"],
       "Summer 1": ["ENGW 3302"]
     },
     "Year 4": {
@@ -28,7 +32,7 @@
       "Fall": ["CS 1210", "CS 3200", "ENGL 1700"]
     },
     "Year 3": {
-      "Fall": ["ENGL 3340", "IS 2000", "ENGL 3710"],
+      "Fall": ["ENGL 3340", "CS  4500", "ENGL 3710"],
       "Summer 1": ["ENGW 3302"]
     },
     "Year 4": {
@@ -44,7 +48,7 @@
     },
     "Year 2": {
       "Fall": ["CS 3200", "ENGL 1700"],
-      "Spring": ["CS 1210", "ENGL 3340", "IS 2000", "ENGL 3710"]
+      "Spring": ["CS 1210", "ENGL 3340", "CS  4500", "ENGL 3710"]
     },
     "Year 3": {
       "Fall": ["ENGW 3302"]

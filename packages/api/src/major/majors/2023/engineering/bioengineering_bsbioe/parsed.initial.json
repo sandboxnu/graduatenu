@@ -2,7 +2,8 @@
   "name": "Bioengineering, BSBioE",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 135,
   "yearVersion": 2023,
@@ -330,6 +331,12 @@
         }
       ],
       "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {
@@ -337,7 +344,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Biomechanics",
         "requirements": [
           {
             "type": "XOM",
@@ -370,7 +377,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective Courses",
+        "title": "Concentration in Biomechanics: Elective Courses",
         "requirements": [
           {
             "type": "COURSE",
@@ -432,7 +439,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Biomedical Devices and Bioimaging",
         "requirements": [
           {
             "type": "COURSE",
@@ -475,7 +482,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective Courses",
+        "title": "Concentration in Biomedical Devices and Bioimaging: Elective Courses",
         "requirements": [
           {
             "type": "COURSE",
@@ -564,7 +571,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Cell and Tissue Engineering",
         "requirements": [
           {
             "type": "OR",
@@ -596,7 +603,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective Courses",
+        "title": "Concentration in Cell and Tissue Engineering: Elective Courses",
         "requirements": [
           {
             "type": "XOM",
@@ -679,7 +686,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Systems, Synthetic, and Computational Bioengineering",
         "requirements": [
           {
             "type": "XOM",
@@ -712,7 +719,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective Courses",
+        "title": "Concentration in Systems, Synthetic, and Computational Bioengineering: Elective Courses",
         "requirements": [
           {
             "type": "XOM",

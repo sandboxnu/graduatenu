@@ -1,44 +1,24 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, 2 Co-ops": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "HUSV 1000",
-        "HUSV 1101",
-        "SOCL 1101"
-      ],
-      "Spring": [
-        "HUSV 2300",
-        "MATH 1215"
-      ],
-      "Summer 2": [
-        "SOCL 2320"
-      ]
+      "Fall": ["ENGW 1111", "HUSV 1000", "HUSV 1101", "SOCL 1101"],
+      "Spring": ["HUSV 2300", "MATH 1215"],
+      "Summer 2": ["SOCL 2320"]
     },
     "Year 2": {
-      "Fall": [
-        "HUSV 3570",
-        "SOCL 3300"
-      ],
-      "Spring": [
-        "EESH 2000"
-      ]
+      "Fall": ["HUSV 3570", "SOCL 3300"],
+      "Spring": ["EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "HUSV 2355",
-        "HUSV 4994"
-      ],
-      "Summer 1": [
-        "ENGW 3315"
-      ]
+      "Spring": ["HUSV 2355", "HUSV 4994"],
+      "Summer 1": ["ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "HUSV 3900",
-        "HUSV 4700",
-        "SOCL 4600"
-      ]
+      "Spring": ["HUSV 3900", "HUSV 4700", "SOCL 4600"]
     }
   }
 }

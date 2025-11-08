@@ -34,7 +34,8 @@
     "tsc": "yarn workspaces foreach -v --exclude . run tsc",
     "g:babel": "cd $INIT_CWD && babel",
     "g:cross-env": "cd $INIT_CWD && cross-env",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "verify-scraper-branch": "npx ts-node packages/api/branch-verify.ts"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",

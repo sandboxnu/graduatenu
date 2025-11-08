@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTH 1001", "SMFA 3000", "ENGW 1111"],
+      "Spring": ["SMFA 3000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTH 3000", "SMFA 3000", "EEAM 2010"]
+    },
+    "Year 3": {
+      "Fall": ["ARTH 4000", "SMFA 3000"],
+      "Spring": ["ENGW 3314"]
+    },
+    "Year 4": {
+      "Fall": ["SMFA 3000", "SMFA 4000"],
+      "Spring": ["SMFA 3000", "SMFA 4000"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTH 1001", "SMFA 3000", "ENGW 1111"],
+      "Spring": ["SMFA 3000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTH 3000", "SMFA 3000", "EEAM 2010"]
+    },
+    "Year 3": {
+      "Fall": ["ARTH 4000", "SMFA 3000"],
+      "Spring": ["ENGW 3314"]
+    },
+    "Year 4": {
+      "Fall": ["SMFA 3000", "SMFA 4000"],
+      "Spring": ["SMFA 3000", "SMFA 4000"]
+    }
+  }
+}

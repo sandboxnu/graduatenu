@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ENGW 1111"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Fall": ["ENGW 3315"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ENGW 1111"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Fall": ["ENGW 3315"]
+    },
+    "Year 4": {}
+  }
+}

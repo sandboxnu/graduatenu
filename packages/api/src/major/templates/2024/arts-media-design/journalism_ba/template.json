@@ -1,80 +1,40 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, Two Co-ops Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "JRNL 1000",
-        "JRNL 1150",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "JRNL 1101"
-      ]
+      "Fall": ["JRNL 1000", "JRNL 1150", "ENGW 1111"],
+      "Spring": ["JRNL 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "JRNL 2201",
-        "EEAM 2000"
-      ],
-      "Spring": [
-        "JRNL 2350",
-        "EEAM 2000"
-      ]
+      "Fall": ["JRNL 2201", "EEAM 2000"],
+      "Spring": ["JRNL 2350", "EEAM 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "JRNL 2301",
-        "JRNL 3550",
-        "JRNL 5314"
-      ],
-      "Fall": [
-        "JRNL 2301",
-        "JRNL 2350",
-        "JRNL 5314"
-      ]
+      "Spring": ["JRNL 2301", "JRNL 3550", "JRNL 5314"],
+      "Fall": ["JRNL 2301", "JRNL 2350", "JRNL 5314"]
     },
     "Year 4": {
-      "Spring": [
-        "JRNL 3610",
-        "JRNL 4650"
-      ],
-      "Fall": [
-        "JRNL 3550",
-        "JRNL 3610"
-      ]
+      "Spring": ["JRNL 3610", "JRNL 4650"],
+      "Fall": ["JRNL 3550", "JRNL 3610"]
     }
   },
   "Sample Four Years, Two Co-ops Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "JRNL 1000",
-        "JRNL 1150",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "JRNL 1101"
-      ]
+      "Fall": ["JRNL 1000", "JRNL 1150", "ENGW 1111"],
+      "Spring": ["JRNL 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "JRNL 2201",
-        "EEAM 2000"
-      ]
+      "Fall": ["JRNL 2201", "EEAM 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "JRNL 2301",
-        "JRNL 2350",
-        "JRNL 5314"
-      ]
+      "Fall": ["JRNL 2301", "JRNL 2350", "JRNL 5314"]
     },
     "Year 4": {
-      "Fall": [
-        "JRNL 3550",
-        "JRNL 3610"
-      ],
-      "Spring": [
-        "JRNL 4650"
-      ]
+      "Fall": ["JRNL 3550", "JRNL 3610"],
+      "Spring": ["JRNL 4650"]
     }
   }
 }

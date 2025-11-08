@@ -1,47 +1,23 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ASNS 1150",
-        "HIST 1215",
-        "CLTR 1000",
-        "HIST 1500"
-      ],
-      "Spring": [
-        "HIST 1246",
-        "HIST 2011",
-        "PHIL 1290",
-        "CHNS 1101"
-      ],
-      "Summer 1": [
-        "ASNS 2245"
-      ]
+      "Fall": ["ASNS 1150", "HIST 1215", "CLTR 1000", "HIST 1500"],
+      "Spring": ["HIST 1246", "HIST 2011", "PHIL 1290", "CHNS 1101"],
+      "Summer 1": ["ASNS 2245"]
     },
     "Year 2": {
-      "Fall": [
-        "INTL 2240",
-        "HIST 2308",
-        "CHNS 1102"
-      ],
-      "Spring": [
-        "CHNS 2101",
-        "INTB 2501",
-        "ENGL 2450"
-      ]
+      "Fall": ["INTL 2240", "HIST 2308", "CHNS 1102"],
+      "Spring": ["CHNS 2101", "INTB 2501", "ENGL 2450"]
     },
     "Year 3": {
-      "Spring": [
-        "ARCH 2310",
-        "INSH 1500",
-        "PHIL 1115"
-      ]
+      "Spring": ["ARCH 2310", "INSH 1500", "PHIL 1115"]
     },
     "Year 4": {
-      "Spring": [
-        "POLS 3487",
-        "ASNS 4900",
-        "POLS 2325"
-      ]
+      "Spring": ["POLS 3487", "ASNS 4900", "POLS 2325"]
     }
   }
 }

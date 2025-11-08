@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["POLS 1155", "ENGW 1111", "HUSV 1000", "HUSV 1101"],
+      "Spring": ["POLS 1150", "POLS 1160", "HUSV 2300"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000"]
+    },
+    "Year 3": {
+      "Fall": ["POLS 2400", "POLS 3307", "HUSV 3900"]
+    },
+    "Year 4": {
+      "Spring": ["HUSV 3570"]
+    },
+    "Year 5": {
+      "Fall": ["HUSV 4994"]
+    }
+  }
+}

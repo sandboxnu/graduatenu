@@ -2,7 +2,8 @@
   "name": "Computer Science, BSCS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 134,
   "yearVersion": 2022,
@@ -393,395 +394,430 @@
       "title": "Science Requirement",
       "requirements": [
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Biology",
+          "requirements": [
             {
-              "subject": "BIOL",
-              "classId": 1111,
-              "description": "General Biology 1",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1111,
+                  "description": "General Biology 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1112,
+                  "description": "Lab for BIOL 1111",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "BIOL",
-              "classId": 1112,
-              "description": "Lab for BIOL 1111",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1113,
+                  "description": "General Biology 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1114,
+                  "description": "Lab for BIOL 1113",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 2301,
+                  "description": "Genetics and Molecular Biology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 2302,
+                  "description": "Lab for BIOL 2301",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 3
         },
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Chemistry",
+          "requirements": [
             {
-              "subject": "BIOL",
-              "classId": 1113,
-              "description": "General Biology 2",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 1211,
+                  "description": "General Chemistry 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 1212,
+                  "description": "Lab for CHEM 1211",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 1213,
+                  "description": "Recitation for CHEM 1211",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "BIOL",
-              "classId": 1114,
-              "description": "Lab for BIOL 1113",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 1214,
+                  "description": "General Chemistry 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 1215,
+                  "description": "Lab for CHEM 1214",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 1216,
+                  "description": "Recitation for CHEM 1214",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Geology/Environmental Science",
+          "requirements": [
             {
-              "subject": "BIOL",
-              "classId": 2301,
-              "description": "Genetics and Molecular Biology",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1200,
+                  "description": "Dynamic Earth",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1201,
+                  "description": "Lab for ENVR 1200",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "BIOL",
-              "classId": 2302,
-              "description": "Lab for BIOL 2301",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1202,
+                  "description": "History of Earth and Life",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1203,
+                  "description": "Interpreting Earth History",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1200,
+                  "description": "Dynamic Earth",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1201,
+                  "description": "Lab for ENVR 1200",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2310,
+                  "description": "Earth Materials",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2311,
+                  "description": "Lab for ENVR 2310",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2340,
+                  "description": "Earth Landforms and Processes",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2341,
+                  "description": "Lab for ENVR 2340",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 3300,
+                  "description": "Geographic Information Systems",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 3301,
+                  "description": "Lab for ENVR 3300",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 4500,
+                  "description": "Applied Hydrogeology",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 4501,
+                  "description": "Lab for ENVR 4500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1202,
+                  "description": "History of Earth and Life",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1203,
+                  "description": "Interpreting Earth History",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 5242,
+                  "description": "Ancient Marine Life",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 5243,
+                  "description": "Lab for ENVR 5242",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 9
         },
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Mathematics",
+          "requirements": [
             {
-              "subject": "CHEM",
-              "classId": 1211,
-              "description": "General Chemistry 1",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 1342,
+              "subject": "MATH"
             },
             {
-              "subject": "CHEM",
-              "classId": 1212,
-              "description": "Lab for CHEM 1211",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 2331,
+              "subject": "MATH"
             },
             {
-              "subject": "CHEM",
-              "classId": 1213,
-              "description": "Recitation for CHEM 1211",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 3081,
+              "subject": "MATH"
             }
-          ]
+          ],
+          "minRequirementCount": 3
         },
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Physics",
+          "requirements": [
             {
-              "subject": "CHEM",
-              "classId": 1214,
-              "description": "General Chemistry 2",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1145,
+                  "description": "Physics for Life Sciences 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1146,
+                  "description": "Lab for PHYS 1145",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CHEM",
-              "classId": 1215,
-              "description": "Lab for CHEM 1214",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1147,
+                  "description": "Physics for Life Sciences 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1148,
+                  "description": "Lab for PHYS 1147",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CHEM",
-              "classId": 1216,
-              "description": "Recitation for CHEM 1214",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1151,
+                  "description": "Physics for Engineering 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1152,
+                  "description": "Lab for PHYS 1151",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1153,
+                  "description": "Interactive Learning Seminar for PHYS 1151",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1155,
+                  "description": "Physics for Engineering 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1156,
+                  "description": "Lab for PHYS 1155",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1157,
+                  "description": "Interactive Learning Seminar for PHYS 1155",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1161,
+                  "description": "Physics 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1162,
+                  "description": "Lab for PHYS 1161",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1163,
+                  "description": "Recitation for PHYS 1161",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1165,
+                  "description": "Physics 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1166,
+                  "description": "Lab for PHYS 1165",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1167,
+                  "description": "Recitation for PHYS 1165",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 1200,
-              "description": "Dynamic Earth",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 1201,
-              "description": "Lab for ENVR 1200",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 1202,
-              "description": "History of Earth and Life",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 1203,
-              "description": "Interpreting Earth History",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 1200,
-              "description": "Dynamic Earth",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 1201,
-              "description": "Lab for ENVR 1200",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 2310,
-              "description": "Earth Materials",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 2311,
-              "description": "Lab for ENVR 2310",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 2340,
-              "description": "Earth Landforms and Processes",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 2341,
-              "description": "Lab for ENVR 2340",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 3300,
-              "description": "Geographic Information Systems",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 3301,
-              "description": "Lab for ENVR 3300",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 4500,
-              "description": "Applied Hydrogeology",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 4501,
-              "description": "Lab for ENVR 4500",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 1202,
-              "description": "History of Earth and Life",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 1203,
-              "description": "Interpreting Earth History",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 5242,
-              "description": "Ancient Marine Life",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ENVR",
-              "classId": 5243,
-              "description": "Lab for ENVR 5242",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 1342,
-          "subject": "MATH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2331,
-          "subject": "MATH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3081,
-          "subject": "MATH"
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1145,
-              "description": "Physics for Life Sciences 1",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1146,
-              "description": "Lab for PHYS 1145",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1147,
-              "description": "Physics for Life Sciences 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1148,
-              "description": "Lab for PHYS 1147",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1151,
-              "description": "Physics for Engineering 1",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1152,
-              "description": "Lab for PHYS 1151",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1153,
-              "description": "Interactive Learning Seminar for PHYS 1151",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1155,
-              "description": "Physics for Engineering 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1156,
-              "description": "Lab for PHYS 1155",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1157,
-              "description": "Interactive Learning Seminar for PHYS 1155",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1161,
-              "description": "Physics 1",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1162,
-              "description": "Lab for PHYS 1161",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1163,
-              "description": "Recitation for PHYS 1161",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PHYS",
-              "classId": 1165,
-              "description": "Physics 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1166,
-              "description": "Lab for PHYS 1165",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1167,
-              "description": "Recitation for PHYS 1165",
-              "type": "COURSE"
-            }
-          ]
+          ],
+          "minRequirementCount": 6
         }
       ],
       "minRequirementCount": 2
@@ -819,6 +855,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

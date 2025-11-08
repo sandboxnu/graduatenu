@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -9,55 +13,23 @@
         "MATH 1251",
         "INSC 1000"
       ],
-      "Spring": [
-        "BIOL 2299",
-        "CHEM 2311",
-        "CHEM 2312",
-        "ENGW 1111"
-      ],
-      "Summer 1": [
-        "BIOL 2301",
-        "BIOL 2302"
-      ]
+      "Spring": ["BIOL 2299", "CHEM 2311", "CHEM 2312", "ENGW 1111"],
+      "Summer 1": ["BIOL 2301", "BIOL 2302"]
     },
     "Year 2": {
-      "Fall": [
-        "ENVR 2500",
-        "ENVR 2501",
-        "CHEM 2313",
-        "CHEM 2314"
-      ],
-      "Spring": [
-        "BIOL 2309",
-        "PHYS 1145",
-        "PHYS 1146",
-        "EESC 2000"
-      ],
-      "Summer 1": [
-        "BIOL 3611",
-        "BIOL 3612"
-      ]
+      "Fall": ["ENVR 2500", "ENVR 2501", "CHEM 2313", "CHEM 2314"],
+      "Spring": ["BIOL 2309", "PHYS 1145", "PHYS 1146", "EESC 2000"],
+      "Summer 1": ["BIOL 3611", "BIOL 3612"]
     },
     "Year 3": {
-      "Summer 1": [
-        "BIOL 4707"
-      ],
-      "Spring": [
-        "PHYS 1147",
-        "PHYS 1148",
-        "ENGW 3307",
-        "BIOL 4707"
-      ]
+      "Summer 1": ["BIOL 4707"],
+      "Spring": ["PHYS 1147", "PHYS 1148", "ENGW 3307", "BIOL 4707"]
     },
     "Year 4": {
-      "Spring": [
-        "BIOL 5591"
-      ]
+      "Spring": ["BIOL 5591"]
     },
     "Year 5": {
-      "Spring": [
-        "BIOL 5591"
-      ]
+      "Spring": ["BIOL 5591"]
     }
   },
   "Five Years, Three Co-ops in Summer 2/Fall": {
@@ -70,48 +42,20 @@
         "MATH 1251",
         "INSC 1000"
       ],
-      "Spring": [
-        "BIOL 2299",
-        "CHEM 2311",
-        "CHEM 2312",
-        "ENGW 1111"
-      ],
-      "Summer 1": [
-        "BIOL 2301",
-        "BIOL 2302"
-      ]
+      "Spring": ["BIOL 2299", "CHEM 2311", "CHEM 2312", "ENGW 1111"],
+      "Summer 1": ["BIOL 2301", "BIOL 2302"]
     },
     "Year 2": {
-      "Fall": [
-        "ENVR 2500",
-        "ENVR 2501",
-        "CHEM 2313",
-        "CHEM 2314"
-      ],
-      "Spring": [
-        "BIOL 2309",
-        "PHYS 1145",
-        "PHYS 1146",
-        "EESC 2000"
-      ],
-      "Summer 1": [
-        "BIOL 3611",
-        "BIOL 3612"
-      ]
+      "Fall": ["ENVR 2500", "ENVR 2501", "CHEM 2313", "CHEM 2314"],
+      "Spring": ["BIOL 2309", "PHYS 1145", "PHYS 1146", "EESC 2000"],
+      "Summer 1": ["BIOL 3611", "BIOL 3612"]
     },
     "Year 3": {
-      "Spring": [
-        "BIOL 4707",
-        "PHYS 1147",
-        "PHYS 1148",
-        "ENGW 3307"
-      ]
+      "Spring": ["BIOL 4707", "PHYS 1147", "PHYS 1148", "ENGW 3307"]
     },
     "Year 4": {},
     "Year 5": {
-      "Spring": [
-        "BIOL 5591"
-      ]
+      "Spring": ["BIOL 5591"]
     }
   }
 }

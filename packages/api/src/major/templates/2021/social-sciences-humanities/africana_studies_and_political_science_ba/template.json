@@ -1,57 +1,25 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "AFRS 1101",
-        "AFAM 1113",
-        "POLS 1150",
-        "CLTR 1000",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "MATH 1215",
-        "POLS 1160",
-        "POLS 1155"
-      ],
-      "Summer 2": [
-        "POLS 3406"
-      ],
-      "Summer 1": [
-        "AFAM 2360"
-      ]
+      "Fall": ["AFRS 1101", "AFAM 1113", "POLS 1150", "CLTR 1000", "ENGW 1111"],
+      "Spring": ["MATH 1215", "POLS 1160", "POLS 1155"],
+      "Summer 2": ["POLS 3406"],
+      "Summer 1": ["AFAM 2360"]
     },
     "Year 2": {
-      "Fall": [
-        "AFAM 2296",
-        "AFRS 2307",
-        "POLS 2400"
-      ],
-      "Spring": [
-        "AFRS 3424",
-        "AFAM 2690",
-        "POLS 2399",
-        "POLS 2325"
-      ]
+      "Fall": ["AFAM 2296", "AFRS 2307", "POLS 2400"],
+      "Spring": ["AFRS 3424", "AFAM 2690", "POLS 2399", "POLS 2325"]
     },
     "Year 3": {
-      "Spring": [
-        "AFAM 3270",
-        "POLS 3418",
-        "AFRS 2464",
-        "PSYC 1101"
-      ],
-      "Summer 1": [
-        "AFAM 2339",
-        "AFAM 3664"
-      ]
+      "Spring": ["AFAM 3270", "POLS 3418", "AFRS 2464", "PSYC 1101"],
+      "Summer 1": ["AFAM 2339", "AFAM 3664"]
     },
     "Year 4": {
-      "Spring": [
-        "AFRS 3460",
-        "POLS 3487",
-        "POLS 2370",
-        "AFAM 4700"
-      ]
+      "Spring": ["AFRS 3460", "POLS 3487", "POLS 2370", "AFAM 4700"]
     }
   }
 }

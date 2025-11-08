@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ENGL 1000", "ENGL 1400", "ANTH 1101", "ANTH 2305"],
+      "Spring": ["ENGL 1160", "ENGW 1111", "ANTH 3410"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Fall": ["ANTH 3421", "ENGL 3710"]
+    },
+    "Year 4": {
+      "Spring": ["ENGL 4710"],
+      "Fall": ["ANTH 4600"]
+    }
+  },
+  "Four Year, Two Co-op Plan of Study": {
+    "Year 1": {
+      "Fall": ["ENGL 1000", "ENGL 1400", "ANTH 1101", "ANTH 2305"],
+      "Spring": ["ENGL 1160", "ENGW 1111", "ANTH 3410"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Fall": ["ANTH 3421", "ENGL 3710"]
+    },
+    "Year 4": {
+      "Spring": ["ENGL 4710"],
+      "Fall": ["ANTH 4600"]
+    }
+  }
+}

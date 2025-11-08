@@ -2,7 +2,8 @@
   "name": "Psychology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -169,72 +170,98 @@
       "title": "Lab Requirement",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 4600,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4606,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4610,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4612,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4614,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4616,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4622,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4624,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4626,
-          "subject": "PSYC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4628,
-          "subject": "PSYC"
-        },
-        {
-          "type": "OR",
-          "courses": [
+          "type": "SECTION",
+          "title": "Lab",
+          "requirements": [
             {
               "type": "COURSE",
-              "classId": 4991,
+              "classId": 4600,
               "subject": "PSYC"
             },
             {
               "type": "COURSE",
-              "classId": 4971,
+              "classId": 4606,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4610,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4612,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4614,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4616,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4622,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4624,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4626,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4628,
               "subject": "PSYC"
             }
-          ]
+          ],
+          "minRequirementCount": 10
+        },
+        {
+          "type": "SECTION",
+          "title": "Directed Study Research or Honors Thesis",
+          "requirements": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4991,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4971,
+                  "subject": "PSYC"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
-      "minRequirementCount": 11
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Required Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Interdisciplinary Cluster",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

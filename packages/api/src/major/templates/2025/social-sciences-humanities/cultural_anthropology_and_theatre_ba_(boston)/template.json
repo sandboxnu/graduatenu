@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ANTH 1000", "ANTH 1101", "ENGW 1111", "THTR 1100", "THTR 1101"],
+      "Spring": ["ANTH 2305", "THTR 1120", "THTR 1131", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["INAM 2000", "THTR 2000", "THTR 3325", "ANTH 3410"],
+      "Spring": ["EESH 2000", "ANTH 3421", "THTR 1270"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["THTR 4702"]
+    }
+  },
+  "Four Years, Two Co-op": {
+    "Year 1": {
+      "Fall": ["ANTH 1000", "ANTH 1101", "ENGW 1111", "THTR 1100", "THTR 1101"],
+      "Spring": ["ANTH 2305", "THTR 1120", "THTR 1131", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["INAM 2000", "THTR 2000", "THTR 3325", "ANTH 3410"],
+      "Spring": ["EESH 2000", "ANTH 3421", "THTR 1270"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["THTR 4702"]
+    }
+  }
+}

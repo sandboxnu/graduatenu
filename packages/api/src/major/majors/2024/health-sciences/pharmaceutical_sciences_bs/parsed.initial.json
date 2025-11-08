@@ -2,7 +2,9 @@
   "name": "Pharmaceutical Sciences, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "11/05/2025",
+    "hardcoded-wennis": true,
+    "branch": "main"
   },
   "totalCreditsRequired": 145,
   "yearVersion": 2024,

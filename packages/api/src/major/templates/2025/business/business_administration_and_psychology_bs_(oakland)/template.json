@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "PSYC 1101", "MATH 1231", "INSC 1000"],
+      "Spring": ["PSYC 2320", "PSYC 3402", "ENGW 1111", "INTB 1203"],
+      "Summer 1": ["ECON 1116"],
+      "Summer 2": ["FINA 2201"]
+    },
+    "Year 2": {
+      "Fall": ["PSYC 3400", "PSYC 3466", "ACCT 2301", "INNO 2301"],
+      "Spring": ["PSYC 3404", "EESC 2000"],
+      "Summer 1": ["MISM 2301"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3304", "MKTG 2201"],
+      "Summer 1": ["ORGB 3201"]
+    },
+    "Year 4": {
+      "Spring": ["STRT 4501"]
+    }
+  }
+}

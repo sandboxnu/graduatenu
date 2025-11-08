@@ -1,125 +1,63 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Patterns:": {
     "Year 1": {
-      "Fall": [
-        "LING 1000",
-        "LING 1150",
-        "COMM 1101",
-        "COMM 1112",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "LING 2350",
-        "LING 3412"
-      ]
+      "Fall": ["LING 1000", "LING 1150", "COMM 1101", "COMM 1112", "ENGW 1111"],
+      "Spring": ["LING 2350", "LING 3412"]
     },
     "Year 2": {
-      "Fall": [
-        "COMM 2301",
-        "EEAM 2000"
-      ],
-      "Spring": [
-        "LING 3442",
-        "EEAM 2000"
-      ]
+      "Fall": ["COMM 2301", "EEAM 2000"],
+      "Spring": ["LING 3442", "EEAM 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "LING 3442",
-        "ENGW 3315"
-      ]
+      "Spring": ["LING 3442", "ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "COMM 3415",
-        "LING 3442"
-      ]
+      "Spring": ["COMM 3415", "LING 3442"]
     },
     "Year 5": {
-      "Spring": [
-        "COMM 3415"
-      ]
+      "Spring": ["COMM 3415"]
     }
   },
   "Four Years, Two Summer 2/Fall Co-ops": {
     "Year 1": {
-      "Fall": [
-        "LING 1000",
-        "LING 1150",
-        "COMM 1101",
-        "COMM 1112",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "LING 2350",
-        "LING 3412"
-      ]
+      "Fall": ["LING 1000", "LING 1150", "COMM 1101", "COMM 1112", "ENGW 1111"],
+      "Spring": ["LING 2350", "LING 3412"]
     },
     "Year 2": {
-      "Fall": [
-        "COMM 2301",
-        "EEAM 2000"
-      ],
-      "Spring": [
-        "LING 3442",
-        "EEAM 2000"
-      ]
+      "Fall": ["COMM 2301", "EEAM 2000"],
+      "Spring": ["LING 3442", "EEAM 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "LING 3442",
-        "ENGW 3315"
-      ]
+      "Spring": ["LING 3442", "ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "COMM 3415",
-        "LING 3442"
-      ]
+      "Spring": ["COMM 3415", "LING 3442"]
     },
     "Year 5": {
-      "Spring": [
-        "COMM 3415"
-      ]
+      "Spring": ["COMM 3415"]
     }
   },
   "Five Years, Three Summer 2/Fall Co-ops": {
     "Year 1": {
-      "Fall": [
-        "LING 1000",
-        "LING 1150",
-        "COMM 1101",
-        "COMM 1112",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "LING 2350",
-        "LING 3412"
-      ]
+      "Fall": ["LING 1000", "LING 1150", "COMM 1101", "COMM 1112", "ENGW 1111"],
+      "Spring": ["LING 2350", "LING 3412"]
     },
     "Year 2": {
-      "Fall": [
-        "COMM 2301"
-      ],
-      "Spring": [
-        "EEAM 2000"
-      ]
+      "Fall": ["COMM 2301"],
+      "Spring": ["EEAM 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "LING 3442",
-        "ENGW 3315"
-      ]
+      "Spring": ["LING 3442", "ENGW 3315"]
     },
     "Year 4": {
-      "Spring": [
-        "LING 3442"
-      ]
+      "Spring": ["LING 3442"]
     },
     "Year 5": {
-      "Spring": [
-        "COMM 3415"
-      ]
+      "Spring": ["COMM 3415"]
     }
   }
 }

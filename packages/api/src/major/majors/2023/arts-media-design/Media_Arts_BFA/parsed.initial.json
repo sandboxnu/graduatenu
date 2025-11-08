@@ -2,7 +2,8 @@
   "name": "Media Arts, BFA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 134,
   "yearVersion": 2023,
@@ -167,53 +168,59 @@
       "title": "Media Arts Basics Elective",
       "requirements": [
         {
-          "type": "AND",
+          "type": "XOM",
+          "numCreditsMin": 4,
           "courses": [
             {
-              "subject": "ARTD",
-              "classId": 2360,
-              "description": "Introduction to Photography",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2360,
+                  "description": "Introduction to Photography",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2361,
+                  "description": "Photo Tools",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "ARTD",
-              "classId": 2361,
-              "description": "Photo Tools",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ARTD",
-              "classId": 2370,
-              "description": "Animation Basics",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2370,
+                  "description": "Animation Basics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2371,
+                  "description": "Animation Tools",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "ARTD",
-              "classId": 2371,
-              "description": "Animation Tools",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ARTD",
-              "classId": 2380,
-              "description": "Video Basics",
-              "type": "COURSE"
-            },
-            {
-              "subject": "ARTD",
-              "classId": 2381,
-              "description": "Video Tools",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2380,
+                  "description": "Video Basics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2381,
+                  "description": "Video Tools",
+                  "type": "COURSE"
+                }
+              ]
             }
           ]
         }
@@ -284,54 +291,6 @@
           "type": "COURSE",
           "classId": 4530,
           "subject": "ARTD"
-        }
-      ],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Video Arts Electives",
-      "requirements": [
-        {
-          "type": "XOM",
-          "numCreditsMin": 16,
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 3000,
-              "subject": "ARTD"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3485,
-              "subject": "ARTD"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2212,
-              "subject": "ARTH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2160,
-              "subject": "MSCR"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3389,
-              "subject": "MSCR"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3446,
-              "subject": "MSCR"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2345,
-              "subject": "THTR"
-            }
-          ]
         }
       ],
       "minRequirementCount": 1
@@ -520,7 +479,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Animation Requirements",
+        "title": "Concentration in Animation",
         "requirements": [
           {
             "type": "COURSE",
@@ -564,7 +523,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Animation Electives",
+        "title": "Concentration in Animation: Animation Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -591,13 +550,13 @@
       },
       {
         "type": "SECTION",
-        "title": "Art and Design Elective",
+        "title": "Concentration in Animation: Art and Design Elective",
         "requirements": [],
         "minRequirementCount": 0
       },
       {
         "type": "SECTION",
-        "title": "Photography Requirements",
+        "title": "Concentration in Photography",
         "requirements": [
           {
             "type": "AND",
@@ -631,7 +590,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Photography Elective",
+        "title": "Concentration in Photography: Photography Elective",
         "requirements": [
           {
             "type": "OR",
@@ -658,13 +617,13 @@
       },
       {
         "type": "SECTION",
-        "title": "Art and Design Electives",
+        "title": "Concentration in Photography: Art and Design Electives",
         "requirements": [],
         "minRequirementCount": 0
       },
       {
         "type": "SECTION",
-        "title": "Video Arts Requirements",
+        "title": "Concentration in Video Arts",
         "requirements": [
           {
             "type": "AND",
@@ -690,6 +649,66 @@
           }
         ],
         "minRequirementCount": 2
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Video Arts: Video Arts Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 16,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3000,
+                "subject": "ARTD"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3485,
+                "subject": "ARTD"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2212,
+                "subject": "ARTH"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2160,
+                "subject": "MSCR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3389,
+                "subject": "MSCR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3446,
+                "subject": "MSCR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2345,
+                "subject": "THTR"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Video Arts: Art and Design Electives",
+        "requirements": [],
+        "minRequirementCount": 0
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Video Arts: University of Arts London",
+        "requirements": [],
+        "minRequirementCount": 0
       }
     ]
   }

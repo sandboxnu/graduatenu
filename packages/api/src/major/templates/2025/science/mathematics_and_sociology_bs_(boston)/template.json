@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Plan of Study": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "ENGW 1111", "SOCL 1101", "MATH 1341", "MATH 1365"],
+      "Spring": ["MATH 1342", "SOCL 2320", "SOCL 3300"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "SOCL 2321"],
+      "Spring": ["MATH 2341", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["MATH 2331"]
+    },
+    "Year 4": {
+      "Spring": ["MATH 3081"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "ENGW 1111", "SOCL 1101", "MATH 1341", "MATH 1365"],
+      "Spring": ["MATH 1342", "SOCL 2320", "SOCL 3300"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "SOCL 2321"],
+      "Spring": ["MATH 2341", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["MATH 2331"]
+    },
+    "Year 4": {
+      "Spring": ["MATH 3081"]
+    }
+  }
+}

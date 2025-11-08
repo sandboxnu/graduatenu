@@ -2,7 +2,8 @@
   "name": "Computer Science and History, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 135,
   "yearVersion": 2023,
@@ -146,65 +147,59 @@
       "title": "Khoury Elective Courses",
       "requirements": [
         {
-          "type": "XOM",
-          "numCreditsMin": 16,
-          "courses": [
+          "type": "RANGE",
+          "subject": "CS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "CS",
-              "idRangeStart": 2500,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "CS",
-                  "classId": 5010,
-                  "type": "COURSE"
-                }
-              ]
-            },
+              "classId": 5010,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "CY",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "CY",
-              "idRangeStart": 2000,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "CY",
-                  "classId": 4930,
-                  "type": "COURSE"
-                }
-              ]
-            },
+              "classId": 4930,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "DS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "DS",
-              "idRangeStart": 2500,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "DS",
-                  "classId": 4900,
-                  "type": "COURSE"
-                }
-              ]
-            },
+              "classId": 4900,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "IS",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "IS",
-              "idRangeStart": 2000,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "IS",
-                  "classId": 4900,
-                  "type": "COURSE"
-                }
-              ]
+              "classId": 4900,
+              "type": "COURSE"
             }
           ]
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 4
     },
     {
       "type": "SECTION",
@@ -374,6 +369,24 @@
     },
     {
       "type": "SECTION",
+      "title": "History Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced History Course",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced History",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "History Capstone Seminar or Senior Project",
       "requirements": [
         {
@@ -521,6 +534,18 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced Writing in the Disciplines",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

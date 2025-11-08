@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "BUSN 1102", "MATH 1231", "PHIL 1160", "POLS 1150"],
+      "Spring": ["ACCT 2301", "ECON 1116", "ENGW 1111", "MGSC 2301"],
+      "Summer 1": ["MISM 2301", "MKTG 2201"]
+    },
+    "Year 2": {
+      "Fall": ["BUSN 1103", "ECON 2316", "FINA 2201", "INNO 2301", "PHIL 1170"],
+      "Summer 2": ["ORGB 3201"]
+    },
+    "Year 3": {
+      "Fall": ["PHIL 2303", "POLS 1160"],
+      "Summer 2": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Fall": ["PHIL 3435", "POLS 3405"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First-Half": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "BUSN 1102", "MATH 1231", "PHIL 1160", "POLS 1150"],
+      "Spring": ["ACCT 2301", "ECON 1116", "ENGW 1111", "MGSC 2301"],
+      "Summer 1": ["MISM 2301", "MKTG 2201"]
+    },
+    "Year 2": {
+      "Fall": ["BUSN 1103", "ECON 2316", "FINA 2201", "INNO 2301", "PHIL 1170"],
+      "Summer 2": ["ORGB 3201"]
+    },
+    "Year 3": {
+      "Fall": ["PHIL 2303", "POLS 1160"],
+      "Summer 2": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Fall": ["PHIL 3435", "POLS 3405"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second-Half/Fall": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "BUSN 1102", "MATH 1231", "PHIL 1160", "POLS 1150"],
+      "Spring": ["ACCT 2301", "ECON 1116", "ECON 2350", "ENGW 1111"],
+      "Summer 1": ["MISM 2301", "MKTG 2201"]
+    },
+    "Year 2": {
+      "Fall": ["ECON 2316", "FINA 2201", "INNO 2301", "PHIL 1170"],
+      "Spring": ["BUSN 1103", "PHIL 2303", "POLS 1160"]
+    },
+    "Year 3": {
+      "Spring": ["ORGB 3201", "POLS 3405"],
+      "Summer 1": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Spring": ["PHIL 3435"]
+    }
+  }
+}

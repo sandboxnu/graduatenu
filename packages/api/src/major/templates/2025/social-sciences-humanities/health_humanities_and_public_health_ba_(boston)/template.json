@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["INSH 1300", "PHTH 1260", "PSYC 1101"],
+      "Spring": ["ENGW 1111"],
+      "Summer 1": ["PHTH 2300", "PHTH 2350"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "PHTH 2210"],
+      "Summer 2": ["ENGW 3315", "PHTH 2515"]
+    },
+    "Year 3": {
+      "Fall": ["INSH 2300", "PHTH 4202"],
+      "Summer 2": ["PHTH 4540", "PHTH 4120"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half—CSSH Students": {
+    "Year 1": {
+      "Fall": ["INSH 1300", "PHTH 1260", "PSYC 1101"],
+      "Spring": ["ENGW 1111"],
+      "Summer 1": ["PHTH 2300", "PHTH 2350"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "PHTH 2210"],
+      "Summer 2": ["ENGW 3315", "PHTH 2515"]
+    },
+    "Year 3": {
+      "Fall": ["INSH 2300", "PHTH 4202"],
+      "Summer 2": ["PHTH 4540", "PHTH 4120"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall—Bouvé Students": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "HSCI 1000", "INSH 1300", "PHTH 1260"],
+      "Spring": ["PSYC 1101"],
+      "Summer 1": ["PHTH 2300", "PHTH 2350"]
+    },
+    "Year 2": {
+      "Spring": ["HSCI 2000", "PHTH 2210", "PHTH 2515"],
+      "Summer 1": ["PHTH 4202"]
+    },
+    "Year 3": {
+      "Spring": ["INSH 2300", "ENGW 3306"],
+      "Summer 1": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {}
+  }
+}

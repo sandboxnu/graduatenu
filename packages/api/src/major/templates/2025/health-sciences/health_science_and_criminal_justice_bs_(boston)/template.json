@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "BIOL 1111", "PSYC 1101", "CRIM 1100"],
+      "Spring": ["BIOL 1113", "CHEM 1161", "MATH 1241"],
+      "Summer 1": ["PHTH 2350", "PHTH 2300"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2210", "CS 1100", "CRIM 1110", "PHTH 2515"]
+    },
+    "Year 3": {
+      "Fall": ["CRIM 1120"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4202", "CRIM 3040"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "BIOL 1111", "PSYC 1101", "CRIM 1100"],
+      "Spring": ["BIOL 1113", "CHEM 1161", "MATH 1241"],
+      "Summer 1": ["PHTH 2350", "PHTH 2300"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2210", "CS 1100", "CRIM 1110", "PHTH 2515"]
+    },
+    "Year 3": {
+      "Fall": ["CRIM 1120"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4202", "CRIM 3040"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "BIOL 1111", "CRIM 1100"],
+      "Spring": ["BIOL 1113", "CHEM 1161", "MATH 1241", "PSYC 1101"],
+      "Summer 1": ["PHTH 2350", "PHTH 2300"]
+    },
+    "Year 2": {
+      "Fall": ["CS 2000", "CRIM 1110", "PHTH 2515"],
+      "Spring": ["HSCI 2000", "PHTH 2210", "CRIM 1120"]
+    },
+    "Year 3": {
+      "Summer 1": ["PHTH 4120", "PHTH 4540"],
+      "Spring": ["CRIM 3040", "PHTH 4202"]
+    },
+    "Year 4": {}
+  }
+}

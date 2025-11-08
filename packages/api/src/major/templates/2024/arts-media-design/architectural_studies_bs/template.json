@@ -1,34 +1,20 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "ARCH 1000",
-        "ARCH 1310",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "ARCH 1110",
-        "ARCH 1120",
-        "EEAM 2000"
-      ]
+      "Fall": ["ARCH 1000", "ARCH 1310", "ENGW 1111"],
+      "Spring": ["ARCH 1110", "ARCH 1120", "EEAM 2000"]
     },
     "Year 2": {
-      "Fall": [
-        "ARCH 2130",
-        "ARCH 2260",
-        "ARCH 2330"
-      ],
-      "Spring": [
-        "ARCH 2140",
-        "ARCH 2340",
-        "ENGW 3314"
-      ]
+      "Fall": ["ARCH 2130", "ARCH 2260", "ARCH 2330"],
+      "Spring": ["ARCH 2140", "ARCH 2340", "ENGW 3314"]
     },
     "Year 3": {},
     "Year 4": {
-      "Spring": [
-        "ARCH 4960"
-      ]
+      "Spring": ["ARCH 4960"]
     }
   }
 }

@@ -1,90 +1,42 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study:": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "PSYC 1101",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "CS 2510",
-        "PSYC 3466",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "CS 3500"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["CS 2510", "PSYC 3466", "MATH 1341"],
+      "Summer 1": ["CS 3500"]
     },
     "Year 2": {
-      "Fall": [
-        "PSYC 2320",
-        "CS 3000",
-        "PSYC 3464"
-      ],
-      "Spring": [
-        "IS 4300",
-        "PSYC 3452",
-        "CS 1210"
-      ]
+      "Fall": ["PSYC 2320", "CS 3000", "PSYC 3464"],
+      "Spring": ["IS 4300", "PSYC 3452", "CS 1210"]
     },
     "Year 3": {
-      "Spring": [
-        "CS 4100"
-      ]
+      "Spring": ["CS 4100"]
     },
     "Year 4": {
-      "Spring": [
-        "CS 4500"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ]
+      "Spring": ["CS 4500"],
+      "Summer 1": ["ENGW 3302"]
     }
   },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "PSYC 1101",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "CS 2510",
-        "PSYC 3466",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "CS 3500"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "PSYC 1101", "ENGW 1111"],
+      "Spring": ["CS 2510", "PSYC 3466", "MATH 1341"],
+      "Summer 1": ["CS 3500"]
     },
     "Year 2": {
-      "Fall": [
-        "PSYC 2320",
-        "CS 3000",
-        "PSYC 3464"
-      ],
-      "Spring": [
-        "IS 4300",
-        "PSYC 3452",
-        "CS 1210"
-      ]
+      "Fall": ["PSYC 2320", "CS 3000", "PSYC 3464"],
+      "Spring": ["IS 4300", "PSYC 3452", "CS 1210"]
     },
     "Year 3": {
-      "Spring": [
-        "CS 4100"
-      ]
+      "Spring": ["CS 4100"]
     },
     "Year 4": {
-      "Spring": [
-        "CS 4500"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ]
+      "Spring": ["CS 4500"],
+      "Summer 1": ["ENGW 3302"]
     }
   }
 }

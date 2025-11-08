@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["BIOL 2217", "ENGW 1111", "HUSV 1101", "SLPA 1000", "MATH 1215"],
+      "Spring": ["BIOL 2219", "HUSV 2300", "SLPA 1101", "SLPA 1205"]
+    },
+    "Year 2": {
+      "Fall": ["HUSV 2355", "PHYS 1145", "SLPA 1103", "SLPA 1203", "SLPA 2000"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306", "HUSV 3570", "PHTH 2210", "PHTH 2300"],
+      "Spring": ["HLTH 5450", "HUSV 2340", "SLPA 1200", "SLPA 1102"]
+    },
+    "Year 4": {
+      "Spring": ["HUSV 3900", "SLPA 4651", "SLPA 6219"],
+      "Fall": ["SLPA 4500", "SLPA 5107"]
+    }
+  },
+  "Four Years, One Co-op in  Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["BIOL 2217", "ENGW 1111", "HUSV 1101", "SLPA 1000", "MATH 1215"],
+      "Spring": ["BIOL 2219", "HUSV 2300", "SLPA 1101", "SLPA 1205"]
+    },
+    "Year 2": {
+      "Fall": ["HUSV 2355", "PHYS 1145", "SLPA 1103", "SLPA 1203", "SLPA 2000"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306", "HUSV 3570", "PHTH 2210", "PHTH 2300"],
+      "Spring": ["HLTH 5450", "HUSV 2340", "SLPA 1200", "SLPA 1102"]
+    },
+    "Year 4": {
+      "Spring": ["HUSV 3900", "SLPA 4651", "SLPA 6219"],
+      "Fall": ["SLPA 4500", "SLPA 5107"]
+    }
+  },
+  "Four Years, One Internship in Year 4 Fall": {
+    "Year 1": {
+      "Fall": ["BIOL 2217", "ENGW 1111", "HUSV 1101", "MATH 1215", "SLPA 1000"],
+      "Spring": ["BIOL 2219", "HUSV 2300", "SLPA 1101", "SLPA 1205"]
+    },
+    "Year 2": {
+      "Fall": ["HUSV 2355", "PHYS 1145", "SLPA 1103", "SLPA 1203"],
+      "Spring": ["SLPA 1200"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306", "PHTH 2210", "PHTH 2300", "HUSV 3570"],
+      "Spring": ["HLTH 5450", "HUSV 2340", "SLPA 1102"]
+    },
+    "Year 4": {
+      "Fall": ["HUSV 4994", "SLPA 4500", "SLPA 5107"],
+      "Spring": ["HUSV 3900", "SLPA 4651", "SLPA 6219"]
+    }
+  }
+}

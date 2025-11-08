@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["CS 2100", "MATH 1341"],
+      "Summer 1": ["MATH 1342", "CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "CS 3650", "CY 2550"],
+      "Spring": ["CS 1210", "CS 4700", "CY 3740"],
+      "Summer 1": ["MATH 3081"]
+    },
+    "Year 3": {
+      "Spring": ["CS 3800", "CY 4740", "CY 5240"],
+      "Summer 1": ["ENGW 3302", "EECE 2310"]
+    },
+    "Year 4": {
+      "Spring": ["CY 4770", "CY 4930"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["CS 2100", "MATH 1341"],
+      "Summer 1": ["MATH 1342", "CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "CS 3650", "CY 2550"],
+      "Spring": ["CS 1210", "CS 4700", "CY 3740"],
+      "Summer 1": ["MATH 3081"]
+    },
+    "Year 3": {
+      "Spring": ["CS 3800", "CY 4740", "CY 5240"],
+      "Summer 1": ["ENGW 3302", "EECE 2310"]
+    },
+    "Year 4": {
+      "Spring": ["CY 4770", "CY 4930"]
+    }
+  }
+}

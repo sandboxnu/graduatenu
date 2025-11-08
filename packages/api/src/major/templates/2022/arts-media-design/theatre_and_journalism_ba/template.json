@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study Four Years, Two Co-ops": {
     "Year 1": {
       "Fall": [
@@ -9,31 +13,17 @@
         "THTR 1101",
         "THTR 1120"
       ],
-      "Spring": [
-        "JRNL 1101",
-        "THTR 1131"
-      ]
+      "Spring": ["JRNL 1101", "THTR 1131"]
     },
     "Year 2": {
-      "Fall": [
-        "EEAM 2000",
-        "JRNL 2201",
-        "THTR 2000",
-        "THTR 2325"
-      ]
+      "Fall": ["EEAM 2000", "JRNL 2201", "THTR 2000", "THTR 2325"]
     },
     "Year 3": {
-      "Fall": [
-        "THTR 1270"
-      ]
+      "Fall": ["THTR 1270"]
     },
     "Year 4": {
-      "Fall": [
-        "JRNL 3550"
-      ],
-      "Spring": [
-        "THTR 4702"
-      ]
+      "Fall": ["JRNL 3550"],
+      "Spring": ["THTR 4702"]
     }
   }
 }

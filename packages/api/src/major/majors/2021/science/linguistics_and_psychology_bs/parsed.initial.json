@@ -2,7 +2,8 @@
   "name": "Linguistics and Psychology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -354,56 +355,69 @@
           "subject": "PSYC"
         },
         {
-          "type": "COURSE",
-          "classId": 4891,
-          "subject": "LING"
-        },
-        {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Experiential Learning",
+          "requirements": [
             {
-              "subject": "LING",
-              "classId": 4970,
-              "description": "Junior/Senior Honors Project 1",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 4891,
+              "subject": "LING"
             },
             {
-              "subject": "LING",
-              "classId": 4971,
-              "description": "Junior/Senior Honors Project 2",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 4991,
-          "subject": "LING"
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "PSYC",
-              "classId": 4970,
-              "description": "Junior/Senior Honors Project 1",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "LING",
+                  "classId": 4970,
+                  "description": "Junior/Senior Honors Project 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "LING",
+                  "classId": 4971,
+                  "description": "Junior/Senior Honors Project 2",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "PSYC",
-              "classId": 4971,
-              "description": "Junior/Senior Honors Project 2",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "LING"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PSYC",
+                  "classId": 4970,
+                  "description": "Junior/Senior Honors Project 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PSYC",
+                  "classId": 4971,
+                  "description": "Junior/Senior Honors Project 2",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4991,
+              "subject": "PSYC"
             }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 4991,
-          "subject": "PSYC"
+          ],
+          "minRequirementCount": 5
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Language Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

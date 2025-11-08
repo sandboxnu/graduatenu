@@ -1,33 +1,21 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: 4 years - 2 Co-ops": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "POLS 1150",
-        "POLS 1155",
-        "SOCL 1000",
-        "SOCL 1101"
-      ],
-      "Spring": [
-        "POLS 1160"
-      ]
+      "Fall": ["ENGW 1111", "POLS 1150", "POLS 1155", "SOCL 1000", "SOCL 1101"],
+      "Spring": ["POLS 1160"]
     },
     "Year 2": {
-      "Fall": [
-        "SOCL 3300"
-      ]
+      "Fall": ["SOCL 3300"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3308",
-        "SOCL 3468"
-      ]
+      "Spring": ["ENGW 3308", "SOCL 3468"]
     },
     "Year 4": {
-      "Spring": [
-        "SOCL 3270",
-        "SOCL 3450"
-      ]
+      "Spring": ["SOCL 3450"]
     }
   }
 }

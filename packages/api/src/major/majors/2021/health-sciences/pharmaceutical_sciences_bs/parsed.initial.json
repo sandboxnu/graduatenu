@@ -2,7 +2,8 @@
   "name": "Pharmaceutical Sciences, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 145,
   "yearVersion": 2021,
@@ -125,6 +126,18 @@
         }
       ],
       "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 7",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 8",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

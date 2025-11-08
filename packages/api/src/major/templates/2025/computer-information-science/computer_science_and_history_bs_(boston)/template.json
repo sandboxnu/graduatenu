@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2000",
+        "ENGW 1111",
+        "HIST 1200",
+        "HIST 1201"
+      ],
+      "Spring": ["CS 2100", "HIST 2301"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "HIST 2302", "CS 3200"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["HIST 2211"],
+      "Spring": ["CS 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2000",
+        "ENGW 1111",
+        "HIST 1200",
+        "HIST 1201"
+      ],
+      "Spring": ["CS 2100", "HIST 2301"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "HIST 2302", "CS 3200"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Fall": ["HIST 2211"],
+      "Spring": ["CS 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": [
+        "CS 1200",
+        "CS 1800",
+        "CS 2000",
+        "ENGW 1111",
+        "HIST 1200",
+        "HIST 1201"
+      ],
+      "Spring": ["CS 2100", "HIST 2301"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "HIST 2302", "CS 3200"],
+      "Spring": ["CS 1210"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["HIST 2211", "CS 4530"]
+    }
+  }
+}

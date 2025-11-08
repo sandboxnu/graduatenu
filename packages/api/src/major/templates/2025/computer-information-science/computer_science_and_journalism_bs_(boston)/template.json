@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "JRNL 1150"],
+      "Spring": ["CS 2100", "CS 3200", "JRNL 1101", "JRNL 2350", "EEAM 2000"],
+      "Summer 1": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3100", "HIST 1130", "JRNL 2201"],
+      "Spring": ["CS 1210", "JRNL 2301", "MATH 1341"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4220", "JRNL 3550", "JRNL 3610"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530", "JRNL 4650"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "JRNL 1150"],
+      "Spring": ["CS 2100", "CS 3200", "JRNL 1101", "JRNL 2350", "EEAM 2000"],
+      "Summer 1": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3100", "HIST 1130", "JRNL 2201"],
+      "Spring": ["CS 1210", "JRNL 2301", "MATH 1341"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4220", "JRNL 3550", "JRNL 3610"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530", "JRNL 4650"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "JRNL 1150"],
+      "Spring": ["CS 2100", "CS 3200", "JRNL 1101", "JRNL 2350"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "HIST 1130", "JRNL 2201"]
+    },
+    "Year 3": {
+      "Fall": ["JRNL 2301", "MATH 1341"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4220", "JRNL 3550", "JRNL 3610"],
+      "Spring": ["CS 4530", "JRNL 4650"]
+    }
+  }
+}

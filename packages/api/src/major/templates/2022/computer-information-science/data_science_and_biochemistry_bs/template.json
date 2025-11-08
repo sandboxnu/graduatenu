@@ -1,110 +1,44 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study:": {
     "Year 1": {
-      "Fall": [
-        "BIOL 1107",
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "BIOL 2299",
-        "CHEM 1161",
-        "CS 2510",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "CS 3500",
-        "MATH 1342"
-      ]
+      "Fall": ["BIOL 1107", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["BIOL 2299", "CHEM 1161", "CS 2510", "MATH 1341"],
+      "Summer 1": ["CS 3500", "MATH 1342"]
     },
     "Year 2": {
-      "Fall": [
-        "DS 3000"
-      ],
-      "Spring": [
-        "BIOL 2301",
-        "CHEM 2311",
-        "CS 1210",
-        "DS 4200",
-        "DS 4300"
-      ],
-      "Summer 1": [
-        "BIOL 2309",
-        "CS 3200"
-      ]
+      "Fall": ["DS 3000"],
+      "Spring": ["BIOL 2301", "CHEM 2311", "CS 1210", "DS 4200", "DS 4300"],
+      "Summer 1": ["BIOL 2309", "CS 3200"]
     },
     "Year 3": {
-      "Spring": [
-        "BINF 6308",
-        "CHEM 2313",
-        "DS 4400"
-      ],
-      "Summer 1": [
-        "BIOL 3611",
-        "ENGW 3302"
-      ]
+      "Spring": ["BINF 6308", "CHEM 2313", "DS 4400"],
+      "Summer 1": ["BIOL 3611", "ENGW 3302"]
     },
     "Year 4": {
-      "Spring": [
-        "BINF 6309",
-        "CHEM 5620"
-      ]
+      "Spring": ["BINF 6309", "CHEM 5620"]
     }
   },
   "Four Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "BIOL 1107",
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "BIOL 2299",
-        "CHEM 1161",
-        "CS 2510",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "CS 3500",
-        "MATH 1342"
-      ]
+      "Fall": ["BIOL 1107", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["BIOL 2299", "CHEM 1161", "CS 2510", "MATH 1341"],
+      "Summer 1": ["CS 3500", "MATH 1342"]
     },
     "Year 2": {
-      "Fall": [
-        "DS 3000"
-      ],
-      "Spring": [
-        "BIOL 2301",
-        "CHEM 2311",
-        "CS 1210",
-        "DS 4200",
-        "DS 4300"
-      ],
-      "Summer 1": [
-        "BIOL 2309",
-        "CS 3200"
-      ]
+      "Fall": ["DS 3000"],
+      "Spring": ["BIOL 2301", "CHEM 2311", "CS 1210", "DS 4200", "DS 4300"],
+      "Summer 1": ["BIOL 2309", "CS 3200"]
     },
     "Year 3": {
-      "Spring": [
-        "BINF 6308",
-        "CHEM 2313",
-        "DS 4400"
-      ],
-      "Summer 1": [
-        "BIOL 3611",
-        "ENGW 3302"
-      ]
+      "Spring": ["BINF 6308", "CHEM 2313", "DS 4400"],
+      "Summer 1": ["BIOL 3611", "ENGW 3302"]
     },
     "Year 4": {
-      "Spring": [
-        "BINF 6309",
-        "CHEM 5620"
-      ]
+      "Spring": ["BINF 6309", "CHEM 5620"]
     }
   }
 }

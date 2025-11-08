@@ -2,7 +2,8 @@
   "name": "History and Philosophy, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -28,6 +29,12 @@
         }
       ],
       "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Level",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -92,6 +99,18 @@
         }
       ],
       "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate/Advanced History Cluster",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced History",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -228,6 +247,12 @@
         }
       ],
       "minRequirementCount": 16
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

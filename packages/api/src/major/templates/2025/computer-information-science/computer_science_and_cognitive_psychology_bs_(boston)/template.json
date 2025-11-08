@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "PSYC 1101"],
+      "Spring": ["CS 2100", "PSYC 3466"],
+      "Summer 1": ["CS 3100"],
+      "Summer 2": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "MATH 1341", "PSYC 3464"]
+    },
+    "Year 3": {
+      "Fall": ["PSYC 2320", "CS 2484", "PSYC 3452"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4530"],
+      "Spring": ["CS 4100"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "PSYC 1101"],
+      "Spring": ["CS 2100", "PSYC 3466"],
+      "Summer 1": ["CS 3100"],
+      "Summer 2": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "MATH 1341", "PSYC 3464"]
+    },
+    "Year 3": {
+      "Fall": ["PSYC 2320", "CS 2484", "PSYC 3452"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4530"],
+      "Spring": ["CS 4100"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "PSYC 1101"],
+      "Spring": ["CS 2100", "PSYC 3466"],
+      "Summer 1": ["CS 3100"],
+      "Summer 2": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 1341", "PSYC 3464"],
+      "Spring": ["CS 1210", "CS 2484", "PSYC 2320", "PSYC 3452"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4100", "CS 4530"]
+    }
+  }
+}

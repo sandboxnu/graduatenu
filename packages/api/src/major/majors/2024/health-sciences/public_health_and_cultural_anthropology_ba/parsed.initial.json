@@ -2,7 +2,8 @@
   "name": "Public Health and Cultural Anthropology, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "9/6/2025"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 130,
   "yearVersion": 2024,
@@ -343,7 +344,7 @@
             {
               "type": "COURSE",
               "classId": 5100,
-              "subject": "INTL/PPUA"
+              "subject": "PPUA"
             },
             {
               "type": "COURSE",

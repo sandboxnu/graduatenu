@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
       "Fall": [
@@ -9,35 +13,17 @@
         "GAME 1110",
         "ENGW 1111"
       ],
-      "Spring": [
-        "ARTD 2370",
-        "GAME 2500",
-        "GAME 2650"
-      ]
+      "Spring": ["ARTD 2370", "GAME 2500", "GAME 2650"]
     },
     "Year 2": {
-      "Fall": [
-        "ARTG 2262",
-        "GAME 2950",
-        "GAME 3300",
-        "EEAM 2000"
-      ]
+      "Fall": ["ARTG 2262", "GAME 2950", "GAME 3300", "EEAM 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "GAME 3400",
-        "GAME 3700"
-      ]
+      "Fall": ["GAME 3400", "GAME 3700"]
     },
     "Year 4": {
-      "Fall": [
-        "GAME 2010",
-        "GAME 3800"
-      ],
-      "Spring": [
-        "GAME 4600",
-        "GAME 4700"
-      ]
+      "Fall": ["GAME 2010", "GAME 3800"],
+      "Spring": ["GAME 4600", "GAME 4700"]
     }
   }
 }

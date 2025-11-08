@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -18,11 +22,7 @@
         "BIOL 2301",
         "BIOL 2302"
       ],
-      "Summer 1": [
-        "BIOL 2301",
-        "BIOL 2302",
-        "BIOL 2309"
-      ]
+      "Summer 1": ["BIOL 2301", "BIOL 2302", "BIOL 2309"]
     },
     "Year 2": {
       "Fall": [
@@ -34,20 +34,9 @@
         "PHYS 1146",
         "EESC 2000"
       ],
-      "Spring": [
-        "BIOL 2309",
-        "PHYS 1145",
-        "PHYS 1146",
-        "EESC 2000"
-      ],
-      "Summer 1": [
-        "BIOL 3611",
-        "BIOL 3612"
-      ],
-      "Summer 2": [
-        "PHYS 1147",
-        "PHYS 1148"
-      ]
+      "Spring": ["BIOL 2309", "PHYS 1145", "PHYS 1146", "EESC 2000"],
+      "Summer 1": ["BIOL 3611", "BIOL 3612"],
+      "Summer 2": ["PHYS 1147", "PHYS 1148"]
     },
     "Year 3": {
       "Spring": [
@@ -57,21 +46,13 @@
         "BIOL 3612",
         "ENGW 3307"
       ],
-      "Fall": [
-        "ENGW 3307",
-        "BIOL 3611",
-        "BIOL 3612"
-      ]
+      "Fall": ["ENGW 3307", "BIOL 3611", "BIOL 3612"]
     },
     "Year 4": {
-      "Spring": [
-        "BIOL 4701"
-      ]
+      "Spring": ["BIOL 4701"]
     },
     "Year 5": {
-      "Spring": [
-        "BIOL 4701"
-      ]
+      "Spring": ["BIOL 4701"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
@@ -84,11 +65,7 @@
         "ENGW 1111",
         "BIOL 2299"
       ],
-      "Summer 1": [
-        "BIOL 2309",
-        "BIOL 2301",
-        "BIOL 2302"
-      ],
+      "Summer 1": ["BIOL 2309", "BIOL 2301", "BIOL 2302"],
       "Fall": [
         "BIOL 2299",
         "CHEM 1161",
@@ -109,23 +86,11 @@
         "PHYS 1146",
         "EESC 2000"
       ],
-      "Summer 2": [
-        "PHYS 1147",
-        "PHYS 1148"
-      ],
-      "Spring": [
-        "BIOL 2309",
-        "PHYS 1145",
-        "PHYS 1146",
-        "EESC 2000"
-      ]
+      "Summer 2": ["PHYS 1147", "PHYS 1148"],
+      "Spring": ["BIOL 2309", "PHYS 1145", "PHYS 1146", "EESC 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "BIOL 3611",
-        "BIOL 3612",
-        "ENGW 3307"
-      ],
+      "Fall": ["BIOL 3611", "BIOL 3612", "ENGW 3307"],
       "Spring": [
         "BIOL 3611",
         "BIOL 3612",
@@ -135,14 +100,10 @@
       ]
     },
     "Year 4": {
-      "Spring": [
-        "BIOL 4701"
-      ]
+      "Spring": ["BIOL 4701"]
     },
     "Year 5": {
-      "Spring": [
-        "BIOL 4701"
-      ]
+      "Spring": ["BIOL 4701"]
     }
   },
   "Five Years, Three Co-ops in Summer 2/Fall": {
@@ -164,11 +125,7 @@
         "BIOL 2301",
         "BIOL 2302"
       ],
-      "Summer 1": [
-        "BIOL 2301",
-        "BIOL 2302",
-        "BIOL 2309"
-      ]
+      "Summer 1": ["BIOL 2301", "BIOL 2302", "BIOL 2309"]
     },
     "Year 2": {
       "Fall": [
@@ -180,16 +137,8 @@
         "PHYS 1146",
         "EESC 2000"
       ],
-      "Spring": [
-        "BIOL 2309",
-        "PHYS 1145",
-        "PHYS 1146",
-        "EESC 2000"
-      ],
-      "Summer 2": [
-        "PHYS 1147",
-        "PHYS 1148"
-      ]
+      "Spring": ["BIOL 2309", "PHYS 1145", "PHYS 1146", "EESC 2000"],
+      "Summer 2": ["PHYS 1147", "PHYS 1148"]
     },
     "Year 3": {
       "Spring": [
@@ -199,17 +148,11 @@
         "PHYS 1148",
         "ENGW 3307"
       ],
-      "Fall": [
-        "BIOL 3611",
-        "BIOL 3612",
-        "ENGW 3307"
-      ]
+      "Fall": ["BIOL 3611", "BIOL 3612", "ENGW 3307"]
     },
     "Year 4": {},
     "Year 5": {
-      "Spring": [
-        "BIOL 4701"
-      ]
+      "Spring": ["BIOL 4701"]
     }
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
@@ -221,16 +164,8 @@
         "CHEM 2312",
         "ENGW 1111"
       ],
-      "Summer 1": [
-        "BIOL 2309"
-      ],
-      "Fall": [
-        "BIOL 2299",
-        "CHEM 1161",
-        "CHEM 1162",
-        "MATH 1251",
-        "BIOL 1000"
-      ]
+      "Summer 1": ["BIOL 2309"],
+      "Fall": ["BIOL 2299", "CHEM 1161", "CHEM 1162", "MATH 1251", "BIOL 1000"]
     },
     "Year 2": {
       "Fall": [
@@ -242,23 +177,14 @@
         "PHYS 1146",
         "EESC 2000"
       ],
-      "Summer 2": [
-        "PHYS 1147",
-        "PHYS 1148"
-      ]
+      "Summer 2": ["PHYS 1147", "PHYS 1148"]
     },
     "Year 3": {
-      "Fall": [
-        "BIOL 3611",
-        "BIOL 3612",
-        "ENGW 3307"
-      ]
+      "Fall": ["BIOL 3611", "BIOL 3612", "ENGW 3307"]
     },
     "Year 4": {},
     "Year 5": {
-      "Spring": [
-        "BIOL 4701"
-      ]
+      "Spring": ["BIOL 4701"]
     }
   }
 }

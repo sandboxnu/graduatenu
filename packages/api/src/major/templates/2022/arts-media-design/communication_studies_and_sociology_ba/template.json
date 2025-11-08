@@ -1,23 +1,15 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "COMM 1000",
-        "COMM 1101",
-        "COMM 1112",
-        "SOCL 1101",
-        "SOCL 3300"
-      ],
-      "Spring": [
-        "ENGW 1111",
-        "SOCL 2320",
-        "SOCL 2321"
-      ]
+      "Fall": ["COMM 1000", "COMM 1101", "COMM 1112", "SOCL 1101", "SOCL 3300"],
+      "Spring": ["ENGW 1111", "SOCL 2320", "SOCL 2321"]
     },
     "Year 2": {
-      "Fall": [
-        "EEAM 2000"
-      ]
+      "Fall": ["EEAM 2000"]
     },
     "Year 3": {},
     "Year 4": {}

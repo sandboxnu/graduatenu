@@ -2,7 +2,8 @@
   "name": "Human Services and Sociology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -41,17 +42,37 @@
     },
     {
       "type": "SECTION",
+      "title": "Human Services Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Research Methods",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2970,
-          "subject": "HUSV"
+          "type": "SECTION",
+          "title": "Option A",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2970,
+              "subject": "HUSV"
+            }
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "COURSE",
-          "classId": 2321,
-          "subject": "SOCL"
+          "type": "SECTION",
+          "title": "Option B",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2321,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 2

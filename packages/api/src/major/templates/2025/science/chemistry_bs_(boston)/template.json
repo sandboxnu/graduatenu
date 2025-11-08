@@ -1,0 +1,59 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CHEM 1000", "CHEM 1161", "ENGW 1111", "MATH 1341"],
+      "Spring": ["CHEM 2315", "MATH 1342", "PHYS 1151"],
+      "Summer 1": ["PHYS 1155"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 2161", "CHEM 2317"],
+      "Spring": ["CHEM 2321", "CHEM 3401", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["CHEM 3403", "CHEM 3501", "ENGW 3307"]
+    },
+    "Year 4": {
+      "Spring": ["CHEM 4750", "CHEM 5621"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CHEM 1000", "CHEM 1161", "ENGW 1111", "MATH 1341"],
+      "Spring": ["CHEM 2315", "MATH 1342", "PHYS 1151"],
+      "Summer 1": ["PHYS 1155"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 2161", "CHEM 2317"],
+      "Spring": ["CHEM 2321", "CHEM 3401", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["CHEM 3403", "CHEM 3501", "ENGW 3307"]
+    },
+    "Year 4": {
+      "Spring": ["CHEM 4750", "CHEM 5621"]
+    }
+  },
+  "Five Years, Three Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CHEM 1000", "CHEM 1161", "ENGW 1111", "MATH 1341"],
+      "Spring": ["CHEM 2315", "MATH 1342", "PHYS 1151"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 2161", "CHEM 2317", "PHYS 1155"],
+      "Spring": ["CHEM 2321", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["CHEM 3401", "CHEM 3501", "ENGW 3307"]
+    },
+    "Year 4": {
+      "Spring": ["CHEM 3403"]
+    },
+    "Year 5": {
+      "Spring": ["CHEM 4750", "CHEM 5621"]
+    }
+  }
+}

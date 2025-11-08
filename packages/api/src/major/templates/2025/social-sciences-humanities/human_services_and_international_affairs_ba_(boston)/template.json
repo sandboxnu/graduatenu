@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "HUSV 1101", "INTL 1000", "INTL 1101"],
+      "Spring": ["ECON 3290", "HUSV 2300", "POLS 1160"]
+    },
+    "Year 2": {
+      "Fall": ["ECON 1115"],
+      "Spring": ["EESH 2000", "HUSV 2970", "HUSV 3900", "INTL 3400"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315", "HUSV 4994"]
+    },
+    "Year 4": {
+      "Spring": ["HUSV 4700", "INTL 4700"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "HUSV 1101", "INTL 1000", "INTL 1101"],
+      "Spring": ["ECON 3290", "HUSV 2300", "POLS 1160"]
+    },
+    "Year 2": {
+      "Fall": ["ECON 1115"],
+      "Spring": ["EESH 2000", "HUSV 2970", "HUSV 3900", "INTL 3400"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315", "HUSV 4994"]
+    },
+    "Year 4": {
+      "Spring": ["HUSV 4700", "INTL 4700"]
+    }
+  }
+}
