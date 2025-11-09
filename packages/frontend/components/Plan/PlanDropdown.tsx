@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, ElementType, SetStateAction } from "react";
 import {
   Button,
   Icon,
@@ -75,8 +75,8 @@ export const PlanDropdown: React.FC<PlanDropdownProps> = ({
             <Icon
               as={
                 plan.id && plan.id === starredPlan
-                  ? IoIosStar
-                  : IoIosStarOutline
+                  ? (IoIosStar as ElementType)
+                  : (IoIosStarOutline as ElementType)
               }
               boxSize="24px"
               color={plan.id === starredPlan ? "yellow.400" : "neutral.400"}
