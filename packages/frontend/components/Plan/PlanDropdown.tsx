@@ -73,7 +73,11 @@ export const PlanDropdown: React.FC<PlanDropdownProps> = ({
               {plan.name}
             </Text>
             <Icon
-              as={plan.id === starredPlan ? IoIosStar : IoIosStarOutline}
+              as={
+                plan.id && plan.id === starredPlan
+                  ? IoIosStar
+                  : IoIosStarOutline
+              }
               boxSize="24px"
               color={plan.id === starredPlan ? "yellow.400" : "neutral.400"}
               transition="all 0.3s ease"

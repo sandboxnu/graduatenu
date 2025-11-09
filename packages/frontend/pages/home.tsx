@@ -16,7 +16,6 @@ import {
   PlanModel,
   PreReqWarnings,
   ScheduleCourse2,
-  StudentModel,
 } from "@graduate/common";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -314,8 +313,6 @@ const HomePage: NextPage = () => {
     ).catch((error) => {
       handleApiClientError(error, router);
     });
-
-    mutateStudent(updatedStudent);
 
     toast.success(
       updatedStudent.starredPlan ? "Plan favorited!" : "Plan unfavorited!"
