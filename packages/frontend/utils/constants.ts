@@ -40,6 +40,7 @@ export const defaultGuestStudent: GetStudentResponse = {
   coursesTransfered: undefined,
   primaryPlanId: undefined,
   concentration: undefined,
+  starredPlan: undefined,
   createdAt: new Date(),
   updatedAt: new Date(),
   plans: [],
