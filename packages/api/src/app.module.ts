@@ -13,6 +13,7 @@ import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { MetaModule } from "./meta/meta.module";
 import { MinorModule } from "./minor/minor.module";
 import { UtilsModule } from "./utils/utils.module";
+import { PlanShareModule } from "./plan-share/plan-share.module";
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { UtilsModule } from "./utils/utils.module";
     StudentModule,
     AuthModule,
     PlanModule,
+    PlanShareModule,
     MajorModule,
     MinorModule,
     EmailModule,
