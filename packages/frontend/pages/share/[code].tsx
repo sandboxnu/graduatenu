@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Box, Divider, Flex, Spinner } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
 import {
@@ -9,7 +9,9 @@ import {
   NoPlanSidebar,
   Sidebar,
   NoMajorSidebar,
+  GraduatePostAuthHeader,
 } from "../../components";
+import { IsGuestContext } from "../_app";
 
 const SharePlanPage: NextPage = () => {
   const router = useRouter();
@@ -17,6 +19,7 @@ const SharePlanPage: NextPage = () => {
   const [plan, setPlan] = useState<PlanModel<string> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { isGuest } = useContext(IsGuestContext);
 
   useEffect(() => {
     if (!code || typeof code !== "string") {
@@ -78,7 +81,7 @@ const SharePlanPage: NextPage = () => {
 
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
-      <GraduatePreAuthHeader />
+      {isGuest ? <GraduatePreAuthHeader /> : <GraduatePostAuthHeader />}
       <Flex height="100%" overflow="hidden">
         <Box
           bg="neutral.100"
