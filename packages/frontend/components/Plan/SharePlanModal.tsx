@@ -18,7 +18,8 @@ import {
 import { PlanModel } from "@graduate/common";
 import { useEffect, useState } from "react";
 import { BlueButton } from "../Button";
-import { CopyIcon, DownloadIcon } from "@chakra-ui/icons";
+import { CopyIcon } from "@chakra-ui/icons";
+import { FaShareSquare } from "react-icons/fa";
 
 interface SharePlanModalProps {
   plan: PlanModel<string>;
@@ -73,7 +74,7 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
       <Tooltip shouldWrapChildren label={`Share ${planName}?`} fontSize="md">
         <BlueButton
           onClick={onOpen}
-          leftIcon={<DownloadIcon />}
+          leftIcon={<FaShareSquare />}
           ml="xs"
           size="md"
         >
