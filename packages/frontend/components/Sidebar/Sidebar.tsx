@@ -394,6 +394,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                             validationStatus={sectionValidationStatus}
                             loading={isCoursesLoading}
                             coursesTaken={coursesTaken}
+                            isSharedPlan={isSharedPlan}
                           ></SidebarSection>
                         );
                       })}
