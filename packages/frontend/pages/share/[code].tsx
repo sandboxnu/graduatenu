@@ -1,10 +1,15 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Flex, Heading, Spinner } from "@chakra-ui/react";
+import { Box, Divider, Flex, Spinner } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
-import { Plan, GraduatePreAuthHeader } from "../../components";
-import { ClientSideError } from "../../components/Error/ClientSideError";
+import {
+  Plan,
+  GraduatePreAuthHeader,
+  NoPlanSidebar,
+  Sidebar,
+  NoMajorSidebar,
+} from "../../components";
 
 const SharePlanPage: NextPage = () => {
   const router = useRouter();
@@ -51,30 +56,50 @@ const SharePlanPage: NextPage = () => {
     );
   }
 
-  if (error || !plan) {
-    return <ClientSideError />;
+  let renderedSidebar = <NoPlanSidebar />;
+  if (plan) {
+    if (plan.major) {
+      renderedSidebar = (
+        <Sidebar
+          selectedPlan={plan}
+          transferCourses={plan.student?.coursesTransfered || []}
+        />
+      );
+    } else
+      renderedSidebar = (
+        <NoMajorSidebar
+          selectedPlan={plan}
+          transferCourses={plan.student?.coursesTransfered || []}
+        />
+      );
   }
 
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       <GraduatePreAuthHeader />
-      <Flex height="100%" overflowY="auto" flexDirection="column" p="md">
-        <Heading
-          as="h1"
-          fontSize="2xl"
-          color="primary.blue.dark.main"
-          fontWeight="bold"
-          mb="5"
+      <Flex height="100%" overflow="hidden">
+        <Box
+          bg="neutral.100"
+          overflowY="auto"
+          width={{ desktop: "360px", tablet: "300px" }}
+          flexShrink={0}
         >
-          Viewing Plan &apos;{plan.name}&apos;
-        </Heading>
-        <Plan
-          plan={plan}
-          isSharedPlan={true}
-          mutateStudentWithUpdatedPlan={() => {
-            //no updates
-          }}
-        />
+          {renderedSidebar}
+        </Box>
+        <Box p="md" overflow="auto" flexGrow={1}>
+          <Flex flexDirection="column" rowGap="sm">
+            {plan && (
+              <>
+                <Plan
+                  plan={plan}
+                  mutateStudentWithUpdatedPlan={() => {}}
+                  isSharedPlan={true}
+                />
+                <Divider borderColor="neutral.200" borderWidth={1} />
+              </>
+            )}
+          </Flex>
+        </Box>
       </Flex>
     </Flex>
   );
