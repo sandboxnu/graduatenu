@@ -279,6 +279,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
               courseData={courseData}
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-generic`}
               loading={isCoursesLoading}
+              isSharedPlan={isSharedPlan}
             />
             <NUPathSection
               coursesTaken={coursesTaken}
@@ -343,6 +344,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                         dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
                         loading={isCoursesLoading}
                         coursesTaken={coursesTaken}
+                        isSharedPlan={isSharedPlan}
                       />
                     );
                   })}
@@ -355,6 +357,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                       dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
                       loading={isCoursesLoading}
                       coursesTaken={coursesTaken}
+                      isSharedPlan={isSharedPlan}
                     />
                   )}
                 </TabPanel>
