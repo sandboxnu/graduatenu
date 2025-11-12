@@ -63,6 +63,7 @@ const SharePlanPage: NextPage = () => {
         <Sidebar
           selectedPlan={plan}
           transferCourses={plan.student?.coursesTransfered || []}
+          isSharedPlan={true}
         />
       );
     } else
@@ -70,6 +71,7 @@ const SharePlanPage: NextPage = () => {
         <NoMajorSidebar
           selectedPlan={plan}
           transferCourses={plan.student?.coursesTransfered || []}
+          isSharedPlan={true}
         />
       );
   }

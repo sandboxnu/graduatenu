@@ -73,10 +73,11 @@ let currentRequestNum = 0;
 interface SidebarProps {
   selectedPlan: PlanModel<string>;
   transferCourses: ScheduleCourse2<unknown>[];
+  isSharedPlan?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = memo(
-  ({ selectedPlan, transferCourses }) => {
+  ({ selectedPlan, transferCourses, isSharedPlan }) => {
     const router = useRouter();
     const {
       major,
@@ -270,6 +271,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
         renderCoopBlock
         renderBetaMajorBlock={major.metadata?.verified !== true}
         planId={selectedPlan.id}
+        isSharedPlan={isSharedPlan}
       >
         {courseData && (
           <>
@@ -407,11 +409,13 @@ const Sidebar: React.FC<SidebarProps> = memo(
 interface NoMajorSidebarProps {
   selectedPlan: PlanModel<string>;
   transferCourses: ScheduleCourse2<unknown>[];
+  isSharedPlan?: boolean;
 }
 
 export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
   selectedPlan,
   transferCourses,
+  isSharedPlan,
 }) => {
   const creditsTaken = totalCreditsInSchedule(
     selectedPlan.schedule,
@@ -424,6 +428,7 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
       renderCoopBlock
       renderDropdownWarning={false}
       planId={selectedPlan.id}
+      isSharedPlan={isSharedPlan}
     >
       <Stack px="md" mb="3">
         <Text>
