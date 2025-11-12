@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import { Box, Divider, Flex, Spinner } from "@chakra-ui/react";
+import { Box, Divider, Flex, Heading, Spinner } from "@chakra-ui/react";
 import { PlanModel } from "@graduate/common";
 import {
   Plan,
@@ -82,6 +82,9 @@ const SharePlanPage: NextPage = () => {
   return (
     <Flex flexDirection="column" height="100vh" overflow="hidden">
       {isGuest ? <GraduatePreAuthHeader /> : <GraduatePostAuthHeader />}
+      <Heading size="lg" m="7px">
+        {`Viewing '${plan?.name}'`}
+      </Heading>
       <Flex height="100%" overflow="hidden">
         <Box
           bg="neutral.100"
@@ -91,6 +94,7 @@ const SharePlanPage: NextPage = () => {
         >
           {renderedSidebar}
         </Box>
+
         <Box p="md" overflow="auto" flexGrow={1}>
           <Flex flexDirection="column" rowGap="sm">
             {plan && (
