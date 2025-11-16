@@ -140,6 +140,7 @@ const HomePage: NextPage = () => {
 
     mutateStudent();
     setLastDeletedPlan(null);
+    toast.success("Plan restored successfully");
   };
 
   useKeyboardShortcuts({
