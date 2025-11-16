@@ -1,0 +1,84 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ARTD 1001", "ENGW 1111"],
+      "Spring": [
+        "ARTF 1200",
+        "ARTF 1240",
+        "ARTD 2100",
+        "CS 2100",
+        "CS 3200",
+        "EEAM 2000"
+      ],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 2484", "CS 3000"],
+      "Summer 2": ["MATH 2331"]
+    },
+    "Year 3": {
+      "Fall": ["CS 4300"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["ARTD 3000", "CS 4530"],
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ARTD 1001", "ENGW 1111"],
+      "Spring": [
+        "ARTF 1200",
+        "ARTF 1240",
+        "ARTD 2100",
+        "CS 2100",
+        "CS 3200",
+        "EEAM 2000"
+      ],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 2484", "CS 3000"],
+      "Summer 2": ["MATH 2331"]
+    },
+    "Year 3": {
+      "Fall": ["CS 4300"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["ARTD 3000", "CS 4530"],
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ARTD 1001", "ENGW 1111"],
+      "Spring": [
+        "ARTF 1200",
+        "ARTF 1240",
+        "ARTD 2100",
+        "CS 2100",
+        "CS 3200",
+        "EEAM 2000"
+      ],
+      "Summer 1": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3100"],
+      "Spring": ["CS 1210", "CS 2484"],
+      "Summer 1": ["MATH 2331"]
+    },
+    "Year 3": {
+      "Spring": ["ARTD 3000", "CS 4300"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["ARTD 4530", "CS 4530"]
+    }
+  }
+}

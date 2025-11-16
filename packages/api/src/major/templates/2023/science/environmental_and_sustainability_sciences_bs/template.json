@@ -1,73 +1,37 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, One Co-op in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "ENVR 1000",
-        "ENVR 1400",
-        "ENVR 1500"
-      ],
-      "Spring": [
-        "EEMB 2302",
-        "ENVR 1200",
-        "MATH 1241"
-      ]
+      "Fall": ["ENGW 1111", "ENVR 1000", "ENVR 1400", "ENVR 1500"],
+      "Spring": ["EEMB 2302", "ENVR 1200", "MATH 1241"]
     },
     "Year 2": {
-      "Fall": [
-        "EESC 2000",
-        "ENVR 2500",
-        "ENVR 2515",
-        "ENVR 3300"
-      ]
+      "Fall": ["EESC 2000", "ENVR 2500", "ENVR 2515", "ENVR 3300"]
     },
     "Year 3": {
-      "Fall": [
-        "ENGW 3307"
-      ],
-      "Spring": [
-        "ENGW 3307"
-      ]
+      "Fall": ["ENGW 3307"],
+      "Spring": ["ENGW 3307"]
     },
     "Year 4": {
-      "Spring": [
-        "ENVR 4000",
-        "ENVR 4050"
-      ]
+      "Spring": ["ENVR 4000", "ENVR 4050"]
     }
   },
   "Four Years, One Co-op in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "ENVR 1000",
-        "ENVR 1400",
-        "ENVR 1500"
-      ],
-      "Spring": [
-        "EEMB 2302",
-        "ENVR 1200",
-        "MATH 1241"
-      ]
+      "Fall": ["ENGW 1111", "ENVR 1000", "ENVR 1400", "ENVR 1500"],
+      "Spring": ["EEMB 2302", "ENVR 1200", "MATH 1241"]
     },
     "Year 2": {
-      "Fall": [
-        "EESC 2000",
-        "ENVR 2500",
-        "ENVR 2515",
-        "ENVR 3300"
-      ]
+      "Fall": ["EESC 2000", "ENVR 2500", "ENVR 2515", "ENVR 3300"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3307"
-      ]
+      "Spring": ["ENGW 3307"]
     },
     "Year 4": {
-      "Spring": [
-        "ENVR 4000",
-        "ENVR 4050"
-      ]
+      "Spring": ["ENVR 4000", "ENVR 4050"]
     }
   }
 }

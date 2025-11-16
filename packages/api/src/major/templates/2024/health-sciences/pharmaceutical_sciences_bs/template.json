@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Default Plan": {
     "Year 1": {
       "Fall": ["BIOL 1111", "BIOL 1112", "ENGW 1111", "PHMD 1000", "PHSC 1001"],
@@ -16,7 +20,6 @@
       "Fall": [
         "CHEM 2311",
         "CHEM 2312",
-        "CHEM 2319",
         "PHSC 2320",
         "PHSC 2100",
         "PHYS 1145",
@@ -25,7 +28,6 @@
       "Spring": [
         "CHEM 2313",
         "CHEM 2314",
-        "CHEM 2320",
         "PHSC 2000",
         "PHTH 2210",
         "PHYS 1147",

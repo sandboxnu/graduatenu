@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["BIOL 1107", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["BIOL 2299", "CHEM 1161", "DS 2500", "MATH 1341"],
+      "Summer 1": ["PSYC 1101"]
+    },
+    "Year 2": {
+      "Fall": ["BIOL 2301", "BIOL 3405", "CS 3200", "DS 3000"],
+      "Spring": ["CHEM 2311", "CS 1210", "DS 3500"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4200", "DS 4300", "PT 5410"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["BINF 6308", "CS 4100", "DS 4400"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["BIOL 1107", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["BIOL 2299", "CHEM 1161", "DS 2500", "MATH 1341"],
+      "Summer 1": ["PSYC 1101"]
+    },
+    "Year 2": {
+      "Fall": ["BIOL 2301", "BIOL 3405", "CS 3200", "DS 3000"],
+      "Spring": ["CHEM 2311", "CS 1210", "DS 3500"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4200", "DS 4300", "PT 5410"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["BINF 6308", "CS 4100", "DS 4400"]
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["HUSV 1101", "ENGW 1111", "SOCL 1101", "SOCL 1000"],
+      "Spring": ["MATH 1215", "HUSV 2300"]
+    },
+    "Year 2": {
+      "Fall": ["HUSV 3570", "HUSV 2970", "SOCL 2320"],
+      "Spring": ["EESH 2000", "SOCL 2323"]
+    },
+    "Year 3": {
+      "Spring": ["HUSV 3900", "SOCL 3300"],
+      "Summer 1": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Spring": ["HUSV 4700"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["HUSV 1101", "ENGW 1111", "SOCL 1101", "SOCL 1000"],
+      "Spring": ["MATH 1215", "HUSV 2300"]
+    },
+    "Year 2": {
+      "Fall": ["HUSV 3570", "HUSV 2970", "SOCL 2320"],
+      "Spring": ["EESH 2000", "SOCL 2323"]
+    },
+    "Year 3": {
+      "Spring": ["HUSV 3900", "SOCL 3300"],
+      "Summer 1": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Spring": ["HUSV 4700"]
+    }
+  }
+}

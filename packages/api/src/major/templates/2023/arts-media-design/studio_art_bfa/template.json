@@ -1,42 +1,23 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, Two Co-ops in Spring/Summer 1 Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "ARTF 1000",
-        "ARTH 1001",
-        "SMFA 3000",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "SMFA 3000",
-        "ENGW 1111"
-      ]
+      "Fall": ["ARTF 1000", "ARTH 1001", "SMFA 3000", "ENGW 1111"],
+      "Spring": ["SMFA 3000", "ENGW 1111"]
     },
     "Year 2": {
-      "Fall": [
-        "ARTH 3000",
-        "SMFA 3000",
-        "EEAM 2010"
-      ]
+      "Fall": ["ARTH 3000", "SMFA 3000", "EEAM 2010"]
     },
     "Year 3": {
-      "Fall": [
-        "ARTH 4000",
-        "SMFA 3000"
-      ],
-      "Spring": [
-        "ENGW 3314"
-      ]
+      "Fall": ["ARTH 4000", "SMFA 3000"],
+      "Spring": ["ENGW 3314"]
     },
     "Year 4": {
-      "Fall": [
-        "SMFA 3000",
-        "SMFA 4000"
-      ],
-      "Spring": [
-        "SMFA 3000",
-        "SMFA 4000"
-      ]
+      "Fall": ["SMFA 3000", "SMFA 4000"],
+      "Spring": ["SMFA 3000", "SMFA 4000"]
     }
   }
 }

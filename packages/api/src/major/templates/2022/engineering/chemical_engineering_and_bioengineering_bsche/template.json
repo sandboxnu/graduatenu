@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, One Co-op in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -17,21 +21,10 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHYS 1155",
-        "PHYS 1156",
-        "PHYS 1157"
-      ]
+      "Summer 1": ["MATH 2321", "PHYS 1155", "PHYS 1156", "PHYS 1157"]
     },
     "Year 2": {
-      "Fall": [
-        "BIOE 2355",
-        "CHEM 2311",
-        "CHEM 2312",
-        "CHME 2308",
-        "MATH 2341"
-      ],
+      "Fall": ["BIOE 2355", "CHEM 2311", "CHEM 2312", "CHME 2308", "MATH 2341"],
       "Spring": [
         "CHEM 2313",
         "CHEM 2314",
@@ -41,12 +34,7 @@
       ]
     },
     "Year 3": {
-      "Fall": [
-        "BIOE 3210",
-        "CHME 3312",
-        "CHME 3322",
-        "ENGW 3302"
-      ],
+      "Fall": ["BIOE 3210", "CHME 3312", "CHME 3322", "ENGW 3302"],
       "Spring": [
         "BIOE 5410",
         "BIOE 5420",
@@ -59,9 +47,7 @@
         "CHME 3322",
         "ENGW 3302"
       ],
-      "Summer 1": [
-        "BIOE 4790"
-      ]
+      "Summer 1": ["BIOE 4790"]
     },
     "Year 4": {
       "Spring": [
@@ -77,9 +63,7 @@
         "CHME 3316",
         "CHME 4510"
       ],
-      "Summer 1": [
-        "BIOE 4790"
-      ]
+      "Summer 1": ["BIOE 4790"]
     },
     "Year 5": {
       "Spring": [
@@ -109,21 +93,10 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHYS 1155",
-        "PHYS 1156",
-        "PHYS 1157"
-      ]
+      "Summer 1": ["MATH 2321", "PHYS 1155", "PHYS 1156", "PHYS 1157"]
     },
     "Year 2": {
-      "Fall": [
-        "BIOE 2355",
-        "CHEM 2311",
-        "CHEM 2312",
-        "CHME 2308",
-        "MATH 2341"
-      ],
+      "Fall": ["BIOE 2355", "CHEM 2311", "CHEM 2312", "CHME 2308", "MATH 2341"],
       "Spring": [
         "CHEM 2313",
         "CHEM 2314",
@@ -133,12 +106,7 @@
       ]
     },
     "Year 3": {
-      "Spring": [
-        "BIOE 3210",
-        "CHME 3312",
-        "CHME 3322",
-        "ENGW 3302"
-      ]
+      "Spring": ["BIOE 3210", "CHME 3312", "CHME 3322", "ENGW 3302"]
     },
     "Year 4": {
       "Spring": [
@@ -149,9 +117,7 @@
         "CHME 4510",
         "ENCP 3000"
       ],
-      "Summer 1": [
-        "BIOE 4790"
-      ]
+      "Summer 1": ["BIOE 4790"]
     },
     "Year 5": {
       "Spring": [

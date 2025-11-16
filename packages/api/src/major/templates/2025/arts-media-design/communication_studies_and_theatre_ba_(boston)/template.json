@@ -1,0 +1,25 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Four Years, Two Co-ops in Spring/Summer": {
+    "Year 1": {
+      "Fall": ["COMM 1000", "COMM 1101", "THTR 1100", "THTR 1101", "THTR 1120"],
+      "Spring": [
+        "COMM 1112",
+        "ENGW 1111",
+        "INAM 2000",
+        "THTR 1131",
+        "EEAM 2000"
+      ]
+    },
+    "Year 2": {
+      "Fall": ["THTR 2000", "THTR 3325"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3314", "THTR 1270"]
+    },
+    "Year 4": {}
+  }
+}

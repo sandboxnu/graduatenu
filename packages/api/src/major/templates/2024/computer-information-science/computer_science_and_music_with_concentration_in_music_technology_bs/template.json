@@ -1,98 +1,42 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study:": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111",
-        "MUSC 1201"
-      ],
-      "Spring": [
-        "CS 2510",
-        "MUSC 1202",
-        "MUSC 2350",
-        "MUST 1220"
-      ],
-      "Summer 1": [
-        "CS 3500",
-        "PSYC 1101"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "MUSC 1201"],
+      "Spring": ["CS 2510", "MUSC 1202", "MUSC 2350", "MUST 1220"],
+      "Summer 1": ["CS 3500", "PSYC 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 1210",
-        "CS 3000",
-        "CS 3200",
-        "MUSC 1001",
-        "MUST 2431"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Fall": ["CS 1210", "CS 3000", "CS 3200", "MUSC 1001", "MUST 2431"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 3": {
-      "Fall": [
-        "MUSC 2111"
-      ]
+      "Fall": ["MUSC 2111"]
     },
     "Year 4": {
-      "Fall": [
-        "CS 4500",
-        "MUST 2102"
-      ],
-      "Spring": [
-        "IS 4300",
-        "MUST 4611"
-      ]
+      "Fall": ["CS 4500", "MUST 2102"],
+      "Spring": ["IS 4300", "MUST 4611"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111",
-        "MUSC 1201"
-      ],
-      "Spring": [
-        "CS 2510",
-        "MUSC 1202",
-        "MUSC 2350",
-        "MUST 1220"
-      ],
-      "Summer 1": [
-        "CS 3500",
-        "PSYC 1101"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "MUSC 1201"],
+      "Spring": ["CS 2510", "MUSC 1202", "MUSC 2350", "MUST 1220"],
+      "Summer 1": ["CS 3500", "PSYC 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 1210",
-        "CS 3000",
-        "CS 3200",
-        "MUSC 1001",
-        "MUST 2431"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Fall": ["CS 1210", "CS 3000", "CS 3200", "MUSC 1001", "MUST 2431"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 3": {
-      "Fall": [
-        "MUSC 2111"
-      ]
+      "Fall": ["MUSC 2111"]
     },
     "Year 4": {
-      "Fall": [
-        "CS 4500",
-        "MUST 2102"
-      ],
-      "Spring": [
-        "IS 4300",
-        "MUST 4611"
-      ]
+      "Fall": ["CS 4500", "MUST 2102"],
+      "Spring": ["IS 4300", "MUST 4611"]
     }
   }
 }

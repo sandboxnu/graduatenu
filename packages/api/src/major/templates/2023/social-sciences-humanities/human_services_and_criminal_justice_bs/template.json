@@ -1,80 +1,38 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "CRIM 1110",
-        "ENGW 1111",
-        "HUSV 1000",
-        "HUSV 1101",
-        "MATH 1215"
-      ],
-      "Spring": [
-        "CRIM 1300",
-        "CS 1100",
-        "HUSV 2300"
-      ]
+      "Fall": ["CRIM 1110", "ENGW 1111", "HUSV 1000", "HUSV 1101", "MATH 1215"],
+      "Spring": ["CRIM 1300", "CS 1100", "HUSV 2300"]
     },
     "Year 2": {
-      "Fall": [
-        "CRIM 1120",
-        "CRIM 3600"
-      ],
-      "Spring": [
-        "EESH 2000"
-      ]
+      "Fall": ["CRIM 1120", "CRIM 3600"],
+      "Spring": ["EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "CRIM 3000",
-        "CRIM 3700",
-        "HUSV 3900"
-      ]
+      "Spring": ["CRIM 3000", "CRIM 3700", "HUSV 3900"]
     },
     "Year 4": {
-      "Spring": [
-        "CRIM 4000",
-        "CRIM 4949",
-        "ENGW 3315"
-      ]
+      "Spring": ["CRIM 4000", "CRIM 4949", "ENGW 3315"]
     }
   },
   "Four Year, 2 Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CRIM 1110",
-        "ENGW 1111",
-        "HUSV 1000",
-        "HUSV 1101",
-        "MATH 1215"
-      ],
-      "Spring": [
-        "CRIM 1300",
-        "CS 1100",
-        "HUSV 2300"
-      ]
+      "Fall": ["CRIM 1110", "ENGW 1111", "HUSV 1000", "HUSV 1101", "MATH 1215"],
+      "Spring": ["CRIM 1300", "CS 1100", "HUSV 2300"]
     },
     "Year 2": {
-      "Fall": [
-        "CRIM 1120",
-        "CRIM 3600"
-      ],
-      "Spring": [
-        "EESH 2000"
-      ]
+      "Fall": ["CRIM 1120", "CRIM 3600"],
+      "Spring": ["EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "CRIM 3000",
-        "CRIM 3700",
-        "HUSV 3900"
-      ]
+      "Spring": ["CRIM 3000", "CRIM 3700", "HUSV 3900"]
     },
     "Year 4": {
-      "Spring": [
-        "CRIM 4000",
-        "CRIM 4949",
-        "ENGW 3315"
-      ]
+      "Spring": ["CRIM 4000", "CRIM 4949", "ENGW 3315"]
     }
   }
 }

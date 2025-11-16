@@ -2,7 +2,8 @@
   "name": "History, Culture, and Law, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -87,162 +88,169 @@
       "title": "Major Electives",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2399,
-          "subject": "AFAM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2305,
-          "subject": "ANTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3120,
-          "subject": "AFAM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3418,
-          "subject": "CLTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2350,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3110,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2690,
-          "subject": "ENGL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3325,
-          "subject": "ENGL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3375,
-          "subject": "ENGL"
-        },
-        {
-          "type": "OR",
-          "courses": [
+          "type": "SECTION",
+          "title": "Complete three of the following not already used to fulfill one of the requirements above.  Courses not used above to fulfill a requirement may also be used to fulfill this elective requirement.  However, only one course used to fulfill this requirement may be at the 1000 level.",
+          "requirements": [
             {
               "type": "COURSE",
-              "classId": 3678,
+              "classId": 2399,
+              "subject": "AFAM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2305,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3120,
+              "subject": "AFAM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3418,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3110,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2690,
               "subject": "ENGL"
             },
             {
               "type": "COURSE",
-              "classId": 3678,
-              "subject": "WMNS"
+              "classId": 3325,
+              "subject": "ENGL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3375,
+              "subject": "ENGL"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3678,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3678,
+                  "subject": "WMNS"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1206,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1215,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2000,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2011,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2217,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2280,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2282,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2285,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2311,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2332,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3334,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3303,
+              "subject": "LPSC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1102,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1112,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2325,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4522,
+              "subject": "SOCL"
             }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 1206,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1215,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2000,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2011,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2217,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2280,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2282,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2285,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2311,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2332,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3334,
-          "subject": "HIST"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3303,
-          "subject": "LPSC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1102,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1112,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2303,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3100,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2325,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2330,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4522,
-          "subject": "SOCL"
+          ],
+          "minRequirementCount": 29
         }
       ],
-      "minRequirementCount": 29
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -640,6 +648,113 @@
       "requirements": [
         {
           "type": "COURSE",
+          "classId": 1101,
+          "subject": "WMNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1103,
+          "subject": "WMNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2505,
+          "subject": "WMNS"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "WMNS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "SOCL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1225,
+              "subject": "AFAM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1225,
+              "subject": "HIST"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1225,
+              "subject": "WMNS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2302,
+          "subject": "ANTH"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2451,
+              "subject": "CLTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2451,
+              "subject": "WMNS"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2480,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1260,
+          "subject": "WMNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2303,
+          "subject": "WMNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3100,
+          "subject": "WMNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3500,
+          "subject": "WMNS"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3678,
+          "subject": "WMNS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Complete four courses as follows:",
+      "requirements": [
+        {
+          "type": "COURSE",
           "classId": 1220,
           "subject": "LACS"
         },
@@ -704,115 +819,7 @@
     }
   ],
   "concentrations": {
-    "minOptions": 1,
-    "concentrationOptions": [
-      {
-        "type": "SECTION",
-        "title": "Complete four courses as follows:",
-        "requirements": [
-          {
-            "type": "COURSE",
-            "classId": 1101,
-            "subject": "WMNS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 1103,
-            "subject": "WMNS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2505,
-            "subject": "WMNS"
-          },
-          {
-            "type": "OR",
-            "courses": [
-              {
-                "type": "COURSE",
-                "classId": 4520,
-                "subject": "WMNS"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4520,
-                "subject": "SOCL"
-              }
-            ]
-          },
-          {
-            "type": "OR",
-            "courses": [
-              {
-                "type": "COURSE",
-                "classId": 1225,
-                "subject": "AFAM"
-              },
-              {
-                "type": "COURSE",
-                "classId": 1225,
-                "subject": "HIST"
-              },
-              {
-                "type": "COURSE",
-                "classId": 1225,
-                "subject": "WMNS"
-              }
-            ]
-          },
-          {
-            "type": "COURSE",
-            "classId": 2302,
-            "subject": "ANTH"
-          },
-          {
-            "type": "OR",
-            "courses": [
-              {
-                "type": "COURSE",
-                "classId": 2451,
-                "subject": "CLTR"
-              },
-              {
-                "type": "COURSE",
-                "classId": 2451,
-                "subject": "WMNS"
-              }
-            ]
-          },
-          {
-            "type": "COURSE",
-            "classId": 2480,
-            "subject": "INTL"
-          },
-          {
-            "type": "COURSE",
-            "classId": 1260,
-            "subject": "WMNS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2303,
-            "subject": "WMNS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3100,
-            "subject": "WMNS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3500,
-            "subject": "WMNS"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3678,
-            "subject": "WMNS"
-          }
-        ],
-        "minRequirementCount": 1
-      }
-    ]
+    "minOptions": 0,
+    "concentrationOptions": []
   }
 }

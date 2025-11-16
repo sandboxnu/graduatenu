@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["COMM 1101", "COMM 1112", "ENGW 1111", "LING 1000", "LING 1150"],
+      "Spring": ["LING 2350", "LING 3412", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["COMM 2301", "EESC 2000"],
+      "Spring": ["LING 3442"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315", "LING 3442"]
+    },
+    "Year 4": {
+      "Spring": ["COMM 3415"]
+    }
+  },
+  "Four Years, Two Summer Second Half/Fall Co-ops": {
+    "Year 1": {
+      "Fall": ["COMM 1101", "COMM 1112", "ENGW 1111", "LING 1000", "LING 1150"],
+      "Spring": ["LING 2350", "LING 3412", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["COMM 2301", "EESC 2000"],
+      "Spring": ["LING 3442"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315", "LING 3442"]
+    },
+    "Year 4": {
+      "Spring": ["COMM 3415"]
+    }
+  },
+  "Five Years, Three Summer Second Half/Fall Co-ops": {
+    "Year 1": {
+      "Fall": ["COMM 1101", "COMM 1112", "ENGW 1111", "LING 1000", "LING 1150"],
+      "Spring": ["LING 2350", "LING 3412"]
+    },
+    "Year 2": {
+      "Fall": ["COMM 2301"],
+      "Spring": ["EEAM 2000"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3315", "LING 3442"]
+    },
+    "Year 4": {
+      "Spring": ["LING 3442"]
+    },
+    "Year 5": {
+      "Spring": ["COMM 3415"]
+    }
+  }
+}

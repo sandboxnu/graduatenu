@@ -2,7 +2,8 @@
   "name": "Architecture, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 142,
   "yearVersion": 2023,
@@ -61,11 +62,18 @@
           "subject": "ARCH"
         },
         {
-          "type": "RANGE",
-          "subject": "ARCH",
-          "idRangeStart": 2300,
-          "idRangeEnd": 2399,
-          "exceptions": []
+          "type": "SECTION",
+          "title": "Architecture History Elective 1",
+          "requirements": [
+            {
+              "type": "RANGE",
+              "subject": "ARCH",
+              "idRangeStart": 2300,
+              "idRangeEnd": 2399,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 3
@@ -85,11 +93,18 @@
           "subject": "ARCH"
         },
         {
-          "type": "RANGE",
-          "subject": "ARCH",
-          "idRangeStart": 2300,
-          "idRangeEnd": 2399,
-          "exceptions": []
+          "type": "SECTION",
+          "title": "Architecture History Elective 2 1",
+          "requirements": [
+            {
+              "type": "RANGE",
+              "subject": "ARCH",
+              "idRangeStart": 2300,
+              "idRangeEnd": 2399,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 3
@@ -139,6 +154,19 @@
         }
       ],
       "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "SEMESTER 5",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Travel Study",
+          "requirements": [],
+          "minRequirementCount": 0
+        }
+      ],
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",

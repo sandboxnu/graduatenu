@@ -2,7 +2,8 @@
   "name": "Architectural Studies, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -100,11 +101,18 @@
           ]
         },
         {
-          "type": "RANGE",
-          "subject": "ARCH",
-          "idRangeStart": 2300,
-          "idRangeEnd": 2399,
-          "exceptions": []
+          "type": "SECTION",
+          "title": "Architecture History Electives",
+          "requirements": [
+            {
+              "type": "RANGE",
+              "subject": "ARCH",
+              "idRangeStart": 2300,
+              "idRangeEnd": 2399,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 3
@@ -126,92 +134,113 @@
       "title": "Major Electives",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2206,
-          "subject": "ENTR"
+          "type": "SECTION",
+          "title": "Real Estate",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2206,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2303,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3330,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4501,
+              "subject": "ENTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2209,
+              "subject": "MKTG"
+            }
+          ],
+          "minRequirementCount": 6
         },
         {
-          "type": "COURSE",
-          "classId": 2301,
-          "subject": "ENTR"
+          "type": "SECTION",
+          "title": "Sustainability",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1200,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2334,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4566,
+              "subject": "CIVE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "SBSY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5200,
+              "subject": "SBSY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1180,
+              "subject": "PHIL"
+            }
+          ],
+          "minRequirementCount": 7
         },
         {
-          "type": "COURSE",
-          "classId": 2303,
-          "subject": "ENTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3330,
-          "subject": "ENTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4501,
-          "subject": "ENTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2209,
-          "subject": "MKTG"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3200,
-          "subject": "ENVR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1200,
-          "subject": "CIVE"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2334,
-          "subject": "CIVE"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4566,
-          "subject": "CIVE"
-        },
-        {
-          "type": "COURSE",
-          "classId": 5100,
-          "subject": "SBSY"
-        },
-        {
-          "type": "COURSE",
-          "classId": 5200,
-          "subject": "SBSY"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1180,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1100,
-          "subject": "ARTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2215,
-          "subject": "ARTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 5902,
-          "subject": "ARTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 5110,
-          "subject": "ARTG"
+          "type": "SECTION",
+          "title": "History, Theory, and Culture",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1100,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2215,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5902,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5110,
+              "subject": "ARTG"
+            }
+          ],
+          "minRequirementCount": 4
         }
       ],
-      "minRequirementCount": 17
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",

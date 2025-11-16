@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["INSC 1000", "ENGW 1111", "ENVR 1101", "ENVR 2515"],
+      "Spring": ["ENVR 1110", "ENVR 3150", "PHIL 1180"]
+    },
+    "Year 2": {
+      "Fall": ["EESC 2000", "ENVR 3300", "ENVR 3540"]
+    },
+    "Year 3": {
+      "Fall": ["ENVR 3200"],
+      "Summer 2": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Fall": ["SOCL 4522"],
+      "Spring": ["ENVR 4000", "ENVR 4050"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["INSC 1000", "ENGW 1111", "ENVR 1101", "ENVR 2515"],
+      "Spring": ["ENVR 1110", "ENVR 3150", "PHIL 1180"]
+    },
+    "Year 2": {
+      "Fall": ["EESC 2000", "ENVR 3300", "ENVR 3540"]
+    },
+    "Year 3": {
+      "Fall": ["ENVR 3200"],
+      "Summer 2": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Fall": ["SOCL 4522"],
+      "Spring": ["ENVR 4000", "ENVR 4050"]
+    }
+  }
+}

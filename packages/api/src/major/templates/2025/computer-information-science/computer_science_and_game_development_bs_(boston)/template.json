@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "GAME 1110"],
+      "Spring": ["CS 2100", "CS 2386", "GAME 2500", "MATH 1260", "EEAM 2000"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "CS 3520", "GAME 2950", "GAME 3700"],
+      "Spring": ["CS 1210", "CS 3386", "CS 3650", "GAME 3400", "PSYC 1101"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4300", "GAME 3800", "ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4530", "CS 4700"],
+      "Spring": ["GAME 4700"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "GAME 1110"],
+      "Spring": ["CS 2100", "CS 2386", "GAME 2500", "MATH 1260", "EEAM 2000"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3000", "CS 3520", "GAME 2950", "GAME 3700"],
+      "Spring": ["CS 1210", "CS 3386", "CS 3650", "GAME 3400", "PSYC 1101"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4300", "GAME 3800", "ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["CS 4530", "CS 4700"],
+      "Spring": ["GAME 4700"]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ANTH 1000", "ANTH 1101", "SOCL 1101"],
+      "Spring": ["ANTH 3410", "SOCL 2321", "SOCL 2320"]
+    },
+    "Year 2": {
+      "Spring": ["ANTH 2305", "SOCL 3300", "EESH 2000"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["ANTH 4600"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ANTH 1000", "ANTH 1101", "SOCL 1101"],
+      "Spring": ["ANTH 3410", "SOCL 2321", "SOCL 2320"]
+    },
+    "Year 2": {
+      "Spring": ["ANTH 2305", "SOCL 3300", "EESH 2000"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["ANTH 4600"]
+    }
+  }
+}

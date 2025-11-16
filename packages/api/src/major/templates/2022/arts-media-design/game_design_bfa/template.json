@@ -1,42 +1,22 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "ARTF 1000",
-        "ARTF 1122",
-        "ARTF 2220",
-        "ENGW 1111",
-        "GAME 1110"
-      ],
-      "Spring": [
-        "ARTD 2370",
-        "ARTF 1124",
-        "GAME 2500",
-        "GAME 2650"
-      ]
+      "Fall": ["ARTF 1000", "ARTF 1122", "ARTF 2220", "ENGW 1111", "GAME 1110"],
+      "Spring": ["ARTD 2370", "ARTF 1124", "GAME 2500", "GAME 2650"]
     },
     "Year 2": {
-      "Fall": [
-        "ARTG 2260",
-        "EEAM 2000",
-        "GAME 2950",
-        "GAME 3300"
-      ]
+      "Fall": ["ARTG 2260", "EEAM 2000", "GAME 2950", "GAME 3300"]
     },
     "Year 3": {
-      "Fall": [
-        "GAME 3400",
-        "GAME 3700"
-      ]
+      "Fall": ["GAME 3400", "GAME 3700"]
     },
     "Year 4": {
-      "Fall": [
-        "GAME 2010",
-        "GAME 3800"
-      ],
-      "Spring": [
-        "GAME 4700"
-      ]
+      "Fall": ["GAME 2010", "GAME 3800"],
+      "Spring": ["GAME 4700"]
     }
   }
 }

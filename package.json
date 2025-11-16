@@ -34,7 +34,8 @@
     "tsc": "yarn workspaces foreach -v --exclude . run tsc",
     "g:babel": "cd $INIT_CWD && babel",
     "g:cross-env": "cd $INIT_CWD && cross-env",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "verify-scraper-branch": "npx ts-node packages/api/branch-verify.ts"
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
@@ -64,7 +65,7 @@
     "@types/pdf-parse": "^1.1.5",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
-    "concurrently": "^7.0.0",
+    "concurrently": "^9.2.1",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.25.4",

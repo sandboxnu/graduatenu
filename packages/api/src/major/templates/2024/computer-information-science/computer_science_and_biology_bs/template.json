@@ -1,122 +1,50 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Pattern: Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "BIOL 1107",
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "CS 2510",
-        "BIOL 2299",
-        "CHEM 1161",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "BIOL 2301",
-        "CS 3500"
-      ],
-      "Summer 2": [
-        "CS 3000"
-      ]
+      "Fall": ["BIOL 1107", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["CS 2510", "BIOL 2299", "CHEM 1161", "MATH 1341"],
+      "Summer 1": ["BIOL 2301", "CS 3500"],
+      "Summer 2": ["CS 3000"]
     },
     "Year 2": {
-      "Fall": [
-        "CHEM 2311",
-        "CS 1210",
-        "BIOL 2301"
-      ],
-      "Spring": [
-        "CS 1210",
-        "CHEM 2313",
-        "BIOL 2309"
-      ],
-      "Summer 1": [
-        "BIOL 3611"
-      ],
-      "Summer 2": [
-        "CHEM 2313"
-      ]
+      "Fall": ["CHEM 2311", "CS 1210", "BIOL 2301"],
+      "Spring": ["CS 1210", "CHEM 2313", "BIOL 2309"],
+      "Summer 1": ["BIOL 3611"],
+      "Summer 2": ["CHEM 2313"]
     },
     "Year 3": {
-      "Spring": [
-        "CS 4500",
-        "ENVR 2500"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ],
-      "Fall": [
-        "BIOL 2309",
-        "BIOL 3611"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Spring": ["CS 4500", "ENVR 2500"],
+      "Summer 1": ["ENGW 3302"],
+      "Fall": ["BIOL 2309", "BIOL 3611"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 4": {
-      "Spring": [
-        "CS 3800",
-        "CS 3200"
-      ],
-      "Fall": [
-        "CS 4500",
-        "ENVR 2500"
-      ]
+      "Spring": ["CS 3800", "CS 3200"],
+      "Fall": ["CS 4500", "ENVR 2500"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "BIOL 1107",
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "CS 2510",
-        "BIOL 2299",
-        "CHEM 1161",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "CS 3500"
-      ],
-      "Summer 2": [
-        "CS 3000"
-      ]
+      "Fall": ["BIOL 1107", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["CS 2510", "BIOL 2299", "CHEM 1161", "MATH 1341"],
+      "Summer 1": ["CS 3500"],
+      "Summer 2": ["CS 3000"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 1210",
-        "CHEM 2311",
-        "BIOL 2301"
-      ],
-      "Summer 2": [
-        "CHEM 2313"
-      ]
+      "Fall": ["CS 1210", "CHEM 2311", "BIOL 2301"],
+      "Summer 2": ["CHEM 2313"]
     },
     "Year 3": {
-      "Fall": [
-        "BIOL 2309",
-        "BIOL 3611"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Fall": ["BIOL 2309", "BIOL 3611"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 4": {
-      "Fall": [
-        "CS 4500",
-        "ENVR 2500"
-      ],
-      "Spring": [
-        "CS 3800",
-        "CS 3200"
-      ]
+      "Fall": ["CS 4500", "ENVR 2500"],
+      "Spring": ["CS 3800", "CS 3200"]
     }
   }
 }

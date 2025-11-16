@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["COMM 1000", "COMM 1101", "MSCR 1220", "ENGW 1111"],
+      "Spring": ["COMM 2301", "MSCR 2220", "EEAM 2000"]
+    },
+    "Year 2": {},
+    "Year 3": {},
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["COMM 1000", "COMM 1101", "MSCR 1220", "ENGW 1111"],
+      "Spring": ["COMM 2301", "MSCR 2220", "EEAM 2000"]
+    },
+    "Year 2": {},
+    "Year 3": {},
+    "Year 4": {}
+  }
+}

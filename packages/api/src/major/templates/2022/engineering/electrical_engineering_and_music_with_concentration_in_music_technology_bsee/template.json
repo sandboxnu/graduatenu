@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, One Co-Op in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -17,12 +21,7 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "MATH 2341",
-        "PHYS 1155",
-        "PHYS 1156",
-        "PHYS 1157"
-      ]
+      "Summer 1": ["MATH 2341", "PHYS 1155", "PHYS 1156", "PHYS 1157"]
     },
     "Year 2": {
       "Fall": [
@@ -36,43 +35,19 @@
         "PHYS 1156",
         "PHYS 1157"
       ],
-      "Spring": [
-        "EECE 2160",
-        "ENCP 2000",
-        "MUSC 1002"
-      ]
+      "Spring": ["EECE 2160", "ENCP 2000", "MUSC 1002"]
     },
     "Year 3": {
-      "Spring": [
-        "ENCP 3000",
-        "ENGW 3302"
-      ],
-      "Summer 2": [
-        "EECE 3468",
-        "EECE 4791",
-        "ENGW 3302"
-      ],
-      "Fall": [
-        "EECE 2150",
-        "EECE 2160",
-        "MATH 2321",
-        "MUSC 1002"
-      ]
+      "Spring": ["ENCP 3000", "ENGW 3302"],
+      "Summer 2": ["EECE 3468", "EECE 4791", "ENGW 3302"],
+      "Fall": ["EECE 2150", "EECE 2160", "MATH 2321", "MUSC 1002"]
     },
     "Year 4": {
-      "Fall": [
-        "EECE 4792",
-        "ENCP 3000"
-      ],
-      "Summer 2": [
-        "EECE 3468",
-        "EECE 4791"
-      ]
+      "Fall": ["EECE 4792", "ENCP 3000"],
+      "Summer 2": ["EECE 3468", "EECE 4791"]
     },
     "Year 5": {
-      "Fall": [
-        "EECE 4792"
-      ]
+      "Fall": ["EECE 4792"]
     }
   },
   "Five Years, Three Co-Ops in Spring / Summer 1": {
@@ -106,29 +81,15 @@
       ]
     },
     "Year 3": {
-      "Fall": [
-        "EECE 2150",
-        "EECE 2160",
-        "MATH 2321",
-        "MUSC 1002"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Fall": ["EECE 2150", "EECE 2160", "MATH 2321", "MUSC 1002"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 4": {
-      "Fall": [
-        "ENCP 3000"
-      ],
-      "Summer 2": [
-        "EECE 3468",
-        "EECE 4791"
-      ]
+      "Fall": ["ENCP 3000"],
+      "Summer 2": ["EECE 3468", "EECE 4791"]
     },
     "Year 5": {
-      "Fall": [
-        "EECE 4792"
-      ]
+      "Fall": ["EECE 4792"]
     }
   }
 }

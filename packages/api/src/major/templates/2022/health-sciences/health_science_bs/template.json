@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Premed Track": {
     "Year 1": {
       "Fall": [
@@ -19,55 +23,23 @@
         "CHEM 1162",
         "CHEM 1163"
       ],
-      "Summer 1": [
-        "PHTH 2300",
-        "PHTH 2350"
-      ]
+      "Summer 1": ["PHTH 2300", "PHTH 2350"]
     },
     "Year 2": {
-      "Spring": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Summer 1": [
-        "PHTH 2515"
-      ],
-      "Fall": [
-        "PHTH 2350",
-        "PHIL 1165",
-        "HSCI 2000",
-        "PHTH 2515",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "PHTH 2300",
-        "PHIL 1165"
-      ]
+      "Spring": ["HSCI 2000", "PHTH 2210"],
+      "Summer 1": ["PHTH 2515"],
+      "Fall": ["PHTH 2350", "PHIL 1165", "HSCI 2000", "PHTH 2515", "PHTH 2210"],
+      "Summer 2": ["PHTH 2300", "PHIL 1165"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 1": [
-        "PHTH 4540"
-      ],
-      "Fall": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 2": [
-        "PHTH 4540"
-      ]
+      "Spring": ["ENGW 3306", "PHTH 4202"],
+      "Summer 1": ["PHTH 4540"],
+      "Fall": ["ENGW 3306", "PHTH 4202"],
+      "Summer 2": ["PHTH 4540"]
     },
     "Year 4": {
-      "Spring": [
-        "PHTH 4120"
-      ],
-      "Fall": [
-        "HSCI 4700",
-        "PHTH 4120"
-      ]
+      "Spring": ["PHTH 4120"],
+      "Fall": ["HSCI 4700", "PHTH 4120"]
     }
   },
   "Pre-PA Track": {
@@ -90,55 +62,23 @@
         "CHEM 1162",
         "CHEM 1163"
       ],
-      "Summer 1": [
-        "PHTH 2300",
-        "PHTH 2350"
-      ]
+      "Summer 1": ["PHTH 2300", "PHTH 2350"]
     },
     "Year 2": {
-      "Spring": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Summer 1": [
-        "PHTH 2515"
-      ],
-      "Fall": [
-        "PHTH 2350",
-        "PHIL 1165",
-        "HSCI 2000",
-        "PHTH 2515",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "PHTH 2300",
-        "PHIL 1165"
-      ]
+      "Spring": ["HSCI 2000", "PHTH 2210"],
+      "Summer 1": ["PHTH 2515"],
+      "Fall": ["PHTH 2350", "PHIL 1165", "HSCI 2000", "PHTH 2515", "PHTH 2210"],
+      "Summer 2": ["PHTH 2300", "PHIL 1165"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 1": [
-        "PHTH 4540"
-      ],
-      "Fall": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 2": [
-        "PHTH 4540"
-      ]
+      "Spring": ["ENGW 3306", "PHTH 4202"],
+      "Summer 1": ["PHTH 4540"],
+      "Fall": ["ENGW 3306", "PHTH 4202"],
+      "Summer 2": ["PHTH 4540"]
     },
     "Year 4": {
-      "Spring": [
-        "PHTH 4120"
-      ],
-      "Fall": [
-        "HSCI 4700",
-        "PHTH 4120"
-      ]
+      "Spring": ["PHTH 4120"],
+      "Fall": ["HSCI 4700", "PHTH 4120"]
     }
   },
   "Pre-Pharmacy Track": {
@@ -161,55 +101,23 @@
         "CHEM 1162",
         "CHEM 1163"
       ],
-      "Summer 1": [
-        "PHTH 2300",
-        "PHTH 2350"
-      ]
+      "Summer 1": ["PHTH 2300", "PHTH 2350"]
     },
     "Year 2": {
-      "Spring": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Summer 1": [
-        "PHTH 2515"
-      ],
-      "Fall": [
-        "PHTH 2350",
-        "PHIL 1165",
-        "HSCI 2000",
-        "PHTH 2515",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "PHTH 2300",
-        "PHIL 1165"
-      ]
+      "Spring": ["HSCI 2000", "PHTH 2210"],
+      "Summer 1": ["PHTH 2515"],
+      "Fall": ["PHTH 2350", "PHIL 1165", "HSCI 2000", "PHTH 2515", "PHTH 2210"],
+      "Summer 2": ["PHTH 2300", "PHIL 1165"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 1": [
-        "PHTH 4540"
-      ],
-      "Fall": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 2": [
-        "PHTH 4540"
-      ]
+      "Spring": ["ENGW 3306", "PHTH 4202"],
+      "Summer 1": ["PHTH 4540"],
+      "Fall": ["ENGW 3306", "PHTH 4202"],
+      "Summer 2": ["PHTH 4540"]
     },
     "Year 4": {
-      "Spring": [
-        "PHTH 4120"
-      ],
-      "Fall": [
-        "HSCI 4700",
-        "PHTH 4120"
-      ]
+      "Spring": ["PHTH 4120"],
+      "Fall": ["HSCI 4700", "PHTH 4120"]
     }
   },
   "Pre-Physical Therapy Track*": {
@@ -232,55 +140,23 @@
         "CHEM 1162",
         "CHEM 1163"
       ],
-      "Summer 1": [
-        "PHTH 2300",
-        "PHTH 2350"
-      ]
+      "Summer 1": ["PHTH 2300", "PHTH 2350"]
     },
     "Year 2": {
-      "Spring": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Summer 1": [
-        "PHTH 2515"
-      ],
-      "Fall": [
-        "PHTH 2350",
-        "PHIL 1165",
-        "HSCI 2000",
-        "PHTH 2515",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "PHTH 2300",
-        "PHIL 1165"
-      ]
+      "Spring": ["HSCI 2000", "PHTH 2210"],
+      "Summer 1": ["PHTH 2515"],
+      "Fall": ["PHTH 2350", "PHIL 1165", "HSCI 2000", "PHTH 2515", "PHTH 2210"],
+      "Summer 2": ["PHTH 2300", "PHIL 1165"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 1": [
-        "PHTH 4540"
-      ],
-      "Fall": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 2": [
-        "PHTH 4540"
-      ]
+      "Spring": ["ENGW 3306", "PHTH 4202"],
+      "Summer 1": ["PHTH 4540"],
+      "Fall": ["ENGW 3306", "PHTH 4202"],
+      "Summer 2": ["PHTH 4540"]
     },
     "Year 4": {
-      "Spring": [
-        "PHTH 4120"
-      ],
-      "Fall": [
-        "HSCI 4700",
-        "PHTH 4120"
-      ]
+      "Spring": ["PHTH 4120"],
+      "Fall": ["HSCI 4700", "PHTH 4120"]
     }
   },
   "Four Years, Two Co-ops in Summer2/Fall": {
@@ -303,55 +179,23 @@
         "CHEM 1162",
         "CHEM 1163"
       ],
-      "Summer 1": [
-        "PHTH 2300",
-        "PHTH 2350"
-      ]
+      "Summer 1": ["PHTH 2300", "PHTH 2350"]
     },
     "Year 2": {
-      "Spring": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Summer 1": [
-        "PHTH 2515"
-      ],
-      "Fall": [
-        "PHTH 2350",
-        "PHIL 1165",
-        "HSCI 2000",
-        "PHTH 2515",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "PHTH 2300",
-        "PHIL 1165"
-      ]
+      "Spring": ["HSCI 2000", "PHTH 2210"],
+      "Summer 1": ["PHTH 2515"],
+      "Fall": ["PHTH 2350", "PHIL 1165", "HSCI 2000", "PHTH 2515", "PHTH 2210"],
+      "Summer 2": ["PHTH 2300", "PHIL 1165"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 1": [
-        "PHTH 4540"
-      ],
-      "Fall": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 2": [
-        "PHTH 4540"
-      ]
+      "Spring": ["ENGW 3306", "PHTH 4202"],
+      "Summer 1": ["PHTH 4540"],
+      "Fall": ["ENGW 3306", "PHTH 4202"],
+      "Summer 2": ["PHTH 4540"]
     },
     "Year 4": {
-      "Spring": [
-        "PHTH 4120"
-      ],
-      "Fall": [
-        "HSCI 4700",
-        "PHTH 4120"
-      ]
+      "Spring": ["PHTH 4120"],
+      "Fall": ["HSCI 4700", "PHTH 4120"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
@@ -372,35 +216,18 @@
         "CHEM 1162",
         "CHEM 1163"
       ],
-      "Summer 1": [
-        "PHTH 2350"
-      ]
+      "Summer 1": ["PHTH 2350"]
     },
     "Year 2": {
-      "Fall": [
-        "HSCI 2000",
-        "PHTH 2515",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "PHTH 2300",
-        "PHIL 1165"
-      ]
+      "Fall": ["HSCI 2000", "PHTH 2515", "PHTH 2210"],
+      "Summer 2": ["PHTH 2300", "PHIL 1165"]
     },
     "Year 3": {
-      "Fall": [
-        "ENGW 3306",
-        "PHTH 4202"
-      ],
-      "Summer 2": [
-        "PHTH 4540"
-      ]
+      "Fall": ["ENGW 3306", "PHTH 4202"],
+      "Summer 2": ["PHTH 4540"]
     },
     "Year 4": {
-      "Fall": [
-        "HSCI 4700",
-        "PHTH 4120"
-      ]
+      "Fall": ["HSCI 4700", "PHTH 4120"]
     }
   }
 }

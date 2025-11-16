@@ -2,7 +2,8 @@
   "name": "Business Administration and Communication Studies, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -127,23 +128,6 @@
               "subject": "SCHM"
             }
           ]
-        }
-      ],
-      "minRequirementCount": 1
-    },
-    {
-      "type": "SECTION",
-      "title": "Elective",
-      "requirements": [
-        {
-          "type": "COURSE",
-          "classId": 3416,
-          "subject": "ACCT"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4414,
-          "subject": "ACCT"
         }
       ],
       "minRequirementCount": 1
@@ -483,7 +467,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Accounting",
         "requirements": [
           {
             "type": "COURSE",
@@ -500,7 +484,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Accounting: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -533,7 +517,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Accounting and Advisory Services",
         "requirements": [
           {
             "type": "COURSE",
@@ -555,7 +539,24 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Course",
+        "title": "Concentration in Accounting and Advisory Services: Elective",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3416,
+            "subject": "ACCT"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4414,
+            "subject": "ACCT"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Brand Management",
         "requirements": [
           {
             "type": "COURSE",
@@ -567,7 +568,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Brand Management: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -644,7 +645,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Business Analytics",
         "requirements": [
           {
             "type": "COURSE",
@@ -676,7 +677,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective",
+        "title": "Concentration in Business Analytics: Elective",
         "requirements": [
           {
             "type": "COURSE",
@@ -698,7 +699,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Corporate Innovation",
         "requirements": [
           {
             "type": "COURSE",
@@ -715,7 +716,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Corporate Innovation: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -782,7 +783,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Entrepreneurial Startups",
         "requirements": [
           {
             "type": "COURSE",
@@ -799,7 +800,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Entrepreneurial Startups: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -856,7 +857,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Family Business",
         "requirements": [
           {
             "type": "COURSE",
@@ -873,7 +874,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Family Business: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -925,7 +926,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Course",
+        "title": "Concentration in Finance",
         "requirements": [
           {
             "type": "OR",
@@ -947,7 +948,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Finance: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1110,7 +1111,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Fintech",
         "requirements": [
           {
             "type": "OR",
@@ -1137,7 +1138,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Fintech: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1185,7 +1186,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Healthcare Management and Consulting",
         "requirements": [
           {
             "type": "COURSE",
@@ -1202,7 +1203,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Implementation/Consulting Elective",
+        "title": "Concentration in Healthcare Management and Consulting: Implementation/Consulting Elective",
         "requirements": [
           {
             "type": "COURSE",
@@ -1259,7 +1260,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Interdisciplinary Healthcare Focus",
+        "title": "Concentration in Healthcare Management and Consulting: Interdisciplinary Healthcare Focus",
         "requirements": [
           {
             "type": "COURSE",
@@ -1301,7 +1302,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in International Business",
         "requirements": [
           {
             "type": "OR",
@@ -1333,59 +1334,73 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in International Business: Electives",
         "requirements": [
           {
-            "type": "COURSE",
-            "classId": 3205,
-            "subject": "INTB"
+            "type": "SECTION",
+            "title": "Managing Internationally",
+            "requirements": [
+              {
+                "type": "COURSE",
+                "classId": 3205,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3320,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4202,
+                "subject": "INTB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "INTB"
+              }
+            ],
+            "minRequirementCount": 4
           },
           {
-            "type": "COURSE",
-            "classId": 3320,
-            "subject": "INTB"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4202,
-            "subject": "INTB"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "INTB"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3306,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4320,
-            "subject": "FINA"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2206,
-            "subject": "INNO"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4512,
-            "subject": "MKTG"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3301,
-            "subject": "SCHM"
+            "type": "SECTION",
+            "title": "International Functional Knowledge",
+            "requirements": [
+              {
+                "type": "COURSE",
+                "classId": 3306,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4320,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2206,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4512,
+                "subject": "MKTG"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3301,
+                "subject": "SCHM"
+              }
+            ],
+            "minRequirementCount": 5
           }
         ],
-        "minRequirementCount": 9
+        "minRequirementCount": 2
       },
       {
         "type": "SECTION",
-        "title": "Required Course",
+        "title": "Concentration in Management",
         "requirements": [
           {
             "type": "OR",
@@ -1407,7 +1422,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Management: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1510,7 +1525,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Management Information Systems",
         "requirements": [
           {
             "type": "COURSE",
@@ -1522,7 +1537,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Management Information Systems: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1607,7 +1622,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Marketing",
         "requirements": [
           {
             "type": "OR",
@@ -1629,7 +1644,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Marketing: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -1757,7 +1772,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Marketing Analytics",
         "requirements": [
           {
             "type": "COURSE",
@@ -1779,7 +1794,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective",
+        "title": "Concentration in Marketing Analytics: Elective",
         "requirements": [
           {
             "type": "AND",
@@ -1820,7 +1835,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Social Innovation and Entrepreneurship",
         "requirements": [
           {
             "type": "COURSE",
@@ -1837,7 +1852,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Social Innovation and Entrepreneurship: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -1855,46 +1870,53 @@
             "subject": "INNO"
           },
           {
-            "type": "COURSE",
-            "classId": 2215,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2303,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4983,
-            "subject": "ENTR"
-          },
-          {
-            "type": "COURSE",
-            "classId": 4610,
-            "subject": "FINA"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2304,
-            "subject": "INNO"
-          },
-          {
-            "type": "COURSE",
-            "classId": 3302,
-            "subject": "MGMT"
-          },
-          {
-            "type": "COURSE",
-            "classId": 2301,
-            "subject": "MKTG"
+            "type": "SECTION",
+            "title": "Additional Electives",
+            "requirements": [
+              {
+                "type": "COURSE",
+                "classId": 2215,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2303,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4983,
+                "subject": "ENTR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4610,
+                "subject": "FINA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2304,
+                "subject": "INNO"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3302,
+                "subject": "MGMT"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2301,
+                "subject": "MKTG"
+              }
+            ],
+            "minRequirementCount": 7
           }
         ],
-        "minRequirementCount": 10
+        "minRequirementCount": 4
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Supply Chain Management",
         "requirements": [
           {
             "type": "COURSE",
@@ -1916,7 +1938,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Elective",
+        "title": "Concentration in Supply Chain Management: Elective",
         "requirements": [
           {
             "type": "COURSE",

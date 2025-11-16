@@ -1,0 +1,217 @@
+{
+  "name": "Africana Studies, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/5/2025",
+    "branch": "main"
+  },
+  "totalCreditsRequired": 128,
+  "yearVersion": 2021,
+  "requirementSections": [],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Africana Studies (no concentration option)",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 1101,
+                "subject": "AFAM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 1101,
+                "subject": "AFRS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Africana Studies (no concentration option): Introductory Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 1104,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1113,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1135,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1225,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1270,
+            "subject": "AFRS"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Africana Studies (no concentration option): Humanities Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 1104,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1113,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1135,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2455,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2296,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2410,
+            "subject": "AFRS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3663,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3900,
+            "subject": "AFRS"
+          }
+        ],
+        "minRequirementCount": 8
+      },
+      {
+        "type": "SECTION",
+        "title": "Africana Studies (no concentration option): Social Science Courses",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 1225,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1270,
+            "subject": "AFRS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2339,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2399,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2549,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2307,
+            "subject": "AFRS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2464,
+            "subject": "AFRS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2465,
+            "subject": "AFRS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 2900,
+            "subject": "AFRS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3270,
+            "subject": "AFAM"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3424,
+            "subject": "AFRS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3460,
+            "subject": "AFRS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4939,
+            "subject": "AFRS"
+          }
+        ],
+        "minRequirementCount": 13
+      },
+      {
+        "type": "SECTION",
+        "title": "Africana Studies (no concentration option): Electives (6 courses)",
+        "requirements": [],
+        "minRequirementCount": 0
+      },
+      {
+        "type": "SECTION",
+        "title": "Africana Studies (no concentration option): Capstone",
+        "requirements": [
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 4700,
+                "subject": "AFAM"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4700,
+                "subject": "AFRS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

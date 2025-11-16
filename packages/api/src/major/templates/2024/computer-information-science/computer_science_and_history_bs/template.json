@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plans of Study": {
     "Year 1": {
       "Fall": [
@@ -9,7 +13,7 @@
         "HIST 1200",
         "HIST 1201"
       ],
-      "Spring": ["CS 2510", "IS 2000"],
+      "Spring": ["CS 2510"],
       "Summer 1": ["CS 3500"]
     },
     "Year 2": {
@@ -32,7 +36,7 @@
         "HIST 1200",
         "HIST 1201"
       ],
-      "Spring": ["CS 2510", "IS 2000"],
+      "Spring": ["CS 2510"],
       "Summer 1": ["CS 3500"]
     },
     "Year 2": {
@@ -55,7 +59,7 @@
         "HIST 1200",
         "HIST 1201"
       ],
-      "Spring": ["CS 2510", "IS 2000"],
+      "Spring": ["CS 2510"],
       "Summer 1": ["CS 3500"]
     },
     "Year 2": {

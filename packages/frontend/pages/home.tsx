@@ -95,7 +95,20 @@ const HomePage: NextPage = () => {
     useState<boolean>(false);
 
   const [lastDeletedPlan, setLastDeletedPlan] = useState<any | null>(null);
+  const [isDeletingPlan, setIsDeletingPlan] = useState<boolean>(false);
   const { isGuest } = useContext(IsGuestContext);
+
+  useEffect(() => {
+    setLastDeletedPlan(null);
+  }, [router.asPath]);
+
+  // Clear lastDeletedPlan when selected plan changes (but not during deletion)
+  useEffect(() => {
+    if (!isDeletingPlan) {
+      setLastDeletedPlan(null);
+    }
+    setIsDeletingPlan(false);
+  }, [selectedPlanId]);
 
   const handleUndoDelete = async () => {
     if (!lastDeletedPlan || !student) return;
@@ -363,9 +376,10 @@ const HomePage: NextPage = () => {
                   setSelectedPlanId={setSelectedPlanId}
                   planName={selectedPlan.name}
                   planId={selectedPlan.id}
-                  onPlanDeleted={(deletedPlan) =>
-                    setLastDeletedPlan(deletedPlan)
-                  }
+                  onPlanDeleted={(deletedPlan) => {
+                    setIsDeletingPlan(true);
+                    setLastDeletedPlan(deletedPlan);
+                  }}
                 />
               )}
             </Flex>

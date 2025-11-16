@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Summer2/Fall": {
     "Year 1": {
       "Fall": [
@@ -21,26 +25,13 @@
       ]
     },
     "Year 2": {
-      "Spring": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Fall": [
-        "PHIL 1165",
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "PHIL 1165"
-      ]
+      "Spring": ["HSCI 2000", "PHTH 2210"],
+      "Fall": ["PHIL 1165", "HSCI 2000", "PHTH 2210"],
+      "Summer 2": ["PHIL 1165"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306"
-      ],
-      "Fall": [
-        "ENGW 3306"
-      ]
+      "Spring": ["ENGW 3306"],
+      "Fall": ["ENGW 3306"]
     },
     "Year 4": {}
   },
@@ -64,18 +55,11 @@
       ]
     },
     "Year 2": {
-      "Fall": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "PHIL 1165"
-      ]
+      "Fall": ["HSCI 2000", "PHTH 2210"],
+      "Summer 2": ["PHIL 1165"]
     },
     "Year 3": {
-      "Fall": [
-        "ENGW 3306"
-      ]
+      "Fall": ["ENGW 3306"]
     },
     "Year 4": {}
   }

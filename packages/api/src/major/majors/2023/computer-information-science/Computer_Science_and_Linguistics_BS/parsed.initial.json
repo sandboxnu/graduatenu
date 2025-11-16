@@ -2,7 +2,8 @@
   "name": "Computer Science and Linguistics, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2023,
@@ -450,6 +451,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

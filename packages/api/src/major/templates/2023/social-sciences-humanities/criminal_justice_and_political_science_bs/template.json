@@ -1,33 +1,21 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-Ops": {
     "Year 1": {
-      "Fall": [
-        "CRIM 1100",
-        "CS 1100",
-        "CS 1101",
-        "POLS 1150",
-        "POLS 1160"
-      ],
-      "Spring": [
-        "POLS 1155"
-      ]
+      "Fall": ["CRIM 1100", "CS 1100", "CS 1101", "POLS 1150", "POLS 1160"],
+      "Spring": ["POLS 1155"]
     },
     "Year 2": {
-      "Fall": [
-        "CRIM 1110",
-        "CRIM 1120"
-      ]
+      "Fall": ["CRIM 1110", "CRIM 1120"]
     },
     "Year 3": {
-      "Fall": [
-        "CRIM 3700",
-        "POLS 2400"
-      ]
+      "Fall": ["CRIM 3700", "POLS 2400"]
     },
     "Year 4": {
-      "Spring": [
-        "POLS 4701"
-      ]
+      "Spring": ["POLS 4701"]
     }
   }
 }

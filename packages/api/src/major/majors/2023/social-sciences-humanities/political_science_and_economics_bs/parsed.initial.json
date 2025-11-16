@@ -2,7 +2,8 @@
   "name": "Political Science and Economics, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -75,88 +76,102 @@
       "title": "Breadth Courses",
       "requirements": [
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Computer Science",
+          "requirements": [
             {
-              "subject": "CS",
-              "classId": 1100,
-              "description": "Computer Science and Its Applications",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CS",
+                  "classId": 1100,
+                  "description": "Computer Science and Its Applications",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CS",
+                  "classId": 1101,
+                  "description": "Lab for CS 1100",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "CS",
-              "classId": 1101,
-              "description": "Lab for CS 1100",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2000,
+                  "description": "Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2001,
+                  "description": "Data Science Programming Practicum",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2510,
+              "subject": "MISM"
             }
-          ]
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Calculus",
+          "requirements": [
             {
-              "subject": "DS",
-              "classId": 2000,
-              "description": "Programming with Data",
-              "type": "COURSE"
+              "type": "RANGE",
+              "subject": "MATH",
+              "idRangeStart": 1241,
+              "idRangeEnd": 9999,
+              "exceptions": []
             },
             {
-              "subject": "DS",
-              "classId": 2001,
-              "description": "Data Science Programming Practicum",
-              "type": "COURSE"
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1231,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1241,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1245,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1251,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1340,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1341,
+                  "subject": "MATH"
+                }
+              ]
             }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 2510,
-          "subject": "MISM"
-        },
-        {
-          "type": "RANGE",
-          "subject": "MATH",
-          "idRangeStart": 1241,
-          "idRangeEnd": 9999,
-          "exceptions": []
-        },
-        {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1231,
-              "subject": "MATH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1241,
-              "subject": "MATH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1245,
-              "subject": "MATH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1251,
-              "subject": "MATH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1340,
-              "subject": "MATH"
-            },
-            {
-              "type": "COURSE",
-              "classId": 1341,
-              "subject": "MATH"
-            }
-          ]
+          ],
+          "minRequirementCount": 2
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
@@ -234,65 +249,99 @@
     },
     {
       "type": "SECTION",
+      "title": "Supporting Courses",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Combination A",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2400,
-          "subject": "POLS"
+          "type": "SECTION",
+          "title": "Statistics",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 1200,
-          "idRangeEnd": 1999,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 2990,
-          "idRangeEnd": 4689,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 4900,
-          "idRangeEnd": 4996,
-          "exceptions": []
-        },
-        {
-          "type": "RANGE",
-          "subject": "ECON",
-          "idRangeStart": 5200,
-          "idRangeEnd": 5999,
-          "exceptions": []
+          "type": "SECTION",
+          "title": "Economics",
+          "requirements": [
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 1200,
+              "idRangeEnd": 1999,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 2990,
+              "idRangeEnd": 4689,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 4900,
+              "idRangeEnd": 4996,
+              "exceptions": []
+            },
+            {
+              "type": "RANGE",
+              "subject": "ECON",
+              "idRangeStart": 5200,
+              "idRangeEnd": 5999,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 4
         }
       ],
-      "minRequirementCount": 5
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
       "title": "Combination B",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2350,
-          "subject": "ECON"
+          "type": "SECTION",
+          "title": "Statistics",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "ECON"
+            }
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "XOM",
-          "numCreditsMin": 4,
-          "courses": [
+          "type": "SECTION",
+          "title": "Political Science",
+          "requirements": [
             {
-              "type": "RANGE",
-              "subject": "POLS",
-              "idRangeStart": 2401,
-              "idRangeEnd": 5999,
-              "exceptions": []
+              "type": "XOM",
+              "numCreditsMin": 4,
+              "courses": [
+                {
+                  "type": "RANGE",
+                  "subject": "POLS",
+                  "idRangeStart": 2401,
+                  "idRangeEnd": 5999,
+                  "exceptions": []
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 2
@@ -410,7 +459,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Campaigns and Elections",
         "requirements": [
           {
             "type": "COURSE",
@@ -427,7 +476,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Campaigns and Elections Electives",
+        "title": "Concentration in Campaigns and Elections: Campaigns and Elections Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -552,7 +601,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Course",
+        "title": "Concentration in Identity, Culture, and Politics",
         "requirements": [
           {
             "type": "COURSE",
@@ -564,7 +613,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Identity, Culture, and Politics: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -725,7 +774,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Requirement",
+        "title": "Concentration in Public Policy",
         "requirements": [
           {
             "type": "COURSE",
@@ -737,7 +786,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Public Policy: Electives",
         "requirements": [
           {
             "type": "XOM",

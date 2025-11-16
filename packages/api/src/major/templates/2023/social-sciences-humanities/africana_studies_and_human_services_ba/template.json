@@ -1,72 +1,38 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "AFAM 1101",
-        "ENGW 1111",
-        "HUSV 1000",
-        "HUSV 1101"
-      ],
-      "Spring": [
-        "HUSV 2300"
-      ]
+      "Fall": ["AFAM 1101", "ENGW 1111", "HUSV 1000", "HUSV 1101"],
+      "Spring": ["HUSV 2300"]
     },
     "Year 2": {
-      "Spring": [
-        "AFAM 2355",
-        "EESH 2000",
-        "HUSV 3570"
-      ]
+      "Spring": ["AFAM 2355", "EESH 2000", "HUSV 3570"]
     },
     "Year 3": {
-      "Spring": [
-        "HUSV 3900",
-        "HUSV 4994"
-      ],
-      "Summer 1": [
-        "ENGW 3308"
-      ]
+      "Spring": ["HUSV 3900", "HUSV 4994"],
+      "Summer 1": ["ENGW 3308"]
     },
     "Year 4": {
-      "Spring": [
-        "AFAM 2618",
-        "AFAM 4700"
-      ]
+      "Spring": ["AFAM 2618", "AFAM 4700"]
     }
   },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "AFAM 1101",
-        "ENGW 1111",
-        "HUSV 1000",
-        "HUSV 1101"
-      ],
-      "Spring": [
-        "HUSV 2300"
-      ]
+      "Fall": ["AFAM 1101", "ENGW 1111", "HUSV 1000", "HUSV 1101"],
+      "Spring": ["HUSV 2300"]
     },
     "Year 2": {
-      "Spring": [
-        "AFAM 2355",
-        "EESH 2000",
-        "HUSV 3570"
-      ]
+      "Spring": ["AFAM 2355", "EESH 2000", "HUSV 3570"]
     },
     "Year 3": {
-      "Spring": [
-        "HUSV 3900",
-        "HUSV 4994"
-      ],
-      "Summer 1": [
-        "ENGW 3308"
-      ]
+      "Spring": ["HUSV 3900", "HUSV 4994"],
+      "Summer 1": ["ENGW 3308"]
     },
     "Year 4": {
-      "Spring": [
-        "AFAM 2618",
-        "AFAM 4700"
-      ]
+      "Spring": ["AFAM 2618", "AFAM 4700"]
     }
   }
 }

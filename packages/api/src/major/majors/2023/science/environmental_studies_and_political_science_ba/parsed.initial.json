@@ -2,7 +2,8 @@
   "name": "Environmental Studies and Political Science, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -12,66 +13,80 @@
       "title": "Introductory Courses",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1101,
-          "subject": "ENVR"
-        },
-        {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Introductory Science",
+          "requirements": [
             {
-              "subject": "ENVR",
-              "classId": 1200,
-              "description": "Dynamic Earth",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ENVR"
             },
             {
-              "subject": "ENVR",
-              "classId": 1201,
-              "description": "Lab for ENVR 1200",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ENVR",
-              "classId": 1400,
-              "description": "Foundations in Environmental and Sustainability Sciences",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1200,
+                  "description": "Dynamic Earth",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1201,
+                  "description": "Lab for ENVR 1200",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "ENVR",
-              "classId": 1401,
-              "description": "Lab for ENVR 1400",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1400,
+                  "description": "Foundations in Environmental and Sustainability Sciences",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1401,
+                  "description": "Lab for ENVR 1400",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 3
         },
         {
-          "type": "COURSE",
-          "classId": 1101,
-          "subject": "ANTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2401,
-          "subject": "ENVR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1180,
-          "subject": "PHIL"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1246,
-          "subject": "SOCL"
+          "type": "SECTION",
+          "title": "Introductory Social Science",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "ANTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2401,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1180,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1246,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 4
         }
       ],
-      "minRequirementCount": 7
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
@@ -309,6 +324,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Political Science Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Political Science Integrative Course",
       "requirements": [
         {
@@ -422,7 +443,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Campaigns and Elections",
         "requirements": [
           {
             "type": "COURSE",
@@ -439,7 +460,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Campaigns and Elections Electives",
+        "title": "Concentration in Campaigns and Elections: Campaigns and Elections Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -564,7 +585,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Course",
+        "title": "Concentration in Identity, Culture, and Politics",
         "requirements": [
           {
             "type": "COURSE",
@@ -576,7 +597,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Identity, Culture, and Politics: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -737,7 +758,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Core Requirement",
+        "title": "Concentration in Public Policy",
         "requirements": [
           {
             "type": "COURSE",
@@ -749,7 +770,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Public Policy: Electives",
         "requirements": [
           {
             "type": "XOM",

@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "GAME 2500", "ARTF 1240", "ARTD 1001", "ENGW 1111"],
+      "Spring": ["ARTD 2370", "GAME 1110", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 3470", "ARTD 3473", "ARTH 1001", "GAME 2355"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 3472", "ARTD 4570", "ARTH 2212"]
+    },
+    "Year 4": {
+      "Fall": ["ARTD 4575"],
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "GAME 2500", "ARTF 1240", "ARTD 1001", "ENGW 1111"],
+      "Spring": ["ARTD 2370", "GAME 1110", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 3470", "ARTD 3473", "ARTH 1001", "GAME 2355"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 3472", "ARTD 4570", "ARTH 2212"]
+    },
+    "Year 4": {
+      "Fall": ["ARTD 4575"],
+      "Spring": ["ARTD 4530"]
+    }
+  }
+}

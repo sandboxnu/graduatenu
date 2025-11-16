@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Note on Physics Courses in Plans of Study": {
     "Year 1": {
       "Fall": [
@@ -21,22 +25,9 @@
       ]
     },
     "Year 2": {
-      "Fall": [
-        "MATH 2321",
-        "MUSC 1201",
-        "PHYS 2303",
-        "PHYS 2371",
-        "PHYS 2372"
-      ],
-      "Spring": [
-        "MATH 2341",
-        "MUSC 1202",
-        "MUSC 2350",
-        "PHYS 3602"
-      ],
-      "Summer 2": [
-        "PHYS 3600"
-      ]
+      "Fall": ["MATH 2321", "MUSC 1201", "PHYS 2303", "PHYS 2371", "PHYS 2372"],
+      "Spring": ["MATH 2341", "MUSC 1202", "MUSC 2350", "PHYS 3602"],
+      "Summer 2": ["PHYS 3600"]
     },
     "Year 3": {
       "Fall": [
@@ -48,33 +39,15 @@
         "PHYS 2372",
         "PHYS 4115"
       ],
-      "Summer 2": [
-        "PHYS 3600",
-        "PHYS 4305",
-        "ENGW 3307"
-      ]
+      "Summer 2": ["PHYS 3600", "PHYS 4305", "ENGW 3307"]
     },
     "Year 4": {
-      "Fall": [
-        "MUSC 3541",
-        "MUST 3973",
-        "PHYS 4115",
-        "MUST 4610"
-      ],
-      "Spring": [
-        "MUST 4611",
-        "PHYS 5318"
-      ]
+      "Fall": ["MUSC 3541", "MUST 3973", "PHYS 4115", "MUST 4610"],
+      "Spring": ["MUST 4611", "PHYS 5318"]
     },
     "Year 5": {
-      "Fall": [
-        "ENGW 3307",
-        "MUST 4610"
-      ],
-      "Spring": [
-        "MUST 4611",
-        "PHYS 5318"
-      ]
+      "Fall": ["ENGW 3307", "MUST 4610"],
+      "Spring": ["MUST 4611", "PHYS 5318"]
     }
   },
   "Sample Plan of Study: Five Years, Two Co-ops in Spring/Summer 1": {
@@ -99,22 +72,9 @@
       ]
     },
     "Year 2": {
-      "Fall": [
-        "MATH 2321",
-        "MUSC 1201",
-        "PHYS 2303",
-        "PHYS 2371",
-        "PHYS 2372"
-      ],
-      "Spring": [
-        "MATH 2341",
-        "MUSC 1202",
-        "MUSC 2350",
-        "PHYS 3602"
-      ],
-      "Summer 2": [
-        "PHYS 3600"
-      ]
+      "Fall": ["MATH 2321", "MUSC 1201", "PHYS 2303", "PHYS 2371", "PHYS 2372"],
+      "Spring": ["MATH 2341", "MUSC 1202", "MUSC 2350", "PHYS 3602"],
+      "Summer 2": ["PHYS 3600"]
     },
     "Year 3": {
       "Fall": [
@@ -126,33 +86,15 @@
         "PHYS 2372",
         "PHYS 4115"
       ],
-      "Summer 2": [
-        "PHYS 3600",
-        "PHYS 4305",
-        "ENGW 3307"
-      ]
+      "Summer 2": ["PHYS 3600", "PHYS 4305", "ENGW 3307"]
     },
     "Year 4": {
-      "Fall": [
-        "MUSC 3541",
-        "MUST 3973",
-        "PHYS 4115",
-        "MUST 4610"
-      ],
-      "Spring": [
-        "MUST 4611",
-        "PHYS 5318"
-      ]
+      "Fall": ["MUSC 3541", "MUST 3973", "PHYS 4115", "MUST 4610"],
+      "Spring": ["MUST 4611", "PHYS 5318"]
     },
     "Year 5": {
-      "Fall": [
-        "ENGW 3307",
-        "MUST 4610"
-      ],
-      "Spring": [
-        "MUST 4611",
-        "PHYS 5318"
-      ]
+      "Fall": ["ENGW 3307", "MUST 4610"],
+      "Spring": ["MUST 4611", "PHYS 5318"]
     }
   },
   "Sample Plan of Study: Four Years, One Co-op in Spring/Summer 1": {
@@ -177,46 +119,17 @@
       ]
     },
     "Year 2": {
-      "Fall": [
-        "MATH 2321",
-        "MUSC 1201",
-        "PHYS 2303",
-        "PHYS 2371",
-        "PHYS 2372"
-      ],
-      "Spring": [
-        "MATH 2341",
-        "MUSC 1202",
-        "MUSC 2350",
-        "PHYS 3602"
-      ],
-      "Summer 2": [
-        "PHYS 3600"
-      ]
+      "Fall": ["MATH 2321", "MUSC 1201", "PHYS 2303", "PHYS 2371", "PHYS 2372"],
+      "Spring": ["MATH 2341", "MUSC 1202", "MUSC 2350", "PHYS 3602"],
+      "Summer 2": ["PHYS 3600"]
     },
     "Year 3": {
-      "Fall": [
-        "EESC 2000",
-        "MUSC 3541",
-        "MUST 2102",
-        "MUST 2431",
-        "PHYS 4115"
-      ],
-      "Summer 2": [
-        "ENGW 3307",
-        "PHYS 4305"
-      ]
+      "Fall": ["EESC 2000", "MUSC 3541", "MUST 2102", "MUST 2431", "PHYS 4115"],
+      "Summer 2": ["ENGW 3307", "PHYS 4305"]
     },
     "Year 4": {
-      "Fall": [
-        "MUSC 3541",
-        "MUST 3973",
-        "MUST 4610"
-      ],
-      "Spring": [
-        "MUST 4611",
-        "PHYS 5318"
-      ]
+      "Fall": ["MUSC 3541", "MUST 3973", "MUST 4610"],
+      "Spring": ["MUST 4611", "PHYS 5318"]
     }
   },
   "Physics Course Offering Schedule": {}

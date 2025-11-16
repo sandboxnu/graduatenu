@@ -1,65 +1,37 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, One Co-0p": {
     "Year 1": {
-      "Fall": [
-        "HIST 1000",
-        "HIST 1170",
-        "ENGW 1111",
-        "HIST 1200",
-        "HIST 1201"
-      ],
-      "Spring": [
-        "HIST 1130",
-        "MATH 1215"
-      ]
+      "Fall": ["HIST 1000", "HIST 1170", "ENGW 1111", "HIST 1200", "HIST 1201"],
+      "Spring": ["HIST 1130", "MATH 1215"]
     },
     "Year 2": {},
     "Year 3": {
-      "Spring": [
-        "HIST 2301",
-        "HIST 2302"
-      ]
+      "Spring": ["HIST 2301", "HIST 2302"]
     },
     "Year 4": {
-      "Spring": [
-        "HIST 4701"
-      ],
-      "Fall": [
-        "HIST 2301",
-        "HIST 2302"
-      ]
+      "Spring": ["HIST 4701"],
+      "Fall": ["HIST 2301", "HIST 2302"]
     },
     "Year 5": {
-      "Spring": [
-        "HIST 4701"
-      ]
+      "Spring": ["HIST 4701"]
     }
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "HIST 1170",
-        "ENGW 1111",
-        "HIST 1200",
-        "HIST 1201"
-      ],
-      "Spring": [
-        "HIST 1130",
-        "MATH 1215"
-      ]
+      "Fall": ["HIST 1170", "ENGW 1111", "HIST 1200", "HIST 1201"],
+      "Spring": ["HIST 1130", "MATH 1215"]
     },
     "Year 2": {},
     "Year 3": {},
     "Year 4": {
-      "Fall": [
-        "HIST 2301",
-        "HIST 2302"
-      ]
+      "Fall": ["HIST 2301", "HIST 2302"]
     },
     "Year 5": {
-      "Spring": [
-        "HIST 4701"
-      ]
+      "Spring": ["HIST 4701"]
     }
   }
 }

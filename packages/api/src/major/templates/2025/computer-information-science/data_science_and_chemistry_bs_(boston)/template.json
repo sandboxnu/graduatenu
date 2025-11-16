@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CHEM 1161", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["DS 2500", "MATH 1341", "CHEM 2161"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 2311", "CS 3200", "DS 3000", "MATH 1342"],
+      "Spring": ["CHEM 2313", "CS 1210", "DS 3500", "DS 4200", "ENVR 2500"]
+    },
+    "Year 3": {
+      "Spring": ["CHEM 2321", "DS 4300", "DS 4400", "PHYS 1151"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CHEM 4750", "CHEM 3401"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["CHEM 1161", "CS 1200", "CS 1800", "CS 2000", "ENGW 1111"],
+      "Spring": ["DS 2500", "MATH 1341", "CHEM 2161"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 2311", "CS 3200", "DS 3000", "MATH 1342"],
+      "Spring": ["CHEM 2313", "CS 1210", "DS 3500", "DS 4200", "ENVR 2500"]
+    },
+    "Year 3": {
+      "Spring": ["CHEM 2321", "DS 4300", "DS 4400", "PHYS 1151"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CHEM 4750", "CHEM 3401"]
+    }
+  }
+}

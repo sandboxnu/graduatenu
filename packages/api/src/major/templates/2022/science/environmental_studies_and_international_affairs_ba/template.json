@@ -1,37 +1,20 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "ENVR 1101",
-        "INTL 1101",
-        "SOCL 1246",
-        "ENVR 1000"
-      ],
-      "Spring": [
-        "ENVR 1110",
-        "ENVR 2515",
-        "POLS 1160"
-      ]
+      "Fall": ["ENGW 1111", "ENVR 1101", "INTL 1101", "SOCL 1246", "ENVR 1000"],
+      "Spring": ["ENVR 1110", "ENVR 2515", "POLS 1160"]
     },
     "Year 2": {
-      "Fall": [
-        "HIST 2211",
-        "ENVR 3300"
-      ],
-      "Spring": [
-        "EESC 2000",
-        "ENVR 3300"
-      ]
+      "Fall": ["HIST 2211", "ENVR 3300"],
+      "Spring": ["EESC 2000", "ENVR 3300"]
     },
     "Year 3": {},
     "Year 4": {
-      "Spring": [
-        "ECON 3423",
-        "ENGW 3308",
-        "INTL 3400",
-        "INTL 4700"
-      ]
+      "Spring": ["ECON 3423", "ENGW 3308", "INTL 3400", "INTL 4700"]
     }
   }
 }

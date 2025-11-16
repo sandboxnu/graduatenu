@@ -2,7 +2,8 @@
   "name": "Economics and Philosophy, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -179,6 +180,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Advanced Philosophy Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Critical Philosophy Elective",
       "requirements": [
         {
@@ -223,6 +230,18 @@
         }
       ],
       "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Additional Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirements",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

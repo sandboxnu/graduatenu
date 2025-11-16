@@ -164,6 +164,7 @@ export interface Major2 {
 export interface Template {
   name: string;
   yearVersion: number;
+  metadata?: TemplateMetadata;
   templateData?: {
     [templateName: string]: {
       [yearKey: string]: {
@@ -195,10 +196,12 @@ export interface Minor {
  *
  * @param verified   Whether the major has been manually verified.
  * @param lastEdited The last time the major was edited MM/DD/YYYY.
+ * @param branch     The branch of the scraper (must be main).
  */
 export interface MinorMetaData {
   verified: boolean;
   lastEdited: string;
+  branch: string;
 }
 
 /**
@@ -206,10 +209,21 @@ export interface MinorMetaData {
  *
  * @param verified   Whether the major has been manually verified.
  * @param lastEdited The last time the major was edited MM/DD/YYYY.
+ * @param branch     The branch of the scraper (must be main).
  */
 export interface MajorMetadata {
   verified: boolean;
   lastEdited: string;
+  branch: string;
+}
+
+/**
+ * Metadata for a template.
+ *
+ * @param branch The branch of the scraper (must be main).
+ */
+export interface TemplateMetadata {
+  branch: string;
 }
 
 /**

@@ -1,42 +1,23 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, One Co-op": {
     "Year 1": {
-      "Fall": [
-        "ANTH 1101",
-        "ENGW 1111",
-        "THTR 1000",
-        "THTR 1100",
-        "THTR 1101"
-      ],
-      "Spring": [
-        "ANTH 2305",
-        "THTR 1120",
-        "THTR 1131"
-      ]
+      "Fall": ["ANTH 1101", "ENGW 1111", "THTR 1000", "THTR 1100", "THTR 1101"],
+      "Spring": ["ANTH 2305", "THTR 1120", "THTR 1131"]
     },
     "Year 2": {
-      "Fall": [
-        "INAM 2000",
-        "THTR 2000",
-        "THTR 3325"
-      ],
-      "Spring": [
-        "ANTH 3421",
-        "THTR 1270"
-      ]
+      "Fall": ["INAM 2000", "THTR 2000", "THTR 3325"],
+      "Spring": ["ANTH 3421", "THTR 1270"]
     },
     "Year 3": {
-      "Fall": [
-        "EEAM 2000"
-      ]
+      "Fall": ["EEAM 2000"]
     },
     "Year 4": {
-      "Fall": [
-        "ANTH 3410"
-      ],
-      "Spring": [
-        "THTR 4702"
-      ]
+      "Fall": ["ANTH 3410"],
+      "Spring": ["THTR 4702"]
     }
   }
 }

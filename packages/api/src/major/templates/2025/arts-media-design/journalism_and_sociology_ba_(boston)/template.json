@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "SOCL 1101", "JRNL 1150", "ENGW 1111", "SOCL 2320"],
+      "Spring": ["SOCL 2321", "JRNL 1101", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "JRNL 2201"]
+    },
+    "Year 3": {
+      "Fall": ["SOCL 3300", "JRNL 3550"]
+    },
+    "Year 4": {
+      "Spring": ["SOCL 4600"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "SOCL 1101", "JRNL 1150", "ENGW 1111", "SOCL 2320"],
+      "Spring": ["SOCL 2321", "JRNL 1101", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "JRNL 2201"]
+    },
+    "Year 3": {
+      "Fall": ["SOCL 3300", "JRNL 3550"]
+    },
+    "Year 4": {
+      "Spring": ["SOCL 4600"]
+    }
+  }
+}

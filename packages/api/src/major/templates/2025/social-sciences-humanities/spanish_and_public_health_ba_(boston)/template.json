@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "SPNS 2102", "BIOL 1147", "ENGW 1111"],
+      "Spring": ["SPNS 3101", "PHTH 2350", "BIOL 1141", "PSYC 1101"],
+      "Summer 1": ["PHTH 2300"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2210", "SPNS 3102"],
+      "Summer 2": ["PHTH 2515"]
+    },
+    "Year 3": {
+      "Fall": ["SPNS 3401"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["SPNS 3402", "PHTH 4202"]
+    }
+  },
+  "Bouvé Student Example: Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "SPNS 2102", "BIOL 1147", "ENGW 1111"],
+      "Spring": ["SPNS 3101", "PHTH 2350", "BIOL 1141", "PSYC 1101"],
+      "Summer 1": ["PHTH 2300"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2210", "SPNS 3102"],
+      "Summer 2": ["PHTH 2515"]
+    },
+    "Year 3": {
+      "Fall": ["SPNS 3401"],
+      "Summer 2": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Fall": ["SPNS 3402", "PHTH 4202"]
+    }
+  },
+  "CSSH Student Example: Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["INSH 1000", "PHTH 1260", "SPNS 2102", "BIOL 1147", "ENGW 1111"],
+      "Spring": ["SPNS 3101", "PHTH 2350", "BIOL 1141", "PSYC 1101"],
+      "Summer 1": ["PHTH 2515"]
+    },
+    "Year 2": {
+      "Fall": ["SPNS 3102", "PHTH 2300"],
+      "Spring": ["EESH 2000", "SPNS 3401", "PHTH 2210"],
+      "Summer 1": ["PHTH 4202"]
+    },
+    "Year 3": {
+      "Summer 1": ["PHTH 4120", "PHTH 4540"]
+    },
+    "Year 4": {
+      "Spring": ["SPNS 3402"]
+    }
+  }
+}

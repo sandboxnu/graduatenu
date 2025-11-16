@@ -2,7 +2,8 @@
   "name": "Human Services and Criminal Justice, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -48,6 +49,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Human Services Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Introduction to Crime, Law, and the Justice System",
       "requirements": [
         {
@@ -73,24 +80,30 @@
       "title": "Current Crime and Justice Issues",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1300,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1400,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1500,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1700,
-          "subject": "CRIM"
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1300,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1500,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1700,
+              "subject": "CRIM"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -100,29 +113,35 @@
       "title": "Understanding and Experiencing Criminal Justice Institutions and Systems",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2310,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2320,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2330,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2340,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2350,
-          "subject": "CRIM"
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "CRIM"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -132,34 +151,40 @@
       "title": "Crime Problems",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3010,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3030,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3040,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3050,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3060,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3070,
-          "subject": "CRIM"
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3010,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3030,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3040,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3050,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3060,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3070,
+              "subject": "CRIM"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -181,14 +206,20 @@
       "title": "Systemic Issues",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3110,
-          "subject": "CRIM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3120,
-          "subject": "CRIM"
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3110,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3120,
+              "subject": "CRIM"
+            }
+          ]
         }
       ],
       "minRequirementCount": 1
@@ -233,6 +264,12 @@
         }
       ],
       "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Criminal Justice Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -302,7 +339,7 @@
     },
     {
       "type": "SECTION",
-      "title": "NUpath Requirements",
+      "title": "Additional Elective",
       "requirements": [
         {
           "type": "OR",

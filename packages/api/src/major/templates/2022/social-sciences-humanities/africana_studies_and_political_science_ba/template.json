@@ -1,28 +1,19 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Spring": [
-        "POLS 1160",
-        "POLS 1155"
-      ],
-      "Fall": [
-        "POLS 1150",
-        "CLTR 1000",
-        "ENGW 1111"
-      ]
+      "Spring": ["POLS 1160", "POLS 1155"],
+      "Fall": ["POLS 1150", "CLTR 1000", "ENGW 1111"]
     },
     "Year 2": {
-      "Summer 1": [
-        "POLS 2399"
-      ],
-      "Fall": [
-        "POLS 2400"
-      ]
+      "Summer 1": ["POLS 2399"],
+      "Fall": ["POLS 2400"]
     },
     "Year 3": {
-      "Spring": [
-        "PSYC 1101"
-      ]
+      "Spring": ["PSYC 1101"]
     },
     "Year 4": {}
   }

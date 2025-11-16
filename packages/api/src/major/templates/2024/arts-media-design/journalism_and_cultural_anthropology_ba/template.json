@@ -1,34 +1,21 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "ANTH 1000",
-        "ANTH 1101",
-        "JRNL 1150",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "ANTH 2305",
-        "JRNL 1101"
-      ]
+      "Fall": ["ANTH 1000", "ANTH 1101", "JRNL 1150", "ENGW 1111"],
+      "Spring": ["ANTH 2305", "JRNL 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "EESH 2000",
-        "ANTH 3410",
-        "ANTH 3421",
-        "JRNL 2201"
-      ]
+      "Fall": ["EESH 2000", "ANTH 3410", "ANTH 3421", "JRNL 2201"]
     },
     "Year 3": {
-      "Fall": [
-        "JRNL 3550"
-      ]
+      "Fall": ["JRNL 3550"]
     },
     "Year 4": {
-      "Fall": [
-        "ANTH 4600"
-      ]
+      "Fall": ["ANTH 4600"]
     }
   }
 }

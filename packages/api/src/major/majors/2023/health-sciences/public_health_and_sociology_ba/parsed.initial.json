@@ -1,0 +1,672 @@
+{
+  "name": "Public Health and Sociology, BA",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/5/2025",
+    "branch": "main"
+  },
+  "totalCreditsRequired": 130,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Public Health Core Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1260,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1261,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2351,
+              "subject": "PHTH"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4120,
+          "subject": "PHTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PHTH"
+        }
+      ],
+      "minRequirementCount": 6
+    },
+    {
+      "type": "SECTION",
+      "title": "Science Core Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Biology",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Option 1",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1141,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1147,
+              "subject": "BIOL"
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "Option 2",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1111,
+                  "description": "General Biology 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1112,
+                  "description": "Lab for BIOL 1111",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "BIOL",
+                  "classId": 1113,
+                  "description": "General Biology 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "BIOL",
+                  "classId": 1114,
+                  "description": "Lab for BIOL 1113",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 2
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1225,
+          "subject": "COMM"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ECON",
+              "classId": 1115,
+              "description": "Principles of Macroeconomics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ECON",
+              "classId": 1125,
+              "description": "Recitation for ECON 1115",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ECON",
+              "classId": 1116,
+              "description": "Principles of Microeconomics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ECON",
+              "classId": 1126,
+              "description": "Recitation for ECON 1116",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1300,
+          "subject": "ENGL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "HUSV"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "INTL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PHIL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1160,
+          "subject": "POLS"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Upper-Level Course",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Society and Behavior",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4102,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3040,
+              "subject": "CRIM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3420,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5280,
+              "subject": "HLTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5222,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3402,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "PSYC"
+            }
+          ],
+          "minRequirementCount": 9
+        },
+        {
+          "type": "SECTION",
+          "title": "Globalization and Global Health",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "AFRS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "ECON"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3200,
+                  "subject": "INTL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3201,
+                  "subject": "INTL"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3400,
+              "subject": "INTL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5230,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3487,
+              "subject": "POLS"
+            }
+          ],
+          "minRequirementCount": 6
+        },
+        {
+          "type": "SECTION",
+          "title": "Environmental Health and Climate Change",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3500,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3423,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "PPUA"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5214,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5238,
+              "subject": "PPUA"
+            }
+          ],
+          "minRequirementCount": 5
+        },
+        {
+          "type": "SECTION",
+          "title": "Law, Policy, and Human Rights",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3424,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5001,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5002,
+              "subject": "PHIL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3307,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3900,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4515,
+              "subject": "PHTH"
+            }
+          ],
+          "minRequirementCount": 6
+        },
+        {
+          "type": "SECTION",
+          "title": "Healthcare Administration and Management",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3413,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3340,
+              "subject": "MGMT"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "ORGB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4511,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5232,
+              "subject": "PHTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5234,
+              "subject": "PHTH"
+            }
+          ],
+          "minRequirementCount": 6
+        }
+      ],
+      "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Required Sociology Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2305,
+          "subject": "ANTH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "SOCL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3300,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 3
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [
+        {
+          "type": "RANGE",
+          "subject": "SOCL",
+          "idRangeStart": 1102,
+          "idRangeEnd": 2999,
+          "exceptions": []
+        },
+        {
+          "type": "RANGE",
+          "subject": "SOCL",
+          "idRangeStart": 3000,
+          "idRangeEnd": 5999,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "HSCI"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Co-op Preparation",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "EESH"
+        },
+        {
+          "type": "COURSE",
+          "classId": 2000,
+          "subject": "HSCI"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Writing Courses",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "First-Year Writing",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1111,
+              "subject": "ENGW"
+            }
+          ],
+          "minRequirementCount": 1
+        },
+        {
+          "type": "SECTION",
+          "title": "Advanced Writing in the Disciplines",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3306,
+              "subject": "ENGW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3308,
+              "subject": "ENGW"
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Statistics and Research Methods",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PHTH",
+              "classId": 2210,
+              "description": "Foundations of Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHTH",
+              "classId": 2211,
+              "description": "Recitation for PHTH 2210",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PHTH",
+              "classId": 4202,
+              "description": "Principles of Epidemiology in Medicine and Public Health",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "SOCL",
+              "classId": 2320,
+              "description": "Statistical Analysis in Sociology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "SOCL",
+              "classId": 2321,
+              "description": "Research Methods in Sociology",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Health Science Capstone",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "HSCI"
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4720,
+                  "subject": "HSCI"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4730,
+                  "subject": "HSCI"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4740,
+                  "subject": "HSCI"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "Sociology Senior Seminar",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4600,
+              "subject": "SOCL"
+            }
+          ],
+          "minRequirementCount": 1
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Integrative Requirement",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3441,
+          "subject": "SOCL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

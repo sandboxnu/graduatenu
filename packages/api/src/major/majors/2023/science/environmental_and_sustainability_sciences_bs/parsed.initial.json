@@ -1,0 +1,1228 @@
+{
+  "name": "Environmental and Sustainability Sciences, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/5/2025",
+    "branch": "main"
+  },
+  "totalCreditsRequired": 136,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Core Curriculum",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 1200,
+                  "description": "Dynamic Earth",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 1201,
+                  "description": "Lab for ENVR 1200",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2200,
+              "subject": "ENVR"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1400,
+              "description": "Foundations in Environmental and Sustainability Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1401,
+              "description": "Lab for ENVR 1400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1500,
+              "description": "Introduction to Environmental, Social, and Biological Data",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1501,
+              "description": "Lab for ENVR 1500",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2515,
+          "subject": "ENVR"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 3300,
+              "description": "Geographic Information Systems",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 3301,
+              "description": "Lab for ENVR 3300",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "ENVR"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 4050,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4971,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4997,
+              "subject": "ENVR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics Requirements",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2500,
+                  "description": "Biostatistics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2501,
+                  "description": "Lab for ENVR 2500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2350,
+              "subject": "ECON"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2400,
+              "subject": "POLS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2321,
+              "subject": "SOCL"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    }
+  ],
+  "concentrations": {
+    "minOptions": 1,
+    "concentrationOptions": [
+      {
+        "type": "SECTION",
+        "title": "Concentration in Conservation, Restoration, and Management",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 2400,
+            "subject": "EEMB"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3455,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3430,
+                "subject": "CIVE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 3460,
+            "subject": "EEMB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4001,
+            "subject": "EEMB"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5220,
+            "subject": "ENVR"
+          }
+        ],
+        "minRequirementCount": 5
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Conservation, Restoration, and Management: Conservation, Restoration, and Management Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 20,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 3465,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3466,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3475,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3700,
+                "subject": "EEMB"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "EEMB",
+                    "classId": 4000,
+                    "description": "Applied Conservation Biology",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 3151,
+                    "description": "Food Sustainability in the Mediterranean - Abroad",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 3150,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3200,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3701,
+                "subject": "ENVR"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 3800,
+                    "description": "Plants and Society",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 3801,
+                    "description": "Lab for ENVR 3800",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 4500,
+                    "description": "Applied Hydrogeology",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 4501,
+                    "description": "Lab for ENVR 4500",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 4505,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5190,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5350,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5450,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5563,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5700,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5750,
+                "subject": "ENVR"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Earth, Oceans, and Environmental Change",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ENVR",
+                "classId": 1200,
+                "description": "Dynamic Earth",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ENVR",
+                "classId": 1201,
+                "description": "Lab for ENVR 1200",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 2200,
+            "subject": "ENVR"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Earth, Oceans, and Environmental Change: Earth Materials and Landforms",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ENVR",
+                "classId": 2310,
+                "description": "Earth Materials",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ENVR",
+                "classId": 2311,
+                "description": "Lab for ENVR 2310",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ENVR",
+                "classId": 2340,
+                "description": "Earth Landforms and Processes",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ENVR",
+                "classId": 2341,
+                "description": "Lab for ENVR 2340",
+                "type": "COURSE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Earth, Oceans, and Environmental Change: Freshwater",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3200,
+            "subject": "ENVR"
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "ENVR",
+                "classId": 4500,
+                "description": "Applied Hydrogeology",
+                "type": "COURSE"
+              },
+              {
+                "subject": "ENVR",
+                "classId": 4501,
+                "description": "Lab for ENVR 4500",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 4505,
+            "subject": "ENVR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5700,
+            "subject": "ENVR"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Earth, Oceans, and Environmental Change: Oceans",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3125,
+            "subject": "ENVR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3600,
+            "subject": "ENVR"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Earth, Oceans, and Environmental Change: Environmental Change",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3125,
+            "subject": "ENVR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5150,
+            "subject": "ENVR"
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Earth, Oceans, and Environmental Change: Chemistry",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "CHEM",
+                "classId": 1151,
+                "description": "General Chemistry for Engineers",
+                "type": "COURSE"
+              },
+              {
+                "subject": "CHEM",
+                "classId": 1153,
+                "description": "Recitation for CHEM 1151",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "CHEM",
+                "classId": 1161,
+                "description": "General Chemistry for Science Majors",
+                "type": "COURSE"
+              },
+              {
+                "subject": "CHEM",
+                "classId": 1162,
+                "description": "Lab for CHEM 1161",
+                "type": "COURSE"
+              },
+              {
+                "subject": "CHEM",
+                "classId": 1163,
+                "description": "Recitation for CHEM 1161",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "CHEM",
+                "classId": 1211,
+                "description": "General Chemistry 1",
+                "type": "COURSE"
+              },
+              {
+                "subject": "CHEM",
+                "classId": 1212,
+                "description": "Lab for CHEM 1211",
+                "type": "COURSE"
+              },
+              {
+                "subject": "CHEM",
+                "classId": 1213,
+                "description": "Recitation for CHEM 1211",
+                "type": "COURSE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Earth, Oceans, and Environmental Change: Physics",
+        "requirements": [
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "PHYS",
+                "classId": 1145,
+                "description": "Physics for Life Sciences 1",
+                "type": "COURSE"
+              },
+              {
+                "subject": "PHYS",
+                "classId": 1146,
+                "description": "Lab for PHYS 1145",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "PHYS",
+                "classId": 1151,
+                "description": "Physics for Engineering 1",
+                "type": "COURSE"
+              },
+              {
+                "subject": "PHYS",
+                "classId": 1152,
+                "description": "Lab for PHYS 1151",
+                "type": "COURSE"
+              },
+              {
+                "subject": "PHYS",
+                "classId": 1153,
+                "description": "Interactive Learning Seminar for PHYS 1151",
+                "type": "COURSE"
+              }
+            ]
+          },
+          {
+            "type": "AND",
+            "courses": [
+              {
+                "subject": "PHYS",
+                "classId": 1161,
+                "description": "Physics 1",
+                "type": "COURSE"
+              },
+              {
+                "subject": "PHYS",
+                "classId": 1162,
+                "description": "Lab for PHYS 1161",
+                "type": "COURSE"
+              },
+              {
+                "subject": "PHYS",
+                "classId": 1163,
+                "description": "Recitation for PHYS 1161",
+                "type": "COURSE"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Earth, Oceans, and Environmental Change: Earth, Oceans, and Environmental Change Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 12,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5280,
+                "subject": "CIVE"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 2310,
+                    "description": "Earth Materials",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 2311,
+                    "description": "Lab for ENVR 2310",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 2340,
+                    "description": "Earth Landforms and Processes",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 2341,
+                    "description": "Lab for ENVR 2340",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 3125,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3200,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3418,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3435,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3600,
+                "subject": "ENVR"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 4500,
+                    "description": "Applied Hydrogeology",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 4501,
+                    "description": "Lab for ENVR 4500",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 4504,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 4505,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5190,
+                "subject": "ENVR"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 5201,
+                    "description": "Geologic Field Seminar",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 5202,
+                    "description": "Environmental Science Field Seminar Abroad",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 5240,
+                    "description": "Sedimentary Basin Analysis",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 5241,
+                    "description": "Lab for ENVR 5240",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 5242,
+                    "description": "Ancient Marine Life",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 5243,
+                    "description": "Lab for ENVR 5242",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 5670,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5700,
+                "subject": "ENVR"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Environment and Society",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3540,
+            "subject": "ENVR"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 3850,
+                    "description": "Sustainable Agriculture",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 3851,
+                    "description": "Lab for ENVR 3850",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 3800,
+                    "description": "Plants and Society",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 3801,
+                    "description": "Lab for ENVR 3800",
+                    "type": "COURSE"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 5260,
+            "subject": "PPUA"
+          },
+          {
+            "type": "COURSE",
+            "classId": 1246,
+            "subject": "SOCL"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 2485,
+                "subject": "SOCL"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2395,
+                "subject": "POLS"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 5
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Environment and Society: Environment and Society Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 20,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5275,
+                "subject": "CIVE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3460,
+                "subject": "EEMB"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "EEMB",
+                    "classId": 4000,
+                    "description": "Applied Conservation Biology",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 3151,
+                    "description": "Food Sustainability in the Mediterranean - Abroad",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 3150,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3201,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3202,
+                "subject": "ENVR"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 3800,
+                    "description": "Plants and Society",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 3801,
+                    "description": "Lab for ENVR 3800",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 5210,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5350,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5600,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5750,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2464,
+                "subject": "INTL"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5100,
+                "subject": "INTL"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5264,
+                "subject": "PPUA"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5268,
+                "subject": "PPUA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Sustainable Planning and Development",
+        "requirements": [
+          {
+            "type": "COURSE",
+            "classId": 3150,
+            "subject": "ENVR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 3200,
+            "subject": "ENVR"
+          },
+          {
+            "type": "COURSE",
+            "classId": 5210,
+            "subject": "ENVR"
+          },
+          {
+            "type": "OR",
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5350,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5800,
+                "subject": "ENVR"
+              }
+            ]
+          },
+          {
+            "type": "COURSE",
+            "classId": 5268,
+            "subject": "PPUA"
+          }
+        ],
+        "minRequirementCount": 5
+      },
+      {
+        "type": "SECTION",
+        "title": "Concentration in Sustainable Planning and Development: Sustainable Planning and Development Electives",
+        "requirements": [
+          {
+            "type": "XOM",
+            "numCreditsMin": 20,
+            "courses": [
+              {
+                "type": "COURSE",
+                "classId": 5275,
+                "subject": "CIVE"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3460,
+                "subject": "EEMB"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "EEMB",
+                    "classId": 4000,
+                    "description": "Applied Conservation Biology",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 3151,
+                    "description": "Food Sustainability in the Mediterranean - Abroad",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 4001,
+                "subject": "EEMB"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3201,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 3701,
+                "subject": "ENVR"
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 3800,
+                    "description": "Plants and Society",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 3801,
+                    "description": "Lab for ENVR 3800",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "AND",
+                "courses": [
+                  {
+                    "subject": "ENVR",
+                    "classId": 4500,
+                    "description": "Applied Hydrogeology",
+                    "type": "COURSE"
+                  },
+                  {
+                    "subject": "ENVR",
+                    "classId": 4501,
+                    "description": "Lab for ENVR 4500",
+                    "type": "COURSE"
+                  }
+                ]
+              },
+              {
+                "type": "COURSE",
+                "classId": 4505,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5190,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5220,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5350,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5450,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5563,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5800,
+                "subject": "ENVR"
+              },
+              {
+                "type": "COURSE",
+                "classId": 2464,
+                "subject": "INTL"
+              },
+              {
+                "type": "COURSE",
+                "classId": 5260,
+                "subject": "PPUA"
+              }
+            ]
+          }
+        ],
+        "minRequirementCount": 1
+      }
+    ]
+  }
+}

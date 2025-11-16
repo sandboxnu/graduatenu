@@ -1,41 +1,23 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, No Co-op": {
     "Year 1": {
-      "Fall": [
-        "HUSV 1101",
-        "ENGW 1111",
-        "SOCL 1101"
-      ],
-      "Spring": [
-        "MATH 1215",
-        "HUSV 2300"
-      ]
+      "Fall": ["HUSV 1101", "ENGW 1111", "SOCL 1101"],
+      "Spring": ["MATH 1215", "HUSV 2300"]
     },
     "Year 2": {
-      "Spring": [
-        "HUSV 2355"
-      ]
+      "Spring": ["HUSV 2355"]
     },
     "Year 3": {
-      "Fall": [
-        "SOCL 2320",
-        "SOCL 3300",
-        "HUSV 3570"
-      ],
-      "Spring": [
-        "HUSV 2970",
-        "ENGW 3315"
-      ]
+      "Fall": ["SOCL 2320", "SOCL 3300", "HUSV 3570"],
+      "Spring": ["HUSV 2970", "ENGW 3315"]
     },
     "Year 4": {
-      "Fall": [
-        "HUSV 3900",
-        "HUSV 4994"
-      ],
-      "Spring": [
-        "HUSV 4700",
-        "SOCL 4600"
-      ]
+      "Fall": ["HUSV 3900", "HUSV 4994"],
+      "Spring": ["HUSV 4700", "SOCL 4600"]
     }
   }
 }

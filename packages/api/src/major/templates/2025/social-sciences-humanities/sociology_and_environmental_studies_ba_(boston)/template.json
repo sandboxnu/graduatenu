@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "ENVR 1101", "SOCL 1101"],
+      "Spring": ["ENVR 2515", "PHIL 1180", "SOCL 2321"]
+    },
+    "Year 2": {
+      "Fall": ["ENVR 3300", "SOCL 3300"],
+      "Spring": ["EESH 2000"]
+    },
+    "Year 3": {},
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Summer Second-Half/Fall": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "ENVR 1101", "SOCL 1101"],
+      "Spring": ["ENVR 2515", "PHIL 1180", "SOCL 2321"]
+    },
+    "Year 2": {
+      "Fall": ["ENVR 3300", "SOCL 3300"],
+      "Spring": ["EESH 2000"]
+    },
+    "Year 3": {},
+    "Year 4": {}
+  }
+}

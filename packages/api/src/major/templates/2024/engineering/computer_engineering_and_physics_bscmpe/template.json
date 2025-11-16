@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plans of Study": {
     "Year 1": {
       "Fall": [
@@ -19,9 +23,7 @@
         "GE 1502",
         "ENGW 1111"
       ],
-      "Summer 1": [
-        "MATH 2341"
-      ]
+      "Summer 1": ["MATH 2341"]
     },
     "Year 2": {
       "Fall": [
@@ -43,58 +45,20 @@
       ]
     },
     "Year 3": {
-      "Spring": [
-        "PHYS 3602",
-        "PHYS 4115"
-      ],
-      "Summer 2": [
-        "PHYS 3600",
-        "EECE 4791",
-        "ENGW 3302"
-      ],
-      "Fall": [
-        "PHYS 3602",
-        "CS 1800",
-        "CS 1802",
-        "EECE 2150",
-        "EECE 2160"
-      ],
-      "Summer 1": [
-        "PHYS 3600"
-      ]
+      "Spring": ["PHYS 3602", "PHYS 4115"],
+      "Summer 2": ["PHYS 3600", "EECE 4791", "ENGW 3302"],
+      "Fall": ["PHYS 3602", "CS 1800", "CS 1802", "EECE 2150", "EECE 2160"],
+      "Summer 1": ["PHYS 3600"]
     },
     "Year 4": {
-      "Fall": [
-        "PHYS 4115",
-        "ENCP 3000",
-        "EECE 4792",
-        "MATH 3081",
-        "EECE 3468"
-      ],
-      "Summer 2": [
-        "EECE 4791",
-        "ENGW 3302"
-      ],
-      "Spring": [
-        "ENCP 3000",
-        "EECE 3468",
-        "PHYS 4305"
-      ],
-      "Summer 1": [
-        "EECE 4791",
-        "ENGW 3302"
-      ]
+      "Fall": ["PHYS 4115", "ENCP 3000", "EECE 4792", "MATH 3081", "EECE 3468"],
+      "Summer 2": ["EECE 4791", "ENGW 3302"],
+      "Spring": ["ENCP 3000", "EECE 3468", "PHYS 4305"],
+      "Summer 1": ["EECE 4791", "ENGW 3302"]
     },
     "Year 5": {
-      "Fall": [
-        "ENCP 3000",
-        "MATH 3081",
-        "PHYS 4305",
-        "EECE 4792"
-      ],
-      "Spring": [
-        "EECE 4792"
-      ]
+      "Fall": ["ENCP 3000", "MATH 3081", "PHYS 4305", "EECE 4792"],
+      "Spring": ["EECE 4792"]
     }
   },
   "Four Years, One Co-op in Summer 2/ Fall": {
@@ -117,9 +81,7 @@
         "GE 1502",
         "ENGW 1111"
       ],
-      "Summer 1": [
-        "MATH 2341"
-      ]
+      "Summer 1": ["MATH 2341"]
     },
     "Year 2": {
       "Fall": [
@@ -141,58 +103,20 @@
       ]
     },
     "Year 3": {
-      "Spring": [
-        "PHYS 3602",
-        "PHYS 4115"
-      ],
-      "Summer 2": [
-        "PHYS 3600",
-        "EECE 4791",
-        "ENGW 3302"
-      ],
-      "Fall": [
-        "PHYS 3602",
-        "CS 1800",
-        "CS 1802",
-        "EECE 2150",
-        "EECE 2160"
-      ],
-      "Summer 1": [
-        "PHYS 3600"
-      ]
+      "Spring": ["PHYS 3602", "PHYS 4115"],
+      "Summer 2": ["PHYS 3600", "EECE 4791", "ENGW 3302"],
+      "Fall": ["PHYS 3602", "CS 1800", "CS 1802", "EECE 2150", "EECE 2160"],
+      "Summer 1": ["PHYS 3600"]
     },
     "Year 4": {
-      "Fall": [
-        "PHYS 4115",
-        "ENCP 3000",
-        "EECE 4792",
-        "MATH 3081",
-        "EECE 3468"
-      ],
-      "Summer 2": [
-        "EECE 4791",
-        "ENGW 3302"
-      ],
-      "Spring": [
-        "ENCP 3000",
-        "EECE 3468",
-        "PHYS 4305"
-      ],
-      "Summer 1": [
-        "EECE 4791",
-        "ENGW 3302"
-      ]
+      "Fall": ["PHYS 4115", "ENCP 3000", "EECE 4792", "MATH 3081", "EECE 3468"],
+      "Summer 2": ["EECE 4791", "ENGW 3302"],
+      "Spring": ["ENCP 3000", "EECE 3468", "PHYS 4305"],
+      "Summer 1": ["EECE 4791", "ENGW 3302"]
     },
     "Year 5": {
-      "Fall": [
-        "ENCP 3000",
-        "MATH 3081",
-        "PHYS 4305",
-        "EECE 4792"
-      ],
-      "Spring": [
-        "EECE 4792"
-      ]
+      "Fall": ["ENCP 3000", "MATH 3081", "PHYS 4305", "EECE 4792"],
+      "Spring": ["EECE 4792"]
     }
   },
   "Four Years, One Co-op in Spring/Summer 1": {
@@ -215,9 +139,7 @@
         "PHYS 1166",
         "PHYS 1167"
       ],
-      "Summer 1": [
-        "MATH 2341"
-      ]
+      "Summer 1": ["MATH 2341"]
     },
     "Year 2": {
       "Fall": [
@@ -239,56 +161,20 @@
       ]
     },
     "Year 3": {
-      "Fall": [
-        "PHYS 3602",
-        "CS 1800",
-        "CS 1802",
-        "EECE 2150",
-        "EECE 2160"
-      ],
-      "Summer 2": [
-        "EECE 4791",
-        "ENGW 3302",
-        "PHYS 3600"
-      ],
-      "Spring": [
-        "PHYS 4115"
-      ],
-      "Summer 1": [
-        "PHYS 3600"
-      ]
+      "Fall": ["PHYS 3602", "CS 1800", "CS 1802", "EECE 2150", "EECE 2160"],
+      "Summer 2": ["EECE 4791", "ENGW 3302", "PHYS 3600"],
+      "Spring": ["PHYS 4115"],
+      "Summer 1": ["PHYS 3600"]
     },
     "Year 4": {
-      "Fall": [
-        "EECE 4792",
-        "ENCP 3000",
-        "EECE 3468",
-        "PHYS 4115"
-      ],
-      "Summer 2": [
-        "EECE 4791",
-        "ENGW 3302"
-      ],
-      "Spring": [
-        "ENCP 3000",
-        "EECE 3468",
-        "PHYS 4305"
-      ],
-      "Summer 1": [
-        "EECE 4791",
-        "ENGW 3302"
-      ]
+      "Fall": ["EECE 4792", "ENCP 3000", "EECE 3468", "PHYS 4115"],
+      "Summer 2": ["EECE 4791", "ENGW 3302"],
+      "Spring": ["ENCP 3000", "EECE 3468", "PHYS 4305"],
+      "Summer 1": ["EECE 4791", "ENGW 3302"]
     },
     "Year 5": {
-      "Fall": [
-        "ENCP 3000",
-        "MATH 3081",
-        "PHYS 4305",
-        "EECE 4792"
-      ],
-      "Spring": [
-        "EECE 4792"
-      ]
+      "Fall": ["ENCP 3000", "MATH 3081", "PHYS 4305", "EECE 4792"],
+      "Spring": ["EECE 4792"]
     }
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
@@ -313,13 +199,7 @@
       ]
     },
     "Year 2": {
-      "Fall": [
-        "EECE 2140",
-        "MATH 2321",
-        "MATH 2341",
-        "PHYS 2303",
-        "ENCP 2000"
-      ],
+      "Fall": ["EECE 2140", "MATH 2321", "MATH 2341", "PHYS 2303", "ENCP 2000"],
       "Spring": [
         "CS 1800",
         "CS 1802",
@@ -330,51 +210,20 @@
       ]
     },
     "Year 3": {
-      "Fall": [
-        "CS 1800",
-        "CS 1802",
-        "EECE 2150",
-        "EECE 2160",
-        "PHYS 3602"
-      ],
-      "Summer 2": [
-        "PHYS 3600"
-      ],
-      "Spring": [
-        "PHYS 4115"
-      ],
-      "Summer 1": [
-        "PHYS 3600"
-      ]
+      "Fall": ["CS 1800", "CS 1802", "EECE 2150", "EECE 2160", "PHYS 3602"],
+      "Summer 2": ["PHYS 3600"],
+      "Spring": ["PHYS 4115"],
+      "Summer 1": ["PHYS 3600"]
     },
     "Year 4": {
-      "Fall": [
-        "PHYS 4115"
-      ],
-      "Summer 2": [
-        "EECE 4791",
-        "ENGW 3302"
-      ],
-      "Spring": [
-        "ENCP 3000",
-        "EECE 3468",
-        "PHYS 4305"
-      ],
-      "Summer 1": [
-        "EECE 4791",
-        "ENGW 3302"
-      ]
+      "Fall": ["PHYS 4115"],
+      "Summer 2": ["EECE 4791", "ENGW 3302"],
+      "Spring": ["ENCP 3000", "EECE 3468", "PHYS 4305"],
+      "Summer 1": ["EECE 4791", "ENGW 3302"]
     },
     "Year 5": {
-      "Fall": [
-        "ENCP 3000",
-        "MATH 3081",
-        "PHYS 4305",
-        "EECE 4792"
-      ],
-      "Spring": [
-        "EECE 4792"
-      ]
+      "Fall": ["ENCP 3000", "MATH 3081", "PHYS 4305", "EECE 4792"],
+      "Spring": ["EECE 4792"]
     }
   },
   "Five Years, Three Co-ops in Summer 2/Fall": {
@@ -399,12 +248,7 @@
       ]
     },
     "Year 2": {
-      "Fall": [
-        "EECE 2140",
-        "MATH 2321",
-        "MATH 2341",
-        "PHYS 2303"
-      ],
+      "Fall": ["EECE 2140", "MATH 2321", "MATH 2341", "PHYS 2303"],
       "Spring": [
         "CS 1800",
         "CS 1802",
@@ -415,28 +259,15 @@
       ]
     },
     "Year 3": {
-      "Spring": [
-        "PHYS 4115"
-      ],
-      "Summer 1": [
-        "PHYS 3600"
-      ]
+      "Spring": ["PHYS 4115"],
+      "Summer 1": ["PHYS 3600"]
     },
     "Year 4": {
-      "Spring": [
-        "ENCP 3000",
-        "EECE 3468",
-        "PHYS 4305"
-      ],
-      "Summer 1": [
-        "EECE 4791",
-        "ENGW 3302"
-      ]
+      "Spring": ["ENCP 3000", "EECE 3468", "PHYS 4305"],
+      "Summer 1": ["EECE 4791", "ENGW 3302"]
     },
     "Year 5": {
-      "Spring": [
-        "EECE 4792"
-      ]
+      "Spring": ["EECE 4792"]
     }
   }
 }

@@ -2,7 +2,8 @@
   "name": "Computer Science and Media Arts, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 137,
   "yearVersion": 2021,
@@ -314,99 +315,134 @@
       "title": "Media Arts Electives",
       "requirements": [
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Basics",
+          "requirements": [
             {
-              "subject": "ARTD",
-              "classId": 2360,
-              "description": "Introduction to Photography",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2360,
+                  "description": "Introduction to Photography",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2361,
+                  "description": "Photo Tools",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "ARTD",
-              "classId": 2361,
-              "description": "Photo Tools",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "ARTD"
             }
-          ]
+          ],
+          "minRequirementCount": 3
         },
         {
-          "type": "COURSE",
-          "classId": 2370,
-          "subject": "ARTD"
+          "type": "SECTION",
+          "title": "Photography",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4565,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4660,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4661,
+              "subject": "ARTD"
+            }
+          ],
+          "minRequirementCount": 4
         },
         {
-          "type": "COURSE",
-          "classId": 2380,
-          "subject": "ARTD"
+          "type": "SECTION",
+          "title": "Animation",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3470,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3471,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3472,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3473,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4570,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4575,
+              "subject": "ARTD"
+            }
+          ],
+          "minRequirementCount": 6
         },
         {
-          "type": "COURSE",
-          "classId": 3460,
-          "subject": "ARTD"
+          "type": "SECTION",
+          "title": "Video",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3480,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3485,
+              "subject": "ARTD"
+            }
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "COURSE",
-          "classId": 4565,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4660,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4661,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3470,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3471,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3472,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3473,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4570,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4575,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3480,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3485,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2212,
-          "subject": "ARTH"
+          "type": "SECTION",
+          "title": "History",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 2212,
+              "subject": "ARTH"
+            }
+          ],
+          "minRequirementCount": 1
         }
       ],
-      "minRequirementCount": 16
+      "minRequirementCount": 5
     },
     {
       "type": "SECTION",
@@ -520,6 +556,12 @@
         }
       ],
       "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

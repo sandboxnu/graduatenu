@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "BUSN 1102", "COMM 1101", "ENGW 1111", "MATH 1231"],
+      "Spring": ["COMM 1112", "MGSC 2301", "MKTG 2201", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["BUSN 1103", "FINA 2201", "ECON 1115"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 3": {
+      "Fall": ["MKTG 4504"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 4": {
+      "Spring": ["COMM 3409", "COMM 4608"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "BUSN 1102", "COMM 1101", "ENGW 1111", "MATH 1231"],
+      "Spring": ["COMM 1112", "MGSC 2301", "MKTG 2201", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["BUSN 1103", "FINA 2201", "ECON 1115"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 3": {
+      "Fall": ["MKTG 4504"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 4": {
+      "Spring": ["COMM 3409", "COMM 4608"]
+    }
+  }
+}

@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -18,11 +22,7 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "PHYS 1155",
-        "PHYS 1156",
-        "PHYS 1157"
-      ]
+      "Summer 1": ["PHYS 1155", "PHYS 1156", "PHYS 1157"]
     },
     "Year 2": {
       "Fall": [
@@ -67,11 +67,7 @@
       ]
     },
     "Year 5": {
-      "Spring": [
-        "CHEM 4750",
-        "CHEM 5621",
-        "CHEM 5622"
-      ]
+      "Spring": ["CHEM 4750", "CHEM 5621", "CHEM 5622"]
     }
   },
   "Four Years, Two Co-ops in Summer 2/Fall": {
@@ -93,11 +89,7 @@
         "PHYS 1152",
         "PHYS 1153"
       ],
-      "Summer 1": [
-        "PHYS 1155",
-        "PHYS 1156",
-        "PHYS 1157"
-      ]
+      "Summer 1": ["PHYS 1155", "PHYS 1156", "PHYS 1157"]
     },
     "Year 2": {
       "Fall": [
@@ -128,11 +120,7 @@
       ]
     },
     "Year 4": {
-      "Spring": [
-        "CHEM 4750",
-        "CHEM 5621",
-        "CHEM 5622"
-      ]
+      "Spring": ["CHEM 4750", "CHEM 5621", "CHEM 5622"]
     }
   }
 }

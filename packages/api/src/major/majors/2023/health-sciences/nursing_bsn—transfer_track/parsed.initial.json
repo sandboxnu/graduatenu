@@ -1,0 +1,406 @@
+{
+  "name": "Nursing, BSN—Transfer Track",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/5/2025",
+    "branch": "main"
+  },
+  "totalCreditsRequired": 131,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Nursing Major Requirements",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 2220,
+              "description": "Health Assessment and Fundamental Nursing Skills",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 2221,
+              "description": "Lab for NRSG 2220",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2350,
+          "subject": "NRSG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3302,
+              "description": "Nursing with Women and Families",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3303,
+              "description": "Clinical for NRSG 3302",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2210,
+          "subject": "NRSG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3320,
+              "description": "Nursing Care of Adults 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3321,
+              "description": "Clinical for NRSG 3320",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3400,
+              "description": "Nursing and the Promotion of Mental Health",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3401,
+              "description": "Clinical for NRSG 3400",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3323,
+              "description": "Advanced Assessment and Interventions",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3324,
+              "description": "Lab for NRSG 3323",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 3420,
+              "description": "Nursing Care of Adults 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 3421,
+              "description": "Clinical for NRSG 3420",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 4502,
+              "description": "Nursing Care of the Child",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 4503,
+              "description": "Clinical for NRSG 4502",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5220,
+          "subject": "NRSG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 4604,
+              "description": "Public Health Community Nursing",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 4605,
+              "description": "Clinical for NRSG 4604",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4610,
+          "subject": "NRSG"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "NRSG",
+              "classId": 4995,
+              "description": "Comprehensive Nursing Practicum",
+              "type": "COURSE"
+            },
+            {
+              "subject": "NRSG",
+              "classId": 4996,
+              "description": "Clinical for NRSG 4995",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2150,
+          "subject": "NRSG"
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 3,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5120,
+              "subject": "NRSG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2280,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2310,
+              "subject": "MTH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 15
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3306,
+          "subject": "ENGW"
+        },
+        {
+          "type": "SECTION",
+          "title": "The university requires a minimum grade of C for ENGW 3306.",
+          "requirements": [],
+          "minRequirementCount": 0
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Supporting Courses Met by Transfer Prerequisites",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2217,
+              "description": "Integrated Anatomy and Physiology 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2218,
+              "description": "Lab for BIOL 2217",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2219,
+              "description": "Integrated Anatomy and Physiology 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2220,
+              "description": "Lab for BIOL 2219",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2221,
+              "description": "Foundations of Microbiology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2222,
+              "description": "Lab for BIOL 2221",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1101,
+              "description": "General Chemistry for Health Sciences",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1102,
+              "description": "Lab for CHEM 1101",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 1111,
+          "subject": "ENGW"
+        },
+        {
+          "type": "SECTION",
+          "title": "The university requires a minimum grade of C for ENGW 1111.",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1105,
+              "subject": "HSCI"
+            },
+            {
+              "type": "XOM",
+              "numCreditsMin": 4,
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1215,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1241,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1242,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1251,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1252,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1341,
+                  "subject": "MATH"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1101,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3404,
+                  "subject": "PSYC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1101,
+                  "subject": "SOCL"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 2
+        }
+      ],
+      "minRequirementCount": 7
+    },
+    {
+      "type": "SECTION",
+      "title": "Courses Met by Transfer Prerequisites",
+      "requirements": [],
+      "minRequirementCount": 0
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

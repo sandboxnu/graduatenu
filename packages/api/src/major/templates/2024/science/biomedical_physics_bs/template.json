@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Additional Recommended Courses for Premedical School Track": {
     "Year 1": {
       "Fall": [
@@ -34,33 +38,16 @@
       ]
     },
     "Year 3": {
-      "Fall": [
-        "PHYS 4621",
-        "PHYS 4623"
-      ],
-      "Summer 2": [
-        "MATH 2341",
-        "PHYS 3600"
-      ]
+      "Fall": ["PHYS 4621", "PHYS 4623"],
+      "Summer 2": ["MATH 2341", "PHYS 3600"]
     },
     "Year 4": {
-      "Fall": [
-        "PHYS 3602",
-        "PHYS 4651"
-      ],
-      "Summer 2": [
-        "PHYS 4305"
-      ]
+      "Fall": ["PHYS 3602", "PHYS 4651"],
+      "Summer 2": ["PHYS 4305"]
     },
     "Year 5": {
-      "Fall": [
-        "PHYS 3603",
-        "ENGW 3307"
-      ],
-      "Spring": [
-        "PHYS 4652",
-        "PHYS 5318"
-      ]
+      "Fall": ["PHYS 3603", "ENGW 3307"],
+      "Spring": ["PHYS 4652", "PHYS 5318"]
     }
   },
   "Note on Biomedical Physics Plans of Study": {
@@ -98,33 +85,16 @@
       ]
     },
     "Year 3": {
-      "Fall": [
-        "PHYS 4621",
-        "PHYS 4623"
-      ],
-      "Summer 2": [
-        "MATH 2341",
-        "PHYS 3600"
-      ]
+      "Fall": ["PHYS 4621", "PHYS 4623"],
+      "Summer 2": ["MATH 2341", "PHYS 3600"]
     },
     "Year 4": {
-      "Fall": [
-        "PHYS 3602",
-        "PHYS 4651"
-      ],
-      "Summer 2": [
-        "PHYS 4305"
-      ]
+      "Fall": ["PHYS 3602", "PHYS 4651"],
+      "Summer 2": ["PHYS 4305"]
     },
     "Year 5": {
-      "Fall": [
-        "PHYS 3603",
-        "ENGW 3307"
-      ],
-      "Spring": [
-        "PHYS 4652",
-        "PHYS 5318"
-      ]
+      "Fall": ["PHYS 3603", "ENGW 3307"],
+      "Spring": ["PHYS 4652", "PHYS 5318"]
     }
   },
   "Sample Plan of Study: Five Years, Three Co-ops in Spring/Summer 1": {
@@ -162,33 +132,16 @@
       ]
     },
     "Year 3": {
-      "Fall": [
-        "PHYS 4621",
-        "PHYS 4623"
-      ],
-      "Summer 2": [
-        "MATH 2341",
-        "PHYS 3600"
-      ]
+      "Fall": ["PHYS 4621", "PHYS 4623"],
+      "Summer 2": ["MATH 2341", "PHYS 3600"]
     },
     "Year 4": {
-      "Fall": [
-        "PHYS 3602",
-        "PHYS 4651"
-      ],
-      "Summer 2": [
-        "PHYS 4305"
-      ]
+      "Fall": ["PHYS 3602", "PHYS 4651"],
+      "Summer 2": ["PHYS 4305"]
     },
     "Year 5": {
-      "Fall": [
-        "PHYS 3603",
-        "ENGW 3307"
-      ],
-      "Spring": [
-        "PHYS 4652",
-        "PHYS 5318"
-      ]
+      "Fall": ["PHYS 3603", "ENGW 3307"],
+      "Spring": ["PHYS 4652", "PHYS 5318"]
     }
   },
   "Physics Course Offering Schedule": {}

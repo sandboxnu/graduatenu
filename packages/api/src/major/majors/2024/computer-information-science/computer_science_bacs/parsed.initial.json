@@ -2,7 +2,8 @@
   "name": "Computer Science, BACS",
   "metadata": {
     "verified": false,
-    "lastEdited": "04/01/2025"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2024,
@@ -400,21 +401,9 @@
               ]
             },
             {
-              "type": "AND",
-              "courses": [
-                {
-                  "subject": "ENVR",
-                  "classId": 1202,
-                  "description": "History of Earth and Life",
-                  "type": "COURSE"
-                },
-                {
-                  "subject": "ENVR",
-                  "classId": 1203,
-                  "description": "Interpreting Earth History",
-                  "type": "COURSE"
-                }
-              ]
+              "type": "COURSE",
+              "classId": 1202,
+              "subject": "ENVR"
             }
           ],
           "minRequirementCount": 2
@@ -822,48 +811,47 @@
             ]
           },
           {
-            "type": "XOM",
-            "numCreditsMin": 4,
-            "courses": [
-              {
-                "type": "COURSE",
-                "classId": 3520,
-                "subject": "CS"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4410,
-                "subject": "CS"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4550,
-                "subject": "CS"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4700,
-                "subject": "CS"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4730,
-                "subject": "CS"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4820,
-                "subject": "CS"
-              },
-              {
-                "type": "COURSE",
-                "classId": 4830,
-                "subject": "CS"
-              }
-            ]
+            "type": "COURSE",
+            "classId": 3520,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4410,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4520,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4550,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4700,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4730,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4820,
+            "subject": "CS"
+          },
+          {
+            "type": "COURSE",
+            "classId": 4830,
+            "subject": "CS"
           }
         ],
-        "minRequirementCount": 4
+        "minRequirementCount": 11
       },
       {
         "type": "SECTION",

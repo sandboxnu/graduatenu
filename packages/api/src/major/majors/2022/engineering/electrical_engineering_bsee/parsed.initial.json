@@ -2,7 +2,8 @@
   "name": "Electrical Engineering, BSEE",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2022,
@@ -80,31 +81,37 @@
       "title": "Computer Engineering Fundamentals",
       "requirements": [
         {
-          "type": "AND",
+          "type": "XOM",
+          "numCreditsMin": 4,
           "courses": [
             {
-              "subject": "EECE",
-              "classId": 2322,
-              "description": "Fundamentals of Digital Design and Computer Organization",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "EECE",
+                  "classId": 2322,
+                  "description": "Fundamentals of Digital Design and Computer Organization",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "EECE",
+                  "classId": 2323,
+                  "description": "Lab for EECE 2322",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "EECE",
-              "classId": 2323,
-              "description": "Lab for EECE 2322",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 2540,
+              "subject": "EECE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2560,
+              "subject": "EECE"
             }
           ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 2540,
-          "subject": "EECE"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2560,
-          "subject": "EECE"
         }
       ],
       "minRequirementCount": 1
@@ -398,6 +405,12 @@
         }
       ],
       "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

@@ -2,7 +2,8 @@
   "name": "Public Health, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2022,
@@ -214,7 +215,7 @@
             {
               "type": "COURSE",
               "classId": 1300,
-              "subject": "ENGL/HIST"
+              "subject": "HIST"
             },
             {
               "type": "COURSE",
@@ -753,6 +754,12 @@
         }
       ],
       "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

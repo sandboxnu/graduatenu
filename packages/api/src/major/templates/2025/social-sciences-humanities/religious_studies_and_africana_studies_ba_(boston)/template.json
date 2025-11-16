@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["AFCS 1101", "CLTR 1000", "ENGW 1111", "PHIL 1110"],
+      "Spring": ["AFCS 1270"]
+    },
+    "Year 2": {
+      "Fall": ["AFCS 2325"]
+    },
+    "Year 3": {
+      "Fall": ["AFCS 1113", "AFCS 2296", "AFCS 3424"]
+    },
+    "Year 4": {
+      "Fall": ["AFCS 4526"],
+      "Spring": ["AFCS 4700", "AFCS 2619"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["AFCS 1101", "CLTR 1000", "ENGW 1111", "PHIL 1110"],
+      "Spring": ["AFCS 1270"]
+    },
+    "Year 2": {
+      "Fall": ["AFCS 2325"]
+    },
+    "Year 3": {
+      "Fall": ["AFCS 1113", "AFCS 2296", "AFCS 3424"]
+    },
+    "Year 4": {
+      "Fall": ["AFCS 4526"],
+      "Spring": ["AFCS 4700", "AFCS 2619"]
+    }
+  }
+}

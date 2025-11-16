@@ -2,7 +2,8 @@
   "name": "Health Science, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 132,
   "yearVersion": 2023,
@@ -169,6 +170,12 @@
         }
       ],
       "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Selectives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -578,6 +585,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Capstone Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Health Science Capstone",
       "requirements": [
         {
@@ -658,6 +671,12 @@
         }
       ],
       "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

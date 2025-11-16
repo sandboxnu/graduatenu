@@ -2,7 +2,8 @@
   "name": "Jewish Studies and Religion, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2021,
@@ -560,7 +561,7 @@
             {
               "type": "COURSE",
               "classId": 1294,
-              "subject": "HIST/JWSS"
+              "subject": "JWSS"
             },
             {
               "type": "COURSE",
@@ -586,6 +587,12 @@
         }
       ],
       "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Hebrew Language Introduction",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

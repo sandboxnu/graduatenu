@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "LING 1150"],
+      "Spring": ["CS 2100", "LING 2350", "MATH 1341"],
+      "Summer 1": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3100", "LING 3412"],
+      "Spring": ["CS 1210", "CS 3800"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4120", "CS 4400"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4100", "CS 4530"]
+    }
+  },
+  "Four Years, One Co-op in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "LING 1150"],
+      "Spring": ["CS 2100", "LING 2350", "MATH 1341"],
+      "Summer 1": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3100", "LING 3412"],
+      "Spring": ["CS 1210", "CS 3800"]
+    },
+    "Year 3": {
+      "Spring": ["CS 4120", "CS 4400"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4100", "CS 4530"]
+    }
+  }
+}
