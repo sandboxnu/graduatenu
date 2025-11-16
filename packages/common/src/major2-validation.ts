@@ -298,34 +298,30 @@ export type MajorValidationResult = Result<
 >;
 
 export function validateMajor2(
-  majors: Major2[],
+  major: Major2,
   taken: ScheduleCourse2<unknown>[],
-  minors?: Minor[],
+  minor?: Minor,
   concentrations?: SelectedConcentrationsType
 ): MajorValidationResult {
   const tracker = new Major2ValidationTracker(taken);
 
   let concentrationReq: Requirement2[] = [];
-  if (majors.length == 1 && majors[0].concentrations) {
+  if (major.concentrations) {
     concentrationReq = getConcentrationsRequirement(
       concentrations,
-      majors[0].concentrations
+      major.concentrations
     );
   }
 
   const minorRequirements: Requirement2[] = [];
-  if (minors && minors.length > 0) {
+  if (minor) {
     // Get the minor requirements and assign them
-    minors.forEach((minor) => {
-      minorRequirements.push(...getMinorRequirement(minor));
-    });
+    minorRequirements.push(...getMinorRequirement(minor));
   }
 
   const majorRequirements: Requirement2[] = [];
-  if (majors && majors.length > 0) {
-    majors.forEach((major) => {
-      majorRequirements.push(...wrapMajor(major));
-    });
+  if (major) {
+    majorRequirements.push(...wrapMajor(major));
   }
 
   const allRequirements = [
@@ -348,19 +344,8 @@ export function validateMajor2(
     tracker
   );
 
-  // Most majors require the same total (e.g., 128), so take the max
-  const totalMajorCredits =
-    majors && majors.length > 0
-      ? Math.max(...majors.map((m) => m.totalCreditsRequired))
-      : 0;
-
-  const totalMinorCredits =
-    minors && minors.length > 0
-      ? Math.max(...minors.map((m) => m.totalCreditsRequired ?? 0))
-      : 0;
-
   const creditsResult = validateTotalCreditsRequired(
-    Math.max(totalMajorCredits, totalMinorCredits), // Take max of both
+    major.totalCreditsRequired + (minor?.totalCreditsRequired ?? 0),
     taken
   );
 

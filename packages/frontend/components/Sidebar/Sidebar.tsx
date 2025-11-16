@@ -133,8 +133,8 @@ const Sidebar: React.FC<SidebarProps> = memo(
 
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
-        majors: majors,
-        minors: minors,
+        major: currentMajor,
+        minor: currentMinor,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
         requestNumber: currentRequestNum,
