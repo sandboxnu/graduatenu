@@ -134,7 +134,7 @@ const HomePage: NextPage = () => {
     // once the student is fetched, set the selected plan id to the last updated plan
     if (student && selectedPlanId === undefined) {
       if (student.plans.length > 0) {
-        const sortedPlans = student.plans.sort(
+        const sortedPlans = student.plans.toSorted(
           (p1, p2) =>
             new Date(p2.updatedAt).getTime() - new Date(p1.updatedAt).getTime()
         );
