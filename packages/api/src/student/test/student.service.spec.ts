@@ -7,6 +7,7 @@ import {
   MustUseHuskyEmail,
   WeakPassword,
 } from "../student.errors";
+import { PlanService } from "src/plan/plan.service";
 
 type MockRepo = {
   findOne: jest.Mock;
@@ -16,6 +17,7 @@ type MockRepo = {
 
 describe("StudentService.create", () => {
   let service: StudentService;
+  let planService: PlanService;
   let repo: MockRepo;
 
   const makeDto = (
@@ -44,10 +46,12 @@ describe("StudentService.create", () => {
       providers: [
         StudentService,
         { provide: getRepositoryToken(Student), useValue: repo },
+        { provide: PlanService, useValue: planService },
       ],
     }).compile();
 
     service = module.get(StudentService);
+    planService = module.get(PlanService);
     jest.clearAllMocks();
   });
 
