@@ -1,6 +1,7 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { ForbiddenException, Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { formatServiceCtx } from "../utils";
+import { PlanService } from "../plan/plan.service";
 import {
   DeleteResult,
   FindOneOptions,
@@ -30,7 +31,8 @@ export class StudentService {
 
   constructor(
     @InjectRepository(Student)
-    private studentRepository: Repository<Student>
+    private studentRepository: Repository<Student>,
+    private planService: PlanService
   ) {}
 
   async create(
@@ -122,6 +124,17 @@ export class StudentService {
       uuid,
       updatedStudent
     );
+
+    if (updateStudentDto.starredPlan) {
+      if (
+        !(await this.planService.isPlanOwnedByStudent(
+          updateStudentDto.starredPlan,
+          student
+        ))
+      ) {
+        throw new ForbiddenException("Not authorized to star this plan.");
+      }
+    }
 
     if (updateResult.affected === 0) {
       this.logger.debug(

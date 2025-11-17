@@ -6,14 +6,10 @@ export class AddStarredPlanToStudent1762392895170
   name = "AddStarredPlanToStudent1762392895170";
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`ALTER TABLE "plan" DROP COLUMN "starred"`);
     await queryRunner.query(`ALTER TABLE "student" ADD "starredPlan" integer`);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(`ALTER TABLE "student" DROP COLUMN "starredPlan"`);
-    await queryRunner.query(
-      `ALTER TABLE "plan" ADD "starred" boolean NOT NULL DEFAULT false`
-    );
   }
 }
