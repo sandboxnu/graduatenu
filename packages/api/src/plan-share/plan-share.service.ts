@@ -33,6 +33,25 @@ export class PlanShareService {
     return String(e?.code || "").includes("duplicate");
   }
 
+  // Helper function to compare two plan JSONs (ignoring metadata like createdAt, updatedAt, student)
+  private arePlansEqual(plan1: any, plan2: any): boolean {
+    if (!plan1 || !plan2) return false;
+
+    // Normalize the plans by removing metadata fields that don't affect the plan content
+    const normalizePlan = (plan: any) => {
+      const { createdAt, updatedAt, student, ...rest } = plan;
+      // Sort keys for consistent comparison
+      const sorted = Object.keys(rest)
+        .sort()
+        .reduce((acc, key) => {
+          acc[key] = rest[key];
+          return acc;
+        }, {} as any);
+      return JSON.stringify(sorted);
+    };
+    return normalizePlan(plan1) === normalizePlan(plan2);
+  }
+
   // creates a plan share and saves it
   async createShare({
     studentUuid,
@@ -44,6 +63,38 @@ export class PlanShareService {
     expiresAt: string;
   }> {
     const student = await this.students.findOneOrFail({ uuid: studentUuid });
+    const planId = planJson?.id;
+
+    // Check if there's an existing active share for this plan
+    if (planId) {
+      const existingShares = await this.shares.find({
+        where: {
+          student: { uuid: studentUuid },
+        },
+        relations: ["student"],
+      });
+
+      // Find an active share for this plan that hasn't been modified
+      const activeShare = existingShares.find(
+        (share) =>
+          share.planJson?.id === planId &&
+          !share.revokedAt &&
+          share.expiresAt > new Date() &&
+          this.arePlansEqual(share.planJson, planJson)
+      );
+
+      if (activeShare) {
+        // Return the existing share code
+        const shareLink = this.getSharingUrl();
+        return {
+          planCode: activeShare.planCode,
+          url: `${shareLink}/${activeShare.planCode}`,
+          expiresAt: activeShare.expiresAt.toISOString(),
+        };
+      }
+    }
+
+    // No existing active share found, create a new one
     const expiresAt = new Date(
       Date.now() + expiresInDays * 24 * 60 * 60 * 1000
     );
