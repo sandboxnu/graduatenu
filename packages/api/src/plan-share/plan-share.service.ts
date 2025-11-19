@@ -65,19 +65,20 @@ export class PlanShareService {
 
     // check if there is an existing share code for this plan
     if (planId) {
+      const now = new Date();
       const existingShares = await this.shares.find({
         where: {
           student: { uuid: studentUuid },
+          revokedAt: null,
         },
         relations: ["student"],
       });
 
-      // Find an active share for this plan that hasn't been modified
+      // find an existing share
       const activeShare = existingShares.find(
         (share) =>
           share.planJson?.id === planId &&
-          !share.revokedAt &&
-          share.expiresAt > new Date() &&
+          share.expiresAt > now &&
           this.arePlansEqual(share.planJson, planJson)
       );
 
