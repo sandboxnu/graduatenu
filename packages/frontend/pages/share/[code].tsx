@@ -13,7 +13,6 @@ import {
   Sidebar,
   NoMajorSidebar,
   GraduatePostAuthHeader,
-  PlanDropdown,
   BlueButton,
 } from "../../components";
 import { IsGuestContext } from "../_app";

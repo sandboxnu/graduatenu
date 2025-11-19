@@ -38,7 +38,12 @@ export class PlanShareService {
     if (!plan1 || !plan2) return false;
 
     const normalizePlan = (plan: any) => {
-      const { createdAt, updatedAt, student, ...rest } = plan;
+      const {
+        createdAt: _createdAt,
+        updatedAt: _updatedAt,
+        student: _student,
+        ...rest
+      } = plan;
       const sorted = Object.keys(rest)
         .sort()
         .reduce((acc, key) => {
