@@ -40,6 +40,7 @@ import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   DELETE_COURSE_AREA_DND_ID,
   cleanDndIdsFromPlan,
+  cleanDndIdsFromStudent,
   handleApiClientError,
   logger,
   toast,
@@ -146,7 +147,7 @@ const HomePage: NextPage = () => {
     // once the student is fetched, set the selected plan id to the last updated plan
     if (student && selectedPlanId === undefined) {
       if (student.plans.length > 0) {
-        const sortedPlans = student.plans.sort(
+        const sortedPlans = student.plans.toSorted(
           (p1, p2) =>
             new Date(p2.updatedAt).getTime() - new Date(p1.updatedAt).getTime()
         );
@@ -289,6 +290,48 @@ const HomePage: NextPage = () => {
     });
   };
 
+  const updateStarredPlan = (updatedStarredPlan: number | undefined) => {
+    if (!selectedPlan || !student) return;
+
+    let updatedStudent = { ...student };
+
+    if (
+      student.starredPlan !== undefined &&
+      student.starredPlan === updatedStarredPlan
+    ) {
+      updatedStudent = { ...student, starredPlan: undefined };
+    } else {
+      updatedStudent = { ...student, starredPlan: updatedStarredPlan };
+    }
+
+    mutateStudent(
+      async () => {
+        // have to clean all dnd ids before sending the student to our API
+        const studentWithoutDndIds = cleanDndIdsFromStudent(updatedStudent);
+        if (isGuest) {
+          window.localStorage.setItem(
+            "student",
+            JSON.stringify(studentWithoutDndIds)
+          );
+        } else {
+          await API.student.update(studentWithoutDndIds);
+        }
+        return fetchStudentAndPrepareForDnd(isGuest);
+      },
+      {
+        optimisticData: updatedStudent,
+        rollbackOnError: true,
+        revalidate: false,
+      }
+    ).catch((error) => {
+      handleApiClientError(error, router);
+    });
+
+    toast.success(
+      updatedStudent.starredPlan ? "Plan favorited!" : "Plan unfavorited!"
+    );
+  };
+
   let renderedSidebar = <NoPlanSidebar />;
   if (selectedPlan) {
     if (selectedPlan.major) {
@@ -331,6 +374,8 @@ const HomePage: NextPage = () => {
                 selectedPlanId={selectedPlanId}
                 setSelectedPlanId={setSelectedPlanId}
                 plans={student.plans}
+                starredPlan={student.starredPlan}
+                updateStarredPlan={updateStarredPlan}
               />
               <AddPlanModal
                 setSelectedPlanId={setSelectedPlanId}
