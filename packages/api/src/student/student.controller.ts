@@ -8,6 +8,7 @@ import {
   InternalServerErrorException,
   Param,
   ParseBoolPipe,
+  ParseIntPipe,
   ParseUUIDPipe,
   Patch,
   Post,
@@ -19,6 +20,7 @@ import { StudentService } from "./student.service";
 import { JwtAuthGuard } from "../guards/jwt-auth.guard";
 import { DevRouteGuard } from "../guards/dev-route.guard";
 import { AuthenticatedRequest } from "../auth/interfaces/authenticated-request";
+import { SeasonEnum } from "@graduate/common";
 import {
   SignUpStudentDto,
   GetStudentResponse,
@@ -59,6 +61,26 @@ export class StudentController {
     }
 
     return student;
+  }
+
+  @UseGuards(DevRouteGuard)
+  @Get("class-enrollment/:classId/:year/:season")
+  async getClassEnrollmentByMajor(
+    @Param("classId") classId: string,
+    @Param("year", ParseIntPipe) year: number,
+    @Param("season") season: string
+  ): Promise<{ [major: string]: number }> {
+    if (!Object.values(SeasonEnum).includes(season as SeasonEnum)) {
+      throw new BadRequestException(
+        "Invalid season. Must be FL, SP, S1, or S2"
+      );
+    }
+
+    return this.studentService.countStudentsByClassAndMajor(
+      classId,
+      year,
+      season as SeasonEnum
+    );
   }
 
   @UseGuards(JwtAuthGuard)

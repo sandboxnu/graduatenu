@@ -1,6 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { formatServiceCtx } from "../utils";
+import { SeasonEnum, ScheduleTerm2 } from "@graduate/common";
 import {
   DeleteResult,
   FindOneOptions,
@@ -105,6 +106,60 @@ export class StudentService {
     }
 
     return student;
+  }
+
+  async countStudentsByClassAndMajor(
+    classId: string,
+    year: number,
+    season: SeasonEnum
+  ): Promise<{ [major: string]: number }> {
+    // Get all students with their plans
+    const students = await this.studentRepository.find({
+      relations: ["plans"],
+    });
+
+    const majorCounts: { [major: string]: number } = {};
+
+    // For each to gather all students
+    students.forEach((student) => {
+      if (!student.major) return;
+
+      // Check if student is taking this class in the specified term
+      const isTakingClass = student.plans.some((plan) => {
+        // Creates a contsant of what the plan is at that year
+        const scheduleYear = plan.schedule.years.find((y) => y.year === year);
+        if (!scheduleYear) return false;
+
+        // Get the term based on season
+        let term: ScheduleTerm2<null>;
+        switch (season) {
+          case SeasonEnum.FL:
+            term = scheduleYear.fall;
+            break;
+          case SeasonEnum.SP:
+            term = scheduleYear.spring;
+            break;
+          case SeasonEnum.S1:
+            term = scheduleYear.summer1;
+            break;
+          case SeasonEnum.S2:
+            term = scheduleYear.summer2;
+            break;
+          default:
+            return false;
+        }
+
+        // Check if the class exists in the semester
+        return term.classes.some((course) => course.classId === classId);
+      });
+
+      // Accumulating
+      if (isTakingClass) {
+        majorCounts[student.major] = (majorCounts[student.major] || 0) + 1;
+      }
+    });
+
+    return majorCounts;
   }
 
   async update(
