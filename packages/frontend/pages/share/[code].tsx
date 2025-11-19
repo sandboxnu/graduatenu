@@ -33,8 +33,8 @@ const SharePlanPage: NextPage = () => {
   const { code } = router.query;
   const [plan, setPlan] = useState<PlanModel<string> | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
+  const [_error, setError] = useState<string | null>(null);
+  const [_saving, setSaving] = useState(false);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
 
@@ -192,7 +192,7 @@ const SharePlanPage: NextPage = () => {
               <>
                 <Plan
                   plan={plan}
-                  mutateStudentWithUpdatedPlan={() => {}}
+                  mutateStudentWithUpdatedPlan={() => undefined}
                   isSharedPlan={true}
                 />
                 <Divider borderColor="neutral.200" borderWidth={1} />
