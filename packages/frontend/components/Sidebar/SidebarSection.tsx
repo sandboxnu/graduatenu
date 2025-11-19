@@ -50,11 +50,6 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
     (o) => o.sectionTitle === section.title
   );
 
-  // check if section is incomplete
-  const isIncomplete =
-    validationStatus === SidebarValidationStatus.Error ||
-    validationStatus === SidebarValidationStatus.InProgress;
-
   const warningLabel = section.warnings && (
     <Stack p="sm">
       <Text>
