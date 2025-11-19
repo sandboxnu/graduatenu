@@ -17,7 +17,8 @@ addEventListener("message", ({ data }: MessageEvent<WorkerPostInfo>) => {
       data.major,
       data.taken,
       data.minor,
-      data.concentration
+      data.concentration,
+      data.overrides
     ),
     requestNumber: data.requestNumber,
   };

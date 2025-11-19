@@ -7,7 +7,12 @@ import {
 } from "@chakra-ui/icons";
 
 import { Box, Flex, Spinner, Stack, Text } from "@chakra-ui/react";
-import { ScheduleCourse2, Section } from "@graduate/common";
+import {
+  CourseOverride,
+  courseToString,
+  ScheduleCourse2,
+  Section,
+} from "@graduate/common";
 import { useState } from "react";
 import SectionRequirement from "./SectionRequirement";
 import { SidebarValidationStatus } from "./Sidebar";
@@ -20,6 +25,9 @@ interface SidebarSectionProps {
   validationStatus: SidebarValidationStatus;
   coursesTaken: ScheduleCourse2<unknown>[];
   loading?: boolean;
+  overrides?: CourseOverride[];
+  onAddOverride?: (sectionTitle: string, courseString: string) => void;
+  onRemoveOverride?: (sectionTitle: string, courseString: string) => void;
 }
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
@@ -29,11 +37,23 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   validationStatus,
   loading,
   coursesTaken,
+  overrides = [],
+  onAddOverride,
+  onRemoveOverride,
 }) => {
   const [opened, setOpened] = useState(false);
 
   const grey = "neutral.400";
   const green = "states.success.main";
+
+  const sectionOverrides = overrides.filter(
+    (o) => o.sectionTitle === section.title
+  );
+
+  // check if section is incomplete
+  const isIncomplete =
+    validationStatus === SidebarValidationStatus.Error ||
+    validationStatus === SidebarValidationStatus.InProgress;
 
   const warningLabel = section.warnings && (
     <Stack p="sm">
@@ -176,6 +196,109 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
           )}
         </Flex>
       </Flex>
+      {opened && onAddOverride && onRemoveOverride && (
+        <Box
+          px="md"
+          py="sm"
+          backgroundColor="neutral.150"
+          borderTopWidth="1px"
+          borderTopColor="neutral.200"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Text
+            fontSize="xs"
+            fontWeight="bold"
+            mb="xs"
+            color="primary.blue.dark.main"
+          >
+            Override this section with courses:
+          </Text>
+          {sectionOverrides.length > 0 && (
+            <Stack spacing="xs" mb="sm">
+              {sectionOverrides.map((override, idx) => (
+                <Flex
+                  key={idx}
+                  alignItems="center"
+                  p="xs"
+                  backgroundColor="white"
+                  borderRadius="md"
+                  justifyContent="space-between"
+                >
+                  <SmallCloseIcon
+                    cursor="pointer"
+                    onClick={() =>
+                      onRemoveOverride(section.title, override.courseString)
+                    }
+                    color="red.500"
+                    _hover={{ color: "red.700" }}
+                  />
+                  <Text fontSize="sm" flex="1" ml="xs">
+                    {override.courseString}
+                  </Text>
+                  <Box
+                    bg={"states.success.main"}
+                    borderColor={"states.success.main"}
+                    color={"white"}
+                    borderWidth="1px"
+                    width="18px"
+                    height="18px"
+                    display="flex"
+                    transition="background 0.25s ease, color 0.25s ease, border 0.25s ease"
+                    transitionDelay="0.1s"
+                    alignItems="center"
+                    justifyContent="center"
+                    borderRadius="2xl"
+                    margin="8px"
+                    p="xs"
+                  >
+                    <CheckIcon position="absolute" boxSize="9px" />
+                  </Box>
+                </Flex>
+              ))}
+            </Stack>
+          )}
+
+          {sectionOverrides.length < 5 && (
+            <Box>
+              <select
+                value=""
+                onChange={(e) => {
+                  if (e.target.value) {
+                    onAddOverride(section.title, e.target.value);
+                  }
+                }}
+                style={{
+                  width: "100%",
+                  padding: "6px",
+                  borderRadius: "4px",
+                  border: "1px solid #CBD5E0",
+                }}
+              >
+                <option value="">Add override course</option>
+                {coursesTaken
+                  .filter((c) => {
+                    const courseStr = courseToString(c);
+                    // don't show courses already overridden for this section
+                    return !sectionOverrides.find(
+                      (o) => o.courseString === courseStr
+                    );
+                  })
+                  .map((course) => {
+                    const courseStr = courseToString(course);
+                    return (
+                      <option key={courseStr} value={courseStr}>
+                        {courseStr} - {course.name}
+                      </option>
+                    );
+                  })}
+              </select>
+              <Text fontSize="xs" color="gray.600" mt="xs">
+                {5 - sectionOverrides.length} override(s) remaining
+              </Text>
+            </Box>
+          )}
+        </Box>
+      )}
       <Box
         style={{ display: opened ? "" : "none" }}
         backgroundColor="neutral.100"

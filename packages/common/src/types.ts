@@ -520,6 +520,17 @@ export interface IScheduleCourse {
   subject: string;
 }
 
+/**
+ * A course used in an override
+ *
+ * @param courseString The string representing the course
+ * @param sectionTitle The section consuming the override
+ */
+export type CourseOverride = {
+  courseString: string;
+  sectionTitle: string;
+};
+
 export type SupportedConcentrations = {
   concentrations: string[];
   minRequiredConcentrations: number;

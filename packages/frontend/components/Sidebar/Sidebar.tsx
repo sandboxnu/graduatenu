@@ -1,6 +1,7 @@
 import { Flex, Heading, Link, Stack, Text } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import {
+  CourseOverride,
   MajorValidationError,
   MajorValidationResult,
   PlanModel,
@@ -104,6 +105,8 @@ const Sidebar: React.FC<SidebarProps> = memo(
       ...transferCourses,
     ];
 
+    const [overrides, setOverrides] = useState<CourseOverride[]>([]);
+
     const revalidateMajor = () => {
       setValidationStatus(undefined);
       if (!selectedPlan || !major || !workerRef.current) return;
@@ -114,10 +117,29 @@ const Sidebar: React.FC<SidebarProps> = memo(
         minor: minor || undefined,
         taken: coursesTaken,
         concentration: selectedPlan.concentration,
+        overrides: overrides,
         requestNumber: currentRequestNum,
       };
 
       workerRef.current?.postMessage(validationInfo);
+    };
+
+    const handleAddOverride = (sectionTitle: string, courseString: string) => {
+      setOverrides((prev) => [...prev, { sectionTitle, courseString }]);
+    };
+
+    const handleRemoveOverride = (
+      sectionTitle: string,
+      courseString: string
+    ) => {
+      setOverrides((prev) =>
+        prev.filter(
+          (o) =>
+            !(
+              o.sectionTitle === sectionTitle && o.courseString === courseString
+            )
+        )
+      );
     };
 
     // Set up the web worker to handle major validation for us. This helps keep the
@@ -165,7 +187,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
     // revalidateMajor because it will change every time, so we're choosing
     // to omit it here:
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(revalidateMajor, [selectedPlan, major, minor]);
+    useEffect(revalidateMajor, [selectedPlan, major, minor, overrides]);
 
     const majorCourses = getAllCoursesInMajor(major, concentration);
     const minorCourses = getAllCoursesInMinor(minor);
@@ -341,6 +363,9 @@ const Sidebar: React.FC<SidebarProps> = memo(
                         dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
                         loading={isCoursesLoading}
                         coursesTaken={coursesTaken}
+                        overrides={overrides}
+                        onAddOverride={handleAddOverride}
+                        onRemoveOverride={handleRemoveOverride}
                       />
                     );
                   })}
@@ -353,6 +378,9 @@ const Sidebar: React.FC<SidebarProps> = memo(
                       dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
                       loading={isCoursesLoading}
                       coursesTaken={coursesTaken}
+                      overrides={overrides}
+                      onAddOverride={handleAddOverride}
+                      onRemoveOverride={handleRemoveOverride}
                     />
                   )}
                 </TabPanel>
@@ -389,6 +417,9 @@ const Sidebar: React.FC<SidebarProps> = memo(
                             validationStatus={sectionValidationStatus}
                             loading={isCoursesLoading}
                             coursesTaken={coursesTaken}
+                            overrides={overrides}
+                            onAddOverride={handleAddOverride}
+                            onRemoveOverride={handleRemoveOverride}
                           ></SidebarSection>
                         );
                       })}
