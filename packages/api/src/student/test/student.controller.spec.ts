@@ -3,9 +3,11 @@ import { getRepositoryToken } from "@nestjs/typeorm";
 import { Student } from "../entities/student.entity";
 import { StudentController } from "../student.controller";
 import { StudentService } from "../student.service";
+import { PlanService } from "src/plan/plan.service";
 
 describe("StudentController", () => {
   let controller: StudentController;
+  let planService: PlanService;
 
   const mockRepository = {
     // mock repository methods like find and save here
@@ -19,6 +21,10 @@ describe("StudentController", () => {
         {
           provide: getRepositoryToken(Student),
           useValue: mockRepository,
+        },
+        {
+          provide: PlanService,
+          useValue: planService,
         },
       ],
     }).compile();

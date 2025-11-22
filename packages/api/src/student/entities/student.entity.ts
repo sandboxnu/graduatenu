@@ -70,6 +70,9 @@ export class Student {
   @Column({ nullable: true })
   concentration: string;
 
+  @Column({ nullable: true })
+  starredPlan: number;
+
   @CreateDateColumn({ default: () => "NOW()" })
   createdAt: Date;
 

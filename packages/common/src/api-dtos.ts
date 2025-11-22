@@ -163,6 +163,10 @@ export class UpdateStudentDto {
   @IsOptional()
   @IsBoolean()
   isOnboarded?: boolean;
+
+  @IsOptional()
+  @IsInt()
+  starredPlan?: number;
 }
 
 export class OnboardStudentDto {

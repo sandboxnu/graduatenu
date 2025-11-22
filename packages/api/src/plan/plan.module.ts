@@ -9,5 +9,6 @@ import { MajorModule } from "../major/major.module";
   imports: [TypeOrmModule.forFeature([Plan]), MajorModule],
   controllers: [PlanController],
   providers: [PlanService],
+  exports: [PlanService],
 })
 export class PlanModule {}
