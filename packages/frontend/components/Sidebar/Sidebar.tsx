@@ -1,5 +1,5 @@
-import { Flex, Heading, IconButton, Link, Stack, Text } from "@chakra-ui/react";
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import { Link, Stack, Text } from "@chakra-ui/react";
+import { Tabs, TabList, Tab, TabPanels } from "@chakra-ui/react";
 import {
   MajorValidationError,
   MajorValidationResult,
@@ -7,7 +7,6 @@ import {
   ScheduleCourse2,
 } from "@graduate/common";
 import { memo, useEffect, useRef, useState } from "react";
-import SidebarSection from "./SidebarSection";
 import {
   getAllCoursesFromPlan,
   getSectionError,
@@ -33,7 +32,6 @@ import NUPathSection from "./NUPathSection";
 import { NUPathEnum } from "@graduate/common";
 import GenericSection from "./GenericSection";
 import SidebarContainer from "./SidebarContainer";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { RequirementTabPanel, RequirementType } from "./RequirementTabPabel";
 
 export enum SidebarValidationStatus {
