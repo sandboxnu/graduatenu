@@ -9,6 +9,8 @@ type MinorReturn = {
   error?: AxiosError | Error;
 };
 
+/* Function that calls minors get API to fetch all information
+ pertaining to minors in the students current plan  */
 export function useMinor(
   catalogYear: number,
   minorNames?: string[]

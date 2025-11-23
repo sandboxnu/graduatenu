@@ -9,6 +9,8 @@ type MajorReturn = {
   error?: AxiosError | Error;
 };
 
+/* Function that calls majors get API to fetch all information
+ pertaining to majors in the students current plan  */
 export function useMajor(
   catalogYear: number,
   majorNames: string[]

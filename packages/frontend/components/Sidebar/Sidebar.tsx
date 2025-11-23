@@ -34,6 +34,7 @@ import { NUPathEnum } from "@graduate/common";
 import GenericSection from "./GenericSection";
 import SidebarContainer from "./SidebarContainer";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
+import { RequirementTabPanel, RequirementType } from "./RequirementTabPabel";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -130,7 +131,6 @@ const Sidebar: React.FC<SidebarProps> = memo(
     const revalidateMajor = () => {
       setValidationStatus(undefined);
       if (!selectedPlan || !currentMajor || !workerRef.current) return;
-
       currentRequestNum += 1;
       const validationInfo: WorkerPostInfo = {
         major: currentMajor,
@@ -231,6 +231,16 @@ const Sidebar: React.FC<SidebarProps> = memo(
         handleApiClientError(minorError, router);
       }
     }
+
+    const getSectionErrorByType = (
+      requirementType: RequirementType,
+      sectionIndex: number,
+      validationStatus: MajorValidationResult | undefined
+    ): MajorValidationError | undefined => {
+      // Convert requirement type to the numeric andIndex your validation system expects
+      const andIndex = requirementType === "major" ? 0 : 1;
+      return getSectionError(andIndex, sectionIndex, validationStatus);
+    };
 
     const getSidebarValidationStatus = (
       validationError: MajorValidationError | undefined
@@ -362,177 +372,43 @@ const Sidebar: React.FC<SidebarProps> = memo(
                 )}
               </TabList>
               <TabPanels>
-                <TabPanel width="100%" p={0} m={0}>
-                  {/* Major navigation header */}
-                  <Flex
-                    align="center"
-                    justify="space-between"
-                    px={4}
-                    py={3}
-                    bg="blue.50"
-                    borderBottom="1px solid"
-                    borderColor="neutral.200"
-                  >
-                    <IconButton
-                      aria-label="Previous major"
-                      icon={<ChevronLeftIcon />}
-                      size="sm"
-                      onClick={handlePrevMajor}
-                      isDisabled={majors.length <= 1}
-                      variant="ghost"
-                      colorScheme="blue"
-                    />
-                    <Heading
-                      fontSize="md"
-                      fontWeight="semibold"
-                      color="primary.blue.dark.main"
-                      textAlign="center"
-                      flex="1"
-                    >
-                      {currentMajor.name}
-                      {majors.length > 1 && (
-                        <Text as="span" fontSize="sm" color="gray.600" ml={2}>
-                          ({currentMajorIndex + 1}/{majors.length})
-                        </Text>
-                      )}
-                    </Heading>
-                    <IconButton
-                      aria-label="Next major"
-                      icon={<ChevronRightIcon />}
-                      size="sm"
-                      onClick={handleNextMajor}
-                      isDisabled={majors.length <= 1}
-                      variant="ghost"
-                      colorScheme="blue"
-                    />
-                  </Flex>
+                {/* Major Tab */}
+                <RequirementTabPanel
+                  requirement={currentMajor}
+                  currentIndex={currentMajorIndex}
+                  totalCount={majors.length}
+                  onPrevious={handlePrevMajor}
+                  onNext={handleNextMajor}
+                  courseData={courseData}
+                  dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}`}
+                  isCoursesLoading={isCoursesLoading}
+                  coursesTaken={coursesTaken}
+                  validationStatus={validationStatus}
+                  getSectionError={getSectionErrorByType}
+                  getSidebarValidationStatus={getSidebarValidationStatus}
+                  requirementType="major"
+                  concentration={concentration}
+                  concentrationValidationStatus={concentrationValidationStatus}
+                />
 
-                  {currentMajor.requirementSections.map((section, index) => {
-                    const sectionValidationError:
-                      | MajorValidationError
-                      | undefined = getSectionError(
-                      0, // AND index for the current major requirement
-                      index, // Section index, aligning with the array structure
-                      validationStatus
-                    );
-
-                    const sectionValidationStatus = getSidebarValidationStatus(
-                      sectionValidationError
-                    );
-                    return (
-                      <SidebarSection
-                        key={section.title}
-                        section={section}
-                        validationStatus={sectionValidationStatus}
-                        courseData={courseData}
-                        dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-${index}`}
-                        loading={isCoursesLoading}
-                        coursesTaken={coursesTaken}
-                      />
-                    );
-                  })}
-
-                  {concentration && (
-                    <SidebarSection
-                      validationStatus={concentrationValidationStatus}
-                      section={concentration}
-                      courseData={courseData}
-                      dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-concentration`}
-                      loading={isCoursesLoading}
-                      coursesTaken={coursesTaken}
-                    />
-                  )}
-                </TabPanel>
-                <TabPanel width="100%" p={0} m={0}>
-                  {currentMinor && (
-                    <>
-                      {/* Minor navigation header */}
-                      <Flex
-                        align="center"
-                        justify="space-between"
-                        px={4}
-                        py={3}
-                        bg="blue.50"
-                        borderBottom="1px solid"
-                        borderColor="neutral.200"
-                      >
-                        <IconButton
-                          aria-label="Previous minor"
-                          icon={<ChevronLeftIcon />}
-                          size="sm"
-                          onClick={handlePrevMinor}
-                          isDisabled={minors.length <= 1}
-                          variant="ghost"
-                          colorScheme="blue"
-                        />
-                        <Heading
-                          fontSize="md"
-                          fontWeight="semibold"
-                          color="primary.blue.dark.main"
-                          textAlign="center"
-                          flex="1"
-                        >
-                          {currentMinor.name}
-                          {minors.length > 1 && (
-                            <Text
-                              as="span"
-                              fontSize="sm"
-                              color="gray.600"
-                              ml={2}
-                            >
-                              ({currentMinorIndex + 1}/{minors.length})
-                            </Text>
-                          )}
-                        </Heading>
-                        <IconButton
-                          aria-label="Next minor"
-                          icon={<ChevronRightIcon />}
-                          size="sm"
-                          onClick={handleNextMinor}
-                          isDisabled={minors.length <= 1}
-                          variant="ghost"
-                          colorScheme="blue"
-                        />
-                      </Flex>
-
-                      <Flex>
-                        <Heading
-                          color="primary.blue.dark.main"
-                          fontSize="md"
-                          py={4}
-                          px={4}
-                        >
-                          Minor Requirements
-                        </Heading>
-                      </Flex>
-                      {currentMinor.requirementSections.map(
-                        (section, index) => {
-                          const sectionValidationError:
-                            | MajorValidationError
-                            | undefined = getSectionError(
-                            1, // Offset by major length
-                            index, // Section index for minor
-                            validationStatus
-                          );
-
-                          const sectionValidationStatus =
-                            getSidebarValidationStatus(sectionValidationError);
-                          return (
-                            <SidebarSection
-                              key={index}
-                              section={section}
-                              courseData={courseData}
-                              dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
-                              validationStatus={sectionValidationStatus}
-                              loading={isCoursesLoading}
-                              coursesTaken={coursesTaken}
-                            ></SidebarSection>
-                          );
-                        }
-                      )}
-                    </>
-                  )}
-                </TabPanel>
+                {/* Minor Tab */}
+                {currentMinor && (
+                  <RequirementTabPanel
+                    requirement={currentMinor}
+                    currentIndex={currentMinorIndex}
+                    totalCount={minors.length}
+                    onPrevious={handlePrevMinor}
+                    onNext={handleNextMinor}
+                    courseData={courseData}
+                    dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-minor`}
+                    isCoursesLoading={isCoursesLoading}
+                    coursesTaken={coursesTaken}
+                    validationStatus={validationStatus}
+                    getSectionError={getSectionErrorByType}
+                    getSidebarValidationStatus={getSidebarValidationStatus}
+                    requirementType="minor"
+                  />
+                )}
               </TabPanels>
             </Tabs>
           </>
