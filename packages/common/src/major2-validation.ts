@@ -15,6 +15,7 @@ import {
   Err,
   Ok,
   Minor,
+  CourseOverride,
 } from "./types";
 import { UNDECIDED_STRING } from "./constants";
 import { assertUnreachable, courseToString } from "./course-utils";
@@ -199,6 +200,10 @@ interface CourseValidationTracker {
   setNecessaryCourses(courses: Set<string>): void;
 
   getNecessaryCourses(): Set<string>;
+
+  getOverrideForSection(sectionTitle: string): ScheduleCourse2<unknown>[];
+
+  isCourseUsedInOverride(courseString: string): boolean;
 }
 
 // exported for testing
@@ -209,7 +214,16 @@ export class Major2ValidationTracker implements CourseValidationTracker {
   //list of degree-required courses that we should not consider in the range validator
   private necessaryCourses: Set<string> = new Set();
 
-  constructor(courses: ScheduleCourse2<unknown>[]) {
+  // courses to use in override per sections
+  private overridesBySectionTitle: Map<string, string[]> = new Map();
+
+  // set of courses used for overrides
+  private coursesUsedInOverride: Set<string> = new Set();
+
+  constructor(
+    courses: ScheduleCourse2<unknown>[],
+    overrides?: CourseOverride[]
+  ) {
     this.currentCourses = new Map();
     for (const c of courses) {
       const cs = courseToString(c);
@@ -220,6 +234,20 @@ export class Major2ValidationTracker implements CourseValidationTracker {
         this.currentCourses.set(cs, tup);
       }
       tup[1] += 1;
+    }
+
+    if (overrides) {
+      for (const override of overrides) {
+        // group overrides by section title
+        const existingOverrides =
+          this.overridesBySectionTitle.get(override.sectionTitle) || [];
+        existingOverrides.push(override.courseString);
+        this.overridesBySectionTitle.set(
+          override.sectionTitle,
+          existingOverrides
+        );
+        this.coursesUsedInOverride.add(override.courseString);
+      }
     }
   }
 
@@ -277,6 +305,26 @@ export class Major2ValidationTracker implements CourseValidationTracker {
     return this.necessaryCourses;
   }
 
+  // return the overrides for this section
+  getOverrideForSection(sectionTitle: string): ScheduleCourse2<unknown>[] {
+    const courseStrings = this.overridesBySectionTitle.get(sectionTitle) || [];
+    const courses: ScheduleCourse2<unknown>[] = [];
+
+    for (const courseString of courseStrings) {
+      const courseTuple = this.currentCourses.get(courseString);
+      if (courseTuple) {
+        courses.push(courseTuple[0]);
+      }
+    }
+
+    return courses;
+  }
+
+  // true, if the course passed in has been used for an override
+  isCourseUsedInOverride(courseString: string): boolean {
+    return this.coursesUsedInOverride.has(courseString);
+  }
+
   // Maps the # of each course required in the given solution
   private static createTakenMap(s: Solution): Map<string, number> {
     const map = new Map();
@@ -301,9 +349,10 @@ export function validateMajor2(
   major: Major2,
   taken: ScheduleCourse2<unknown>[],
   minor?: Minor,
-  concentrations?: SelectedConcentrationsType
+  concentrations?: SelectedConcentrationsType,
+  overrides?: CourseOverride[]
 ): MajorValidationResult {
-  const tracker = new Major2ValidationTracker(taken);
+  const tracker = new Major2ValidationTracker(taken, overrides);
 
   let concentrationReq: Requirement2[] = [];
   if (major.concentrations) {
@@ -529,6 +578,12 @@ function validateCourseRequirement(
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
   const c = tracker.get(r);
+
+  // don't use course if it's currently used in an override (avoids double counting)
+  if (c && tracker.isCourseUsedInOverride(courseToString(c))) {
+    return Err(CourseError(r));
+  }
+
   if (c) {
     return Ok([
       {
@@ -551,7 +606,11 @@ function validateRangeRequirement(
 
   const courses = tracker
     .getAll(r.subject, r.idRangeStart, r.idRangeEnd)
-    .filter((c) => !exceptions.has(courseToString(c)));
+    .filter(
+      (c) =>
+        !exceptions.has(courseToString(c)) &&
+        !tracker.isCourseUsedInOverride(courseToString(c))
+    );
 
   const solutionsSoFar: Array<Solution> = [];
 
@@ -743,6 +802,29 @@ function validateSectionRequirement(
   r: Section,
   tracker: CourseValidationTracker
 ): Result<Array<Solution>, MajorValidationError> {
+  // check for override
+  const overrideCourses = tracker.getOverrideForSection(r.title);
+  if (overrideCourses.length > 0) {
+    // since the section is being overridden, use these courses instead of normal validation
+    const minCredits = overrideCourses.reduce(
+      (sum, c) => sum + c.numCreditsMin,
+      0
+    );
+    const maxCredits = overrideCourses.reduce(
+      (sum, c) => sum + c.numCreditsMax,
+      0
+    );
+    const sol = overrideCourses.map(courseToString);
+
+    return Ok([
+      {
+        minCredits,
+        maxCredits,
+        sol,
+      },
+    ]);
+  }
+
   if (r.minRequirementCount < 1) {
     return Ok([]);
     // this should be an invalid shape and throw an error, but for now we'll just return an empty array

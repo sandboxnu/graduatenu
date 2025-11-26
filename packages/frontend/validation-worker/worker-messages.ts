@@ -1,4 +1,5 @@
 import {
+  CourseOverride,
   Major2,
   MajorValidationResult,
   Minor,
@@ -25,4 +26,5 @@ export interface WorkerPostInfo {
   taken: ScheduleCourse2<unknown>[];
   concentration?: string;
   requestNumber: number;
+  overrides?: CourseOverride[];
 }
