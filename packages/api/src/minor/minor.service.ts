@@ -1,5 +1,5 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { formatServiceCtx } from "src/utils";
+import { formatServiceCtx } from "../utils";
 import { MINOR_YEARS, MINORS } from "./minor-collator";
 import { Minor, SupportedMinors } from "@graduate/common";
 
