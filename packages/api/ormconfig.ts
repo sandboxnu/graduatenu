@@ -2,6 +2,7 @@ import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import { config } from "dotenv";
 import { Plan } from "./src/plan/entities/plan.entity";
 import { Student } from "./src/student/entities/student.entity";
+import { PlanShare } from "./src/plan-share/entities/plan-share.entity";
 
 config({ path: `.env.${process.env.NODE_ENV}.local` });
 
@@ -13,7 +14,7 @@ const ormconfig: TypeOrmModuleOptions = {
   password: process.env.POSTGRES_PASSWORD || "",
   database: process.env.POSTGRES_DATABASE,
   synchronize: process.env.NODE_ENV === "testing",
-  entities: [Student, Plan],
+  entities: [Student, Plan, PlanShare],
   migrations: ["./dist/migrations/*.js"],
   cli: {
     migrationsDir: "migrations",

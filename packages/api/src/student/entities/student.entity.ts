@@ -12,6 +12,7 @@ import * as bcrypt from "bcrypt";
 import { Exclude } from "class-transformer";
 import { ScheduleCourse, ScheduleCourse2 } from "@graduate/common";
 import { Plan } from "../../plan/entities/plan.entity";
+import { PlanShare } from "../../plan-share/entities/plan-share.entity";
 
 @Entity()
 export class Student {
@@ -66,6 +67,9 @@ export class Student {
 
   @OneToMany(() => Plan, (plan) => plan.student)
   plans: Plan[];
+
+  @OneToMany(() => PlanShare, (planShare) => planShare.student)
+  planShares: PlanShare[];
 
   @Column({ nullable: true })
   concentration: string;

@@ -21,6 +21,7 @@ interface ScheduleYearProps extends ToggleYearProps {
   catalogYear: number;
   yearCoReqError?: YearError;
   yearPreReqError?: YearError;
+  isSharedPlan?: boolean;
 
   /** Function to add classes to a given term in the plan being displayed. */
   addClassesToTermInCurrPlan: (
@@ -53,6 +54,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
   setIsRemove,
   yearCoReqError = undefined,
   yearPreReqError = undefined,
+  isSharedPlan = false,
 }) => {
   const totalCreditsThisYear = totalCreditsInYear(scheduleYear);
   const [displayReqErrors, setDisplayReqErrors] = useState(false);
@@ -79,7 +81,9 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
         toggleExpanded={toggleExpanded}
         removeYearFromCurrPlan={removeYearFromCurrPlan}
         displayReqErrors={displayReqErrors}
+        isSharedPlan={isSharedPlan}
       />
+
       {isExpanded && (
         <Grid templateColumns="repeat(4, 1fr)" minHeight="220px">
           <ScheduleTerm
@@ -91,6 +95,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             setIsRemove={setIsRemove}
+            isSharedPlan={isSharedPlan}
           />
           <ScheduleTerm
             yearNum={scheduleYear.year}
@@ -101,6 +106,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             setIsRemove={setIsRemove}
+            isSharedPlan={isSharedPlan}
           />
           {/* TODO: support summer full term */}
           <ScheduleTerm
@@ -112,6 +118,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             setIsRemove={setIsRemove}
+            isSharedPlan={isSharedPlan}
           />
           <ScheduleTerm
             catalogYear={catalogYear}
@@ -122,6 +129,7 @@ export const ScheduleYear: React.FC<ScheduleYearProps> = ({
             addClassesToTermInCurrPlan={addClassesToTermInCurrPlan}
             removeCourseFromTermInCurrPlan={removeCourseFromTermInCurrPlan}
             setIsRemove={setIsRemove}
+            isSharedPlan={isSharedPlan}
           />
         </Grid>
       )}
@@ -134,6 +142,7 @@ interface YearHeaderProps extends ToggleYearProps {
   displayReqErrors: boolean;
   totalCreditsTaken: number;
   removeYearFromCurrPlan: () => void;
+  isSharedPlan?: boolean;
 }
 
 /** Displays the academic year, credits taken and hide/show button for the year. */
@@ -144,6 +153,7 @@ const YearHeader: React.FC<YearHeaderProps> = ({
   toggleExpanded,
   removeYearFromCurrPlan,
   displayReqErrors,
+  isSharedPlan = false,
 }) => {
   const backgroundColor = isExpanded
     ? "primary.blue.dark"
@@ -193,10 +203,12 @@ const YearHeader: React.FC<YearHeaderProps> = ({
             />
           </Tooltip>
         )}
-        <DeleteYearModal
-          yearNum={year.year}
-          removeYear={removeYearFromCurrPlan}
-        />
+        {!isSharedPlan && (
+          <DeleteYearModal
+            yearNum={year.year}
+            removeYear={removeYearFromCurrPlan}
+          />
+        )}
       </Flex>
     </Flex>
   );

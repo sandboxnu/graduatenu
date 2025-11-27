@@ -22,6 +22,7 @@ interface SidebarRequirementProps {
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
   coursesTaken: ScheduleCourse2<unknown>[];
+  isSharedPlan?: boolean;
 }
 
 const SectionRequirement: React.FC<SidebarRequirementProps> = ({
@@ -29,6 +30,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
   courseData,
   dndIdPrefix,
   coursesTaken,
+  isSharedPlan,
 }) => {
   const renderRequirement = () => {
     switch (requirement.type) {
@@ -77,6 +79,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
             coursesTaken={coursesTaken}
             dndIdPrefix={dndIdPrefix + "-" + index}
             key={index}
+            isSharedPlan={isSharedPlan}
           />
         ))}
       </div>
@@ -96,6 +99,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
             coursesTaken={coursesTaken}
             dndIdPrefix={dndIdPrefix + "-" + index}
             key={index}
+            isSharedPlan={isSharedPlan}
           />
         ))}
       </div>
@@ -115,6 +119,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
             coursesTaken={coursesTaken}
             dndIdPrefix={dndIdPrefix + "-" + index}
             key={index}
+            isSharedPlan={isSharedPlan}
           />
         ))}
       </div>
@@ -152,6 +157,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
           // TODO: isChecked is for when the requirement is added to the plan and validated. When true, this will render a checkmark.
           isChecked={isCourseInPlan(requirement)}
           isDisabled={false}
+          isSharedPlan={isSharedPlan}
         />
       );
     }
@@ -167,6 +173,7 @@ const SectionRequirement: React.FC<SidebarRequirementProps> = ({
         courseData={courseData}
         coursesTaken={coursesTaken}
         dndIdPrefix={dndIdPrefix + "-sec"}
+        isSharedPlan={isSharedPlan}
       />
     );
   };

@@ -18,6 +18,7 @@ interface SidebarContainerProps {
   renderBetaMajorBlock?: boolean;
   renderDropdownWarning?: boolean;
   planId?: string | number;
+  isSharedPlan?: boolean;
 }
 
 const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
@@ -30,6 +31,7 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
   renderDropdownWarning = true,
   planId,
   children,
+  isSharedPlan,
 }) => {
   return (
     <Box pt="xl" borderRight="1px" borderRightColor="neutral.200" minH="100%">
@@ -99,13 +101,14 @@ const SidebarContainer: React.FC<PropsWithChildren<SidebarContainerProps>> = ({
           <DraggableScheduleCourse
             scheduleCourse={COOP_BLOCK}
             isDisabled={false}
+            isSharedPlan={isSharedPlan}
           />
         )}
       </Box>
 
       {children}
 
-      {planId && <SandboxArea planId={planId} />}
+      {!isSharedPlan && planId && <SandboxArea planId={planId} />}
     </Box>
   );
 };

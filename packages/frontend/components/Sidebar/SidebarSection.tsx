@@ -20,6 +20,7 @@ interface SidebarSectionProps {
   validationStatus: SidebarValidationStatus;
   coursesTaken: ScheduleCourse2<unknown>[];
   loading?: boolean;
+  isSharedPlan?: boolean;
 }
 
 const SidebarSection: React.FC<SidebarSectionProps> = ({
@@ -29,6 +30,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
   validationStatus,
   loading,
   coursesTaken,
+  isSharedPlan,
 }) => {
   const [opened, setOpened] = useState(false);
 
@@ -204,6 +206,7 @@ const SidebarSection: React.FC<SidebarSectionProps> = ({
                 dndIdPrefix={dndIdPrefix + "-" + index}
                 key={index}
                 coursesTaken={coursesTaken}
+                isSharedPlan={isSharedPlan}
               />
             ))}
           </>
