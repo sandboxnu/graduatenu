@@ -25,11 +25,12 @@ export class PlanService {
 
   create(createPlanDto: CreatePlanDto, student: Student): Promise<Plan> {
     const {
-      major: majorName,
+      majors: majorName,
       catalogYear,
       concentration: concentrationName,
     } = createPlanDto;
 
+    console.log("Received DTO:", createPlanDto);
     // if the plan has a major, then validate the major, year, concentration
     if (majorName) {
       const major = this.majorService.findByMajorAndYear(
@@ -78,6 +79,7 @@ export class PlanService {
     } catch (error) {
       return null;
     }
+    console.log("About to save plan with:", { ...createPlanDto, student });
   }
 
   /** Returns the plan if it exists, else returns nothing. */
@@ -121,8 +123,8 @@ export class PlanService {
     updatePlanDto: UpdatePlanDto
   ): Promise<UpdateResult> {
     const {
-      major: newMajorName,
-      minor: newMinorName,
+      majors: newMajors,
+      minors: newMinorNames,
       catalogYear: newCatalogYear,
       concentration: newConcentrationName,
       schedule: newSchedule,
@@ -148,19 +150,23 @@ export class PlanService {
      */
     // It is necessary for this to be OR because we need to run an update if any of these are true.
     const isMajorInfoUpdate =
-      newMajorName || newCatalogYear || newConcentrationName;
+      newMajors || newCatalogYear || newConcentrationName;
 
     /** Wipe Major => Remove existing major from the plan. */
     const isWipeMajorUpdate =
-      !newMajorName &&
+      !newMajors &&
       !newCatalogYear &&
       !newConcentrationName &&
-      currentPlan.major;
+      currentPlan.majors?.[0];
 
-    /** Wipe Minor => Remove existing minor from the plan. */
-    const isWipeMinorUpdate = newMinorName === "" && currentPlan.minor;
+    /** Wipe Minor => Remove all minors from the plan. */
+    const isWipeMinorUpdate =
+      (!newMinorNames || newMinorNames.length === 0) &&
+      currentPlan.minors &&
+      currentPlan.minors.length > 0;
 
-    const isMinorInfoUpdate = newMinorName || newCatalogYear;
+    const isMinorInfoUpdate =
+      (newMinorNames && newMinorNames.length > 0) || newCatalogYear;
 
     const isScheduleUpdate = newSchedule && !isMajorInfoUpdate;
 
@@ -183,7 +189,7 @@ export class PlanService {
     if (isMajorInfoUpdate) {
       // validate the major, year, concentration pair if either one is being update
       const major = this.majorService.findByMajorAndYear(
-        newMajorName,
+        newMajors,
         newCatalogYear
       );
 
@@ -191,7 +197,7 @@ export class PlanService {
         this.logger.debug(
           {
             message: "Attempting to update a plan with an unsupported major.",
-            newMajorName,
+            newMajors,
             newCatalogYear,
           },
           this.formatPlanServiceCtx("update")
@@ -200,7 +206,7 @@ export class PlanService {
       }
 
       const isValidMajorCatalogueYear = this.majorService.isValidCatalogueYear(
-        newMajorName,
+        newMajors,
         newCatalogYear,
         newConcentrationName
       );
@@ -209,7 +215,7 @@ export class PlanService {
         this.logger.debug(
           {
             message: "Attempting to add plan with an invalid catalogue year",
-            newMajorName,
+            newMajors,
             newCatalogYear,
           },
           this.formatPlanServiceCtx("update")
@@ -221,7 +227,7 @@ export class PlanService {
 
       const isValidConcentrationForMajor =
         this.majorService.isValidConcentrationForMajor(
-          newMajorName,
+          newMajors,
           newCatalogYear,
           newConcentrationName
         );
@@ -231,7 +237,7 @@ export class PlanService {
           {
             message:
               "Attempting to update a plan with an unsupported concentration.",
-            newMajorName,
+            newMajors,
             newCatalogYear,
           },
           this.formatPlanServiceCtx("update")
@@ -252,8 +258,8 @@ export class PlanService {
      */
     let name = currentPlan.name;
     let schedule = currentPlan.schedule;
-    let major = isWipeMajorUpdate ? undefined : currentPlan.major;
-    let minor = isWipeMinorUpdate ? undefined : currentPlan.minor;
+    let majors = isWipeMajorUpdate ? undefined : currentPlan.majors;
+    let minors = isWipeMinorUpdate ? undefined : currentPlan.minors;
     let catalogYear = isWipeMajorUpdate ? undefined : currentPlan.catalogYear;
     let concentration = isWipeMajorUpdate
       ? undefined
@@ -267,24 +273,24 @@ export class PlanService {
       name = newName;
     }
 
-    if (newMajorName) {
-      major = newMajorName;
+    if (newMajors) {
+      majors = newMajors;
       catalogYear = newCatalogYear;
       concentration = newConcentrationName;
     }
 
-    if (newMinorName) {
-      minor = newMinorName;
+    if (newMinorNames) {
+      minors = newMinorNames;
     }
 
-    if (newMinorName === null) {
-      minor = null;
+    if (newMinorNames && newMinorNames.length > 0) {
+      minors = newMinorNames;
     }
 
     const newPlan = {
       name,
-      major,
-      minor,
+      majors,
+      minors,
       catalogYear,
       concentration,
       schedule,

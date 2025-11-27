@@ -113,7 +113,7 @@ class APIClient {
       this.req("GET", "/students/me", GetStudentResponse, undefined, {
         isWithPlans: true,
       }),
-    delete: (): Promise<void> => this.req("DELETE", "students/me"),
+    delete: (): Promise<void> => this.req("DELETE", "/students/me"),
     changePassword: (body: ChangePasswordDto): Promise<void> =>
       this.req("POST", "/students/changePassword", undefined, body),
   };

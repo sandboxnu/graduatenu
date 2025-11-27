@@ -12,12 +12,12 @@ import { FilterOptionOption } from "react-select/dist/declarations/src/filters";
 
 type PlanSelectProps = {
   error?: FieldError;
-  label: string;
+  label?: string;
   helperText?: string;
   /** List of (label, value) if for label and value */
   options: OptionObject[];
   /** Any side effects as a result of this field changing. */
-  onChangeSideEffect?: (val: string | null) => void;
+  onChangeSideEffect?: (val: string | string[] | null) => void;
   /** The name of the react hook form field. */
   name: string;
   /** Returned by useForm. */
@@ -32,6 +32,9 @@ type PlanSelectProps = {
   placeholder?: string;
   /** Fuzzy options to use */
   useFuzzySearch?: boolean;
+  // Is the form field multi select (used for)
+  isMulti?: boolean;
+  removeButton?: React.ReactNode;
 };
 
 export const PlanSelect: React.FC<PlanSelectProps> = ({
@@ -46,6 +49,8 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   isSearchable,
   isDisabled,
   placeholder,
+  isMulti,
+  removeButton,
   // useFuzzySearch,
 }) => {
   const customFilterOption = (
@@ -138,14 +143,17 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   } = useController({ name, control, rules });
 
   const onChange = (option: any) => {
-    let val = option ? option.value : "";
-
-    onChangeSideEffect && onChangeSideEffect(val);
-
-    if (isNumeric && val) {
-      val = parseInt(val, 10);
+    let val;
+    if (isMulti) {
+      val = option ? option.map((opt: any) => opt.value) : [];
+    } else {
+      val = option ? option.value : "";
+      if (isNumeric && val) {
+        val = parseInt(val, 10);
+      }
     }
 
+    onChangeSideEffect && onChangeSideEffect(val);
     onChangeUpdateValue(val);
   };
 
@@ -153,9 +161,9 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   if (isNumeric) {
     selectedValue = value ? value.toString() : null;
   }
-  const selectedOption = options.find(
-    (option: any) => option.value === selectedValue
-  );
+  const selectedOption = isMulti
+    ? options.filter((option) => value?.includes(option.value))
+    : options.find((option) => option.value === selectedValue);
 
   const sortedOptions = useMemo(() => {
     return [...options].sort((a, b) => {
@@ -165,7 +173,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
   }, [options]);
 
   return (
-    <FormControl isInvalid={error != null}>
+    <FormControl isInvalid={error != null} w="100%">
       <FormLabel
         color="primary.blue.dark.main"
         size="md"
@@ -177,6 +185,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
       <Select
         options={sortedOptions}
         onChange={onChange}
+        isMulti={isMulti}
         value={selectedOption}
         isSearchable={isSearchable}
         isDisabled={isDisabled}
@@ -187,6 +196,7 @@ export const PlanSelect: React.FC<PlanSelectProps> = ({
       />
       {helperText && <FormHelperText>{helperText}</FormHelperText>}
       <FormErrorMessage>{error?.message}</FormErrorMessage>
+      {removeButton}
     </FormControl>
   );
 };

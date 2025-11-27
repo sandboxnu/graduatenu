@@ -40,7 +40,7 @@ export const DuplicatePlanButton: React.FC<DuplicatePlanButton> = ({
     const updatedPlan: CreatePlanDto = {
       name: "Copy of " + plan.name,
       catalogYear: plan.catalogYear,
-      major: plan.major,
+      majors: plan.majors,
       concentration: plan.concentration,
       schedule: cleanDndIdsFromPlan(plan).schedule,
     };
