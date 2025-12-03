@@ -12,6 +12,7 @@ import {
 import { PlanModel } from "@graduate/common";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { IoIosStar, IoIosStarOutline } from "react-icons/io";
+import { MdFormatAlignLeft } from "react-icons/md";
 
 interface PlanDropdownProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -48,10 +49,14 @@ export const PlanDropdown: React.FC<PlanDropdownProps> = ({
         color="black"
         width="300px"
         fontWeight="base"
+        justifyContent="left"
+        paddingX="15px"
       >
-        {selectedPlanId
-          ? plans.find((p) => p.id === selectedPlanId)?.name
-          : "Select Plan"}
+        <div style={{ textAlign: "left" }}>
+          {selectedPlanId
+            ? plans.find((p) => p.id === selectedPlanId)?.name
+            : "Select Plan"}
+        </div>
       </MenuButton>
 
       <MenuList>

@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Button } from "@chakra-ui/react";
+import { Box, Divider, Flex, Button, Icon, Tooltip } from "@chakra-ui/react";
 import { useKeyboardShortcuts } from "../hooks/useKeyboardShortcuts";
 import {
   CollisionDetection,
@@ -19,7 +19,13 @@ import {
 } from "@graduate/common";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { PropsWithChildren, useContext, useEffect, useState } from "react";
+import {
+  ElementType,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import {
   AddPlanModal,
   DeletePlanModal,
@@ -53,6 +59,7 @@ import {
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
 import { RepeatIcon } from "@chakra-ui/icons";
+import { IoIosStar } from "react-icons/io";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -414,6 +421,24 @@ const HomePage: NextPage = () => {
                     setLastDeletedPlan(deletedPlan);
                   }}
                 />
+              )}
+              {selectedPlan && selectedPlan.id === student.starredPlan && (
+                <Tooltip
+                  label={`${selectedPlan.name} is favorited!`}
+                  fontSize="md"
+                >
+                  <span style={{ display: "flex", alignItems: "center" }}>
+                    <Icon
+                      as={IoIosStar as ElementType}
+                      boxSize="40px"
+                      color={"yellow.400"}
+                      borderRadius={"lg"}
+                      border={"1px"}
+                      marginLeft={"8px"}
+                      padding={"7px"}
+                    />
+                  </span>
+                </Tooltip>
               )}
             </Flex>
             {selectedPlan && (
