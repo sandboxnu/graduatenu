@@ -109,28 +109,29 @@ export class StudentService {
   }
 
   async countStudentsByClassAndMajor(
+    subject: string,
     classId: string,
     year: number,
     season: SeasonEnum
   ): Promise<{ [major: string]: number }> {
-    // Get all students with their plans
+    // Grabs the plan
     const students = await this.studentRepository.find({
       relations: ["plans"],
     });
 
+    // Initialize majorCounts
     const majorCounts: { [major: string]: number } = {};
 
-    // For each to gather all students
     students.forEach((student) => {
-      if (!student.major) return;
+      // Goes through all the students plan
+      student.plans?.forEach((plan) => {
+        if (!plan.major) return;
 
-      // Check if student is taking this class in the specified term
-      const isTakingClass = student.plans.some((plan) => {
-        // Creates a contsant of what the plan is at that year
+        // Checks that the year matches
         const scheduleYear = plan.schedule.years.find((y) => y.year === year);
-        if (!scheduleYear) return false;
+        if (!scheduleYear) return;
 
-        // Get the term based on season
+        // Checks the specific semester based on the given SeasonEnum
         let term: ScheduleTerm2<null>;
         switch (season) {
           case SeasonEnum.FL:
@@ -145,18 +146,23 @@ export class StudentService {
           case SeasonEnum.S2:
             term = scheduleYear.summer2;
             break;
+          case SeasonEnum.SM:
+            term = scheduleYear.summer1;
+            break;
           default:
-            return false;
+            return;
         }
 
-        // Check if the class exists in the semester
-        return term.classes.some((course) => course.classId === classId);
-      });
+        // Checks is class is there based on subject and Class ID
+        const hasClass = term.classes.some(
+          (course) => course.subject === subject && course.classId === classId
+        );
 
-      // Accumulating
-      if (isTakingClass) {
-        majorCounts[student.major] = (majorCounts[student.major] || 0) + 1;
-      }
+        // Accumulate
+        if (hasClass) {
+          majorCounts[plan.major] = (majorCounts[plan.major] || 0) + 1;
+        }
+      });
     });
 
     return majorCounts;

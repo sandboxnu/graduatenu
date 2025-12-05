@@ -64,12 +64,17 @@ export class StudentController {
   }
 
   @UseGuards(DevRouteGuard)
-  @Get("class-enrollment/:classId/:year/:season")
+  @Get("class-enrollment")
   async getClassEnrollmentByMajor(
-    @Param("classId") classId: string,
-    @Param("year", ParseIntPipe) year: number,
-    @Param("season") season: string
+    @Query("subject") subject: string,
+    @Query("classId") classId: string,
+    @Query("year", ParseIntPipe) year: number,
+    @Query("season") season: string
   ): Promise<{ [major: string]: number }> {
+    if (!subject || !classId || !year || !season) {
+      throw new BadRequestException("Missing required query parameters");
+    }
+
     if (!Object.values(SeasonEnum).includes(season as SeasonEnum)) {
       throw new BadRequestException(
         "Invalid season. Must be FL, SP, S1, or S2"
@@ -77,6 +82,7 @@ export class StudentController {
     }
 
     return this.studentService.countStudentsByClassAndMajor(
+      subject,
       classId,
       year,
       season as SeasonEnum
