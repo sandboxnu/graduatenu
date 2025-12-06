@@ -7,7 +7,7 @@ import {
   MustUseHuskyEmail,
   WeakPassword,
 } from "../student.errors";
-import { PlanService } from "src/plan/plan.service";
+import { PlanService } from "../../plan/plan.service";
 
 type MockRepo = {
   findOne: jest.Mock;
