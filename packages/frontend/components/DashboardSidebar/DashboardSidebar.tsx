@@ -1,50 +1,9 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Flex,
-  Grid,
-  Heading,
-  Link,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
-import {
-  courseEq,
-  MajorValidationError,
-  MajorValidationResult,
-  PlanModel,
-  ScheduleCourse2,
-} from "@graduate/common";
-import { memo, useEffect, useRef, useState } from "react";
-import {
-  getAllCoursesFromPlan,
-  getSectionError,
-  getAllCoursesInMajor,
-  getAllCoursesInMinor,
-  UNDECIDED_CONCENTRATION,
-  UNDECIDED_STRING,
-  extractSupportedMajorOptions,
-} from "../../utils";
-import {
-  handleApiClientError,
-  SIDEBAR_DND_ID_PREFIX,
-  totalCreditsInSchedule,
-} from "../../utils";
-import axios, { AxiosError } from "axios";
-import { useRouter } from "next/router";
-import {
-  WorkerMessage,
-  WorkerMessageType,
-  WorkerPostInfo,
-} from "../../validation-worker/worker-messages";
-import {
-  useFetchCourses,
-  useMajor,
-  useMinor,
-  useSupportedMajors,
-} from "../../hooks";
+import { Box, Button, Checkbox, Flex, Grid, Heading } from "@chakra-ui/react";
+import { ScheduleCourse2 } from "@graduate/common";
+import { memo, useState } from "react";
+import { extractSupportedMajorOptions } from "../../utils";
+import { SIDEBAR_DND_ID_PREFIX } from "../../utils";
+import { useSearchCourses, useSupportedMajors } from "../../hooks";
 import { NUPathEnum } from "@graduate/common";
 import SidebarContainer from "../Sidebar/SidebarContainer";
 import DashboardSidebarContainer from "./DashboardSidebarContainer";
@@ -68,7 +27,6 @@ export const COOP_BLOCK: ScheduleCourse2<string> = {
 };
 
 const DashboardSidebar: React.FC = memo(() => {
-  const router = useRouter();
   const [selectedSemesters, setSelectedSemesters] = useState<string[]>([]);
   const [selectedMajors, setSelectedMajors] = useState<string[]>([]);
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
@@ -79,12 +37,16 @@ const DashboardSidebar: React.FC = memo(() => {
     (major) => major.label.toString()
   );
 
-  const courses = ["course", "course", "course"];
+  const { courses } = useSearchCourses("");
+
   const colleges = [
-    "Khoury",
-    "Bouve",
-    "College of Science",
+    "Bouve College of Health Science",
+    "College of Arts, Media and Design",
     "College of Engineering",
+    "College of Science",
+    "College of Social Sciences and Humanities",
+    "D'Amore-McKim School of Business",
+    "Khoury College of Computer Sciences",
   ];
 
   const handleCheckboxChange = (value: string) => {
@@ -253,7 +215,12 @@ const DashboardSidebar: React.FC = memo(() => {
           <MultipleSelectDropdown
             selected={selectedCourses}
             setSelected={setSelectedCourses}
-            options={courses}
+            options={
+              courses?.map(
+                (course) =>
+                  course.subject + " " + course.classId + " - " + course.name
+              ) ?? []
+            }
             placeholder={"Select Courses"}
           />
 
