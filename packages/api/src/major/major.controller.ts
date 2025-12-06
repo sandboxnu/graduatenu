@@ -17,7 +17,10 @@ export class MajorController {
     @Param("catalogYear", ParseIntPipe) catalogYear: number,
     @Param("majorName") majorName: string
   ): Major2 {
-    const major = this.majorService.findByMajorAndYear(majorName, catalogYear);
+    const major = this.majorService.findByMajorAndYear(
+      [majorName],
+      catalogYear
+    );
     if (!major) {
       throw new NotFoundException();
     }

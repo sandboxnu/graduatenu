@@ -1,4 +1,4 @@
-import { EditIcon } from "@chakra-ui/icons";
+import { EditIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Button,
   Checkbox,
@@ -14,6 +14,8 @@ import {
   useDisclosure,
   VStack,
   Text,
+  Box,
+  CloseButton,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
 import {
@@ -50,8 +52,8 @@ type EditPlanModalProps = {
 
 type EditPlanInput = {
   name: string;
-  major: string;
-  minor?: string | undefined;
+  majors: string[];
+  minors?: string[];
   catalogYear: number;
   concentration: string;
   agreeToBetaMajor: boolean;
@@ -66,6 +68,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const router = useRouter();
   const { onOpen, onClose: onCloseDisplay, isOpen } = useDisclosure();
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
+  const [showAdvancedEdit, setShowAdvancedEdit] = useState(false);
 
   const {
     register,
@@ -91,12 +94,12 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     reset({
       name: plan.name,
       catalogYear: plan.catalogYear,
-      major: plan.major,
-      minor: plan.minor,
+      majors: plan.majors,
+      minors: plan.minors,
       concentration: plan.concentration,
     });
 
-    if (!plan.major) {
+    if (!plan.majors) {
       setIsNoMajorSelected(true);
     } else {
       setIsNoMajorSelected(false);
@@ -120,12 +123,16 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
   const title = watch("name");
   const catalogYear = watch("catalogYear");
-  const majorName = watch("major");
+  const majors = watch("majors");
+  const minors = watch("minors");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
-  const editMajor = watch("major");
-  const currentMajor = plan.major;
-  const isMajorChanged = currentMajor !== editMajor;
+  const editMajors = watch("majors");
+  const currentMajors = plan.majors;
+  // Check if majors changed from the original plan
+  const isMajorsChanged =
+    JSON.stringify(currentMajors?.slice().sort()) !==
+    JSON.stringify(editMajors?.slice().sort());
 
   const yearSupportedMajors =
     supportedMajorsData?.supportedMajors[catalogYear ?? 0];
@@ -133,22 +140,23 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
   const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
 
   const majorConcentrations =
-    yearSupportedMajors?.[majorName ?? ""] ?? noConcentrations;
+    yearSupportedMajors?.[majors?.[0] ?? ""] ?? noConcentrations; // Currently we only support concentrations for the single majors
 
   const isConcentrationRequired =
     majorConcentrations.minRequiredConcentrations > 0;
 
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
-  const isValidatedMajor =
-    yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
+  const isValidatedMajors = majors?.every(
+    (major) => yearSupportedMajors?.[major ?? ""]?.verified ?? false
+  );
 
   const isValidForm =
     (title &&
       catalogYear &&
-      majorName &&
+      majors &&
       (!isConcentrationRequired || concentration) &&
-      (isValidatedMajor || !isMajorChanged || agreeToBetaMajor)) ||
+      (isValidatedMajors || !isMajorsChanged || agreeToBetaMajor)) ||
     // Valid plan for no major selected
     (title && isNoMajorSelected);
 
@@ -158,14 +166,17 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
       return;
     }
 
-    const isNoMajorSelectedPrev = !plan.major;
-    const minorChanged = plan.minor !== payload.minor;
+    const isNoMajorSelectedPrev = !plan.majors;
+
+    const minorsChanged =
+      JSON.stringify(plan.minors?.sort()) !==
+      JSON.stringify(payload.minors?.sort());
 
     // If no field has been changed, don't send an update request
     if (
       !isDirty &&
       isNoMajorSelectedPrev === isNoMajorSelected &&
-      !minorChanged
+      !minorsChanged
     ) {
       toast.info("No fields have been updated.");
       return;
@@ -174,9 +185,9 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
     const newPlan: UpdatePlanDto = {
       name: payload.name,
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
-      major: isNoMajorSelected ? undefined : payload.major,
+      majors: isNoMajorSelected ? undefined : payload.majors,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
-      minor: payload.minor === undefined ? undefined : payload.minor,
+      minors: payload.minors,
     };
 
     if (isGuest) {
@@ -223,6 +234,7 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
 
   const onCloseModal = () => {
     resetValuesToCurrPlan();
+    setShowAdvancedEdit(false);
     onCloseDisplay();
   };
 
@@ -282,38 +294,113 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                       options={convertToOptionObjects(
                         extractSupportedMajorYears(supportedMajorsData)
                       )}
-                      onChangeSideEffect={(val: string | null) => {
-                        const newYear = val ? parseInt(val, 10) : null;
+                      onChangeSideEffect={(val: string | string[] | null) => {
+                        const stringVal = Array.isArray(val) ? val[0] : val;
+                        const newYear = stringVal
+                          ? parseInt(stringVal, 10)
+                          : null;
                         if (newYear !== catalogYear) {
-                          setValue("major", "");
-                          setValue("concentration", "");
-                          setValue("minor", "");
-                          setValue("agreeToBetaMajor", false);
+                          if (
+                            stringVal &&
+                            majors.every(
+                              (major) =>
+                                supportedMajorsData?.supportedMajors?.[
+                                  stringVal
+                                ]?.[major]
+                            )
+                          ) {
+                            // we can keep the majors, but check the concentration
+                            if (
+                              !supportedMajorsData?.supportedMajors?.[
+                                stringVal
+                              ]?.[majors[0]]?.concentrations?.includes(
+                                concentration
+                              )
+                            ) {
+                              setValue("concentration", "");
+                            }
+                          } else {
+                            // Clear everything if majors aren't supported in new year
+                            setValue("majors", []);
+                            setValue("concentration", "");
+                            setValue("minors", []);
+                            setValue("agreeToBetaMajor", false);
+                          }
                         }
                       }}
                       rules={{ required: "Catalog year is required." }}
                       isNumeric
                     />
-                    <PlanSelect
-                      // key so the drop down visully resets
-                      key={`major-${catalogYear}`}
-                      label="Major"
-                      placeholder="Select a Major"
-                      name="major"
-                      control={control}
-                      options={extractSupportedMajorOptions(
-                        catalogYear,
-                        supportedMajorsData
-                      )}
-                      onChangeSideEffect={() => {
-                        setValue("concentration", "");
-                        setValue("agreeToBetaMajor", false);
-                      }}
-                      rules={{ required: "Major is required." }}
-                      isSearchable
-                      useFuzzySearch
-                      isDisabled={!catalogYear}
-                    />
+                    {majors?.map((major, index) => (
+                      <Box key={index} w="100%">
+                        <PlanSelect
+                          // key so the dropdown visually resets when catalog year changes
+                          key={`major-${catalogYear}-${index}`}
+                          label={index === 0 ? "Major(s)" : undefined}
+                          placeholder="Select a Major"
+                          name={`majors.${index}`}
+                          isMulti={false}
+                          control={control}
+                          options={extractSupportedMajorOptions(
+                            catalogYear,
+                            supportedMajorsData
+                          ).filter(
+                            (option) =>
+                              // Prevent selecting the same major multiple times
+                              !majors.some(
+                                (selectedMajor, i) =>
+                                  i !== index && selectedMajor === option.value
+                              )
+                          )}
+                          onChangeSideEffect={() => {
+                            setValue("concentration", "");
+                            setValue("agreeToBetaMajor", false);
+                          }}
+                          rules={
+                            index === 0
+                              ? { required: "Major is required." }
+                              : {}
+                          }
+                          isSearchable
+                          useFuzzySearch
+                          isDisabled={!catalogYear}
+                          removeButton={
+                            index > 0 ? (
+                              <CloseButton
+                                position="absolute"
+                                top="-5px"
+                                right="-5px"
+                                cursor="pointer"
+                                color="white"
+                                bg="red.400"
+                                boxSize="16px"
+                                fontSize="8px"
+                                _hover={{ color: "red.700" }}
+                                onClick={() => {
+                                  const newMajors = majors.filter(
+                                    (_, i) => i !== index
+                                  );
+                                  setValue("majors", newMajors, {
+                                    shouldDirty: true,
+                                    shouldValidate: true,
+                                  });
+                                  setValue("concentration", "");
+                                  setValue("agreeToBetaMajor", false);
+                                }}
+                              />
+                            ) : undefined
+                          }
+                        />
+                      </Box>
+                    ))}
+                    <Text
+                      cursor="pointer"
+                      textColor="blue.500"
+                      fontWeight="medium"
+                      onClick={() => setValue("majors", [...majors, ""])}
+                    >
+                      + Add a Major
+                    </Text>
                     {majorHasConcentrations && (
                       <PlanSelect
                         label="Concentrations"
@@ -333,23 +420,102 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                         useFuzzySearch
                       />
                     )}
-                    <PlanSelect
-                      label="Minor"
-                      placeholder="Select a Minor"
-                      name="minor"
-                      control={control}
-                      options={extractSupportedMinorOptions(
-                        catalogYear,
-                        supportedMinorsData
+
+                    <Box w="100%">
+                      <hr />
+                      <Flex justify="flex-end" w="100%" mb="sm">
+                        <Text
+                          cursor="pointer"
+                          color="primary"
+                          fontWeight="medium"
+                          fontSize="sm"
+                          onClick={() => setShowAdvancedEdit(!showAdvancedEdit)}
+                          display="flex"
+                          alignItems="center"
+                        >
+                          Advanced edit
+                          <ChevronDownIcon
+                            ml="1"
+                            transform={
+                              showAdvancedEdit
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)"
+                            }
+                            transition="transform 0.2s"
+                          />
+                        </Text>
+                      </Flex>
+
+                      {showAdvancedEdit && (
+                        <VStack padding="5" bg="gray.100" alignItems="start">
+                          {minors?.map((minor, index) => (
+                            <Box key={index} w="100%">
+                              <PlanSelect
+                                label={index === 0 ? "Minor(s)" : undefined}
+                                placeholder="Select a Minor"
+                                name={`minors.${index}`}
+                                isMulti={false}
+                                control={control}
+                                options={extractSupportedMinorOptions(
+                                  catalogYear,
+                                  supportedMinorsData
+                                ).filter(
+                                  (option) =>
+                                    // Prevent selecting the same major multiple times
+                                    !minors.some(
+                                      (selectedMinor, i) =>
+                                        i !== index &&
+                                        selectedMinor === option.value
+                                    )
+                                )}
+                                isDisabled={!catalogYear}
+                                isSearchable
+                                useFuzzySearch
+                                removeButton={
+                                  index > 0 ? (
+                                    <CloseButton
+                                      position="absolute"
+                                      top="-5px"
+                                      right="-5px"
+                                      cursor="pointer"
+                                      color="white"
+                                      bg="red.400"
+                                      boxSize="16px"
+                                      fontSize="8px"
+                                      _hover={{ color: "red.700" }}
+                                      onClick={() => {
+                                        const newMinors = minors.filter(
+                                          (_, i) => i !== index
+                                        );
+                                        setValue("minors", newMinors);
+                                        setValue("concentration", "");
+                                      }}
+                                    />
+                                  ) : undefined
+                                }
+                              />
+                            </Box>
+                          ))}
+                          <Text
+                            cursor="pointer"
+                            textColor="blue.500"
+                            fontWeight="medium"
+                            onClick={() => {
+                              const currentMinors = minors || [];
+                              setValue("minors", [...currentMinors, ""]);
+                            }}
+                          >
+                            + Add a Minor
+                          </Text>
+                        </VStack>
                       )}
-                      isDisabled={!catalogYear}
-                      isSearchable
-                      useFuzzySearch
-                    />
-                    {editMajor &&
-                      isMajorChanged &&
-                      majorName &&
-                      !isValidatedMajor && (
+                    </Box>
+
+                    {editMajors &&
+                      isMajorsChanged &&
+                      majors &&
+                      majors.length > 0 &&
+                      !isValidatedMajors && (
                         <Flex alignItems="center">
                           <Checkbox
                             mr="md"

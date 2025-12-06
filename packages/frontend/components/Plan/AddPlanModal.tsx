@@ -1,4 +1,4 @@
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Text,
   Stack,
@@ -16,6 +16,7 @@ import {
   useDisclosure,
   Tooltip,
   Box,
+  CloseButton,
   Input,
 } from "@chakra-ui/react";
 import { API } from "@graduate/api-client";
@@ -122,6 +123,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const [isNoMajorSelected, setIsNoMajorSelected] = useState(false);
   const [isNoMinorSelected, setIsNoMinorSelected] = useState(false);
+  const [showAdvancedEdit, setShowAdvancedEdit] = useState(false);
   const [uploadedCourses, setUploadedCourses] = useState<ParsedCourse[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isGuest } = useContext(IsGuestContext);
@@ -129,15 +131,16 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   // watch form fields
   const catalogYear = watch("catalogYear");
-  const majorName = watch("major");
+  const majors = watch("majors");
+  const minors = watch("minors");
   const concentration = watch("concentration");
   const agreeToBetaMajor = watch("agreeToBetaMajor");
   const usingTemplate = watch("useTemplate");
 
   // Check if the selected major has a template
-  const { hasTemplate } = useHasTemplate(majorName, catalogYear);
+  const { hasTemplate } = useHasTemplate(majors, catalogYear);
   const { template } = useTemplate(
-    usingTemplate ? majorName : null,
+    usingTemplate ? majors : null,
     usingTemplate ? catalogYear : null
   );
 
@@ -168,7 +171,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   // Reset useTemplate when major or catalog year changes
   useEffect(() => {
     setValue("useTemplate", false);
-  }, [majorName, catalogYear, setValue]);
+  }, [majors, catalogYear, setValue]);
 
   // handle keyboard shortcut modal opening
   useEffect(() => {
@@ -177,6 +180,23 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       setIsNewPlanModalOpen(false);
     }
   }, [isNewPlanModalOpen, onOpen, setIsNewPlanModalOpen]);
+
+  // Update your existing useEffect to always ensure at least one major slot exists
+  useEffect(() => {
+    // Initialize arrays when modal opens
+    if (isOpen) {
+      const currentMajors = watch("majors");
+      const currentMinors = watch("minors");
+
+      // Always ensure at least one major slot exists
+      if (!currentMajors || currentMajors.length === 0) {
+        setValue("majors", [""]);
+      }
+      if (!currentMinors || currentMinors.length === 0) {
+        setValue("minors", [""]);
+      }
+    }
+  }, [isOpen, setValue, watch]);
 
   if (!student) {
     return null;
@@ -224,8 +244,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     const newPlan: CreatePlanDto = {
       name: payload.name || generateDefaultPlanTitle(),
       catalogYear: isNoMajorSelected ? undefined : payload.catalogYear,
-      major: isNoMajorSelected ? undefined : payload.major,
-      minor: isNoMinorSelected ? undefined : payload.minor,
+      majors: isNoMajorSelected ? undefined : payload.majors,
+      minors: isNoMinorSelected ? undefined : payload.minors,
       concentration: isNoMajorSelected ? undefined : payload.concentration,
       schedule,
     };
@@ -275,6 +295,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     reset();
     setIsNoMajorSelected(false);
     setIsNoMinorSelected(false);
+    setShowAdvancedEdit(false);
     setUploadedCourses([]);
     onCloseDisplay();
     setIsNoMajorSelected(false);
@@ -285,21 +306,21 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const noConcentrations = { concentrations: [], minRequiredConcentrations: 0 };
 
   const majorConcentrations =
-    yearSupportedMajors?.[majorName ?? ""] ?? noConcentrations;
+    yearSupportedMajors?.[majors?.[0] ?? ""] ?? noConcentrations; // Currently we only support concentrations for the single majors
 
   const isConcentrationRequired =
     majorConcentrations.minRequiredConcentrations > 0;
 
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
-  const isValidatedMajor =
-    yearSupportedMajors?.[majorName ?? ""]?.verified ?? false;
+  const hasValidMajors =
+    majors && majors.length > 0 && majors && majors.length > 0;
 
   const isValidForm =
     (catalogYear &&
-      majorName &&
+      majors &&
       (!isConcentrationRequired || concentration) &&
-      (!isValidatedMajor ? agreeToBetaMajor : true)) ||
+      (!hasValidMajors ? agreeToBetaMajor : true)) ||
     // Valid plan for no major selected
     isNoMajorSelected;
 
@@ -417,50 +438,107 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       options={convertToOptionObjects(
                         extractSupportedMajorYears(supportedMajorsData)
                       )}
-                      onChangeSideEffect={(val: string | null) => {
-                        const newYear = val ? parseInt(val, 10) : null;
+                      onChangeSideEffect={(val: string | string[] | null) => {
+                        const stringVal = Array.isArray(val) ? val[0] : val;
+                        const newYear = stringVal
+                          ? parseInt(stringVal, 10)
+                          : null;
                         if (newYear !== catalogYear) {
                           if (
-                            val &&
-                            majorName &&
-                            supportedMajorsData?.supportedMajors?.[val]?.[
-                              majorName
-                            ]
+                            stringVal &&
+                            majors &&
+                            majors.every(
+                              (major) =>
+                                supportedMajorsData?.supportedMajors?.[
+                                  stringVal
+                                ]?.[major]
+                            )
                           ) {
                             // we can keep the major, but we should check the concentration
+                            // (again with flexible majors currently only supporting single major concetrations)
                             if (
-                              majorName &&
-                              !supportedMajorsData?.supportedMajors?.[val]?.[
-                                majorName
-                              ]?.concentrations?.includes(concentration ?? "")
+                              majors &&
+                              !supportedMajorsData?.supportedMajors?.[
+                                stringVal
+                              ]?.[majors[0]]?.concentrations?.includes(
+                                concentration ?? ""
+                              )
                             ) {
                               setValue("concentration", "");
                             }
                           } else {
-                            setValue("major", "");
+                            setValue("majors", [""]);
                           }
                         }
                       }}
                       rules={{ required: "Catalog year is required." }}
                       isNumeric
                     />
-                    <PlanSelect
-                      label="Major"
-                      placeholder="Select a Major"
-                      name="major"
-                      control={control}
-                      options={extractSupportedMajorOptions(
-                        catalogYear,
-                        supportedMajorsData
-                      )}
-                      onChangeSideEffect={() => {
-                        setValue("concentration", "");
-                      }}
-                      rules={{ required: "Major is required." }}
-                      isDisabled={!catalogYear}
-                      isSearchable
-                      useFuzzySearch
-                    />
+                    {majors?.map((major, index) => (
+                      <Box key={index} w="100%">
+                        <PlanSelect
+                          label={index === 0 ? "Major(s)" : undefined}
+                          placeholder="Select a Major"
+                          name={`majors.${index}`}
+                          isMulti={false} // Change from isMulti={true} to false
+                          control={control}
+                          options={extractSupportedMajorOptions(
+                            catalogYear,
+                            supportedMajorsData
+                          ).filter(
+                            (option) =>
+                              // Prevent selecting the same major multiple times
+                              !majors.some(
+                                (selectedMajor) =>
+                                  selectedMajor === option.value
+                              )
+                          )}
+                          onChangeSideEffect={() => {
+                            setValue("concentration", "");
+                          }}
+                          rules={
+                            index === 0
+                              ? { required: "Major is required." }
+                              : {}
+                          }
+                          isSearchable
+                          useFuzzySearch
+                          isDisabled={!catalogYear}
+                          removeButton={
+                            index > 0 ? (
+                              <CloseButton
+                                position="absolute"
+                                top="-5px"
+                                right="-5px"
+                                cursor="pointer"
+                                color="white"
+                                bg="red.400"
+                                boxSize="16px"
+                                fontSize="8px"
+                                _hover={{ color: "red.700" }}
+                                onClick={() => {
+                                  const newMajors = majors.filter(
+                                    (_, i) => i !== index
+                                  );
+                                  setValue("majors", newMajors);
+                                  setValue("concentration", "");
+                                }}
+                              />
+                            ) : undefined
+                          }
+                        />
+                      </Box>
+                    ))}
+                    <Text
+                      cursor="pointer"
+                      textColor="blue.500"
+                      fontWeight="medium"
+                      onClick={() =>
+                        setValue("majors", [...(majors || []), ""])
+                      }
+                    >
+                      + Add a Major
+                    </Text>
 
                     {majorHasConcentrations && (
                       <PlanSelect
@@ -481,19 +559,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                         useFuzzySearch
                       />
                     )}
-                    <PlanSelect
-                      label="Minor"
-                      placeholder="Select a Minor"
-                      name="minor"
-                      control={control}
-                      options={extractSupportedMinorOptions(
-                        catalogYear,
-                        supportedMinorsData
-                      )}
-                      isDisabled={!catalogYear}
-                      isSearchable
-                      useFuzzySearch
-                    />
+
                     <Flex align="center">
                       <Text size="xs" mr="xs">
                         Can&apos;t find your major / minor?
@@ -501,8 +567,97 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       <HelperToolTip label="We are working to support all majors, but in the meantime, you can submit feedback requesting your major and select 'No Major' so that you can still use our planner!" />
                     </Flex>
 
+                    <Box w="100%">
+                      <hr />
+                      <Flex justify="flex-end" w="100%" mb="sm">
+                        <Text
+                          cursor="pointer"
+                          color="primary"
+                          fontWeight="medium"
+                          fontSize="sm"
+                          onClick={() => setShowAdvancedEdit(!showAdvancedEdit)}
+                          display="flex"
+                          alignItems="center"
+                        >
+                          Advanced edit
+                          <ChevronDownIcon
+                            ml="1"
+                            transform={
+                              showAdvancedEdit
+                                ? "rotate(180deg)"
+                                : "rotate(0deg)"
+                            }
+                            transition="transform 0.2s"
+                          />
+                        </Text>
+                      </Flex>
+
+                      {showAdvancedEdit && (
+                        <VStack padding="5" bg="gray.100" alignItems="start">
+                          {minors?.map((minor, index) => (
+                            <Box key={index} w="100%">
+                              <PlanSelect
+                                label={index === 0 ? "Minor(s)" : undefined}
+                                placeholder="Select a Minor"
+                                name={`minors.${index}`}
+                                isMulti={false}
+                                control={control}
+                                options={extractSupportedMinorOptions(
+                                  catalogYear,
+                                  supportedMinorsData
+                                ).filter(
+                                  (option) =>
+                                    // Prevent selecting the same major multiple times
+                                    !minors.some(
+                                      (selectedMinor) =>
+                                        selectedMinor === option.value
+                                    )
+                                )}
+                                isDisabled={!catalogYear}
+                                isSearchable
+                                useFuzzySearch
+                                removeButton={
+                                  index > 0 ? (
+                                    <CloseButton
+                                      position="absolute"
+                                      top="-5px"
+                                      right="-5px"
+                                      cursor="pointer"
+                                      color="white"
+                                      bg="red.400"
+                                      boxSize="16px"
+                                      fontSize="8px"
+                                      _hover={{ color: "red.700" }}
+                                      onClick={() => {
+                                        const newMinors = minors.filter(
+                                          (_, i) => i !== index
+                                        );
+                                        setValue("minors", newMinors);
+                                        setValue("concentration", "");
+                                      }}
+                                    />
+                                  ) : undefined
+                                }
+                              />
+                            </Box>
+                          ))}
+                          <Text
+                            cursor="pointer"
+                            textColor="blue.500"
+                            fontWeight="medium"
+                            onClick={() => {
+                              const currentMinors = minors || [];
+                              setValue("minors", [...currentMinors, ""]);
+                            }}
+                          >
+                            + Add a Minor
+                          </Text>
+                        </VStack>
+                      )}
+                    </Box>
+
                     {/* Template option - show when a template is available */}
-                    {hasTemplate && majorName && catalogYear && (
+                    {hasTemplate && majors && catalogYear && (
                       <Box
                         p="sm"
                         borderRadius="md"
@@ -536,7 +691,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       </Box>
                     )}
 
-                    {!isNoMajorSelected && (
+                    {!isNoMajorSelected && majors && hasValidMajors && (
                       <Flex alignItems="center" w="100%" gap="sm">
                         <Text fontWeight="medium">
                           Import from UAchieve PDF:
@@ -576,7 +731,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       </Flex>
                     )}
 
-                    {majorName && !isValidatedMajor && (
+                    {majors && !hasValidMajors && (
                       <Flex alignItems="center">
                         <Checkbox
                           mr="md"

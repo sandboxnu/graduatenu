@@ -45,13 +45,13 @@ export function useTemplatesForYear(catalogYear?: number | null) {
 
 /** Hook to check if a template exists for a specific major and catalog year */
 export function useHasTemplate(
-  majorName?: string | null,
+  majorNames?: string[] | null,
   catalogYear?: number | null
 ) {
   const { templatesForYear, isLoading } = useTemplatesForYear(catalogYear);
 
   const hasTemplate = Boolean(
-    majorName && templatesForYear && templatesForYear[majorName]
+    majorNames && templatesForYear && templatesForYear[majorNames[0]]
   );
 
   return {
@@ -62,7 +62,7 @@ export function useHasTemplate(
 
 /** Hook to fetch a specific template for a major and catalog year */
 export function useTemplate(
-  majorName?: string | null,
+  majorNames?: string[] | null,
   catalogYear?: number | null
 ) {
   const {
@@ -70,12 +70,12 @@ export function useTemplate(
     error,
     isValidating: isLoading,
   } = useSWR(
-    majorName && catalogYear
-      ? `${USE_TEMPLATES_SWR_KEY}/${catalogYear}/${majorName}`
+    majorNames?.[0] && catalogYear
+      ? `${USE_TEMPLATES_SWR_KEY}/${catalogYear}/${majorNames[0]}`
       : null,
     async () => {
-      if (majorName && catalogYear) {
-        return await API.templates.getForMajor(majorName, catalogYear);
+      if (majorNames && catalogYear) {
+        return await API.templates.getForMajor(majorNames[0], catalogYear);
       }
       return null;
     }

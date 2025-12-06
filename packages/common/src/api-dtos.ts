@@ -21,13 +21,15 @@ export class CreatePlanDtoWithoutSchedule {
   @IsString()
   name: string;
 
-  @IsString()
+  @IsArray()
+  @IsString({ each: true })
   @IsOptional()
-  major?: string;
+  majors?: string[];
 
-  @IsString()
   @IsOptional()
-  minor?: string;
+  @IsArray()
+  @IsString({ each: true })
+  minors?: string[];
 
   @IsString()
   @IsOptional()
@@ -59,12 +61,14 @@ export class UpdatePlanDto {
   schedule?: Schedule2<null>;
 
   @IsOptional()
-  @IsString()
-  major?: string;
+  @IsArray()
+  @IsString({ each: true })
+  majors?: string[];
 
   @IsOptional()
-  @IsString()
-  minor?: string | null;
+  @IsArray()
+  @IsString({ each: true })
+  minors?: string[];
 
   @IsOptional()
   @IsString()
@@ -127,12 +131,14 @@ export class UpdateStudentDto {
   catalogYear?: number;
 
   @IsOptional()
-  @IsString()
-  major?: string;
+  @IsArray()
+  @IsString({ each: true })
+  majors?: string[];
 
   @IsOptional()
-  @IsString()
-  minor?: string;
+  @IsArray()
+  @IsString({ each: true })
+  minors?: string[];
 
   @IsOptional()
   @IsString()
@@ -186,11 +192,13 @@ export class OnboardStudentDto {
   @Max(3000)
   catalogYear: number;
 
-  @IsString()
-  major: string;
+  @IsArray()
+  @IsString({ each: true })
+  majors: string[];
 
-  @IsString()
-  minor: string;
+  @IsArray()
+  @IsString({ each: true })
+  minors: string[];
 
   @IsString()
   coopCycle: string;

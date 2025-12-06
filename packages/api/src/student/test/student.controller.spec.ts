@@ -3,7 +3,7 @@ import { getRepositoryToken } from "@nestjs/typeorm";
 import { Student } from "../entities/student.entity";
 import { StudentController } from "../student.controller";
 import { StudentService } from "../student.service";
-import { PlanService } from "src/plan/plan.service";
+import { PlanService } from "../../plan/plan.service";
 
 describe("StudentController", () => {
   let controller: StudentController;

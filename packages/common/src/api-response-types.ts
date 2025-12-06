@@ -15,12 +15,12 @@ export class PlanModel<T> {
   name: string;
   student: StudentModel<null>;
   schedule: Schedule2<T>;
-  major: string;
+  majors: string[];
   concentration: string | undefined;
   catalogYear: number;
   createdAt: Date;
   updatedAt: Date;
-  minor?: string;
+  minors?: string[];
 }
 
 export class GetPlanResponse extends PlanModel<null> {}
@@ -37,8 +37,8 @@ export class StudentModel<T> {
   academicYear: number | undefined;
   graduateYear: number | undefined;
   catalogYear: number | undefined;
-  major: string | undefined;
-  minor?: string | undefined;
+  majors: string[] | undefined;
+  minors?: string[] | undefined;
   coopCycle: string | undefined;
   coursesCompleted: ScheduleCourse[] | undefined;
   coursesTransfered: ScheduleCourse2<null>[] | undefined;

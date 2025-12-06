@@ -13,6 +13,7 @@ import {
 import { API } from "@graduate/api-client";
 import {
   CoReqWarnings,
+  CreatePlanDto,
   PlanModel,
   PreReqWarnings,
   ScheduleCourse2,
@@ -113,6 +114,8 @@ const HomePage: NextPage = () => {
   const handleUndoDelete = async () => {
     if (!lastDeletedPlan || !student) return;
 
+    console.log("Restoring plan:", lastDeletedPlan);
+
     if (isGuest) {
       window.localStorage.setItem(
         "student",
@@ -121,14 +124,24 @@ const HomePage: NextPage = () => {
           plans: [...student.plans, lastDeletedPlan],
         })
       );
+      setSelectedPlanId(lastDeletedPlan.id);
     } else {
-      await API.plans.create(lastDeletedPlan);
+      const createDto: CreatePlanDto = {
+        name: lastDeletedPlan.name,
+        majors: lastDeletedPlan.majors,
+        minors: lastDeletedPlan.minors,
+        catalogYear: lastDeletedPlan.catalogYear,
+        concentration: lastDeletedPlan.concentration,
+        schedule: lastDeletedPlan.schedule,
+      };
+
+      const result = await API.plans.create(createDto);
+      setSelectedPlanId(result.id);
     }
 
     mutateStudent();
-    setSelectedPlanId(lastDeletedPlan.id);
     setLastDeletedPlan(null);
-    toast.success("Plan restored!");
+    toast.success("Plan restored successfully");
   };
 
   useKeyboardShortcuts({
@@ -334,7 +347,7 @@ const HomePage: NextPage = () => {
 
   let renderedSidebar = <NoPlanSidebar />;
   if (selectedPlan) {
-    if (selectedPlan.major) {
+    if (selectedPlan.majors) {
       renderedSidebar = (
         <Sidebar
           selectedPlan={selectedPlan}
