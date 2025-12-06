@@ -2,7 +2,8 @@
   "name": "Art, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 129,
   "yearVersion": 2021,
@@ -124,271 +125,334 @@
       "title": "Arts, Media and Design Electives",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 2100,
-          "subject": "ARTD"
-        },
-        {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Art + Design",
+          "requirements": [
             {
-              "subject": "ARTD",
-              "classId": 2360,
-              "description": "Introduction to Photography",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 2100,
+              "subject": "ARTD"
             },
             {
-              "subject": "ARTD",
-              "classId": 2361,
-              "description": "Photo Tools",
-              "type": "COURSE"
-            }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 2370,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2380,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3460,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3470,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3471,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3472,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3473,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3480,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4565,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4570,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4575,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4660,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4661,
-          "subject": "ARTD"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2301,
-          "subject": "ARTE"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2500,
-          "subject": "ARTE"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2501,
-          "subject": "ARTE"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3901,
-          "subject": "ARTE"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4901,
-          "subject": "ARTE"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1250,
-          "subject": "ARTG"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2250,
-          "subject": "ARTG"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2252,
-          "subject": "ARTG"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1100,
-          "subject": "ARTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1400,
-          "subject": "ARTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2213,
-          "subject": "ARTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 5100,
-          "subject": "ARTH"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2341,
-          "subject": "ARTS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2340,
-          "subject": "ARTS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3449,
-          "subject": "ARTS"
-        },
-        {
-          "type": "AND",
-          "courses": [
-            {
-              "subject": "ARCH",
-              "classId": 1310,
-              "description": "Buildings and Cities, A Global History",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARTD",
+                  "classId": 2360,
+                  "description": "Introduction to Photography",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARTD",
+                  "classId": 2361,
+                  "description": "Photo Tools",
+                  "type": "COURSE"
+                }
+              ]
             },
             {
-              "subject": "ARCH",
-              "classId": 1311,
-              "description": "Recitation for ARCH 1310",
-              "type": "COURSE"
+              "type": "COURSE",
+              "classId": 2370,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2380,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3460,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3470,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3471,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3472,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3473,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3480,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4565,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4570,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4575,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4660,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4661,
+              "subject": "ARTD"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2301,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2501,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4901,
+              "subject": "ARTE"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1250,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2250,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2252,
+              "subject": "ARTG"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1100,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1400,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2213,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5100,
+              "subject": "ARTH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2341,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3449,
+              "subject": "ARTS"
             }
-          ]
+          ],
+          "minRequirementCount": 30
         },
         {
-          "type": "COURSE",
-          "classId": 1350,
-          "subject": "ARCH"
+          "type": "SECTION",
+          "title": "Architecture",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ARCH",
+                  "classId": 1310,
+                  "description": "Buildings and Cities, A Global History",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ARCH",
+                  "classId": 1311,
+                  "description": "Recitation for ARCH 1310",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 1350,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1450,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2330,
+              "subject": "ARCH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "ARCH"
+            }
+          ],
+          "minRequirementCount": 5
         },
         {
-          "type": "COURSE",
-          "classId": 1450,
-          "subject": "ARCH"
+          "type": "SECTION",
+          "title": "Communication Studies",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "COMM"
+            }
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "COURSE",
-          "classId": 2330,
-          "subject": "ARCH"
+          "type": "SECTION",
+          "title": "Game Design",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1110,
+              "subject": "GAME"
+            }
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "COURSE",
-          "classId": 2340,
-          "subject": "ARCH"
+          "type": "SECTION",
+          "title": "Journalism",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1150,
+              "subject": "JRNL"
+            }
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "COURSE",
-          "classId": 1101,
-          "subject": "COMM"
+          "type": "SECTION",
+          "title": "Media and Screen Studies",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1230,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2220,
+              "subject": "MSCR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2336,
+              "subject": "MSCR"
+            }
+          ],
+          "minRequirementCount": 4
         },
         {
-          "type": "COURSE",
-          "classId": 1110,
-          "subject": "GAME"
+          "type": "SECTION",
+          "title": "Music",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1113,
+              "subject": "MUSC"
+            }
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "COURSE",
-          "classId": 1150,
-          "subject": "JRNL"
+          "type": "SECTION",
+          "title": "Theatre",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1101,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1270,
+              "subject": "THTR"
+            }
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "COURSE",
-          "classId": 1220,
-          "subject": "MSCR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1230,
-          "subject": "MSCR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2220,
-          "subject": "MSCR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2336,
-          "subject": "MSCR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1113,
-          "subject": "MUSC"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1101,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1270,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3510,
-          "subject": "ARTS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3520,
-          "subject": "ARTS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3530,
-          "subject": "ARTS"
+          "type": "SECTION",
+          "title": "University of Arts London",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3510,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3520,
+              "subject": "ARTS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3530,
+              "subject": "ARTS"
+            }
+          ],
+          "minRequirementCount": 3
         }
       ],
-      "minRequirementCount": 48
+      "minRequirementCount": 9
     }
   ],
   "concentrations": {
@@ -396,7 +460,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Art and Design History Electives",
+        "title": "Concentration in Visual Studies",
         "requirements": [
           {
             "type": "COURSE",

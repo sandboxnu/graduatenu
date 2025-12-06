@@ -2,7 +2,8 @@
   "name": "Theatre, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 132,
   "yearVersion": 2021,
@@ -54,52 +55,66 @@
       "title": "Theatre Texts and Context",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 1220,
-          "subject": "THTR"
+          "type": "SECTION",
+          "title": "Complete one of the following:",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1220,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2300,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2315,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2500,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "THTR"
+            }
+          ],
+          "minRequirementCount": 6
         },
         {
-          "type": "COURSE",
-          "classId": 2300,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2315,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2320,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2500,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3200,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 1215,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2340,
-          "subject": "THTR"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3100,
-          "subject": "THTR"
+          "type": "SECTION",
+          "title": "Complete one of the following:",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 1215,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2340,
+              "subject": "THTR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3100,
+              "subject": "THTR"
+            }
+          ],
+          "minRequirementCount": 3
         }
       ],
-      "minRequirementCount": 9
+      "minRequirementCount": 2
     },
     {
       "type": "SECTION",
@@ -299,7 +314,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Performance",
+        "title": "Theatre Performance Concentration",
         "requirements": [
           {
             "type": "COURSE",
@@ -321,7 +336,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Theatre Performance Concentration: Electives",
         "requirements": [
           {
             "type": "XOM",
@@ -439,7 +454,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Design and Production",
+        "title": "Theatre Production Concentration",
         "requirements": [
           {
             "type": "XOM",
@@ -477,7 +492,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Theatre Production Concentration: Electives",
         "requirements": [
           {
             "type": "XOM",

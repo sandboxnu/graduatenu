@@ -1,6 +1,7 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { ForbiddenException, Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { formatServiceCtx } from "../utils";
+import { PlanService } from "../plan/plan.service";
 import {
   DeleteResult,
   FindOneOptions,
@@ -18,6 +19,7 @@ import {
 import { Student } from "./entities/student.entity";
 import {
   EmailAlreadyExists,
+  MustUseHuskyEmail,
   NewPasswordsDontMatch,
   WeakPassword,
   WrongPassword,
@@ -29,12 +31,13 @@ export class StudentService {
 
   constructor(
     @InjectRepository(Student)
-    private studentRepository: Repository<Student>
+    private studentRepository: Repository<Student>,
+    private planService: PlanService
   ) {}
 
   async create(
     createStudentDto: SignUpStudentDto
-  ): Promise<Student | EmailAlreadyExists | WeakPassword> {
+  ): Promise<Student | EmailAlreadyExists | MustUseHuskyEmail | WeakPassword> {
     // make sure the user doesn't already exists
     const { email, fullName, password, passwordConfirm } = createStudentDto;
     const userInDb = await this.studentRepository.findOne({ where: { email } });
@@ -44,6 +47,10 @@ export class StudentService {
         StudentService.formatStudentServiceCtx("create")
       );
       return new EmailAlreadyExists();
+    }
+
+    if (!email.endsWith("@husky.neu.edu")) {
+      return new MustUseHuskyEmail();
     }
 
     if (password !== passwordConfirm) {
@@ -117,6 +124,17 @@ export class StudentService {
       uuid,
       updatedStudent
     );
+
+    if (updateStudentDto.starredPlan) {
+      if (
+        !(await this.planService.isPlanOwnedByStudent(
+          updateStudentDto.starredPlan,
+          student
+        ))
+      ) {
+        throw new ForbiddenException("Not authorized to star this plan.");
+      }
+    }
 
     if (updateResult.affected === 0) {
       this.logger.debug(

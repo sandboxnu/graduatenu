@@ -1,42 +1,23 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ECON 1115",
-        "ENGW 1111",
-        "PHIL 1000"
-      ],
-      "Spring": [
-        "ECON 1116",
-        "MATH 1231",
-        "PHIL 1115",
-        "POLS 2325"
-      ]
+      "Fall": ["ECON 1115", "ENGW 1111", "PHIL 1000"],
+      "Spring": ["ECON 1116", "MATH 1231", "PHIL 1115", "POLS 2325"]
     },
     "Year 2": {
-      "Fall": [
-        "ECON 2315",
-        "ECON 2350",
-        "PHIL 2330"
-      ],
-      "Spring": [
-        "ECON 2316",
-        "ECON 2560"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ]
+      "Fall": ["ECON 2315", "ECON 2350", "PHIL 2330"],
+      "Spring": ["ECON 2316", "ECON 2560"],
+      "Summer 1": ["ENGW 3302"]
     },
     "Year 3": {
-      "Spring": [
-        "ECON 2560"
-      ]
+      "Spring": ["ECON 2560"]
     },
     "Year 4": {
-      "Spring": [
-        "ECON 3520",
-        "ECON 4692"
-      ]
+      "Spring": ["ECON 3520", "ECON 4692"]
     }
   }
 }

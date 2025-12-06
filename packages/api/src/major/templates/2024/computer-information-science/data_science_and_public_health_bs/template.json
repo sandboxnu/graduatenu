@@ -1,110 +1,46 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "DS 2000",
-        "CS 1800",
-        "PHTH 1260"
-      ],
-      "Spring": [
-        "DS 2500",
-        "ENGW 1111",
-        "PSYC 1101"
-      ],
-      "Summer 1": [
-        "DS 3000",
-        "PHTH 2350"
-      ]
+      "Fall": ["CS 1200", "DS 2000", "CS 1800", "PHTH 1260"],
+      "Spring": ["DS 2500", "ENGW 1111", "PSYC 1101"],
+      "Summer 1": ["DS 3000", "PHTH 2350"]
     },
     "Year 2": {
-      "Fall": [
-        "DS 3500",
-        "MATH 1341",
-        "PHTH 2300"
-      ],
-      "Spring": [
-        "CS 1210",
-        "DS 4200",
-        "CS 3200",
-        "PHTH 2210"
-      ],
-      "Summer 1": [
-        "PHTH 2515"
-      ]
+      "Fall": ["DS 3500", "MATH 1341", "PHTH 2300"],
+      "Spring": ["CS 1210", "DS 4200", "CS 3200", "PHTH 2210"],
+      "Summer 1": ["PHTH 2515"]
     },
     "Year 3": {
-      "Spring": [
-        "PHTH 4202",
-        "DS 4300",
-        "DS 4400"
-      ],
-      "Summer 1": [
-        "PHTH 4540"
-      ],
-      "Fall": [
-        "ENGW 3306"
-      ]
+      "Spring": ["PHTH 4202", "DS 4300", "DS 4400"],
+      "Summer 1": ["PHTH 4540"],
+      "Fall": ["ENGW 3306"]
     },
     "Year 4": {
-      "Spring": [
-        "DS 4420",
-        "PHTH 4120"
-      ]
+      "Spring": ["DS 4420", "PHTH 4120"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "DS 2000",
-        "CS 1800",
-        "PHTH 1260"
-      ],
-      "Spring": [
-        "DS 2500",
-        "ENGW 1111",
-        "PSYC 1101"
-      ],
-      "Summer 1": [
-        "DS 3000",
-        "PHTH 2350"
-      ]
+      "Fall": ["CS 1200", "DS 2000", "CS 1800", "PHTH 1260"],
+      "Spring": ["DS 2500", "ENGW 1111", "PSYC 1101"],
+      "Summer 1": ["DS 3000", "PHTH 2350"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 1210",
-        "DS 3500",
-        "MATH 1341",
-        "PHTH 2300",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "PHTH 2515"
-      ]
+      "Fall": ["CS 1210", "DS 3500", "MATH 1341", "PHTH 2300", "PHTH 2210"],
+      "Summer 2": ["PHTH 2515"]
     },
     "Year 3": {
-      "Fall": [
-        "DS 4200",
-        "CS 3200"
-      ],
-      "Spring": [
-        "ENGW 3302"
-      ],
-      "Summer 2": [
-        "PHTH 4540"
-      ]
+      "Fall": ["DS 4200", "CS 3200"],
+      "Spring": ["ENGW 3302"],
+      "Summer 2": ["PHTH 4540"]
     },
     "Year 4": {
-      "Fall": [
-        "PHTH 4202",
-        "DS 4300",
-        "DS 4400"
-      ],
-      "Spring": [
-        "DS 4420",
-        "PHTH 4120"
-      ]
+      "Fall": ["PHTH 4202", "DS 4300", "DS 4400"],
+      "Spring": ["DS 4420", "PHTH 4120"]
     }
   }
 }

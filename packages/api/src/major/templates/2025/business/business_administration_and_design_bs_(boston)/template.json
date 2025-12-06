@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "ARTF 1220", "ARTG 1001", "BUSN 1102", "ENGW 1111"],
+      "Spring": ["ARTG 1270", "ECON 1115", "MGSC 2301", "EEAM 2000"],
+      "Summer 1": ["ARTG 1290"]
+    },
+    "Year 2": {
+      "Fall": ["ARTG 2262", "INTB 1203", "MKTG 2201"],
+      "Spring": ["BUSN 1103"],
+      "Summer 1": ["FINA 2201"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3314", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Spring": ["ARTG 4550", "STRT 4501"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ACCT 1201", "ARTF 1220", "ARTG 1001", "BUSN 1102", "ENGW 1111"],
+      "Spring": ["ARTG 1270", "ECON 1115", "MGSC 2301", "EEAM 2000"],
+      "Summer 1": ["ARTG 1290"]
+    },
+    "Year 2": {
+      "Fall": ["ARTG 2262", "INTB 1203", "MKTG 2201"],
+      "Spring": ["BUSN 1103"],
+      "Summer 1": ["FINA 2201"]
+    },
+    "Year 3": {
+      "Spring": ["ENGW 3314", "ORGB 3201"]
+    },
+    "Year 4": {
+      "Spring": ["ARTG 4550", "STRT 4501"]
+    }
+  }
+}

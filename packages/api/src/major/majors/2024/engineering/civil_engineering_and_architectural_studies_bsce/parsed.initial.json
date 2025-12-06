@@ -2,7 +2,9 @@
   "name": "Civil Engineering and Architectural Studies, BSCE",
   "metadata": {
     "verified": false,
-    "lastEdited": "11/21/2024"
+    "lastEdited": "11/05/2025",
+    "hardcoded-wennis": true,
+    "branch": "main"
   },
   "totalCreditsRequired": 141,
   "yearVersion": 2024,

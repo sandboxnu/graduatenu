@@ -1,0 +1,22 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Four Years, Two Co-ops Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["JRNL 1150", "ENGW 1111", "MSCR 1000", "MSCR 1220"],
+      "Spring": ["JRNL 1101", "MSCR 1230", "MSCR 1320", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["JRNL 2201"]
+    },
+    "Year 3": {
+      "Fall": ["JRNL 2301", "JRNL 5314"]
+    },
+    "Year 4": {
+      "Fall": ["JRNL 4650"],
+      "Spring": ["MSCR 4623"]
+    }
+  }
+}

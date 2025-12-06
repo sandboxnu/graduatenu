@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["MSCR 1000", "MSCR 1220", "POLS 1150", "ENGW 1111"],
+      "Spring": ["MSCR 1320", "POLS 1155", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["POLS 1160", "POLS 2400"]
+    },
+    "Year 3": {
+      "Fall": ["POLS 3320"]
+    },
+    "Year 4": {
+      "Spring": ["MSCR 3437"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["MSCR 1000", "MSCR 1220", "POLS 1150", "ENGW 1111"],
+      "Spring": ["MSCR 1320", "POLS 1155", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["POLS 1160", "POLS 2400"]
+    },
+    "Year 3": {
+      "Fall": ["POLS 3320"]
+    },
+    "Year 4": {
+      "Spring": ["MSCR 3437"]
+    }
+  }
+}

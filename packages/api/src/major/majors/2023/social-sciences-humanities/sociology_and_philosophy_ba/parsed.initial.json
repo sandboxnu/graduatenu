@@ -2,7 +2,8 @@
   "name": "Sociology and Philosophy, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -38,6 +39,12 @@
         }
       ],
       "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -112,6 +119,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Advanced Philosophy Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Critical Philosophy Elective",
       "requirements": [
         {
@@ -156,6 +169,12 @@
         }
       ],
       "minRequirementCount": 8
+    },
+    {
+      "type": "SECTION",
+      "title": "Philosophy Elective",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

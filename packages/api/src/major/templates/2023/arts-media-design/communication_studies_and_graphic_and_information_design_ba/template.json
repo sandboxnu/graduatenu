@@ -1,39 +1,23 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ARTF 1000",
-        "ARTF 1122",
-        "COMM 1101",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "ARTG 1270",
-        "COMM 1112"
-      ],
-      "Summer 1": [
-        "ARTG 1290"
-      ]
+      "Fall": ["ARTF 1000", "ARTF 1122", "COMM 1101", "ENGW 1111"],
+      "Spring": ["ARTG 1270", "COMM 1112"],
+      "Summer 1": ["ARTG 1290"]
     },
     "Year 2": {
-      "Fall": [
-        "ARTG 2252",
-        "ARTG 3350"
-      ],
-      "Spring": [
-        "EEAM 2000"
-      ]
+      "Fall": ["ARTG 2252", "ARTG 3350"],
+      "Spring": ["EEAM 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3314"
-      ]
+      "Spring": ["ENGW 3314"]
     },
     "Year 4": {
-      "Spring": [
-        "ARTG 4550",
-        "COMM 2200"
-      ]
+      "Spring": ["ARTG 4550", "COMM 2200"]
     }
   }
 }

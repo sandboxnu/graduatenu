@@ -1,48 +1,24 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CRIM 1100",
-        "CS 1200",
-        "CS 1800",
-        "DS 2000",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "CRIM 1110",
-        "CRIM 1120",
-        "DS 2500",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "CS 3200"
-      ]
+      "Fall": ["CRIM 1100", "CS 1200", "CS 1800", "DS 2000", "ENGW 1111"],
+      "Spring": ["CRIM 1110", "CRIM 1120", "DS 2500", "MATH 1341"],
+      "Summer 1": ["CS 3200"]
     },
     "Year 2": {
-      "Fall": [
-        "CRIM 3600",
-        "DS 3000",
-        "DS 3500"
-      ],
-      "Spring": [
-        "CS 1210",
-        "DS 4200",
-        "ECON 2350"
-      ]
+      "Fall": ["CRIM 3600", "DS 3000", "DS 3500"],
+      "Spring": ["CS 1210", "DS 4200", "ECON 2350"]
     },
     "Year 3": {
-      "Spring": [
-        "DS 4300"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ]
+      "Spring": ["DS 4300"],
+      "Summer 1": ["ENGW 3302"]
     },
     "Year 4": {
-      "Spring": [
-        "CRIM 4949",
-        "DS 4400"
-      ]
+      "Spring": ["CRIM 4949", "DS 4400"]
     }
   }
 }

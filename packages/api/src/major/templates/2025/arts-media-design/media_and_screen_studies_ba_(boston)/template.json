@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["MSCR 1000", "MSCR 1220"],
+      "Spring": ["MSCR 1320", "ENGW 1111", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["MSCR 1420", "MSCR 1230"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["MSCR 4623"]
+    }
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["MSCR 1000", "MSCR 1220"],
+      "Spring": ["MSCR 1320", "ENGW 1111", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["MSCR 1420", "MSCR 1230"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["MSCR 4623"]
+    }
+  }
+}

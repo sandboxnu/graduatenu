@@ -1,37 +1,22 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ECON 1115",
-        "ENGW 1111",
-        "MATH 1231",
-        "ECON 1000"
-      ],
-      "Spring": [
-        "ECON 1116",
-        "MISM 2510"
-      ]
+      "Fall": ["ECON 1115", "ENGW 1111", "MATH 1231", "ECON 1000"],
+      "Spring": ["ECON 1116", "MISM 2510"]
     },
     "Year 2": {
-      "Fall": [
-        "ECON 2315",
-        "ECON 2350"
-      ],
-      "Spring": [
-        "ECON 2316",
-        "EESH 2000"
-      ]
+      "Fall": ["ECON 2315", "ECON 2350"],
+      "Spring": ["ECON 2316", "EESH 2000"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3308",
-        "ECON 2560"
-      ]
+      "Spring": ["ENGW 3308", "ECON 2560"]
     },
     "Year 4": {
-      "Spring": [
-        "ECON 4692"
-      ]
+      "Spring": ["ECON 4692"]
     }
   }
 }

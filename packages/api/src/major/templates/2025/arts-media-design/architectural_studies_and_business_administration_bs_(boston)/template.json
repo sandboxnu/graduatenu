@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "ARCH 1110", "ARCH 1120", "ACCT 1201", "ENGW 1111"],
+      "Spring": ["ARCH 2130", "ECON 1115", "MGSC 2301"],
+      "Summer 1": ["ARCH 1310", "MATH 1231"]
+    },
+    "Year 2": {
+      "Fall": ["ARCH 2140", "LARC 2330"],
+      "Summer 2": ["COOP 3945"],
+      "Spring": ["ARCH 5530", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["COOP 3945"],
+      "Spring": ["ENGW 3314"],
+      "Summer 2": ["COOP 3945"]
+    },
+    "Year 4": {
+      "Fall": ["COOP 3945"],
+      "Spring": ["ARCH 4960", "ARCH 5314"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "ARCH 1110", "ARCH 1120", "ACCT 1201", "ENGW 1111"],
+      "Spring": ["ARCH 2130", "ECON 1115", "MGSC 2301"],
+      "Summer 1": ["ARCH 1310", "MATH 1231"]
+    },
+    "Year 2": {
+      "Fall": ["ARCH 2140", "LARC 2330"],
+      "Summer 2": ["COOP 3945"],
+      "Spring": ["ARCH 5530", "EEAM 2000"]
+    },
+    "Year 3": {
+      "Fall": ["COOP 3945"],
+      "Spring": ["ENGW 3314"],
+      "Summer 2": ["COOP 3945"]
+    },
+    "Year 4": {
+      "Fall": ["COOP 3945"],
+      "Spring": ["ARCH 4960", "ARCH 5314"]
+    }
+  }
+}

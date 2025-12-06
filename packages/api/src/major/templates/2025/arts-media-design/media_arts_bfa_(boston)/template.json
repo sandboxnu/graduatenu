@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study by Concentration": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1240", "ARTD 1001", "ARTH 1001", "ENGW 1111"],
+      "Spring": ["ARTD 2370", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 2100", "ARTD 3470"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 4570", "ARTG 1290", "ARTH 3000"]
+    },
+    "Year 4": {
+      "Fall": ["ARTH 4000"],
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Animation": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1240", "ARTD 1001", "ARTH 1001", "ENGW 1111"],
+      "Spring": ["ARTD 2370", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 2100", "ARTD 3470"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 4570", "ARTG 1290", "ARTH 3000"]
+    },
+    "Year 4": {
+      "Fall": ["ARTH 4000"],
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First-Half": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1240", "ARTD 1001", "ARTH 1001", "ENGW 1111"],
+      "Spring": ["ARTD 2370", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 2100", "ARTD 3470"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 4570", "ARTG 1290", "ARTH 3000"]
+    },
+    "Year 4": {
+      "Fall": ["ARTH 4000"],
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Photography": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1240", "ARTD 1001", "ARTH 1001", "ENGW 1111"],
+      "Spring": ["ARTD 2360", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 3460", "ARTH 3000"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 4565", "ARTG 1290", "ARTH 4000"]
+    },
+    "Year 4": {
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Video Arts": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1240", "ARTD 1001", "ARTH 1001", "ENGW 1111"],
+      "Spring": ["EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["ARTD 2380", "ARTH 3000"]
+    },
+    "Year 3": {
+      "Fall": ["ARTD 3480", "ARTG 1290", "ARTH 4000"]
+    },
+    "Year 4": {
+      "Spring": ["ARTD 4530"]
+    }
+  },
+  "Electives Option (No Concentration)": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTF 1240", "ARTD 1001", "ARTH 1001", "ENGW 1111"],
+      "Spring": ["EEAM 2000"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Fall": ["ARTG 1290", "ARTH 3000"]
+    },
+    "Year 4": {
+      "Fall": ["ARTH 4000"],
+      "Spring": ["ARTD 4530"]
+    }
+  }
+}

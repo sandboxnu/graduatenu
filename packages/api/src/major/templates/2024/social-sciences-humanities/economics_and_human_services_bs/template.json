@@ -1,45 +1,21 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ECON 1115",
-        "ENGW 1111",
-        "HUSV 1000",
-        "HUSV 1101"
-      ],
-      "Spring": [
-        "CS 1100",
-        "ECON 1116",
-        "HUSV 2300",
-        "MATH 1231"
-      ],
-      "Summer 1": [
-        "ECON 2315"
-      ]
+      "Fall": ["ECON 1115", "ENGW 1111", "HUSV 1000", "HUSV 1101"],
+      "Spring": ["CS 1100", "ECON 1116", "HUSV 2300", "MATH 1231"],
+      "Summer 1": ["ECON 2315"]
     },
     "Year 2": {
-      "Fall": [
-        "ECON 2316",
-        "HUSV 2355",
-        "HUSV 2800",
-        "HUSV 2960"
-      ],
-      "Spring": [
-        "ECON 2350",
-        "EESH 2000",
-        "HUSV 2970",
-        "HUSV 3570"
-      ]
+      "Fall": ["ECON 2316", "HUSV 2355", "HUSV 2800", "HUSV 2960"],
+      "Spring": ["ECON 2350", "EESH 2000", "HUSV 2970", "HUSV 3570"]
     },
     "Year 3": {
-      "Spring": [
-        "ECON 2560",
-        "HUSV 3900",
-        "HUSV 4994"
-      ],
-      "Summer 1": [
-        "ENGW 3308"
-      ]
+      "Spring": ["ECON 2560", "HUSV 3900", "HUSV 4994"],
+      "Summer 1": ["ENGW 3308"]
     },
     "Year 4": {}
   }

@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, One Co-op in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -9,17 +13,8 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "GE 1502",
-        "MATH 1342",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ],
-      "Summer 1": [
-        "CHME 2308",
-        "MATH 2321"
-      ]
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
     },
     "Year 2": {
       "Fall": [
@@ -31,18 +26,9 @@
         "CHME 2320",
         "ENCP 2000"
       ],
-      "Spring": [
-        "ENCP 2000",
-        "CHME 2320",
-        "CHME 3312",
-        "CIVE 3430"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Spring": ["ENCP 2000", "CHME 2320", "CHME 3312", "CIVE 3430"],
+      "Summer 1": ["ENGW 3302"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 3": {
       "Fall": [
@@ -91,10 +77,7 @@
       ]
     },
     "Year 5": {
-      "Spring": [
-        "CHME 4512",
-        "CIVE 4765"
-      ],
+      "Spring": ["CHME 4512", "CIVE 4765"],
       "Fall": [
         "CHME 4510",
         "CHME 4701",
@@ -115,17 +98,8 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "GE 1502",
-        "MATH 1342",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ],
-      "Summer 1": [
-        "CHME 2308",
-        "MATH 2321"
-      ]
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
     },
     "Year 2": {
       "Fall": [
@@ -137,33 +111,13 @@
         "CHME 2320",
         "ENCP 2000"
       ],
-      "Spring": [
-        "CHME 2320",
-        "CHME 3312",
-        "CIVE 3430",
-        "ENCP 2000"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Spring": ["CHME 2320", "CHME 3312", "CIVE 3430", "ENCP 2000"],
+      "Summer 1": ["ENGW 3302"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 3": {
-      "Fall": [
-        "CHME 3305",
-        "CHME 3322",
-        "CIVE 3435",
-        "CHME 2310",
-        "CIVE 3430"
-      ],
-      "Spring": [
-        "CHME 3305",
-        "CHME 3306",
-        "CHME 3322",
-        "CIVE 3435"
-      ]
+      "Fall": ["CHME 3305", "CHME 3322", "CIVE 3435", "CHME 2310", "CIVE 3430"],
+      "Spring": ["CHME 3305", "CHME 3306", "CHME 3322", "CIVE 3435"]
     },
     "Year 4": {
       "Fall": [
@@ -190,10 +144,7 @@
       ]
     },
     "Year 5": {
-      "Spring": [
-        "CHME 4512",
-        "CIVE 4765"
-      ],
+      "Spring": ["CHME 4512", "CIVE 4765"],
       "Fall": [
         "CHME 4510",
         "CHME 4701",
@@ -214,17 +165,8 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "GE 1502",
-        "MATH 1342",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ],
-      "Summer 1": [
-        "CHME 2308",
-        "MATH 2321"
-      ]
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
     },
     "Year 2": {
       "Fall": [
@@ -236,31 +178,13 @@
         "CHME 2320",
         "ENCP 2000"
       ],
-      "Spring": [
-        "CHME 2320",
-        "CHME 3312",
-        "CIVE 3430",
-        "ENCP 2000"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Spring": ["CHME 2320", "CHME 3312", "CIVE 3430", "ENCP 2000"],
+      "Summer 1": ["ENGW 3302"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 3": {
-      "Spring": [
-        "CHME 3305",
-        "CHME 3306",
-        "CHME 3322",
-        "CIVE 3435"
-      ],
-      "Fall": [
-        "CHME 2310",
-        "CHME 3322",
-        "CIVE 3430"
-      ]
+      "Spring": ["CHME 3305", "CHME 3306", "CHME 3322", "CIVE 3435"],
+      "Fall": ["CHME 2310", "CHME 3322", "CIVE 3430"]
     },
     "Year 4": {
       "Spring": [
@@ -271,18 +195,10 @@
         "CIVE 4535",
         "ENCP 3000"
       ],
-      "Fall": [
-        "CHME 3305",
-        "CHME 3306",
-        "CHME 3312",
-        "CIVE 3435"
-      ]
+      "Fall": ["CHME 3305", "CHME 3306", "CHME 3312", "CIVE 3435"]
     },
     "Year 5": {
-      "Spring": [
-        "CHME 4512",
-        "CIVE 4765"
-      ],
+      "Spring": ["CHME 4512", "CIVE 4765"],
       "Fall": [
         "CHME 4510",
         "CHME 4701",
@@ -303,44 +219,18 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "GE 1502",
-        "MATH 1342",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ],
-      "Summer 1": [
-        "CHME 2308",
-        "MATH 2321"
-      ]
+      "Spring": ["GE 1502", "MATH 1342", "PHYS 1151", "PHYS 1152", "PHYS 1153"],
+      "Summer 1": ["CHME 2308", "MATH 2321"]
     },
     "Year 2": {
-      "Fall": [
-        "CHME 2320",
-        "CIVE 2300",
-        "CIVE 2334",
-        "ENCP 2000",
-        "MATH 2341"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Fall": ["CHME 2320", "CIVE 2300", "CIVE 2334", "ENCP 2000", "MATH 2341"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 3": {
-      "Fall": [
-        "CHME 2310",
-        "CHME 3322",
-        "CIVE 3430"
-      ]
+      "Fall": ["CHME 2310", "CHME 3322", "CIVE 3430"]
     },
     "Year 4": {
-      "Fall": [
-        "CHME 3305",
-        "CHME 3306",
-        "CHME 3312",
-        "CIVE 3435"
-      ]
+      "Fall": ["CHME 3305", "CHME 3306", "CHME 3312", "CIVE 3435"]
     },
     "Year 5": {
       "Fall": [
@@ -351,10 +241,7 @@
         "CIVE 4535",
         "ENCP 3000"
       ],
-      "Spring": [
-        "CHME 4512",
-        "CIVE 4765"
-      ]
+      "Spring": ["CHME 4512", "CIVE 4765"]
     }
   }
 }

@@ -1,133 +1,58 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Five Years, Three Spring Co-ops": {
     "Year 1": {
-      "Fall": [
-        "EEMB 1101",
-        "ENVR 1000",
-        "MATH 1241",
-        "ENVR 1500"
-      ],
-      "Spring": [
-        "EEMB 1105",
-        "PHYS 1145",
-        "CHEM 1161"
-      ]
+      "Fall": ["EEMB 1101", "ENVR 1000", "MATH 1241", "ENVR 1500"],
+      "Spring": ["EEMB 1105", "PHYS 1145", "CHEM 1161"]
     },
     "Year 2": {
-      "Fall": [
-        "ENVR 2500",
-        "CHEM 2311",
-        "EESC 2000",
-        "BIOL 2301"
-      ],
-      "Spring": [
-        "COOP 3945",
-        "EEMB 2400",
-        "EEMB 2302"
-      ],
-      "Summer 1": [
-        "COOP 3945"
-      ],
-      "Summer 2": [
-        "COOP 3945"
-      ]
+      "Fall": ["ENVR 2500", "CHEM 2311", "EESC 2000", "BIOL 2301"],
+      "Spring": ["COOP 3945", "EEMB 2400", "EEMB 2302"],
+      "Summer 1": ["COOP 3945"],
+      "Summer 2": ["COOP 3945"]
     },
     "Year 3": {
-      "Fall": [
-        "EEMB 2400",
-        "EEMB 2302",
-        "COOP 3945"
-      ],
-      "Spring": [
-        "COOP 3945",
-        "EEMB 3460"
-      ],
-      "Summer 1": [
-        "COOP 3945"
-      ],
-      "Summer 2": [
-        "COOP 3945"
-      ]
+      "Fall": ["EEMB 2400", "EEMB 2302", "COOP 3945"],
+      "Spring": ["COOP 3945", "EEMB 3460"],
+      "Summer 1": ["COOP 3945"],
+      "Summer 2": ["COOP 3945"]
     },
     "Year 4": {
-      "Spring": [
-        "COOP 3945"
-      ],
-      "Summer 1": [
-        "COOP 3945"
-      ],
-      "Fall": [
-        "EEMB 3460",
-        "COOP 3945"
-      ],
-      "Summer 2": [
-        "COOP 3945"
-      ]
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"],
+      "Fall": ["EEMB 3460", "COOP 3945"],
+      "Summer 2": ["COOP 3945"]
     },
     "Year 5": {
-      "Spring": [
-        "ENVR 4000"
-      ],
-      "Fall": [
-        "COOP 3945"
-      ]
+      "Spring": ["ENVR 4000"],
+      "Fall": ["COOP 3945"]
     }
   },
   "Five Years, Three Fall Co-ops": {
     "Year 1": {
-      "Fall": [
-        "EEMB 1101",
-        "ENVR 1000",
-        "MATH 1241",
-        "ENVR 1500"
-      ],
-      "Spring": [
-        "EEMB 1105",
-        "PHYS 1145",
-        "CHEM 1161"
-      ]
+      "Fall": ["EEMB 1101", "ENVR 1000", "MATH 1241", "ENVR 1500"],
+      "Spring": ["EEMB 1105", "PHYS 1145", "CHEM 1161"]
     },
     "Year 2": {
-      "Fall": [
-        "ENVR 2500",
-        "BIOL 2301",
-        "EESC 2000",
-        "CHEM 2311"
-      ],
-      "Spring": [
-        "EEMB 2400",
-        "EEMB 2302"
-      ],
-      "Summer 2": [
-        "COOP 3945"
-      ]
+      "Fall": ["ENVR 2500", "BIOL 2301", "EESC 2000", "CHEM 2311"],
+      "Spring": ["EEMB 2400", "EEMB 2302"],
+      "Summer 2": ["COOP 3945"]
     },
     "Year 3": {
-      "Fall": [
-        "COOP 3945"
-      ],
-      "Summer 2": [
-        "COOP 3945"
-      ],
-      "Spring": [
-        "EEMB 3460"
-      ]
+      "Fall": ["COOP 3945"],
+      "Summer 2": ["COOP 3945"],
+      "Spring": ["EEMB 3460"]
     },
     "Year 4": {
-      "Fall": [
-        "COOP 3945"
-      ],
-      "Summer 2": [
-        "COOP 3945"
-      ]
+      "Fall": ["COOP 3945"],
+      "Summer 2": ["COOP 3945"]
     },
     "Year 5": {
-      "Fall": [
-        "COOP 3945"
-      ],
-      "Spring": [
-        "ENVR 4000"
-      ]
+      "Fall": ["COOP 3945"],
+      "Spring": ["ENVR 4000"]
     }
   }
 }

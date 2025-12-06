@@ -1,0 +1,58 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "PHIL 1115"],
+      "Spring": ["CS 2100", "CS 2800", "PHIL 2325"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "PHIL 1145"]
+    },
+    "Year 3": {
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["CS 3800", "CS 4530"],
+      "Spring": ["PHIL 4515", "PHIL 5005"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "PHIL 1115"],
+      "Spring": ["CS 2100", "CS 2800", "PHIL 2325"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "PHIL 1145"]
+    },
+    "Year 3": {
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["CS 3800", "CS 4530"],
+      "Spring": ["PHIL 4515", "PHIL 5005"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "PHIL 1115"],
+      "Spring": ["CS 2100", "CS 2800", "PHIL 2325"],
+      "Summer 1": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 3100", "PHIL 1145"],
+      "Spring": ["CS 1210"]
+    },
+    "Year 3": {
+      "Spring": ["CS 3800", "PHIL 4515"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530", "PHIL 5005"]
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["INSC 1000", "PSYC 1101", "MATH 1365", "ENGW 1111"],
+      "Summer 1": ["MATH 1342"],
+      "Spring": ["MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "PSYC 2320"],
+      "Spring": ["MATH 2341", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["MATH 2331", "PSYC 4540"],
+      "Summer 1": ["MATH 3081"]
+    },
+    "Year 4": {}
+  },
+  "Four years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["INSC 1000", "PSYC 1101", "MATH 1365", "ENGW 1111"],
+      "Summer 1": ["MATH 1342"],
+      "Spring": ["MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "PSYC 2320"],
+      "Spring": ["MATH 2341", "EESC 2000"]
+    },
+    "Year 3": {
+      "Spring": ["MATH 2331", "PSYC 4540"],
+      "Summer 1": ["MATH 3081"]
+    },
+    "Year 4": {}
+  },
+  "Five years, Three Co-ops": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "MATH 1365", "PSYC 1101", "MATH 1000"],
+      "Spring": ["MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 1342", "PSYC 2320"],
+      "Spring": ["EESC 2000", "MATH 2321"]
+    },
+    "Year 3": {
+      "Spring": ["MATH 2331"],
+      "Summer 1": ["MATH 2341"]
+    },
+    "Year 4": {
+      "Spring": ["MATH 3081", "PSYC 4540"]
+    },
+    "Year 5": {}
+  }
+}

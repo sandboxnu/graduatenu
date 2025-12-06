@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "ENGW 1111", "CS 2000", "ENVR 2200"],
+      "Spring": ["DS 2500", "EEMB 2302", "ENVR 1400", "ENVR 2515"],
+      "Summer 1": ["CS 3200", "MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 1211", "DS 3000"],
+      "Spring": ["CS 1210", "CHEM 1214", "DS 3500", "DS 4200", "ENVR 2500"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4300", "DS 4400"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "ENGW 1111", "CS 2000", "ENVR 2200"],
+      "Spring": ["DS 2500", "EEMB 2302", "ENVR 1400", "ENVR 2515"],
+      "Summer 1": ["CS 3200", "MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["CHEM 1211", "DS 3000"],
+      "Spring": ["CS 1210", "CHEM 1214", "DS 3500", "DS 4200", "ENVR 2500"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4300", "DS 4400"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["DS 4420"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "ENGW 1111", "CS 2000", "ENVR 2200"],
+      "Spring": ["DS 2500", "EEMB 2302", "ENVR 1400", "ENVR 2515"],
+      "Summer 1": ["CS 3200", "MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CHEM 1211", "DS 3000"]
+    },
+    "Year 3": {
+      "Fall": ["CHEM 1214", "DS 3500", "DS 4200", "ENVR 2500"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["DS 4300", "DS 4400"],
+      "Spring": ["DS 4420"]
+    }
+  }
+}

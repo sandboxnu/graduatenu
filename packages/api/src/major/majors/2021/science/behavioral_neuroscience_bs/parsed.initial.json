@@ -1,0 +1,673 @@
+{
+  "name": "Behavioral Neuroscience, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/5/2025",
+    "branch": "main"
+  },
+  "totalCreditsRequired": 132,
+  "yearVersion": 2021,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Behavioral Neuroscience Core Requirements",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3403,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3415,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3601,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3605,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4705,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4709,
+          "subject": "BIOL"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5587,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3405,
+              "subject": "BIOL"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5595,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5601,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3506,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3508,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3510,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4510,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4512,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4514,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4570,
+          "subject": "PSYC"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "PT",
+              "classId": 5410,
+              "description": "Functional Human Neuroanatomy",
+              "type": "COURSE"
+            },
+            {
+              "subject": "PT",
+              "classId": 5411,
+              "description": "Lab for PT 5410",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4994,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4970,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4971,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4994,
+          "subject": "BNSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4970,
+          "subject": "BNSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4971,
+          "subject": "BNSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4540,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4550,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4624,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4626,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4991,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4994,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4965,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4970,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4971,
+          "subject": "PSYC"
+        }
+      ],
+      "minRequirementCount": 33
+    },
+    {
+      "type": "SECTION",
+      "title": "Psychology Elective",
+      "requirements": [
+        {
+          "type": "XOM",
+          "numCreditsMin": 4,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3358,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3404,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3406,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3451,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3452,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3464,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3466,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4520,
+              "subject": "PSYC"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4524,
+              "subject": "PSYC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Biology Elective",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3401,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3409,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3411,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3421,
+              "description": "Microbiology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3422,
+              "description": "Lab for BIOL 3421",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 3603,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 3611,
+              "description": "Biochemistry",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 3612,
+              "description": "Lab for BIOL 3611",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 4707,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5306,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5543,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5569,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5573,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5581,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5591,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5593,
+          "subject": "BIOL"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone Course",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "BIOL"
+        },
+        {
+          "type": "RANGE",
+          "subject": "PSYC",
+          "idRangeStart": 4654,
+          "idRangeEnd": 4678,
+          "exceptions": []
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundation Courses",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 1000,
+          "subject": "BNSC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 1101,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3458,
+          "subject": "PSYC"
+        },
+        {
+          "type": "COURSE",
+          "classId": 3200,
+          "subject": "PSYC"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 2500,
+                  "description": "Biostatistics",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 2501,
+                  "description": "Lab for ENVR 2500",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 2320,
+              "subject": "PSYC"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 1107,
+              "description": "Foundations of Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 1108,
+              "description": "Lab for BIOL 1107",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2299,
+          "subject": "BIOL"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 2309,
+          "subject": "BIOL"
+        }
+      ],
+      "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Breadth Courses",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2311,
+              "description": "Organic Chemistry 1",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2312,
+              "description": "Lab for CHEM 2311",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 2313,
+              "description": "Organic Chemistry 2",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 2314,
+              "description": "Lab for CHEM 2313",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 5,
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "DS",
+                  "classId": 2000,
+                  "description": "Programming with Data",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "DS",
+                  "classId": 2001,
+                  "description": "Data Science Programming Practicum",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1145,
+                  "description": "Physics for Life Sciences 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1146,
+                  "description": "Lab for PHYS 1145",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1151,
+                  "description": "Physics for Engineering 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1152,
+                  "description": "Lab for PHYS 1151",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1153,
+                  "description": "Interactive Learning Seminar for PHYS 1151",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1161,
+                  "description": "Physics 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1162,
+                  "description": "Lab for PHYS 1161",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1163,
+                  "description": "Recitation for PHYS 1161",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1171,
+                  "description": "Physics 1 for Bioscience and Bioengineering",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1172,
+                  "description": "Lab for PHYS 1171",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1173,
+                  "description": "Interactive Learning Seminar for PHYS 1171",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 5
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

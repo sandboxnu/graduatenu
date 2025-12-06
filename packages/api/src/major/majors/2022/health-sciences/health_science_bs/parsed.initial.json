@@ -2,7 +2,8 @@
   "name": "Health Science, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 132,
   "yearVersion": 2022,
@@ -169,6 +170,12 @@
         }
       ],
       "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Selectives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -581,29 +588,42 @@
       "title": "Capstone Requirement",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 4700,
-          "subject": "HSCI"
+          "type": "SECTION",
+          "title": "Option 1: Health Science Capstone",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4700,
+              "subject": "HSCI"
+            },
+            {
+              "type": "XOM",
+              "numCreditsMin": 4,
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 4720,
+                  "subject": "HSCI"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4730,
+                  "subject": "HSCI"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 4740,
+                  "subject": "HSCI"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "XOM",
-          "numCreditsMin": 4,
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 4720,
-              "subject": "HSCI"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4730,
-              "subject": "HSCI"
-            },
-            {
-              "type": "COURSE",
-              "classId": 4740,
-              "subject": "HSCI"
-            },
+          "type": "SECTION",
+          "title": "Option 2: Honors Project",
+          "requirements": [
             {
               "type": "COURSE",
               "classId": 4970,
@@ -614,7 +634,8 @@
               "classId": 4971,
               "subject": "HSCI"
             }
-          ]
+          ],
+          "minRequirementCount": 2
         }
       ],
       "minRequirementCount": 2
@@ -650,6 +671,12 @@
         }
       ],
       "minRequirementCount": 5
+    },
+    {
+      "type": "SECTION",
+      "title": "Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

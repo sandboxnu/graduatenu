@@ -1,110 +1,44 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study:": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "DS 2000",
-        "ENGW 1111",
-        "MATH 1341"
-      ],
-      "Spring": [
-        "DS 2500",
-        "MATH 1342",
-        "PHIL 1145"
-      ],
-      "Summer 1": [
-        "CS 3200",
-        "MATH 3081"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "DS 2000", "ENGW 1111", "MATH 1341"],
+      "Spring": ["DS 2500", "MATH 1342", "PHIL 1145"],
+      "Summer 1": ["CS 3200", "MATH 3081"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 3520",
-        "DS 3000",
-        "DS 3500",
-        "MATH 2331"
-      ],
-      "Spring": [
-        "CS 1210",
-        "DS 4200",
-        "DS 4300",
-        "IS 4300"
-      ],
-      "Summer 1": [
-        "CS 3000",
-        "ENGW 3302"
-      ]
+      "Fall": ["CS 3520", "DS 3000", "DS 3500", "MATH 2331"],
+      "Spring": ["CS 1210", "DS 4200", "DS 4300", "IS 4300"],
+      "Summer 1": ["CS 3000", "ENGW 3302"]
     },
     "Year 3": {
-      "Spring": [
-        "CS 4100",
-        "DS 4400"
-      ]
+      "Spring": ["CS 4100", "DS 4400"]
     },
     "Year 4": {
-      "Fall": [
-        "CS 4120",
-        "IS 4200"
-      ],
-      "Spring": [
-        "DS 4420",
-        "DS 4440"
-      ]
+      "Fall": ["CS 4120", "IS 4200"],
+      "Spring": ["DS 4420", "DS 4440"]
     }
   },
   "Four Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "DS 2000",
-        "ENGW 1111",
-        "MATH 1341"
-      ],
-      "Spring": [
-        "DS 2500",
-        "MATH 1342",
-        "PHIL 1145"
-      ],
-      "Summer 1": [
-        "CS 3200",
-        "MATH 3081"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "DS 2000", "ENGW 1111", "MATH 1341"],
+      "Spring": ["DS 2500", "MATH 1342", "PHIL 1145"],
+      "Summer 1": ["CS 3200", "MATH 3081"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 3520",
-        "DS 3000",
-        "DS 3500",
-        "MATH 2331"
-      ],
-      "Spring": [
-        "CS 1210",
-        "DS 4200",
-        "DS 4300",
-        "IS 4300"
-      ],
-      "Summer 1": [
-        "CS 3000",
-        "ENGW 3302"
-      ]
+      "Fall": ["CS 3520", "DS 3000", "DS 3500", "MATH 2331"],
+      "Spring": ["CS 1210", "DS 4200", "DS 4300", "IS 4300"],
+      "Summer 1": ["CS 3000", "ENGW 3302"]
     },
     "Year 3": {
-      "Spring": [
-        "CS 4100",
-        "DS 4400"
-      ]
+      "Spring": ["CS 4100", "DS 4400"]
     },
     "Year 4": {
-      "Fall": [
-        "CS 4120",
-        "IS 4200"
-      ],
-      "Spring": [
-        "DS 4420",
-        "DS 4440"
-      ]
+      "Fall": ["CS 4120", "IS 4200"],
+      "Spring": ["DS 4420", "DS 4440"]
     }
   }
 }

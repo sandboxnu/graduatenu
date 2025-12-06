@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["JRNL 1000", "ENGW 1111", "PREL 1425"],
+      "Spring": ["COMM 1113", "JRNL 2200", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["PREL 3625"],
+      "Spring": ["JRNL 5480"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["COMM 4608", "JRNL 5311"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["JRNL 1000", "ENGW 1111", "PREL 1425"],
+      "Spring": ["COMM 1113", "JRNL 2200", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["PREL 3625"],
+      "Spring": ["JRNL 5480"]
+    },
+    "Year 3": {},
+    "Year 4": {
+      "Spring": ["COMM 4608", "JRNL 5311"]
+    }
+  }
+}

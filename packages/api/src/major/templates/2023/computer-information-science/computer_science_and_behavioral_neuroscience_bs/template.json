@@ -1,169 +1,64 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Patterns:": {
     "Year 1": {
-      "Fall": [
-        "BIOL 1107",
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "BIOL 2299",
-        "CHEM 1161",
-        "CS 2510",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "CS 3500",
-        "PSYC 1101"
-      ]
+      "Fall": ["BIOL 1107", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["BIOL 2299", "CHEM 1161", "CS 2510", "MATH 1341"],
+      "Summer 1": ["CS 3500", "PSYC 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "BIOL 2301",
-        "BIOL 3405",
-        "CS 1210",
-        "CS 3000",
-        "CS 3200"
-      ],
-      "Spring": [
-        "CHEM 2311",
-        "CS 1210",
-        "PSYC 3200"
-      ]
+      "Fall": ["BIOL 2301", "BIOL 3405", "CS 1210", "CS 3000", "CS 3200"],
+      "Spring": ["CHEM 2311", "CS 1210", "PSYC 3200"]
     },
     "Year 3": {
-      "Fall": [
-        "CHEM 2311",
-        "PSYC 3200"
-      ],
-      "Spring": [
-        "ENGW 3302",
-        "CS 4530"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Fall": ["CHEM 2311", "PSYC 3200"],
+      "Spring": ["ENGW 3302", "CS 4530"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 4": {
-      "Fall": [
-        "CS 4500",
-        "IS 4300"
-      ],
-      "Spring": [
-        "BINF 6308",
-        "CS 4100",
-        "IS 4300"
-      ]
+      "Fall": ["CS 4500", "IS 4300"],
+      "Spring": ["BINF 6308", "CS 4100", "IS 4300"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "BIOL 1107",
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "BIOL 2299",
-        "CHEM 1161",
-        "CS 2510",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "CS 3500",
-        "PSYC 1101"
-      ]
+      "Fall": ["BIOL 1107", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["BIOL 2299", "CHEM 1161", "CS 2510", "MATH 1341"],
+      "Summer 1": ["CS 3500", "PSYC 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "BIOL 2301",
-        "BIOL 3405",
-        "CS 1210",
-        "CS 3000",
-        "CS 3200"
-      ],
-      "Spring": [
-        "CHEM 2311",
-        "CS 1210",
-        "PSYC 3200"
-      ]
+      "Fall": ["BIOL 2301", "BIOL 3405", "CS 1210", "CS 3000", "CS 3200"],
+      "Spring": ["CHEM 2311", "CS 1210", "PSYC 3200"]
     },
     "Year 3": {
-      "Fall": [
-        "CHEM 2311",
-        "PSYC 3200"
-      ],
-      "Spring": [
-        "ENGW 3302",
-        "CS 4530"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Fall": ["CHEM 2311", "PSYC 3200"],
+      "Spring": ["ENGW 3302", "CS 4530"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 4": {
-      "Fall": [
-        "CS 4500",
-        "IS 4300"
-      ],
-      "Spring": [
-        "BINF 6308",
-        "CS 4100",
-        "IS 4300"
-      ]
+      "Fall": ["CS 4500", "IS 4300"],
+      "Spring": ["BINF 6308", "CS 4100", "IS 4300"]
     }
   },
   "Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "BIOL 1107",
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "BIOL 2299",
-        "CHEM 1161",
-        "CS 2510",
-        "MATH 1341"
-      ],
-      "Summer 1": [
-        "CS 3500",
-        "PSYC 1101"
-      ]
+      "Fall": ["BIOL 1107", "CS 1200", "CS 1800", "CS 2500", "ENGW 1111"],
+      "Spring": ["BIOL 2299", "CHEM 1161", "CS 2510", "MATH 1341"],
+      "Summer 1": ["CS 3500", "PSYC 1101"]
     },
     "Year 2": {
-      "Fall": [
-        "BIOL 2301",
-        "BIOL 3405",
-        "CS 3000",
-        "CS 3200"
-      ],
-      "Spring": [
-        "CHEM 2311",
-        "CS 1210",
-        "PSYC 3200"
-      ]
+      "Fall": ["BIOL 2301", "BIOL 3405", "CS 3000", "CS 3200"],
+      "Spring": ["CHEM 2311", "CS 1210", "PSYC 3200"]
     },
     "Year 3": {
-      "Spring": [
-        "CS 4530"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Spring": ["CS 4530"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 4": {
-      "Spring": [
-        "BINF 6308",
-        "CS 4100",
-        "IS 4300"
-      ]
+      "Spring": ["BINF 6308", "CS 4100", "IS 4300"]
     }
   }
 }

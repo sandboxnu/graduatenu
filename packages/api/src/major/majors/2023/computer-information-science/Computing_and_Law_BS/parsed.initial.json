@@ -2,7 +2,8 @@
   "name": "Computing and Law, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2023,
@@ -80,42 +81,49 @@
       "title": "Required Major Courses",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3000,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3200,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3500,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 2550,
-          "subject": "CY"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3000,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3101,
-          "subject": "LAW"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3102,
-          "subject": "LAW"
+          "type": "SECTION",
+          "title": "Technology",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3200,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3500,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2550,
+              "subject": "CY"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3101,
+              "subject": "LAW"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3102,
+              "subject": "LAW"
+            }
+          ],
+          "minRequirementCount": 7
         }
       ],
-      "minRequirementCount": 7
+      "minRequirementCount": 1
     },
     {
       "type": "SECTION",
@@ -401,6 +409,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

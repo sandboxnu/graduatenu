@@ -2,7 +2,8 @@
   "name": "Communication Studies and Sociology, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2023,
@@ -183,6 +184,12 @@
     },
     {
       "type": "SECTION",
+      "title": "Communication Studies Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Required Sociology Courses",
       "requirements": [
         {
@@ -207,6 +214,24 @@
         }
       ],
       "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Introductory Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Intermediate-Level Elective",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
+      "title": "Advanced-Level Elective",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -235,41 +260,55 @@
       "title": "Capstone/Senior Seminar Option",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 4102,
-          "subject": "COMM"
+          "type": "SECTION",
+          "title": "Communications Capstone Option",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4102,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4530,
+              "subject": "COMM"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4625,
+              "subject": "COMM"
+            },
+            {
+              "type": "RANGE",
+              "subject": "SOCL",
+              "idRangeStart": 3000,
+              "idRangeEnd": 4999,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 4
         },
         {
-          "type": "COURSE",
-          "classId": 4530,
-          "subject": "COMM"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4625,
-          "subject": "COMM"
-        },
-        {
-          "type": "RANGE",
-          "subject": "SOCL",
-          "idRangeStart": 3000,
-          "idRangeEnd": 4999,
-          "exceptions": []
-        },
-        {
-          "type": "COURSE",
-          "classId": 4600,
-          "subject": "SOCL"
-        },
-        {
-          "type": "RANGE",
-          "subject": "COMM",
-          "idRangeStart": 3000,
-          "idRangeEnd": 4999,
-          "exceptions": []
+          "type": "SECTION",
+          "title": "Sociology Senior Seminar Option",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 4600,
+              "subject": "SOCL"
+            },
+            {
+              "type": "RANGE",
+              "subject": "COMM",
+              "idRangeStart": 3000,
+              "idRangeEnd": 4999,
+              "exceptions": []
+            }
+          ],
+          "minRequirementCount": 2
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 2
     }
   ],
   "concentrations": {

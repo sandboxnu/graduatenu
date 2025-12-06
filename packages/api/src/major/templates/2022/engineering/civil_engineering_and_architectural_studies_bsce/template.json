@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, 1 Co-op in Summer 2/Fall": {
     "Year 1": {
       "Fall": [
@@ -9,18 +13,8 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "ARCH 1110",
-        "ARCH 1120",
-        "GE 1502",
-        "MATH 1342"
-      ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ]
+      "Spring": ["ARCH 1110", "ARCH 1120", "GE 1502", "MATH 1342"],
+      "Summer 1": ["MATH 2321", "PHYS 1151", "PHYS 1152", "PHYS 1153"]
     },
     "Year 2": {
       "Fall": [
@@ -42,10 +36,7 @@
         "ENCP 2000",
         "GE 3300"
       ],
-      "Summer 1": [
-        "CIVE 2324",
-        "GE 3300"
-      ]
+      "Summer 1": ["CIVE 2324", "GE 3300"]
     },
     "Year 3": {
       "Spring": [
@@ -58,17 +49,10 @@
         "ARCH 2340",
         "ARCH 2341"
       ],
-      "Summer 1": [
-        "CIVE 2324",
-        "ENGW 3302"
-      ]
+      "Summer 1": ["CIVE 2324", "ENGW 3302"]
     },
     "Year 4": {
-      "Fall": [
-        "CIVE 3464",
-        "ENCP 3000",
-        "ENGW 3302"
-      ],
+      "Fall": ["CIVE 3464", "ENCP 3000", "ENGW 3302"],
       "Spring": [
         "CIVE 4767",
         "ARCH 2140",
@@ -79,9 +63,7 @@
       ]
     },
     "Year 5": {
-      "Spring": [
-        "CIVE 4767"
-      ]
+      "Spring": ["CIVE 4767"]
     }
   },
   "Five Years, 3 Co-ops in Summer 2/Fall": {
@@ -94,18 +76,8 @@
         "GE 1501",
         "MATH 1341"
       ],
-      "Spring": [
-        "ARCH 1110",
-        "ARCH 1120",
-        "GE 1502",
-        "MATH 1342"
-      ],
-      "Summer 1": [
-        "MATH 2321",
-        "PHYS 1151",
-        "PHYS 1152",
-        "PHYS 1153"
-      ]
+      "Spring": ["ARCH 1110", "ARCH 1120", "GE 1502", "MATH 1342"],
+      "Summer 1": ["MATH 2321", "PHYS 1151", "PHYS 1152", "PHYS 1153"]
     },
     "Year 2": {
       "Fall": [
@@ -134,10 +106,7 @@
         "CIVE 2340",
         "CIVE 2341"
       ],
-      "Summer 1": [
-        "CIVE 2324",
-        "ENGW 3302"
-      ]
+      "Summer 1": ["CIVE 2324", "ENGW 3302"]
     },
     "Year 4": {
       "Spring": [
@@ -149,9 +118,7 @@
       ]
     },
     "Year 5": {
-      "Spring": [
-        "CIVE 4767"
-      ]
+      "Spring": ["CIVE 4767"]
     }
   }
 }

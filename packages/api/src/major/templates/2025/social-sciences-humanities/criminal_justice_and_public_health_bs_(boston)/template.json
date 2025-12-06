@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study: Four Years, Two Co-ops in Spring/Summer First Half, Biology Option 1": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "PSYC 1101", "CRIM 1100", "BIOL 1141"],
+      "Spring": ["CRIM 1110", "PHTH 2350", "BIOL 1147", "ENGW 1111"],
+      "Summer 1": ["PHTH 2300"]
+    },
+    "Year 2": {
+      "Fall": ["HSCI 2000", "PHTH 2210", "PHTH 2515", "CRIM 1120", "CS 2000"]
+    },
+    "Year 3": {
+      "Summer 2": ["PHTH 4120", "PHTH 4540"],
+      "Fall": ["PHTH 4202", "CRIM 3110"]
+    },
+    "Year 4": {}
+  },
+  "Sample Plan of Study: Four Years, Two Co-ops in Summer Second Half/Fall, Biology Option 2": {
+    "Year 1": {
+      "Fall": ["HSCI 1000", "PHTH 1260", "CRIM 1100", "BIOL 1111", "ENGW 1111"],
+      "Spring": ["PSYC 1101", "PHTH 2350", "BIOL 1113"],
+      "Summer 1": ["PHTH 2300"]
+    },
+    "Year 2": {
+      "Fall": ["CRIM 1110", "CS 1100", "PHTH 2515"],
+      "Spring": ["HSCI 2000", "PHTH 2210", "CRIM 1120"],
+      "Summer 1": ["PHTH 4202"]
+    },
+    "Year 3": {
+      "Summer 1": ["PHTH 4120", "PHTH 4540"],
+      "Spring": ["CRIM 3110"]
+    },
+    "Year 4": {}
+  }
+}

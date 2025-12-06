@@ -1,38 +1,23 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "MATH 1365",
-        "PSYC 1101"
-      ],
-      "Spring": [
-        "MATH 1341"
-      ]
+      "Fall": ["ENGW 1111", "MATH 1365", "PSYC 1101"],
+      "Spring": ["MATH 1341"]
     },
     "Year 2": {
-      "Fall": [
-        "MATH 1342",
-        "PSYC 2320"
-      ],
-      "Spring": [
-        "EESC 2000",
-        "MATH 2321"
-      ]
+      "Fall": ["MATH 1342", "PSYC 2320"],
+      "Spring": ["EESC 2000", "MATH 2321"]
     },
     "Year 3": {
-      "Spring": [
-        "MATH 2331"
-      ],
-      "Summer 1": [
-        "MATH 2341"
-      ]
+      "Spring": ["MATH 2331"],
+      "Summer 1": ["MATH 2341"]
     },
     "Year 4": {
-      "Spring": [
-        "MATH 3081",
-        "PSYC 4540"
-      ]
+      "Spring": ["MATH 3081", "PSYC 4540"]
     },
     "Year 5": {}
   }

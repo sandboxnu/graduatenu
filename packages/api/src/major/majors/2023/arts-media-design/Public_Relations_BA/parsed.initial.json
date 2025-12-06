@@ -2,7 +2,8 @@
   "name": "Public Relations, BA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 60,
   "yearVersion": 2023,
@@ -231,6 +232,12 @@
         }
       ],
       "minRequirementCount": 9
+    },
+    {
+      "type": "SECTION",
+      "title": "Subject Expertise",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",

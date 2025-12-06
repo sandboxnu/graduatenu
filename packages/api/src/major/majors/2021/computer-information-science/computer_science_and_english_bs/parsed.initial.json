@@ -2,7 +2,8 @@
   "name": "Computer Science and English, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 133,
   "yearVersion": 2021,
@@ -121,37 +122,58 @@
       "title": "Computing Focus",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3800,
-          "subject": "CS"
+          "type": "SECTION",
+          "title": "Focus 1: Natural Language Processing",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4120,
+              "subject": "CS"
+            }
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "COURSE",
-          "classId": 4120,
-          "subject": "CS"
+          "type": "SECTION",
+          "title": "Focus 2: Programming Languages",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "CS"
+            }
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "COURSE",
-          "classId": 3800,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4400,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3000,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4200,
-          "subject": "DS"
+          "type": "SECTION",
+          "title": "Focus 3: Analytics",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4200,
+              "subject": "DS"
+            }
+          ],
+          "minRequirementCount": 2
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
@@ -244,6 +266,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "English Course-Level Requirement",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -725,6 +753,12 @@
     },
     {
       "type": "SECTION",
+      "title": "English Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Integrative Course Requirement",
       "requirements": [
         {
@@ -861,6 +895,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

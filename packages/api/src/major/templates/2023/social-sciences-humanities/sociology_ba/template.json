@@ -1,32 +1,21 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "SOCL 1000",
-        "SOCL 1101",
-        "ENGW 1111"
-      ],
-      "Spring": [
-        "SOCL 2321"
-      ]
+      "Fall": ["SOCL 1000", "SOCL 1101", "ENGW 1111"],
+      "Spring": ["SOCL 2321"]
     },
     "Year 2": {
-      "Fall": [
-        "SOCL 2320",
-        "ANTH 2305",
-        "EESH 2000"
-      ]
+      "Fall": ["SOCL 2320", "ANTH 2305", "EESH 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "ENGW 3315",
-        "SOCL 3300"
-      ]
+      "Fall": ["ENGW 3315", "SOCL 3300"]
     },
     "Year 4": {
-      "Spring": [
-        "SOCL 4600"
-      ]
+      "Spring": ["SOCL 4600"]
     }
   }
 }

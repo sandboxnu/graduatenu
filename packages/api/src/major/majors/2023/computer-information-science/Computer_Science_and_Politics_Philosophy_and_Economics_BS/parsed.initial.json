@@ -2,7 +2,8 @@
   "name": "Computer Science and Politics, Philosophy, and Economics, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 129,
   "yearVersion": 2023,
@@ -227,97 +228,125 @@
       "title": "Core Courses",
       "requirements": [
         {
-          "type": "OR",
-          "courses": [
+          "type": "SECTION",
+          "title": "Philosophy",
+          "requirements": [
             {
-              "type": "COURSE",
-              "classId": 2303,
-              "subject": "PHIL"
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2303,
+                  "subject": "PHIL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3822,
+                  "subject": "PHIL"
+                }
+              ]
+            },
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 3435,
+                  "subject": "PHIL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2325,
+                  "subject": "PHIL"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 2
+        },
+        {
+          "type": "SECTION",
+          "title": "Political Science",
+          "requirements": [
+            {
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1150,
+                  "subject": "POLS"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1155,
+                  "subject": "POLS"
+                }
+              ]
             },
             {
               "type": "COURSE",
-              "classId": 3822,
-              "subject": "PHIL"
-            }
-          ]
-        },
-        {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 3435,
-              "subject": "PHIL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2325,
-              "subject": "PHIL"
-            }
-          ]
-        },
-        {
-          "type": "OR",
-          "courses": [
-            {
-              "type": "COURSE",
-              "classId": 1150,
+              "classId": 1160,
               "subject": "POLS"
             },
             {
               "type": "COURSE",
-              "classId": 1155,
+              "classId": 3405,
               "subject": "POLS"
             }
-          ]
+          ],
+          "minRequirementCount": 3
         },
         {
-          "type": "COURSE",
-          "classId": 1160,
-          "subject": "POLS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3405,
-          "subject": "POLS"
-        },
-        {
-          "type": "OR",
-          "courses": [
+          "type": "SECTION",
+          "title": "Economics",
+          "requirements": [
             {
-              "type": "COURSE",
-              "classId": 1115,
-              "subject": "ECON"
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 1115,
+                  "subject": "ECON"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 1116,
+                  "subject": "ECON"
+                }
+              ]
             },
             {
-              "type": "COURSE",
-              "classId": 1116,
-              "subject": "ECON"
+              "type": "OR",
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2315,
+                  "subject": "ECON"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2316,
+                  "subject": "ECON"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "OR",
-          "courses": [
+          "type": "SECTION",
+          "title": "Methods Course",
+          "requirements": [
             {
               "type": "COURSE",
-              "classId": 2315,
-              "subject": "ECON"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2316,
-              "subject": "ECON"
+              "classId": 3000,
+              "subject": "PHIL"
             }
-          ]
-        },
-        {
-          "type": "COURSE",
-          "classId": 3000,
-          "subject": "PHIL"
+          ],
+          "minRequirementCount": 1
         }
       ],
-      "minRequirementCount": 8
+      "minRequirementCount": 4
     },
     {
       "type": "SECTION",
@@ -512,6 +541,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

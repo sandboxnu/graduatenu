@@ -1,31 +1,21 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study": {
     "Year 1": {
-      "Fall": [
-        "ANTH 1101",
-        "SOCL 1000",
-        "SOCL 1101"
-      ],
-      "Spring": [
-        "ANTH 3410",
-        "SOCL 2321"
-      ]
+      "Fall": ["ANTH 1101", "SOCL 1000", "SOCL 1101"],
+      "Spring": ["ANTH 3410", "SOCL 2321"]
     },
     "Year 2": {
-      "Spring": [
-        "ANTH 2305",
-        "SOCL 3300"
-      ]
+      "Spring": ["ANTH 2305", "SOCL 3300"]
     },
     "Year 3": {
-      "Spring": [
-        "ANTH 3421"
-      ]
+      "Spring": ["ANTH 3421"]
     },
     "Year 4": {
-      "Spring": [
-        "ANTH 4600"
-      ]
+      "Spring": ["ANTH 4600"]
     }
   }
 }

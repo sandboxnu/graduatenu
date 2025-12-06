@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTG 1001", "MATH 1365", "MATH 1341", "ENGW 1111"],
+      "Spring": ["MATH 1342", "ARTG 1270", "ARTG 1290", "EEAM 2000"],
+      "Summer 1": ["ARTF 1220"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "MATH 2341", "EESC 2000"]
+    },
+    "Year 3": {
+      "Fall": ["MATH 2331"]
+    },
+    "Year 4": {
+      "Fall": ["MATH 3081"],
+      "Spring": ["ARTG 4550"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ARTF 1000", "ARTG 1001", "MATH 1365", "MATH 1341", "ENGW 1111"],
+      "Spring": ["MATH 1342", "ARTG 1270", "ARTG 1290", "EEAM 2000"],
+      "Summer 1": ["ARTF 1220"]
+    },
+    "Year 2": {
+      "Fall": ["MATH 2321", "MATH 2341", "EESC 2000"]
+    },
+    "Year 3": {
+      "Fall": ["MATH 2331"]
+    },
+    "Year 4": {
+      "Fall": ["MATH 3081"],
+      "Spring": ["ARTG 4550"]
+    }
+  }
+}

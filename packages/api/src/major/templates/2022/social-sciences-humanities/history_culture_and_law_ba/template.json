@@ -1,69 +1,33 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Africana Studies and Culture Concentration, Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CLTR 1000",
-        "ENGW 1111",
-        "HIST 1100",
-        "MATH 1215"
-      ],
-      "Spring": [
-        "AFAM 1101",
-        "LPSC 2301",
-        "POLS 1160"
-      ]
+      "Fall": ["CLTR 1000", "ENGW 1111", "HIST 1100", "MATH 1215"],
+      "Spring": ["AFAM 1101", "LPSC 2301", "POLS 1160"]
     },
     "Year 2": {
-      "Fall": [
-        "EESH 2000",
-        "ENGL 3325",
-        "LPSC 2301",
-        "PHIL 2301"
-      ]
+      "Fall": ["EESH 2000", "ENGL 3325", "LPSC 2301", "PHIL 2301"]
     },
     "Year 3": {
-      "Fall": [
-        "AFRS 1270",
-        "ENGW 3315",
-        "SOCL 4520"
-      ],
-      "Spring": [
-        "AFAM 1113",
-        "EESH 2000"
-      ]
+      "Fall": ["AFRS 1270", "ENGW 3315", "SOCL 4520"],
+      "Spring": ["AFAM 1113", "EESH 2000"]
     },
     "Year 4": {}
   },
   "Digital Humanities Concentration, Four Years, One Co-op in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "CLTR 1000",
-        "ENGW 1111",
-        "HIST 1100",
-        "MATH 1215"
-      ],
-      "Spring": [
-        "COMM 1255",
-        "ENGL 1450",
-        "LPSC 2301"
-      ]
+      "Fall": ["CLTR 1000", "ENGW 1111", "HIST 1100", "MATH 1215"],
+      "Spring": ["COMM 1255", "ENGL 1450", "LPSC 2301"]
     },
     "Year 2": {
-      "Fall": [
-        "EESH 2000",
-        "ENGL 3325",
-        "LPSC 2301",
-        "PHIL 2301"
-      ]
+      "Fall": ["EESH 2000", "ENGL 3325", "LPSC 2301", "PHIL 2301"]
     },
     "Year 3": {
-      "Fall": [
-        "ENGL 3340",
-        "INSH 2102"
-      ],
-      "Spring": [
-        "ENGW 3315"
-      ]
+      "Fall": ["ENGL 3340", "INSH 2102"],
+      "Spring": ["ENGW 3315"]
     },
     "Year 4": {}
   }

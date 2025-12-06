@@ -2,7 +2,8 @@
   "name": "Design, BFA",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 129,
   "yearVersion": 2021,
@@ -223,7 +224,7 @@
     "concentrationOptions": [
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Graphic and Information Design",
         "requirements": [
           {
             "type": "COURSE",
@@ -240,7 +241,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Graphic and Information Design: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -302,7 +303,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Interaction Design",
         "requirements": [
           {
             "type": "COURSE",
@@ -329,7 +330,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Interaction Design: Electives",
         "requirements": [
           {
             "type": "COURSE",
@@ -386,7 +387,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Required Courses",
+        "title": "Concentration in Experience Design",
         "requirements": [
           {
             "type": "COURSE",
@@ -408,7 +409,7 @@
       },
       {
         "type": "SECTION",
-        "title": "Electives",
+        "title": "Concentration in Experience Design: Electives",
         "requirements": [
           {
             "type": "COURSE",

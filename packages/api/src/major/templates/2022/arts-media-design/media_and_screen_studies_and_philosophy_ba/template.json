@@ -1,28 +1,19 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, Two Co-ops": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "MSCR 1000",
-        "MSCR 1220",
-        "PHIL 1115"
-      ],
-      "Spring": [
-        "MSCR 1320",
-        "PHIL 2325"
-      ]
+      "Fall": ["ENGW 1111", "MSCR 1000", "MSCR 1220", "PHIL 1115"],
+      "Spring": ["MSCR 1320", "PHIL 2325"]
     },
     "Year 2": {
-      "Fall": [
-        "EEAM 2000",
-        "PHIL 2330"
-      ]
+      "Fall": ["EEAM 2000", "PHIL 2330"]
     },
     "Year 3": {},
     "Year 4": {
-      "Spring": [
-        "MSCR 3600"
-      ]
+      "Spring": ["MSCR 3600"]
     }
   }
 }

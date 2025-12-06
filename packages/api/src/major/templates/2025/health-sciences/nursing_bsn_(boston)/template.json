@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": [
+        "NRSG 1000",
+        "CHEM 1101",
+        "CHEM 1161",
+        "BIOL 2217",
+        "MATH 1215",
+        "HSCI 1105"
+      ],
+      "Spring": ["PSYC 1101", "BIOL 2219", "BIOL 2221", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["NRSG 2215", "NRSG 2222", "NRSG 2350", "PSYC 3404"],
+      "Spring": ["NRSG 2000", "NRSG 3320", "NRSG 3333", "SOCL 1101"],
+      "Summer 1": ["HLTH 2100", "NRSG 3400"]
+    },
+    "Year 3": {
+      "Spring": ["NRSG 3120", "NRSG 3344", "NRSG 3420", "NRSG 4504"],
+      "Summer 1": ["ENGW 3306"]
+    },
+    "Year 4": {
+      "Spring": ["NRSG 4604", "NRSG 4610", "NRSG 4889", "NRSG 5220"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": [
+        "NRSG 1000",
+        "CHEM 1101",
+        "CHEM 1161",
+        "BIOL 2217",
+        "MATH 1215",
+        "HSCI 1105"
+      ],
+      "Spring": ["PSYC 1101", "BIOL 2219", "BIOL 2221", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["NRSG 2215", "NRSG 2222", "NRSG 2350", "PSYC 3404"],
+      "Spring": ["NRSG 2000", "NRSG 3320", "NRSG 3333", "SOCL 1101"],
+      "Summer 1": ["HLTH 2100", "NRSG 3400"]
+    },
+    "Year 3": {
+      "Spring": ["NRSG 3120", "NRSG 3344", "NRSG 3420", "NRSG 4504"],
+      "Summer 1": ["ENGW 3306"]
+    },
+    "Year 4": {
+      "Spring": ["NRSG 4604", "NRSG 4610", "NRSG 4889", "NRSG 5220"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": [
+        "NRSG 1000",
+        "BIOL 2217",
+        "CHEM 1101",
+        "CHEM 1161",
+        "HSCI 1105",
+        "MATH 1215"
+      ],
+      "Spring": ["PSYC 1101", "BIOL 2219", "BIOL 2221", "ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["NRSG 2000", "NRSG 2222", "NRSG 2215", "NRSG 2350", "PSYC 3404"],
+      "Summer 2": ["NRSG 3400", "SOCL 1101"]
+    },
+    "Year 3": {
+      "Fall": ["HLTH 2100", "NRSG 3120", "NRSG 3320", "NRSG 3333"],
+      "Summer 2": ["ENGW 3306"]
+    },
+    "Year 4": {
+      "Fall": ["NRSG 3344", "NRSG 3320", "NRSG 4504", "NRSG 5220"],
+      "Spring": ["NRSG 4610", "NRSG 4604", "NRSG 4889"]
+    }
+  }
+}

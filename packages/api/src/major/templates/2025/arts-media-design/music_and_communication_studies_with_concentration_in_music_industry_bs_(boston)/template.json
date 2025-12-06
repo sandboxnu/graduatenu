@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["COMM 1101", "COMM 1112", "MUSC 1000", "MUSC 1002", "MUSI 1230"],
+      "Spring": ["ENGW 1111", "MUSC 1201", "EEAM 2000"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Spring": ["ACCT 1209", "ENGW 3314"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["COMM 1101", "COMM 1112", "MUSC 1000", "MUSC 1002", "MUSI 1230"],
+      "Spring": ["ENGW 1111", "MUSC 1201", "EEAM 2000"]
+    },
+    "Year 2": {},
+    "Year 3": {
+      "Spring": ["ACCT 1209", "ENGW 3314"]
+    },
+    "Year 4": {}
+  }
+}

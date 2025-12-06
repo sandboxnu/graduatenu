@@ -2,7 +2,8 @@
   "name": "Physics and Music with Concentration in Music Technology, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 131,
   "yearVersion": 2021,
@@ -12,38 +13,52 @@
       "title": "Introductory Physics",
       "requirements": [
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Physics 1",
+          "requirements": [
             {
-              "subject": "PHYS",
-              "classId": 1161,
-              "description": "Physics 1",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1162,
-              "description": "Lab for PHYS 1161",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1161,
+                  "description": "Physics 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1162,
+                  "description": "Lab for PHYS 1161",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "AND",
-          "courses": [
+          "type": "SECTION",
+          "title": "Physics 2",
+          "requirements": [
             {
-              "subject": "PHYS",
-              "classId": 1165,
-              "description": "Physics 2",
-              "type": "COURSE"
-            },
-            {
-              "subject": "PHYS",
-              "classId": 1166,
-              "description": "Lab for PHYS 1165",
-              "type": "COURSE"
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1165,
+                  "description": "Physics 2",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1166,
+                  "description": "Lab for PHYS 1165",
+                  "type": "COURSE"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 2
@@ -184,60 +199,67 @@
           "subject": "MUSC"
         },
         {
-          "type": "XOM",
-          "numCreditsMin": 4,
-          "courses": [
+          "type": "SECTION",
+          "title": "Contemporary",
+          "requirements": [
             {
-              "type": "COURSE",
-              "classId": 2101,
-              "subject": "MUSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2150,
-              "subject": "MUSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2317,
-              "subject": "MUSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2310,
-              "subject": "MUSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2320,
-              "subject": "MUSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2340,
-              "subject": "MUSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2351,
-              "subject": "MUSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3352,
-              "subject": "MUSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3560,
-              "subject": "MUSC"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3401,
-              "subject": "MUSI"
+              "type": "XOM",
+              "numCreditsMin": 4,
+              "courses": [
+                {
+                  "type": "COURSE",
+                  "classId": 2101,
+                  "subject": "MUSC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2150,
+                  "subject": "MUSC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2317,
+                  "subject": "MUSC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2310,
+                  "subject": "MUSC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2320,
+                  "subject": "MUSC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2340,
+                  "subject": "MUSC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2351,
+                  "subject": "MUSC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3352,
+                  "subject": "MUSC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3560,
+                  "subject": "MUSC"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3401,
+                  "subject": "MUSI"
+                }
+              ]
             }
-          ]
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 2

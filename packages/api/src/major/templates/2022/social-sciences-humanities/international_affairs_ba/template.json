@@ -1,80 +1,42 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "INTL 1000",
-        "INTL 1101",
-        "ENGW 1111",
-        "ANTH 1101"
-      ],
-      "Spring": [
-        "HIST 2211",
-        "POLS 1160",
-        "MATH 1215"
-      ]
+      "Fall": ["INTL 1000", "INTL 1101", "ENGW 1111", "ANTH 1101"],
+      "Spring": ["HIST 2211", "POLS 1160", "MATH 1215"]
     },
     "Year 2": {
-      "Fall": [
-        "ECON 1115",
-        "INTL 2718",
-        "EESH 2000"
-      ]
+      "Fall": ["ECON 1115", "INTL 2718", "EESH 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "INTL 3400",
-        "ENGW 3315",
-        "ECON 1115"
-      ]
+      "Fall": ["INTL 3400", "ENGW 3315", "ECON 1115"]
     },
     "Year 4": {
-      "Fall": [
-        "INTL 4700",
-        "INTL 3400",
-        "ENGW 3315"
-      ]
+      "Fall": ["INTL 4700", "INTL 3400", "ENGW 3315"]
     },
     "Year 5": {
-      "Spring": [
-        "INTL 4700"
-      ]
+      "Spring": ["INTL 4700"]
     }
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "INTL 1000",
-        "INTL 1101",
-        "ENGW 1111",
-        "ANTH 1101"
-      ],
-      "Spring": [
-        "MATH 1215",
-        "HIST 2211",
-        "POLS 1160"
-      ]
+      "Fall": ["INTL 1000", "INTL 1101", "ENGW 1111", "ANTH 1101"],
+      "Spring": ["MATH 1215", "HIST 2211", "POLS 1160"]
     },
     "Year 2": {
-      "Fall": [
-        "INTL 2718",
-        "EESH 2000"
-      ]
+      "Fall": ["INTL 2718", "EESH 2000"]
     },
     "Year 3": {
-      "Fall": [
-        "ECON 1115"
-      ]
+      "Fall": ["ECON 1115"]
     },
     "Year 4": {
-      "Fall": [
-        "INTL 3400",
-        "ENGW 3315"
-      ]
+      "Fall": ["INTL 3400", "ENGW 3315"]
     },
     "Year 5": {
-      "Spring": [
-        "INTL 4700"
-      ]
+      "Spring": ["INTL 4700"]
     }
   }
 }

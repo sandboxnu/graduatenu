@@ -313,32 +313,37 @@ export function validateMajor2(
     );
   }
 
-  let minorRequirements: Requirement2[] = [];
+  const minorRequirements: Requirement2[] = [];
   if (minor) {
     // Get the minor requirements and assign them
-    minorRequirements = getMinorRequirement(minor);
+    minorRequirements.push(...getMinorRequirement(minor));
   }
 
-  let majorRequirements: Requirement2[] = [];
-  majorRequirements = wrapMajor(major);
+  const majorRequirements: Requirement2[] = [];
+  if (major) {
+    majorRequirements.push(...wrapMajor(major));
+  }
 
-  const majorReqs = [
+  const allRequirements = [
     ...majorRequirements,
     ...minorRequirements,
     ...concentrationReq,
   ];
 
   const requiredCourses: Set<string> = new Set();
-  tracker.setNecessaryCourses(getNecessaryCourses(majorReqs, requiredCourses));
+  tracker.setNecessaryCourses(
+    getNecessaryCourses(allRequirements, requiredCourses)
+  );
 
   // create a big AND requirement of all the sections and selected concentrations
   const requirementsResult = validateRequirement(
     {
       type: "AND",
-      courses: majorReqs,
+      courses: allRequirements,
     },
     tracker
   );
+
   const creditsResult = validateTotalCreditsRequired(
     major.totalCreditsRequired + (minor?.totalCreditsRequired ?? 0),
     taken

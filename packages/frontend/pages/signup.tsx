@@ -105,8 +105,8 @@ const SignUpForm: React.FC = () => {
             {...register("email", {
               required: "Email is required",
               pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address",
+                value: /^[A-Z0-9._%+-]+@husky\.neu\.edu$/i,
+                message: "Please use a valid husky.neu.edu email address",
               },
             })}
           />

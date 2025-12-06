@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CRIM 1000", "CRIM 1100", "ECON 1115", "ECON 1116", "MATH 1231"],
+      "Spring": ["CRIM 1110", "CRIM 1120", "ECON 2315", "CS 1100"],
+      "Summer 1": ["ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "CRIM 3600", "ECON 2316", "ECON 2560"]
+    },
+    "Year 3": {
+      "Fall": ["ECON 2350"],
+      "Spring": ["ENGW 3308"]
+    },
+    "Year 4": {
+      "Fall": ["ECON 3424"]
+    }
+  },
+  "Four Years, One Co-op in Spring/Summer First-Half": {
+    "Year 1": {
+      "Fall": ["CRIM 1000", "CRIM 1100", "ECON 1115", "ECON 1116", "MATH 1231"],
+      "Spring": ["CRIM 1110", "CRIM 1120", "ECON 2315", "CS 1100"],
+      "Summer 1": ["ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "CRIM 3600", "ECON 2316", "ECON 2560"]
+    },
+    "Year 3": {
+      "Fall": ["ECON 2350"],
+      "Spring": ["ENGW 3308"]
+    },
+    "Year 4": {
+      "Fall": ["ECON 3424"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First-Half": {
+    "Year 1": {
+      "Fall": ["CRIM 1000", "CRIM 1100", "ECON 1115", "ECON 1116", "MATH 1231"],
+      "Spring": ["CRIM 1110", "CRIM 1120", "ECON 2315", "CS 1100"],
+      "Summer 1": ["ENGW 1111"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "CRIM 3600", "ECON 2316", "ECON 2560"],
+      "Summer 2": ["ENGW 3308"]
+    },
+    "Year 3": {
+      "Fall": ["ECON 2350"]
+    },
+    "Year 4": {
+      "Fall": ["ECON 3424"]
+    }
+  }
+}

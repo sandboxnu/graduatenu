@@ -1,74 +1,39 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Five Years, Three Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "INTL 1000",
-        "ENGW 1111",
-        "INTL 1101",
-        "CLTR 1120",
-        "SPNS 2101"
-      ],
-      "Spring": [
-        "MATH 1215",
-        "ECON 1115",
-        "SPNS 2102"
-      ]
+      "Fall": ["INTL 1000", "ENGW 1111", "INTL 1101", "CLTR 1120", "SPNS 2101"],
+      "Spring": ["MATH 1215", "ECON 1115", "SPNS 2102"]
     },
     "Year 2": {
-      "Fall": [
-        "SPNS 3101"
-      ]
+      "Fall": ["SPNS 3101"]
     },
     "Year 3": {},
     "Year 4": {
-      "Spring": [
-        "ENGW 3315",
-        "INTL 3400"
-      ],
-      "Fall": [
-        "INTL 3400",
-        "ENGW 3315"
-      ]
+      "Spring": ["ENGW 3315", "INTL 3400"],
+      "Fall": ["INTL 3400", "ENGW 3315"]
     },
     "Year 5": {
-      "Spring": [
-        "INTL 4700",
-        "CLTR 4655"
-      ]
+      "Spring": ["INTL 4700", "CLTR 4655"]
     }
   },
   "Five Years, Three Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "INTL 1000",
-        "ENGW 1111",
-        "INTL 1101",
-        "CLTR 1120",
-        "SPNS 2101"
-      ],
-      "Spring": [
-        "MATH 1215",
-        "ECON 1115",
-        "SPNS 2102"
-      ]
+      "Fall": ["INTL 1000", "ENGW 1111", "INTL 1101", "CLTR 1120", "SPNS 2101"],
+      "Spring": ["MATH 1215", "ECON 1115", "SPNS 2102"]
     },
     "Year 2": {
-      "Fall": [
-        "SPNS 3101"
-      ]
+      "Fall": ["SPNS 3101"]
     },
     "Year 3": {},
     "Year 4": {
-      "Fall": [
-        "INTL 3400",
-        "ENGW 3315"
-      ]
+      "Fall": ["INTL 3400", "ENGW 3315"]
     },
     "Year 5": {
-      "Spring": [
-        "INTL 4700",
-        "CLTR 4655"
-      ]
+      "Spring": ["INTL 4700", "CLTR 4655"]
     }
   }
 }

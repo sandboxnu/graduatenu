@@ -1,26 +1,14 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111",
-        "PHIL 1160"
-      ],
-      "Spring": [
-        "CS 2510",
-        "ECON 1115",
-        "PHIL 1115",
-        "POLS 1160"
-      ],
-      "Summer 1": [
-        "CS 3000",
-        "CS 3500"
-      ],
-      "Summer 2": [
-        "MATH 1231"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "PHIL 1160"],
+      "Spring": ["CS 2510", "ECON 1115", "PHIL 1115", "POLS 1160"],
+      "Summer 1": ["CS 3000", "CS 3500"],
+      "Summer 2": ["MATH 1231"]
     },
     "Year 2": {
       "Fall": [
@@ -31,102 +19,39 @@
         "CS 1210",
         "CS 3000"
       ],
-      "Spring": [
-        "CS 1210",
-        "CS 3200",
-        "ECON 2350",
-        "PHIL 2303"
-      ],
-      "Summer 1": [
-        "ECON 2315"
-      ],
-      "Summer 2": [
-        "ECON 2315"
-      ]
+      "Spring": ["CS 1210", "CS 3200", "ECON 2350", "PHIL 2303"],
+      "Summer 1": ["ECON 2315"],
+      "Summer 2": ["ECON 2315"]
     },
     "Year 3": {
-      "Spring": [
-        "IS 4300",
-        "PHIL 3000",
-        "POLS 2390"
-      ],
-      "Summer 1": [
-        "ENGW 3302"
-      ],
-      "Fall": [
-        "CS 3200",
-        "ECON 2350",
-        "PHIL 2303"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Spring": ["IS 4300", "PHIL 3000", "POLS 2390"],
+      "Summer 1": ["ENGW 3302"],
+      "Fall": ["CS 3200", "ECON 2350", "PHIL 2303"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 4": {
-      "Spring": [
-        "CS 4530",
-        "IS 4300"
-      ],
-      "Fall": [
-        "CS 4500",
-        "PHIL 3000",
-        "POLS 2390"
-      ]
+      "Spring": ["CS 4530", "IS 4300"],
+      "Fall": ["CS 4500", "PHIL 3000", "POLS 2390"]
     }
   },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "CS 1200",
-        "CS 1800",
-        "CS 2500",
-        "ENGW 1111",
-        "PHIL 1160"
-      ],
-      "Spring": [
-        "CS 2510",
-        "ECON 1115",
-        "PHIL 1115",
-        "POLS 1160"
-      ],
-      "Summer 1": [
-        "CS 3500"
-      ],
-      "Summer 2": [
-        "MATH 1231"
-      ]
+      "Fall": ["CS 1200", "CS 1800", "CS 2500", "ENGW 1111", "PHIL 1160"],
+      "Spring": ["CS 2510", "ECON 1115", "PHIL 1115", "POLS 1160"],
+      "Summer 1": ["CS 3500"],
+      "Summer 2": ["MATH 1231"]
     },
     "Year 2": {
-      "Fall": [
-        "CS 1210",
-        "CS 3000",
-        "PHIL 3435",
-        "POLS 1150",
-        "POLS 3405"
-      ],
-      "Summer 2": [
-        "ECON 2315"
-      ]
+      "Fall": ["CS 1210", "CS 3000", "PHIL 3435", "POLS 1150", "POLS 3405"],
+      "Summer 2": ["ECON 2315"]
     },
     "Year 3": {
-      "Fall": [
-        "CS 3200",
-        "ECON 2350",
-        "PHIL 2303"
-      ],
-      "Summer 2": [
-        "ENGW 3302"
-      ]
+      "Fall": ["CS 3200", "ECON 2350", "PHIL 2303"],
+      "Summer 2": ["ENGW 3302"]
     },
     "Year 4": {
-      "Fall": [
-        "CS 4500",
-        "PHIL 3000",
-        "POLS 2390"
-      ],
-      "Spring": [
-        "IS 4300"
-      ]
+      "Fall": ["CS 4500", "PHIL 3000", "POLS 2390"],
+      "Spring": ["IS 4300"]
     }
   }
 }

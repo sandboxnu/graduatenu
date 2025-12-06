@@ -1,11 +1,11 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Spring/Summer 1": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "PHIL 1110",
-        "AFAM 1101"
-      ]
+      "Fall": ["ENGW 1111", "PHIL 1110", "AFAM 1101"]
     },
     "Year 2": {},
     "Year 3": {},

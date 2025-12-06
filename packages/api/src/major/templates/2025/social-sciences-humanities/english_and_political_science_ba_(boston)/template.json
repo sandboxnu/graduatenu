@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["ENGL 1000", "ENGL 1400", "POLS 1150", "POLS 1155"],
+      "Spring": ["ENGL 1160", "POLS 1160"]
+    },
+    "Year 2": {
+      "Fall": ["POLS 2399"]
+    },
+    "Year 3": {
+      "Fall": ["ENGL 3710"]
+    },
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["ENGL 1000", "ENGL 1400", "POLS 1150", "POLS 1155"],
+      "Spring": ["ENGL 1160", "POLS 1160"]
+    },
+    "Year 2": {
+      "Fall": ["POLS 2399"]
+    },
+    "Year 3": {
+      "Fall": ["ENGL 3710"]
+    },
+    "Year 4": {}
+  },
+  "Five Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["ENGL 1000", "ENGL 1400", "POLS 1150", "POLS 1155"],
+      "Spring": ["ENGL 1160", "POLS 1160"]
+    },
+    "Year 2": {
+      "Spring": ["POLS 2400"]
+    },
+    "Year 3": {
+      "Spring": ["ENGL 3710", "POLS 2399"]
+    },
+    "Year 4": {},
+    "Year 5": {}
+  }
+}

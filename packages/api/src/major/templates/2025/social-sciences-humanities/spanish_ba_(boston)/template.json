@@ -1,0 +1,38 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["CLTR 1000", "CLTR 1120", "ENGW 1111", "MATH 1215", "SPNS 2102"],
+      "Spring": ["LING 1150", "SPNS 3101"]
+    },
+    "Year 2": {
+      "Fall": ["SPNS 3102"],
+      "Spring": ["EESH 2000", "SPNS 3502"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Spring": ["SPNS 3601", "SPNS 4700"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CLTR 1000", "CLTR 1120", "ENGW 1111", "MATH 1215", "SPNS 2102"],
+      "Spring": ["LING 1150", "SPNS 3101"]
+    },
+    "Year 2": {
+      "Fall": ["SPNS 3102"],
+      "Spring": ["EESH 2000", "SPNS 3502"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3315"]
+    },
+    "Year 4": {
+      "Spring": ["SPNS 3601", "SPNS 4700"]
+    }
+  }
+}

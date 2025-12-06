@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops Sample": {
     "Year 1": {
       "Fall": [
@@ -9,51 +13,23 @@
         "PHTH 1260",
         "PSYC 1101"
       ],
-      "Spring": [
-        "BIOL 1113",
-        "BIOL 1114",
-        "CHEM 1161",
-        "ENGW 1111"
-      ]
+      "Spring": ["BIOL 1113", "BIOL 1114", "CHEM 1161", "ENGW 1111"]
     },
     "Year 2": {
-      "Fall": [
-        "COMM 1101",
-        "COMM 1112",
-        "HSCI 2000",
-        "PHTH 2210"
-      ],
-      "Summer 2": [
-        "ENGW 3306"
-      ],
-      "Spring": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ]
+      "Fall": ["COMM 1101", "COMM 1112", "HSCI 2000", "PHTH 2210"],
+      "Summer 2": ["ENGW 3306"],
+      "Spring": ["HSCI 2000", "PHTH 2210"]
     },
     "Year 3": {
-      "Summer 2": [
-        "HSCI 4700"
-      ],
-      "Spring": [
-        "ENGW 3306"
-      ]
+      "Summer 2": ["HSCI 4700"],
+      "Spring": ["ENGW 3306"]
     },
     "Year 4": {
-      "Fall": [
-        "HSCI 4720",
-        "PHTH 4202",
-        "PHTH 4540"
-      ]
+      "Fall": ["HSCI 4720", "PHTH 4202", "PHTH 4540"]
     },
     "Year 5": {
-      "Spring": [
-        "HSCI 4720"
-      ],
-      "Fall": [
-        "HSCI 4700",
-        "PHTH 4120"
-      ]
+      "Spring": ["HSCI 4720"],
+      "Fall": ["HSCI 4700", "PHTH 4120"]
     }
   },
   "Five Years, Two Co-ops in Summer 2/Fall": {
@@ -66,42 +42,21 @@
         "PHTH 1260",
         "PSYC 1101"
       ],
-      "Spring": [
-        "BIOL 1113",
-        "BIOL 1114",
-        "CHEM 1161",
-        "ENGW 1111"
-      ]
+      "Spring": ["BIOL 1113", "BIOL 1114", "CHEM 1161", "ENGW 1111"]
     },
     "Year 2": {
-      "Fall": [
-        "COMM 1101",
-        "COMM 1112"
-      ],
-      "Spring": [
-        "HSCI 2000",
-        "PHTH 2210"
-      ]
+      "Fall": ["COMM 1101", "COMM 1112"],
+      "Spring": ["HSCI 2000", "PHTH 2210"]
     },
     "Year 3": {
-      "Spring": [
-        "ENGW 3306"
-      ]
+      "Spring": ["ENGW 3306"]
     },
     "Year 4": {
-      "Fall": [
-        "PHTH 4202",
-        "PHTH 4540"
-      ]
+      "Fall": ["PHTH 4202", "PHTH 4540"]
     },
     "Year 5": {
-      "Spring": [
-        "HSCI 4720"
-      ],
-      "Fall": [
-        "HSCI 4700",
-        "PHTH 4120"
-      ]
+      "Spring": ["HSCI 4720"],
+      "Fall": ["HSCI 4700", "PHTH 4120"]
     }
   }
 }

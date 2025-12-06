@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "PHTH 1260", "PSYC 1101", "ARCH 1450"],
+      "Spring": [
+        "ARCH 1110",
+        "ARTF 1220",
+        "ARTF 1250",
+        "ENGW 1111",
+        "EEAM 2000"
+      ],
+      "Summer 1": ["PHTH 2300"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 2210", "ARCH 1120", "ARCH 2260", "PHTH 2350"],
+      "Spring": ["HSCI 2000", "PHTH 2515", "ARTG 1270"],
+      "Summer 1": ["ARCH 1310"]
+    },
+    "Year 3": {
+      "Fall": ["COOP 3945"],
+      "Spring": ["ENGW 3306"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4120", "PHTH 4202"],
+      "Spring": ["PHTH 4540"]
+    }
+  },
+  "Four Years, One Co-op in Fall, Built Environment Concentration": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "PHTH 1260", "PSYC 1101", "ARCH 1450"],
+      "Spring": [
+        "ARCH 1110",
+        "ARTF 1220",
+        "ARTF 1250",
+        "ENGW 1111",
+        "EEAM 2000"
+      ],
+      "Summer 1": ["PHTH 2300"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 2210", "ARCH 1120", "ARCH 2260", "PHTH 2350"],
+      "Spring": ["HSCI 2000", "PHTH 2515", "ARTG 1270"],
+      "Summer 1": ["ARCH 1310"]
+    },
+    "Year 3": {
+      "Fall": ["COOP 3945"],
+      "Spring": ["ENGW 3306"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4120", "PHTH 4202"],
+      "Spring": ["PHTH 4540"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half, Design Concentration": {
+    "Year 1": {
+      "Fall": ["ARCH 1000", "PHTH 1260", "PSYC 1101", "ARTG 1001"],
+      "Spring": [
+        "ARCH 1110",
+        "ARTF 1220",
+        "ARTF 1250",
+        "ENGW 1111",
+        "EEAM 2000"
+      ],
+      "Summer 1": ["PHTH 2300", "ARTG 1270"]
+    },
+    "Year 2": {
+      "Fall": ["PHTH 2210", "PHTH 2350", "ARTG 1290", "HSCI 2000"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"]
+    },
+    "Year 3": {
+      "Fall": ["ENGW 3306"],
+      "Spring": ["COOP 3945"],
+      "Summer 1": ["COOP 3945"],
+      "Summer 2": ["PHTH 2515"]
+    },
+    "Year 4": {
+      "Fall": ["PHTH 4120", "PHTH 4202"],
+      "Spring": ["PHTH 4540"]
+    }
+  }
+}

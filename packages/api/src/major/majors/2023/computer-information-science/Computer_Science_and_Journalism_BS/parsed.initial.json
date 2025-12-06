@@ -2,7 +2,8 @@
   "name": "Computer Science and Journalism, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 134,
   "yearVersion": 2023,
@@ -171,52 +172,46 @@
       "title": "Khoury Elective Courses",
       "requirements": [
         {
-          "type": "XOM",
-          "numCreditsMin": 12,
-          "courses": [
+          "type": "RANGE",
+          "subject": "CS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "CS",
-              "idRangeStart": 2500,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "CS",
-                  "classId": 5010,
-                  "type": "COURSE"
-                }
-              ]
-            },
+              "classId": 5010,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "CY",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "CY",
-              "idRangeStart": 2000,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "CY",
-                  "classId": 4930,
-                  "type": "COURSE"
-                }
-              ]
-            },
+              "classId": 4930,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "DS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "DS",
-              "idRangeStart": 2500,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "DS",
-                  "classId": 4900,
-                  "type": "COURSE"
-                }
-              ]
+              "classId": 4900,
+              "type": "COURSE"
             }
           ]
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
@@ -305,6 +300,12 @@
         }
       ],
       "minRequirementCount": 4
+    },
+    {
+      "type": "SECTION",
+      "title": "Journalism Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     },
     {
       "type": "SECTION",
@@ -425,6 +426,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

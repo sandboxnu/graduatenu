@@ -13,6 +13,7 @@ import {
 import { API } from "@graduate/api-client";
 import {
   CoReqWarnings,
+  CreatePlanDto,
   PlanModel,
   PreReqWarnings,
   ScheduleCourse2,
@@ -40,6 +41,7 @@ import { fetchStudentAndPrepareForDnd, useStudentWithPlans } from "../hooks";
 import {
   DELETE_COURSE_AREA_DND_ID,
   cleanDndIdsFromPlan,
+  cleanDndIdsFromStudent,
   handleApiClientError,
   logger,
   toast,
@@ -95,10 +97,25 @@ const HomePage: NextPage = () => {
     useState<boolean>(false);
 
   const [lastDeletedPlan, setLastDeletedPlan] = useState<any | null>(null);
+  const [isDeletingPlan, setIsDeletingPlan] = useState<boolean>(false);
   const { isGuest } = useContext(IsGuestContext);
+
+  useEffect(() => {
+    setLastDeletedPlan(null);
+  }, [router.asPath]);
+
+  // Clear lastDeletedPlan when selected plan changes (but not during deletion)
+  useEffect(() => {
+    if (!isDeletingPlan) {
+      setLastDeletedPlan(null);
+    }
+    setIsDeletingPlan(false);
+  }, [selectedPlanId]);
 
   const handleUndoDelete = async () => {
     if (!lastDeletedPlan || !student) return;
+
+    console.log("Restoring plan:", lastDeletedPlan);
 
     if (isGuest) {
       window.localStorage.setItem(
@@ -108,14 +125,24 @@ const HomePage: NextPage = () => {
           plans: [...student.plans, lastDeletedPlan],
         })
       );
+      setSelectedPlanId(lastDeletedPlan.id);
     } else {
-      await API.plans.create(lastDeletedPlan);
+      const createDto: CreatePlanDto = {
+        name: lastDeletedPlan.name,
+        majors: lastDeletedPlan.majors,
+        minors: lastDeletedPlan.minors,
+        catalogYear: lastDeletedPlan.catalogYear,
+        concentration: lastDeletedPlan.concentration,
+        schedule: lastDeletedPlan.schedule,
+      };
+
+      const result = await API.plans.create(createDto);
+      setSelectedPlanId(result.id);
     }
 
     mutateStudent();
-    setSelectedPlanId(lastDeletedPlan.id);
     setLastDeletedPlan(null);
-    toast.success("Plan restored!");
+    toast.success("Plan restored successfully");
   };
 
   useKeyboardShortcuts({
@@ -134,7 +161,7 @@ const HomePage: NextPage = () => {
     // once the student is fetched, set the selected plan id to the last updated plan
     if (student && selectedPlanId === undefined) {
       if (student.plans.length > 0) {
-        const sortedPlans = student.plans.sort(
+        const sortedPlans = student.plans.toSorted(
           (p1, p2) =>
             new Date(p2.updatedAt).getTime() - new Date(p1.updatedAt).getTime()
         );
@@ -277,9 +304,51 @@ const HomePage: NextPage = () => {
     });
   };
 
+  const updateStarredPlan = (updatedStarredPlan: number | undefined) => {
+    if (!selectedPlan || !student) return;
+
+    let updatedStudent = { ...student };
+
+    if (
+      student.starredPlan !== undefined &&
+      student.starredPlan === updatedStarredPlan
+    ) {
+      updatedStudent = { ...student, starredPlan: undefined };
+    } else {
+      updatedStudent = { ...student, starredPlan: updatedStarredPlan };
+    }
+
+    mutateStudent(
+      async () => {
+        // have to clean all dnd ids before sending the student to our API
+        const studentWithoutDndIds = cleanDndIdsFromStudent(updatedStudent);
+        if (isGuest) {
+          window.localStorage.setItem(
+            "student",
+            JSON.stringify(studentWithoutDndIds)
+          );
+        } else {
+          await API.student.update(studentWithoutDndIds);
+        }
+        return fetchStudentAndPrepareForDnd(isGuest);
+      },
+      {
+        optimisticData: updatedStudent,
+        rollbackOnError: true,
+        revalidate: false,
+      }
+    ).catch((error) => {
+      handleApiClientError(error, router);
+    });
+
+    toast.success(
+      updatedStudent.starredPlan ? "Plan favorited!" : "Plan unfavorited!"
+    );
+  };
+
   let renderedSidebar = <NoPlanSidebar />;
   if (selectedPlan) {
-    if (selectedPlan.major) {
+    if (selectedPlan.majors) {
       renderedSidebar = (
         <Sidebar
           selectedPlan={selectedPlan}
@@ -319,6 +388,8 @@ const HomePage: NextPage = () => {
                 selectedPlanId={selectedPlanId}
                 setSelectedPlanId={setSelectedPlanId}
                 plans={student.plans}
+                starredPlan={student.starredPlan}
+                updateStarredPlan={updateStarredPlan}
               />
               <AddPlanModal
                 setSelectedPlanId={setSelectedPlanId}
@@ -358,9 +429,10 @@ const HomePage: NextPage = () => {
                   setSelectedPlanId={setSelectedPlanId}
                   planName={selectedPlan.name}
                   planId={selectedPlan.id}
-                  onPlanDeleted={(deletedPlan) =>
-                    setLastDeletedPlan(deletedPlan)
-                  }
+                  onPlanDeleted={(deletedPlan) => {
+                    setIsDeletingPlan(true);
+                    setLastDeletedPlan(deletedPlan);
+                  }}
                 />
               )}
             </Flex>

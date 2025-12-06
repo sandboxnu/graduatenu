@@ -2,7 +2,8 @@
   "name": "Public Health, BA (Oakland)",
   "metadata": {
     "verified": false,
-    "lastEdited": "9/15/2025"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 128,
   "yearVersion": 2025,
@@ -226,7 +227,7 @@
             {
               "type": "COURSE",
               "classId": 1300,
-              "subject": "ENGL/HIST"
+              "subject": "HIST"
             },
             {
               "type": "COURSE",

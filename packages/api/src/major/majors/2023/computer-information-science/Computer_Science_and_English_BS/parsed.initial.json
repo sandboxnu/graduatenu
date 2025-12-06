@@ -2,7 +2,8 @@
   "name": "Computer Science and English, BS",
   "metadata": {
     "verified": false,
-    "lastEdited": "4/14/2024"
+    "lastEdited": "11/5/2025",
+    "branch": "main"
   },
   "totalCreditsRequired": 137,
   "yearVersion": 2023,
@@ -141,37 +142,58 @@
       "title": "Computing Focus",
       "requirements": [
         {
-          "type": "COURSE",
-          "classId": 3800,
-          "subject": "CS"
+          "type": "SECTION",
+          "title": "Focus 1: Natural Language Processing",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4120,
+              "subject": "CS"
+            }
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "COURSE",
-          "classId": 4120,
-          "subject": "CS"
+          "type": "SECTION",
+          "title": "Focus 2: Programming Languages",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3800,
+              "subject": "CS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4400,
+              "subject": "CS"
+            }
+          ],
+          "minRequirementCount": 2
         },
         {
-          "type": "COURSE",
-          "classId": 3800,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4400,
-          "subject": "CS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 3000,
-          "subject": "DS"
-        },
-        {
-          "type": "COURSE",
-          "classId": 4200,
-          "subject": "DS"
+          "type": "SECTION",
+          "title": "Focus 3: Analytics",
+          "requirements": [
+            {
+              "type": "COURSE",
+              "classId": 3000,
+              "subject": "DS"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4200,
+              "subject": "DS"
+            }
+          ],
+          "minRequirementCount": 2
         }
       ],
-      "minRequirementCount": 6
+      "minRequirementCount": 3
     },
     {
       "type": "SECTION",
@@ -205,65 +227,59 @@
       "title": "Khoury Elective Courses",
       "requirements": [
         {
-          "type": "XOM",
-          "numCreditsMin": 4,
-          "courses": [
+          "type": "RANGE",
+          "subject": "CS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "CS",
-              "idRangeStart": 2500,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "CS",
-                  "classId": 5010,
-                  "type": "COURSE"
-                }
-              ]
-            },
+              "classId": 5010,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "CY",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "CY",
-              "idRangeStart": 2000,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "CY",
-                  "classId": 4930,
-                  "type": "COURSE"
-                }
-              ]
-            },
+              "classId": 4930,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "DS",
+          "idRangeStart": 2500,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "DS",
-              "idRangeStart": 2500,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "DS",
-                  "classId": 4900,
-                  "type": "COURSE"
-                }
-              ]
-            },
+              "classId": 4900,
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "RANGE",
+          "subject": "IS",
+          "idRangeStart": 2000,
+          "idRangeEnd": 9999,
+          "exceptions": [
             {
-              "type": "RANGE",
               "subject": "IS",
-              "idRangeStart": 2000,
-              "idRangeEnd": 9999,
-              "exceptions": [
-                {
-                  "subject": "IS",
-                  "classId": 4900,
-                  "type": "COURSE"
-                }
-              ]
+              "classId": 4900,
+              "type": "COURSE"
             }
           ]
         }
       ],
-      "minRequirementCount": 1
+      "minRequirementCount": 4
     },
     {
       "type": "SECTION",
@@ -359,121 +375,135 @@
       "title": "Literary Periods",
       "requirements": [
         {
-          "type": "XOM",
-          "numCreditsMin": 4,
-          "courses": [
+          "type": "SECTION",
+          "title": "Pre-19th Century Literature",
+          "requirements": [
             {
-              "type": "COURSE",
-              "classId": 1600,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2296,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3101,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3120,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3618,
-              "subject": "ENGL"
-            },
-            {
-              "type": "OR",
+              "type": "XOM",
+              "numCreditsMin": 4,
               "courses": [
                 {
                   "type": "COURSE",
-                  "classId": 3678,
+                  "classId": 1600,
                   "subject": "ENGL"
                 },
                 {
                   "type": "COURSE",
-                  "classId": 3678,
-                  "subject": "JWSS"
+                  "classId": 2296,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3101,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3120,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3618,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "OR",
+                  "courses": [
+                    {
+                      "type": "COURSE",
+                      "classId": 3678,
+                      "subject": "ENGL"
+                    },
+                    {
+                      "type": "COURSE",
+                      "classId": 3678,
+                      "subject": "JWSS"
+                    }
+                  ]
                 }
               ]
             }
-          ]
+          ],
+          "minRequirementCount": 1
         },
         {
-          "type": "XOM",
-          "numCreditsMin": 4,
-          "courses": [
+          "type": "SECTION",
+          "title": "19th/20th/21st Century Literature",
+          "requirements": [
             {
-              "type": "COURSE",
-              "classId": 2330,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3140,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3190,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3619,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3720,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2301,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2440,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 2600,
-              "subject": "ENGL"
-            },
-            {
-              "type": "COURSE",
-              "classId": 3161,
-              "subject": "ENGL"
-            },
-            {
-              "type": "OR",
+              "type": "XOM",
+              "numCreditsMin": 4,
               "courses": [
                 {
                   "type": "COURSE",
-                  "classId": 3685,
+                  "classId": 2330,
                   "subject": "ENGL"
                 },
                 {
                   "type": "COURSE",
-                  "classId": 3685,
-                  "subject": "JWSS"
+                  "classId": 3140,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3190,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3619,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3720,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2301,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2440,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 2600,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3161,
+                  "subject": "ENGL"
+                },
+                {
+                  "type": "OR",
+                  "courses": [
+                    {
+                      "type": "COURSE",
+                      "classId": 3685,
+                      "subject": "ENGL"
+                    },
+                    {
+                      "type": "COURSE",
+                      "classId": 3685,
+                      "subject": "JWSS"
+                    }
+                  ]
+                },
+                {
+                  "type": "COURSE",
+                  "classId": 3730,
+                  "subject": "ENGL"
                 }
               ]
-            },
-            {
-              "type": "COURSE",
-              "classId": 3730,
-              "subject": "ENGL"
             }
-          ]
+          ],
+          "minRequirementCount": 1
         }
       ],
       "minRequirementCount": 2
@@ -717,6 +747,12 @@
     },
     {
       "type": "SECTION",
+      "title": "English Electives",
+      "requirements": [],
+      "minRequirementCount": 0
+    },
+    {
+      "type": "SECTION",
       "title": "Capstone",
       "requirements": [
         {
@@ -891,6 +927,12 @@
         }
       ],
       "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Required General Electives",
+      "requirements": [],
+      "minRequirementCount": 0
     }
   ],
   "concentrations": {

@@ -1,24 +1,16 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Four Years, Two Co-ops in Summer 2/ Fall": {
     "Year 1": {
-      "Fall": [
-        "ANTH 1101",
-        "ENGW 1111",
-        "PHIL 1115"
-      ],
-      "Spring": [
-        "ANTH 2305",
-        "PHIL 2325"
-      ]
+      "Fall": ["ANTH 1101", "ENGW 1111", "PHIL 1115"],
+      "Spring": ["ANTH 2305", "PHIL 2325"]
     },
     "Year 2": {
-      "Fall": [
-        "PHIL 2330"
-      ],
-      "Spring": [
-        "ANTH 3410",
-        "ANTH 3421"
-      ]
+      "Fall": ["PHIL 2330"],
+      "Spring": ["ANTH 3410", "ANTH 3421"]
     },
     "Year 3": {},
     "Year 4": {}

@@ -1,40 +1,22 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Four Years, Two Co-ops (Spring/Summer)": {
     "Year 1": {
-      "Fall": [
-        "ARTF 1122",
-        "ENGL 1000",
-        "ENGL 1400",
-        "ENGL 1450"
-      ],
-      "Spring": [
-        "ARTG 1270",
-        "ARTG 1290",
-        "ENGW 1111",
-        "ENGL 1160"
-      ],
-      "Summer 1": [
-        "ARTF 2220"
-      ]
+      "Fall": ["ARTF 1122", "ENGL 1000", "ENGL 1400", "ENGL 1450"],
+      "Spring": ["ARTG 1270", "ARTG 1290", "ENGW 1111", "ENGL 1160"],
+      "Summer 1": ["ARTF 2220"]
     },
     "Year 2": {
-      "Fall": [
-        "ARTG 2252",
-        "ENGL 1700"
-      ],
-      "Summer 2": [
-        "ARTG 3350"
-      ]
+      "Fall": ["ARTG 2252", "ENGL 1700"],
+      "Summer 2": ["ARTG 3350"]
     },
     "Year 3": {},
     "Year 4": {
-      "Fall": [
-        "ARTG 2242"
-      ],
-      "Spring": [
-        "ARTG 4550",
-        "ENGL 4710"
-      ]
+      "Fall": ["ARTG 2242"],
+      "Spring": ["ARTG 4550", "ENGL 4710"]
     }
   }
 }

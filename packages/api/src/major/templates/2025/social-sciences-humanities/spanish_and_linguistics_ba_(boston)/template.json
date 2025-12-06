@@ -1,0 +1,46 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study:": {
+    "Year 1": {
+      "Fall": ["CLTR 1000", "CLTR 1120", "LING 1150", "SPNS 2102"],
+      "Spring": ["LING 2350", "SPNS 3101"]
+    },
+    "Year 2": {
+      "Fall": ["LING 3412", "SPNS 3102"],
+      "Spring": ["EESH 2000", "SPNS 3601"],
+      "Summer 2": ["COOP 3948"]
+    },
+    "Year 3": {
+      "Fall": ["COOP 3948"],
+      "Spring": ["SPNS 3601"],
+      "Summer 2": ["COOP 3948"]
+    },
+    "Year 4": {
+      "Fall": ["COOP 3948"],
+      "Spring": ["LING 4891", "LING 4654"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CLTR 1000", "CLTR 1120", "LING 1150", "SPNS 2102"],
+      "Spring": ["LING 2350", "SPNS 3101"]
+    },
+    "Year 2": {
+      "Fall": ["LING 3412", "SPNS 3102"],
+      "Spring": ["EESH 2000", "SPNS 3601"],
+      "Summer 2": ["COOP 3948"]
+    },
+    "Year 3": {
+      "Fall": ["COOP 3948"],
+      "Spring": ["SPNS 3601"],
+      "Summer 2": ["COOP 3948"]
+    },
+    "Year 4": {
+      "Fall": ["COOP 3948"],
+      "Spring": ["LING 4891", "LING 4654"]
+    }
+  }
+}

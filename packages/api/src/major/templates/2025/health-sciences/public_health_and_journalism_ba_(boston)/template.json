@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plan of Study": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "JRNL 1000", "JRNL 1150", "PHTH 1260"],
+      "Spring": ["JRNL 1101", "PSYC 1101", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["JRNL 2201"],
+      "Spring": ["HSCI 2000", "PHTH 2210"],
+      "Summer 1": ["ENGW 3306"]
+    },
+    "Year 3": {},
+    "Year 4": {}
+  },
+  "Four Years, Two Co-ops": {
+    "Year 1": {
+      "Fall": ["ENGW 1111", "JRNL 1000", "JRNL 1150", "PHTH 1260"],
+      "Spring": ["JRNL 1101", "PSYC 1101", "EEAM 2000"]
+    },
+    "Year 2": {
+      "Fall": ["JRNL 2201"],
+      "Spring": ["HSCI 2000", "PHTH 2210"],
+      "Summer 1": ["ENGW 3306"]
+    },
+    "Year 3": {},
+    "Year 4": {}
+  }
+}

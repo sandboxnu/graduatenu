@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["HUSV 1000", "PHTH 1260", "HUSV 1101", "BIOL 1143", "ENGW 1111"],
+      "Spring": ["HUSV 2300", "MATH 1213", "BIOL 1147", "PSYC 1101"],
+      "Summer 1": ["PHTH 2350", "PHTH 2300"]
+    },
+    "Year 2": {
+      "Spring": ["EESH 2000", "HUSV 2970", "HUSV 3570", "PHTH 2210"],
+      "Summer 1": ["PHTH 2515"]
+    },
+    "Year 3": {
+      "Spring": ["HUSV 3900", "PHTH 4540", "PHTH 4202"],
+      "Summer 1": ["PHTH 4120"]
+    },
+    "Year 4": {
+      "Spring": ["HUSV 2355"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["HUSV 1000", "PHTH 1260", "HUSV 1101", "BIOL 1143", "ENGW 1111"],
+      "Spring": ["HUSV 2300", "MATH 1213", "BIOL 1147", "PSYC 1101"],
+      "Summer 1": ["PHTH 2350", "PHTH 2300"]
+    },
+    "Year 2": {
+      "Spring": ["EESH 2000", "HUSV 2970", "HUSV 3570", "PHTH 2210"],
+      "Summer 1": ["PHTH 2515"]
+    },
+    "Year 3": {
+      "Spring": ["HUSV 3900", "PHTH 4540", "PHTH 4202"],
+      "Summer 1": ["PHTH 4120"]
+    },
+    "Year 4": {
+      "Spring": ["HUSV 2355"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["HUSV 1000", "PHTH 1260", "BIOL 1111", "PSYC 1101", "HUSV 1101"],
+      "Spring": ["ENGW 1111", "BIOL 1113", "MATH 1213", "HUSV 2300"],
+      "Summer 1": ["PHTH 2300", "PHTH 2350"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "PHTH 2210", "HUSV 2970", "HUSV 3570"],
+      "Summer 2": ["PHTH 2515"]
+    },
+    "Year 3": {
+      "Summer 2": ["PHTH 4120", "PHTH 4540"],
+      "Fall": ["PHTH 4202"]
+    },
+    "Year 4": {
+      "Fall": ["HUSV 3900", "HUSV 2355"]
+    }
+  }
+}

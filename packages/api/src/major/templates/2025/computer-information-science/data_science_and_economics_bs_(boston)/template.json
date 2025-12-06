@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ECON 1115", "ENGW 1111"],
+      "Spring": ["DS 2500", "ECON 1116", "MATH 1231"],
+      "Summer 1": ["CS 3200"]
+    },
+    "Year 2": {
+      "Fall": ["DS 3000", "DS 3500", "ECON 2315", "ECON 2350"],
+      "Spring": ["CS 1210", "DS 4200", "DS 4300", "ECON 2316"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4400", "ECON 2560"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["ECON 4692"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ECON 1115", "ENGW 1111"],
+      "Spring": ["DS 2500", "ECON 1116", "MATH 1231"],
+      "Summer 1": ["CS 3200"]
+    },
+    "Year 2": {
+      "Fall": ["DS 3000", "DS 3500", "ECON 2315", "ECON 2350"],
+      "Spring": ["CS 1210", "DS 4200", "DS 4300", "ECON 2316"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4400", "ECON 2560"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["ECON 4692"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ECON 1115", "ENGW 1111"],
+      "Spring": ["DS 2500", "ECON 1116", "MATH 1231"],
+      "Summer 1": ["CS 3200"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "DS 3000", "DS 3500", "ECON 2315", "ECON 2350"]
+    },
+    "Year 3": {
+      "Fall": ["DS 4200", "DS 4300", "ECON 2316"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["DS 4400", "ECON 2560"],
+      "Spring": ["ECON 4692"]
+    }
+  }
+}

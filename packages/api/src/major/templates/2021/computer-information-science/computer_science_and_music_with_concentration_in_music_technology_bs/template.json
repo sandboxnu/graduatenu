@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Pattern, Five Years, Three Co-ops in Spring/Summer 1": {
     "Year 1": {
       "Fall": ["CS 1200", "CS 1800", "CS 2500", "MUSC 1201", "ENGW 1111"],

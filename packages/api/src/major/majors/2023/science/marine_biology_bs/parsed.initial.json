@@ -1,0 +1,733 @@
+{
+  "name": "Marine Biology, BS",
+  "metadata": {
+    "verified": false,
+    "lastEdited": "11/5/2025",
+    "branch": "main"
+  },
+  "totalCreditsRequired": 137,
+  "yearVersion": 2023,
+  "requirementSections": [
+    {
+      "type": "SECTION",
+      "title": "Introduction to College",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1000,
+              "subject": "INSC"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Foundations Courses",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 1101,
+              "description": "Foundations in Ecology and Evolutionary Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 1102,
+              "description": "Lab for EEMB 1101",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 1105,
+              "description": "Foundations in Ecological and Evolutionary Genomics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 1106,
+              "description": "Lab for EEMB 1105",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Genetics",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "BIOL",
+              "classId": 2301,
+              "description": "Genetics and Molecular Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "BIOL",
+              "classId": 2302,
+              "description": "Lab for BIOL 2301",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Ecology",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2302,
+              "description": "Ecology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2303,
+              "description": "Lab for EEMB 2302",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Evolution",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 2400,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Marine Biology",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 2700,
+              "description": "Marine Biology",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 2701,
+              "description": "Lab for EEMB 2700",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Conservation",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 3460,
+          "subject": "EEMB"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Scientific Communication",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4000,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Capstone",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 4701,
+          "subject": "BIOL"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4900,
+          "subject": "ENVR"
+        },
+        {
+          "type": "COURSE",
+          "classId": 4997,
+          "subject": "ENVR"
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Mathematics",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 1251,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1241,
+              "subject": "MATH"
+            },
+            {
+              "type": "COURSE",
+              "classId": 1341,
+              "subject": "MATH"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Introduction to Data",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 1500,
+              "description": "Introduction to Environmental, Social, and Biological Data",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 1501,
+              "description": "Lab for ENVR 1500",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Biostatistics",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "ENVR",
+              "classId": 2500,
+              "description": "Biostatistics",
+              "type": "COURSE"
+            },
+            {
+              "subject": "ENVR",
+              "classId": 2501,
+              "description": "Lab for ENVR 2500",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Chemistry",
+      "requirements": [
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "CHEM",
+              "classId": 1161,
+              "description": "General Chemistry for Science Majors",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1162,
+              "description": "Lab for CHEM 1161",
+              "type": "COURSE"
+            },
+            {
+              "subject": "CHEM",
+              "classId": 1163,
+              "description": "Recitation for CHEM 1161",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "CHEM",
+                  "classId": 2311,
+                  "description": "Organic Chemistry 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "CHEM",
+                  "classId": 2312,
+                  "description": "Lab for CHEM 2311",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 3410,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4504,
+              "subject": "ENVR"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Physics",
+      "requirements": [
+        {
+          "type": "SECTION",
+          "title": "Physics 1",
+          "requirements": [
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1145,
+                  "description": "Physics for Life Sciences 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1146,
+                  "description": "Lab for PHYS 1145",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1151,
+                  "description": "Physics for Engineering 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1152,
+                  "description": "Lab for PHYS 1151",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1153,
+                  "description": "Interactive Learning Seminar for PHYS 1151",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1161,
+                  "description": "Physics 1",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1162,
+                  "description": "Lab for PHYS 1161",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1163,
+                  "description": "Recitation for PHYS 1161",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "PHYS",
+                  "classId": 1171,
+                  "description": "Physics 1 for Bioscience and Bioengineering",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1172,
+                  "description": "Lab for PHYS 1171",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "PHYS",
+                  "classId": 1173,
+                  "description": "Interactive Learning Seminar for PHYS 1171",
+                  "type": "COURSE"
+                }
+              ]
+            }
+          ],
+          "minRequirementCount": 4
+        }
+      ],
+      "minRequirementCount": 1
+    },
+    {
+      "type": "SECTION",
+      "title": "Requirements for Students Not Participating in Three Seas",
+      "requirements": [
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 3125,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3600,
+              "subject": "ENVR"
+            }
+          ]
+        },
+        {
+          "type": "XOM",
+          "numCreditsMin": 20,
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5587,
+              "subject": "BIOL"
+            },
+            {
+              "type": "COURSE",
+              "classId": 2290,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3001,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3450,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3455,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3465,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3466,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3600,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5130,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3125,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3201,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 3202,
+              "subject": "ENVR"
+            },
+            {
+              "type": "AND",
+              "courses": [
+                {
+                  "subject": "ENVR",
+                  "classId": 3300,
+                  "description": "Geographic Information Systems",
+                  "type": "COURSE"
+                },
+                {
+                  "subject": "ENVR",
+                  "classId": 3301,
+                  "description": "Lab for ENVR 3300",
+                  "type": "COURSE"
+                }
+              ]
+            },
+            {
+              "type": "COURSE",
+              "classId": 4504,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 4505,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5220,
+              "subject": "ENVR"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5542,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5510,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5522,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5525,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5546,
+              "subject": "EEMB"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 2
+    },
+    {
+      "type": "SECTION",
+      "title": "Three Seas Students",
+      "requirements": [
+        {
+          "type": "COURSE",
+          "classId": 5510,
+          "subject": "EEMB"
+        },
+        {
+          "type": "OR",
+          "courses": [
+            {
+              "type": "COURSE",
+              "classId": 5522,
+              "subject": "EEMB"
+            },
+            {
+              "type": "COURSE",
+              "classId": 5525,
+              "subject": "EEMB"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5542,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5546,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5589,
+          "subject": "EEMB"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 5504,
+              "description": "Biology of Corals",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 5505,
+              "description": "Lab for EEMB 5504",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 5506,
+              "description": "Biology and Ecology of Fishes",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 5507,
+              "description": "Lab for EEMB 5506",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5508,
+          "subject": "EEMB"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 5518,
+              "description": "Ocean and Coastal Processes",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 5519,
+              "description": "Lab for EEMB 5518",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "COURSE",
+          "classId": 5520,
+          "subject": "EEMB"
+        },
+        {
+          "type": "COURSE",
+          "classId": 5538,
+          "subject": "EEMB"
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 5533,
+              "description": "Marine Invertebrate Zoology and Botany",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 5535,
+              "description": "Lab for EEMB 5533",
+              "type": "COURSE"
+            }
+          ]
+        },
+        {
+          "type": "AND",
+          "courses": [
+            {
+              "subject": "EEMB",
+              "classId": 5540,
+              "description": "Changing Global Oceans",
+              "type": "COURSE"
+            },
+            {
+              "subject": "EEMB",
+              "classId": 5541,
+              "description": "Lab for EEMB 5540",
+              "type": "COURSE"
+            }
+          ]
+        }
+      ],
+      "minRequirementCount": 13
+    }
+  ],
+  "concentrations": {
+    "minOptions": 0,
+    "concentrationOptions": []
+  }
+}

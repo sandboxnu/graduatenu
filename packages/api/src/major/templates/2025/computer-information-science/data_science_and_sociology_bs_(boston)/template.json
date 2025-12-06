@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "ENGW 1111", "SOCL 1101", "CS 1800", "CS 2000"],
+      "Spring": ["SOCL 2320", "DS 2500"],
+      "Summer 1": ["MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "SOCL 2321", "CS 3200", "DS 3500"]
+    },
+    "Year 3": {
+      "Fall": ["SOCL 3300", "DS 3000"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["DS 4200"],
+      "Spring": ["SOCL 4600", "DS 4300", "DS 4400"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First-Half": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "ENGW 1111", "SOCL 1101", "CS 1800", "CS 2000"],
+      "Spring": ["SOCL 2320", "DS 2500"],
+      "Summer 1": ["MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["EESH 2000", "SOCL 2321", "CS 3200", "DS 3500"]
+    },
+    "Year 3": {
+      "Fall": ["SOCL 3300", "DS 3000"],
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Fall": ["DS 4200"],
+      "Spring": ["SOCL 4600", "DS 4300", "DS 4400"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second-Half/Fall": {
+    "Year 1": {
+      "Fall": ["SOCL 1000", "ENGW 1111", "SOCL 1101", "CS 1800", "CS 2000"],
+      "Spring": ["SOCL 2320", "DS 2500"],
+      "Summer 1": ["MATH 1341"]
+    },
+    "Year 2": {
+      "Fall": ["SOCL 2321", "CS 3200", "DS 3500"],
+      "Spring": ["EESH 2000", "SOCL 3300", "DS 3000"]
+    },
+    "Year 3": {
+      "Spring": ["DS 4200"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["SOCL 4600", "DS 4300", "DS 4400"]
+    }
+  }
+}

@@ -1,23 +1,15 @@
 {
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
   "Sample Plan of Study: Four Years, Two Co-ops in Summer 2/Fall": {
     "Year 1": {
-      "Fall": [
-        "ENGW 1111",
-        "HIST 1200",
-        "HIST 1201",
-        "PHIL 1115",
-        "PHIL 2325"
-      ],
-      "Spring": [
-        "HIST 1000",
-        "PHIL 2330"
-      ]
+      "Fall": ["ENGW 1111", "HIST 1200", "HIST 1201", "PHIL 1115", "PHIL 2325"],
+      "Spring": ["HIST 1000", "PHIL 2330"]
     },
     "Year 2": {
-      "Fall": [
-        "HIST 2301",
-        "HIST 2302"
-      ]
+      "Fall": ["HIST 2301", "HIST 2302"]
     },
     "Year 3": {},
     "Year 4": {}

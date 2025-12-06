@@ -1,0 +1,57 @@
+{
+  "metadata": {
+    "branch": "main",
+    "lastEdited": "11/5/2025"
+  },
+  "Sample Plans of Study": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "MATH 1365"],
+      "Spring": ["CS 2100", "MATH 1341"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "CS 3650", "DS 3000"]
+    },
+    "Year 3": {
+      "Fall": ["CS 3800"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Spring/Summer First-Half": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "MATH 1365"],
+      "Spring": ["CS 2100", "MATH 1341"],
+      "Summer 1": ["CS 3100"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3000", "CS 3650", "DS 3000"]
+    },
+    "Year 3": {
+      "Fall": ["CS 3800"],
+      "Summer 2": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530"]
+    }
+  },
+  "Four Years, Two Co-ops in Summer Second-Half/Fall": {
+    "Year 1": {
+      "Fall": ["CS 1200", "CS 1800", "CS 2000", "ENGW 1111", "MATH 1365"],
+      "Spring": ["CS 2100", "MATH 1341"],
+      "Summer 1": ["CS 3000"]
+    },
+    "Year 2": {
+      "Fall": ["CS 1210", "CS 3100", "DS 3000"],
+      "Spring": ["CS 3650", "CS 3800"]
+    },
+    "Year 3": {
+      "Summer 1": ["ENGW 3302"]
+    },
+    "Year 4": {
+      "Spring": ["CS 4530"]
+    }
+  }
+}
