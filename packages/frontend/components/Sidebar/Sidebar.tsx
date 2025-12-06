@@ -73,10 +73,11 @@ let currentRequestNum = 0;
 interface SidebarProps {
   selectedPlan: PlanModel<string>;
   transferCourses: ScheduleCourse2<unknown>[];
+  isSharedPlan?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = memo(
-  ({ selectedPlan, transferCourses }) => {
+  ({ selectedPlan, transferCourses, isSharedPlan }) => {
     const router = useRouter();
 
     // State to track which major/minor is currently being viewed
@@ -321,6 +322,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
         renderCoopBlock
         renderBetaMajorBlock={currentMajor.metadata?.verified !== true}
         planId={selectedPlan.id}
+        isSharedPlan={isSharedPlan}
       >
         {courseData && (
           <>
@@ -328,6 +330,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
               courseData={courseData}
               dndIdPrefix={`${SIDEBAR_DND_ID_PREFIX}-generic`}
               loading={isCoursesLoading}
+              isSharedPlan={isSharedPlan}
             />
             <NUPathSection
               coursesTaken={coursesTaken}
@@ -387,6 +390,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                   requirementType="major"
                   concentration={concentration}
                   concentrationValidationStatus={concentrationValidationStatus}
+                  isSharedPlan={isSharedPlan}
                 />
 
                 {/* Minor Tab */}
@@ -405,6 +409,7 @@ const Sidebar: React.FC<SidebarProps> = memo(
                     getSectionError={getSectionErrorByType}
                     getSidebarValidationStatus={getSidebarValidationStatus}
                     requirementType="minor"
+                    isSharedPlan={isSharedPlan}
                   />
                 )}
               </TabPanels>
@@ -419,11 +424,13 @@ const Sidebar: React.FC<SidebarProps> = memo(
 interface NoMajorSidebarProps {
   selectedPlan: PlanModel<string>;
   transferCourses: ScheduleCourse2<unknown>[];
+  isSharedPlan?: boolean;
 }
 
 export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
   selectedPlan,
   transferCourses,
+  isSharedPlan,
 }) => {
   const creditsTaken = totalCreditsInSchedule(
     selectedPlan.schedule,
@@ -436,6 +443,7 @@ export const NoMajorSidebar: React.FC<NoMajorSidebarProps> = ({
       renderCoopBlock
       renderDropdownWarning={false}
       planId={selectedPlan.id}
+      isSharedPlan={isSharedPlan}
     >
       <Stack px="md" mb="3">
         <Text>

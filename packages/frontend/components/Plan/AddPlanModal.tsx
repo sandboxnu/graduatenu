@@ -56,6 +56,7 @@ import {
   handleApiClientError,
   noLeadOrTrailWhitespacePattern,
   createScheduleFromTemplate,
+  toast,
 } from "../../utils";
 import { BlueButton } from "../Button";
 import { PlanInput, PlanSelect } from "../Form";
@@ -65,6 +66,7 @@ import { GraduateToolTip } from "../GraduateTooltip";
 import { getLocalPlansLength } from "../../utils/plan/getLocalPlansLength";
 import { useTemplateCourses } from "../../hooks/useTemplateCourses";
 import { addTransferCoursesToStudent } from "../../utils/student/addTransferCoursesToStudent.ts";
+import { createScheduleFromJson } from "../../utils/plan/createScheduleFromJson";
 
 interface AddPlanModalProps {
   setSelectedPlanId: Dispatch<SetStateAction<number | undefined | null>>;
@@ -83,6 +85,8 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     useSupportedMajors();
   const { supportedMinorsData, error: supportedMinorsError } =
     useSupportedMinors();
+  const { onClose: onCreateClose, isOpen: isCreateOpen } = useDisclosure();
+  const { onClose: onImportClose, isOpen: isImportOpen } = useDisclosure();
 
   // Generate default plan title using formatted date and time
   const generateDefaultPlanTitle = () => {
@@ -128,6 +132,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { isGuest } = useContext(IsGuestContext);
   const { student } = useStudentWithPlans();
+  const [scheduleJson, setScheduleJson] = useState<any>(null); // for importing
 
   // watch form fields
   const catalogYear = watch("catalogYear");
@@ -298,6 +303,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     setShowAdvancedEdit(false);
     setUploadedCourses([]);
     onCloseDisplay();
+    onCreateClose();
     setIsNoMajorSelected(false);
   };
   const yearSupportedMajors =
@@ -358,8 +364,80 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
     </Stack>
   );
 
+  // IMPORT FUNCTIONALITY
+
+  const loadPlan = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const extractedFile = event.target.files?.[0];
+    if (extractedFile) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        try {
+          const text = e.target?.result as string;
+          const parsed = JSON.parse(text);
+          setScheduleJson(parsed);
+          console.log("Parsed schedule JSON:", parsed);
+        } catch (err) {
+          console.error("Error parsing JSON file:", err);
+        }
+      };
+
+      reader.readAsText(extractedFile);
+    }
+  };
+
+  const importFile = async () => {
+    if (!scheduleJson || !student) return;
+
+    try {
+      const schedule = createScheduleFromJson(scheduleJson);
+
+      const newPlan: CreatePlanDto = {
+        name: scheduleJson.name || generateDefaultPlanTitle(),
+        catalogYear: scheduleJson["catalogYear"],
+        majors: scheduleJson["major"],
+        concentration: scheduleJson["concentration"],
+        schedule,
+      };
+
+      let createdPlanId: number;
+
+      if (isGuest) {
+        createdPlanId = student.plans.length + 1;
+
+        const planInLocalStorage: PlanModel<null> = {
+          ...newPlan,
+          id: createdPlanId,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          student: cleanDndIdsFromStudent(student),
+        } as PlanModel<null>;
+
+        window.localStorage.setItem(
+          "student",
+          JSON.stringify({
+            ...student,
+            plans: [...student.plans, planInLocalStorage],
+          })
+        );
+      } else {
+        const createdPlan = await API.plans.create(newPlan);
+        createdPlanId = createdPlan.id;
+      }
+
+      mutate(USE_STUDENT_WITH_PLANS_SWR_KEY);
+      onImportClose();
+      setSelectedPlanId(createdPlanId);
+      toast.success("Plan imported successfully!");
+    } catch (error) {
+      toast.error("Failed to import plan.");
+      console.error("Error importing plan:", error);
+    }
+  };
+
   const disableButton = isGuest && getLocalPlansLength() > 4;
-  const showCoachMark = !selectedPlanId && !isOpen;
+  const showCoachMark =
+    !selectedPlanId && !isOpen && !isCreateOpen && !isImportOpen;
 
   return (
     <>
@@ -775,6 +853,37 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
               </Flex>
             </ModalFooter>
           </form>
+        </ModalContent>
+      </Modal>
+      <Modal isOpen={isImportOpen} onClose={onImportClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader textAlign="center" color="primary.blue.dark.main">
+            Import Plan
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>Upload JSON (.json) file</ModalBody>
+          <Input
+            placeholder="Upload"
+            size="md"
+            type="file"
+            onChange={loadPlan}
+            border="none"
+            paddingLeft="24px"
+          />
+          <ModalFooter justifyContent="center">
+            <Flex columnGap="sm">
+              <Button
+                variant="solid"
+                size="md"
+                borderRadius="lg"
+                type="submit"
+                onClick={importFile}
+              >
+                Import Plan
+              </Button>
+            </Flex>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

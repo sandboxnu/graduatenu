@@ -45,6 +45,23 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
       { toastId: ErrorToastId.BAD_DATA }
     );
   } else if (statusCode === 401) {
+    // If the user is on a share link or guest route, never redirect
+    const shareRoute = router.asPath.startsWith("/share");
+    const guestMode = router.asPath.startsWith("/guest");
+
+    if (shareRoute || guestMode) {
+      logger.debug(
+        "handleApiClientError",
+        "Guest user allowed on this route.",
+        error
+      );
+
+      toast.warn("You’re viewing this plan in guest mode. Login to save it.", {
+        toastId: ErrorToastId.UNAUTHORIZED,
+      });
+
+      return; // <-- do NOT redirect
+    }
     logger.debug(
       "handleApiClientError",
       "Unauthenticated, redirecting to login",
