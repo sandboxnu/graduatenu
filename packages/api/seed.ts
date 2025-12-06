@@ -362,6 +362,10 @@ async function seed() {
     await planRepository.delete({});
     console.log("Cleared existing plans");
 
+    console.log("Clearing existing students..");
+    await studentRepository.delete({});
+    console.log("Cleared existing students");
+
     // make 50 mock students (change if we want more/less)
     const numStudents = 50;
     const students = [];
