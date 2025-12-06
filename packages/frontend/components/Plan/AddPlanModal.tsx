@@ -480,11 +480,18 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                           label={index === 0 ? "Major(s)" : undefined}
                           placeholder="Select a Major"
                           name={`majors.${index}`}
-                          isMulti={false} // Changed from isMulti={true} to false
+                          isMulti={false} // Change from isMulti={true} to false
                           control={control}
                           options={extractSupportedMajorOptions(
                             catalogYear,
                             supportedMajorsData
+                          ).filter(
+                            (option) =>
+                              // Prevent selecting the same major multiple times
+                              !majors.some(
+                                (selectedMajor) =>
+                                  selectedMajor === option.value
+                              )
                           )}
                           onChangeSideEffect={() => {
                             setValue("concentration", "");

@@ -344,6 +344,13 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                           options={extractSupportedMajorOptions(
                             catalogYear,
                             supportedMajorsData
+                          ).filter(
+                            (option) =>
+                              // Prevent selecting the same major multiple times
+                              !majors.some(
+                                (selectedMajor, i) =>
+                                  i !== index && selectedMajor === option.value
+                              )
                           )}
                           onChangeSideEffect={() => {
                             setValue("concentration", "");
