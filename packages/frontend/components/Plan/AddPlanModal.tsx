@@ -605,6 +605,13 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                                 options={extractSupportedMinorOptions(
                                   catalogYear,
                                   supportedMinorsData
+                                ).filter(
+                                  (option) =>
+                                    // Prevent selecting the same major multiple times
+                                    !minors.some(
+                                      (selectedMinor) =>
+                                        selectedMinor === option.value
+                                    )
                                 )}
                                 isDisabled={!catalogYear}
                                 isSearchable

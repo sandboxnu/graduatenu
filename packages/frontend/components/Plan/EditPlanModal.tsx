@@ -459,6 +459,14 @@ export const EditPlanModal: React.FC<EditPlanModalProps> = ({ plan }) => {
                                 options={extractSupportedMinorOptions(
                                   catalogYear,
                                   supportedMinorsData
+                                ).filter(
+                                  (option) =>
+                                    // Prevent selecting the same major multiple times
+                                    !minors.some(
+                                      (selectedMinor, i) =>
+                                        i !== index &&
+                                        selectedMinor === option.value
+                                    )
                                 )}
                                 isDisabled={!catalogYear}
                                 isSearchable
