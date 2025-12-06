@@ -13,6 +13,9 @@ import {
   ChangePasswordDto,
   isStrongPassword,
   ResetPasswordDto,
+  ScheduleTerm2,
+  ScheduleYear2,
+  SeasonEnum,
   SignUpStudentDto,
   UpdateStudentDto,
 } from "@graduate/common";
@@ -236,5 +239,94 @@ export class StudentService {
     return await this.studentRepository.save(
       Object.assign(student, { password })
     );
+  }
+
+  async getStudentInterest(
+    season: SeasonEnum,
+    major?: string,
+    subject?: string,
+    classId?: string
+  ): Promise<{ count: number; students: string[] }> {
+    const students = await this.studentRepository.find({
+      relations: ["plans"],
+    });
+
+    let count = 0;
+    const studentsWithInterest: string[] = [];
+
+    for (const student of students) {
+      // if major param, skip if doesn't match
+      if (major && student.major !== major) {
+        continue;
+      }
+
+      const starredPlan = student.plans?.find(
+        (p) => p.id === student.starredPlan
+      );
+
+      if (!starredPlan || !starredPlan.schedule?.years) {
+        continue;
+      }
+
+      const years: ScheduleYear2<null>[] = starredPlan.schedule.years;
+      let hasMatch = false;
+
+      for (const year of years) {
+        let termsToCheck: ScheduleTerm2<null>[] = [];
+
+        switch (season) {
+          case SeasonEnum.FL:
+            termsToCheck = [year.fall];
+            break;
+          case SeasonEnum.SP:
+            termsToCheck = [year.spring];
+            break;
+          case SeasonEnum.S1:
+            termsToCheck = [year.summer1];
+            break;
+          case SeasonEnum.S2:
+            termsToCheck = [year.summer2];
+            break;
+          case SeasonEnum.SM:
+            termsToCheck = [year.summer1, year.summer2];
+            break;
+        }
+
+        for (const term of termsToCheck) {
+          if (!term || !term.classes || term.classes.length === 0) {
+            continue;
+          }
+
+          // if no subject/classId params, any course in this term counts
+          if (!subject && !classId) {
+            hasMatch = true;
+            break;
+          }
+
+          // if subject/classId, apply course filters
+          const hasClass = term.classes.some((c) => {
+            if (subject && c.subject !== subject) return false;
+            if (classId && String(c.classId) !== String(classId)) return false;
+            return true;
+          });
+
+          if (hasClass) {
+            hasMatch = true;
+            break;
+          }
+        }
+
+        if (hasMatch) {
+          break;
+        }
+      }
+
+      if (hasMatch) {
+        count++;
+        studentsWithInterest.push(student.email);
+      }
+    }
+
+    return { count, students: studentsWithInterest };
   }
 }

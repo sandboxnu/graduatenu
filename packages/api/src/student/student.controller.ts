@@ -30,6 +30,7 @@ import {
   weakPasswordError,
   ChangePasswordDto,
   wrongPasswordError,
+  SeasonEnum,
 } from "@graduate/common";
 import {
   EmailAlreadyExists,
@@ -178,6 +179,32 @@ export class StudentController {
     }
 
     return students;
+  }
+
+  @UseGuards(DevRouteGuard)
+  @Get("course-interest")
+  async getCourseInterest(
+    @Query("season") season: string,
+    @Query("major") major?: string,
+    @Query("subject") subject?: string,
+    @Query("classId") classId?: string
+  ): Promise<{ count: number; students: string[] }> {
+    if (!season) {
+      throw new BadRequestException("Missing required query parameter: season");
+    }
+
+    if (!Object.values(SeasonEnum).includes(season as SeasonEnum)) {
+      throw new BadRequestException(
+        "Invalid season. Must be FL, SP, S1, S2, or SM"
+      );
+    }
+
+    return this.studentService.getStudentInterest(
+      season as SeasonEnum,
+      major,
+      subject,
+      classId
+    );
   }
 
   @UseGuards(DevRouteGuard)
