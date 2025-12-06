@@ -1,4 +1,12 @@
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Heading,
+  Divider,
+  Text,
+  UnorderedList,
+  ListItem,
+} from "@chakra-ui/react";
 import { useDroppable } from "@dnd-kit/core";
 import { NextPage } from "next";
 import { PropsWithChildren, useContext, useState } from "react";
@@ -36,17 +44,66 @@ const DashboardPage: NextPage = () => {
       </Box>
 
       <Box
-        overflowY="auto"
         width={{ desktop: "1036px", tablet: "590px" }}
         outline="primary.blue.light.main"
         borderWidth="1.5px"
         borderRadius="16px"
-        margin="20px"
+        margin="10px"
       >
         <Heading size="md" padding="32px">
           {selectedMajors.map((major) => major.split(", ")[0]).join(", ")}
         </Heading>
+        <Divider marginLeft="32px" marginRight="32px" />
+        <Flex marginLeft="32px" marginRight="32px">
+          {/*Semesters*/}
+          <Box marginTop="24px">
+            <Heading size="sm" marginBottom="10px">
+              Semesters:
+            </Heading>
+            <Flex wrap="wrap">
+              {selectedSemesters.map((sem) => (
+                <Text
+                  padding="4px"
+                  paddingBottom="2px"
+                  paddingTop="2px"
+                  marginRight="8px"
+                  marginBottom="4px"
+                  bg="lightgrey"
+                  borderRadius="6px"
+                >
+                  {sem}
+                </Text>
+              ))}
+            </Flex>
+          </Box>
+
+          {/*Colleges*/}
+          <Box marginTop="24px">
+            <Heading size="sm" marginBottom="10px">
+              Colleges:{" "}
+            </Heading>
+            <UnorderedList>
+              {selectedColleges.map((college) => (
+                <ListItem>{college}</ListItem>
+              ))}
+            </UnorderedList>
+          </Box>
+
+          {/*Courses*/}
+          <Box marginRight="8px" marginTop="24px" paddingRight="5px">
+            <Heading size="sm" marginBottom="10px">
+              Courses:{" "}
+            </Heading>
+            <UnorderedList>
+              {selectedCourses.map((course) => (
+                <ListItem>{course}</ListItem>
+              ))}
+            </UnorderedList>
+          </Box>
+        </Flex>
       </Box>
+
+      {/*Analytics Part*/}
     </PageLayout>
   );
 };
