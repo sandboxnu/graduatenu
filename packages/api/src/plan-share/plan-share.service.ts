@@ -39,7 +39,12 @@ export class PlanShareService {
 
     // Normalize the plans by removing metadata fields that don't affect the plan content
     const normalizePlan = (plan: any) => {
-      const { createdAt, updatedAt, student, ...rest } = plan;
+      const {
+        createdAt: _createdAt,
+        updatedAt: _updatedAt,
+        student: _student,
+        ...rest
+      } = plan;
       // Sort keys for consistent comparison
       const sorted = Object.keys(rest)
         .sort()
