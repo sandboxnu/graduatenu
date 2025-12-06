@@ -24,7 +24,13 @@ import {
 } from "../WhatsNewModal/WhatsNewModalContextProvider";
 import { MdChatBubbleOutline, MdOutlineBugReport } from "react-icons/md";
 
-export const GraduatePreAuthHeader: React.FC = () => {
+interface GraduatePreAuthHeaderProps {
+  hasWhatsNew?: boolean;
+}
+
+export const GraduatePreAuthHeader: React.FC<GraduatePreAuthHeaderProps> = ({
+  hasWhatsNew = false,
+}) => {
   const [isMobile] = useMediaQuery("(max-width: 640px)");
 
   return isMobile ? (
@@ -34,12 +40,21 @@ export const GraduatePreAuthHeader: React.FC = () => {
       rightContent={
         <GraduateButtonLink href="/login">Log In</GraduateButtonLink>
       }
+      hasWhatsNew={hasWhatsNew}
     />
   );
 };
 
-export const GraduatePostAuthHeader: React.FC = () => {
-  return <GraduateHeader rightContent={<UserDropdown />} />;
+interface GraduatePostAuthHeaderProps {
+  hasWhatsNew?: boolean;
+}
+
+export const GraduatePostAuthHeader: React.FC<GraduatePostAuthHeaderProps> = ({
+  hasWhatsNew = true,
+}) => {
+  return (
+    <GraduateHeader rightContent={<UserDropdown />} hasWhatsNew={hasWhatsNew} />
+  );
 };
 
 export const GraduateDisabledAppHeader: React.FC = () => {
@@ -48,14 +63,21 @@ export const GraduateDisabledAppHeader: React.FC = () => {
 
 interface GraduateHeaderProps {
   rightContent?: React.ReactNode;
+  hasWhatsNew?: boolean;
 }
 
-const GraduateHeader: React.FC<GraduateHeaderProps> = ({ rightContent }) => {
-  return (
-    <WhatsNewModalContextProvider>
-      <GraduateHeaderContent rightContent={rightContent} />
-    </WhatsNewModalContextProvider>
-  );
+const GraduateHeader: React.FC<GraduateHeaderProps> = ({
+  rightContent,
+  hasWhatsNew = true,
+}) => {
+  if (hasWhatsNew) {
+    return (
+      <WhatsNewModalContextProvider>
+        <GraduateHeaderContent rightContent={rightContent} />
+      </WhatsNewModalContextProvider>
+    );
+  }
+  return <GraduateHeaderContent rightContent={rightContent} />;
 };
 
 const GraduateHeaderContent: React.FC<GraduateHeaderProps> = ({
