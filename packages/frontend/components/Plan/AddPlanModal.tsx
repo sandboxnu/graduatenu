@@ -395,7 +395,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
       const newPlan: CreatePlanDto = {
         name: scheduleJson.name || generateDefaultPlanTitle(),
         catalogYear: scheduleJson["catalogYear"],
-        major: scheduleJson["major"],
+        majors: scheduleJson["major"],
         concentration: scheduleJson["concentration"],
         schedule,
       };
