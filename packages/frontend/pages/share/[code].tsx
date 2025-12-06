@@ -159,7 +159,6 @@ const SharePlanPage: NextPage = () => {
       {isGuest ? <GraduatePreAuthHeader /> : <GraduatePostAuthHeader />}
       <Flex alignItems="flex-start" m="8px">
         <Heading size="lg">{`Viewing '${plan?.name}'`}</Heading>
-
         {plan && student && (
           <GraduateToolTip
             label="Click here to save this plan to your account"

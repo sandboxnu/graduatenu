@@ -69,6 +69,12 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    setShareUrl(null);
+    setPlanCode(null);
+    setExpiresAt(null);
+  }, [plan]);
+
   return (
     <>
       <Tooltip shouldWrapChildren label={`Share ${planName}?`} fontSize="md">

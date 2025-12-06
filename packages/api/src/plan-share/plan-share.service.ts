@@ -33,17 +33,14 @@ export class PlanShareService {
     return String(e?.code || "").includes("duplicate");
   }
 
-  // helper to compare 2 plans to not generate a new code for the same plan
+  // Helper function to compare two plan JSONs (ignoring metadata like createdAt, updatedAt, student)
   private arePlansEqual(plan1: any, plan2: any): boolean {
     if (!plan1 || !plan2) return false;
 
+    // Normalize the plans by removing metadata fields that don't affect the plan content
     const normalizePlan = (plan: any) => {
-      const {
-        createdAt: _createdAt,
-        updatedAt: _updatedAt,
-        student: _student,
-        ...rest
-      } = plan;
+      const { createdAt, updatedAt, student, ...rest } = plan;
+      // Sort keys for consistent comparison
       const sorted = Object.keys(rest)
         .sort()
         .reduce((acc, key) => {
@@ -68,26 +65,26 @@ export class PlanShareService {
     const student = await this.students.findOneOrFail({ uuid: studentUuid });
     const planId = planJson?.id;
 
-    // check if there is an existing share code for this plan
+    // Check if there's an existing active share for this plan
     if (planId) {
-      const now = new Date();
       const existingShares = await this.shares.find({
         where: {
           student: { uuid: studentUuid },
-          revokedAt: null,
         },
         relations: ["student"],
       });
 
-      // find an existing share
+      // Find an active share for this plan that hasn't been modified
       const activeShare = existingShares.find(
         (share) =>
           share.planJson?.id === planId &&
-          share.expiresAt > now &&
+          !share.revokedAt &&
+          share.expiresAt > new Date() &&
           this.arePlansEqual(share.planJson, planJson)
       );
 
       if (activeShare) {
+        // Return the existing share code
         const shareLink = this.getSharingUrl();
         return {
           planCode: activeShare.planCode,
@@ -97,6 +94,7 @@ export class PlanShareService {
       }
     }
 
+    // No existing active share found, create a new one
     const expiresAt = new Date(
       Date.now() + expiresInDays * 24 * 60 * 60 * 1000
     );
