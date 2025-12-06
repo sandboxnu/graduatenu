@@ -26,12 +26,27 @@ export const COOP_BLOCK: ScheduleCourse2<string> = {
   nupaths: [NUPathEnum.EX],
 };
 
-const DashboardSidebar: React.FC = memo(() => {
-  const [selectedSemesters, setSelectedSemesters] = useState<string[]>([]);
-  const [selectedMajors, setSelectedMajors] = useState<string[]>([]);
-  const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
-  const [selectedColleges, setSelectedColleges] = useState<string[]>([]);
+interface DashboardSidebarProps {
+  selectedSemesters: string[];
+  setSelectedSemesters: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedMajors: string[];
+  setSelectedMajors: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedCourses: string[];
+  setSelectedCourses: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedColleges: string[];
+  setSelectedColleges: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
+const DashboardSidebar: React.FC<DashboardSidebarProps> = ({
+  selectedSemesters,
+  setSelectedSemesters,
+  selectedMajors,
+  setSelectedMajors,
+  selectedCourses,
+  setSelectedCourses,
+  selectedColleges,
+  setSelectedColleges,
+}) => {
   const { supportedMajorsData } = useSupportedMajors();
   const majors = extractSupportedMajorOptions(2022, supportedMajorsData).map(
     (major) => major.label.toString()
@@ -236,7 +251,7 @@ const DashboardSidebar: React.FC = memo(() => {
       </Box>
     </DashboardSidebarContainer>
   );
-});
+};
 
 export const NoPlanSidebar: React.FC = () => {
   return <SidebarContainer title="No Plan Selected" />;

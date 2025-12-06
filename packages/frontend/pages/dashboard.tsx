@@ -1,13 +1,20 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { useDroppable } from "@dnd-kit/core";
 import { NextPage } from "next";
-import { PropsWithChildren, useContext } from "react";
+import { PropsWithChildren, useContext, useState } from "react";
 import { GraduatePostAuthHeader, GraduatePreAuthHeader } from "../components";
 import { IsGuestContext } from "./_app";
 import { DELETE_COURSE_AREA_DND_ID } from "../utils";
 import { DashboardSidebar } from "../components/DashboardSidebar";
 
 const DashboardPage: NextPage = () => {
+  const [selectedSemesters, setSelectedSemesters] = useState<string[]>([]);
+  const [selectedMajors, setSelectedMajors] = useState<string[]>([]);
+  const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
+  const [selectedColleges, setSelectedColleges] = useState<string[]>([]);
+
+  console.log("DashboardPage render - selectedMajors:", selectedMajors);
+
   return (
     <PageLayout>
       <Box
@@ -16,7 +23,16 @@ const DashboardPage: NextPage = () => {
         width={{ desktop: "360px", tablet: "300px" }}
         flexShrink={0}
       >
-        <DashboardSidebar />
+        <DashboardSidebar
+          selectedSemesters={selectedSemesters}
+          setSelectedSemesters={setSelectedSemesters}
+          selectedMajors={selectedMajors}
+          setSelectedMajors={setSelectedMajors}
+          selectedCourses={selectedCourses}
+          setSelectedCourses={setSelectedCourses}
+          selectedColleges={selectedColleges}
+          setSelectedColleges={setSelectedColleges}
+        />
       </Box>
 
       <Box
@@ -26,7 +42,11 @@ const DashboardPage: NextPage = () => {
         borderWidth="1.5px"
         borderRadius="16px"
         margin="20px"
-      ></Box>
+      >
+        <Heading size="md" padding="32px">
+          {selectedMajors.map((major) => major.split(", ")[0]).join(", ")}
+        </Heading>
+      </Box>
     </PageLayout>
   );
 };

@@ -30,11 +30,20 @@ export const MultipleSelectDropdown: React.FC<MultipleSelectDropdownProps> = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const toggleMajor = (option: string) => {
-    setSelected((prev: string[]) =>
-      prev.includes(option)
+    console.log("Toggling with " + option);
+    console.log("Current selected:", selected);
+    console.log("setSelected function type:", typeof setSelected);
+
+    setSelected((prev: string[]) => {
+      console.log("Inside setSelected callback, prev:", prev);
+      const newValue = prev.includes(option)
         ? prev.filter((o: string) => o !== option)
-        : [...prev, option]
-    );
+        : [...prev, option];
+      console.log("Returning newValue:", newValue);
+      return newValue;
+    });
+
+    console.log("After setSelected call");
   };
 
   return (
@@ -99,11 +108,11 @@ export const MultipleSelectDropdown: React.FC<MultipleSelectDropdownProps> = ({
         }}
       >
         {options.map((option: string) => {
-          const isSelected = selected.includes(`${option}`);
+          const isSelected = selected.includes(option);
           return (
             <MenuItem
               key={option}
-              onClick={() => toggleMajor(`${option}`)}
+              onClick={() => toggleMajor(option)}
               bg={isSelected ? "neutral.200" : "transparent"}
               color={"black"}
               _hover={{
