@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import {
+  courseEq,
   MajorValidationError,
   MajorValidationResult,
   PlanModel,
@@ -24,6 +25,7 @@ import {
   getAllCoursesInMinor,
   UNDECIDED_CONCENTRATION,
   UNDECIDED_STRING,
+  extractSupportedMajorOptions,
 } from "../../utils";
 import {
   handleApiClientError,
@@ -37,12 +39,16 @@ import {
   WorkerMessageType,
   WorkerPostInfo,
 } from "../../validation-worker/worker-messages";
-import { useFetchCourses, useMajor, useMinor } from "../../hooks";
+import {
+  useFetchCourses,
+  useMajor,
+  useMinor,
+  useSupportedMajors,
+} from "../../hooks";
 import { NUPathEnum } from "@graduate/common";
 import SidebarContainer from "../Sidebar/SidebarContainer";
-import GenericSection from "../Sidebar/GenericSection";
-import NUPathSection from "../Sidebar/NUPathSection";
 import DashboardSidebarContainer from "./DashboardSidebarContainer";
+import { MultipleSelectDropdown } from "./MultipleSelectedDropdown";
 
 export enum SidebarValidationStatus {
   Loading = "Loading",
@@ -63,10 +69,26 @@ export const COOP_BLOCK: ScheduleCourse2<string> = {
 
 const DashboardSidebar: React.FC = memo(() => {
   const router = useRouter();
-  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [selectedSemesters, setSelectedSemesters] = useState<string[]>([]);
+  const [selectedMajors, setSelectedMajors] = useState<string[]>([]);
+  const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
+  const [selectedColleges, setSelectedColleges] = useState<string[]>([]);
+
+  const { supportedMajorsData } = useSupportedMajors();
+  const majors = extractSupportedMajorOptions(2022, supportedMajorsData).map(
+    (major) => major.label.toString()
+  );
+
+  const courses = ["course", "course", "course"];
+  const colleges = [
+    "Khoury",
+    "Bouve",
+    "College of Science",
+    "College of Engineering",
+  ];
 
   const handleCheckboxChange = (value: string) => {
-    setSelectedFilters((prev) =>
+    setSelectedSemesters((prev) =>
       prev.includes(value)
         ? prev.filter((item) => item !== value)
         : [...prev, value]
@@ -99,6 +121,13 @@ const DashboardSidebar: React.FC = memo(() => {
           >
             College
           </Heading>
+          <MultipleSelectDropdown
+            selected={selectedColleges}
+            setSelected={setSelectedColleges}
+            options={colleges}
+            placeholder={"Select Colleges"}
+          />
+
           <Heading
             as="h2"
             fontSize="xl"
@@ -110,7 +139,7 @@ const DashboardSidebar: React.FC = memo(() => {
           <>
             <Grid templateColumns="repeat(2, 1fr)" gap={3} marginY="10px">
               <Checkbox
-                isChecked={selectedFilters.includes("Fall")}
+                isChecked={selectedSemesters.includes("Fall")}
                 onChange={() => handleCheckboxChange("Fall")}
                 sx={{
                   "& .chakra-checkbox__control": {
@@ -132,7 +161,7 @@ const DashboardSidebar: React.FC = memo(() => {
               </Checkbox>
 
               <Checkbox
-                isChecked={selectedFilters.includes("Spring")}
+                isChecked={selectedSemesters.includes("Spring")}
                 onChange={() => handleCheckboxChange("Spring")}
                 sx={{
                   "& .chakra-checkbox__control": {
@@ -154,7 +183,7 @@ const DashboardSidebar: React.FC = memo(() => {
               </Checkbox>
 
               <Checkbox
-                isChecked={selectedFilters.includes("Summer I")}
+                isChecked={selectedSemesters.includes("Summer I")}
                 onChange={() => handleCheckboxChange("Summer I")}
                 sx={{
                   "& .chakra-checkbox__control": {
@@ -176,7 +205,7 @@ const DashboardSidebar: React.FC = memo(() => {
               </Checkbox>
 
               <Checkbox
-                isChecked={selectedFilters.includes("Summer II")}
+                isChecked={selectedSemesters.includes("Summer II")}
                 onChange={() => handleCheckboxChange("Summer II")}
                 sx={{
                   "& .chakra-checkbox__control": {
@@ -206,6 +235,13 @@ const DashboardSidebar: React.FC = memo(() => {
           >
             Major
           </Heading>
+          <MultipleSelectDropdown
+            selected={selectedMajors}
+            setSelected={setSelectedMajors}
+            options={majors}
+            placeholder={"Select Majors"}
+          />
+
           <Heading
             as="h2"
             fontSize="xl"
@@ -214,6 +250,13 @@ const DashboardSidebar: React.FC = memo(() => {
           >
             Course
           </Heading>
+          <MultipleSelectDropdown
+            selected={selectedCourses}
+            setSelected={setSelectedCourses}
+            options={courses}
+            placeholder={"Select Courses"}
+          />
+
           <Button
             variant="solid"
             borderRadius="md"
