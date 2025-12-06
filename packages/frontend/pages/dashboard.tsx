@@ -18,6 +18,15 @@ const DashboardPage: NextPage = () => {
       >
         <DashboardSidebar />
       </Box>
+
+      <Box
+        overflowY="auto"
+        width={{ desktop: "1036px", tablet: "590px" }}
+        outline="primary.blue.light.main"
+        borderWidth="1.5px"
+        borderRadius="16px"
+        margin="20px"
+      ></Box>
     </PageLayout>
   );
 };

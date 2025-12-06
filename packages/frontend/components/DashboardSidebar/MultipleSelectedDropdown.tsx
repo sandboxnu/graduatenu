@@ -77,16 +77,6 @@ export const MultipleSelectDropdown: React.FC<MultipleSelectDropdownProps> = ({
                 backgroundColor="neutral.100"
                 onClick={(e) => e.stopPropagation()}
               >
-                <TagCloseButton
-                  ml="-3px"
-                  mr="3px"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelected((prev: string[]) =>
-                      prev.filter((o: string) => o !== option)
-                    );
-                  }}
-                />
                 <TagLabel>{option}</TagLabel>
               </Tag>
             ))}
