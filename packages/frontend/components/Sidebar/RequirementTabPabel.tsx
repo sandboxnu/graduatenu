@@ -131,6 +131,7 @@ export const RequirementTabPanel: React.FC<RequirementTabPanelProps> = ({
             dndIdPrefix={`${dndIdPrefix}-${index}`}
             loading={isCoursesLoading}
             coursesTaken={coursesTaken}
+            isSharedPlan={isSharedPlan}
           />
         );
       })}
