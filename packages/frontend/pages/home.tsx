@@ -54,6 +54,7 @@ import {
 } from "../utils/plan/preAndCoReqCheck";
 import { IsGuestContext } from "./_app";
 import { RepeatIcon } from "@chakra-ui/icons";
+import { SharePlanModal } from "../components/Plan/SharePlanModal";
 
 // Algorithm to decide which droppable the course is currently over (if any).
 // See https://docs.dndkit.com/api-documentation/context-provider/collision-detection-algorithms for more info.
@@ -415,6 +416,12 @@ const HomePage: NextPage = () => {
                 <DuplicatePlanButton
                   plan={selectedPlan}
                   setSelectedPlanId={setSelectedPlanId}
+                />
+              )}
+              {selectedPlan && !isGuest && (
+                <SharePlanModal
+                  plan={selectedPlan}
+                  planName={selectedPlan.name}
                 />
               )}
               {selectedPlan && (

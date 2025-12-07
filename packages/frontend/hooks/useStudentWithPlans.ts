@@ -1,7 +1,7 @@
 import useSWR, { KeyedMutator, SWRResponse } from "swr";
 import { API } from "@graduate/api-client";
 import { GetStudentResponse, StudentModel } from "@graduate/common";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { defaultGuestStudent, preparePlanForDnd } from "../utils";
 import { useContext } from "react";
 import { IsGuestContext } from "../pages/_app";
@@ -45,16 +45,35 @@ export function useStudentWithPlans(): UseStudentReturn {
 export const fetchStudentAndPrepareForDnd = async (
   isGuest: boolean
 ): Promise<StudentModel<string>> => {
+  //for shared plans
+  const pathname = window.location.pathname;
+  const isSharedPlan = pathname.startsWith("/share");
+
   const studentString = window.localStorage.getItem("student");
   const studentFromLocalStorage: GetStudentResponse = studentString
     ? JSON.parse(studentString)
     : defaultGuestStudent;
 
   let student: GetStudentResponse;
-  if (!isGuest) {
-    student = await API.student.getMeWithPlan();
-  } else {
-    student = studentFromLocalStorage;
+
+  try {
+    // (for plan sharing) not a guest, fetch the real user
+    if (!isGuest) {
+      student = await API.student.getMeWithPlan();
+    } else {
+      student = studentFromLocalStorage;
+    }
+  } catch (err) {
+    // (for plan sharing)not guest but backend says 401, treat as guest
+    if (
+      axios.isAxiosError(err) &&
+      err.response?.status === 401 &&
+      isSharedPlan
+    ) {
+      student = studentFromLocalStorage;
+    } else {
+      throw err; // real error
+    }
   }
   const plansWithDndIds = student.plans.map(preparePlanForDnd);
 

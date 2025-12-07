@@ -11,6 +11,7 @@ interface GenericSectionProps {
   courseData: { [id: string]: ScheduleCourse2<null> };
   dndIdPrefix: string;
   loading?: boolean;
+  isSharedPlan?: boolean;
 }
 
 export const GENERAL_ELECTIVE: ScheduleCourse2<string> = {
@@ -38,6 +39,7 @@ const courses = [GENERAL_ELECTIVE, GENERAL_NUPATH];
 const GenericSection: React.FC<GenericSectionProps> = ({
   courseData,
   loading,
+  isSharedPlan,
 }) => {
   const [opened, setOpened] = useState(false);
 
@@ -128,6 +130,7 @@ const GenericSection: React.FC<GenericSectionProps> = ({
                       key={index}
                       scheduleCourse={course}
                       isDisabled={false}
+                      isSharedPlan={isSharedPlan}
                     />
                   ))}
                 </div>
