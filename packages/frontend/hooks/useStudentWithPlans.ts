@@ -24,10 +24,10 @@ export const USE_STUDENT_WITH_PLANS_SWR_KEY = `api/students/me`;
  * to cookies.
  */
 export function useStudentWithPlans(): UseStudentReturn {
-  const { isGuest, setIsGuest } = useContext(IsGuestContext);
+  const { isGuest } = useContext(IsGuestContext);
 
   const { data, mutate, ...rest } = useSWR(USE_STUDENT_WITH_PLANS_SWR_KEY, () =>
-    fetchStudentAndPrepareForDnd(isGuest, setIsGuest)
+    fetchStudentAndPrepareForDnd(isGuest)
   );
 
   return {
@@ -43,8 +43,7 @@ export function useStudentWithPlans(): UseStudentReturn {
  * drag and drop by adding drag and drop ids.
  */
 export const fetchStudentAndPrepareForDnd = async (
-  isGuest: boolean,
-  setIsGuest: (value: boolean) => void
+  isGuest: boolean
 ): Promise<StudentModel<string>> => {
   //for shared plans
   const pathname = window.location.pathname;
@@ -71,7 +70,6 @@ export const fetchStudentAndPrepareForDnd = async (
       err.response?.status === 401 &&
       isSharedPlan
     ) {
-      setIsGuest(true);
       student = studentFromLocalStorage;
     } else {
       throw err; // real error

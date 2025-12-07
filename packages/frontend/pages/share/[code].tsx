@@ -73,9 +73,9 @@ const SharePlanPage: NextPage = () => {
     const planToSave: CreatePlanDto = {
       name: "Copy of " + plan.name,
       catalogYear: plan.catalogYear,
-      major: plan.major,
+      majors: plan.majors,
       concentration: plan.concentration,
-      minor: plan.minor,
+      minors: plan.minors,
       schedule: cleanDndIdsFromPlan(plan).schedule,
     };
 
@@ -136,7 +136,7 @@ const SharePlanPage: NextPage = () => {
 
   let renderedSidebar = <NoPlanSidebar />;
   if (plan) {
-    if (plan.major) {
+    if (plan.majors) {
       renderedSidebar = (
         <Sidebar
           selectedPlan={plan}

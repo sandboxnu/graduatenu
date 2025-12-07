@@ -36,6 +36,7 @@ interface RequirementTabPanelProps {
   requirementType: RequirementType;
   concentration?: any;
   concentrationValidationStatus?: any;
+  isSharedPlan?: boolean;
 }
 
 export const RequirementTabPanel: React.FC<RequirementTabPanelProps> = ({
@@ -54,6 +55,7 @@ export const RequirementTabPanel: React.FC<RequirementTabPanelProps> = ({
   requirementType,
   concentration,
   concentrationValidationStatus,
+  isSharedPlan,
 }) => {
   const label = requirementType === "major" ? "Major" : "Minor";
 
