@@ -6,6 +6,7 @@ import {
   Text,
   UnorderedList,
   ListItem,
+  Spacer,
 } from "@chakra-ui/react";
 import { useDroppable } from "@dnd-kit/core";
 import { NextPage } from "next";
@@ -76,6 +77,7 @@ const DashboardPage: NextPage = () => {
               ))}
             </Flex>
           </Box>
+          <Spacer />
 
           {/*Colleges*/}
           <Box marginTop="24px">
@@ -88,6 +90,7 @@ const DashboardPage: NextPage = () => {
               ))}
             </UnorderedList>
           </Box>
+          <Spacer />
 
           {/*Courses*/}
           <Box marginRight="8px" marginTop="24px" paddingRight="5px">
