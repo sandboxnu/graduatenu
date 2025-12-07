@@ -74,3 +74,9 @@ export class SharePlanResponse {
   url!: string;
   expiresAt!: string;
 }
+
+export class ViewSharedPlanResponse {
+  planJson!: PlanModel<string>;
+  createdAt!: Date;
+  expiresAt!: Date;
+}

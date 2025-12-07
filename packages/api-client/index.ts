@@ -27,6 +27,7 @@ import {
   ParsedCourse,
   SharePlanResponse,
   CreatePlanShareDto,
+  ViewSharedPlanResponse,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -134,7 +135,7 @@ class APIClient {
       this.req("DELETE", `/plans/${id}`),
     share: (body: CreatePlanShareDto): Promise<SharePlanResponse> =>
       this.req("POST", "/plans/share", SharePlanResponse, body),
-    viewSharedPlan: (code: string): Promise<string> =>
+    viewSharedPlan: (code: string): Promise<ViewSharedPlanResponse> =>
       this.req("GET", `/plans/share/view/${code}`),
   };
 
