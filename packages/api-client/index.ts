@@ -25,6 +25,8 @@ import {
   GetSupportedMinorsResponse,
   Minor,
   ParsedCourse,
+  SharePlanResponse,
+  CreatePlanShareDto,
 } from "@graduate/common";
 import { ClassConstructor, plainToInstance } from "class-transformer";
 
@@ -130,6 +132,10 @@ class APIClient {
       this.req("PATCH", `/plans/${id}`, UpdatePlanResponse, body),
     delete: (id: string | number): Promise<void> =>
       this.req("DELETE", `/plans/${id}`),
+    share: (body: CreatePlanShareDto): Promise<SharePlanResponse> =>
+      this.req("POST", "/plans/share", SharePlanResponse, body),
+    viewSharedPlan: (code: string): Promise<SharePlanResponse> =>
+      this.req("GET", `/plans/share/view/${code}`),
   };
 
   majors = {

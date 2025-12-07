@@ -47,14 +47,9 @@ const SharePlanPage: NextPage = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch(`/api/plans/share/view/${code}`);
+        const response = await API.plans.viewSharedPlan(code as string);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch shared plan");
-        }
-
-        const data = await response.json();
-        setPlan(data.planJson);
+        setPlan(response.planJson);
       } catch (err: any) {
         setError(err.message || "Failed to load shared plan");
       } finally {

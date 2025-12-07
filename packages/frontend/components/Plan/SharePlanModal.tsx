@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { BlueButton } from "../Button";
 import { CopyIcon } from "@chakra-ui/icons";
 import { FaShareSquare } from "react-icons/fa";
+import { API } from "@graduate/api-client";
 
 interface SharePlanModalProps {
   plan: PlanModel<string>;
@@ -40,17 +41,10 @@ export const SharePlanModal: React.FC<SharePlanModalProps> = ({
     try {
       setCopied(false);
       setLoading(true);
-      const response = await fetch("/api/plans/share", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ planJson: plan }),
-        credentials: "include",
-      });
-      const data: { planCode: string; url: string; expiresAt: string } =
-        await response.json();
-      setShareUrl(data.url);
-      setPlanCode(data.planCode);
-      setExpiresAt(data.expiresAt);
+      const shareResponse = await API.plans.share({ planJson: plan });
+      setShareUrl(shareResponse.url);
+      setPlanCode(shareResponse.planCode);
+      setExpiresAt(shareResponse.expiresAt);
     } catch (e: any) {
     } finally {
       setLoading(false);
