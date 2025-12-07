@@ -134,7 +134,7 @@ class APIClient {
       this.req("DELETE", `/plans/${id}`),
     share: (body: CreatePlanShareDto): Promise<SharePlanResponse> =>
       this.req("POST", "/plans/share", SharePlanResponse, body),
-    viewSharedPlan: (code: string): Promise<SharePlanResponse> =>
+    viewSharedPlan: (code: string): Promise<string> =>
       this.req("GET", `/plans/share/view/${code}`),
   };
 
