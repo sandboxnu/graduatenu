@@ -20,7 +20,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: graduateLogger,
     cors: {
-      origin: /graduatenu.com$/,
+      origin: [/graduatenu\.com$/, "searchneu.com"],
       credentials: true,
       methods: ["GET", "HEAD", "POST", "PUT", "DELETE", "PATCH"],
     },
