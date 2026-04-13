@@ -40,8 +40,12 @@ const handleAxiosError = (error: AxiosError, router: NextRouter) => {
 
   if (statusCode === 400) {
     logger.debug("handleApiClientError", "Bad Request", error);
+    const serverMessage = (error.response?.data as { message?: string })?.message;
+    const errorMessage = serverMessage 
+      ? `Server error: ${serverMessage}`
+      : "Sorry, we sent some invalid data. Try again and if this persists please report it to us through the bug report button at the top.";
     toast.error(
-      "Sorry, we sent some invalid data. Try again and if this persists please report it to us through the bug report button at the top.",
+      errorMessage,
       { toastId: ErrorToastId.BAD_DATA }
     );
   } else if (statusCode === 401) {
