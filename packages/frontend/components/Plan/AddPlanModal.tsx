@@ -99,7 +99,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
   ) => {
     const file = event.target.files?.[0];
     if (!file || file.type !== "application/pdf") {
-      console.error("Please select a PDF file");
+      toast.error("Please select a PDF file.");
       return;
     }
 
@@ -108,6 +108,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
       setUploadedCourses(courses);
     } catch (error) {
+      toast.error("Failed to read courses from the PDF.");
       console.error("Error parsing PDF:", error);
     }
   };
@@ -228,6 +229,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
           isGuest
         );
       } catch (error) {
+        toast.error("Failed to add transfer courses. Plan was not created.");
         console.error("Error adding transfer courses:", error);
         return; // Don't proceed with plan creation if transfer courses failed
       }
@@ -319,14 +321,17 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
 
   const majorHasConcentrations = majorConcentrations.concentrations.length > 0;
 
-  const hasValidMajors =
-    majors && majors.length > 0 && majors && majors.length > 0;
+  const hasValidMajors = majors && majors.length > 0;
+
+  const isValidatedMajors = majors?.every(
+    (major) => yearSupportedMajors?.[major ?? ""]?.verified ?? false
+  );
 
   const isValidForm =
     (catalogYear &&
       majors &&
       (!isConcentrationRequired || concentration) &&
-      (!hasValidMajors ? agreeToBetaMajor : true)) ||
+      (isValidatedMajors || agreeToBetaMajor)) ||
     // Valid plan for no major selected
     isNoMajorSelected;
 
@@ -378,6 +383,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
           setScheduleJson(parsed);
           console.log("Parsed schedule JSON:", parsed);
         } catch (err) {
+          toast.error("That file isn't a valid plan JSON.");
           console.error("Error parsing JSON file:", err);
         }
       };
@@ -809,7 +815,7 @@ export const AddPlanModal: React.FC<AddPlanModalProps> = ({
                       </Flex>
                     )}
 
-                    {majors && !hasValidMajors && (
+                    {hasValidMajors && !isValidatedMajors && (
                       <Flex alignItems="center">
                         <Checkbox
                           mr="md"
