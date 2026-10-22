@@ -13,7 +13,7 @@ const nextConfig = {
       // its first request. Send all traffic to the replacement on SearchNEU.
       {
         source: "/:path*",
-        destination: "https://searchneu.com/graduate",
+        destination: "https://searchneu.com/scheduler",
         permanent: false,
       },
     ];
